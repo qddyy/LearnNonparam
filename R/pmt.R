@@ -41,7 +41,8 @@ Tests <- as.environment(list(
 #' @export pmt
 pmt <- function(key, ...) do.call(key, list(...), envir = Tests)
 
-
+#' @title All tests available. 
+#' 
 #' @export pmts
 pmts <- data.frame(
     key = names(Tests),

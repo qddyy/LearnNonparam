@@ -19,7 +19,7 @@ Performs two sample Wilcoxon test, which is equivalant to the Mann-Whitney test,
 <details open><summary>Inherited methods</summary>
 <ul>
 <li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="feed"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-feed'><code>LearnNonparam::Permutation Test$feed()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="ggplot"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-ggplot'><code>LearnNonparam::Permutation Test$ggplot()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="plot_hist"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-plot_hist'><code>LearnNonparam::Permutation Test$plot_hist()</code></a></span></li>
 </ul>
 </details>
 }}

@@ -24,13 +24,14 @@ This is the abstract base class for empirical cumulative distribution function o
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-Empirical Cumulative Distribution Function-new}{\code{ECDF$new()}}
-\item \href{#method-Empirical Cumulative Distribution Function-ggplot}{\code{ECDF$ggplot()}}
+\item \href{#method-Empirical Cumulative Distribution Function-plot_ecdf}{\code{ECDF$plot_ecdf()}}
 }
 }
 \if{html}{\out{
 <details open><summary>Inherited methods</summary>
 <ul>
 <li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="feed"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-feed'><code>LearnNonparam::Permutation Test$feed()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="plot_hist"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-plot_hist'><code>LearnNonparam::Permutation Test$plot_hist()</code></a></span></li>
 </ul>
 </details>
 }}
@@ -55,23 +56,16 @@ A \code{ECDF} object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Empirical Cumulative Distribution Function-ggplot"></a>}}
-\if{latex}{\out{\hypertarget{method-Empirical Cumulative Distribution Function-ggplot}{}}}
-\subsection{Method \code{ggplot()}}{
-Prepare the object for plotting.
+\if{html}{\out{<a id="method-Empirical Cumulative Distribution Function-plot_ecdf"></a>}}
+\if{latex}{\out{\hypertarget{method-Empirical Cumulative Distribution Function-plot_ecdf}{}}}
+\subsection{Method \code{plot_ecdf()}}{
+Draw the empirical cumulative distribution function of the data fed (with confidence bounds).
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ECDF$ggplot(plot = TRUE)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ECDF$plot_ecdf()}\if{html}{\out{</div>}}
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{plot}}{a logical indicating whether to show the histogram.}
-}
-\if{html}{\out{</div>}}
-}
 \subsection{Returns}{
-A ggplot object containing the empirical distribution with lower and upper confidence bounds (invisibly).
+The object itself (invisibly).
 }
 }
 }

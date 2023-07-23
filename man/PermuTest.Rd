@@ -44,7 +44,7 @@ This is the abstract base class for permutation test objects, which contains sev
 \itemize{
 \item \href{#method-Permutation Test-new}{\code{PermuTest$new()}}
 \item \href{#method-Permutation Test-feed}{\code{PermuTest$feed()}}
-\item \href{#method-Permutation Test-ggplot}{\code{PermuTest$ggplot()}}
+\item \href{#method-Permutation Test-plot_hist}{\code{PermuTest$plot_hist()}}
 }
 }
 \if{html}{\out{<hr>}}
@@ -99,25 +99,23 @@ The object itself (invisibly).
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Permutation Test-ggplot"></a>}}
-\if{latex}{\out{\hypertarget{method-Permutation Test-ggplot}{}}}
-\subsection{Method \code{ggplot()}}{
-Prepare the object for plotting.
+\if{html}{\out{<a id="method-Permutation Test-plot_hist"></a>}}
+\if{latex}{\out{\hypertarget{method-Permutation Test-plot_hist}{}}}
+\subsection{Method \code{plot_hist()}}{
+Draw a histogram of the permutation distribution.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PermuTest$ggplot(plot = TRUE, ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{PermuTest$plot_hist(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{plot}}{a logical indicating whether to show the histogram.}
-
 \item{\code{...}}{extra parameters passed to \code{ggplot2::stat_bin}.}
 }
 \if{html}{\out{</div>}}
 }
 \subsection{Returns}{
-A ggplot object containing a histogram of the permutation distribution with a vertical line on it identifying where the statistic lies (invisibly).
+The object itself (invisibly).
 }
 }
 }
