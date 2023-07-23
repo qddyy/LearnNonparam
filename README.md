@@ -3,6 +3,13 @@
 
 # LearnNonparam
 
+<!-- badges: start -->
+
+[![Codecov test
+coverage](https://codecov.io/gh/qddyy/LearnNonparam/branch/master/graph/badge.svg)](https://app.codecov.io/gh/qddyy/LearnNonparam?branch=master)
+[![R-CMD-check](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml)
+<!-- badges: end -->
+
 The goal of LearnNonparam is to conduct non-parametric tests (mostly
 based on permutations).
 
@@ -48,7 +55,7 @@ library(LearnNonparam)
   print(t$statistic)
   #> [1] 35
   print(t$p_value)
-  #> [1] 0.0021
+  #> [1] 0.0027
 
   print(t$estimate)
   #> [1] 30.045
