@@ -3,13 +3,6 @@
 
 # LearnNonparam
 
-<!-- badges: start -->
-
-[![Codecov test
-coverage](https://codecov.io/gh/qddyy/LearnNonparam/branch/master/graph/badge.svg)](https://app.codecov.io/gh/qddyy/LearnNonparam?branch=master)
-[![R-CMD-check](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml)
-<!-- badges: end -->
-
 The goal of LearnNonparam is to conduct non-parametric tests (mostly
 based on permutations).
 
@@ -55,7 +48,7 @@ library(LearnNonparam)
   print(t$statistic)
   #> [1] 35
   print(t$p_value)
-  #> [1] 0.0017
+  #> [1] 0.0021
 
   print(t$estimate)
   #> [1] 30.045
@@ -81,8 +74,7 @@ library(LearnNonparam)
 Just use `?...` syntax.
 
 If you want to know all available methods and attributes, it’s a good
-idea to explore `?PermuTest` (all tests’ **base class**) and
-`?MultipleComparison` first.
+idea to explore `?PermuTest` (all tests’ **base class**) first.
 
 If you want to know all available tests, see `pmts`.
 
