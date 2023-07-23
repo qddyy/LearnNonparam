@@ -1,0 +1,829 @@
+---
+title: "`r stringr::str_sub(basename(this.path::this.path()), 1, -5)`"
+author: dy
+graphics: true
+tables: true
+colorlinks: true
+mathspec: true
+output:
+#   rmdformats::readthedown:
+#     code_folding: show
+#     self_contained: true
+#     thumbnails: false
+#     lightbox: true
+#     toc_depth: 2
+#     number_sections: false   
+#     toc_float:
+#       collapsed: true
+#       smooth_scroll: true
+  rticles::ctex:
+    df_print: kable
+    toc: true
+    extra_dependencies:
+    #   ctex: UTF8
+      mathrsfs: null
+      bm: null
+  bookdown::beamer_presentation2:
+    latex_engine: xelatex
+    theme: metropolis
+    slide_level: 2
+    toc: true
+    toc_depth: 3
+    number_sections: true
+    incremental: true
+header-includes:
+  - \allowdisplaybreaks[4]
+---
+
+```{r, setup, include=FALSE}
+# setwd(this.path::this.dir())
+
+options(
+    knitr.kable.NA = "",
+    error = rlang::entrace,
+    rlang_backtrace_on_error = "full",
+    datatable.print.topn = 5,
+    datatable.print.nrows = 20,
+    datatable.print.class = TRUE,
+    datatable.print.keys = TRUE,
+    datatable.print.trunc.cols = TRUE
+)
+knitr::opts_knit$set(root.dir = this.path::this.dir())
+knitr::opts_chunk$set(
+    digits = 4,
+    fig.align = "center",
+    out.width = "60%",
+    comment = "",
+    error = FALSE,
+    message = FALSE,
+    warning = FALSE
+)
+```
+
+\newpage
+
+# README
+
+```{r}
+# devtools::install_local("LearnNonparam_1.1.7.tar.gz", dependencies = TRUE, upgrade = "never")
+library(LearnNonparam)
+```
+
+## Usage
+
+- Create a test object
+    ```{r}
+    t <- Wilcoxon$new(type = "permu", n_permu = 10000)
+    ```
+
+    or you can use `pmt` (**p**er**m**utation **t**est) function (**Recommended**):
+    ```{r}
+    # See ?pmt
+    t <- pmt("twosample.wilcoxon", type = "permu", n_permu = 10000)
+    ```
+
+- feed it the data
+    ```{r}
+    t$feed(Table2.6.2)
+    ```
+
+- check the results
+    ```{r}
+    print(t$statistic)
+    print(t$p_value)
+
+    print(t$estimate)
+    print(t$ci)
+
+    t$ggplot(bins = 12)
+    ```
+
+- modify some attributes and see how the results change
+    ```{r}
+    t$type <- "approx"
+
+    print(t$p_value)
+    ```
+
+## Help
+
+Just use `?...` syntax. 
+
+If you want to know all available methods and attributes, it's a good idea to explore `?PermuTest` (all tests' **base class**) and `?MultipleComparison` first. 
+
+If you want to know all available tests, see `pmts`. 
+
+```{r}
+pmts
+```
+
+\newpage
+
+# Chapter 1
+
+## Example 1.1.2
+
+```{r}
+# See ?Quantile
+t <- pmt(
+    "onesample.quantile", alternative = "greater",
+    p = 0.5, null_value = 75
+)
+
+# See ?Table1.1.1
+t$feed(Table1.1.1)
+
+print(t$statistic)
+print(t$p_value)
+print(t$ci)
+```
+
+## Example 1.2.1
+
+```{r}
+# See ?ECDF
+t <- pmt("onesample.ecdf")
+
+# See ?Table1.2.1
+t$feed(Table1.2.1)
+
+t$ggplot()
+```
+
+## Example 1.2.4
+
+```{r}
+# See ?Quantile
+t <- pmt(
+    "onesample.quantile",
+    p = 0.25, null_value = 0, conf_level = 0.90
+)
+
+# See ?Table1.2.1
+t$feed(Table1.2.1)
+
+print(t$ci)
+```
+
+\newpage
+
+# Chapter 2
+
+## Example 2.1.1
+
+```{r}
+# See ?MeanDiff
+t <- pmt(
+    "twosample.mean", alternative = "greater"
+)
+
+# See ?Table2.1.1
+t$feed(Table2.1.1)
+# or
+# t$feed(
+#     Table2.1.1$new,
+#     Table2.1.1$traditional
+# )
+
+print(t$statistic)
+print(t$p_value)
+```
+
+## Example 2.1.1 - wilcoxon
+
+```{r}
+# See ?Wilcoxon
+t <- pmt(
+    "twosample.wilcoxon", alternative = "greater"
+)
+
+# See ?Table2.1.1
+t$feed(Table2.1.1)
+# or
+# t$feed(
+#     Table2.1.1$new,
+#     Table2.1.1$traditional
+# )
+
+print(t$statistic)
+print(t$p_value)
+```
+
+## Example 2.3.1
+
+```{r}
+start <- proc.time()
+
+# See ?MeanDiff
+t <- pmt(
+    "twosample.mean", alternative = "greater"
+)
+
+# See ?Table2.3.1
+t$feed(Table2.3.1)
+# or
+# t$feed(
+#     Table2.3.1$treatment_1,
+#     Table2.3.1$treatment_2
+# )
+
+print(t$statistic)
+print(t$p_value)
+
+end <- proc.time()
+
+# time: all permutaions
+print(end - start)
+
+
+start <- proc.time()
+
+t$n_permu <- 1000
+
+print(t$p_value)
+
+end <- proc.time()
+
+# time: 1000 permutaions
+print(end - start)
+```
+
+## Example 2.6.1
+
+```{r}
+# See ?Wilcoxon
+t <- pmt(
+    "twosample.wilcoxon", alternative = "greater"
+)
+
+# See ?Table2.6.1
+t$feed(Table2.6.1)
+# or
+# t$feed(
+#     Table2.6.1$brand_2,
+#     Table2.6.1$brand_1
+# )
+
+print(t$statistic)
+print(t$p_value)
+```
+
+## Example 2.6.2
+
+```{r}
+# See ?Wilcoxon
+t <- pmt(
+    "twosample.wilcoxon", conf_level = 0.90
+)
+
+# See ?Table2.6.2
+t$feed(Table2.6.2)
+# or
+# t$feed(
+#     Table2.6.2$granite,
+#     Table2.6.2$basalt
+# )
+
+# Hodges-Lehmann estimate
+print(t$estimate)
+print(t$ci)
+```
+
+## Example 2.7.1
+
+```{r}
+# See ?ScoreSum
+t <- pmt(
+    "twosample.scoresum", alternative = "greater", scoring = "savage"
+)
+
+# See ?Table2.6.2
+t$feed(Table2.6.2)
+# or
+# t$feed(
+#     Table2.6.2$granite,
+#     Table2.6.2$basalt
+# )
+
+print(t$statistic)
+print(t$p_value)
+```
+
+## Example 2.8.1
+
+```{r}
+# See ?SiegelTukey
+t <- pmt(
+    "twosample.st", alternative = "less", type = "approx"
+)
+
+# See ?Table2.8.1
+t$feed(Table2.8.1)
+# or
+# t$feed(
+#     Table2.8.1$treatment_1,
+#     Table2.8.1$treatment_2
+# )
+
+print(t$statistic)
+print(t$p_value)
+```
+
+## Example 2.8.2
+
+```{r}
+# See ?RatioMeanDeviance
+t <- pmt(
+    "twosample.rmd", alternative = "greater"
+)
+
+# See ?Table2.8.1
+t$feed(Table2.8.1)
+# or
+# t$feed(
+#     Table2.8.1$treatment_1,
+#     Table2.8.1$treatment_2
+# )
+
+print(t$statistic)
+print(t$p_value)
+```
+
+## Example 2.8.3
+
+```{r}
+t <- pmt(
+    "twosample.ks", n_permu = 5000
+)
+
+# See ?Table2.8.1
+t$feed(Table2.8.1)
+# or
+# t$feed(
+#     Table2.8.1$treatment_1,
+#     Table2.8.1$treatment_2
+# )
+
+t$plot_ecdfs()
+
+print(t$statistic)
+print(t$p_value)
+```
+
+\newpage
+
+# Chapter 3
+
+## Example 3.1.1
+
+```{r}
+# See ?ANOVA
+t <- pmt(
+    "ksample.anova", type = "approx"
+)
+
+# See ?Table3.1.2
+t$feed(Table3.1.2)
+# or
+# t$feed(
+#     Table3.1.2$x_1,
+#     Table3.1.2$x_2,
+#     Table3.1.2$x_3
+# )
+
+# F-statistic
+print(t$statistic)
+print(t$p_value)
+
+
+# Change n_permu first,
+# otherwise changing type to permu will use all permutations by default,
+# which results in an error because there are too many permutations. 
+t$n_permu <- 1000
+t$type <- "permu"
+
+
+print(t$statistic)
+print(t$p_value)
+```
+
+## Example 3.2.1
+
+```{r}
+# See ?KruskalWallis
+t <- pmt(
+    "ksample.kw", type = "approx"
+)
+
+# See ?Table3.2.2
+t$feed(Table3.2.2)
+# or
+# t$feed(
+#     Table3.2.2$control,
+#     Table3.2.2$preservative_1,
+#     Table3.2.2$preservative_2,
+#     Table3.2.2$preservative_3
+# )
+
+print(t$statistic)
+print(t$p_value)
+```
+
+## Example 3.2.2 & 3.2.3
+
+```{r}
+# See ?KruskalWallis
+t <- pmt(
+    "ksample.kw", n_permu = 4000
+)
+
+# See ?Table3.2.3
+t$feed(Table3.2.3)
+# or
+# t$feed(
+#     Table3.2.3$product_1,
+#     Table3.2.3$product_2,
+#     Table3.2.3$product_3
+# )
+
+print(t$statistic)
+print(t$p_value)
+
+
+t$type <- "approx"
+print(t$p_value)
+
+
+t$scoring <- "savage"
+
+t$n_permu <- 4000
+t$type <- "permu"
+print(t$p_value)
+
+t$type <- "approx"
+print(t$p_value)
+```
+
+## Example 3.3.1
+
+```{r}
+# See ?MultiCompT
+t <- pmt(
+    "multicomp.t", n_permu = 5000
+)
+
+# See ?Table3.3.1
+t$feed(Table3.3.1)
+# or
+# t$feed(
+#     Table3.3.1$location_1,
+#     Table3.3.1$location_2,
+#     Table3.3.1$location_3,
+#     Table3.3.1$location_4
+# )
+
+print(t$multicomp)
+
+t$type <- "approx"
+print(t$multicomp)
+
+# try other scoring! ("vw", "savage")
+t$scoring <- "rank"
+print(t$multicomp)
+```
+
+```{r}
+# See ?TukeyHSD
+t <- pmt(
+    "multicomp.tukey", n_permu = 5000
+)
+
+t$feed(Table3.3.1)
+
+print(t$multicomp)
+
+t$type <- "approx"
+print(t$multicomp)
+
+# try other scoring! ("vw", "savage")
+t$scoring <- "rank"
+print(t$multicomp)
+```
+
+## Example 3.4.1
+
+```{r}
+# See ?JonckheereTerpstra
+t <- pmt(
+    "ksample.jt", alternative = "greater", n_permu = 4000
+)
+
+# See ?Table3.4.1
+t$feed(Table3.4.1)
+# or
+# t$feed(
+#     Table3.4.1$treatment_1,
+#     Table3.4.1$treatment_2,
+#     Table3.4.1$treatment_3,
+#     Table3.4.1$treatment_4
+# )
+
+print(t$statistic)
+print(t$p_value)
+
+t$type <- "approx"
+print(t$p_value)
+```
+
+\newpage
+
+# Chapter 4
+
+## Table 4.1.1
+
+```{r}
+# See ?MeanDiffPaired
+t <- pmt(
+    "paired.comparison", alternative = "greater"
+)
+
+# See ?Table4.1.1
+t$feed(Table4.1.1)
+# or
+# t$feed(
+#     Table4.1.1$recall_24h,
+#     Table4.1.1$survey
+# )
+
+print(t$statistic)
+print(t$p_value)
+
+t$n_permu <- 4000
+print(t$p_value)
+```
+
+## Table 4.1.3
+
+```{r}
+# See ?MeanDiffPaired
+t <- pmt(
+    "paired.comparison", alternative = "two_sided", n_permu = 4000
+)
+
+# See ?Table4.1.3
+t$feed(Table4.1.3)
+# or
+# t$feed(
+#     Table4.1.3$drug_1,
+#     Table4.1.3$drug_2
+# )
+
+print(t$p_value)
+
+t$type <- "approx"
+print(t$p_value)
+```
+
+## Example 4.2.1 & 4.2.2
+
+```{r}
+# See ?SignedScore
+t <- pmt(
+    "paired.signedscore", alternative = "greater",
+    ranking_method = "with_zeros"
+)
+
+# See ?Table4.1.1
+t$feed(Table4.1.1)
+# or
+# t$feed(
+#     Table4.1.1$recall_24h,
+#     Table4.1.1$survey
+# )
+
+print(t$statistic)
+print(t$p_value)
+
+t$n_permu <- 4000
+print(t$p_value)
+
+t$type <- "approx"
+print(t$p_value)
+```
+
+## Table 4.2.3
+
+```{r}
+# See ?SignedScore
+t <- pmt(
+    "paired.signedscore", alternative = "greater",
+    ranking_method = "ignore"
+)
+
+t$feed(data.frame(
+    diff = c(-5, -3, -3, 0, 0, 2, 4, 4, 4, 5),
+    zero = 0
+))
+
+print(t$statistic)
+print(t$p_value)
+
+t$n_permu <- 4000
+print(t$p_value)
+```
+
+## Example 4.3.1
+
+```{r}
+# See ?Sign
+t <- pmt(
+    "paired.sign", alternative = "greater"
+)
+
+t$feed(data.frame(
+    diff = c(rep(+1, 12), rep(-1, 5)),
+    zero = 0
+))
+
+print(t$statistic)
+print(t$p_value)
+
+t$type <- "approx"
+print(t$p_value)
+```
+
+## Example 4.4.1
+
+```{r}
+# See ?RCBDANOVA
+t <- pmt(
+    "rcbd.anova", n_permu = 5000
+)
+
+# See ?Table4.4.3
+t$feed(Table4.4.3)
+# or
+# t$feed(
+#     Table4.4.3$block_1,
+#     Table4.4.3$block_2,
+#     Table4.4.3$block_3,
+#     Table4.4.3$block_4,
+#     Table4.4.3$block_5,
+#     Table4.4.3$block_6
+# )
+
+
+print(t$statistic)
+print(t$p_value)
+
+
+t$type <- "approx"
+# F-statistic
+print(t$statistic)
+print(t$p_value)
+```
+
+## Example 4.5.2
+
+```{r}
+# See ?Friedman
+t <- pmt(
+    "rcbd.friedman", n_permu = 5000
+)
+
+# See ?Table4.5.3
+t$feed(Table4.5.3)
+# or
+# t$feed(
+#     Table4.5.3$block_1,
+#     Table4.5.3$block_2,
+#     Table4.5.3$block_3
+# )
+
+# Use SSX for speed
+print(t$statistic)
+print(t$p_value)
+
+
+t$type <- "approx"
+# chi-statistic
+print(t$statistic)
+print(t$p_value)
+```
+
+## Example 4.6.1
+
+```{r}
+# See ?Page
+t <- pmt(
+    "rcbd.page", alternative = "less", n_permu = 5000
+)
+
+# See ?Table4.4.3
+t$feed(Table4.4.3)
+# or
+# t$feed(
+#     Table4.4.3$block_1,
+#     Table4.4.3$block_2,
+#     Table4.4.3$block_3,
+#     Table4.4.3$block_4,
+#     Table4.4.3$block_5,
+#     Table4.4.3$block_6
+# )
+
+print(t$statistic)
+print(t$p_value)
+
+
+t$type <- "approx"
+print(t$p_value)
+```
+
+\newpage
+
+# Chapter 5
+
+## Example 5.1.1
+
+```{r}
+# See ?Correlation
+t <- pmt(
+    "association.corr", method = "pearson",
+    alternative = "greater", n_permu = 2000
+)
+
+# See ?Table5.1.2
+t$feed(Table5.1.2)
+# or
+# t$feed(
+#     Table5.1.2$heterophils,
+#     Table5.1.2$lymphocytes
+# )
+
+print(t$statistic)
+print(t$p_value)
+```
+
+## Example 5.2.1
+
+```{r}
+# See ?Correlation
+t <- pmt(
+    "association.corr", method = "spearman",
+    alternative = "greater", n_permu = 5000
+)
+
+# See ?Table5.1.2
+t$feed(Table5.1.2)
+# or
+# t$feed(
+#     Table5.1.2$heterophils,
+#     Table5.1.2$lymphocytes
+# )
+
+print(t$statistic)
+print(t$p_value)
+
+
+t$type <- "approx"
+print(t$p_value)
+```
+
+## Example 5.3.2
+
+```{r}
+# See ?Correlation
+t <- pmt(
+    "association.corr", method = "kendall",
+    alternative = "greater", type = "approx"
+)
+
+# See ?Table5.2.2
+t$feed(Table5.2.2)
+# or
+# t$feed(
+#     Table5.2.2$judge_a,
+#     Table5.2.2$judge_b
+# )
+
+print(t$statistic)
+print(t$p_value)
+```
+
+## Table 5.4.2
+
+```{r}
+# See ?ChiSquare
+t <- pmt(
+    "table.chi", n_permu = 2000
+)
+
+# See ?Table5.4.2
+t$feed(Table5.4.2)
+
+print(t$statistic)
+print(t$p_value)
+
+t$type <- "approx"
+print(t$p_value)
+```
