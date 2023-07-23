@@ -1,120 +1,20 @@
 ---
-title: "`r stringr::str_sub(basename(this.path::this.path()), 1, -5)`"
+title: "examples"
 author: dy
-graphics: true
-tables: true
-colorlinks: true
-mathspec: true
-output:
-#   rmdformats::readthedown:
-#     code_folding: show
-#     self_contained: true
-#     thumbnails: false
-#     lightbox: true
-#     toc_depth: 2
-#     number_sections: false   
-#     toc_float:
-#       collapsed: true
-#       smooth_scroll: true
-  rticles::ctex:
-    df_print: kable
+output: 
+  bookdown::pdf_document2:
     toc: true
-    extra_dependencies:
-    #   ctex: UTF8
-      mathrsfs: null
-      bm: null
-  bookdown::beamer_presentation2:
-    latex_engine: xelatex
-    theme: metropolis
-    slide_level: 2
-    toc: true
-    toc_depth: 3
-    number_sections: true
-    incremental: true
-header-includes:
-  - \allowdisplaybreaks[4]
 ---
 
 ```{r, setup, include=FALSE}
-# setwd(this.path::this.dir())
-
-options(
-    knitr.kable.NA = "",
-    error = rlang::entrace,
-    rlang_backtrace_on_error = "full",
-    datatable.print.topn = 5,
-    datatable.print.nrows = 20,
-    datatable.print.class = TRUE,
-    datatable.print.keys = TRUE,
-    datatable.print.trunc.cols = TRUE
-)
-knitr::opts_knit$set(root.dir = this.path::this.dir())
 knitr::opts_chunk$set(
-    digits = 4,
-    fig.align = "center",
-    out.width = "60%",
     comment = "",
     error = FALSE,
     message = FALSE,
-    warning = FALSE
+    warning = FALSE,
+    fig.align = "center",
+    out.width = "60%"
 )
-```
-
-\newpage
-
-# README
-
-```{r}
-# devtools::install_local("LearnNonparam_1.1.7.tar.gz", dependencies = TRUE, upgrade = "never")
-library(LearnNonparam)
-```
-
-## Usage
-
-- Create a test object
-    ```{r}
-    t <- Wilcoxon$new(type = "permu", n_permu = 10000)
-    ```
-
-    or you can use `pmt` (**p**er**m**utation **t**est) function (**Recommended**):
-    ```{r}
-    # See ?pmt
-    t <- pmt("twosample.wilcoxon", type = "permu", n_permu = 10000)
-    ```
-
-- feed it the data
-    ```{r}
-    t$feed(Table2.6.2)
-    ```
-
-- check the results
-    ```{r}
-    print(t$statistic)
-    print(t$p_value)
-
-    print(t$estimate)
-    print(t$ci)
-
-    t$ggplot(bins = 12)
-    ```
-
-- modify some attributes and see how the results change
-    ```{r}
-    t$type <- "approx"
-
-    print(t$p_value)
-    ```
-
-## Help
-
-Just use `?...` syntax. 
-
-If you want to know all available methods and attributes, it's a good idea to explore `?PermuTest` (all tests' **base class**) and `?MultipleComparison` first. 
-
-If you want to know all available tests, see `pmts`. 
-
-```{r}
-pmts
 ```
 
 \newpage
@@ -147,7 +47,7 @@ t <- pmt("onesample.ecdf")
 # See ?Table1.2.1
 t$feed(Table1.2.1)
 
-t$ggplot()
+t$plot_ecdf()
 ```
 
 ## Example 1.2.4
