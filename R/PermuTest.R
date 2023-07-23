@@ -43,27 +43,28 @@ PermuTest <- R6Class(
             invisible(self)
         },
 
-        #' @description Prepare the object for plotting. 
+        #' @description Draw a histogram of the permutation distribution. 
         #' 
-        #' @param plot a logical indicating whether to show the histogram.
         #' @param ... extra parameters passed to `ggplot2::stat_bin`.
         #' 
-        #' @return A ggplot object containing a histogram of the permutation distribution with a vertical line on it identifying where the statistic lies (invisibly). 
-        ggplot = function(plot = TRUE, ...) {
-            hist <- ggplot() +
-                stat_bin(
-                    mapping = aes(x = private$.statistic_permu),
-                    geom = "bar", fill = "#68aaa1", ...
-                ) +
-                geom_vline(
-                    xintercept = private$.statistic, linetype = "dashed"
-                ) +
-                labs(
-                    title = "Permutation Distribution", x = "Statistic", y = "Count"
-                ) +
-                theme(plot.title = element_text(face = "bold", hjust = 0.5))
-            if (plot) print(hist)
-            invisible(hist)
+        #' @return The object itself (invisibly).
+        plot_hist = function(...) {
+            if (private$.type == "permu") {
+                histogram <- ggplot() +
+                    stat_bin(
+                        mapping = aes(x = private$.statistic_permu),
+                        geom = "bar", fill = "#68aaa1", ...
+                    ) +
+                    geom_vline(xintercept = private$.statistic, linetype = "dashed") +
+                    labs(
+                        title = "Permutation Distribution",
+                        x = "Statistic", y = "Count"
+                    ) +
+                    theme(plot.title = element_text(face = "bold", hjust = 0.5))
+                print(histogram)
+            }
+
+            invisible(self)
         }
     ),
     private = list(

@@ -23,22 +23,19 @@ ECDF <- R6Class(
             private$.conf_level <- conf_level
         },
 
-        #' @description Prepare the object for plotting. 
+        #' @description Draw the empirical cumulative distribution function of the data fed (with confidence bounds). 
         #' 
-        #' @param plot a logical indicating whether to show the histogram.
-        #' 
-        #' @return A ggplot object containing the empirical distribution with lower and upper confidence bounds (invisibly). 
-        ggplot = function(plot = TRUE) {
-            lines <- ggplot() +
+        #' @return The object itself (invisibly). 
+        plot_ecdf = function() {
+            ecdf <- ggplot() +
                 stat_function(fun = private$.ecdf, geom = "step") +
                 stat_function(fun = private$.lower, geom = "step", linetype = 2) +
                 stat_function(fun = private$.upper, geom = "step", linetype = 2) +
-                xlim(c(min(private$.data), max(private$.data)))
+                xlim(c(min(private$.data), max(private$.data))) +
                 labs(x = "", y = "")
+            print(ecdf)
 
-            if (plot) print(lines)
-
-            invisible(lines)
+            invisible(self)
         }
     ),
     private = list(

@@ -34,16 +34,18 @@ KolmogorovSmirnov <- R6Class(
             x <- private$.data$x
             y <- private$.data$y
 
-            max <- max(max(x), max(y))
-            min <- min(min(x), min(y))
+            c_xy <- c(x, y)
+
+            max <- max(c_xy)
+            min <- min(c_xy)
             range <- max - min
 
-            print(
-                ggplot() + 
-                    geom_function(fun = ecdf(x), mapping = aes(color = "x")) +
-                    geom_function(fun = ecdf(y), mapping = aes(color = "y")) +
-                    xlim(c(min - range * 0.1, max + range * 0.1))
-            )
+            ecdfs <- ggplot() +
+                geom_function(fun = ecdf(x), mapping = aes(color = "x")) +
+                geom_function(fun = ecdf(y), mapping = aes(color = "y")) +
+                xlim(c(min - range * 0.1, max + range * 0.1)) +
+                labs(x = "", y = "")
+            print(ecdfs)
 
             invisible(self)
         }
