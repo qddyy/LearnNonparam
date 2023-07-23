@@ -99,27 +99,31 @@ PermuTest <- R6Class(
         },
 
         # @Override
-        .permute = function() {
-            # private$.data_permu <- ...
-        },
-
-        # @Override
-        .calculate_scores = function(data) {
-            # return(scores)
-        },
-
-        # @Override
         .calculate_statistic = function() {
             # private$.statistic <- 
+        },
+
+        # @Override
+        .calculate_p = function() {},
+
+        # @Override
+        .calculate_estimate = function() {
+            # private$.estimate <- 
+        },
+        # @Override
+        .calculate_ci = function() {
+            # private$.ci <- 
+        },
+
+        # @Override
+        .permute = function() {
+            # private$.data_permu <- ...
         },
 
         # @Override
         .calculate_statistic_permu = function() {
             # private$.statistic_permu <- 
         },
-
-        # @Override
-        .calculate_p = function() {},
 
         .calculate_p_permu = function() {
             greater <- mean(private$.statistic_permu >= private$.statistic)
@@ -138,12 +142,8 @@ PermuTest <- R6Class(
         },
 
         # @Override
-        .calculate_estimate = function() {
-            # private$.estimate <- 
-        },
-        # @Override
-        .calculate_ci = function() {
-            # private$.ci <- 
+        .calculate_scores = function(data) {
+            # return(scores)
         },
 
         .calculate = function() {
