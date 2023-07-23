@@ -55,7 +55,99 @@
 
       </header><div class="row">
   <div class="contents col-md-9">
-This package is based on the R6 package. Various non-parametric tests are implemented for the one-sample, two-sample, and k-sample cases. 
+<div class="section level1">
+<div class="page-header"><h1 id="learnnonparam">LearnNonparam<a class="anchor" aria-label="anchor" href="#learnnonparam"></a>
+</h1></div>
+<!-- badges: start -->
+
+<p>The goal of LearnNonparam is to conduct non-parametric tests (mostly based on permutations).</p>
+<div class="section level2">
+<h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
+</h2>
+<p>You can install the development version of LearnNonparam from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
+<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"qddyy/LearnNonparam"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span>, upgrade <span class="op">=</span> <span class="st">"never"</span><span class="op">)</span></span></code></pre></div>
+</div>
+<div class="section level2">
+<h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
+</h2>
+<div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">LearnNonparam</span><span class="op">)</span></span></code></pre></div>
+<ul>
+<li>
+<p>Create a test object</p>
+<div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/Wilcoxon.html">Wilcoxon</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>type <span class="op">=</span> <span class="st">"permu"</span>, n_permu <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span></span></code></pre></div>
+<p>or you can use <code>pmt</code> (<strong>p</strong>er<strong>m</strong>utation <strong>t</strong>est) function (<strong>Recommended</strong>):</p>
+<div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># See ?pmt</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pmt.html">pmt</a></span><span class="op">(</span><span class="st">"twosample.wilcoxon"</span>, type <span class="op">=</span> <span class="st">"permu"</span>, n_permu <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span></span></code></pre></div>
+</li>
+<li>
+<p>feed it the data</p>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="fu">feed</span><span class="op">(</span><span class="va">Table2.6.2</span><span class="op">)</span></span></code></pre></div>
+</li>
+<li>
+<p>check the results</p>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 35</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.0017</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">estimate</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 30.045</span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">ci</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 11.57 50.76</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">plot_hist</span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span></code></pre></div>
+<p><img src="reference/figures/README-unnamed-chunk-6-1.png" width="100%"></p>
+</li>
+<li>
+<p>modify some attributes and see how the results change</p>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.008239019</span></span></code></pre></div>
+</li>
+</ul>
+</div>
+<div class="section level2">
+<h2 id="help">Help<a class="anchor" aria-label="anchor" href="#help"></a>
+</h2>
+<p>Just use <code><a href="https://rdrr.io/r/base/dots.html" class="external-link">?...</a></code> syntax.</p>
+<p>If you want to know all available methods and attributes, it’s a good idea to explore <code><a href="reference/PermuTest.html">?PermuTest</a></code> (all tests’ <strong>base class</strong>) and <code><a href="reference/MultipleComparison.html">?MultipleComparison</a></code> first.</p>
+<p>If you want to know all available tests, see <code>pmts</code>.</p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">pmts</span></span>
+<span><span class="co">#&gt;                   key                                                  test</span></span>
+<span><span class="co">#&gt; 1           table.chi       Contingency Table Permutation Test (chi-square)</span></span>
+<span><span class="co">#&gt; 2    association.corr Two Sample Permutation Test (correlation coefficient)</span></span>
+<span><span class="co">#&gt; 3           rcbd.page                                             Page Test</span></span>
+<span><span class="co">#&gt; 4       rcbd.friedman                                         Friedman Test</span></span>
+<span><span class="co">#&gt; 5          rcbd.anova            ANOVA for Randomized Complete Block Design</span></span>
+<span><span class="co">#&gt; 6  paired.signedscore                                     Signed Score Test</span></span>
+<span><span class="co">#&gt; 7         paired.sign                                             Sign Test</span></span>
+<span><span class="co">#&gt; 8   paired.comparison                                     Paired Comparison</span></span>
+<span><span class="co">#&gt; 9     multicomp.tukey                                             Tukey HSD</span></span>
+<span><span class="co">#&gt; 10        multicomp.t                          Multiple Comparison (t test)</span></span>
+<span><span class="co">#&gt; 11         ksample.jt                              Jonckheere-Terpstra Test</span></span>
+<span><span class="co">#&gt; 12         ksample.kw                                   Kruskal-Wallis Test</span></span>
+<span><span class="co">#&gt; 13      ksample.anova                                                 ANOVA</span></span>
+<span><span class="co">#&gt; 14       twosample.ks                    Two Sample Kolmogorov-Smirnov Test</span></span>
+<span><span class="co">#&gt; 15      twosample.rmd                              Ratio Mean Deviance Test</span></span>
+<span><span class="co">#&gt; 16       twosample.ab                                   Ansari-Bradley Test</span></span>
+<span><span class="co">#&gt; 17       twosample.st                                     Siegel-Tukey Test</span></span>
+<span><span class="co">#&gt; 18 twosample.scoresum                                        Score Sum Test</span></span>
+<span><span class="co">#&gt; 19 twosample.wilcoxon                              Two Sample Wilcoxon Test</span></span>
+<span><span class="co">#&gt; 20     twosample.mean                    Two Sample Permutation Test (mean)</span></span>
+<span><span class="co">#&gt; 21     onesample.ecdf            Empirical Cumulative Distribution Function</span></span>
+<span><span class="co">#&gt; 22 onesample.quantile                                         Quantile Test</span></span></code></pre></div>
+</div>
+</div>
   </div>
 
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
@@ -82,7 +174,13 @@ This package is based on the R6 package. Various non-parametric tests are implem
 </ul>
 </div>
 
-
+<div class="dev-status">
+<h2 data-toc-skip>Dev status</h2>
+<ul class="list-unstyled">
+<li><a href="https://app.codecov.io/gh/qddyy/LearnNonparam?branch=master" class="external-link"><img src="https://codecov.io/gh/qddyy/LearnNonparam/branch/master/graph/badge.svg" alt="Codecov test coverage"></a></li>
+<li><a href="https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
+</ul>
+</div>
 
   </div>
 </div>
