@@ -112,7 +112,7 @@
 
 <ul><li><p><a href="#method-Permutation%20Test-new"><code>PermuTest$new()</code></a></p></li>
 <li><p><a href="#method-Permutation%20Test-feed"><code>PermuTest$feed()</code></a></p></li>
-<li><p><a href="#method-Permutation%20Test-plot_hist"><code>PermuTest$plot_hist()</code></a></p></li>
+<li><p><a href="#method-Permutation%20Test-ggplot"><code>PermuTest$ggplot()</code></a></p></li>
 </ul></div><p></p><hr><a id="method-Permutation Test-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Create a new <code>PermuTest</code> object. Note that it is not recommended to create objects of this class directly.</p><div class="section">
@@ -170,16 +170,20 @@
 <p>The object itself (invisibly).</p>
 </div>
 
-</div><p></p><hr><a id="method-Permutation Test-plot_hist"></a><div class="section">
-<h3 id="method-plot-hist-">Method <code>plot_hist()</code><a class="anchor" aria-label="anchor" href="#method-plot-hist-"></a></h3>
-<p>Draw a histogram of the permutation distribution.</p><div class="section">
+</div><p></p><hr><a id="method-Permutation Test-ggplot"></a><div class="section">
+<h3 id="method-ggplot-">Method <code>ggplot()</code><a class="anchor" aria-label="anchor" href="#method-ggplot-"></a></h3>
+<p>Prepare the object for plotting.</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">PermuTest</span><span class="op">$</span><span class="fu">plot_hist</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">PermuTest</span><span class="op">$</span><span class="fu">ggplot</span><span class="op">(</span>plot <span class="op">=</span> <span class="cn">TRUE</span>, <span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>...</code></dt>
+<p></p><div class="arguments"><dl><dt><code>plot</code></dt>
+<dd><p>a logical indicating whether to show the histogram.</p></dd>
+
+
+<dt><code>...</code></dt>
 <dd><p>extra parameters passed to <code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html" class="external-link">ggplot2::stat_bin</a></code>.</p></dd>
 
 
@@ -187,7 +191,7 @@
 </div>
 <div class="section">
 <h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
-<p>The object itself (invisibly).</p>
+<p>A ggplot object containing a histogram of the permutation distribution with a vertical line on it identifying where the statistic lies (invisibly).</p>
 </div>
 
 </div>

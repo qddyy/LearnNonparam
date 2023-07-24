@@ -71,9 +71,8 @@
 <h3 id="public-methods">Public methods<a class="anchor" aria-label="anchor" href="#public-methods"></a></h3>
 
 <ul><li><p><a href="#method-Empirical%20Cumulative%20Distribution%20Function-new"><code>ECDF$new()</code></a></p></li>
-<li><p><a href="#method-Empirical%20Cumulative%20Distribution%20Function-plot_ecdf"><code>ECDF$plot_ecdf()</code></a></p></li>
+<li><p><a href="#method-Empirical%20Cumulative%20Distribution%20Function-ggplot"><code>ECDF$ggplot()</code></a></p></li>
 </ul></div><p><details open><summary>Inherited methods</summary><ul><li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="feed"><a href="Permutation%20Test.html#method-feed"><code>LearnNonparam::Permutation Test$feed()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="plot_hist"><a href="Permutation%20Test.html#method-plot_hist"><code>LearnNonparam::Permutation Test$plot_hist()</code></a></span></li>
 </ul></details></p><hr><a id="method-Empirical Cumulative Distribution Function-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Create a new <code>ECDF</code> object.</p><div class="section">
@@ -94,16 +93,24 @@
 <p>A <code>ECDF</code> object.</p>
 </div>
 
-</div><p></p><hr><a id="method-Empirical Cumulative Distribution Function-plot_ecdf"></a><div class="section">
-<h3 id="method-plot-ecdf-">Method <code>plot_ecdf()</code><a class="anchor" aria-label="anchor" href="#method-plot-ecdf-"></a></h3>
-<p>Draw the empirical cumulative distribution function of the data fed (with confidence bounds).</p><div class="section">
+</div><p></p><hr><a id="method-Empirical Cumulative Distribution Function-ggplot"></a><div class="section">
+<h3 id="method-ggplot-">Method <code>ggplot()</code><a class="anchor" aria-label="anchor" href="#method-ggplot-"></a></h3>
+<p>Prepare the object for plotting.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ECDF</span><span class="op">$</span><span class="fu">plot_ecdf</span><span class="op">(</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">ECDF</span><span class="op">$</span><span class="fu">ggplot</span><span class="op">(</span>plot <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
+<h4 id="arguments-1">Arguments<a class="anchor" aria-label="anchor" href="#arguments-1"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>plot</code></dt>
+<dd><p>a logical indicating whether to show the histogram.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
 <h4 id="returns-1">Returns<a class="anchor" aria-label="anchor" href="#returns-1"></a></h4>
-<p>The object itself (invisibly).</p>
+<p>A ggplot object containing the empirical distribution with lower and upper confidence bounds (invisibly).</p>
 </div>
 
 </div>
