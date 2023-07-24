@@ -44,6 +44,7 @@ PermuTest <- R6Class(
             private$.feed(...)
             private$.check()
             private$.calculate()
+
             invisible(self)
         },
 
