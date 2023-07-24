@@ -15,6 +15,8 @@ PermuTest <- R6Class(
     public = list(
         #' @description Create a new `PermuTest` object. Note that it is not recommended to create objects of this class directly. 
         #' 
+        #' @param null_value a number specifying the value of the parameter specified by the null hypothesis. 
+        #' 
         #' @param alternative a character string specifying the alternative hypothesis, must be one of `"two_sided"` (default), `"greater"` or `"less"`.
         #' @param n_permu an integer specifying how many permutations should be used to construct the permutation distribution. If `NULL` (default) then all permutations are used.
         #' @param conf_level a number specifying confidence level of the interval.
@@ -22,8 +24,10 @@ PermuTest <- R6Class(
         #' @param scoring a character string specifying which scoring system to be used, must be one of `"none"` (default), `"rank`, `"vw"` or `"savage"`.
         #' 
         #' @return A `PermuTest` object. 
-        initialize = function(alternative = c("two_sided", "less", "greater"), n_permu = NULL, conf_level = 0.95, scoring = c("none", "rank", "vw", "savage")) {
+        initialize = function(null_value = 0, alternative = c("two_sided", "less", "greater"), n_permu = NULL, conf_level = 0.95, scoring = c("none", "rank", "vw", "savage")) {
+            private$.null_value <- null_value
             private$.alternative <- match.arg(alternative)
+
             private$.n_permu <- n_permu
 
             private$.conf_level <- conf_level
@@ -70,17 +74,18 @@ PermuTest <- R6Class(
     private = list(
         .type = "permu",
         .method = NULL,
-
         .scoring = NULL,
-
-        .alternative = NULL,
 
         .n_permu = NULL,
 
         .data = NULL,
         .data_permu = NULL,
+
         .statistic = NULL,
         .statistic_permu = NULL,
+
+        .null_value = NULL,
+        .alternative = NULL,
         .p_value = NULL,
 
         .estimate = NULL,
@@ -195,6 +200,16 @@ PermuTest <- R6Class(
                 private$.scoring
             } else {
                 private$.scoring <- value
+                private$.check()
+                private$.calculate()
+            }
+        },
+        #' @field null_value The value of the parameter specified by the null hypothesis. 
+        null_value = function(value) {
+            if (missing(value)) {
+                private$.null_value
+            } else {
+                private$.null_value <- value
                 private$.check()
                 private$.calculate()
             }

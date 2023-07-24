@@ -16,25 +16,23 @@ Quantile <- R6Class(
         #' @description Create a new `Quantile` object. 
         #' 
         #' @param p a numeric between 0 and 1 indicating the probability. 
-        #' @param null_value a number indicating the true value of the quantile. 
+        #' @param null_value a number specifying the true value of the quantile. 
         #' @param conf_level a number specifying confidence level of the interval.
         #' 
         #' @param alternative a character string specifying the alternative hypothesis, must be one of `"two_sided"` (default), `"greater"` or `"less"`.
         #' 
         #' @return A `Quantile` object. 
         initialize = function(
-            p = 0.5, null_value = 0,
-            alternative = c("two_sided", "less", "greater"), conf_level = 0.95
+            p = 0.5,
+            null_value = 0, alternative = c("two_sided", "less", "greater"), conf_level = 0.95
         ) {
             private$.p <- p
-            private$.null_value <- null_value
 
             super$initialize(alternative = match.arg(alternative), conf_level = conf_level)
         }
     ),
     private = list(
         .p = NULL,
-        .null_value = NULL,
 
         .calculate_statistic = function() {
             private$.statistic <- sum(private$.data > private$.null_value)
@@ -87,16 +85,6 @@ Quantile <- R6Class(
                 private$.p
             } else {
                 private$.p <- value
-                private$.check()
-                private$.calculate()
-            }
-        },
-        #' @field null_value The true value of the quantile. 
-        null_value = function(value) {
-            if (missing(value)) {
-                private$.p
-            } else {
-                private$.null_value <- value
                 private$.check()
                 private$.calculate()
             }
