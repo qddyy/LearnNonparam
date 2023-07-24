@@ -28,9 +28,6 @@ Quantile <- R6Class(
         ) {
             private$.p <- p
             private$.null_value <- null_value
-            private$.conf_level <- conf_level
-
-            private$.type <- ""
 
             super$initialize(alternative = match.arg(alternative), conf_level = conf_level)
         }
@@ -48,25 +45,23 @@ Quantile <- R6Class(
             n <- length(private$.data)
             p <- private$.p
 
-            # copied stats::binom.test
+            # modified stats::binom.test
             private$.p_value <- switch(
                 private$.alternative,
                 less = pbinom(x, n, p),
                 greater = pbinom(x - 1, n, p, lower.tail = FALSE),
-                two_sided = {
-                    if (p == 0) (x == 0) else if (p == 1) (x == n) else {
-                        relErr <- 1 + 1e-07
-                        d <- dbinom(x, n, p)
-                        m <- n * p
-                        if (x == m) 1 else if (x < m) {
-                            i <- seq.int(from = ceiling(m), to = n)
-                            y <- sum(dbinom(i, n, p) <= d * relErr)
-                            pbinom(x, n, p) + pbinom(n - y, n, p, lower.tail = FALSE)
-                        } else {
-                            i <- seq.int(from = 0, to = floor(m))
-                            y <- sum(dbinom(i, n, p) <= d * relErr)
-                            pbinom(y - 1, n, p) + pbinom(x - 1, n, p, lower.tail = FALSE)
-                        }
+                two_sided = if (p == 0) (x == 0) else if (p == 1) (x == n) else {
+                    relErr <- 1 + 1e-07
+                    d <- dbinom(x, n, p)
+                    m <- n * p
+                    if (x == m) 1 else if (x < m) {
+                        i <- seq.int(from = ceiling(m), to = n)
+                        y <- sum(dbinom(i, n, p) <= d * relErr)
+                        pbinom(x, n, p) + pbinom(n - y, n, p, lower.tail = FALSE)
+                    } else {
+                        i <- seq.int(from = 0, to = floor(m))
+                        y <- sum(dbinom(i, n, p) <= d * relErr)
+                        pbinom(y - 1, n, p) + pbinom(x - 1, n, p, lower.tail = FALSE)
                     }
                 }
             )

@@ -6,6 +6,8 @@ OneSampleTest <- R6Class(
     inherit = PermuTest,
     cloneable = FALSE,
     private = list(
+        .type = "!permu",
+
         .check = function() {}, # TODO
 
         .feed = function(x) {
