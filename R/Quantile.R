@@ -15,7 +15,7 @@ Quantile <- R6Class(
     public = list(
         #' @description Create a new `Quantile` object. 
         #' 
-        #' @param p a numeric between 0 and 1 indicating the probability. 
+        #' @param prob a numeric between 0 and 1 indicating the probability. 
         #' @param null_value a number specifying the true value of the quantile. 
         #' @param conf_level a number specifying confidence level of the interval.
         #' 
@@ -23,16 +23,16 @@ Quantile <- R6Class(
         #' 
         #' @return A `Quantile` object. 
         initialize = function(
-            p = 0.5,
+            prob = 0.5,
             null_value = 0, alternative = c("two_sided", "less", "greater"), conf_level = 0.95
         ) {
-            private$.p <- p
+            private$.prob <- prob
 
             super$initialize(alternative = match.arg(alternative), conf_level = conf_level)
         }
     ),
     private = list(
-        .p = NULL,
+        .prob = NULL,
 
         .calculate_statistic = function() {
             private$.statistic <- sum(private$.data > private$.null_value)
@@ -41,7 +41,7 @@ Quantile <- R6Class(
         .calculate_p = function() {
             x <- private$.statistic
             n <- length(private$.data)
-            p <- private$.p
+            p <- private$.prob
 
             # modified stats::binom.test
             private$.p_value <- switch(
@@ -68,7 +68,7 @@ Quantile <- R6Class(
         .calculate_ci = function() {
             n <- length(private$.data)
             beta <- 1 - (1 - private$.conf_level) / 2
-            p <- private$.p
+            p <- private$.prob
             
             d <- qnorm(beta) * sqrt(n * p * (1 - p))
             a <- round(p * n - d)
@@ -79,12 +79,12 @@ Quantile <- R6Class(
         }
     ),
     active = list(
-        #' @field p The probability. 
-        p = function(value) {
+        #' @field prob The probability. 
+        prob = function(value) {
             if (missing(value)) {
-                private$.p
+                private$.prob
             } else {
-                private$.p <- value
+                private$.prob <- value
                 private$.check()
                 private$.calculate()
             }
