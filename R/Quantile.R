@@ -16,7 +16,7 @@ Quantile <- R6Class(
         #' @description Create a new `Quantile` object. 
         #' 
         #' @param prob a numeric between 0 and 1 indicating the probability. 
-        #' @param null_value a number specifying the true value of the quantile. 
+        #' @param null_value a number specifying the value of the quantile under the null hypothesis. 
         #' @param conf_level a number specifying confidence level of the interval.
         #' 
         #' @param alternative a character string specifying the alternative hypothesis, must be one of `"two_sided"` (default), `"greater"` or `"less"`.
