@@ -58,6 +58,10 @@
 <dd><p>The scoring system used.</p></dd>
 
 
+<dt><code>null_value</code></dt>
+<dd><p>The value of the parameter specified by the null hypothesis.</p></dd>
+
+
 <dt><code>alternative</code></dt>
 <dd><p>The alternative hypothesis.</p></dd>
 
@@ -118,6 +122,7 @@
 <p>Create a new <code>PermuTest</code> object. Note that it is not recommended to create objects of this class directly.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/PermuTest.html">PermuTest</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
+<span>  null_value <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two_sided"</span>, <span class="st">"less"</span>, <span class="st">"greater"</span><span class="op">)</span>,</span>
 <span>  n_permu <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  conf_level <span class="op">=</span> <span class="fl">0.95</span>,</span>
@@ -127,7 +132,11 @@
 
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>alternative</code></dt>
+<p></p><div class="arguments"><dl><dt><code>null_value</code></dt>
+<dd><p>a number specifying the value of the parameter specified by the null hypothesis.</p></dd>
+
+
+<dt><code>alternative</code></dt>
 <dd><p>a character string specifying the alternative hypothesis, must be one of <code>"two_sided"</code> (default), <code>"greater"</code> or <code>"less"</code>.</p></dd>
 
 
