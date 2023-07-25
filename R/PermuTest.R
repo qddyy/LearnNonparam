@@ -136,14 +136,8 @@ PermuTest <- R6Class(
             less <- mean(private$.statistic_permu <= private$.statistic)
             two_sided <- mean(abs(private$.statistic_permu) >= abs(private$.statistic))
 
-            private$.p_value <- switch(
-                private$.trend, 
-                `+` = switch(private$.alternative,
-                    greater = greater, less = less, two_sided = two_sided
-                ),
-                `-` = switch(private$.alternative,
-                    greater = less, less = greater, two_sided = two_sided
-                )
+            private$.p_value <- switch(private$.alternative,
+                greater = greater, less = less, two_sided = two_sided
             )
         },
 
@@ -156,6 +150,13 @@ PermuTest <- R6Class(
             raw_data <- private$.data
             if (private$.scoring != "none") {
                 private$.data <- private$.calculate_scores(raw_data)
+            }
+
+            raw_alternative <- private$.alternative
+            if (private$.trend == "-") {
+                private$.alternative <- switch(private$.alternative,
+                    greater = "less", less = "greater", two_sided = "two_sided"
+                )
             }
 
             private$.calculate_statistic()
@@ -172,6 +173,7 @@ PermuTest <- R6Class(
             private$.calculate_ci()
 
             private$.data <- raw_data
+            private$.alternative <- raw_alternative
         }
     ),
     active = list(
