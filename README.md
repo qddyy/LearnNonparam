@@ -5,8 +5,6 @@
 
 <!-- badges: start -->
 
-[![Codecov test
-coverage](https://codecov.io/gh/qddyy/LearnNonparam/branch/master/graph/badge.svg)](https://app.codecov.io/gh/qddyy/LearnNonparam?branch=master)
 [![R-CMD-check](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
@@ -55,7 +53,7 @@ library(LearnNonparam)
   print(t$statistic)
   #> [1] 35
   print(t$p_value)
-  #> [1] 0.0027
+  #> [1] 0.0021
 
   print(t$estimate)
   #> [1] 30.045
@@ -103,8 +101,8 @@ pmts
 #> 13      ksample.anova                                                 ANOVA
 #> 14       twosample.ks                    Two Sample Kolmogorov-Smirnov Test
 #> 15      twosample.rmd                              Ratio Mean Deviance Test
-#> 16       twosample.ab                                   Ansari-Bradley Test
-#> 17       twosample.st                                     Siegel-Tukey Test
+#> 16   twosample.siegel                                     Siegel-Tukey Test
+#> 17   twosample.ansari                                   Ansari-Bradley Test
 #> 18 twosample.scoresum                                        Score Sum Test
 #> 19 twosample.wilcoxon                              Two Sample Wilcoxon Test
 #> 20     twosample.mean                    Two Sample Permutation Test (mean)
