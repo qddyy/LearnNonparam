@@ -12,9 +12,7 @@ Performs one sample quantile test on data vectors. In addition, a confidence int
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{p}}{The probability.}
-
-\item{\code{null_value}}{The true value of the quantile.}
+\item{\code{prob}}{The probability.}
 }
 \if{html}{\out{</div>}}
 }
@@ -39,7 +37,7 @@ Performs one sample quantile test on data vectors. In addition, a confidence int
 Create a new \code{Quantile} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Quantile$new(
-  p = 0.5,
+  prob = 0.5,
   null_value = 0,
   alternative = c("two_sided", "less", "greater"),
   conf_level = 0.95
@@ -49,9 +47,9 @@ Create a new \code{Quantile} object.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{p}}{a numeric between 0 and 1 indicating the probability.}
+\item{\code{prob}}{a numeric between 0 and 1 indicating the probability.}
 
-\item{\code{null_value}}{a number indicating the true value of the quantile.}
+\item{\code{null_value}}{a number specifying the value of the quantile under the null hypothesis.}
 
 \item{\code{alternative}}{a character string specifying the alternative hypothesis, must be one of \code{"two_sided"} (default), \code{"greater"} or \code{"less"}.}
 

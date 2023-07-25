@@ -7,7 +7,7 @@
 Performs two sample Ansari-Bradley test on data vectors.
 }
 \section{Super classes}{
-\code{LearnNonparam::Permutation Test} -> \code{LearnNonparam::Two Sample Permutation Test} -> \code{Ansari-Bradley Test}
+\code{LearnNonparam::Permutation Test} -> \code{LearnNonparam::Two Sample Permutation Test} -> \code{LearnNonparam::Two Sample Wilcoxon Test} -> \code{Ansari-Bradley Test}
 }
 \section{Methods}{
 \subsection{Public methods}{
@@ -29,18 +29,13 @@ Performs two sample Ansari-Bradley test on data vectors.
 \subsection{Method \code{new()}}{
 Create a new \code{AnsariBradley} object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{AnsariBradley$new(
-  alternative = c("two_sided", "less", "greater"),
-  n_permu = NULL
-)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{AnsariBradley$new(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{alternative}}{a character string specifying the alternative hypothesis, must be one of \code{"two_sided"} (default), \code{"greater"} or \code{"less"}.}
-
-\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If \code{NULL} (default) then all permutations are used.}
+\item{\code{...}}{parameters passed to \code{Wilcoxon$new()}.}
 }
 \if{html}{\out{</div>}}
 }

@@ -7,7 +7,7 @@
 Performs two sample Siegel-Tukey test on data vectors.
 }
 \section{Super classes}{
-\code{LearnNonparam::Permutation Test} -> \code{LearnNonparam::Two Sample Permutation Test} -> \code{LearnNonparam::Two Sample Wilcoxon Test} -> \code{Siegel-Tukey Test}
+\code{LearnNonparam::Permutation Test} -> \code{LearnNonparam::Two Sample Permutation Test} -> \code{LearnNonparam::Two Sample Wilcoxon Test} -> \code{LearnNonparam::Ansari-Bradley Test} -> \code{Siegel-Tukey Test}
 }
 \section{Methods}{
 \subsection{Public methods}{
@@ -29,11 +29,7 @@ Performs two sample Siegel-Tukey test on data vectors.
 \subsection{Method \code{new()}}{
 Create a new \code{SiegelTukey} object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{SiegelTukey$new(
-  adjust_median = FALSE,
-  ...,
-  alternative = c("two_sided", "less", "greater")
-)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{SiegelTukey$new(adjust_median = FALSE, ...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -42,8 +38,6 @@ Create a new \code{SiegelTukey} object.
 \item{\code{adjust_median}}{a logical indicating whether the median difference between groups is levelled before the test is conducted.}
 
 \item{\code{...}}{extra parameters passed to \code{Wilcoxon$new()}.}
-
-\item{\code{alternative}}{a character string specifying the alternative hypothesis, must be one of \code{"two_sided"} (default), \code{"greater"} or \code{"less"}.}
 }
 \if{html}{\out{</div>}}
 }

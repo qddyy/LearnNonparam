@@ -15,6 +15,8 @@ This is the abstract base class for permutation test objects, which contains sev
 
 \item{\code{scoring}}{The scoring system used.}
 
+\item{\code{null_value}}{The value of the parameter specified by the null hypothesis.}
+
 \item{\code{alternative}}{The alternative hypothesis.}
 
 \item{\code{n_permu}}{The number of permutations used.}
@@ -54,6 +56,7 @@ This is the abstract base class for permutation test objects, which contains sev
 Create a new \code{PermuTest} object. Note that it is not recommended to create objects of this class directly.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PermuTest$new(
+  null_value = 0,
   alternative = c("two_sided", "less", "greater"),
   n_permu = NULL,
   conf_level = 0.95,
@@ -64,6 +67,8 @@ Create a new \code{PermuTest} object. Note that it is not recommended to create 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
+\item{\code{null_value}}{a number specifying the value of the parameter specified by the null hypothesis.}
+
 \item{\code{alternative}}{a character string specifying the alternative hypothesis, must be one of \code{"two_sided"} (default), \code{"greater"} or \code{"less"}.}
 
 \item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If \code{NULL} (default) then all permutations are used.}
