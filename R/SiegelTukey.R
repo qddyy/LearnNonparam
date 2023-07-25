@@ -19,71 +19,51 @@ SiegelTukey <- R6Class(
         #' 
         #' @param ... extra parameters passed to `Wilcoxon$new()`.
         #' 
-        #' @param alternative a character string specifying the alternative hypothesis, must be one of `"two_sided"` (default), `"greater"` or `"less"`.
-        #' 
         #' @return A `SiegelTukey` object. 
         initialize = function(
             adjust_median = FALSE,
-            ...,
-            alternative = c("two_sided", "less", "greater")
+            ...
         ) {
             private$.adjust_median <- adjust_median
+            private$.trend <- "-"
 
-            super$initialize(
-                ...,
-                alternative = match.arg(alternative)
-            )
+            super$initialize(...)
         }
     ),
     private = list(
         .adjust_median = NULL,
 
         .calculate_scores = function(data) {
+            x <- data$x
+            y <- data$y
+
             if (private$.adjust_median) {
-                data$x <- data$x - median(data$x)
-                data$y <- data$y - median(data$y)
+                x <- x - median(x)
+                y <- y - median(y)
             }
 
-            super$.calculate_scores(SiegelTukey_rank(data$x, data$y))
+            m <- length(x)
+            n <- length(y)
+            N <- m + n
+
+            rank_l <- sapply(
+                seq(from = 0, to = N - 1, by = 4),
+                function(x) x + c(1, 4)
+            ) 
+            rank_r <- sapply(
+                seq(from = 2, to = N, by = 4),
+                function(x) x + c(0, 1)
+            )
+            if (length(rank_l) == length(rank_r)) {
+                rank_l <- rank_l[1:floor(N / 2)]
+                rank_r <- rank_r[1:ceiling(N / 2)]
+            } else {
+                rank_l <- rank_l[1:ceiling(N / 2)]
+                rank_r <- rank_r[1:floor(N / 2)]
+            }
+            ST_rank <- c(rank_l, rev(rank_r))[rank(c(x, y))]
+
+            list(x = ST_rank[1:m], y = ST_rank[(m + 1):(m + n)])
         }
     )
 )
-
-# modified jmuOutlier::siegel.test
-SiegelTukey_rank <- function(x, y) {
-    z <- sort(c(x, y))
-    N <- length(z)
-    lower <- 1
-    upper <- N
-    j <- rep(NA, N)
-    for (i in 1:N) {
-        if (i - 4 * as.integer(i/4) <= 1) {
-            j[lower] <- i
-            lower <- lower + 1
-        }
-        else {
-            j[upper] <- i
-            upper <- upper - 1
-        }
-    }
-    z_0 <- z[order(j)]
-    rank.x.mat <- matrix(NA, length(x), N)
-    rank.y.mat <- matrix(NA, length(y), N)
-    for (k in 1:N) {
-        for (i in 1:length(x)) {
-            if (x[i] == z_0[k]) {
-                rank.x.mat[i, k] <- k
-            }
-        }
-        for (i in 1:length(y)) {
-            if (y[i] == z_0[k]) {
-                rank.y.mat[i, k] <- k
-            }
-        }
-    }
-
-    list(
-        x = apply(rank.x.mat, 1, mean, na.rm = TRUE),
-        y = apply(rank.y.mat, 1, mean, na.rm = TRUE)
-    )
-}
