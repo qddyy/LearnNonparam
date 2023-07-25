@@ -10,7 +10,7 @@
 
 SiegelTukey <- R6Class(
     classname = "Siegel-Tukey Test",
-    inherit = AnsariBradley,
+    inherit = Wilcoxon,
     cloneable = FALSE,
     public = list(
         #' @description Create a new `SiegelTukey` object. 
@@ -31,6 +31,16 @@ SiegelTukey <- R6Class(
     ),
     private = list(
         .adjust_median = NULL,
+
+        .calculate = function() {
+            super$.__enclos_env__$super$.calculate()
+
+            m <- length(private$.data$x)
+            private$.statistic <- private$.statistic + m * (m + 1) / 2
+        },
+
+        .calculate_estimate = function() {},
+        .calculate_ci = function() {},
 
         .calculate_scores = function(data) {
             private$.scoring <- "Siegel-Tukey rank"
