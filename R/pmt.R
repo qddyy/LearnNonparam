@@ -5,8 +5,8 @@ Tests <- as.environment(list(
     twosample.mean = MeanDiff$new,
     twosample.wilcoxon = Wilcoxon$new,
     twosample.scoresum = ScoreSum$new,
-    twosample.st = SiegelTukey$new,
-    twosample.ab = AnsariBradley$new,
+    twosample.ansari = AnsariBradley$new,
+    twosample.siegel = SiegelTukey$new,
     twosample.rmd = RatioMeanDeviance$new,
     twosample.ks = KolmogorovSmirnov$new,
 
