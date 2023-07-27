@@ -29,19 +29,33 @@ SiegelTukey <- R6Class(
             super$initialize(...)
 
             private$.scoring <- "Siegel-Tukey rank"
+
+            private$.statistic_func <- function(x, y) sum(x)
         }
     ),
     private = list(
         .adjust_median = NULL,
 
-        .calculate = function() {
-            super$.calculate()
-
-            m <- length(private$.data$x)
-            private$.statistic <- private$.statistic + m * (m + 1) / 2
-        },
+        .trend = "-",
 
         .calculate_extra = function() {},
+
+        .calculate_p = function() {
+            raw_alternative <- private$.alternative
+            private$.alternative <- switch(raw_alternative,
+                greater = "less", less = "greater", two_sided = "two_sided"
+            )
+
+            raw_statistic <- private$.statistic
+            m <- length(private$.data$x)
+            private$.statistic <- raw_statistic - m * (m + 1) / 2
+
+            super$.calculate_p()
+
+            private$.statistic <- raw_statistic
+
+            private$.alternative <- raw_alternative
+        },
 
         .calculate_scores = function(data) {
             x <- data$x
