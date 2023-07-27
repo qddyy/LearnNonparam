@@ -134,10 +134,10 @@ PermuTest <- R6Class(
             two_sided <- mean(abs(private$.statistic_permu) >= abs(private$.statistic))
 
             private$.p_value <- switch(private$.trend,
-                `+` = switch(private$.alternative
+                "+" = switch(private$.alternative,
                     greater = greater, less = less, two_sided = two_sided
                 ),
-                `-` = switch(private$.alternative
+                "-" = switch(private$.alternative,
                     greater = less, less = greater, two_sided = two_sided
                 ),
             )
