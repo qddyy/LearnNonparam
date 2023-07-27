@@ -40,14 +40,6 @@ Wilcoxon <- R6Class(
     ),
     private = list(
         .correct = NULL,
-        .diff = NULL,
-
-        .calculate = function() {
-            combinations_xy <- expand.grid(x = private$.data$x, y = private$.data$y)
-            private$.diff <- combinations_xy$x - combinations_xy$y
-
-            super$.calculate()
-        },
 
         .calculate_p = function() {
             m <- length(private$.data$x)
@@ -63,7 +55,9 @@ Wilcoxon <- R6Class(
             if (private$.type == "exact") {
                 less <- pwilcox(private$.statistic, m, n)
                 greater <- pwilcox(private$.statistic - 1, m, n, lower.tail = FALSE)
-                two_sided <- min(1, 2 * (if (private$.statistic > (m * n / 2)) greater else less))
+                two_sided <- min(1, 2 * (
+                    if (private$.statistic > m * n / 2) greater else less
+                ))
             }
             if (private$.type == "approx") {
                 ties <- table(rank)
@@ -87,11 +81,13 @@ Wilcoxon <- R6Class(
             )
         },
 
-        .calculate_estimate = function() {
-            private$.estimate <- median(private$.diff)
-        },
+        .calculate_extra = function() {
+            combinations_xy <- expand.grid(x = private$.data$x, y = private$.data$y)
+            diff <- combinations_xy$x - combinations_xy$y
 
-        .calculate_ci = function() {
+            private$.estimate <- median(diff)
+
+
             m <- length(private$.data$x)
             n <- length(private$.data$y)
 
@@ -102,7 +98,7 @@ Wilcoxon <- R6Class(
             k_a <- round(mu - z * sqrt(sigma2))
             k_b <- round(mu + z * sqrt(sigma2)) + 1
 
-            diff_sorted <- sort(private$.diff)
+            diff_sorted <- sort(diff)
 
             private$.ci <- c(diff_sorted[k_a], diff_sorted[k_b])
         }

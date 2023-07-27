@@ -27,24 +27,23 @@ SiegelTukey <- R6Class(
             private$.adjust_median <- adjust_median
 
             super$initialize(...)
+
+            private$.scoring <- "Siegel-Tukey rank"
         }
     ),
     private = list(
         .adjust_median = NULL,
 
         .calculate = function() {
-            super$.__enclos_env__$super$.calculate()
+            super$.calculate()
 
             m <- length(private$.data$x)
             private$.statistic <- private$.statistic + m * (m + 1) / 2
         },
 
-        .calculate_estimate = function() {},
-        .calculate_ci = function() {},
+        .calculate_extra = function() {},
 
         .calculate_scores = function(data) {
-            private$.scoring <- "Siegel-Tukey rank"
-
             x <- data$x
             y <- data$y
 
