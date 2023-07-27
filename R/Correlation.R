@@ -51,7 +51,6 @@ Correlation <- R6Class(
                 x <- private$.data$x
                 y <- private$.data$y
 
-                # modified stats:::cor.test.default
                 x_ties <- table(x[duplicated(x)]) + 1
                 y_ties <- table(y[duplicated(y)]) + 1
                 T_0 <- n * (n - 1) / 2

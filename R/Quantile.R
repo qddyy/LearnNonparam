@@ -43,7 +43,6 @@ Quantile <- R6Class(
             n <- length(private$.data)
             p <- private$.prob
 
-            # modified stats::binom.test
             private$.p_value <- switch(
                 private$.alternative,
                 less = pbinom(x, n, p),
