@@ -36,7 +36,7 @@ devtools::install_github("qddyy/LearnNonparam", dependencies = TRUE, upgrade = "
 library(LearnNonparam)
 ```
 
-- Create a test object
+- Create a test (for example, a `Wilcoxon` object)
     ```{r}
     t <- Wilcoxon$new(type = "permu", n_permu = 10000)
     ```
@@ -47,7 +47,7 @@ library(LearnNonparam)
     t <- pmt("twosample.wilcoxon", type = "permu", n_permu = 10000)
     ```
 
-- feed it the data
+- feed it the data (`data.frame` | `list` | `vector`)
     ```{r}
     t$feed(Table2.6.2)
     ```

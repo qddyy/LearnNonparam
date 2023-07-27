@@ -27,7 +27,7 @@ devtools::install_github("qddyy/LearnNonparam", dependencies = TRUE, upgrade = "
 library(LearnNonparam)
 ```
 
-- Create a test object
+- Create a test (for example, a `Wilcoxon` object)
 
   ``` r
   t <- Wilcoxon$new(type = "permu", n_permu = 10000)
@@ -41,7 +41,7 @@ library(LearnNonparam)
   t <- pmt("twosample.wilcoxon", type = "permu", n_permu = 10000)
   ```
 
-- feed it the data
+- feed it the data (`data.frame` \| `list` \| `vector`)
 
   ``` r
   t$feed(Table2.6.2)
@@ -53,12 +53,12 @@ library(LearnNonparam)
   print(t$statistic)
   #> [1] 35
   print(t$p_value)
-  #> [1] 0.0021
+  #> [1] 0.0032
 
   print(t$estimate)
-  #> [1] 30.045
+  #> [1] 6
   print(t$ci)
-  #> [1] 11.57 50.76
+  #> [1] 3 9
 
   t$plot_hist(bins = 12)
   ```

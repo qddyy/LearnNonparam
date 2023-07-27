@@ -19,11 +19,9 @@ This is the abstract base class for permutation test objects, which contains sev
 
 \item{\code{alternative}}{The alternative hypothesis.}
 
-\item{\code{n_permu}}{The number of permutations used.}
-
 \item{\code{conf_level}}{The confidence level of the interval.}
 
-\item{\code{statistic_func}}{The function used to calculate the statistic.}
+\item{\code{n_permu}}{The number of permutations used.}
 
 \item{\code{data}}{Data fed into the object.}
 

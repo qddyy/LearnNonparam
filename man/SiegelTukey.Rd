@@ -7,7 +7,7 @@
 Performs two sample Siegel-Tukey test on data vectors.
 }
 \section{Super classes}{
-\code{LearnNonparam::Permutation Test} -> \code{LearnNonparam::Two Sample Permutation Test} -> \code{LearnNonparam::Two Sample Wilcoxon Test} -> \code{LearnNonparam::Ansari-Bradley Test} -> \code{Siegel-Tukey Test}
+\code{LearnNonparam::Permutation Test} -> \code{LearnNonparam::Two Sample Permutation Test} -> \code{LearnNonparam::Two Sample Wilcoxon Test} -> \code{Siegel-Tukey Test}
 }
 \section{Methods}{
 \subsection{Public methods}{
