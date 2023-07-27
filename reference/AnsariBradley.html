@@ -17,7 +17,7 @@
       </button>
       <span class="navbar-brand">
         <a class="navbar-link" href="../index.html">LearnNonparam</a>
-        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.7</span>
+        <span class="version label label-default" data-toggle="tooltip" data-placement="bottom" title="">1.1.8</span>
       </span>
     </div>
 
@@ -46,7 +46,7 @@
 
     <div id="super-classes">
     <h2>Super classes</h2>
-    <p><code>LearnNonparam::Permutation Test</code> -&gt; <code>LearnNonparam::Two Sample Permutation Test</code> -&gt; <code>LearnNonparam::Two Sample Wilcoxon Test</code> -&gt; <code>Ansari-Bradley Test</code></p>
+    <p><code>LearnNonparam::Permutation Test</code> -&gt; <code>LearnNonparam::Two Sample Permutation Test</code> -&gt; <code>Ansari-Bradley Test</code></p>
     </div>
     <div id="methods">
     <h2>Methods</h2>
@@ -61,13 +61,30 @@
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Create a new <code>AnsariBradley</code> object.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/AnsariBradley.html">AnsariBradley</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/AnsariBradley.html">AnsariBradley</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"exact"</span>, <span class="st">"approx"</span>, <span class="st">"permu"</span><span class="op">)</span>,</span>
+<span>  alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two_sided"</span>, <span class="st">"less"</span>, <span class="st">"greater"</span><span class="op">)</span>,</span>
+<span>  n_permu <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  conf_level <span class="op">=</span> <span class="fl">0.95</span></span>
+<span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>...</code></dt>
-<dd><p>parameters passed to <code>Wilcoxon$new()</code>.</p></dd>
+<p></p><div class="arguments"><dl><dt><code>type</code></dt>
+<dd><p>a character string specifying the way to calculate p-values, must be one of <code>"exact"</code> (default), <code>"approx"</code> or <code>"permu"</code>. Note that this parameter will be set to <code>"approx"</code> automatically when there exists ties.</p></dd>
+
+
+<dt><code>alternative</code></dt>
+<dd><p>a character string specifying the alternative hypothesis, must be one of <code>"two_sided"</code> (default), <code>"greater"</code> or <code>"less"</code>.</p></dd>
+
+
+<dt><code>n_permu</code></dt>
+<dd><p>an integer specifying how many permutations should be used to construct the permutation distribution. If <code>NULL</code> (default) then all permutations are used.</p></dd>
+
+
+<dt><code>conf_level</code></dt>
+<dd><p>a number specifying confidence level of the interval.</p></dd>
 
 
 </dl><p></p></div>
