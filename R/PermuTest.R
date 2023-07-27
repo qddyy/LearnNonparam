@@ -149,14 +149,14 @@ PermuTest <- R6Class(
                 private$.data <- private$.calculate_scores(raw_data)
             }
 
+            private$.calculate_statistic()
+
             raw_alternative <- private$.alternative
             if (private$.trend == "-") {
                 private$.alternative <- switch(private$.alternative,
                     greater = "less", less = "greater", two_sided = "two_sided"
                 )
             }
-
-            private$.calculate_statistic()
 
             if (private$.type == "permu") {
                 private$.permute()
@@ -166,10 +166,11 @@ PermuTest <- R6Class(
                 private$.calculate_p()
             }
 
+            private$.alternative <- raw_alternative
+
             private$.calculate_extra()
 
             private$.data <- raw_data
-            private$.alternative <- raw_alternative
         }
     ),
     active = list(
