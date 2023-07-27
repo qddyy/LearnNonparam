@@ -30,16 +30,20 @@ Correlation <- R6Class(
             private$.method <- match.arg(method)
 
             super$initialize(alternative = match.arg(alternative), n_permu = n_permu)
-
+        }
+    ),
+    private = list(
+        .calculate = function() {
             private$.statistic_func <- switch(
                 private$.method,
                 pearson = function(x, y) cor(x, y, method = "pearson"),
                 kendall = function(x, y) cor(x, y, method = "kendall"),
                 spearman = function(x, y) cor(x, y, method = "spearman")
             )
-        }
-    ),
-    private = list(
+
+            super$.calculate()
+        },
+
         .calculate_p = function() {
             n <- nrow(private$.data)
 
