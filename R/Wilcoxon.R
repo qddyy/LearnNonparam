@@ -45,10 +45,10 @@ Wilcoxon <- R6Class(
             m <- length(private$.data$x)
             n <- length(private$.data$y)
             N <- m + n
-            rank <- c(private$.data$x, private$.data$y)
 
             # Detect ties
-            if (length(rank) != length(unique(rank))) {
+            ties <- table(c(private$.data$x, private$.data$y))
+            if (any(ties > 1)) {
                 private$.type <- "approx"
             }
     
@@ -59,9 +59,8 @@ Wilcoxon <- R6Class(
                     if (private$.statistic > m * n / 2) greater else less
                 ))
             }
-            if (private$.type == "approx") {
-                ties <- table(rank)
 
+            if (private$.type == "approx") {
                 z <- private$.statistic - m * n / 2
                 correction <- if (private$.correct) switch(
                     private$.alternative,
