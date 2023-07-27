@@ -133,8 +133,13 @@ PermuTest <- R6Class(
             less <- mean(private$.statistic_permu <= private$.statistic)
             two_sided <- mean(abs(private$.statistic_permu) >= abs(private$.statistic))
 
-            private$.p_value <- switch(private$.alternative,
-                greater = greater, less = less, two_sided = two_sided
+            private$.p_value <- switch(private$.trend,
+                `+` = switch(private$.alternative
+                    greater = greater, less = less, two_sided = two_sided
+                ),
+                `-` = switch(private$.alternative
+                    greater = less, less = greater, two_sided = two_sided
+                ),
             )
         },
 
@@ -144,19 +149,13 @@ PermuTest <- R6Class(
         },
 
         .calculate = function() {
-            raw_data <- private$.data
+            raw_data <- NULL
             if (private$.scoring != "none") {
+                raw_data <- private$.data
                 private$.data <- private$.calculate_scores(raw_data)
             }
 
             private$.calculate_statistic()
-
-            raw_alternative <- private$.alternative
-            if (private$.trend == "-") {
-                private$.alternative <- switch(private$.alternative,
-                    greater = "less", less = "greater", two_sided = "two_sided"
-                )
-            }
 
             if (private$.type == "permu") {
                 private$.permute()
@@ -166,11 +165,9 @@ PermuTest <- R6Class(
                 private$.calculate_p()
             }
 
-            private$.alternative <- raw_alternative
-
             private$.calculate_extra()
 
-            private$.data <- raw_data
+            if (!is.null(raw_data)) private$.data <- raw_data
         }
     ),
     active = list(
@@ -204,16 +201,6 @@ PermuTest <- R6Class(
                 private$.calculate()
             }
         },
-        #' @field null_value The value of the parameter specified by the null hypothesis. 
-        null_value = function(value) {
-            if (missing(value)) {
-                private$.null_value
-            } else {
-                private$.null_value <- value
-                private$.check()
-                private$.calculate()
-            }
-        },
         #' @field alternative The alternative hypothesis. 
         alternative = function(value) {
             if (missing(value)) {
@@ -224,15 +211,16 @@ PermuTest <- R6Class(
                 private$.calculate()
             }
         },
-        #' @field n_permu The number of permutations used. 
-        n_permu = function(value) 
+        #' @field null_value The value of the parameter specified by the null hypothesis. 
+        null_value = function(value) {
             if (missing(value)) {
-                private$.n_permu
+                private$.null_value
             } else {
-                private$.n_permu <- value
+                private$.null_value <- value
                 private$.check()
-                if (private$.type == "permu") private$.calculate()
-            },
+                private$.calculate()
+            }
+        },
         #' @field conf_level The confidence level of the interval. 
         conf_level = function(value) {
             if (missing(value)) {
@@ -240,15 +228,20 @@ PermuTest <- R6Class(
             } else {
                 private$.conf_level <- value
                 private$.check()
-                private$.calculate_ci()
+                private$.calculate_extra()
             }
         },
-        #' @field statistic_func The function used to calculate the statistic. 
-        statistic_func = function(value) {
-            if (!missing(value)) {
-                private$.statistic_func <- value
+        #' @field n_permu The number of permutations used. 
+        n_permu = function(value) {
+            if (missing(value)) {
+                private$.n_permu
+            } else {
+                private$.n_permu <- value
+                private$.check()
+                if (private$.type == "permu") private$.calculate()
             }
         },
+
         #' @field data Data fed into the object. 
         data = function() private$.data,
         #' @field data_permu All permutations used. 
