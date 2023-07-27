@@ -65,7 +65,7 @@ Quantile <- R6Class(
             )
         },
 
-        .calculate_ci = function() {
+        .calculate_extra = function() {
             n <- length(private$.data)
             beta <- 1 - (1 - private$.conf_level) / 2
             p <- private$.prob
