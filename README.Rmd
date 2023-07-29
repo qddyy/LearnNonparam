@@ -27,7 +27,7 @@ You can install the development version of LearnNonparam from [GitHub](https://g
 
 ```{r, eval = FALSE}
 # install.packages("devtools")
-devtools::install_github("qddyy/LearnNonparam")
+devtools::install_github("qddyy/LearnNonparam", dependencies = TRUE)
 ```
 
 ## Example

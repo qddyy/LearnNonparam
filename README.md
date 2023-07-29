@@ -18,7 +18,7 @@ You can install the development version of LearnNonparam from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("qddyy/LearnNonparam")
+devtools::install_github("qddyy/LearnNonparam", dependencies = TRUE)
 ```
 
 ## Example
@@ -52,12 +52,12 @@ library(LearnNonparam)
   print(t$statistic)
   #> [1] 35
   print(t$p_value)
-  #> [1] 0.0013
+  #> [1] 0.0023
 
   print(t$estimate)
-  #> [1] 6
+  #> [1] 30.045
   print(t$ci)
-  #> [1] 3 9
+  #> [1] 11.57 50.76
 
   t$plot_hist(bins = 12)
   ```
