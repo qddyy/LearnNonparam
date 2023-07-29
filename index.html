@@ -65,12 +65,11 @@
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <p>You can install the development version of LearnNonparam from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
-<div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"qddyy/LearnNonparam"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span>, upgrade <span class="op">=</span> <span class="st">"never"</span><span class="op">)</span></span>
-<span><span class="co">#&gt; Downloading GitHub repo qddyy/LearnNonparam@HEAD</span></span>
-<span><span class="co">#&gt; Error in utils::download.file(url, path, method = method, quiet = quiet,  : </span></span>
-<span><span class="co">#&gt;   cannot open URL 'https://api.github.com/repos/qddyy/LearnNonparam/tarball/HEAD'</span></span></code></pre></div>
+<div class="sourceCode" id="cb1"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb1-1"><a href="#cb1-1" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("devtools")</span></span>
+<span id="cb1-2"><a href="#cb1-2" aria-hidden="true" tabindex="-1"></a>devtools<span class="sc">::</span><span class="fu">install_github</span>(<span class="st">"qddyy/LearnNonparam"</span>, <span class="at">dependencies =</span> <span class="cn">TRUE</span>, <span class="at">upgrade =</span> <span class="st">"never"</span>)</span>
+<span id="cb1-3"><a href="#cb1-3" aria-hidden="true" tabindex="-1"></a>Downloading GitHub repo qddyy<span class="sc">/</span>LearnNonparam<span class="sc">@</span>HEAD</span>
+<span id="cb1-4"><a href="#cb1-4" aria-hidden="true" tabindex="-1"></a>Error <span class="cf">in</span> utils<span class="sc">::</span><span class="fu">download.file</span>(url, path, <span class="at">method =</span> method, <span class="at">quiet =</span> quiet,  <span class="sc">:</span> </span>
+<span id="cb1-5"><a href="#cb1-5" aria-hidden="true" tabindex="-1"></a>  cannot open URL <span class="st">'https://api.github.com/repos/qddyy/LearnNonparam/tarball/HEAD'</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="example">Example<a class="anchor" aria-label="anchor" href="#example"></a>
@@ -94,27 +93,25 @@
 </li>
 <li>
 <p>check the results</p>
-<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 35</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.0025</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">estimate</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 6</span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">ci</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 3 9</span></span>
-<span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="fu">plot_hist</span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(t<span class="sc">$</span>statistic)</span>
+<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">35</span></span>
+<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(t<span class="sc">$</span>p_value)</span>
+<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">0.0015</span></span>
+<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(t<span class="sc">$</span>estimate)</span>
+<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">6</span></span>
+<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(t<span class="sc">$</span>ci)</span>
+<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="dv">3</span> <span class="dv">9</span></span>
+<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">plot_hist</span>(<span class="at">bins =</span> <span class="dv">12</span>)</span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-7-1.png" width="100%"></p>
 </li>
 <li>
 <p>modify some attributes and see how the results change</p>
-<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
-<span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.008239019</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="st">"approx"</span></span>
+<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
+<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(t<span class="sc">$</span>p_value)</span>
+<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">0.008239019</span></span></code></pre></div>
 </li>
 </ul>
 </div>
@@ -124,31 +121,30 @@
 <p>Just use <code><a href="https://rdrr.io/r/base/dots.html" class="external-link">?...</a></code> syntax.</p>
 <p>If you want to know all available methods and attributes, it’s a good idea to explore <code><a href="reference/PermuTest.html">?PermuTest</a></code> (all tests’ <strong>base class</strong>) first.</p>
 <p>If you want to know all available tests, see <code><a href="reference/pmt.html">pmts()</a></code>.</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/pmt.html">pmts</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                   key                                                  test</span></span>
-<span><span class="co">#&gt; 1           table.chi       Contingency Table Permutation Test (chi-square)</span></span>
-<span><span class="co">#&gt; 2    association.corr Two Sample Permutation Test (correlation coefficient)</span></span>
-<span><span class="co">#&gt; 3           rcbd.page                                             Page Test</span></span>
-<span><span class="co">#&gt; 4       rcbd.friedman                                         Friedman Test</span></span>
-<span><span class="co">#&gt; 5          rcbd.anova            ANOVA for Randomized Complete Block Design</span></span>
-<span><span class="co">#&gt; 6  paired.signedscore                                     Signed Score Test</span></span>
-<span><span class="co">#&gt; 7         paired.sign                                             Sign Test</span></span>
-<span><span class="co">#&gt; 8   paired.comparison                                     Paired Comparison</span></span>
-<span><span class="co">#&gt; 9     multicomp.tukey                                             Tukey HSD</span></span>
-<span><span class="co">#&gt; 10        multicomp.t                          Multiple Comparison (t test)</span></span>
-<span><span class="co">#&gt; 11         ksample.jt                              Jonckheere-Terpstra Test</span></span>
-<span><span class="co">#&gt; 12         ksample.kw                                   Kruskal-Wallis Test</span></span>
-<span><span class="co">#&gt; 13      ksample.anova                                                 ANOVA</span></span>
-<span><span class="co">#&gt; 14       twosample.ks                    Two Sample Kolmogorov-Smirnov Test</span></span>
-<span><span class="co">#&gt; 15      twosample.rmd                              Ratio Mean Deviance Test</span></span>
-<span><span class="co">#&gt; 16   twosample.siegel                                     Siegel-Tukey Test</span></span>
-<span><span class="co">#&gt; 17   twosample.ansari                                   Ansari-Bradley Test</span></span>
-<span><span class="co">#&gt; 18 twosample.scoresum                                        Score Sum Test</span></span>
-<span><span class="co">#&gt; 19 twosample.wilcoxon                              Two Sample Wilcoxon Test</span></span>
-<span><span class="co">#&gt; 20     twosample.mean                    Two Sample Permutation Test (mean)</span></span>
-<span><span class="co">#&gt; 21     onesample.ecdf            Empirical Cumulative Distribution Function</span></span>
-<span><span class="co">#&gt; 22 onesample.quantile                                         Quantile Test</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pmts</span>()</span>
+<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>                  key                                                  test</span>
+<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a><span class="dv">1</span>  onesample.quantile                                         Quantile Test</span>
+<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a><span class="dv">2</span>      onesample.ecdf            Empirical Cumulative Distribution Function</span>
+<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a><span class="dv">3</span>      twosample.mean                    Two Sample Permutation <span class="fu">Test</span> (mean)</span>
+<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="dv">4</span>  twosample.wilcoxon                              Two Sample Wilcoxon Test</span>
+<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a><span class="dv">5</span>  twosample.scoresum                                        Score Sum Test</span>
+<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="dv">6</span>    twosample.ansari                                   Ansari<span class="sc">-</span>Bradley Test</span>
+<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a><span class="dv">7</span>    twosample.siegel                                     Siegel<span class="sc">-</span>Tukey Test</span>
+<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a><span class="dv">8</span>       twosample.rmd                              Ratio Mean Deviance Test</span>
+<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a><span class="dv">9</span>        twosample.ks                    Two Sample Kolmogorov<span class="sc">-</span>Smirnov Test</span>
+<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="dv">10</span>      ksample.anova                                                 ANOVA</span>
+<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a><span class="dv">11</span>         ksample.kw                                   Kruskal<span class="sc">-</span>Wallis Test</span>
+<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="dv">12</span>         ksample.jt                              Jonckheere<span class="sc">-</span>Terpstra Test</span>
+<span id="cb8-15"><a href="#cb8-15" aria-hidden="true" tabindex="-1"></a><span class="dv">13</span>        multicomp.t                          Multiple <span class="fu">Comparison</span> (t test)</span>
+<span id="cb8-16"><a href="#cb8-16" aria-hidden="true" tabindex="-1"></a><span class="dv">14</span>    multicomp.tukey                                             Tukey HSD</span>
+<span id="cb8-17"><a href="#cb8-17" aria-hidden="true" tabindex="-1"></a><span class="dv">15</span>  paired.comparison                                     Paired Comparison</span>
+<span id="cb8-18"><a href="#cb8-18" aria-hidden="true" tabindex="-1"></a><span class="dv">16</span>        paired.sign                                             Sign Test</span>
+<span id="cb8-19"><a href="#cb8-19" aria-hidden="true" tabindex="-1"></a><span class="dv">17</span> paired.signedscore                                     Signed Score Test</span>
+<span id="cb8-20"><a href="#cb8-20" aria-hidden="true" tabindex="-1"></a><span class="dv">18</span>         rcbd.anova            ANOVA <span class="cf">for</span> Randomized Complete Block Design</span>
+<span id="cb8-21"><a href="#cb8-21" aria-hidden="true" tabindex="-1"></a><span class="dv">19</span>      rcbd.friedman                                         Friedman Test</span>
+<span id="cb8-22"><a href="#cb8-22" aria-hidden="true" tabindex="-1"></a><span class="dv">20</span>          rcbd.page                                             Page Test</span>
+<span id="cb8-23"><a href="#cb8-23" aria-hidden="true" tabindex="-1"></a><span class="dv">21</span>   association.corr Two Sample Permutation <span class="fu">Test</span> (correlation coefficient)</span>
+<span id="cb8-24"><a href="#cb8-24" aria-hidden="true" tabindex="-1"></a><span class="dv">22</span>          table.chi       Contingency Table Permutation <span class="fu">Test</span> (chi<span class="sc">-</span>square)</span></code></pre></div>
 </div>
 </div>
   </div>
