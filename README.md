@@ -18,7 +18,7 @@ You can install the development version of LearnNonparam from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("qddyy/LearnNonparam", dependencies = TRUE)
+devtools::install_github("qddyy/LearnNonparam")
 #> Downloading GitHub repo qddyy/LearnNonparam@HEAD
 #> Error in utils::download.file(url, path, method = method, quiet = quiet,  : 
 #>   cannot open URL 'https://api.github.com/repos/qddyy/LearnNonparam/tarball/HEAD'
@@ -55,7 +55,7 @@ library(LearnNonparam)
   print(t$statistic)
   #> [1] 35
   print(t$p_value)
-  #> [1] 0.0015
+  #> [1] 0.0024
 
   print(t$estimate)
   #> [1] 6
