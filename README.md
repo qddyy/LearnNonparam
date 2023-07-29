@@ -19,6 +19,9 @@ You can install the development version of LearnNonparam from
 ``` r
 # install.packages("devtools")
 devtools::install_github("qddyy/LearnNonparam", dependencies = TRUE, upgrade = "never")
+#> Downloading GitHub repo qddyy/LearnNonparam@HEAD
+#> Error in utils::download.file(url, path, method = method, quiet = quiet,  : 
+#>   cannot open URL 'https://api.github.com/repos/qddyy/LearnNonparam/tarball/HEAD'
 ```
 
 ## Example
@@ -53,7 +56,7 @@ library(LearnNonparam)
   print(t$statistic)
   #> [1] 35
   print(t$p_value)
-  #> [1] 0.0032
+  #> [1] 0.0019
 
   print(t$estimate)
   #> [1] 6
@@ -63,7 +66,7 @@ library(LearnNonparam)
   t$plot_hist(bins = 12)
   ```
 
-  <img src="man/figures/README-unnamed-chunk-6-1.png" width="100%" />
+  <img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
 
 - modify some attributes and see how the results change
 
