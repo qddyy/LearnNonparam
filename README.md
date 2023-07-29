@@ -19,9 +19,18 @@ You can install the development version of LearnNonparam from
 ``` r
 # install.packages("devtools")
 devtools::install_github("qddyy/LearnNonparam", dependencies = TRUE, upgrade = "never")
-Downloading GitHub repo qddyy/LearnNonparam@HEAD
-Error in utils::download.file(url, path, method = method, quiet = quiet,  : 
-  cannot open URL 'https://api.github.com/repos/qddyy/LearnNonparam/tarball/HEAD'
+#> Downloading GitHub repo qddyy/LearnNonparam@HEAD
+#> ── R CMD build ─────────────────────────────────────────────────────────────────
+#>       ✔  checking for file 'C:\Users\dy\AppData\Local\Temp\RtmpgB5Pop\remotesdb6c543542f4\qddyy-LearnNonparam-da63024/DESCRIPTION'
+#>       ─  preparing 'LearnNonparam': (718ms)
+#>    checking DESCRIPTION meta-information ...  ✔  checking DESCRIPTION meta-information
+#>       ─  checking for LF line-endings in source and make files and shell scripts
+#>       ─  checking for empty or unneeded directories
+#>       ─  building 'LearnNonparam_1.1.8.tar.gz'
+#>      
+#> 
+#> Installing package into 'C:/Users/dy/AppData/Local/Temp/Rtmp4uu1St/temp_libpathd1181cac69d'
+#> (as 'lib' is unspecified)
 ```
 
 ## Example
@@ -54,14 +63,14 @@ library(LearnNonparam)
 
   ``` r
   print(t$statistic)
-  [1] 35
+  #> [1] 35
   print(t$p_value)
-  [1] 0.0015
+  #> [1] 0.0018
 
   print(t$estimate)
-  [1] 6
+  #> [1] 6
   print(t$ci)
-  [1] 3 9
+  #> [1] 3 9
 
   t$plot_hist(bins = 12)
   ```
@@ -74,7 +83,7 @@ library(LearnNonparam)
   t$type <- "approx"
 
   print(t$p_value)
-  [1] 0.008239019
+  #> [1] 0.008239019
   ```
 
 ## Help
@@ -88,27 +97,27 @@ If you want to know all available tests, see `pmts()`.
 
 ``` r
 pmts()
-                  key                                                  test
-1  onesample.quantile                                         Quantile Test
-2      onesample.ecdf            Empirical Cumulative Distribution Function
-3      twosample.mean                    Two Sample Permutation Test (mean)
-4  twosample.wilcoxon                              Two Sample Wilcoxon Test
-5  twosample.scoresum                                        Score Sum Test
-6    twosample.ansari                                   Ansari-Bradley Test
-7    twosample.siegel                                     Siegel-Tukey Test
-8       twosample.rmd                              Ratio Mean Deviance Test
-9        twosample.ks                    Two Sample Kolmogorov-Smirnov Test
-10      ksample.anova                                                 ANOVA
-11         ksample.kw                                   Kruskal-Wallis Test
-12         ksample.jt                              Jonckheere-Terpstra Test
-13        multicomp.t                          Multiple Comparison (t test)
-14    multicomp.tukey                                             Tukey HSD
-15  paired.comparison                                     Paired Comparison
-16        paired.sign                                             Sign Test
-17 paired.signedscore                                     Signed Score Test
-18         rcbd.anova            ANOVA for Randomized Complete Block Design
-19      rcbd.friedman                                         Friedman Test
-20          rcbd.page                                             Page Test
-21   association.corr Two Sample Permutation Test (correlation coefficient)
-22          table.chi       Contingency Table Permutation Test (chi-square)
+#>                   key                                                  test
+#> 1  onesample.quantile                                         Quantile Test
+#> 2      onesample.ecdf            Empirical Cumulative Distribution Function
+#> 3      twosample.mean                    Two Sample Permutation Test (mean)
+#> 4  twosample.wilcoxon                              Two Sample Wilcoxon Test
+#> 5  twosample.scoresum                                        Score Sum Test
+#> 6    twosample.ansari                                   Ansari-Bradley Test
+#> 7    twosample.siegel                                     Siegel-Tukey Test
+#> 8       twosample.rmd                              Ratio Mean Deviance Test
+#> 9        twosample.ks                    Two Sample Kolmogorov-Smirnov Test
+#> 10      ksample.anova                                                 ANOVA
+#> 11         ksample.kw                                   Kruskal-Wallis Test
+#> 12         ksample.jt                              Jonckheere-Terpstra Test
+#> 13        multicomp.t                          Multiple Comparison (t test)
+#> 14    multicomp.tukey                                             Tukey HSD
+#> 15  paired.comparison                                     Paired Comparison
+#> 16        paired.sign                                             Sign Test
+#> 17 paired.signedscore                                     Signed Score Test
+#> 18         rcbd.anova            ANOVA for Randomized Complete Block Design
+#> 19      rcbd.friedman                                         Friedman Test
+#> 20          rcbd.page                                             Page Test
+#> 21   association.corr Two Sample Permutation Test (correlation coefficient)
+#> 22          table.chi       Contingency Table Permutation Test (chi-square)
 ```
