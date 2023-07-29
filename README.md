@@ -56,7 +56,7 @@ library(LearnNonparam)
   print(t$statistic)
   #> [1] 35
   print(t$p_value)
-  #> [1] 0.0018
+  #> [1] 0.0025
 
   print(t$estimate)
   #> [1] 6
@@ -84,7 +84,7 @@ Just use `?...` syntax.
 If you want to know all available methods and attributes, it’s a good
 idea to explore `?PermuTest` (all tests’ **base class**) first.
 
-If you want to know all available tests, see `pmts`.
+If you want to know all available tests, see `pmts()`.
 
 ``` r
 pmts()

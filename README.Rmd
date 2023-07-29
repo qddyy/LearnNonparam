@@ -76,7 +76,7 @@ Just use `?...` syntax.
 
 If you want to know all available methods and attributes, it's a good idea to explore `?PermuTest` (all tests' **base class**) first. 
 
-If you want to know all available tests, see `pmts`. 
+If you want to know all available tests, see `pmts()`. 
 
 ```{r}
 pmts()
