@@ -1,40 +1,38 @@
-tests <- as.environment(list(
-    onesample.quantile = Quantile$new,
-    onesample.ecdf = ECDF$new,
+tests <- list(
+    onesample.quantile = Quantile,
+    onesample.ecdf = ECDF,
 
-    twosample.mean = MeanDiff$new,
-    twosample.wilcoxon = Wilcoxon$new,
-    twosample.scoresum = ScoreSum$new,
-    twosample.ansari = AnsariBradley$new,
-    twosample.siegel = SiegelTukey$new,
-    twosample.rmd = RatioMeanDeviance$new,
-    twosample.ks = KolmogorovSmirnov$new,
+    twosample.mean = MeanDiff,
+    twosample.wilcoxon = Wilcoxon,
+    twosample.scoresum = ScoreSum,
+    twosample.ansari = AnsariBradley,
+    twosample.siegel = SiegelTukey,
+    twosample.rmd = RatioMeanDeviance,
+    twosample.ks = KolmogorovSmirnov,
 
-    ksample.anova = ANOVA$new,
-    ksample.kw = KruskalWallis$new,
-    ksample.jt = JonckheereTerpstra$new,
+    ksample.anova = ANOVA,
+    ksample.kw = KruskalWallis,
+    ksample.jt = JonckheereTerpstra,
 
-    multicomp.t = MultiCompT$new,
-    multicomp.tukey = TukeyHSD$new,
+    multicomp.t = MultiCompT,
+    multicomp.tukey = TukeyHSD,
 
-    paired.comparison = PairedComparison$new,
-    paired.sign = Sign$new,
-    paired.signedscore = SignedScore$new,
+    paired.comparison = PairedComparison,
+    paired.sign = Sign,
+    paired.signedscore = SignedScore,
 
-    rcbd.anova = RCBDANOVA$new,
-    rcbd.friedman = Friedman$new,
-    rcbd.page = Page$new,
+    rcbd.anova = RCBDANOVA,
+    rcbd.friedman = Friedman,
+    rcbd.page = Page,
 
-    association.corr = Correlation$new,
+    association.corr = Correlation,
 
-    table.chi = ChiSquare$new
-))
+    table.chi = ChiSquare
+)
 
 tests_df <- data.frame(
     key = names(tests),
-    test = unname(sapply(
-        tests, function(new) class(do.call(new, list()))[[1]]
-    ))
+    test = unname(sapply(tests, function(t) t$classname))
 )
 
 #' @title Syntactic Sugar for Object Construction
@@ -46,11 +44,12 @@ tests_df <- data.frame(
 
 #' @rdname pmt
 #' 
-#' @param key a character string corresponding to the desired test. Check `pmts(...)` to see available keys. 
+#' @param key a character string corresponding to the desired test. Check `pmts()` to see available keys. 
 #' @param ... extra parameters passed to the initialize method of the test class. 
 #' 
 #' @export
-pmt <- function(key, ...) do.call(key, list(...), envir = tests)
+pmt <- function(key, ...) tests[[key]]$new(...)
+
 
 #' @rdname pmt
 #' 
