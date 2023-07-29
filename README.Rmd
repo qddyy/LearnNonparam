@@ -27,7 +27,7 @@ You can install the development version of LearnNonparam from [GitHub](https://g
 
 ```{r}
 # install.packages("devtools")
-devtools::install_github("qddyy/LearnNonparam", dependencies = TRUE, upgrade = "never")
+devtools::install_github("qddyy/LearnNonparam", dependencies = TRUE)
 ```
 
 ## Example
@@ -43,7 +43,6 @@ library(LearnNonparam)
 
     or you can use `pmt` (**p**er**m**utation **t**est) function (**Recommended**):
     ```{r}
-    # See ?pmt
     t <- pmt("twosample.wilcoxon", type = "permu", n_permu = 10000)
     ```
 
