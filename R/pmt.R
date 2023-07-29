@@ -1,4 +1,4 @@
-Tests <- as.environment(list(
+tests <- as.environment(list(
     onesample.quantile = Quantile$new,
     onesample.ecdf = ECDF$new,
 
@@ -30,21 +30,35 @@ Tests <- as.environment(list(
     table.chi = ChiSquare$new
 ))
 
+tests_df <- data.frame(
+    key = names(tests),
+    test = unname(sapply(
+        tests, function(new) class(do.call(new, list()))[[1]]
+    ))
+)
 
-#' @title Create a test object conveniently
+#' @title Syntactic Sugar for Object Construction
 #' 
-#' @description This class specializes `PermuTest` for permutation tests for contingency tables. 
+#' @description Create a test object conveniently. 
 #' 
-#' @param key key corresponding to the desired test class. Check `pmts` to see all keys available. 
+#' @name pmt
+
+
+#' @rdname pmt
+#' 
+#' @param key a character string corresponding to the desired test. Check `pmts(...)` to see available keys. 
 #' @param ... extra parameters passed to the initialize method of the test class. 
 #' 
-#' @export pmt
-pmt <- function(key, ...) do.call(key, list(...), envir = Tests)
+#' @export
+pmt <- function(key, ...) do.call(key, list(...), envir = tests)
 
-#' @describeIn pmt All tests available. 
+#' @rdname pmt
 #' 
-#' @export pmts
-pmts <- data.frame(
-    key = names(Tests),
-    test = unname(sapply(Tests, function(new) class(do.call(new, list()))[[1]]))
-)
+#' @param category a character string specifying which tests to show. 
+#' 
+#' @export
+pmts <- function(category = c("all", "onesample", "twosample", "ksample", "multicomp", "paired", "rcbd", "association", "table")) {
+    category <- match.arg(category)
+
+    if (category == "all") tests_df else tests_df[startsWith(tests_df$key, category), ]
+}

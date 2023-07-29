@@ -2,15 +2,23 @@
 % Please edit documentation in R/pmt.R
 \name{pmt}
 \alias{pmt}
-\title{Create a test object conveniently}
+\alias{pmts}
+\title{Syntactic Sugar for Object Construction}
 \usage{
 pmt(key, ...)
+
+pmts(
+  category = c("all", "onesample", "twosample", "ksample", "multicomp", "paired", "rcbd",
+    "association", "table")
+)
 }
 \arguments{
-\item{key}{key corresponding to the desired test class. Check \code{pmts} to see all keys available.}
+\item{key}{a character string corresponding to the desired test. Check \code{pmts(...)} to see available keys.}
 
 \item{...}{extra parameters passed to the initialize method of the test class.}
+
+\item{category}{a character string specifying which tests to show.}
 }
 \description{
-This class specializes \code{PermuTest} for permutation tests for contingency tables.
+Create a test object conveniently.
 }
