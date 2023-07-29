@@ -31,8 +31,7 @@ ANOVA <- R6Class(
     ),
     private = list(
         .calculate = function() {
-            private$.statistic_func <- switch(
-                private$.type,
+            private$.statistic_func <- switch(private$.type,
                 permu = function(data, group) sum(tapply(
                     X = data, INDEX = group, FUN = function(x) length(x) * mean(x)^2
                 )),

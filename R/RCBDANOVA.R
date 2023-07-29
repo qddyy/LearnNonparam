@@ -32,8 +32,7 @@ RCBDANOVA <- R6Class(
         .calculate_statistic = function() {
             k <- nrow(private$.data)
             b <- ncol(private$.data)
-            private$.statistic <- switch(
-                private$.type,
+            private$.statistic <- switch(private$.type,
                 permu = private$.statistic_func(private$.data),
                 approx = anova(lm(
                     do.call(c, private$.data) ~

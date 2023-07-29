@@ -63,8 +63,7 @@ RCBD <- R6Class(
         .calculate_scores = function() {
             N <- nrow(private$.data)
 
-            scores <- switch(
-                private$.scoring,
+            scores <- switch(private$.scoring,
                 rank = function(x) rank(x),
                 vw = function(x) qnorm(rank(x) / (N + 1)),
                 savage = function(x) cumsum(1 / N:1)[rank(x)]

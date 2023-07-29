@@ -56,8 +56,7 @@ TwoSampleTest <- R6Class(
             N <- m + n
 
             rank <- rank(c(x, y))
-            scores <- switch(
-                private$.scoring,
+            scores <- switch(private$.scoring,
                 rank = rank,
                 vw = qnorm(rank / (N + 1)),
                 savage = cumsum(1 / N:1)[rank]

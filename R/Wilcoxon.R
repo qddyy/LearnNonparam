@@ -62,8 +62,7 @@ Wilcoxon <- R6Class(
 
             if (private$.type == "approx") {
                 z <- private$.statistic - m * n / 2
-                correction <- if (private$.correct) switch(
-                    private$.alternative,
+                correction <- if (private$.correct) switch(private$.alternative,
                     two_sided = sign(z) * 0.5, greater = 0.5, less = -0.5
                 ) else 0
                 z <- (z - correction) / sqrt(

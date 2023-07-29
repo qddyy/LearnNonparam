@@ -55,8 +55,7 @@ KSampleTest <- R6Class(
             rank <- rank(private$.data)
             N <- length(rank)
 
-            private$.data <- setNames(switch(
-                private$.scoring,
+            private$.data <- setNames(switch(private$.scoring,
                 rank = rank,
                 vw = qnorm(rank / (N + 1)),
                 savage = cumsum(1 / N:1)[rank]

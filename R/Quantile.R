@@ -43,21 +43,20 @@ Quantile <- R6Class(
             n <- length(private$.data)
             p <- private$.prob
 
-            private$.p_value <- switch(
-                private$.alternative,
+            private$.p_value <- switch(private$.alternative,
                 less = pbinom(x, n, p),
                 greater = pbinom(x - 1, n, p, lower.tail = FALSE),
                 two_sided = if (p == 0) (x == 0) else if (p == 1) (x == n) else {
-                    relErr <- 1 + 1e-07
+                    relative_error <- 1 + 1e-07
                     d <- dbinom(x, n, p)
                     m <- n * p
                     if (x == m) 1 else if (x < m) {
                         i <- seq.int(from = ceiling(m), to = n)
-                        y <- sum(dbinom(i, n, p) <= d * relErr)
+                        y <- sum(dbinom(i, n, p) <= d * relative_error)
                         pbinom(x, n, p) + pbinom(n - y, n, p, lower.tail = FALSE)
                     } else {
                         i <- seq.int(from = 0, to = floor(m))
-                        y <- sum(dbinom(i, n, p) <= d * relErr)
+                        y <- sum(dbinom(i, n, p) <= d * relative_error)
                         pbinom(y - 1, n, p) + pbinom(x - 1, n, p, lower.tail = FALSE)
                     }
                 }

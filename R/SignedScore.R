@@ -61,8 +61,7 @@ SignedScore <- R6Class(
             }
 
             rank <- rank(abs(diff))
-            scores <- switch(
-                private$.scoring,
+            scores <- switch(private$.scoring,
                 rank = rank,
                 vw = qnorm(rank / (length(rank) + 1)),
                 savage = cumsum(1 / length(rank):1)[rank]
@@ -86,8 +85,7 @@ SignedScore <- R6Class(
 
             SR <- sum(pmax(0, private$.signed_score))
             z <- SR - 1 / 2 * sum(abs(private$.signed_score))
-            correction <- if (private$.correct) switch(
-                private$.alternative,
+            correction <- if (private$.correct) switch(private$.alternative,
                 two_sided = sign(z) * 0.5, greater = 0.5, less = -0.5
             ) else 0
             z <- (z - correction) / sqrt(

@@ -34,8 +34,7 @@ Correlation <- R6Class(
     ),
     private = list(
         .calculate = function() {
-            private$.statistic_func <- switch(
-                private$.method,
+            private$.statistic_func <- switch(private$.method,
                 pearson = function(x, y) cor(x, y, method = "pearson"),
                 kendall = function(x, y) cor(x, y, method = "kendall"),
                 spearman = function(x, y) cor(x, y, method = "spearman")
