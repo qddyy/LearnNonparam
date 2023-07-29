@@ -158,7 +158,6 @@ PermuTest <- R6Class(
             }
 
             private$.calculate_statistic()
-
             if (private$.type == "permu") {
                 private$.permute()
                 private$.calculate_statistic_permu()
@@ -167,9 +166,9 @@ PermuTest <- R6Class(
                 private$.calculate_p()
             }
 
-            private$.calculate_extra()
-
             if (!is.null(raw_data)) private$.data <- raw_data
+
+            private$.calculate_extra()
         }
     ),
     active = list(
