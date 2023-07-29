@@ -56,7 +56,7 @@ library(LearnNonparam)
   print(t$statistic)
   #> [1] 35
   print(t$p_value)
-  #> [1] 0.0019
+  #> [1] 0.0018
 
   print(t$estimate)
   #> [1] 6
@@ -87,7 +87,7 @@ idea to explore `?PermuTest` (all tests’ **base class**) first.
 If you want to know all available tests, see `pmts`.
 
 ``` r
-pmts
+pmts()
 #>                   key                                                  test
 #> 1           table.chi       Contingency Table Permutation Test (chi-square)
 #> 2    association.corr Two Sample Permutation Test (correlation coefficient)

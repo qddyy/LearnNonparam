@@ -79,5 +79,5 @@ If you want to know all available methods and attributes, it's a good idea to ex
 If you want to know all available tests, see `pmts`. 
 
 ```{r}
-pmts
+pmts()
 ```
