@@ -66,16 +66,16 @@ SiegelTukey <- R6Class(
                 y <- y - median(y)
             }
 
-            m <- length(x)seq
+            m <- length(x)
             n <- length(y)
             N <- m + n
 
             rank_l <- sapply(
-                seq(from = 0, to = N - 1, by = 4),
+                seq.int(from = 0, to = N - 1, by = 4),
                 function(x) x + c(1, 4)
             ) 
             rank_r <- sapply(
-                seq(from = 2, to = N, by = 4),
+                seq.int(from = 2, to = N, by = 4),
                 function(x) x + c(0, 1)
             )
             if (length(rank_l) == length(rank_r)) {
