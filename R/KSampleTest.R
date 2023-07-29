@@ -51,16 +51,16 @@ KSampleTest <- R6Class(
             )
         },
 
-        .calculate_scores = function(data) {
-            rank <- rank(data)
+        .calculate_scores = function() {
+            rank <- rank(private$.data)
             N <- length(rank)
 
-            setNames(switch(
+            private$.data <- setNames(switch(
                 private$.scoring,
                 rank = rank,
                 vw = qnorm(rank / (N + 1)),
                 savage = cumsum(1 / N:1)[rank]
-            ), names(data))
+            ), names(private$.data))
         }
     ),
     active = list(

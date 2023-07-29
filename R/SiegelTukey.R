@@ -57,9 +57,9 @@ SiegelTukey <- R6Class(
             private$.alternative <- raw_alternative
         },
 
-        .calculate_scores = function(data) {
-            x <- data$x
-            y <- data$y
+        .calculate_scores = function() {
+            x <- private$.data$x
+            y <- private$.data$y
 
             if (private$.adjust_median) {
                 x <- x - median(x)
@@ -87,7 +87,7 @@ SiegelTukey <- R6Class(
             }
             ST_rank <- c(rank_l, rev(rank_r))[rank(c(x, y))]
 
-            list(x = ST_rank[1:m], y = ST_rank[(m + 1):(m + n)])
+            private$.data <- list(x = ST_rank[1:m], y = ST_rank[(m + 1):(m + n)])
         }
     )
 )

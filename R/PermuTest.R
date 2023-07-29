@@ -154,7 +154,7 @@ PermuTest <- R6Class(
             raw_data <- NULL
             if (private$.scoring != "none") {
                 raw_data <- private$.data
-                private$.data <- private$.calculate_scores(raw_data)
+                private$.calculate_scores()
             }
 
             private$.calculate_statistic()

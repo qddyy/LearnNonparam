@@ -60,8 +60,9 @@ RCBD <- R6Class(
             )
         },
 
-        .calculate_scores = function(data) {
-            N <- nrow(data)
+        .calculate_scores = function() {
+            N <- nrow(private$.data)
+
             scores <- switch(
                 private$.scoring,
                 rank = function(x) rank(x),
@@ -69,7 +70,7 @@ RCBD <- R6Class(
                 savage = function(x) cumsum(1 / N:1)[rank(x)]
             )
 
-            do.call(data.frame, lapply(data, scores))
+            private$.data <- do.call(data.frame, lapply(private$.data, scores))
         }
     )
 )

@@ -47,12 +47,15 @@ TwoSampleTest <- R6Class(
             )
         },
 
-        .calculate_scores = function(data) {
-            m <- length(data$x)
-            n <- length(data$y)
+        .calculate_scores = function() {
+            x <- private$.data$x
+            y <- private$.data$y
+
+            m <- length(x)
+            n <- length(y)
             N <- m + n
 
-            rank <- rank(c(data$x, data$y))
+            rank <- rank(c(x, y))
             scores <- switch(
                 private$.scoring,
                 rank = rank,
@@ -60,10 +63,7 @@ TwoSampleTest <- R6Class(
                 savage = cumsum(1 / N:1)[rank]
             )
 
-            list(
-                x = scores[1:m],
-                y = scores[(m + 1):(m + n)]
-            )
+            private$.data <- list(x = scores[1:m], y = scores[(m + 1):(m + n)])
         }
     )
 )
