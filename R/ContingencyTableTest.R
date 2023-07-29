@@ -19,16 +19,16 @@ ContingencyTableTest <- R6Class(
             r <- length(row_sum)
             c <- length(col_sum)
 
-            row_index <- rep(1:r, row_sum)
+            row_index <- rep(seq_len(r), row_sum)
             private$.data_permu <- lapply(
                 permutations(
-                    v = rep(1:c, col_sum),
+                    v = rep(seq_len(c), col_sum),
                     nsample = private$.n_permu, layout = "list"
                 ),
                 function(data) t(do.call(
                     data.frame, tapply(
                         data, row_index,
-                        function(row) as.integer(table(c(1:c, row)) - 1),
+                        function(row) as.integer(table(c(seq_len(c), row)) - 1),
                         simplify = TRUE
                     )
                 ))

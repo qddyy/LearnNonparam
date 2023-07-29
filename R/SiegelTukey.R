@@ -66,7 +66,7 @@ SiegelTukey <- R6Class(
                 y <- y - median(y)
             }
 
-            m <- length(x)
+            m <- length(x)seq
             n <- length(y)
             N <- m + n
 
@@ -79,11 +79,11 @@ SiegelTukey <- R6Class(
                 function(x) x + c(0, 1)
             )
             if (length(rank_l) == length(rank_r)) {
-                rank_l <- rank_l[1:floor(N / 2)]
-                rank_r <- rank_r[1:ceiling(N / 2)]
+                rank_l <- rank_l[seq_len(floor(N / 2))]
+                rank_r <- rank_r[seq_len(ceiling(N / 2))]
             } else {
-                rank_l <- rank_l[1:ceiling(N / 2)]
-                rank_r <- rank_r[1:floor(N / 2)]
+                rank_l <- rank_l[seq_len(ceiling(N / 2))]
+                rank_r <- rank_r[seq_len(floor(N / 2))]
             }
             ST_rank <- c(rank_l, rev(rank_r))[rank(c(x, y))]
 
