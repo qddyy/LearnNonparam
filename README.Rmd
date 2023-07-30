@@ -3,7 +3,7 @@ bibliography: ref.bib
 output:
   github_document:
     html_preview: false
-    dev: pdf
+    dev: svg
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
