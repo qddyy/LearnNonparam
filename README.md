@@ -8,7 +8,8 @@
 [![R-CMD-check](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-This package implements the tests in chapters 1-5 of Higgins (2003).
+This package implements the tests in chapters 1-5 of Higgins
+([2003](#ref-Higgins2003)).
 
 It uses [R6](https://cran.r-project.org/package=R6) for clean OO-design
 and object property-changes, as well as
@@ -44,7 +45,7 @@ library(LearnNonparam)
   t <- pmt("twosample.wilcoxon", type = "permu", n_permu = 10000)
   ```
 
-- feed it the data (`data.frame` \| `list` \| `vector`s)
+- feed it the data (a data.frame, a list, or some numeric vectors)
 
   ``` r
   t$feed(Table2.6.2)
@@ -56,7 +57,7 @@ library(LearnNonparam)
   print(t$statistic)
   #> [1] 35
   print(t$p_value)
-  #> [1] 0.0017
+  #> [1] 0.0025
 
   print(t$estimate)
   #> [1] 30.045
