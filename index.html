@@ -60,7 +60,7 @@
 </h1></div>
 <!-- badges: start -->
 
-<p>This package implements the tests in chapters 1-5 of Higgins (2003).</p>
+<p>This package implements the tests in chapters 1-5 of Higgins (<a href="#ref-Higgins2003">2003</a>).</p>
 <p>It uses <a href="https://cran.r-project.org/package=R6" class="external-link">R6</a> for clean OO-design and object property-changes, as well as <a href="https://cran.r-project.org/package=arrangements" class="external-link">arrangements</a> for fast generation of permutations.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
@@ -85,7 +85,7 @@
 <code class="sourceCode R"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pmt.html">pmt</a></span><span class="op">(</span><span class="st">"twosample.wilcoxon"</span>, type <span class="op">=</span> <span class="st">"permu"</span>, n_permu <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
-<p>feed it the data (<code>data.frame</code> | <code>list</code> | <code>vector</code>s)</p>
+<p>feed it the data (a data.frame, a list, or some numeric vectors)</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="fu">feed</span><span class="op">(</span><span class="va">Table2.6.2</span><span class="op">)</span></span></code></pre></div>
 </li>
@@ -95,7 +95,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 35</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.0017</span></span>
+<span><span class="co">#&gt; [1] 0.0025</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">estimate</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 30.045</span></span>
