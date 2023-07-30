@@ -36,23 +36,12 @@ SignedScore <- R6Class(
         }
     ),
     private = list(
-        .signed_score = NULL,
         .correct = NULL,
         .ranking_method = NULL,
 
-        .calculate = function() {
-            private$.calculate_statistic()
+        .signed_score = NULL,
 
-            if (private$.type == "permu") {
-                private$.permute()
-                private$.calculate_statistic_permu()
-                private$.calculate_p_permu()
-            } else {
-                private$.calculate_p()
-            }
-        },
-
-        .calculate_statistic = function() {
+        .calculate_scores = function() {
             diff <- private$.data$x - private$.data$y
 
             if (private$.ranking_method == "ignore") {
@@ -61,14 +50,18 @@ SignedScore <- R6Class(
             }
 
             rank <- rank(abs(diff))
+            N <- length(rank)
+
             scores <- switch(private$.scoring,
                 rank = rank,
-                vw = qnorm(rank / (length(rank) + 1)),
-                savage = cumsum(1 / length(rank):1)[rank]
+                vw = qnorm(rank / (N + 1)),
+                savage = cumsum(1 / N:1)[rank]
             )
 
             private$.signed_score <- scores * sign(diff)
+        },
 
+        .calculate_statistic = function() {
             private$.statistic <- mean(private$.signed_score)
         },
 
