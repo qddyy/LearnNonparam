@@ -30,7 +30,8 @@ ChiSquare <- R6Class(
                 row_count <- apply(mat, 1, sum)
                 col_count <- apply(mat, 2, sum)
 
-                expect <- matrix(row_count, , 1) %*% matrix(col_count, 1, ) / sum(mat)
+                expect <- matrix(row_count, ncol = 1) %*% matrix(col_count, nrow = 1) / sum(mat)
+
                 sum((mat - expect)^2 / expect)
             }
         }
