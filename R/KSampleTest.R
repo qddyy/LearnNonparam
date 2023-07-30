@@ -61,8 +61,5 @@ KSampleTest <- R6Class(
                 savage = cumsum(1 / N:1)[rank]
             ), names(private$.data))
         }
-    ),
-    active = list(
-        
     )
 )
