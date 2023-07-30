@@ -8,8 +8,12 @@
 [![R-CMD-check](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of LearnNonparam is to conduct non-parametric tests (mostly
-based on permutations).
+This package implements the tests in chapters 1-5 of Higgins (2003).
+
+It uses [R6](https://cran.r-project.org/package=R6) for clean OO-design
+and object property-changes, as well as
+[arrangements](https://cran.r-project.org/package=arrangements) for fast
+generation of permutations.
 
 ## Installation
 
@@ -21,7 +25,7 @@ You can install the development version of LearnNonparam from
 devtools::install_github("qddyy/LearnNonparam", dependencies = TRUE)
 ```
 
-## Example
+## Usage
 
 ``` r
 library(LearnNonparam)
@@ -34,13 +38,13 @@ library(LearnNonparam)
   ```
 
   or you can use `pmt` (**p**er**m**utation **t**est) function
-  (**Recommended**):
+  (*Recommended*):
 
   ``` r
   t <- pmt("twosample.wilcoxon", type = "permu", n_permu = 10000)
   ```
 
-- feed it the data (`data.frame` \| `list` \| `vector`)
+- feed it the data (`data.frame` \| `list` \| `vector`s)
 
   ``` r
   t$feed(Table2.6.2)
@@ -52,7 +56,7 @@ library(LearnNonparam)
   print(t$statistic)
   #> [1] 35
   print(t$p_value)
-  #> [1] 0.0023
+  #> [1] 0.0022
 
   print(t$estimate)
   #> [1] 30.045
@@ -62,7 +66,7 @@ library(LearnNonparam)
   t$plot_hist(bins = 12)
   ```
 
-  <img src="man/figures/README-unnamed-chunk-7-1.png" width="100%" />
+  <img src="man/figures/README-unnamed-chunk-7-1.jpeg" width="100%" />
 
 - modify some attributes and see how the results change
 
@@ -72,6 +76,13 @@ library(LearnNonparam)
   print(t$p_value)
   #> [1] 0.008239019
   ```
+
+There’s also support for chained calls, which means that you can do
+things like
+
+``` r
+pmt("twosample.wilcoxon", type = "permu", n_permu = 10000)$feed(Table2.6.2)$plot_hist(bins = 12)$p_value
+```
 
 ## Help
 
@@ -84,27 +95,46 @@ If you want to know all available tests, see `pmts()`.
 
 ``` r
 pmts()
-#>                   key                                                  test
-#> 1  onesample.quantile                                         Quantile Test
-#> 2      onesample.ecdf            Empirical Cumulative Distribution Function
-#> 3      twosample.mean                    Two Sample Permutation Test (mean)
-#> 4  twosample.wilcoxon                              Two Sample Wilcoxon Test
-#> 5  twosample.scoresum                                        Score Sum Test
-#> 6    twosample.ansari                                   Ansari-Bradley Test
-#> 7    twosample.siegel                                     Siegel-Tukey Test
-#> 8       twosample.rmd                              Ratio Mean Deviance Test
-#> 9        twosample.ks                    Two Sample Kolmogorov-Smirnov Test
-#> 10      ksample.anova                                                 ANOVA
-#> 11         ksample.kw                                   Kruskal-Wallis Test
-#> 12         ksample.jt                              Jonckheere-Terpstra Test
-#> 13        multicomp.t                          Multiple Comparison (t test)
-#> 14    multicomp.tukey                                             Tukey HSD
-#> 15  paired.comparison                                     Paired Comparison
-#> 16        paired.sign                                             Sign Test
-#> 17 paired.signedscore                                     Signed Score Test
-#> 18         rcbd.anova            ANOVA for Randomized Complete Block Design
-#> 19      rcbd.friedman                                         Friedman Test
-#> 20          rcbd.page                                             Page Test
-#> 21   association.corr Two Sample Permutation Test (correlation coefficient)
-#> 22          table.chi       Contingency Table Permutation Test (chi-square)
 ```
+
+<div class="kable-table">
+
+| key                | test                                                  |
+|:-------------------|:------------------------------------------------------|
+| onesample.quantile | Quantile Test                                         |
+| onesample.ecdf     | Empirical Cumulative Distribution Function            |
+| twosample.mean     | Two Sample Permutation Test (mean)                    |
+| twosample.wilcoxon | Two Sample Wilcoxon Test                              |
+| twosample.scoresum | Score Sum Test                                        |
+| twosample.ansari   | Ansari-Bradley Test                                   |
+| twosample.siegel   | Siegel-Tukey Test                                     |
+| twosample.rmd      | Ratio Mean Deviance Test                              |
+| twosample.ks       | Two Sample Kolmogorov-Smirnov Test                    |
+| ksample.anova      | ANOVA                                                 |
+| ksample.kw         | Kruskal-Wallis Test                                   |
+| ksample.jt         | Jonckheere-Terpstra Test                              |
+| multicomp.t        | Multiple Comparison (t test)                          |
+| multicomp.tukey    | Tukey HSD                                             |
+| paired.comparison  | Paired Comparison                                     |
+| paired.sign        | Sign Test                                             |
+| paired.signedscore | Signed Score Test                                     |
+| rcbd.anova         | ANOVA for Randomized Complete Block Design            |
+| rcbd.friedman      | Friedman Test                                         |
+| rcbd.page          | Page Test                                             |
+| association.corr   | Two Sample Permutation Test (correlation coefficient) |
+| table.chi          | Contingency Table Permutation Test (chi-square)       |
+
+</div>
+
+## References
+
+<div id="refs" class="references csl-bib-body hanging-indent">
+
+<div id="ref-Higgins2003" class="csl-entry">
+
+Higgins, J. J. 2003. *An Introduction to Modern Nonparametric
+Statistics*. Florence, KY: Brooks/Cole.
+
+</div>
+
+</div>

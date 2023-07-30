@@ -1,5 +1,10 @@
 ---
-output: github_document
+bibliography: ref.bib
+output:
+  github_document:
+    html_preview: false
+    df_print: kable
+    dev: jpeg
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
@@ -19,18 +24,20 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-The goal of LearnNonparam is to conduct non-parametric tests (mostly based on permutations). 
+This package implements the tests in chapters 1-5 of @Higgins2003.
+
+It uses [R6](https://cran.r-project.org/package=R6) for clean OO-design and object property-changes, as well as [arrangements](https://cran.r-project.org/package=arrangements) for fast generation of permutations.
 
 ## Installation
 
 You can install the development version of LearnNonparam from [GitHub](https://github.com/) with:
 
-```{r, eval = FALSE}
+```{r, eval=FALSE}
 # install.packages("devtools")
 devtools::install_github("qddyy/LearnNonparam", dependencies = TRUE)
 ```
 
-## Example
+## Usage
 
 ```{r}
 library(LearnNonparam)
@@ -41,12 +48,12 @@ library(LearnNonparam)
     t <- Wilcoxon$new(type = "permu", n_permu = 10000)
     ```
 
-    or you can use `pmt` (**p**er**m**utation **t**est) function (**Recommended**):
+    or you can use `pmt` (**p**er**m**utation **t**est) function (*Recommended*):
     ```{r}
     t <- pmt("twosample.wilcoxon", type = "permu", n_permu = 10000)
     ```
 
-- feed it the data (`data.frame` | `list` | `vector`)
+- feed it the data (`data.frame` | `list` | `vector`s)
     ```{r}
     t$feed(Table2.6.2)
     ```
@@ -69,6 +76,12 @@ library(LearnNonparam)
     print(t$p_value)
     ```
 
+There's also support for chained calls, which means that you can do things like
+
+```{r, eval=FALSE}
+pmt("twosample.wilcoxon", type = "permu", n_permu = 10000)$feed(Table2.6.2)$plot_hist(bins = 12)$p_value
+```
+
 ## Help
 
 Just use `?...` syntax. 
@@ -80,3 +93,5 @@ If you want to know all available tests, see `pmts()`.
 ```{r}
 pmts()
 ```
+
+## References
