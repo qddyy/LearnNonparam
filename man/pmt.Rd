@@ -13,9 +13,9 @@ pmts(
 )
 }
 \arguments{
-\item{key}{a character string corresponding to the desired test. Check \code{pmts(...)} to see available keys.}
+\item{key}{a character string corresponding to the desired test. Check \code{pmts()} to see available keys.}
 
-\item{...}{extra parameters passed to the initialize method of the test class.}
+\item{...}{extra parameters passed to the \code{new()} method of the test class.}
 
 \item{category}{a character string specifying which tests to show.}
 }

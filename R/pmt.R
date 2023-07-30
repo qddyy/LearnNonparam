@@ -45,7 +45,7 @@ tests_df <- data.frame(
 #' @rdname pmt
 #' 
 #' @param key a character string corresponding to the desired test. Check `pmts()` to see available keys. 
-#' @param ... extra parameters passed to the initialize method of the test class. 
+#' @param ... extra parameters passed to the `new()` method of the test class. 
 #' 
 #' @export
 pmt <- function(key, ...) tests[[key]]$new(...)
