@@ -44,7 +44,8 @@ KruskalWallis <- R6Class(
         },
 
         .calculate_p = function() {
-            k <- as.integer(names(private$.data)[length(private$.data)])
+            group <- names(private$.data)
+            k <- as.integer(group[length(group)])
 
             private$.p_value <- pchisq(
                 private$.statistic, df = k - 1, , lower.tail = FALSE
