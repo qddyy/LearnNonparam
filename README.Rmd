@@ -3,8 +3,7 @@ bibliography: ref.bib
 output:
   github_document:
     html_preview: false
-    df_print: kable
-    dev: jpeg
+    dev: pdf
 ---
 
 <!-- README.md is generated from README.Rmd. Please edit that file -->
