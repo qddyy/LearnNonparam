@@ -146,8 +146,8 @@ PermuTest <- R6Class(
         },
 
         # @Override
-        .calculate_scores = function(data) {
-            # return(scores)
+        .calculate_scores = function() {
+            # private$.data <- 
         },
 
         .calculate = function() {
