@@ -95,7 +95,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 35</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.0022</span></span>
+<span><span class="co">#&gt; [1] 0.0019</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">estimate</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 30.045</span></span>
@@ -103,7 +103,7 @@
 <span><span class="co">#&gt; [1] 11.57 50.76</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">plot_hist</span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-7-1.jpeg" width="100%"></p>
+<embed src="man/figures/README-unnamed-chunk-7-1.pdf" width="100%" type="application/pdf"></embed>
 </li>
 <li>
 <p>modify some attributes and see how the results change</p>
@@ -125,109 +125,30 @@
 <p>If you want to know all available methods and attributes, it’s a good idea to explore <code><a href="reference/PermuTest.html">?PermuTest</a></code> (all tests’ <strong>base class</strong>) first.</p>
 <p>If you want to know all available tests, see <code><a href="reference/pmt.html">pmts()</a></code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/pmt.html">pmts</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<div class="kable-table">
-<table class="table">
-<colgroup>
-<col width="26%">
-<col width="73%">
-</colgroup>
-<thead><tr class="header">
-<th align="left">key</th>
-<th align="left">test</th>
-</tr></thead>
-<tbody>
-<tr class="odd">
-<td align="left">onesample.quantile</td>
-<td align="left">Quantile Test</td>
-</tr>
-<tr class="even">
-<td align="left">onesample.ecdf</td>
-<td align="left">Empirical Cumulative Distribution Function</td>
-</tr>
-<tr class="odd">
-<td align="left">twosample.mean</td>
-<td align="left">Two Sample Permutation Test (mean)</td>
-</tr>
-<tr class="even">
-<td align="left">twosample.wilcoxon</td>
-<td align="left">Two Sample Wilcoxon Test</td>
-</tr>
-<tr class="odd">
-<td align="left">twosample.scoresum</td>
-<td align="left">Score Sum Test</td>
-</tr>
-<tr class="even">
-<td align="left">twosample.ansari</td>
-<td align="left">Ansari-Bradley Test</td>
-</tr>
-<tr class="odd">
-<td align="left">twosample.siegel</td>
-<td align="left">Siegel-Tukey Test</td>
-</tr>
-<tr class="even">
-<td align="left">twosample.rmd</td>
-<td align="left">Ratio Mean Deviance Test</td>
-</tr>
-<tr class="odd">
-<td align="left">twosample.ks</td>
-<td align="left">Two Sample Kolmogorov-Smirnov Test</td>
-</tr>
-<tr class="even">
-<td align="left">ksample.anova</td>
-<td align="left">ANOVA</td>
-</tr>
-<tr class="odd">
-<td align="left">ksample.kw</td>
-<td align="left">Kruskal-Wallis Test</td>
-</tr>
-<tr class="even">
-<td align="left">ksample.jt</td>
-<td align="left">Jonckheere-Terpstra Test</td>
-</tr>
-<tr class="odd">
-<td align="left">multicomp.t</td>
-<td align="left">Multiple Comparison (t test)</td>
-</tr>
-<tr class="even">
-<td align="left">multicomp.tukey</td>
-<td align="left">Tukey HSD</td>
-</tr>
-<tr class="odd">
-<td align="left">paired.comparison</td>
-<td align="left">Paired Comparison</td>
-</tr>
-<tr class="even">
-<td align="left">paired.sign</td>
-<td align="left">Sign Test</td>
-</tr>
-<tr class="odd">
-<td align="left">paired.signedscore</td>
-<td align="left">Signed Score Test</td>
-</tr>
-<tr class="even">
-<td align="left">rcbd.anova</td>
-<td align="left">ANOVA for Randomized Complete Block Design</td>
-</tr>
-<tr class="odd">
-<td align="left">rcbd.friedman</td>
-<td align="left">Friedman Test</td>
-</tr>
-<tr class="even">
-<td align="left">rcbd.page</td>
-<td align="left">Page Test</td>
-</tr>
-<tr class="odd">
-<td align="left">association.corr</td>
-<td align="left">Two Sample Permutation Test (correlation coefficient)</td>
-</tr>
-<tr class="even">
-<td align="left">table.chi</td>
-<td align="left">Contingency Table Permutation Test (chi-square)</td>
-</tr>
-</tbody>
-</table>
-</div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/pmt.html">pmts</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt;                   key                                                  test</span></span>
+<span><span class="co">#&gt; 1  onesample.quantile                                         Quantile Test</span></span>
+<span><span class="co">#&gt; 2      onesample.ecdf            Empirical Cumulative Distribution Function</span></span>
+<span><span class="co">#&gt; 3      twosample.mean                    Two Sample Permutation Test (mean)</span></span>
+<span><span class="co">#&gt; 4  twosample.wilcoxon                              Two Sample Wilcoxon Test</span></span>
+<span><span class="co">#&gt; 5  twosample.scoresum                                        Score Sum Test</span></span>
+<span><span class="co">#&gt; 6    twosample.ansari                                   Ansari-Bradley Test</span></span>
+<span><span class="co">#&gt; 7    twosample.siegel                                     Siegel-Tukey Test</span></span>
+<span><span class="co">#&gt; 8       twosample.rmd                              Ratio Mean Deviance Test</span></span>
+<span><span class="co">#&gt; 9        twosample.ks                    Two Sample Kolmogorov-Smirnov Test</span></span>
+<span><span class="co">#&gt; 10      ksample.anova                                                 ANOVA</span></span>
+<span><span class="co">#&gt; 11         ksample.kw                                   Kruskal-Wallis Test</span></span>
+<span><span class="co">#&gt; 12         ksample.jt                              Jonckheere-Terpstra Test</span></span>
+<span><span class="co">#&gt; 13        multicomp.t                          Multiple Comparison (t test)</span></span>
+<span><span class="co">#&gt; 14    multicomp.tukey                                             Tukey HSD</span></span>
+<span><span class="co">#&gt; 15  paired.comparison                                     Paired Comparison</span></span>
+<span><span class="co">#&gt; 16        paired.sign                                             Sign Test</span></span>
+<span><span class="co">#&gt; 17 paired.signedscore                                     Signed Score Test</span></span>
+<span><span class="co">#&gt; 18         rcbd.anova            ANOVA for Randomized Complete Block Design</span></span>
+<span><span class="co">#&gt; 19      rcbd.friedman                                         Friedman Test</span></span>
+<span><span class="co">#&gt; 20          rcbd.page                                             Page Test</span></span>
+<span><span class="co">#&gt; 21   association.corr Two Sample Permutation Test (correlation coefficient)</span></span>
+<span><span class="co">#&gt; 22          table.chi       Contingency Table Permutation Test (chi-square)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
