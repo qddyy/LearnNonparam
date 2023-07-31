@@ -9,12 +9,11 @@
 <!-- badges: end -->
 
 This package implements the tests in chapters 1-5 of [Higgins
-(2003)](#ref-Higgins2003).
+(2003)](#references).
 
 It uses [R6](https://cran.r-project.org/package=R6) for clean OO-design
-and object property-changes, as well as
-[arrangements](https://cran.r-project.org/package=arrangements) for fast
-generation of permutations.
+and [arrangements](https://cran.r-project.org/package=arrangements) for
+fast generation of permutations.
 
 ## Installation
 
@@ -57,7 +56,7 @@ library(LearnNonparam)
   print(t$statistic)
   #> [1] 35
   print(t$p_value)
-  #> [1] 0.0021
+  #> [1] 0.0018
 
   print(t$estimate)
   #> [1] 30.045
