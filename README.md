@@ -8,8 +8,8 @@
 [![R-CMD-check](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-This package implements the tests in chapters 1-5 of Higgins
-([2003](#ref-Higgins2003)).
+This package implements the tests in chapters 1-5 of [Higgins
+(2003)](#ref-Higgins2003).
 
 It uses [R6](https://cran.r-project.org/package=R6) for clean OO-design
 and object property-changes, as well as
@@ -57,7 +57,7 @@ library(LearnNonparam)
   print(t$statistic)
   #> [1] 35
   print(t$p_value)
-  #> [1] 0.0025
+  #> [1] 0.0021
 
   print(t$estimate)
   #> [1] 30.045
@@ -127,7 +127,7 @@ pmts()
 
 <div id="ref-Higgins2003" class="csl-entry">
 
-Higgins, J. J. 2003. *An Introduction to Modern Nonparametric
+Higgins, James J. 2003. *An Introduction to Modern Nonparametric
 Statistics*. Florence, KY: Brooks/Cole.
 
 </div>

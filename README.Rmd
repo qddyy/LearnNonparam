@@ -1,6 +1,5 @@
 ---
 bibliography: ref.bib
-link-citations: true
 output:
   github_document:
     html_preview: false
@@ -24,7 +23,7 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml)
 <!-- badges: end -->
 
-This package implements the tests in chapters 1-5 of @Higgins2003.
+This package implements the tests in chapters 1-5 of [@Higgins2003](#ref-Higgins2003).
 
 It uses [R6](https://cran.r-project.org/package=R6) for clean OO-design and object property-changes, as well as [arrangements](https://cran.r-project.org/package=arrangements) for fast generation of permutations.
 
