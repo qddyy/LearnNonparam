@@ -51,8 +51,9 @@ TukeyHSD <- R6Class(
         .calculate_p_permu = function() {
             Q <- apply(abs(private$.statistic_permu), 2, max)
 
-            private$.p_value <- sapply(
-                abs(private$.statistic), function(T_abs) mean(Q >= T_abs)
+            private$.p_value <- vapply(
+                X = abs(private$.statistic), FUN.VALUE = numeric(1),
+                FUN = function(T_abs) mean(Q >= T_abs)
             )
         },
 

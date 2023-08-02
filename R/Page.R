@@ -38,7 +38,7 @@ Page <- R6Class(
             b <- ncol(private$.data)
             
             z <- (private$.statistic - b * k * (k + 1)^2 / 4) / sqrt(
-                (k - 1) * k * (k + 1) / 12 * sum(sapply(private$.data, var))
+                (k - 1) * k * (k + 1) / 12 * sum(vapply(private$.data, var, numeric(1)))
             )
 
             less <- pnorm(z)

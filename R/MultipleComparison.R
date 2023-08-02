@@ -55,26 +55,29 @@ MultipleComparison <- R6Class(
             private$.statistic <- apply(
                 private$.c_groups, 1,
                 function(ij) statistic_func(
-                    data[g_index[[ij[1]]]], data[g_index[[ij[2]]]], setNames(data, group)
+                    data[g_index[[ij[1]]]],
+                    data[g_index[[ij[2]]]],
+                    setNames(data, group)
                 )
             )
         },
 
         .calculate_statistic_permu = function() {
             groups <- private$.groups
+            c_groups <- private$.c_groups
             statistic_func <- private$.statistic_func
             data <- unname(private$.data)
-            private$.statistic_permu <- sapply(
-                private$.group_permu, function(group) {
-                    g_index <- setNames(lapply(
-                        groups, function(g) which(group == g)
-                    ), groups)
-                    apply(
-                        private$.c_groups, 1,
-                        function(ij) statistic_func(
-                            data[g_index[[ij[1]]]], data[g_index[[ij[2]]]], setNames(data, group)
-                        )
+            private$.statistic_permu <- vapply(
+                X = private$.group_permu, FUN.VALUE = numeric(nrow(c_groups)),
+                FUN = function(group) {
+                    g_index <- setNames(
+                        lapply(groups, function(g) which(group == g)), groups
                     )
+                    apply(c_groups, 1, function(ij) statistic_func(
+                        data[g_index[[ij[1]]]],
+                        data[g_index[[ij[2]]]],
+                        setNames(data, group)
+                    ))
                 }
             )
         },

@@ -41,9 +41,9 @@ TwoSampleTest <- R6Class(
 
         .calculate_statistic_permu = function() {
             statistic_func <- private$.statistic_func
-            private$.statistic_permu <- sapply(
-                private$.data_permu,
-                function(data) statistic_func(data$x, data$y)
+            private$.statistic_permu <- vapply(
+                X = private$.data_permu, FUN.VALUE = numeric(1),
+                FUN = function(data) statistic_func(data$x, data$y)
             )
         },
 

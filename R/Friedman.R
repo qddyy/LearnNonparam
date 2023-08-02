@@ -34,7 +34,7 @@ Friedman <- R6Class(
             private$.statistic_func <- switch(private$.type,
                 permu = function(df) sum(rowMeans(df)^2),
                 approx = function(df) {
-                    ncol(df)^2 / sum(sapply(df, var)) *
+                    ncol(df)^2 / sum(vapply(df, var, numeric(1))) *
                     sum((rowMeans(df) - (nrow(df) + 1) / 2)^2)
                 }
             )

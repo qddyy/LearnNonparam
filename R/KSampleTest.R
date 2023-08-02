@@ -19,7 +19,7 @@ KSampleTest <- R6Class(
 
             private$.data <- setNames(
                 c(data, recursive = TRUE, use.names = FALSE),
-                rep(seq_along(data), times = sapply(data, length))
+                rep(seq_along(data), times = vapply(data, length, integer(1)))
             )
         },
 
@@ -45,9 +45,9 @@ KSampleTest <- R6Class(
         .calculate_statistic_permu = function() {
             data <- unname(private$.data)
             statistic_func <- private$.statistic_func
-            private$.statistic_permu <- sapply(
-                private$.group_permu,
-                function(group) statistic_func(data, group)
+            private$.statistic_permu <- vapply(
+                X = private$.group_permu, FUN.VALUE = numeric(1),
+                FUN = function(group) statistic_func(data, group)
             )
         },
 

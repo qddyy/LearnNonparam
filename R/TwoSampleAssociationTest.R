@@ -26,8 +26,9 @@ TwoSampleAssociationTest <- R6Class(
         .calculate_statistic_permu = function() {
             statistic_func <- private$.statistic_func
             y <- private$.data$y
-            private$.statistic_permu <- sapply(
-                private$.x_permu, function(x) statistic_func(x, y)
+            private$.statistic_permu <- vapply(
+                X = private$.x_permu, FUN.VALUE = numeric(1),
+                FUN = function(x) statistic_func(x, y)
             )
         }
     )

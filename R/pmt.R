@@ -32,7 +32,7 @@ tests <- list(
 
 tests_df <- data.frame(
     key = names(tests),
-    test = unname(sapply(tests, function(t) t$classname))
+    test = unname(vapply(tests, function(t) t$classname, character(1)))
 )
 
 #' @title Syntactic Sugar for Object Construction

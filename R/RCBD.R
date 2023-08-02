@@ -55,8 +55,8 @@ RCBD <- R6Class(
         },
 
         .calculate_statistic_permu = function() {
-            private$.statistic_permu <- sapply(
-                private$.data_permu, private$.statistic_func
+            private$.statistic_permu <- vapply(
+                private$.data_permu, private$.statistic_func, numeric(1)
             )
         },
 
