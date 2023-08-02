@@ -20,12 +20,12 @@ MultiCompT <- R6Class(
         #' 
         #' @param signif_level a numeric value between zero and one giving the significance level.
         #' @param n_permu an integer specifying how many permutations should be used to construct the permutation distribution. If `NULL` (default) then all permutations are used.
-        #' @param scoring a character string specifying which scoring system to be used, must be one of `"none"` (default), `"rank`, `"vw"` or `"savage"`.
+        #' @param scoring a character string specifying which scoring system to be used, must be one of `"none"` (default), `"rank`, `"vw"` or `"expon"`.
         #' 
         #' @return A `MultiCompT` object. 
         initialize = function(
             type = c("permu", "approx"), bonferroni = TRUE,
-            signif_level = 0.05, n_permu = NULL, scoring = c("none", "rank", "vw", "savage")
+            signif_level = 0.05, n_permu = NULL, scoring = c("none", "rank", "vw", "expon")
         ) {
             private$.type <- match.arg(type)
             private$.bonferroni <- bonferroni

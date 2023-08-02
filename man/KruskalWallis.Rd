@@ -32,7 +32,7 @@ Create a new \code{KruskalWallis} object.
 \if{html}{\out{<div class="r">}}\preformatted{KruskalWallis$new(
   type = c("permu", "approx"),
   n_permu = NULL,
-  scoring = c("rank", "vw", "savage")
+  scoring = c("rank", "vw", "expon")
 )}\if{html}{\out{</div>}}
 }
 
@@ -43,7 +43,7 @@ Create a new \code{KruskalWallis} object.
 
 \item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If \code{NULL} (default) then all permutations are used.}
 
-\item{\code{scoring}}{a character string specifying which scoring system to be used, must be one of \code{"rank"} (default), \code{"vw"} or \code{"savage"}.}
+\item{\code{scoring}}{a character string specifying which scoring system to be used, must be one of \code{"rank"} (default), \code{"vw"} or \code{"expon"}.}
 }
 \if{html}{\out{</div>}}
 }

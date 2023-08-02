@@ -47,22 +47,11 @@ TwoSampleTest <- R6Class(
             )
         },
 
-        .calculate_scores = function() {
-            x <- private$.data$x
-            y <- private$.data$y
+        .calculate_score = function() {
+            scores <- score(c(private$.data$x, private$.data$y), method = private$.scoring)
 
-            m <- length(x)
-            n <- length(y)
-            N <- m + n
-
-            rank <- rank(c(x, y))
-            scores <- switch(private$.scoring,
-                rank = rank,
-                vw = qnorm(rank / (N + 1)),
-                savage = cumsum(1 / N:1)[rank]
-            )
-
-            private$.data <- list(x = scores[1:m], y = scores[(m + 1):(m + n)])
+            x_index <- seq_along(private$.data$x)
+            private$.data <- list(x = scores[x_index], y = scores[-x_index])
         }
     )
 )

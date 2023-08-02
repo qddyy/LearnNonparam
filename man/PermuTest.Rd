@@ -58,7 +58,7 @@ Create a new \code{PermuTest} object. Note that it is not recommended to create 
   alternative = c("two_sided", "less", "greater"),
   n_permu = NULL,
   conf_level = 0.95,
-  scoring = c("none", "rank", "vw", "savage")
+  scoring = c("none", "rank", "vw", "expon")
 )}\if{html}{\out{</div>}}
 }
 
@@ -73,7 +73,7 @@ Create a new \code{PermuTest} object. Note that it is not recommended to create 
 
 \item{\code{conf_level}}{a number specifying confidence level of the interval.}
 
-\item{\code{scoring}}{a character string specifying which scoring system to be used, must be one of \code{"none"} (default), \verb{"rank}, \code{"vw"} or \code{"savage"}.}
+\item{\code{scoring}}{a character string specifying which scoring system to be used, must be one of \code{"none"} (default), \verb{"rank}, \code{"vw"} or \code{"expon"}.}
 }
 \if{html}{\out{</div>}}
 }

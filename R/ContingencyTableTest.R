@@ -28,7 +28,7 @@ ContingencyTableTest <- R6Class(
                 function(data) t(do.call(
                     data.frame, tapply(
                         data, row_index,
-                        function(row) as.integer(table(c(seq_len(c), row)) - 1),
+                        function(row) as.integer(tabulate(c(seq_len(c), row)) - 1),
                         simplify = TRUE
                     )
                 ))

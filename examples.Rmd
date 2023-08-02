@@ -196,7 +196,7 @@ print(t$ci)
 ```{r}
 # See ?ScoreSum
 t <- pmt(
-    "twosample.scoresum", alternative = "greater", scoring = "savage"
+    "twosample.scoresum", alternative = "greater", scoring = "expon"
 )
 
 # See ?Table2.6.2
@@ -356,7 +356,7 @@ t$type <- "approx"
 print(t$p_value)
 
 
-t$scoring <- "savage"
+t$scoring <- "expon"
 
 t$n_permu <- 4000
 t$type <- "permu"
@@ -389,7 +389,7 @@ print(t$multicomp)
 t$type <- "approx"
 print(t$multicomp)
 
-# try other scoring! ("vw", "savage")
+# try other scoring! ("vw", "expon")
 t$scoring <- "rank"
 print(t$multicomp)
 ```
@@ -407,7 +407,7 @@ print(t$multicomp)
 t$type <- "approx"
 print(t$multicomp)
 
-# try other scoring! ("vw", "savage")
+# try other scoring! ("vw", "expon")
 t$scoring <- "rank"
 print(t$multicomp)
 ```

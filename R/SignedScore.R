@@ -21,12 +21,12 @@ SignedScore <- R6Class(
         #' 
         #' @param alternative a character string specifying the alternative hypothesis, must be one of `"two_sided"` (default), `"greater"` or `"less"`.
         #' @param n_permu an integer specifying how many permutations should be used to construct the permutation distribution. If `NULL` (default) then all permutations are used.
-        #' @param scoring a character string specifying which scoring system to be used, must be one of `"rank"` (default), `"vw"` or `"savage"`.
+        #' @param scoring a character string specifying which scoring system to be used, must be one of `"rank"` (default), `"vw"` or `"expon"`.
         #' 
         #' @return A `SignedScore` object. 
         initialize = function(
             type = c("permu", "approx"), correct = TRUE, ranking_method = c("with_zeros", "ignore"),
-            alternative = c("two_sided", "less", "greater"), n_permu = NULL, scoring = c("rank", "vw", "savage")
+            alternative = c("two_sided", "less", "greater"), n_permu = NULL, scoring = c("rank", "vw", "expon")
         ) {
             private$.correct <- correct
             private$.type <- match.arg(type)
@@ -41,7 +41,7 @@ SignedScore <- R6Class(
 
         .signed_score = NULL,
 
-        .calculate_scores = function() {
+        .calculate_score = function() {
             diff <- private$.data$x - private$.data$y
 
             if (private$.ranking_method == "ignore") {
@@ -49,16 +49,7 @@ SignedScore <- R6Class(
                 diff <- diff[diff != 0]
             }
 
-            rank <- rank(abs(diff))
-            N <- length(rank)
-
-            scores <- switch(private$.scoring,
-                rank = rank,
-                vw = qnorm(rank / (N + 1)),
-                savage = cumsum(1 / N:1)[rank]
-            )
-
-            private$.signed_score <- scores * sign(diff)
+            private$.signed_score <- sign(diff) * score(abs(diff), method = private$.scoring)
         },
 
         .calculate_statistic = function() {

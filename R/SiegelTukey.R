@@ -41,23 +41,22 @@ SiegelTukey <- R6Class(
         .calculate_extra = function() {},
 
         .calculate_p = function() {
+            raw_statistic <- private$.statistic
+            m <- length(private$.data$x)
+            private$.statistic <- raw_statistic - m * (m + 1) / 2
+
             raw_alternative <- private$.alternative
             private$.alternative <- switch(raw_alternative,
                 greater = "less", less = "greater", two_sided = "two_sided"
             )
 
-            raw_statistic <- private$.statistic
-            m <- length(private$.data$x)
-            private$.statistic <- raw_statistic - m * (m + 1) / 2
-
             super$.calculate_p()
 
             private$.statistic <- raw_statistic
-
             private$.alternative <- raw_alternative
         },
 
-        .calculate_scores = function() {
+        .calculate_score = function() {
             x <- private$.data$x
             y <- private$.data$y
 
@@ -66,28 +65,25 @@ SiegelTukey <- R6Class(
                 y <- y - median(y)
             }
 
-            m <- length(x)
-            n <- length(y)
-            N <- m + n
+            c_xy <- c(x, y)
+            N <- length(c_xy)
 
-            rank_l <- sapply(
-                seq.int(from = 0, to = N - 1, by = 4),
-                function(x) x + c(1, 4)
-            ) 
-            rank_r <- sapply(
-                seq.int(from = 2, to = N, by = 4),
-                function(x) x + c(0, 1)
-            )
+            rank_l <- outer(c(1, 4), seq.int(from = 0, to = N - 1, by = 4), "+")
+            rank_r <- outer(c(0, 1), seq.int(from = 2, to = N, by = 4), "+")
+
+            index_floor <- seq_len(floor(N / 2))
+            index_ceiling <- seq_len(ceiling(N / 2))
             if (length(rank_l) == length(rank_r)) {
-                rank_l <- rank_l[seq_len(floor(N / 2))]
-                rank_r <- rank_r[seq_len(ceiling(N / 2))]
+                rank_l <- rank_l[index_floor]
+                rank_r <- rank_r[index_ceiling]
             } else {
-                rank_l <- rank_l[seq_len(ceiling(N / 2))]
-                rank_r <- rank_r[seq_len(floor(N / 2))]
+                rank_l <- rank_l[index_ceiling]
+                rank_r <- rank_r[index_floor]
             }
-            ST_rank <- c(rank_l, rev(rank_r))[rank(c(x, y))]
 
-            private$.data <- list(x = ST_rank[1:m], y = ST_rank[(m + 1):(m + n)])
+            st_rank <- tapply(c(rank_l, rev(rank_r)), sort(c_xy), mean)
+
+            private$.data <- list(x = st_rank[as.character(x)], y = st_rank[as.character(y)])
         }
     )
 )

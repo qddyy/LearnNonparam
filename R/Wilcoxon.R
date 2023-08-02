@@ -44,10 +44,8 @@ Wilcoxon <- R6Class(
         .calculate_p = function() {
             m <- length(private$.data$x)
             n <- length(private$.data$y)
-            N <- m + n
 
-            # Detect ties
-            ties <- table(c(private$.data$x, private$.data$y))
+            ties <- tabulate(c(private$.data$x, private$.data$y))
             if (any(ties > 1)) {
                 private$.type <- "approx"
             }
@@ -61,6 +59,8 @@ Wilcoxon <- R6Class(
             }
 
             if (private$.type == "approx") {
+                N <- m + n
+
                 z <- private$.statistic - m * n / 2
                 correction <- if (private$.correct) switch(private$.alternative,
                     two_sided = sign(z) * 0.5, greater = 0.5, less = -0.5

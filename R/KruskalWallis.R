@@ -18,12 +18,12 @@ KruskalWallis <- R6Class(
         #' @param type a character string specifying the way to calculate p-values, must be one of `"permu"` (default) or `"approx"`. 
         #' 
         #' @param n_permu an integer specifying how many permutations should be used to construct the permutation distribution. If `NULL` (default) then all permutations are used.
-        #' @param scoring a character string specifying which scoring system to be used, must be one of `"rank"` (default), `"vw"` or `"savage"`.
+        #' @param scoring a character string specifying which scoring system to be used, must be one of `"rank"` (default), `"vw"` or `"expon"`.
         #' 
         #' @return A `KruskalWallis` object. 
         initialize = function(
             type = c("permu", "approx"),
-            n_permu = NULL, scoring = c("rank", "vw", "savage")
+            n_permu = NULL, scoring = c("rank", "vw", "expon")
         ) {
             private$.type <- match.arg(type)
 

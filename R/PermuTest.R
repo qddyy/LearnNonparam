@@ -15,7 +15,7 @@ PermuTest <- R6Class(
     public = list(
         #' @description Create a new `PermuTest` object. Note that it is not recommended to create objects of this class directly. 
         #' 
-        #' @param scoring a character string specifying which scoring system to be used, must be one of `"none"` (default), `"rank`, `"vw"` or `"savage"`.
+        #' @param scoring a character string specifying which scoring system to be used, must be one of `"none"` (default), `"rank`, `"vw"` or `"expon"`.
         #' 
         #' @param n_permu an integer specifying how many permutations should be used to construct the permutation distribution. If `NULL` (default) then all permutations are used.
         #' 
@@ -25,7 +25,7 @@ PermuTest <- R6Class(
         #' @param conf_level a number specifying confidence level of the interval.
         #' 
         #' @return A `PermuTest` object. 
-        initialize = function(null_value = 0, alternative = c("two_sided", "less", "greater"), n_permu = NULL, conf_level = 0.95, scoring = c("none", "rank", "vw", "savage")) {
+        initialize = function(null_value = 0, alternative = c("two_sided", "less", "greater"), n_permu = NULL, conf_level = 0.95, scoring = c("none", "rank", "vw", "expon")) {
             private$.n_permu <- n_permu
 
             private$.scoring <- match.arg(scoring)
@@ -146,7 +146,7 @@ PermuTest <- R6Class(
         },
 
         # @Override
-        .calculate_scores = function() {
+        .calculate_score = function() {
             # private$.data <- 
         },
 
@@ -154,7 +154,7 @@ PermuTest <- R6Class(
             raw_data <- NULL
             if (private$.scoring != "none") {
                 raw_data <- private$.data
-                private$.calculate_scores()
+                private$.calculate_score()
             }
 
             private$.calculate_statistic()

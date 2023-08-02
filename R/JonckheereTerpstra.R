@@ -48,7 +48,7 @@ JonckheereTerpstra <- R6Class(
     private = list(
         .calculate_p = function() {
             N <- length(private$.data)
-            n <- table(names(private$.data))
+            n <- tabulate(as.integer(names(private$.data)))
 
             z <- (private$.statistic - 1 / 4 * (N^2 - sum(n^2))) / sqrt(
                 1 / 72 * (N^2 * (2 * N + 3) - sum(n^2 * (2 * n + 3)))

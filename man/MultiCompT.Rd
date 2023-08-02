@@ -41,7 +41,7 @@ Create a new \code{MultiCompT} object.
   bonferroni = TRUE,
   signif_level = 0.05,
   n_permu = NULL,
-  scoring = c("none", "rank", "vw", "savage")
+  scoring = c("none", "rank", "vw", "expon")
 )}\if{html}{\out{</div>}}
 }
 
@@ -56,7 +56,7 @@ Create a new \code{MultiCompT} object.
 
 \item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If \code{NULL} (default) then all permutations are used.}
 
-\item{\code{scoring}}{a character string specifying which scoring system to be used, must be one of \code{"none"} (default), \verb{"rank}, \code{"vw"} or \code{"savage"}.}
+\item{\code{scoring}}{a character string specifying which scoring system to be used, must be one of \code{"none"} (default), \verb{"rank}, \code{"vw"} or \code{"expon"}.}
 }
 \if{html}{\out{</div>}}
 }
