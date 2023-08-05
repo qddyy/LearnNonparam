@@ -24,28 +24,29 @@ RCBD <- R6Class(
         },
 
         .permute = function() {
-            data <- private$.data
+            k <- nrow(private$.data)
+            b <- ncol(private$.data)
 
             if (is.null(private$.n_permu)) {
-                number_permu <- factorial(nrow(data))
-                permu_index <- expand.grid(rep(list(seq_len(number_permu)), ncol(private$.data)))
+                col_permu <- lapply(private$.data, permutations)
+                index_permu <- expand.grid(rep(list(seq_len(factorial(k))), b))
 
                 private$.data_permu <- apply(
-                    permu_index, 1, function(index) do.call(
-                        data.frame, lapply(
-                            seq_along(index), function(i) permutations(
-                                v = data[, i], index = index[i]
+                    X = index_permu, MARGIN = 1,
+                    FUN = function(index) {
+                        do.call(
+                            data.frame, lapply(
+                                seq_along(index), function(i) col_permu[[i]][i, ]
                             )
                         )
-                    ), simplify = FALSE
+                    }
                 )
             } else {
-                private$.data_permu <- replicate(
-                    private$.n_permu, do.call(
-                        data.frame, lapply(
-                            data, function(x) permutations(v = x, nsample = 1)
-                        )
-                    ), simplify = FALSE
+                data <- private$.data
+                private$.data_permu <- lapply(
+                    seq_len(private$.n_permu), function(...) {
+                        do.call(data.frame, lapply(data, function(x) x[sample.int(k)]))
+                    }
                 )
             }
         },

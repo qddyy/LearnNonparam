@@ -17,23 +17,22 @@ TwoSamplePairedTest <- R6Class(
         },
 
         .permute = function() {
-            if (is.null(private$.n_permu)) {
-                private$.swapped_permu <- as.matrix(
-                    expand.grid(rep(list(c(TRUE, FALSE)), nrow(private$.data)))
-                )
+            private$.swapped_permu <- if (is.null(private$.n_permu)) {
+                expand.grid(rep(list(c(TRUE, FALSE)), nrow(private$.data)))
             } else {
-                private$.swapped_permu <- matrix(
-                    as.logical(rbinom(private$.n_permu * nrow(private$.data), 1, 0.5)),
-                    nrow = private$.n_permu, byrow = TRUE
-                )
+                matrix(as.logical(rbinom(private$.n_permu * nrow(private$.data), 1, 0.5)), nrow = private$.n_permu)
             }
 
             x <- private$.data$x
             y <- private$.data$y
             private$.data_permu <- apply(
-                private$.swapped_permu, 1, function(is_swapped) data.frame(
-                    x = ifelse(is_swapped, y, x), y = ifelse(is_swapped, x, y)
-                ), simplify = FALSE
+                X = private$.swapped_permu, MARGIN = 1,
+                FUN = function(is_swapped) {
+                    data.frame(
+                        x = `[<-`(x, is_swapped, y[is_swapped]),
+                        y = `[<-`(y, is_swapped, x[is_swapped])
+                    )
+                }
             )
         }
     )
