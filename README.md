@@ -51,7 +51,7 @@ library(LearnNonparam)
   print(t$statistic)
   #> [1] 35
   print(t$p_value)
-  #> [1] 0.0023
+  #> [1] 0.0024
 
   print(t$estimate)
   #> [1] 30.045
@@ -61,7 +61,7 @@ library(LearnNonparam)
   t$plot_hist(bins = 12)
   ```
 
-  <img src="man/figures/README-unnamed-chunk-7-1.svg" width="60%" />
+  <img src="man/figures/README-unnamed-chunk-7-1.svg" width="100%" />
 
 - modify some attributes and see how the results change
 
