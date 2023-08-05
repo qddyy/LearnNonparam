@@ -1,25 +1,25 @@
 ---
-title: "examples"
-author: dy
+title: "Examples"
+vignette: >
+  %\VignetteIndexEntry{examples}
+  %\VignetteEngine{knitr::rmarkdown}
+  %\VignetteEncoding{UTF-8}
 output: 
-  bookdown::pdf_document2:
-    toc: true
+  rmarkdown::html_vignette:
+    dev: svg
 ---
 
-```{r, setup, include=FALSE}
+```{r, include = FALSE}
 knitr::opts_chunk$set(
-    comment = "",
-    error = FALSE,
-    message = FALSE,
-    warning = FALSE,
-    fig.align = "center",
-    out.width = "60%"
+    collapse = TRUE, comment = "#>",
+    warning = FALSE, message = FALSE, error = FALSE,
+    fig.align = "center", out.width = "75%"
 )
-
-library(LearnNonparam)
 ```
 
-\newpage
+```{r setup}
+library(LearnNonparam)
+```
 
 # Chapter 1
 

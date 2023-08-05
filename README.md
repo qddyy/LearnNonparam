@@ -1,12 +1,7 @@
 
-<!-- README.md is generated from README.Rmd. Please edit that file -->
-
 # LearnNonparam
 
-<!-- badges: start -->
-
 [![R-CMD-check](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml)
-<!-- badges: end -->
 
 This package implements the tests in chapters 1-5 of [Higgins
 (2003)](#references).
@@ -22,7 +17,7 @@ You can install the development version of LearnNonparam from
 
 ``` r
 # install.packages("devtools")
-devtools::install_github("qddyy/LearnNonparam", dependencies = TRUE)
+devtools::install_github("qddyy/LearnNonparam")
 ```
 
 ## Usage
@@ -44,7 +39,7 @@ library(LearnNonparam)
   t <- pmt("twosample.wilcoxon", type = "permu", n_permu = 10000)
   ```
 
-- feed it the data (a data.frame, a list, or some numeric vectors)
+- feed it the data (a data frame, a list, or some numeric vectors)
 
   ``` r
   t$feed(Table2.6.2)
@@ -56,7 +51,7 @@ library(LearnNonparam)
   print(t$statistic)
   #> [1] 35
   print(t$p_value)
-  #> [1] 0.0018
+  #> [1] 0.0023
 
   print(t$estimate)
   #> [1] 30.045
@@ -66,7 +61,7 @@ library(LearnNonparam)
   t$plot_hist(bins = 12)
   ```
 
-  <img src="man/figures/README-unnamed-chunk-7-1.svg" width="100%" />
+  <img src="man/figures/README-unnamed-chunk-7-1.svg" width="60%" />
 
 - modify some attributes and see how the results change
 
@@ -77,8 +72,8 @@ library(LearnNonparam)
   #> [1] 0.008239019
   ```
 
-There’s also support for chained calls, which means that you can do
-things like
+There is also support for chaining method calls, which means that you
+can do things like
 
 ``` r
 pmt("twosample.wilcoxon", type = "permu", n_permu = 10000)$feed(Table2.6.2)$plot_hist(bins = 12)$p_value
@@ -88,8 +83,8 @@ pmt("twosample.wilcoxon", type = "permu", n_permu = 10000)$feed(Table2.6.2)$plot
 
 Just use `?...` syntax.
 
-If you want to know all available methods and attributes, it’s a good
-idea to explore `?PermuTest` (all tests’ **base class**) first.
+If you want to know all available methods and attributes, you can start
+by exploring `?PermuTest` (all tests’ **base class**) first.
 
 If you want to know all available tests, see `pmts()`.
 
