@@ -33,7 +33,7 @@ ANOVA <- R6Class(
         .calculate = function() {
             private$.statistic_func <- switch(private$.type,
                 permu = function(data, group) sum(tapply(
-                    X = data, INDEX = group, FUN = function(x) length(x) * mean(x)^2
+                    data, group, function(x) length(x) * mean(x)^2
                 )),
                 approx = function(data, group) anova(lm(data ~ as.factor(group)))$F[1]
             )

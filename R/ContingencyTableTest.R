@@ -24,14 +24,14 @@ ContingencyTableTest <- R6Class(
                 permutations(
                     v = rep(seq_len(c), col_sum),
                     nsample = private$.n_permu, layout = "list"
-                ),
-                function(data) t(do.call(
-                    data.frame, tapply(
-                        data, row_index,
-                        function(row) as.integer(tabulate(c(seq_len(c), row)) - 1),
-                        simplify = TRUE
-                    )
-                ))
+                ), function(data) {
+                    t(do.call(
+                        data.frame, tapply(
+                            data, row_index,
+                            function(row) as.integer(tabulate(c(seq_len(c), row)) - 1)
+                        )
+                    ))
+                }
             )
         },
 

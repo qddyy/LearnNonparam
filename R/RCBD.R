@@ -32,8 +32,7 @@ RCBD <- R6Class(
                 index_permu <- expand.grid(rep(list(seq_len(factorial(k))), b))
 
                 private$.data_permu <- apply(
-                    X = index_permu, MARGIN = 1,
-                    FUN = function(index) {
+                    index_permu, 1, function(index) {
                         do.call(
                             data.frame, lapply(
                                 seq_along(index), function(i) col_permu[[i]][i, ]

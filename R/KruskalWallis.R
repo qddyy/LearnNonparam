@@ -36,7 +36,7 @@ KruskalWallis <- R6Class(
             var <- var(private$.data)
             private$.statistic_func <- function(data, group) {
                 1 / var * sum(tapply(
-                    X = data, INDEX = group, FUN = function(x) length(x) * (mean(x) - mean)^2
+                    data, group, function(x) length(x) * (mean(x) - mean)^2
                 ))
             }
 

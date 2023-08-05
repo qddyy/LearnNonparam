@@ -26,8 +26,7 @@ TwoSamplePairedTest <- R6Class(
             x <- private$.data$x
             y <- private$.data$y
             private$.data_permu <- apply(
-                X = private$.swapped_permu, MARGIN = 1,
-                FUN = function(is_swapped) {
+                private$.swapped_permu, 1, function(is_swapped) {
                     data.frame(
                         x = `[<-`(x, is_swapped, y[is_swapped]),
                         y = `[<-`(y, is_swapped, x[is_swapped])
