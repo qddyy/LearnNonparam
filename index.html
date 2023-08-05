@@ -42,6 +42,18 @@
 <li>
   <a href="reference/index.html">Reference</a>
 </li>
+<li class="dropdown">
+  <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+    Articles
+     
+    <span class="caret"></span>
+  </a>
+  <ul class="dropdown-menu" role="menu">
+<li>
+      <a href="articles/examples.html">Examples</a>
+    </li>
+  </ul>
+</li>
       </ul>
 <ul class="nav navbar-nav navbar-right"></ul>
 </div>
@@ -58,8 +70,7 @@
 <div class="section level1">
 <div class="page-header"><h1 id="learnnonparam">LearnNonparam<a class="anchor" aria-label="anchor" href="#learnnonparam"></a>
 </h1></div>
-<!-- badges: start -->
-
+<p><a href="https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></p>
 <p>This package implements the tests in chapters 1-5 of <a href="#references">Higgins (2003)</a>.</p>
 <p>It uses <a href="https://cran.r-project.org/package=R6" class="external-link">R6</a> for clean OO-design and <a href="https://cran.r-project.org/package=arrangements" class="external-link">arrangements</a> for fast generation of permutations.</p>
 <div class="section level2">
@@ -68,7 +79,7 @@
 <p>You can install the development version of LearnNonparam from <a href="https://github.com/" class="external-link">GitHub</a> with:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("devtools")</span></span>
-<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"qddyy/LearnNonparam"</span>, dependencies <span class="op">=</span> <span class="cn">TRUE</span><span class="op">)</span></span></code></pre></div>
+<span><span class="fu">devtools</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"qddyy/LearnNonparam"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
@@ -85,7 +96,7 @@
 <code class="sourceCode R"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pmt.html">pmt</a></span><span class="op">(</span><span class="st">"twosample.wilcoxon"</span>, type <span class="op">=</span> <span class="st">"permu"</span>, n_permu <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
-<p>feed it the data (a data.frame, a list, or some numeric vectors)</p>
+<p>feed it the data (a data frame, a list, or some numeric vectors)</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="fu">feed</span><span class="op">(</span><span class="va">Table2.6.2</span><span class="op">)</span></span></code></pre></div>
 </li>
@@ -95,7 +106,7 @@
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 35</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.0018</span></span>
+<span><span class="co">#&gt; [1] 0.0023</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">estimate</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 30.045</span></span>
@@ -103,7 +114,7 @@
 <span><span class="co">#&gt; [1] 11.57 50.76</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">plot_hist</span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span></code></pre></div>
-<p><img src="reference/figures/README-unnamed-chunk-7-1.svg" width="100%"></p>
+<p><img src="reference/figures/README-unnamed-chunk-7-1.svg" width="60%"></p>
 </li>
 <li>
 <p>modify some attributes and see how the results change</p>
@@ -114,7 +125,7 @@
 <span><span class="co">#&gt; [1] 0.008239019</span></span></code></pre></div>
 </li>
 </ul>
-<p>There’s also support for chained calls, which means that you can do things like</p>
+<p>There is also support for chaining method calls, which means that you can do things like</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pmt.html">pmt</a></span><span class="op">(</span><span class="st">"twosample.wilcoxon"</span>, type <span class="op">=</span> <span class="st">"permu"</span>, n_permu <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span><span class="op">$</span><span class="fu">feed</span><span class="op">(</span><span class="va">Table2.6.2</span><span class="op">)</span><span class="op">$</span><span class="fu">plot_hist</span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">12</span><span class="op">)</span><span class="op">$</span><span class="va">p_value</span></span></code></pre></div>
 </div>
@@ -122,7 +133,7 @@
 <h2 id="help">Help<a class="anchor" aria-label="anchor" href="#help"></a>
 </h2>
 <p>Just use <code><a href="https://rdrr.io/r/base/dots.html" class="external-link">?...</a></code> syntax.</p>
-<p>If you want to know all available methods and attributes, it’s a good idea to explore <code><a href="reference/PermuTest.html">?PermuTest</a></code> (all tests’ <strong>base class</strong>) first.</p>
+<p>If you want to know all available methods and attributes, you can start by exploring <code><a href="reference/PermuTest.html">?PermuTest</a></code> (all tests’ <strong>base class</strong>) first.</p>
 <p>If you want to know all available tests, see <code><a href="reference/pmt.html">pmts()</a></code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pmt.html">pmts</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -186,12 +197,7 @@ Higgins, James J. 2003. <em>An Introduction to Modern Nonparametric Statistics</
 </ul>
 </div>
 
-<div class="dev-status">
-<h2 data-toc-skip>Dev status</h2>
-<ul class="list-unstyled">
-<li><a href="https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></li>
-</ul>
-</div>
+
 
   </div>
 </div>
