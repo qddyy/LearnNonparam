@@ -108,7 +108,7 @@ PermuTest <- R6Class(
 
         # @Override
         .calculate_statistic = function() {
-            # private$.statistic <- 
+            # private$.statistic <- ...
         },
 
         # @Override
@@ -116,8 +116,8 @@ PermuTest <- R6Class(
 
         # @Override
         .calculate_extra = function() {
-            # private$.estimate <- 
-            # private$.ci <- 
+            # private$.estimate <- ...
+            # private$.ci <- ...
         },
 
         # @Override
@@ -127,7 +127,7 @@ PermuTest <- R6Class(
 
         # @Override
         .calculate_statistic_permu = function() {
-            # private$.statistic_permu <- 
+            # private$.statistic_permu <- ...
         },
 
         .calculate_p_permu = function() {
