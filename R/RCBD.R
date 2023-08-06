@@ -34,8 +34,9 @@ RCBD <- R6Class(
                 private$.data_permu <- apply(
                     index_permu, 1, function(index) {
                         do.call(
-                            data.frame, lapply(
-                                seq_along(index), function(i) col_permu[[i]][i, ]
+                            data.frame, .mapply(
+                                dots = list(col_permu, index), MoreArgs = NULL,
+                                FUN = function(col, i) col[i, ]
                             )
                         )
                     }
@@ -63,10 +64,12 @@ RCBD <- R6Class(
         .calculate_scores = function() {
             k <- nrow(private$.data)
 
-            private$.data <- do.call(data.frame, lapply(
-                private$.data,
-                function(x) score(x, n = k, method = private$.scoring)
-            ))
+            scoring <- private$.scoring
+            private$.data <- do.call(
+                data.frame, lapply(
+                    private$.data, function(x) score(x, n = k, method = scoring)
+                )
+            )
         }
     )
 )
