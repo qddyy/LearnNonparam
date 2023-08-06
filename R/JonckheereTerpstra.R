@@ -28,24 +28,30 @@ JonckheereTerpstra <- R6Class(
             private$.type <- match.arg(type)
 
             super$initialize(alternative = match.arg(alternative), n_permu = n_permu)
+        }
+    ),
+    private = list(
+        .calculate_statistic = function() {
+            k <- as.integer(names(private$.data)[length(private$.data)])
+            c_groups <- expand.grid(i = seq_len(k), j = seq_len(k))
+            c_groups <- c_groups[c_groups$i < c_groups$j, ]
 
             private$.statistic_func <- function(data, group) {
-                groups <- unique(group)
-                c_ij <- expand.grid(i = groups, j = groups)
+                group_loc <- split(seq_along(group), group)
                 sum(apply(
-                    c_ij[c_ij$i < c_ij$j, ], 1,
-                    function(ij) {
+                    c_groups, 1, function(ij) {
                         c_xy <- expand.grid(
-                            x = data[group == ij[1]],
-                            y = data[group == ij[2]]
+                            x = data[group_loc[[ij[1]]]],
+                            y = data[group_loc[[ij[2]]]]
                         )
                         sum(c_xy$x < c_xy$y)
                     }
                 ))
             }
-        }
-    ),
-    private = list(
+
+            super$.calculate_statistic()
+        },
+
         .calculate_p = function() {
             N <- length(private$.data)
             n <- tabulate(as.integer(names(private$.data)))
