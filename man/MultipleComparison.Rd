@@ -12,8 +12,6 @@ This class specializes \code{KSampleTest} for multiple comparisons.
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{signif_level}}{The significance level.}
-
 \item{\code{multicomp}}{The multiple comparison result.}
 }
 \if{html}{\out{</div>}}
@@ -38,15 +36,21 @@ This class specializes \code{KSampleTest} for multiple comparisons.
 \subsection{Method \code{new()}}{
 Create a new \code{MultipleComparison} object. Note that it is not recommended to create objects of this class directly.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{MultipleComparison$new(signif_level = 0.05, ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{MultipleComparison$new(
+  conf_level = 0.95,
+  n_permu = NULL,
+  scoring = c("none", "rank", "vw", "expon")
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{signif_level}}{a numeric value between zero and one giving the significance level.}
+\item{\code{conf_level}}{a numeric value between zero and one giving the family-wise confidence level to use.}
 
-\item{\code{...}}{extra parameters passed to \code{PermuTest$initialize}.}
+\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If \code{NULL} (default) then all permutations are used.}
+
+\item{\code{scoring}}{a character string specifying which scoring system to be used, must be one of \code{"none"} (default), \verb{"rank}, \code{"vw"} or \code{"expon"}.}
 }
 \if{html}{\out{</div>}}
 }

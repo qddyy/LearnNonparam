@@ -9,7 +9,7 @@
 
 
 MultiCompT <- R6Class(
-    classname = "Multiple Comparison (t test)",
+    classname = "Multiple Comparison (t)",
     inherit = MultipleComparison,
     cloneable = FALSE,
     public = list(

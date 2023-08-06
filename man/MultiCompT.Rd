@@ -2,24 +2,17 @@
 % Please edit documentation in R/MultiCompT.R
 \name{MultiCompT}
 \alias{MultiCompT}
-\title{Multiple Comparison Based on T Test}
+\title{Multiple Comparison Based on t Statistic}
 \description{
-Performs t test based multiple comparison on data vectors.
+Performs t statistic based multiple comparison on data vectors.
 }
 \section{Super classes}{
-\code{LearnNonparam::Permutation Test} -> \code{LearnNonparam::K Sample Permutation Test} -> \code{LearnNonparam::Multiple Comparison} -> \code{Multiple Comparison (t test)}
-}
-\section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{bonferroni}}{Whether to apply bonferroni adjustment.}
-}
-\if{html}{\out{</div>}}
+\code{LearnNonparam::Permutation Test} -> \code{LearnNonparam::K Sample Permutation Test} -> \code{LearnNonparam::Multiple Comparison} -> \code{Multiple Comparison (t)}
 }
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-Multiple Comparison (t test)-new}{\code{MultiCompT$new()}}
+\item \href{#method-Multiple Comparison (t)-new}{\code{MultiCompT$new()}}
 }
 }
 \if{html}{\out{
@@ -31,15 +24,15 @@ Performs t test based multiple comparison on data vectors.
 </details>
 }}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Multiple Comparison (t test)-new"></a>}}
-\if{latex}{\out{\hypertarget{method-Multiple Comparison (t test)-new}{}}}
+\if{html}{\out{<a id="method-Multiple Comparison (t)-new"></a>}}
+\if{latex}{\out{\hypertarget{method-Multiple Comparison (t)-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new \code{MultiCompT} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{MultiCompT$new(
   type = c("permu", "approx"),
   bonferroni = TRUE,
-  signif_level = 0.05,
+  conf_level = 0.95,
   n_permu = NULL,
   scoring = c("none", "rank", "vw", "expon")
 )}\if{html}{\out{</div>}}
@@ -52,7 +45,7 @@ Create a new \code{MultiCompT} object.
 
 \item{\code{bonferroni}}{a logical indicating whether to apply bonferroni adjustment.}
 
-\item{\code{signif_level}}{a numeric value between zero and one giving the significance level.}
+\item{\code{conf_level}}{a numeric value between zero and one giving the family-wise confidence level to use.}
 
 \item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If \code{NULL} (default) then all permutations are used.}
 

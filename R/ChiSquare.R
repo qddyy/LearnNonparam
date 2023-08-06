@@ -1,4 +1,4 @@
-#' @title Permutation Test for Contingency Tables Based on Chi-Square Statistic
+#' @title Permutation Test for Contingency Tables Based on Chi-square Statistic
 #' 
 #' @description Performs chi-square statistic based permutation test on contingency tables. 
 #' 
