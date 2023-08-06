@@ -16,69 +16,51 @@ MultipleComparison <- R6Class(
     public = list(
         #' @description Create a new `MultipleComparison` object. Note that it is not recommended to create objects of this class directly. 
         #' 
-        #' @param signif_level a numeric value between zero and one giving the significance level.
-        #' @param ... extra parameters passed to `PermuTest$initialize`.
+        #' @param conf_level a numeric value between zero and one giving the family-wise confidence level to use. 
+        #' @param n_permu an integer specifying how many permutations should be used to construct the permutation distribution. If `NULL` (default) then all permutations are used. 
+        #' @param scoring a character string specifying which scoring system to be used, must be one of `"none"` (default), `"rank`, `"vw"` or `"expon"`. 
         #' 
         #' @return A `MultipleComparison` object. 
-        initialize = function(signif_level = 0.05, ...) {
-            private$.signif_level <- signif_level
-
-            super$initialize(alternative = "two_sided", ...)
+        initialize = function(conf_level = 0.95, n_permu = NULL, scoring = c("none", "rank", "vw", "expon")) {
+            super$initialize(alternative = "two_sided", conf_level = conf_level, n_permu = n_permu, scoring = match.arg(scoring))
         }
     ),
     private = list(
-        .groups = NULL,
-        .c_groups = NULL,
-
-        .signif_level = NULL,
         .multicomp = NULL,
+
+        .c_groups = NULL,
 
         .check = function() {}, # TODO
 
-        .calculate = function(...) {
-            private$.groups <- unique(names(private$.data))
-            private$.c_groups <- combinations(v = private$.groups, k = 2)
-
-            super$.calculate()
-
-            private$.prepare_multicomp()
-        },
-
         .calculate_statistic = function() {
-            group <- names(private$.data)
-            g_index <- setNames(lapply(
-                private$.groups, function(g) which(group == g)
-            ), private$.groups)
-
-            statistic_func <- private$.statistic_func
-            data <- unname(private$.data)
-            private$.statistic <- apply(
-                private$.c_groups, 1,
-                function(ij) statistic_func(
-                    data[g_index[[ij[1]]]],
-                    data[g_index[[ij[2]]]],
-                    setNames(data, group)
-                )
+            c_groups <- combinations(
+                v = unique(names(private$.data)), k = 2, layout = "list"
             )
+            private$.c_groups <- c_groups
+
+            data <- unname(private$.data)
+            statistic_func <- private$.statistic_func
+            private$.statistic_func <- function(group) {
+                group_loc <- split(seq_along(group), group)
+                vapply(
+                    X = c_groups, FUN.VALUE = numeric(1),
+                    FUN = function(ij) {
+                        statistic_func(
+                            data[group_loc[[ij[1]]]],
+                            data[group_loc[[ij[2]]]],
+                            setNames(data, group)
+                        )
+                    }
+                )
+            }
+
+            private$.statistic <- private$.statistic_func(names(private$.data))
         },
 
         .calculate_statistic_permu = function() {
-            groups <- private$.groups
-            c_groups <- private$.c_groups
-            statistic_func <- private$.statistic_func
-            data <- unname(private$.data)
             private$.statistic_permu <- vapply(
-                X = private$.group_permu, FUN.VALUE = numeric(nrow(c_groups)),
-                FUN = function(group) {
-                    g_index <- setNames(
-                        lapply(groups, function(g) which(group == g)), groups
-                    )
-                    apply(c_groups, 1, function(ij) statistic_func(
-                        data[g_index[[ij[1]]]],
-                        data[g_index[[ij[2]]]],
-                        setNames(data, group)
-                    ))
-                }
+                X = private$.group_permu, FUN = private$.statistic_func,
+                FUN.VALUE = numeric(length(private$.c_groups))
             )
         },
 
@@ -88,26 +70,18 @@ MultipleComparison <- R6Class(
             )
         },
 
-        .prepare_multicomp = function() {
-            private$.multicomp <- setNames(as.data.frame(cbind(
-                apply(private$.c_groups, 2, as.integer),
-                private$.statistic, private$.p_value
-            )), c("i", "j", "statistic", "p"))
+        .calculate_extra = function() {
+            private$.multicomp <- setNames(
+                as.data.frame(cbind(
+                    t(vapply(private$.c_groups, as.integer, integer(2))),
+                    private$.statistic, private$.p_value
+                )), c("i", "j", "statistic", "p")
+            )
 
-            private$.multicomp$differ <- private$.p_value < private$.signif_level
+            private$.multicomp$differ <- (private$.p_value < 1 - private$.conf_level)
         }
     ),
     active = list(
-        #' @field signif_level The significance level. 
-        signif_level = function() {
-            if (missing(value)) {
-                private$.signif_level
-            } else {
-                private$.signif_level <- value
-                private$.check()
-                private$.prepare_multicomp()
-            }
-        },
         #' @field multicomp The multiple comparison result. 
         multicomp = function() private$.multicomp
     )

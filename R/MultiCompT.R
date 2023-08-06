@@ -1,6 +1,6 @@
-#' @title Multiple Comparison Based on T Test
+#' @title Multiple Comparison Based on t Statistic
 #' 
-#' @description Performs t test based multiple comparison on data vectors. 
+#' @description Performs t statistic based multiple comparison on data vectors. 
 #' 
 #' 
 #' @export
@@ -18,19 +18,19 @@ MultiCompT <- R6Class(
         #' @param type a character string specifying the way to calculate p-values, must be one of `"permu"` (default) or `"approx"`. 
         #' @param bonferroni a logical indicating whether to apply bonferroni adjustment. 
         #' 
-        #' @param signif_level a numeric value between zero and one giving the significance level.
+        #' @param conf_level a numeric value between zero and one giving the family-wise confidence level to use. 
         #' @param n_permu an integer specifying how many permutations should be used to construct the permutation distribution. If `NULL` (default) then all permutations are used.
         #' @param scoring a character string specifying which scoring system to be used, must be one of `"none"` (default), `"rank`, `"vw"` or `"expon"`.
         #' 
         #' @return A `MultiCompT` object. 
         initialize = function(
             type = c("permu", "approx"), bonferroni = TRUE,
-            signif_level = 0.05, n_permu = NULL, scoring = c("none", "rank", "vw", "expon")
+            conf_level = 0.95, n_permu = NULL, scoring = c("none", "rank", "vw", "expon")
         ) {
             private$.type <- match.arg(type)
             private$.bonferroni <- bonferroni
             
-            super$initialize(signif_level = signif_level, n_permu = n_permu, scoring = match.arg(scoring))
+            super$initialize(conf_level = conf_level, n_permu = n_permu, scoring = match.arg(scoring))
         }
     ),
     private = list(
@@ -39,14 +39,13 @@ MultiCompT <- R6Class(
         .calculate_statistic = function() {
             if (private$.scoring == "none") {
                 N <- length(private$.data)
-                k <- length(unique(names(private$.data)))
+                k <- as.integer(names(private$.data)[N])
                 private$.statistic_func <- function(x, y, data) {
-                    MSE <- sum(tapply(
+                    mse <- sum(tapply(
                         data, names(data), function(x) (length(x) - 1) * var(x)
                     )) / (N - k)
-
                     (mean(x) - mean(y)) / sqrt(
-                        MSE * (1 / length(x) + 1 / length(y))
+                        mse * (1 / length(x) + 1 / length(y))
                     )
                 }
             } else {
@@ -62,40 +61,23 @@ MultiCompT <- R6Class(
         },
 
         .calculate_p = function() {
-            if (private$.scoring == "none") {
-                N <- length(private$.data)
-                k <- length(unique(names(private$.data)))
+            N <- length(private$.data)
+            k <- as.integer(names(private$.data)[N])
+            df <- if (private$.scoring == "none") N - k else Inf
 
-                private$.p_value <- 2 * pt(
-                    abs(private$.statistic), df = N - k, lower.tail = FALSE
-                )
-            } else {
-                private$.p_value <- 2 * pnorm(
-                    abs(private$.statistic), lower.tail = FALSE
-                )
-            }
+            private$.p_value <- 2 * pt(
+                abs(private$.statistic), df = df, lower.tail = FALSE
+            )
         },
 
-        .prepare_multicomp = function() {
-            super$.prepare_multicomp()
+        .calculate_extra = function() {
+            super$.calculate_extra()
 
             if (private$.bonferroni) {
-                private$.multicomp$differ <- private$.p_value < (
-                    private$.signif_level / nrow(private$.multicomp)
+                private$.multicomp$differ <- (
+                    private$.p_value < (1 - private$.conf_level) / nrow(private$.multicomp)
                 )
             }
         }
-    ),
-    active = list(
-        #' @field bonferroni Whether to apply bonferroni adjustment. 
-        bonferroni = function(value) {
-            if (missing(value)) {
-                private$.bonferroni
-            } else {
-                private$.bonferroni <- value
-                private$.check()
-                private$.prepare_multicomp()
-            }
-        } 
     )
 )
