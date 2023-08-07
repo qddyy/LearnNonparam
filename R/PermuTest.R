@@ -151,9 +151,7 @@ PermuTest <- R6Class(
         },
 
         .calculate = function() {
-            raw_data <- NULL
             if (private$.scoring != "none") {
-                raw_data <- private$.data
                 private$.calculate_score()
             }
 
@@ -165,8 +163,6 @@ PermuTest <- R6Class(
             } else {
                 private$.calculate_p()
             }
-
-            if (!is.null(raw_data)) private$.data <- raw_data
 
             private$.calculate_extra()
         }
@@ -219,7 +215,11 @@ PermuTest <- R6Class(
             } else {
                 private$.alternative <- value
                 private$.check()
-                private$.calculate()
+                if (private$.type == "permu") {
+                    private$.calculate_p_permu()
+                } else {
+                    private$.calculate_p()
+                }
             }
         },
         #' @field conf_level The confidence level of the interval. 
@@ -229,7 +229,7 @@ PermuTest <- R6Class(
             } else {
                 private$.conf_level <- value
                 private$.check()
-                private$.calculate()
+                private$.calculate_extra()
             }
         },
         #' @field n_permu The number of permutations used. 
@@ -239,7 +239,9 @@ PermuTest <- R6Class(
             } else {
                 private$.n_permu <- value
                 private$.check()
-                if (private$.type == "permu") private$.calculate()
+                if (private$.type == "permu") {
+                    private$.calculate()
+                }
             }
         },
 
