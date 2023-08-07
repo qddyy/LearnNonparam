@@ -20,7 +20,7 @@ ECDF <- R6Class(
         #' 
         #' @return A `ECDF` object. 
         initialize = function(conf_level = 0.95) {
-            private$.conf_level <- conf_level
+            super$initialize(conf_level = conf_level)
         },
 
         #' @description Draw the empirical cumulative distribution function of the data fed (with confidence bounds). 
