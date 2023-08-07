@@ -22,17 +22,17 @@ RatioMeanDeviance <- R6Class(
         initialize = function(alternative = c("two_sided", "less", "greater"), n_permu = NULL) {
             super$initialize(alternative = match.arg(alternative), n_permu = n_permu)
 
+            private$.scoring <- "dev"
+
             private$.statistic_func <- function(x, y) mean(x) / mean(y)
         }
     ),
     private = list(
-        .calculate = function() {
-            private$.data <- list(
-                x = abs(private$.data$x - median(private$.data$x)),
-                y = abs(private$.data$y - median(private$.data$y))
-            )
+        .calculate_score = function() {
+            x <- private$.data$x
+            y <- private$.data$y
 
-            super$.calculate()
+            private$.data <- list(x = abs(x - median(x)), y = abs(y - median(y)))
         }
     )
 )

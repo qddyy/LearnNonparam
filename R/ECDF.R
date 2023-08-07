@@ -28,9 +28,9 @@ ECDF <- R6Class(
         #' @return The object itself (invisibly). 
         plot_ecdf = function() {
             ecdf <- ggplot() +
-                stat_function(fun = private$.ecdf, geom = "step") +
-                stat_function(fun = private$.lower, geom = "step", linetype = 2) +
-                stat_function(fun = private$.upper, geom = "step", linetype = 2) +
+                stat_function(fun = private$.estimate, geom = "step") +
+                stat_function(fun = private$.ci$lower, geom = "step", linetype = 2) +
+                stat_function(fun = private$.ci$upper, geom = "step", linetype = 2) +
                 xlim(c(min(private$.data), max(private$.data))) +
                 labs(x = "", y = "")
             print(ecdf)
@@ -39,28 +39,17 @@ ECDF <- R6Class(
         }
     ),
     private = list(
-        .ecdf = NULL,
-        .lower = NULL,
-        .upper = NULL,
-
-        .calculate = function() {
-            F_n <- ecdf(private$.data)
+        .calculate_extra = function() {
+            private$.estimate <- F_n <- ecdf(private$.data)
 
             n <- length(private$.data)
             A <- 1 / sqrt(n) * qnorm(1 - (1 - private$.conf_level) / 2)
             delta_n <- function(x) A * sqrt(F_n(x) * (1 - F_n(x)))
 
-            private$.ecdf <- F_n
-            private$.upper <- function(x) F_n(x) + delta_n(x) 
-            private$.lower <- function(x) F_n(x) - delta_n(x)
+            private$.ci <- list(
+                lower = function(x) F_n(x) - delta_n(x),
+                upper = function(x) F_n(x) + delta_n(x)
+            )
         }
-    ),
-    active = list(
-        #' @field ecdf Empirical distribution. 
-        ecdf = function() private$.ecdf,
-        #' @field upper confidence bound. 
-        lower = function() private$.lower,
-        #' @field lower confidence bound. 
-        upper = function() private$.upper
     )
 )
