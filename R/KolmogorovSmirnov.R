@@ -44,11 +44,11 @@ KolmogorovSmirnov <- R6Class(
         }
     ),
     private = list(
-        .calculate = function() {
+        .calculate_statistic = function() {
             c_xy <- c(private$.data$x, private$.data$y)
             private$.statistic_func <- function(x, y) max(abs(ecdf(x)(c_xy) - ecdf(y)(c_xy)))
 
-            super$.calculate()
+            super$.calculate_statistic()
         }
     )
 )

@@ -30,7 +30,7 @@ ANOVA <- R6Class(
         }
     ),
     private = list(
-        .calculate = function() {
+        .calculate_statistic = function() {
             private$.statistic_func <- switch(private$.type,
                 permu = function(data, group) sum(tapply(
                     data, group, function(x) length(x) * mean(x)^2
@@ -38,7 +38,7 @@ ANOVA <- R6Class(
                 approx = function(data, group) anova(lm(data ~ as.factor(group)))$F[1]
             )
 
-            super$.calculate()
+            super$.calculate_statistic()
         },
 
         .calculate_p = function() {

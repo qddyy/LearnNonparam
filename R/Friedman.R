@@ -30,7 +30,7 @@ Friedman <- R6Class(
         }
     ),
     private = list(
-        .calculate = function() {
+        .calculate_statistic = function() {
             private$.statistic_func <- switch(private$.type,
                 permu = function(df) sum(rowMeans(df)^2),
                 approx = function(df) {
@@ -39,7 +39,7 @@ Friedman <- R6Class(
                 }
             )
 
-            super$.calculate()
+            super$.calculate_statistic()
         },
 
         .calculate_p = function() {
