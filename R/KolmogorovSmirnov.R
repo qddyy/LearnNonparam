@@ -20,27 +20,6 @@ KolmogorovSmirnov <- R6Class(
         #' @return A `KolmogorovSmirnov` object. 
         initialize = function(n_permu = NULL) {
             super$initialize(alternative = "greater", n_permu = n_permu)
-        },
-
-        #' @description Draw the empirical cumulative distribution function of each of the data fed. 
-        #' 
-        #' @return The object itself (invisibly).
-        plot_ecdfs = function() {
-            x <- private$.data$x
-            y <- private$.data$y
-
-            max <- max(max(x), max(y))
-            min <- min(min(x), min(y))
-            range <- max - min
-
-            ecdfs <- ggplot() +
-                geom_function(fun = ecdf(x), mapping = aes(color = "x")) +
-                geom_function(fun = ecdf(y), mapping = aes(color = "y")) +
-                xlim(c(min - range * 0.1, max + range * 0.1)) +
-                labs(x = "", y = "")
-            print(ecdfs)
-
-            invisible(self)
         }
     ),
     private = list(

@@ -5,6 +5,7 @@
 #' 
 #' @export
 #' 
+#' @import ggplot2
 #' @importFrom R6 R6Class
 #' @importFrom arrangements combinations
 
@@ -32,11 +33,58 @@ MultipleComparison <- R6Class(
 
         .check = function() {}, # TODO
 
+        .print = function(digits) {
+            cat("\n")
+            cat(strwrap(class(self)[1], prefix = "\t"), sep = "\n")
+            cat("\n")
+
+            cat(
+                "family-wise confidence level:",
+                format(100 * private$.conf_level, digits = 2), "(%)"
+            )
+            cat("\n\n")
+
+            print(private$.multicomp, digits = digits, row.names = FALSE)
+        },
+
+        .plot = function(...) {
+            histograms <- ggplot() +
+                stat_bin(
+                    data = do.call(
+                        rbind, .mapply(
+                            dots = list(
+                                private$.c_groups,
+                                split(
+                                    private$.statistic_permu,
+                                    row(private$.statistic_permu)
+                                )
+                            ),
+                            FUN = function(ij, statistic_permu) {
+                                ij <- as.integer(ij)
+                                data.frame(
+                                    i = ij[1], j = ij[2],
+                                    statistic_permu = statistic_permu
+                                )
+                            },
+                            MoreArgs = NULL
+                        )
+                    ),
+                    mapping = aes(x = statistic_permu),
+                    geom = "bar", fill = "#68aaa1"
+                ) +
+                geom_vline(
+                    data = private$.multicomp[1:3],
+                    mapping = aes(xintercept = statistic),
+                    linetype = "dashed"
+                ) +
+                facet_grid(j ~ i, scales = "free", switch = "both")
+            print(histograms)
+        },
+
         .calculate_statistic = function() {
-            c_groups <- combinations(
+            private$.c_groups <- c_groups <- combinations(
                 v = unique(names(private$.data)), k = 2, layout = "list"
             )
-            private$.c_groups <- c_groups
 
             data <- unname(private$.data)
             statistic_func <- private$.statistic_func
@@ -80,9 +128,5 @@ MultipleComparison <- R6Class(
 
             private$.multicomp$differ <- (private$.p_value < 1 - private$.conf_level)
         }
-    ),
-    active = list(
-        #' @field multicomp The multiple comparison result. 
-        multicomp = function() private$.multicomp
     )
 )

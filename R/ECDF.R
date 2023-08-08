@@ -23,10 +23,31 @@ ECDF <- R6Class(
             super$initialize(conf_level = conf_level)
         },
 
-        #' @description Draw the empirical cumulative distribution function of the data fed (with confidence bounds). 
+        #' @description Plot the empirical cumulative distribution function of the data fed (with confidence bounds). 
         #' 
         #' @return The object itself (invisibly). 
-        plot_ecdf = function() {
+        plot = function() {
+            if (!is.null(private$.data)) {
+                private$.plot()
+            }
+
+            invisible(self)
+        }
+    ),
+    private = list(
+        .print = function(...) {
+            raw_estimate <- private$.estimate
+            raw_ci <- private$.ci
+            private$.estimate <- private$.ci <- NULL
+
+            super$.print(...)
+
+            private$.estimate <- raw_estimate
+            private$.ci <- raw_ci
+        },
+        .name = "Empirical Cumulative Distribution Function",
+
+        .plot = function() {
             ecdf <- ggplot() +
                 stat_function(fun = private$.estimate, geom = "step") +
                 stat_function(fun = private$.ci$lower, geom = "step", linetype = 2) +
@@ -34,11 +55,8 @@ ECDF <- R6Class(
                 xlim(c(min(private$.data), max(private$.data))) +
                 labs(x = "", y = "")
             print(ecdf)
+        },
 
-            invisible(self)
-        }
-    ),
-    private = list(
         .calculate_extra = function() {
             private$.estimate <- F_n <- ecdf(private$.data)
 

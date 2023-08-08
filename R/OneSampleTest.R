@@ -10,8 +10,16 @@ OneSampleTest <- R6Class(
 
         .check = function() {}, # TODO
 
+        .plot = function() {},
+
         .feed = function(x) {
             private$.data <- x
+        },
+
+        .calculate = function() {
+            private$.calculate_statistic()
+            private$.calculate_p()
+            private$.calculate_extra()
         }
     )
 )

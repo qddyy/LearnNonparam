@@ -15,14 +15,14 @@ PermuTest <- R6Class(
     public = list(
         #' @description Create a new `PermuTest` object. Note that it is not recommended to create objects of this class directly. 
         #' 
-        #' @param scoring a character string specifying which scoring system to be used, must be one of `"none"` (default), `"rank`, `"vw"` or `"expon"`.
+        #' @param scoring a character string specifying which scoring system to be used, must be one of `"none"` (default), `"rank`, `"vw"` or `"expon"`. 
         #' 
-        #' @param n_permu an integer specifying how many permutations should be used to construct the permutation distribution. If `NULL` (default) then all permutations are used.
+        #' @param n_permu an integer specifying how many permutations should be used to construct the permutation distribution. If `NULL` (default) then all permutations are used. 
         #' 
-        #' @param null_value a number specifying the value of the parameter specified by the null hypothesis. 
-        #' @param alternative a character string specifying the alternative hypothesis, must be one of `"two_sided"` (default), `"greater"` or `"less"`.
+        #' @param null_value a number specifying the value of the parameter in the null hypothesis. 
+        #' @param alternative a character string specifying the alternative hypothesis, must be one of `"two_sided"` (default), `"greater"` or `"less"`. 
         #' 
-        #' @param conf_level a number specifying confidence level of the interval.
+        #' @param conf_level a number specifying confidence level of the interval. 
         #' 
         #' @return A `PermuTest` object. 
         initialize = function(null_value = 0, alternative = c("two_sided", "less", "greater"), n_permu = NULL, conf_level = 0.95, scoring = c("none", "rank", "vw", "expon")) {
@@ -36,7 +36,7 @@ PermuTest <- R6Class(
             private$.conf_level <- conf_level
         },
 
-        #' @description Feed the data to the object. 
+        #' @description Feed the data to the test. 
         #' 
         #' @param ... the data. 
         #' 
@@ -49,25 +49,27 @@ PermuTest <- R6Class(
             invisible(self)
         },
 
-        #' @description Draw a histogram of the permutation distribution. 
+        #' @description Print the results of the test. Note that it works only if data has been fed. 
         #' 
-        #' @param ... extra parameters passed to `ggplot2::stat_bin`.
+        #' @param digits number of significant digits to be used. 
         #' 
-        #' @return The object itself (invisibly).
-        plot_hist = function(...) {
+        #' @return The object itself (invisibly). 
+        print = function(digits = getOption("digits")) {
+            if (!is.null(private$.data)) {
+                private$.print(digits = digits)
+            }
+
+            invisible(self)
+        },
+
+        #' @description Plot histogram(s) of the permutation distribution. Note that it works only if the test's type is `"permu"`. 
+        #' 
+        #' @param ... extra parameters passed to `ggplot2::stat_bin`. 
+        #' 
+        #' @return The object itself (invisibly). 
+        plot = function(...) {
             if (private$.type == "permu") {
-                histogram <- ggplot() +
-                    stat_bin(
-                        mapping = aes(x = private$.statistic_permu),
-                        geom = "bar", fill = "#68aaa1", ...
-                    ) +
-                    geom_vline(xintercept = private$.statistic, linetype = "dashed") +
-                    labs(
-                        title = "Permutation Distribution",
-                        x = "Statistic", y = "Count"
-                    ) +
-                    theme(plot.title = element_text(face = "bold", hjust = 0.5))
-                print(histogram)
+                private$.plot(...)
             }
 
             invisible(self)
@@ -100,6 +102,69 @@ PermuTest <- R6Class(
 
         # @Override
         .check = function() {},
+
+        .print = function(digits) {
+            cat("\n")
+            cat("\t", class(self)[1])
+            cat("\n\n")
+
+            cat(paste(c(
+                paste(
+                    "statistic", "=", format(
+                        private$.statistic, digits = max(1L, digits - 2L)
+                    )
+                ),
+                {
+                    p <- format.pval(x$p.value, digits = max(1L, digits - 3L))
+                    paste(
+                        "p-value", if (startsWith(p, "<")) p else paste("=", p)
+                    )
+                }
+            ), collapse = ", "), sep = "\n")
+
+            cat("alternative hypothesis:\n")
+            cat(
+                "  true value of the parameter in the null hypothesis is",
+                switch(private$.alternative,
+                    less = "less than",
+                    greater = "greater than",
+                    two_sided = "not equal to"
+                ),
+                format(private$.null_value, digits = digits), "\n"
+            )
+
+            if (!is.null(private$.estimate)) {
+                cat("estimate:", format(private$.estimate, digits = digits))
+                cat("\n")
+            }
+
+            if (!is.null(private$.ci)) {
+                cat(
+                    format(100 * private$.conf_level, digits = 2),
+                    "percent confidence interval:",
+                    paste(
+                        format(private$.ci, digits = digits), collapse = " "
+                    )
+                )
+            }
+
+            cat("\n")
+        },
+
+        .plot = function(...) {
+            histogram <- ggplot() +
+                stat_bin(
+                    mapping = aes(x = private$.statistic_permu),
+                    geom = "bar", fill = "#68aaa1", ...
+                ) +
+                geom_vline(xintercept = private$.statistic, linetype = "dashed") +
+                labs(
+                    title = "Permutation Distribution",
+                    x = "Statistic", y = "Count"
+                ) +
+                theme(plot.title = element_text(face = "bold", hjust = 0.5))
+            print(histogram)
+        },
 
         # @Override
         .feed = function() {
@@ -168,7 +233,7 @@ PermuTest <- R6Class(
         }
     ),
     active = list(
-        #' @field type The type. 
+        #' @field type The type of the test. 
         type = function(value) {
             if (missing(value)) {
                 private$.type
@@ -178,7 +243,7 @@ PermuTest <- R6Class(
                 private$.calculate()
             }
         },
-        #' @field method The method. 
+        #' @field method The method used. 
         method = function(value) {
             if (missing(value)) {
                 private$.method
@@ -198,7 +263,7 @@ PermuTest <- R6Class(
                 private$.calculate()
             }
         },
-        #' @field null_value The value of the parameter specified by the null hypothesis. 
+        #' @field null_value The value of the parameter in the null hypothesis. 
         null_value = function(value) {
             if (missing(value)) {
                 private$.null_value

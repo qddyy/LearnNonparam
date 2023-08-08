@@ -60,7 +60,7 @@ library(LearnNonparam)
     print(t$estimate)
     print(t$ci)
 
-    t$plot_hist(bins = 12)
+    t$plot(bins = 12)
     ```
 
 - modify some attributes and see how the results change

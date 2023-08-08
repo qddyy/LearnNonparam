@@ -51,14 +51,14 @@ library(LearnNonparam)
   print(t$statistic)
   #> [1] 35
   print(t$p_value)
-  #> [1] 0.0024
+  #> [1] 0.0016
 
   print(t$estimate)
-  #> [1] 30.045
+  #> [1] 6
   print(t$ci)
-  #> [1] 11.57 50.76
+  #> [1] 3 9
 
-  t$plot_hist(bins = 12)
+  t$plot(bins = 12)
   ```
 
   <img src="man/figures/README-unnamed-chunk-7-1.svg" width="100%" />
@@ -103,7 +103,7 @@ pmts()
 #> 10      ksample.anova                                                 ANOVA
 #> 11         ksample.kw                                   Kruskal-Wallis Test
 #> 12         ksample.jt                              Jonckheere-Terpstra Test
-#> 13        multicomp.t                          Multiple Comparison (t test)
+#> 13        multicomp.t                               Multiple Comparison (t)
 #> 14    multicomp.tukey                                             Tukey HSD
 #> 15  paired.comparison                                     Paired Comparison
 #> 16        paired.sign                                             Sign Test

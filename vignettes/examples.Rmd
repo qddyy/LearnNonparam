@@ -47,7 +47,7 @@ t <- pmt("onesample.ecdf")
 # See ?Table1.2.1
 t$feed(Table1.2.1)
 
-t$plot_ecdf()
+t$plot()
 ```
 
 ## Example 1.2.4
@@ -263,8 +263,6 @@ t$feed(Table2.8.1)
 #     Table2.8.1$treatment_1,
 #     Table2.8.1$treatment_2
 # )
-
-t$plot_ecdfs()
 
 print(t$statistic)
 print(t$p_value)
