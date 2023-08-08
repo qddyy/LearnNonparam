@@ -98,7 +98,9 @@ Wilcoxon <- R6Class(
 
             diff_sorted <- sort(diff)
 
-            private$.ci <- c(diff_sorted[k_a], diff_sorted[k_b])
+            private$.ci <- if (k_a >= 1 & k_b <= length(diff)) {
+                c(diff_sorted[k_a], diff_sorted[k_b])
+            } else c(NA, NA)
         }
     )
 )

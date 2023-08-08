@@ -73,7 +73,8 @@ Quantile <- R6Class(
             b <- round(p * n + 1 + d)
 
             y <- sort(private$.data)
-            private$.ci <- c(y[a], y[b])
+
+            private$.ci <- if (a >= 1 & b <= n) c(y[a], y[b]) else c(NA, NA)
         }
     ),
     active = list(
