@@ -1,4 +1,4 @@
-#' @title Siegel-Tukey Test
+#' @title `r SiegelTukey$private_fields$.name`
 #' 
 #' @description Performs two sample Siegel-Tukey test on data vectors. 
 #' 
@@ -9,7 +9,7 @@
 
 
 SiegelTukey <- R6Class(
-    classname = "Siegel-Tukey Test",
+    classname = "SiegelTukey",
     inherit = Wilcoxon,
     cloneable = FALSE,
     public = list(
@@ -34,6 +34,8 @@ SiegelTukey <- R6Class(
         }
     ),
     private = list(
+        .name = "Siegel-Tukey Test",
+
         .adjust_median = NULL,
 
         .trend = "-",

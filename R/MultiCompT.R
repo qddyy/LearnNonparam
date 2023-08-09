@@ -1,4 +1,4 @@
-#' @title Multiple Comparison Based on t Statistic
+#' @title `r MultiCompT$private_fields$.name`
 #' 
 #' @description Performs t statistic based multiple comparison on data vectors. 
 #' 
@@ -9,7 +9,7 @@
 
 
 MultiCompT <- R6Class(
-    classname = "Multiple Comparison (t)",
+    classname = "MultiCompT",
     inherit = MultipleComparison,
     cloneable = FALSE,
     public = list(
@@ -34,6 +34,8 @@ MultiCompT <- R6Class(
         }
     ),
     private = list(
+        .name = "Multiple Comparison Based on t Statistic",
+
         .bonferroni = NULL,
 
         .calculate_statistic = function() {

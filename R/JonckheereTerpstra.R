@@ -1,4 +1,4 @@
-#' @title Jonckheere-Terpstra Test
+#' @title `r JonckheereTerpstra$private_fields$.name`
 #' 
 #' @description Performs k sample Jonckheere-Terpstra Test on data vectors. 
 #' 
@@ -9,7 +9,7 @@
 
 
 JonckheereTerpstra <- R6Class(
-    classname = "Jonckheere-Terpstra Test",
+    classname = "JonckheereTerpstra",
     inherit = KSampleTest,
     cloneable = FALSE,
     public = list(
@@ -31,6 +31,8 @@ JonckheereTerpstra <- R6Class(
         }
     ),
     private = list(
+        .name = "Jonckheere-Terpstra Test",
+
         .calculate_statistic = function() {
             k <- as.integer(names(private$.data)[length(private$.data)])
             c_groups <- expand.grid(i = seq_len(k), j = seq_len(k))

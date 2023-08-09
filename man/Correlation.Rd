@@ -2,31 +2,31 @@
 % Please edit documentation in R/Correlation.R
 \name{Correlation}
 \alias{Correlation}
-\title{Two Sample Permutation Test Based on Correlation Coefficients}
+\title{Two Sample Test Based on Correlation Coefficient}
 \description{
 Performs correlation coefficient based two sample permutation test on data vectors.
 }
 \section{Super classes}{
-\code{LearnNonparam::Permutation Test} -> \code{LearnNonparam::Two Sample Permutation Test} -> \code{LearnNonparam::Paired Two Sample Permutation Test} -> \code{LearnNonparam::Two Sample Permutation Test for Association} -> \code{Two Sample Permutation Test (correlation coefficient)}
+\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{\link[LearnNonparam:TwoSamplePairedTest]{LearnNonparam::TwoSamplePairedTest}} -> \code{LearnNonparam::NA} -> \code{Correlation}
 }
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-Two Sample Permutation Test (correlation coefficient)-new}{\code{Correlation$new()}}
+\item \href{#method-Correlation-new}{\code{Correlation$new()}}
 }
 }
 \if{html}{\out{
 <details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="feed"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-feed'><code>LearnNonparam::Permutation Test$feed()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="plot"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-plot'><code>LearnNonparam::Permutation Test$plot()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="print"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-print'><code>LearnNonparam::Permutation Test$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="feed"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-feed'><code>LearnNonparam::PermuTest$feed()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="plot"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-plot'><code>LearnNonparam::PermuTest$plot()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="print"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-print'><code>LearnNonparam::PermuTest$print()</code></a></span></li>
 </ul>
 </details>
 }}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Two Sample Permutation Test (correlation coefficient)-new"></a>}}
-\if{latex}{\out{\hypertarget{method-Two Sample Permutation Test (correlation coefficient)-new}{}}}
+\if{html}{\out{<a id="method-Correlation-new"></a>}}
+\if{latex}{\out{\hypertarget{method-Correlation-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new \code{Correlation} object.
 \subsection{Usage}{

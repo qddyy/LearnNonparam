@@ -2,31 +2,31 @@
 % Please edit documentation in R/Wilcoxon.R
 \name{Wilcoxon}
 \alias{Wilcoxon}
-\title{Wilcoxon Test}
+\title{Two Sample Wilcoxon Test}
 \description{
 Performs two sample Wilcoxon test, which is equivalant to the Mann-Whitney test, on data vectors. In addition, an estimation and a confidence interval of the location parameter will be calculated.
 }
 \section{Super classes}{
-\code{LearnNonparam::Permutation Test} -> \code{LearnNonparam::Two Sample Permutation Test} -> \code{Two Sample Wilcoxon Test}
+\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{Wilcoxon}
 }
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-Two Sample Wilcoxon Test-new}{\code{Wilcoxon$new()}}
+\item \href{#method-Wilcoxon-new}{\code{Wilcoxon$new()}}
 }
 }
 \if{html}{\out{
 <details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="feed"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-feed'><code>LearnNonparam::Permutation Test$feed()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="plot"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-plot'><code>LearnNonparam::Permutation Test$plot()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="print"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-print'><code>LearnNonparam::Permutation Test$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="feed"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-feed'><code>LearnNonparam::PermuTest$feed()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="plot"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-plot'><code>LearnNonparam::PermuTest$plot()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="print"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-print'><code>LearnNonparam::PermuTest$print()</code></a></span></li>
 </ul>
 </details>
 }}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Two Sample Wilcoxon Test-new"></a>}}
-\if{latex}{\out{\hypertarget{method-Two Sample Wilcoxon Test-new}{}}}
+\if{html}{\out{<a id="method-Wilcoxon-new"></a>}}
+\if{latex}{\out{\hypertarget{method-Wilcoxon-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new \code{Wilcoxon} object.
 \subsection{Usage}{

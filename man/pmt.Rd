@@ -17,7 +17,7 @@ pmts(
 
 \item{...}{extra parameters passed to the \code{new()} method of the test class.}
 
-\item{category}{a character string specifying which tests to show.}
+\item{category}{a character string specifying which tests to show. If \code{"all"} (default) then available tests are shown.}
 }
 \description{
 Create a test object conveniently.

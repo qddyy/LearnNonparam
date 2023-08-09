@@ -1,4 +1,4 @@
-#' @title Quantile Test
+#' @title `r Quantile$private_fields$.name`
 #' 
 #' @description Performs one sample quantile test on data vectors. In addition, a confidence interval will be calculated. 
 #' 
@@ -9,7 +9,7 @@
 
 
 Quantile <- R6Class(
-    classname = "Quantile Test",
+    classname = "Quantile",
     inherit = OneSampleTest,
     cloneable = FALSE,
     public = list(
@@ -32,6 +32,8 @@ Quantile <- R6Class(
         }
     ),
     private = list(
+        .name = "Quantile Test",
+
         .prob = NULL,
 
         .calculate_statistic = function() {

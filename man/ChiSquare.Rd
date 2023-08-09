@@ -2,31 +2,31 @@
 % Please edit documentation in R/ChiSquare.R
 \name{ChiSquare}
 \alias{ChiSquare}
-\title{Permutation Test for Contingency Tables Based on Chi-square Statistic}
+\title{Contingency Table Test Based on Chi-square Statistic}
 \description{
 Performs chi-square statistic based permutation test on contingency tables.
 }
 \section{Super classes}{
-\code{LearnNonparam::Permutation Test} -> \code{LearnNonparam::Contingency Table Permutation Test} -> \code{Contingency Table Permutation Test (chi-square)}
+\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:ContingencyTableTest]{LearnNonparam::ContingencyTableTest}} -> \code{ChiSquare}
 }
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-Contingency Table Permutation Test (chi-square)-new}{\code{ChiSquare$new()}}
+\item \href{#method-ChiSquare-new}{\code{ChiSquare$new()}}
 }
 }
 \if{html}{\out{
 <details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="feed"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-feed'><code>LearnNonparam::Permutation Test$feed()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="plot"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-plot'><code>LearnNonparam::Permutation Test$plot()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="print"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-print'><code>LearnNonparam::Permutation Test$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="feed"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-feed'><code>LearnNonparam::PermuTest$feed()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="plot"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-plot'><code>LearnNonparam::PermuTest$plot()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="print"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-print'><code>LearnNonparam::PermuTest$print()</code></a></span></li>
 </ul>
 </details>
 }}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Contingency Table Permutation Test (chi-square)-new"></a>}}
-\if{latex}{\out{\hypertarget{method-Contingency Table Permutation Test (chi-square)-new}{}}}
+\if{html}{\out{<a id="method-ChiSquare-new"></a>}}
+\if{latex}{\out{\hypertarget{method-ChiSquare-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new \code{ChiSquare} object.
 \subsection{Usage}{

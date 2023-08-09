@@ -1,4 +1,4 @@
-#' @title Signed Score Test
+#' @title `r SignedScore$private_fields$.name`
 #' 
 #' @description Performs two sample signed score test on data vectors. 
 #' 
@@ -9,7 +9,7 @@
 
 
 SignedScore <- R6Class(
-    classname = "Signed Score Test",
+    classname = "SignedScore",
     inherit = TwoSamplePairedTest,
     cloneable = FALSE,
     public = list(
@@ -36,6 +36,8 @@ SignedScore <- R6Class(
         }
     ),
     private = list(
+        .name = "Signed Score Test",
+
         .correct = NULL,
         .ranking_method = NULL,
 

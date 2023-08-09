@@ -1,4 +1,4 @@
-#' @title Ansari-Bradley Test
+#' @title `r AnsariBradley$private_fields$.name`
 #' 
 #' @description Performs two sample Ansari-Bradley test on data vectors. 
 #' 
@@ -9,7 +9,7 @@
 
 
 AnsariBradley <- R6Class(
-    classname = "Ansari-Bradley Test",
+    classname = "AnsariBradley",
     inherit = TwoSampleTest,
     cloneable = FALSE,
     public = list(
@@ -35,6 +35,8 @@ AnsariBradley <- R6Class(
         }
     ),
     private = list(
+        .name = "Ansari-Bradley Test",
+
         .trend = "-",
 
         .calculate_score = function() {

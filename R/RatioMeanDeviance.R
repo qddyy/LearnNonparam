@@ -1,4 +1,4 @@
-#' @title Ratio Mean Deviance Test
+#' @title `r RatioMeanDeviance$private_fields$.name`
 #' 
 #' @description Performs two sample ratio mean deviance test on data vectors. 
 #' 
@@ -9,7 +9,7 @@
 
 
 RatioMeanDeviance <- R6Class(
-    classname = "Ratio Mean Deviance Test",
+    classname = "RatioMeanDeviance",
     inherit = TwoSampleTest,
     cloneable = FALSE,
     public = list(
@@ -26,6 +26,8 @@ RatioMeanDeviance <- R6Class(
         }
     ),
     private = list(
+        .name = "Ratio Mean Deviance Test",
+
         .calculate = function() {
             x <- private$.data$x
             y <- private$.data$y

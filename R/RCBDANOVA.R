@@ -1,4 +1,4 @@
-#' @title ANOVA for Randomized Complete Block Design
+#' @title `r RCBDANOVA$private_fields$.name`
 #' 
 #' @description Performs F-statistic based permutation test on data for a randomized complete block design. 
 #' 
@@ -9,7 +9,7 @@
 
 
 RCBDANOVA <- R6Class(
-    classname = "ANOVA for Randomized Complete Block Design",
+    classname = "RCBDANOVA",
     inherit = RCBD,
     cloneable = FALSE,
     public = list(
@@ -27,6 +27,8 @@ RCBDANOVA <- R6Class(
         }
     ),
     private = list(
+        .name = "ANOVA for Randomized Complete Block Design",
+
         .calculate_statistic = function() {
             private$.statistic_func <- switch(private$.type,
                 permu = function(df) sum(rowSums(df)^2),

@@ -7,26 +7,26 @@
 Performs Tukey's honest significant difference method on data vectors. Note that procedure modified by Kramer is performed for unequal sample sizes.
 }
 \section{Super classes}{
-\code{LearnNonparam::Permutation Test} -> \code{LearnNonparam::K Sample Permutation Test} -> \code{LearnNonparam::Multiple Comparison} -> \code{Tukey HSD}
+\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:KSampleTest]{LearnNonparam::KSampleTest}} -> \code{\link[LearnNonparam:MultipleComparison]{LearnNonparam::MultipleComparison}} -> \code{TukeyHSD}
 }
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-Tukey HSD-new}{\code{TukeyHSD$new()}}
+\item \href{#method-TukeyHSD-new}{\code{TukeyHSD$new()}}
 }
 }
 \if{html}{\out{
 <details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="feed"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-feed'><code>LearnNonparam::Permutation Test$feed()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="plot"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-plot'><code>LearnNonparam::Permutation Test$plot()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="print"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-print'><code>LearnNonparam::Permutation Test$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="feed"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-feed'><code>LearnNonparam::PermuTest$feed()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="plot"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-plot'><code>LearnNonparam::PermuTest$plot()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="print"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-print'><code>LearnNonparam::PermuTest$print()</code></a></span></li>
 </ul>
 </details>
 }}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Tukey HSD-new"></a>}}
-\if{latex}{\out{\hypertarget{method-Tukey HSD-new}{}}}
+\if{html}{\out{<a id="method-TukeyHSD-new"></a>}}
+\if{latex}{\out{\hypertarget{method-TukeyHSD-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new \code{TukeyHSD} object.
 \subsection{Usage}{

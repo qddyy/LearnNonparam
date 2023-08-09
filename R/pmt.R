@@ -30,11 +30,6 @@ tests <- list(
     table.chi = ChiSquare
 )
 
-tests_df <- data.frame(
-    key = names(tests),
-    test = unname(vapply(tests, function(t) t$classname, character(1)))
-)
-
 #' @title Syntactic Sugar for Object Construction
 #' 
 #' @description Create a test object conveniently. 
@@ -53,11 +48,28 @@ pmt <- function(key, ...) tests[[key]]$new(...)
 
 #' @rdname pmt
 #' 
-#' @param category a character string specifying which tests to show. 
+#' @param category a character string specifying which tests to show. If `"all"` (default) then available tests are shown. 
 #' 
 #' @export
 pmts <- function(category = c("all", "onesample", "twosample", "ksample", "multicomp", "paired", "rcbd", "association", "table")) {
     category <- match.arg(category)
 
-    if (category == "all") tests_df else tests_df[startsWith(tests_df$key, category), ]
+    keys <- names(tests)
+    if (category != "all") {
+        keys <- keys[startsWith(keys, category)]
+    }
+    tests <- tests[keys]
+
+    test_info <- data.frame(
+        key = keys,
+        class = vapply(
+            X = tests, FUN.VALUE = character(1), USE.NAMES = FALSE,
+            FUN = function(test) test$classname
+        ),
+        test = vapply(
+            X = tests, FUN.VALUE = character(1), USE.NAMES = FALSE,
+            FUN = function(test) test$private_fields$.name
+        )
+    )
+    print(test_info, row.names = FALSE)
 }

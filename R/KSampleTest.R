@@ -1,12 +1,21 @@
+#' @title KSampleTest Class
+#' 
+#' @description This Test specializes `PermuTest` for k sample permutation tests. Note that it is not recommended to create objects of this class directly. 
+#' 
+#' 
+#' @export
+#' 
 #' @importFrom R6 R6Class
 #' @importFrom arrangements permutations
 
 
 KSampleTest <- R6Class(
-    classname = "K Sample Permutation Test",
+    classname = "KSampleTest",
     inherit = PermuTest,
     cloneable = FALSE,
     private = list(
+        .name = "K Sample Permutation Test",
+
         .group_permu = NULL,
 
         .check = function() {}, # TODO

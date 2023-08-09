@@ -1,12 +1,21 @@
+#' @title RCBD Class
+#' 
+#' @description This class specializes `PermuTest` for randomized complete block design. Note that it is not recommended to create objects of this class directly. 
+#' 
+#' 
+#' @export
+#' 
 #' @importFrom R6 R6Class
 #' @importFrom arrangements permutations
 
 
 RCBD <- R6Class(
-    classname = "Randomized Complete Block Design",
+    classname = "RCBD",
     inherit = PermuTest,
     cloneable = FALSE,
     private = list(
+        .name = "Randomized Complete Block Design",
+
         .check = function() {}, # TODO
 
         .feed = function(...) {

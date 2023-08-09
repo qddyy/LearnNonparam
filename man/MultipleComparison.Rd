@@ -2,54 +2,10 @@
 % Please edit documentation in R/MultipleComparison.R
 \name{MultipleComparison}
 \alias{MultipleComparison}
-\title{Multiple Comparison Class}
+\title{MultipleComparison Class}
 \description{
-This class specializes \code{KSampleTest} for multiple comparisons.
+This class specializes \code{KSampleTest} for multiple comparisons. Note that it is not recommended to create objects of this class directly.
 }
 \section{Super classes}{
-\code{LearnNonparam::Permutation Test} -> \code{LearnNonparam::K Sample Permutation Test} -> \code{Multiple Comparison}
-}
-\section{Methods}{
-\subsection{Public methods}{
-\itemize{
-\item \href{#method-Multiple Comparison-new}{\code{MultipleComparison$new()}}
-}
-}
-\if{html}{\out{
-<details open><summary>Inherited methods</summary>
-<ul>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="feed"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-feed'><code>LearnNonparam::Permutation Test$feed()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="plot"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-plot'><code>LearnNonparam::Permutation Test$plot()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="print"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-print'><code>LearnNonparam::Permutation Test$print()</code></a></span></li>
-</ul>
-</details>
-}}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Multiple Comparison-new"></a>}}
-\if{latex}{\out{\hypertarget{method-Multiple Comparison-new}{}}}
-\subsection{Method \code{new()}}{
-Create a new \code{MultipleComparison} object. Note that it is not recommended to create objects of this class directly.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{MultipleComparison$new(
-  conf_level = 0.95,
-  n_permu = NULL,
-  scoring = c("none", "rank", "vw", "expon")
-)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{conf_level}}{a numeric value between zero and one giving the family-wise confidence level to use.}
-
-\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If \code{NULL} (default) then all permutations are used.}
-
-\item{\code{scoring}}{a character string specifying which scoring system to be used, must be one of \code{"none"} (default), \verb{"rank}, \code{"vw"} or \code{"expon"}.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A \code{MultipleComparison} object.
-}
-}
+\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:KSampleTest]{LearnNonparam::KSampleTest}} -> \code{MultipleComparison}
 }

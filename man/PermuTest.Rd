@@ -42,15 +42,15 @@ This is the abstract base class for permutation test objects, which contains sev
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-Permutation Test-new}{\code{PermuTest$new()}}
-\item \href{#method-Permutation Test-feed}{\code{PermuTest$feed()}}
-\item \href{#method-Permutation Test-print}{\code{PermuTest$print()}}
-\item \href{#method-Permutation Test-plot}{\code{PermuTest$plot()}}
+\item \href{#method-PermuTest-new}{\code{PermuTest$new()}}
+\item \href{#method-PermuTest-feed}{\code{PermuTest$feed()}}
+\item \href{#method-PermuTest-print}{\code{PermuTest$print()}}
+\item \href{#method-PermuTest-plot}{\code{PermuTest$plot()}}
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Permutation Test-new"></a>}}
-\if{latex}{\out{\hypertarget{method-Permutation Test-new}{}}}
+\if{html}{\out{<a id="method-PermuTest-new"></a>}}
+\if{latex}{\out{\hypertarget{method-PermuTest-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new \code{PermuTest} object. Note that it is not recommended to create objects of this class directly.
 \subsection{Usage}{
@@ -83,8 +83,8 @@ A \code{PermuTest} object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Permutation Test-feed"></a>}}
-\if{latex}{\out{\hypertarget{method-Permutation Test-feed}{}}}
+\if{html}{\out{<a id="method-PermuTest-feed"></a>}}
+\if{latex}{\out{\hypertarget{method-PermuTest-feed}{}}}
 \subsection{Method \code{feed()}}{
 Feed the data to the test.
 \subsection{Usage}{
@@ -103,8 +103,8 @@ The object itself (invisibly).
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Permutation Test-print"></a>}}
-\if{latex}{\out{\hypertarget{method-Permutation Test-print}{}}}
+\if{html}{\out{<a id="method-PermuTest-print"></a>}}
+\if{latex}{\out{\hypertarget{method-PermuTest-print}{}}}
 \subsection{Method \code{print()}}{
 Print the results of the test. Note that it works only if data has been fed.
 \subsection{Usage}{
@@ -123,8 +123,8 @@ The object itself (invisibly).
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Permutation Test-plot"></a>}}
-\if{latex}{\out{\hypertarget{method-Permutation Test-plot}{}}}
+\if{html}{\out{<a id="method-PermuTest-plot"></a>}}
+\if{latex}{\out{\hypertarget{method-PermuTest-plot}{}}}
 \subsection{Method \code{plot()}}{
 Plot histogram(s) of the permutation distribution. Note that it works only if the test's type is \code{"permu"}.
 \subsection{Usage}{

@@ -1,4 +1,4 @@
-#' @title Friedman Test
+#' @title `r Friedman$private_fields$.name`
 #' 
 #' @description Performs Friedman test on data for a randomized complete block design. 
 #' 
@@ -9,7 +9,7 @@
 
 
 Friedman <- R6Class(
-    classname = "Friedman Test",
+    classname = "Friedman",
     inherit = RCBD,
     cloneable = FALSE,
     public = list(
@@ -30,6 +30,8 @@ Friedman <- R6Class(
         }
     ),
     private = list(
+        .name = "Friedman Test",
+
         .calculate_statistic = function() {
             private$.statistic_func <- switch(private$.type,
                 permu = function(df) sum(rowMeans(df)^2),

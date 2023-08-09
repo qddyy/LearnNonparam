@@ -7,26 +7,26 @@
 Performs two sample Ansari-Bradley test on data vectors.
 }
 \section{Super classes}{
-\code{LearnNonparam::Permutation Test} -> \code{LearnNonparam::Two Sample Permutation Test} -> \code{Ansari-Bradley Test}
+\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{AnsariBradley}
 }
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-Ansari-Bradley Test-new}{\code{AnsariBradley$new()}}
+\item \href{#method-AnsariBradley-new}{\code{AnsariBradley$new()}}
 }
 }
 \if{html}{\out{
 <details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="feed"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-feed'><code>LearnNonparam::Permutation Test$feed()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="plot"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-plot'><code>LearnNonparam::Permutation Test$plot()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="print"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-print'><code>LearnNonparam::Permutation Test$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="feed"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-feed'><code>LearnNonparam::PermuTest$feed()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="plot"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-plot'><code>LearnNonparam::PermuTest$plot()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="print"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-print'><code>LearnNonparam::PermuTest$print()</code></a></span></li>
 </ul>
 </details>
 }}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Ansari-Bradley Test-new"></a>}}
-\if{latex}{\out{\hypertarget{method-Ansari-Bradley Test-new}{}}}
+\if{html}{\out{<a id="method-AnsariBradley-new"></a>}}
+\if{latex}{\out{\hypertarget{method-AnsariBradley-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new \code{AnsariBradley} object.
 \subsection{Usage}{

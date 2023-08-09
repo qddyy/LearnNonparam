@@ -1,12 +1,21 @@
+#' @title TwoSampleAssociationTest Class
+#' 
+#' @description This Test specializes `PermuTest` for two sample permutation tests for association. Note that it is not recommended to create objects of this class directly. 
+#' 
+#' 
+#' @export
+#' 
 #' @importFrom R6 R6Class
 #' @importFrom arrangements permutations
 
 
 TwoSampleAssociationTest <- R6Class(
-    classname = "Two Sample Permutation Test for Association",
+    classname = ,
     inherit = TwoSamplePairedTest,
     cloneable = FALSE,
     private = list(
+        .name = "Two Sample Permutation Test for Association",
+
         .check = function() {}, # TODO
 
         .permute = function() {

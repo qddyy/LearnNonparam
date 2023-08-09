@@ -1,4 +1,4 @@
-#' @title Tukey's HSD
+#' @title `r TukeyHSD$private_fields$.name`
 #' 
 #' @description Performs Tukey's honest significant difference method on data vectors. Note that procedure modified by Kramer is performed for unequal sample sizes. 
 #' 
@@ -9,7 +9,7 @@
 
 
 TukeyHSD <- R6Class(
-    classname = "Tukey HSD",
+    classname = "TukeyHSD",
     inherit = MultipleComparison,
     cloneable = FALSE,
     public = list(
@@ -32,6 +32,8 @@ TukeyHSD <- R6Class(
         }
     ),
     private = list(
+        .name = "Tukey's HSD",
+
         .calculate_statistic = function() {
             if (private$.scoring == "none") {
                 N <- length(private$.data)

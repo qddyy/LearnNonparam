@@ -1,4 +1,4 @@
-#' @title Two Sample Kolmogorov-Smirnov Test
+#' @title `r KolmogorovSmirnov$private_fields$.name`
 #' 
 #' @description Performs two sample Kolmogorov-Smirnov test on data vectors. 
 #' 
@@ -9,7 +9,7 @@
 
 
 KolmogorovSmirnov <- R6Class(
-    classname = "Two Sample Kolmogorov-Smirnov Test",
+    classname = "KolmogorovSmirnov",
     inherit = TwoSampleTest,
     cloneable = FALSE,
     public = list(
@@ -23,6 +23,8 @@ KolmogorovSmirnov <- R6Class(
         }
     ),
     private = list(
+        .name = "Two Sample Kolmogorov-Smirnov Test",
+
         .calculate_statistic = function() {
             c_xy <- c(private$.data$x, private$.data$y)
             private$.statistic_func <- function(x, y) max(abs(ecdf(x)(c_xy) - ecdf(y)(c_xy)))

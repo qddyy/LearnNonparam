@@ -7,26 +7,26 @@
 This is the abstract base class for empirical cumulative distribution function objects.
 }
 \section{Super classes}{
-\code{LearnNonparam::Permutation Test} -> \code{LearnNonparam::One Sample Test} -> \code{Empirical Cumulative Distribution Function}
+\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:OneSampleTest]{LearnNonparam::OneSampleTest}} -> \code{ECDF}
 }
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-Empirical Cumulative Distribution Function-new}{\code{ECDF$new()}}
-\item \href{#method-Empirical Cumulative Distribution Function-plot}{\code{ECDF$plot()}}
+\item \href{#method-ECDF-new}{\code{ECDF$new()}}
+\item \href{#method-ECDF-plot}{\code{ECDF$plot()}}
 }
 }
 \if{html}{\out{
 <details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="feed"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-feed'><code>LearnNonparam::Permutation Test$feed()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="print"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-print'><code>LearnNonparam::Permutation Test$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="feed"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-feed'><code>LearnNonparam::PermuTest$feed()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="print"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-print'><code>LearnNonparam::PermuTest$print()</code></a></span></li>
 </ul>
 </details>
 }}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Empirical Cumulative Distribution Function-new"></a>}}
-\if{latex}{\out{\hypertarget{method-Empirical Cumulative Distribution Function-new}{}}}
+\if{html}{\out{<a id="method-ECDF-new"></a>}}
+\if{latex}{\out{\hypertarget{method-ECDF-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new \code{ECDF} object.
 \subsection{Usage}{
@@ -45,8 +45,8 @@ A \code{ECDF} object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Empirical Cumulative Distribution Function-plot"></a>}}
-\if{latex}{\out{\hypertarget{method-Empirical Cumulative Distribution Function-plot}{}}}
+\if{html}{\out{<a id="method-ECDF-plot"></a>}}
+\if{latex}{\out{\hypertarget{method-ECDF-plot}{}}}
 \subsection{Method \code{plot()}}{
 Plot the empirical cumulative distribution function of the data fed (with confidence bounds).
 \subsection{Usage}{

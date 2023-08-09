@@ -1,4 +1,4 @@
-#' @title Sign Test
+#' @title `r Sign$private_fields$.name`
 #' 
 #' @description Performs two sample sign test on data vectors. 
 #' 
@@ -9,7 +9,7 @@
 
 
 Sign <- R6Class(
-    classname = "Sign Test",
+    classname = "Sign",
     inherit = TwoSamplePairedTest,
     cloneable = FALSE,
     public = list(
@@ -33,6 +33,8 @@ Sign <- R6Class(
         }
     ),
     private = list(
+        .name = "Sign Test",
+
         .sign = NULL,
         .correct = NULL,
 

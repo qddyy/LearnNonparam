@@ -1,11 +1,20 @@
+#' @title TwoSamplePairedTest Class
+#' 
+#' @description This Test specializes `PermuTest` for paired two sample permutation tests. Note that it is not recommended to create objects of this class directly. 
+#' 
+#' 
+#' @export
+#' 
 #' @importFrom R6 R6Class
 
 
 TwoSamplePairedTest <- R6Class(
-    classname = "Paired Two Sample Permutation Test",
+    classname = "TwoSamplePairedTest",
     inherit = TwoSampleTest,
     cloneable = FALSE,
     private = list(
+        .name = "Paired Two Sample Permutation Test",
+
         .swapped_permu = NULL,
 
         .check = function() {}, # TODO

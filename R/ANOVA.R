@@ -1,4 +1,4 @@
-#' @title K Sample Permutation Test Based on F Statistic
+#' @title `r ANOVA$private_fields$.name`
 #' 
 #' @description Performs F statistic based k sample permutation test on data vectors. 
 #' 
@@ -30,6 +30,8 @@ ANOVA <- R6Class(
         }
     ),
     private = list(
+        .name = "K Sample Test Based on F Statistic",
+
         .calculate_statistic = function() {
             private$.statistic_func <- switch(private$.type,
                 permu = function(data, group) {

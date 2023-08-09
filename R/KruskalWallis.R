@@ -1,4 +1,4 @@
-#' @title Kruskal-Wallis Test
+#' @title `r KruskalWallis$private_fields$.name`
 #' 
 #' @description Performs k sample Kruskal-Wallis Test on data vectors. 
 #' 
@@ -9,7 +9,7 @@
 
 
 KruskalWallis <- R6Class(
-    classname = "Kruskal-Wallis Test",
+    classname = "KruskalWallis",
     inherit = KSampleTest,
     cloneable = FALSE,
     public = list(
@@ -31,6 +31,8 @@ KruskalWallis <- R6Class(
         }
     ),
     private = list(
+        .name = "Kruskal-Wallis Test",
+
         .calculate_statistic = function() {
             mean <- mean(private$.data)
             var <- var(private$.data)

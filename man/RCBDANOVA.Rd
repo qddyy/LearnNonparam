@@ -7,26 +7,26 @@
 Performs F-statistic based permutation test on data for a randomized complete block design.
 }
 \section{Super classes}{
-\code{LearnNonparam::Permutation Test} -> \code{LearnNonparam::Randomized Complete Block Design} -> \code{ANOVA for Randomized Complete Block Design}
+\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:RCBD]{LearnNonparam::RCBD}} -> \code{RCBDANOVA}
 }
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-ANOVA for Randomized Complete Block Design-new}{\code{RCBDANOVA$new()}}
+\item \href{#method-RCBDANOVA-new}{\code{RCBDANOVA$new()}}
 }
 }
 \if{html}{\out{
 <details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="feed"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-feed'><code>LearnNonparam::Permutation Test$feed()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="plot"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-plot'><code>LearnNonparam::Permutation Test$plot()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="print"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-print'><code>LearnNonparam::Permutation Test$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="feed"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-feed'><code>LearnNonparam::PermuTest$feed()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="plot"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-plot'><code>LearnNonparam::PermuTest$plot()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="print"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-print'><code>LearnNonparam::PermuTest$print()</code></a></span></li>
 </ul>
 </details>
 }}
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-ANOVA for Randomized Complete Block Design-new"></a>}}
-\if{latex}{\out{\hypertarget{method-ANOVA for Randomized Complete Block Design-new}{}}}
+\if{html}{\out{<a id="method-RCBDANOVA-new"></a>}}
+\if{latex}{\out{\hypertarget{method-RCBDANOVA-new}{}}}
 \subsection{Method \code{new()}}{
 Create a new \code{RCBDANOVA} object.
 \subsection{Usage}{

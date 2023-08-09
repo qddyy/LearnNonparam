@@ -1,4 +1,4 @@
-#' @title Wilcoxon Test
+#' @title `r Wilcoxon$private_fields$.name`
 #' 
 #' @description Performs two sample Wilcoxon test, which is equivalant to the Mann-Whitney test, on data vectors. In addition, an estimation and a confidence interval of the location parameter will be calculated. 
 #' 
@@ -9,7 +9,7 @@
 
 
 Wilcoxon <- R6Class(
-    classname = "Two Sample Wilcoxon Test",
+    classname = "Wilcoxon",
     inherit = TwoSampleTest,
     cloneable = FALSE,
     public = list(
@@ -39,6 +39,8 @@ Wilcoxon <- R6Class(
         }
     ),
     private = list(
+        .name = "Two Sample Wilcoxon Test",
+
         .correct = NULL,
 
         .diff = NULL,

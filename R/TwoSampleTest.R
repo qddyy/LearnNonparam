@@ -1,12 +1,21 @@
+#' @title TwoSampleTest Class
+#' 
+#' @description This Test specializes `PermuTest` for two sample permutation tests. Note that it is not recommended to create objects of this class directly. 
+#' 
+#' 
+#' @export
+#' 
 #' @importFrom R6 R6Class
 #' @importFrom arrangements combinations
 
 
 TwoSampleTest <- R6Class(
-    classname = "Two Sample Permutation Test",
+    classname = "TwoSampleTest",
     inherit = PermuTest,
     cloneable = FALSE,
     private = list(
+        .name = "Two Sample Permutation Test",
+
         .check = function() {}, # TODO
 
         .feed = function(...) {

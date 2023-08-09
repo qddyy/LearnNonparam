@@ -1,4 +1,4 @@
-#' @title Paired Comparison
+#' @title `r PairedComparison$private_fields$.name`
 #' 
 #' @description Performs two sample paired comparison on data vectors. 
 #' 
@@ -9,7 +9,7 @@
 
 
 PairedComparison <- R6Class(
-    classname = "Paired Comparison",
+    classname = "PairedComparison",
     inherit = TwoSamplePairedTest,
     cloneable = FALSE,
     public = list(
@@ -31,6 +31,8 @@ PairedComparison <- R6Class(
         }
     ),
     private = list(
+        .name = "Paired Comparison",
+
         .diff = NULL,
 
         .calculate_statistic = function() {

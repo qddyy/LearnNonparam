@@ -10,7 +10,7 @@
 
 
 PermuTest <- R6Class(
-    classname = "Permutation Test",
+    classname = "PermuTest",
     cloneable = FALSE,
     public = list(
         #' @description Create a new `PermuTest` object. Note that it is not recommended to create objects of this class directly. 
@@ -76,6 +76,8 @@ PermuTest <- R6Class(
         }
     ),
     private = list(
+        .name = "Permutation Test",
+
         .type = "permu",
         .method = NULL,
 
@@ -105,7 +107,7 @@ PermuTest <- R6Class(
 
         .print = function(digits) {
             cat("\n")
-            cat("\t", class(self)[1])
+            cat("\t", private$.name)
             cat("\n\n")
 
             cat(paste(c(

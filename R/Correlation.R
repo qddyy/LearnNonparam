@@ -1,4 +1,4 @@
-#' @title Two Sample Permutation Test Based on Correlation Coefficients
+#' @title `r Correlation$private_fields$.name`
 #' 
 #' @description Performs correlation coefficient based two sample permutation test on data vectors. 
 #' 
@@ -9,7 +9,7 @@
 
 
 Correlation <- R6Class(
-    classname = "Two Sample Permutation Test (correlation coefficient)",
+    classname = "Correlation",
     inherit = TwoSampleAssociationTest,
     cloneable = FALSE,
     public = list(
@@ -33,6 +33,8 @@ Correlation <- R6Class(
         }
     ),
     private = list(
+        .name = "Two Sample Test Based on Correlation Coefficient",
+
         .calculate_statistic = function() {
             private$.statistic_func <- switch(private$.method,
                 pearson = function(x, y) cor(x, y, method = "pearson"),

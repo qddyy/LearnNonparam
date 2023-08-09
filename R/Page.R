@@ -1,4 +1,4 @@
-#' @title Page Test
+#' @title `r Page$private_fields$.name`
 #' 
 #' @description Performs Page test on data for a randomized complete block design. 
 #' 
@@ -9,7 +9,7 @@
 
 
 Page <- R6Class(
-    classname = "Page Test",
+    classname = "Page",
     inherit = RCBD,
     cloneable = FALSE,
     public = list(
@@ -31,6 +31,8 @@ Page <- R6Class(
         }
     ),
     private = list(
+        .name = "Page Test",
+
         .calculate_statistic = function() {
             seq_row <- seq_len(nrow(private$.data))
             private$.statistic_func <- function(df) sum(seq_row * rowSums(df))

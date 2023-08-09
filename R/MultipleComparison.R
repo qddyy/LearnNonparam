@@ -1,6 +1,6 @@
-#' @title Multiple Comparison Class
+#' @title MultipleComparison Class
 #' 
-#' @description This class specializes `KSampleTest` for multiple comparisons. 
+#' @description This class specializes `KSampleTest` for multiple comparisons. Note that it is not recommended to create objects of this class directly. 
 #' 
 #' 
 #' @export
@@ -11,31 +11,20 @@
 
 
 MultipleComparison <- R6Class(
-    classname = "Multiple Comparison",
+    classname = "MultipleComparison",
     inherit = KSampleTest,
     cloneable = FALSE,
-    public = list(
-        #' @description Create a new `MultipleComparison` object. Note that it is not recommended to create objects of this class directly. 
-        #' 
-        #' @param conf_level a numeric value between zero and one giving the family-wise confidence level to use. 
-        #' @param n_permu an integer specifying how many permutations should be used to construct the permutation distribution. If `NULL` (default) then all permutations are used. 
-        #' @param scoring a character string specifying which scoring system to be used, must be one of `"none"` (default), `"rank`, `"vw"` or `"expon"`. 
-        #' 
-        #' @return A `MultipleComparison` object. 
-        initialize = function(conf_level = 0.95, n_permu = NULL, scoring = c("none", "rank", "vw", "expon")) {
-            super$initialize(alternative = "two_sided", conf_level = conf_level, n_permu = n_permu, scoring = match.arg(scoring))
-        }
-    ),
     private = list(
-        .multicomp = NULL,
+        .name = "Multiple Comparison",
 
+        .multicomp = NULL,
         .c_groups = NULL,
 
         .check = function() {}, # TODO
 
         .print = function(digits) {
             cat("\n")
-            cat(strwrap(class(self)[1], prefix = "\t"), sep = "\n")
+            cat(strwrap(private$.name, prefix = "\t"), sep = "\n")
             cat("\n")
 
             cat(

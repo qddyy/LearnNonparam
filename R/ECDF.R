@@ -1,4 +1,4 @@
-#' @title Empirical Cumulative Distribution Function
+#' @title `r ECDF$private_fields$.name`
 #' 
 #' @description This is the abstract base class for empirical cumulative distribution function objects. 
 #' 
@@ -10,7 +10,7 @@
 
 
 ECDF <- R6Class(
-    classname = "Empirical Cumulative Distribution Function",
+    classname = "ECDF",
     inherit = OneSampleTest,
     cloneable = FALSE,
     public = list(
@@ -35,17 +35,9 @@ ECDF <- R6Class(
         }
     ),
     private = list(
-        .print = function(...) {
-            raw_estimate <- private$.estimate
-            raw_ci <- private$.ci
-            private$.estimate <- private$.ci <- NULL
-
-            super$.print(...)
-
-            private$.estimate <- raw_estimate
-            private$.ci <- raw_ci
-        },
         .name = "Empirical Cumulative Distribution Function",
+
+        .print = function(...) {},
 
         .plot = function() {
             ecdf <- ggplot() +

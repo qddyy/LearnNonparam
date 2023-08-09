@@ -1,4 +1,4 @@
-#' @title Two Sample Permutation Test Based on Mean
+#' @title `r MeanDiff$private_fields$.name`
 #' 
 #' @description Performs mean based two sample permutation test on data vectors. 
 #' 
@@ -9,7 +9,7 @@
 
 
 MeanDiff <- R6Class(
-    classname = "Two Sample Permutation Test (mean)",
+    classname = "MeanDiff",
     inherit = TwoSampleTest,
     cloneable = FALSE,
     public = list(
@@ -24,5 +24,8 @@ MeanDiff <- R6Class(
 
             private$.statistic_func <- function(x, y) mean(x) - mean(y)
         }
+    ),
+    private = list(
+        .name = "Two Sample Test Based on Mean"
     )
 )

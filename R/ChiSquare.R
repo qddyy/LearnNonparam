@@ -1,4 +1,4 @@
-#' @title Permutation Test for Contingency Tables Based on Chi-square Statistic
+#' @title `r ChiSquare$private_fields$.name`
 #' 
 #' @description Performs chi-square statistic based permutation test on contingency tables. 
 #' 
@@ -9,7 +9,7 @@
 
 
 ChiSquare <- R6Class(
-    classname = "Contingency Table Permutation Test (chi-square)",
+    classname = "ChiSquare",
     inherit = ContingencyTableTest,
     cloneable = FALSE,
     public = list(
@@ -28,6 +28,8 @@ ChiSquare <- R6Class(
         }
     ),
     private = list(
+        .name = "Contingency Table Test Based on Chi-square Statistic",
+
         .calculate_statistic = function() {
             dim <- dim(private$.data)
             private$.statistic_func <- function(mat) {
