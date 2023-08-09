@@ -31,6 +31,9 @@
     <loc>/reference/ChiSquare.html</loc>
   </url>
   <url>
+    <loc>/reference/ContingencyTableTest.html</loc>
+  </url>
+  <url>
     <loc>/reference/Correlation.html</loc>
   </url>
   <url>
@@ -41,6 +44,9 @@
   </url>
   <url>
     <loc>/reference/JonckheereTerpstra.html</loc>
+  </url>
+  <url>
+    <loc>/reference/KSampleTest.html</loc>
   </url>
   <url>
     <loc>/reference/KolmogorovSmirnov.html</loc>
@@ -58,6 +64,9 @@
     <loc>/reference/MultipleComparison.html</loc>
   </url>
   <url>
+    <loc>/reference/OneSampleTest.html</loc>
+  </url>
+  <url>
     <loc>/reference/Page.html</loc>
   </url>
   <url>
@@ -68,6 +77,9 @@
   </url>
   <url>
     <loc>/reference/Quantile.html</loc>
+  </url>
+  <url>
+    <loc>/reference/RCBD.html</loc>
   </url>
   <url>
     <loc>/reference/RCBDANOVA.html</loc>
@@ -146,6 +158,15 @@
   </url>
   <url>
     <loc>/reference/TukeyHSD.html</loc>
+  </url>
+  <url>
+    <loc>/reference/TwoSampleAssociationTest.html</loc>
+  </url>
+  <url>
+    <loc>/reference/TwoSamplePairedTest.html</loc>
+  </url>
+  <url>
+    <loc>/reference/TwoSampleTest.html</loc>
   </url>
   <url>
     <loc>/reference/Wilcoxon.html</loc>

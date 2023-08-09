@@ -105,9 +105,9 @@
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span> <span class="co"># or t$print()</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Two Sample Wilcoxon Test</span></span>
+<span><span class="co">#&gt;   Wilcoxon</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; statistic = 35, p-value = 0.0023</span></span>
+<span><span class="co">#&gt; statistic = 35, p-value = 0.0016</span></span>
 <span><span class="co">#&gt; alternative hypothesis:</span></span>
 <span><span class="co">#&gt;   true value of the parameter in the null hypothesis is not equal to 0 </span></span>
 <span><span class="co">#&gt; estimate: 30.045</span></span>
@@ -133,33 +133,56 @@
 <h2 id="help">Help<a class="anchor" aria-label="anchor" href="#help"></a>
 </h2>
 <p>Just use <code><a href="https://rdrr.io/r/base/dots.html" class="external-link">?...</a></code> syntax.</p>
-<p>If you want to know all available methods and attributes, you can start by exploring <code><a href="reference/PermuTest.html">?PermuTest</a></code> (all tests’ <strong>base class</strong>) first.</p>
+<p>If you want to know all available methods and attributes, you can start by exploring <code><a href="reference/PermuTest.html">?PermuTest</a></code> (all tests’ <strong>base class</strong>).</p>
 <p>If you want to know all available tests, see <code><a href="reference/pmt.html">pmts()</a></code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pmt.html">pmts</a></span><span class="op">(</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                   key                                                  test</span></span>
-<span><span class="co">#&gt; 1  onesample.quantile                                         Quantile Test</span></span>
-<span><span class="co">#&gt; 2      onesample.ecdf            Empirical Cumulative Distribution Function</span></span>
-<span><span class="co">#&gt; 3      twosample.mean                    Two Sample Permutation Test (mean)</span></span>
-<span><span class="co">#&gt; 4  twosample.wilcoxon                              Two Sample Wilcoxon Test</span></span>
-<span><span class="co">#&gt; 5  twosample.scoresum                                        Score Sum Test</span></span>
-<span><span class="co">#&gt; 6    twosample.ansari                                   Ansari-Bradley Test</span></span>
-<span><span class="co">#&gt; 7    twosample.siegel                                     Siegel-Tukey Test</span></span>
-<span><span class="co">#&gt; 8       twosample.rmd                              Ratio Mean Deviance Test</span></span>
-<span><span class="co">#&gt; 9        twosample.ks                    Two Sample Kolmogorov-Smirnov Test</span></span>
-<span><span class="co">#&gt; 10      ksample.anova                                                 ANOVA</span></span>
-<span><span class="co">#&gt; 11         ksample.kw                                   Kruskal-Wallis Test</span></span>
-<span><span class="co">#&gt; 12         ksample.jt                              Jonckheere-Terpstra Test</span></span>
-<span><span class="co">#&gt; 13        multicomp.t                               Multiple Comparison (t)</span></span>
-<span><span class="co">#&gt; 14    multicomp.tukey                                             Tukey HSD</span></span>
-<span><span class="co">#&gt; 15  paired.comparison                                     Paired Comparison</span></span>
-<span><span class="co">#&gt; 16        paired.sign                                             Sign Test</span></span>
-<span><span class="co">#&gt; 17 paired.signedscore                                     Signed Score Test</span></span>
-<span><span class="co">#&gt; 18         rcbd.anova            ANOVA for Randomized Complete Block Design</span></span>
-<span><span class="co">#&gt; 19      rcbd.friedman                                         Friedman Test</span></span>
-<span><span class="co">#&gt; 20          rcbd.page                                             Page Test</span></span>
-<span><span class="co">#&gt; 21   association.corr Two Sample Permutation Test (correlation coefficient)</span></span>
-<span><span class="co">#&gt; 22          table.chi       Contingency Table Permutation Test (chi-square)</span></span></code></pre></div>
+<span><span class="co">#&gt;                   key                                      class</span></span>
+<span><span class="co">#&gt; 1  onesample.quantile                                   Quantile</span></span>
+<span><span class="co">#&gt; 2      onesample.ecdf                                       ECDF</span></span>
+<span><span class="co">#&gt; 3      twosample.mean                                   MeanDiff</span></span>
+<span><span class="co">#&gt; 4  twosample.wilcoxon                                   Wilcoxon</span></span>
+<span><span class="co">#&gt; 5  twosample.scoresum                                   ScoreSum</span></span>
+<span><span class="co">#&gt; 6    twosample.ansari                              AnsariBradley</span></span>
+<span><span class="co">#&gt; 7    twosample.siegel                                SiegelTukey</span></span>
+<span><span class="co">#&gt; 8       twosample.rmd                          RatioMeanDeviance</span></span>
+<span><span class="co">#&gt; 9        twosample.ks                          KolmogorovSmirnov</span></span>
+<span><span class="co">#&gt; 10      ksample.anova                                      ANOVA</span></span>
+<span><span class="co">#&gt; 11         ksample.kw                              KruskalWallis</span></span>
+<span><span class="co">#&gt; 12         ksample.jt                         JonckheereTerpstra</span></span>
+<span><span class="co">#&gt; 13        multicomp.t                                 MultiCompT</span></span>
+<span><span class="co">#&gt; 14    multicomp.tukey                                   TukeyHSD</span></span>
+<span><span class="co">#&gt; 15  paired.comparison                           PairedComparison</span></span>
+<span><span class="co">#&gt; 16        paired.sign                                       Sign</span></span>
+<span><span class="co">#&gt; 17 paired.signedscore                                SignedScore</span></span>
+<span><span class="co">#&gt; 18         rcbd.anova ANOVA for Randomized Complete Block Design</span></span>
+<span><span class="co">#&gt; 19      rcbd.friedman                                   Friedman</span></span>
+<span><span class="co">#&gt; 20          rcbd.page                                       Page</span></span>
+<span><span class="co">#&gt; 21   association.corr                                Correlation</span></span>
+<span><span class="co">#&gt; 22          table.chi                                  ChiSquare</span></span>
+<span><span class="co">#&gt;                                                                     test</span></span>
+<span><span class="co">#&gt; 1                                                          Quantile Test</span></span>
+<span><span class="co">#&gt; 2                             Empirical Cumulative Distribution Function</span></span>
+<span><span class="co">#&gt; 3                              Two Sample Permutation Test Based on Mean</span></span>
+<span><span class="co">#&gt; 4                                               Two Sample Wilcoxon Test</span></span>
+<span><span class="co">#&gt; 5                                                         Score Sum Test</span></span>
+<span><span class="co">#&gt; 6                                                    Ansari-Bradley Test</span></span>
+<span><span class="co">#&gt; 7                                                      Siegel-Tukey Test</span></span>
+<span><span class="co">#&gt; 8                                               Ratio Mean Deviance Test</span></span>
+<span><span class="co">#&gt; 9                                     Two Sample Kolmogorov-Smirnov Test</span></span>
+<span><span class="co">#&gt; 10                        K Sample Permutation Test Based on F Statistic</span></span>
+<span><span class="co">#&gt; 11                                                   Kruskal-Wallis Test</span></span>
+<span><span class="co">#&gt; 12                                              Jonckheere-Terpstra Test</span></span>
+<span><span class="co">#&gt; 13                              Multiple Comparison Based on t Statistic</span></span>
+<span><span class="co">#&gt; 14                                                           Tukey's HSD</span></span>
+<span><span class="co">#&gt; 15                                                     Paired Comparison</span></span>
+<span><span class="co">#&gt; 16                                                             Sign Test</span></span>
+<span><span class="co">#&gt; 17                                                     Signed Score Test</span></span>
+<span><span class="co">#&gt; 18                            ANOVA for Randomized Complete Block Design</span></span>
+<span><span class="co">#&gt; 19                                                         Friedman Test</span></span>
+<span><span class="co">#&gt; 20                                                             Page Test</span></span>
+<span><span class="co">#&gt; 21         Two Sample Permutation Test Based on Correlation Coefficients</span></span>
+<span><span class="co">#&gt; 22 Permutation Test for Contingency Tables Based on Chi-square Statistic</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
