@@ -81,7 +81,10 @@ SiegelTukey <- R6Class(
                 rank_r <- rank_r[index_floor]
             }
 
-            st_rank <- tapply(c(rank_l, rev(rank_r)), sort(c_xy), mean)
+            st_rank <- vapply(
+                X = split(c(rank_l, rev(rank_r)), sort(c_xy)),
+                FUN = mean, FUN.VALUE = numeric(1)
+            )
 
             private$.data <- list(x = st_rank[as.character(x)], y = st_rank[as.character(y)])
         }

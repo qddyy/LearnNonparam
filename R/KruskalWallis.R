@@ -35,9 +35,10 @@ KruskalWallis <- R6Class(
             mean <- mean(private$.data)
             var <- var(private$.data)
             private$.statistic_func <- function(data, group) {
-                1 / var * sum(tapply(
-                    data, group, function(x) length(x) * (mean(x) - mean)^2
-                ))
+                sum(vapply(
+                    X = split(data, group), FUN.VALUE = numeric(1),
+                    FUN = function(x) length(x) * (mean(x) - mean)^2
+                )) / var
             }
 
             super$.calculate_statistic()

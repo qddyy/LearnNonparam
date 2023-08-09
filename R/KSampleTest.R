@@ -29,10 +29,9 @@ KSampleTest <- R6Class(
                 nsample = private$.n_permu, layout = "list"
             )
 
-            data <- unname(private$.data)
             private$.data_permu <- lapply(
-                private$.group_permu,
-                function(group) setNames(data, group)
+                X = private$.group_permu,
+                FUN = setNames, object = unname(private$.data)
             )
         },
 
@@ -43,11 +42,10 @@ KSampleTest <- R6Class(
         },
 
         .calculate_statistic_permu = function() {
-            data <- unname(private$.data)
-            statistic_func <- private$.statistic_func
             private$.statistic_permu <- vapply(
                 X = private$.group_permu, FUN.VALUE = numeric(1),
-                FUN = function(group) statistic_func(data, group)
+                FUN = function(data, group, f) f(data, group),
+                data = unname(private$.data), f = private$.statistic_func
             )
         },
 

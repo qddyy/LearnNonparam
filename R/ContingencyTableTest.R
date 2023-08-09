@@ -14,25 +14,23 @@ ContingencyTableTest <- R6Class(
         },
 
         .permute = function() {
-            dim <- dim(private$.data)
-            r <- dim[1]
-            c <- dim[2]
+            r <- nrow(private$.data)
+            c <- ncol(private$.data)
 
             row_sum <- .rowSums(private$.data, r, c)
             col_sum <- .colSums(private$.data, r, c)
 
-            col_index <- rep(seq_len(c), col_sum)
             private$.data_permu <- lapply(
-                permutations(
+                X = permutations(
                     v = rep(seq_len(r), row_sum),
                     nsample = private$.n_permu, layout = "list"
                 ),
-                function(data) {
+                FUN = function(data, col_index) {
                     vapply(
                         X = split(data, col_index), USE.NAMES = FALSE,
                         FUN = tabulate, nbins = r, FUN.VALUE = integer(r)
                     )
-                }
+                }, col_index = rep(seq_len(c), col_sum)
             )
         },
 

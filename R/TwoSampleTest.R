@@ -23,27 +23,27 @@ TwoSampleTest <- R6Class(
         .permute = function() {
             c_xy <- c(private$.data$x, private$.data$y)
 
-            permu_index <- combinations(
-                n = length(c_xy), k = length(private$.data$x),
-                nsample = private$.n_permu, layout = "list"
-            )
-
             private$.data_permu <- lapply(
-                permu_index, function(index) list(
-                    x = c_xy[index], y = c_xy[-index]
-                )
+                X = combinations(
+                    n = length(c_xy), k = length(private$.data$x),
+                    nsample = private$.n_permu, layout = "list"
+                ),
+                FUN = function(index, c_xy) {
+                    list(x = c_xy[index], y = c_xy[-index])
+                }, c_xy = c_xy
             )
         },
 
         .calculate_statistic = function() {
-            private$.statistic <- private$.statistic_func(private$.data$x, private$.data$y)
+            private$.statistic <- private$.statistic_func(
+                private$.data$x, private$.data$y
+            )
         },
 
         .calculate_statistic_permu = function() {
-            statistic_func <- private$.statistic_func
             private$.statistic_permu <- vapply(
                 X = private$.data_permu, FUN.VALUE = numeric(1),
-                FUN = function(data) statistic_func(data$x, data$y)
+                FUN = function(data, f) f(data$x, data$y), f = private$.statistic_func
             )
         },
 

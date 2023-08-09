@@ -82,7 +82,7 @@ MultipleComparison <- R6Class(
         },
 
         .calculate_statistic = function() {
-            private$.c_groups <- c_groups <- combinations(
+            private$.c_groups <- combinations(
                 v = unique(names(private$.data)), k = 2, layout = "list"
             )
 
@@ -91,7 +91,7 @@ MultipleComparison <- R6Class(
             private$.statistic_func <- function(group) {
                 group_loc <- split(seq_along(group), group)
                 vapply(
-                    X = c_groups, FUN.VALUE = numeric(1),
+                    X = private$.c_groups, FUN.VALUE = numeric(1),
                     FUN = function(ij) {
                         statistic_func(
                             data[group_loc[[ij[1]]]],

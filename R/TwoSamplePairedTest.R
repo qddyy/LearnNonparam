@@ -23,15 +23,15 @@ TwoSamplePairedTest <- R6Class(
                 matrix(as.logical(rbinom(private$.n_permu * nrow(private$.data), 1, 0.5)), nrow = private$.n_permu)
             }
 
-            x <- private$.data$x
-            y <- private$.data$y
             private$.data_permu <- apply(
-                private$.swapped_permu, 1, function(is_swapped) {
+                X = private$.swapped_permu, MARGIN = 1,
+                FUN = function(is_swapped, x, y) {
                     data.frame(
                         x = `[<-`(x, is_swapped, y[is_swapped]),
                         y = `[<-`(y, is_swapped, x[is_swapped])
                     )
-                }
+                }, simplify = FALSE,
+                x = private$.data$x, y = private$.data$y
             )
         }
     )

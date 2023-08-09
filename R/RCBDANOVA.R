@@ -24,22 +24,26 @@ RCBDANOVA <- R6Class(
             private$.type <- match.arg(type)
 
             super$initialize(alternative = "greater", n_permu = n_permu)
-
-            private$.statistic_func <- function(df) sum(rowMeans(df)^2)
         }
     ),
     private = list(
         .calculate_statistic = function() {
-            k <- nrow(private$.data)
-            b <- ncol(private$.data)
-            private$.statistic <- switch(private$.type,
-                permu = private$.statistic_func(private$.data),
-                approx = anova(lm(
-                    do.call(c, private$.data) ~
-                    as.factor(rep(seq_len(k), times = b)) +
-                    as.factor(rep(seq_len(b), each = k))
-                ))$F[1]
+            private$.statistic_func <- switch(private$.type,
+                permu = function(df) sum(rowSums(df)^2),
+                approx = function(df) {
+                    b <- ncol(df)
+
+                    bar_i. <- rowMeans(df)
+                    bar_.j <- colMeans(df)
+                    bar_.. <- mean(bar_i.)
+
+                    sst <- b * sum((bar_i. - bar_..)^2)
+                    sse <- sum((df - outer(bar_i., bar_.j, "+") + bar_..)^2)
+                    (b - 1) * sst / sse
+                }
             )
+
+            super$.calculate_statistic()
         },
 
         .calculate_p = function() {

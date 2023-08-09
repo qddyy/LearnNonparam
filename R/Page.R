@@ -28,11 +28,16 @@ Page <- R6Class(
             private$.type <- match.arg(type)
 
             super$initialize(scoring = "rank", alternative = match.arg(alternative), n_permu = n_permu)
-
-            private$.statistic_func <- function(df) sum(seq_len(nrow(df)) * rowSums(df))
         }
     ),
     private = list(
+        .calculate_statistic = function() {
+            seq_row <- seq_len(nrow(private$.data))
+            private$.statistic_func <- function(df) sum(seq_row * rowSums(df))
+
+            super$.calculate_statistic()
+        },
+
         .calculate_p = function() {
             k <- nrow(private$.data)
             b <- ncol(private$.data)

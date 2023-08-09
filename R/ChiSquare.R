@@ -25,24 +25,29 @@ ChiSquare <- R6Class(
             n_permu = NULL
         ) {
             super$initialize(alternative = "greater", n_permu = n_permu)
-
-            private$.statistic_func <- function(mat) {
-                row_count <- apply(mat, 1, sum)
-                col_count <- apply(mat, 2, sum)
-
-                expect <- matrix(row_count, ncol = 1) %*% matrix(col_count, nrow = 1) / sum(mat)
-
-                sum((mat - expect)^2 / expect)
-            }
         }
     ),
     private = list(
+        .calculate_statistic = function() {
+            dim <- dim(private$.data)
+            private$.statistic_func <- function(mat) {
+                row_sum <- .rowSums(mat, dim[1], dim[2])
+                col_sum <- .colSums(mat, dim[1], dim[2])
+
+                expect <- row_sum %*% matrix(col_sum, nrow = 1) / sum(mat)
+
+                sum((mat - expect)^2 / expect)
+            }
+
+            super$.calculate_statistic()
+        },
+
         .calculate_p = function() {
-            r <- nrow(private$.data)
-            c <- ncol(private$.data)
+            k <- nrow(private$.data)
+            b <- ncol(private$.data)
 
             private$.p_value <- pchisq(
-                private$.statistic, df = (r - 1) * (c - 1), lower.tail = FALSE
+                private$.statistic, df = (k - 1) * (b - 1), lower.tail = FALSE
             )
         }
     )

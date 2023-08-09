@@ -37,8 +37,9 @@ TukeyHSD <- R6Class(
                 N <- length(private$.data)
                 k <- as.integer(names(private$.data)[N])
                 private$.statistic_func <- function(x, y, data) {
-                    mse <- sum(tapply(
-                        data, names(data), function(x) (length(x) - 1) * var(x)
+                    mse <- sum(vapply(
+                        X = split(data, names(data)), FUN.VALUE = numeric(1),
+                        FUN = function(x) (length(x) - 1) * var(x)
                     )) / (N - k)
                     (mean(x) - mean(y)) / sqrt(
                         mse / 2 * (1 / length(x) + 1 / length(y))

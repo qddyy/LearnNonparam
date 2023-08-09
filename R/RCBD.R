@@ -17,8 +17,9 @@ RCBD <- R6Class(
                 data <- do.call(data.frame, data)
             }
 
-            colnames(data) <- paste0("block_", seq_len(ncol(data)))
-            rownames(data) <- paste0("treatment_", seq_len(nrow(data)))
+            dim <- dim(data)
+            rownames(data) <- paste0("treatment_", seq_len(dim[1]))
+            colnames(data) <- paste0("block_", seq_len(dim[2]))
 
             private$.data <- data
         },
@@ -27,26 +28,30 @@ RCBD <- R6Class(
             k <- nrow(private$.data)
             b <- ncol(private$.data)
 
-            if (is.null(private$.n_permu)) {
-                col_permu <- lapply(private$.data, permutations)
-                index_permu <- expand.grid(rep(list(seq_len(factorial(k))), b))
-
-                private$.data_permu <- apply(
-                    index_permu, 1, function(index) {
+            private$.data_permu <- if (is.null(private$.n_permu)) {
+                apply(
+                    X = expand.grid(rep(
+                        list(seq_len(factorial(k))), b
+                    )), MARGIN = 1, simplify = FALSE,
+                    FUN = function(index, cols_permu) {
                         do.call(
                             data.frame, .mapply(
-                                dots = list(col_permu, index), MoreArgs = NULL,
-                                FUN = function(col, i) col[i, ]
+                                dots = list(cols_permu, index), MoreArgs = NULL,
+                                FUN = function(col_permu, i) col[i, ]
                             )
                         )
-                    }
+                    }, cols_permu = lapply(private$.data, permutations)
                 )
             } else {
-                data <- private$.data
-                private$.data_permu <- lapply(
-                    seq_len(private$.n_permu), function(...) {
-                        do.call(data.frame, lapply(data, function(x) x[sample.int(k)]))
-                    }
+                lapply(
+                    X = seq_len(private$.n_permu),
+                    FUN = function(data, ...) {
+                        do.call(
+                            data.frame, lapply(
+                                data, function(x) x[sample.int(k)]
+                            )
+                        )
+                    }, data = private$.data
                 )
             }
         },
@@ -62,12 +67,10 @@ RCBD <- R6Class(
         },
 
         .calculate_scores = function() {
-            k <- nrow(private$.data)
-
-            scoring <- private$.scoring
             private$.data <- do.call(
                 data.frame, lapply(
-                    private$.data, function(x) score(x, n = k, method = scoring)
+                    X = private$.data, FUN = score,
+                    n = nrow(private$.data), method = private$.scoring
                 )
             )
         }

@@ -43,10 +43,11 @@ Sign <- R6Class(
         },
 
         .calculate_statistic_permu = function() {
-            sign <- private$.sign
             private$.statistic_permu <- apply(
-                private$.swapped_permu, 1,
-                function(is_swapped) mean(sign * (2 * is_swapped - 1))
+                X = private$.swapped_permu, MARGIN = 1,
+                FUN = function(is_swapped, sign) {
+                    mean(sign * (2 * is_swapped - 1))
+                }, sign = private$.sign
             )
         },
 

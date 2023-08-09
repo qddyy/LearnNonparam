@@ -40,10 +40,11 @@ PairedComparison <- R6Class(
         },
 
         .calculate_statistic_permu = function() {
-            diff <- private$.diff
             private$.statistic_permu <- apply(
-                private$.swapped_permu, 1,
-                function(is_swapped) mean(diff * (2 * is_swapped - 1))
+                X = private$.swapped_permu, MARGIN = 1,
+                FUN = function(is_swapped, diff) {
+                    mean(diff * (2 * is_swapped - 1))
+                }, diff = private$.diff
             )
         },
 

@@ -57,10 +57,11 @@ SignedScore <- R6Class(
         },
 
         .calculate_statistic_permu = function() {
-            signed_score <- private$.signed_score
             private$.statistic_permu <- apply(
-                private$.swapped_permu, 1,
-                function(is_swapped) mean(signed_score * (2 * is_swapped - 1))
+                X = private$.swapped_permu, MARGIN = 1,
+                FUN = function(is_swapped, signed_score) {
+                    mean(signed_score * (2 * is_swapped - 1))
+                }, signed_score = private$.signed_score
             )
         },
 

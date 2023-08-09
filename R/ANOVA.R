@@ -32,10 +32,28 @@ ANOVA <- R6Class(
     private = list(
         .calculate_statistic = function() {
             private$.statistic_func <- switch(private$.type,
-                permu = function(data, group) sum(tapply(
-                    data, group, function(x) length(x) * mean(x)^2
-                )),
-                approx = function(data, group) anova(lm(data ~ as.factor(group)))$F[1]
+                permu = function(data, group) {
+                    sum(vapply(
+                        X = split(data, group), FUN.VALUE = numeric(1),
+                        FUN = function(x) sum(x)^2 / length(x)
+                    ))
+                },
+                approx = function(data, group) {
+                    N <- length(data)
+                    splited <- split(data, group)
+                    k <- length(splited)
+
+                    bar_.. <- mean(data)
+                    bar_i. <- c(
+                        lapply(
+                            splited, function(x) rep.int(mean(x), length(x))
+                        ), recursive = TRUE, use.names = FALSE
+                    )
+
+                    mst <- sum((bar_i. - bar_..)^2) / (k - 1)
+                    mse <- sum((data - bar_i.)^2) / (N - k)
+                    mst / mse
+                }
             )
 
             super$.calculate_statistic()

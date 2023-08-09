@@ -7,28 +7,17 @@ TwoSampleAssociationTest <- R6Class(
     inherit = TwoSamplePairedTest,
     cloneable = FALSE,
     private = list(
-        .x_permu = NULL,
-
         .check = function() {}, # TODO
 
         .permute = function() {
-            private$.x_permu <- permutations(
-                v = private$.data$x,
-                nsample = private$.n_permu, layout = "list"
-            )
-            
-            y <- private$.data$y
             private$.data_permu <- lapply(
-                private$.x_permu, function(x) data.frame(x = x, y = y)
-            )
-        },
-
-        .calculate_statistic_permu = function() {
-            statistic_func <- private$.statistic_func
-            y <- private$.data$y
-            private$.statistic_permu <- vapply(
-                X = private$.x_permu, FUN.VALUE = numeric(1),
-                FUN = function(x) statistic_func(x, y)
+                X = permutations(
+                    v = private$.data$x,
+                    nsample = private$.n_permu, layout = "list"
+                ),
+                FUN = function(x, y) {
+                    data.frame(x = x, y = y)
+                }, y = private$.data$y
             )
         }
     )
