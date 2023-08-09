@@ -57,11 +57,11 @@
     <div id="active-bindings">
     <h2>Active bindings</h2>
     <p></p><div class="r6-active-bindings"><dl><dt><code>type</code></dt>
-<dd><p>The type.</p></dd>
+<dd><p>The type of the test.</p></dd>
 
 
 <dt><code>method</code></dt>
-<dd><p>The method.</p></dd>
+<dd><p>The method used.</p></dd>
 
 
 <dt><code>scoring</code></dt>
@@ -69,7 +69,7 @@
 
 
 <dt><code>null_value</code></dt>
-<dd><p>The value of the parameter specified by the null hypothesis.</p></dd>
+<dd><p>The value of the parameter in the null hypothesis.</p></dd>
 
 
 <dt><code>alternative</code></dt>
@@ -122,7 +122,8 @@
 
 <ul><li><p><a href="#method-Permutation%20Test-new"><code>PermuTest$new()</code></a></p></li>
 <li><p><a href="#method-Permutation%20Test-feed"><code>PermuTest$feed()</code></a></p></li>
-<li><p><a href="#method-Permutation%20Test-plot_hist"><code>PermuTest$plot_hist()</code></a></p></li>
+<li><p><a href="#method-Permutation%20Test-print"><code>PermuTest$print()</code></a></p></li>
+<li><p><a href="#method-Permutation%20Test-plot"><code>PermuTest$plot()</code></a></p></li>
 </ul></div><p></p><hr><a id="method-Permutation Test-new"></a><div class="section">
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Create a new <code>PermuTest</code> object. Note that it is not recommended to create objects of this class directly.</p><div class="section">
@@ -139,7 +140,7 @@
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>null_value</code></dt>
-<dd><p>a number specifying the value of the parameter specified by the null hypothesis.</p></dd>
+<dd><p>a number specifying the value of the parameter in the null hypothesis.</p></dd>
 
 
 <dt><code>alternative</code></dt>
@@ -167,7 +168,7 @@
 
 </div><p></p><hr><a id="method-Permutation Test-feed"></a><div class="section">
 <h3 id="method-feed-">Method <code>feed()</code><a class="anchor" aria-label="anchor" href="#method-feed-"></a></h3>
-<p>Feed the data to the object.</p><div class="section">
+<p>Feed the data to the test.</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">PermuTest</span><span class="op">$</span><span class="fu">feed</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
@@ -185,15 +186,35 @@
 <p>The object itself (invisibly).</p>
 </div>
 
-</div><p></p><hr><a id="method-Permutation Test-plot_hist"></a><div class="section">
-<h3 id="method-plot-hist-">Method <code>plot_hist()</code><a class="anchor" aria-label="anchor" href="#method-plot-hist-"></a></h3>
-<p>Draw a histogram of the permutation distribution.</p><div class="section">
+</div><p></p><hr><a id="method-Permutation Test-print"></a><div class="section">
+<h3 id="method-print-">Method <code><a href="https://rdrr.io/r/base/print.html" class="external-link">print()</a></code><a class="anchor" aria-label="anchor" href="#method-print-"></a></h3>
+<p>Print the results of the test. Note that it works only if data has been fed.</p><div class="section">
 <h4 id="usage-2">Usage<a class="anchor" aria-label="anchor" href="#usage-2"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">PermuTest</span><span class="op">$</span><span class="fu">plot_hist</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">PermuTest</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span>digits <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">getOption</a></span><span class="op">(</span><span class="st">"digits"</span><span class="op">)</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
+<p></p><div class="arguments"><dl><dt><code>digits</code></dt>
+<dd><p>number of significant digits to be used.</p></dd>
+
+
+</dl><p></p></div>
+</div>
+<div class="section">
+<h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
+<p>The object itself (invisibly).</p>
+</div>
+
+</div><p></p><hr><a id="method-Permutation Test-plot"></a><div class="section">
+<h3 id="method-plot-">Method <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code><a class="anchor" aria-label="anchor" href="#method-plot-"></a></h3>
+<p>Plot histogram(s) of the permutation distribution. Note that it works only if the test's type is <code>"permu"</code>.</p><div class="section">
+<h4 id="usage-3">Usage<a class="anchor" aria-label="anchor" href="#usage-3"></a></h4>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">PermuTest</span><span class="op">$</span><span class="fu">plot</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
+</div>
+
+<div class="section">
+<h4 id="arguments-3">Arguments<a class="anchor" aria-label="anchor" href="#arguments-3"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>...</code></dt>
 <dd><p>extra parameters passed to <code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html" class="external-link">ggplot2::stat_bin</a></code>.</p></dd>
 
@@ -201,7 +222,7 @@
 </dl><p></p></div>
 </div>
 <div class="section">
-<h4 id="returns-2">Returns<a class="anchor" aria-label="anchor" href="#returns-2"></a></h4>
+<h4 id="returns-3">Returns<a class="anchor" aria-label="anchor" href="#returns-3"></a></h4>
 <p>The object itself (invisibly).</p>
 </div>
 
