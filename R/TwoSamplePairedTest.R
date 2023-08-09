@@ -30,8 +30,7 @@ TwoSamplePairedTest <- R6Class(
                         x = `[<-`(x, is_swapped, y[is_swapped]),
                         y = `[<-`(y, is_swapped, x[is_swapped])
                     )
-                }, simplify = FALSE,
-                x = private$.data$x, y = private$.data$y
+                }, x = private$.data$x, y = private$.data$y
             )
         }
     )

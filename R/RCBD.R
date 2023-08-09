@@ -32,7 +32,7 @@ RCBD <- R6Class(
                 apply(
                     X = expand.grid(rep(
                         list(seq_len(factorial(k))), b
-                    )), MARGIN = 1, simplify = FALSE,
+                    )), MARGIN = 1,
                     FUN = function(index, cols_permu) {
                         do.call(
                             data.frame, .mapply(
