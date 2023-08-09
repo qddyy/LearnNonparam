@@ -102,25 +102,27 @@
 </li>
 <li>
 <p>check the results</p>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a>t <span class="co"># or t$print()</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>     Wilcoxon</span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a>statistic <span class="ot">=</span> <span class="dv">35</span>, p<span class="sc">-</span>value <span class="ot">=</span> <span class="fl">0.0016</span></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a>alternative hypothesis<span class="sc">:</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>  true value of the parameter <span class="cf">in</span> the null hypothesis is not equal to <span class="dv">0</span> </span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a>estimate<span class="sc">:</span> <span class="fl">30.045</span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a><span class="dv">95</span> percent confidence interval<span class="sc">:</span> <span class="fl">11.57</span> <span class="fl">50.76</span></span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">plot</span>(<span class="at">bins =</span> <span class="dv">12</span>)</span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">t</span> <span class="co"># or t$print()</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Wilcoxon</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; statistic = 35, p-value = 0.0027</span></span>
+<span><span class="co">#&gt; alternative hypothesis:</span></span>
+<span><span class="co">#&gt;   true value of the parameter in the null hypothesis is not equal to 0 </span></span>
+<span><span class="co">#&gt; estimate: 30.045</span></span>
+<span><span class="co">#&gt; 95 percent confidence interval: 11.57 50.76</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">plot</span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">12</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-7-1.svg" width="100%"></p>
 </li>
 <li>
 <p>modify some attributes and see how the results change</p>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="st">"approx"</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a><span class="fu">print</span>(t<span class="sc">$</span>p_value)</span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>[<span class="dv">1</span>] <span class="fl">0.008239019</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
+<span></span>
+<span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
+<span><span class="co">#&gt; [1] 0.008239019</span></span></code></pre></div>
 </li>
 </ul>
 <p>There is also support for chaining method calls, which means that you can do things like</p>
@@ -133,53 +135,54 @@
 <p>Just use <code><a href="https://rdrr.io/r/base/dots.html" class="external-link">?...</a></code> syntax.</p>
 <p>If you want to know all available methods and attributes, you can start by exploring <code><a href="reference/PermuTest.html">?PermuTest</a></code> (all tests’ <strong>base class</strong>).</p>
 <p>If you want to know all available tests, see <code><a href="reference/pmt.html">pmts()</a></code>.</p>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="fu">pmts</span>()</span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a> key                class             </span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a> onesample.quantile Quantile          </span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a> onesample.ecdf     ECDF              </span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a> twosample.mean     MeanDiff          </span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a> twosample.wilcoxon Wilcoxon          </span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a> twosample.scoresum ScoreSum          </span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a> twosample.ansari   AnsariBradley     </span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a> twosample.siegel   SiegelTukey       </span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a> twosample.rmd      RatioMeanDeviance </span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a> twosample.ks       KolmogorovSmirnov </span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a> ksample.anova      ANOVA             </span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a> ksample.kw         KruskalWallis     </span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a> ksample.jt         JonckheereTerpstra</span>
-<span id="cb9-15"><a href="#cb9-15" aria-hidden="true" tabindex="-1"></a> multicomp.t        MultiCompT        </span>
-<span id="cb9-16"><a href="#cb9-16" aria-hidden="true" tabindex="-1"></a> multicomp.tukey    TukeyHSD          </span>
-<span id="cb9-17"><a href="#cb9-17" aria-hidden="true" tabindex="-1"></a> paired.comparison  PairedComparison  </span>
-<span id="cb9-18"><a href="#cb9-18" aria-hidden="true" tabindex="-1"></a> paired.sign        Sign              </span>
-<span id="cb9-19"><a href="#cb9-19" aria-hidden="true" tabindex="-1"></a> paired.signedscore SignedScore       </span>
-<span id="cb9-20"><a href="#cb9-20" aria-hidden="true" tabindex="-1"></a> rcbd.anova         RCBDANOVA         </span>
-<span id="cb9-21"><a href="#cb9-21" aria-hidden="true" tabindex="-1"></a> rcbd.friedman      Friedman          </span>
-<span id="cb9-22"><a href="#cb9-22" aria-hidden="true" tabindex="-1"></a> rcbd.page          Page              </span>
-<span id="cb9-23"><a href="#cb9-23" aria-hidden="true" tabindex="-1"></a> association.corr   Correlation       </span>
-<span id="cb9-24"><a href="#cb9-24" aria-hidden="true" tabindex="-1"></a> table.chi          ChiSquare         </span>
-<span id="cb9-25"><a href="#cb9-25" aria-hidden="true" tabindex="-1"></a> test                                                                 </span>
-<span id="cb9-26"><a href="#cb9-26" aria-hidden="true" tabindex="-1"></a> Quantile Test                                                        </span>
-<span id="cb9-27"><a href="#cb9-27" aria-hidden="true" tabindex="-1"></a> Empirical Cumulative Distribution Function                           </span>
-<span id="cb9-28"><a href="#cb9-28" aria-hidden="true" tabindex="-1"></a> Two Sample Permutation Test Based on Mean                            </span>
-<span id="cb9-29"><a href="#cb9-29" aria-hidden="true" tabindex="-1"></a> Two Sample Wilcoxon Test                                             </span>
-<span id="cb9-30"><a href="#cb9-30" aria-hidden="true" tabindex="-1"></a> Score Sum Test                                                       </span>
-<span id="cb9-31"><a href="#cb9-31" aria-hidden="true" tabindex="-1"></a> Ansari<span class="sc">-</span>Bradley Test                                                  </span>
-<span id="cb9-32"><a href="#cb9-32" aria-hidden="true" tabindex="-1"></a> Siegel<span class="sc">-</span>Tukey Test                                                    </span>
-<span id="cb9-33"><a href="#cb9-33" aria-hidden="true" tabindex="-1"></a> Ratio Mean Deviance Test                                             </span>
-<span id="cb9-34"><a href="#cb9-34" aria-hidden="true" tabindex="-1"></a> Two Sample Kolmogorov<span class="sc">-</span>Smirnov Test                                   </span>
-<span id="cb9-35"><a href="#cb9-35" aria-hidden="true" tabindex="-1"></a> K Sample Permutation Test Based on F Statistic                       </span>
-<span id="cb9-36"><a href="#cb9-36" aria-hidden="true" tabindex="-1"></a> Kruskal<span class="sc">-</span>Wallis Test                                                  </span>
-<span id="cb9-37"><a href="#cb9-37" aria-hidden="true" tabindex="-1"></a> Jonckheere<span class="sc">-</span>Terpstra Test                                             </span>
-<span id="cb9-38"><a href="#cb9-38" aria-hidden="true" tabindex="-1"></a> Multiple Comparison Based on t Statistic                             </span>
-<span id="cb9-39"><a href="#cb9-39" aria-hidden="true" tabindex="-1"></a> Tukey<span class="st">'s HSD                                                          </span></span>
-<span id="cb9-40"><a href="#cb9-40" aria-hidden="true" tabindex="-1"></a><span class="st"> Paired Comparison                                                    </span></span>
-<span id="cb9-41"><a href="#cb9-41" aria-hidden="true" tabindex="-1"></a><span class="st"> Sign Test                                                            </span></span>
-<span id="cb9-42"><a href="#cb9-42" aria-hidden="true" tabindex="-1"></a><span class="st"> Signed Score Test                                                    </span></span>
-<span id="cb9-43"><a href="#cb9-43" aria-hidden="true" tabindex="-1"></a><span class="st"> ANOVA for Randomized Complete Block Design                           </span></span>
-<span id="cb9-44"><a href="#cb9-44" aria-hidden="true" tabindex="-1"></a><span class="st"> Friedman Test                                                        </span></span>
-<span id="cb9-45"><a href="#cb9-45" aria-hidden="true" tabindex="-1"></a><span class="st"> Page Test                                                            </span></span>
-<span id="cb9-46"><a href="#cb9-46" aria-hidden="true" tabindex="-1"></a><span class="st"> Two Sample Permutation Test Based on Correlation Coefficients        </span></span>
-<span id="cb9-47"><a href="#cb9-47" aria-hidden="true" tabindex="-1"></a><span class="st"> Permutation Test for Contingency Tables Based on Chi-square Statistic</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/pmt.html">pmts</a></span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt;  key                class             </span></span>
+<span><span class="co">#&gt;  onesample.quantile Quantile          </span></span>
+<span><span class="co">#&gt;  onesample.ecdf     ECDF              </span></span>
+<span><span class="co">#&gt;  twosample.mean     MeanDiff          </span></span>
+<span><span class="co">#&gt;  twosample.wilcoxon Wilcoxon          </span></span>
+<span><span class="co">#&gt;  twosample.scoresum ScoreSum          </span></span>
+<span><span class="co">#&gt;  twosample.ansari   AnsariBradley     </span></span>
+<span><span class="co">#&gt;  twosample.siegel   SiegelTukey       </span></span>
+<span><span class="co">#&gt;  twosample.rmd      RatioMeanDeviance </span></span>
+<span><span class="co">#&gt;  twosample.ks       KolmogorovSmirnov </span></span>
+<span><span class="co">#&gt;  ksample.anova      ANOVA             </span></span>
+<span><span class="co">#&gt;  ksample.kw         KruskalWallis     </span></span>
+<span><span class="co">#&gt;  ksample.jt         JonckheereTerpstra</span></span>
+<span><span class="co">#&gt;  multicomp.t        MultiCompT        </span></span>
+<span><span class="co">#&gt;  multicomp.tukey    TukeyHSD          </span></span>
+<span><span class="co">#&gt;  paired.comparison  PairedComparison  </span></span>
+<span><span class="co">#&gt;  paired.sign        Sign              </span></span>
+<span><span class="co">#&gt;  paired.signedscore SignedScore       </span></span>
+<span><span class="co">#&gt;  rcbd.anova         RCBDANOVA         </span></span>
+<span><span class="co">#&gt;  rcbd.friedman      Friedman          </span></span>
+<span><span class="co">#&gt;  rcbd.page          Page              </span></span>
+<span><span class="co">#&gt;  association.corr   Correlation       </span></span>
+<span><span class="co">#&gt;  table.chi          ChiSquare         </span></span>
+<span><span class="co">#&gt;  test                                                                 </span></span>
+<span><span class="co">#&gt;  Quantile Test                                                        </span></span>
+<span><span class="co">#&gt;  Empirical Cumulative Distribution Function                           </span></span>
+<span><span class="co">#&gt;  Two Sample Permutation Test Based on Mean                            </span></span>
+<span><span class="co">#&gt;  Two Sample Wilcoxon Test                                             </span></span>
+<span><span class="co">#&gt;  Score Sum Test                                                       </span></span>
+<span><span class="co">#&gt;  Ansari-Bradley Test                                                  </span></span>
+<span><span class="co">#&gt;  Siegel-Tukey Test                                                    </span></span>
+<span><span class="co">#&gt;  Ratio Mean Deviance Test                                             </span></span>
+<span><span class="co">#&gt;  Two Sample Kolmogorov-Smirnov Test                                   </span></span>
+<span><span class="co">#&gt;  K Sample Permutation Test Based on F Statistic                       </span></span>
+<span><span class="co">#&gt;  Kruskal-Wallis Test                                                  </span></span>
+<span><span class="co">#&gt;  Jonckheere-Terpstra Test                                             </span></span>
+<span><span class="co">#&gt;  Multiple Comparison Based on t Statistic                             </span></span>
+<span><span class="co">#&gt;  Tukey's HSD                                                          </span></span>
+<span><span class="co">#&gt;  Paired Comparison                                                    </span></span>
+<span><span class="co">#&gt;  Sign Test                                                            </span></span>
+<span><span class="co">#&gt;  Signed Score Test                                                    </span></span>
+<span><span class="co">#&gt;  ANOVA for Randomized Complete Block Design                           </span></span>
+<span><span class="co">#&gt;  Friedman Test                                                        </span></span>
+<span><span class="co">#&gt;  Page Test                                                            </span></span>
+<span><span class="co">#&gt;  Two Sample Permutation Test Based on Correlation Coefficients        </span></span>
+<span><span class="co">#&gt;  Permutation Test for Contingency Tables Based on Chi-square Statistic</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
