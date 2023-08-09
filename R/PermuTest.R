@@ -115,7 +115,7 @@ PermuTest <- R6Class(
                     )
                 ),
                 {
-                    p <- format.pval(x$p.value, digits = max(1L, digits - 3L))
+                    p <- format.pval(private$.p_value, digits = max(1L, digits - 3L))
                     paste(
                         "p-value", if (startsWith(p, "<")) p else paste("=", p)
                     )
