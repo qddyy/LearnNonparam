@@ -13,14 +13,14 @@ Performs two sample Kolmogorov-Smirnov test on data vectors.
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-Two Sample Kolmogorov-Smirnov Test-new}{\code{KolmogorovSmirnov$new()}}
-\item \href{#method-Two Sample Kolmogorov-Smirnov Test-plot_ecdfs}{\code{KolmogorovSmirnov$plot_ecdfs()}}
 }
 }
 \if{html}{\out{
 <details open><summary>Inherited methods</summary>
 <ul>
 <li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="feed"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-feed'><code>LearnNonparam::Permutation Test$feed()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="plot_hist"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-plot_hist'><code>LearnNonparam::Permutation Test$plot_hist()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="plot"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-plot'><code>LearnNonparam::Permutation Test$plot()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="print"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-print'><code>LearnNonparam::Permutation Test$print()</code></a></span></li>
 </ul>
 </details>
 }}
@@ -42,19 +42,6 @@ Create a new \code{KolmogorovSmirnov} object.
 }
 \subsection{Returns}{
 A \code{KolmogorovSmirnov} object.
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Two Sample Kolmogorov-Smirnov Test-plot_ecdfs"></a>}}
-\if{latex}{\out{\hypertarget{method-Two Sample Kolmogorov-Smirnov Test-plot_ecdfs}{}}}
-\subsection{Method \code{plot_ecdfs()}}{
-Draw the empirical cumulative distribution function of each of the data fed.
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{KolmogorovSmirnov$plot_ecdfs()}\if{html}{\out{</div>}}
-}
-
-\subsection{Returns}{
-The object itself (invisibly).
 }
 }
 }

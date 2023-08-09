@@ -9,13 +9,13 @@ This is the abstract base class for permutation test objects, which contains sev
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{type}}{The type.}
+\item{\code{type}}{The type of the test.}
 
-\item{\code{method}}{The method.}
+\item{\code{method}}{The method used.}
 
 \item{\code{scoring}}{The scoring system used.}
 
-\item{\code{null_value}}{The value of the parameter specified by the null hypothesis.}
+\item{\code{null_value}}{The value of the parameter in the null hypothesis.}
 
 \item{\code{alternative}}{The alternative hypothesis.}
 
@@ -44,7 +44,8 @@ This is the abstract base class for permutation test objects, which contains sev
 \itemize{
 \item \href{#method-Permutation Test-new}{\code{PermuTest$new()}}
 \item \href{#method-Permutation Test-feed}{\code{PermuTest$feed()}}
-\item \href{#method-Permutation Test-plot_hist}{\code{PermuTest$plot_hist()}}
+\item \href{#method-Permutation Test-print}{\code{PermuTest$print()}}
+\item \href{#method-Permutation Test-plot}{\code{PermuTest$plot()}}
 }
 }
 \if{html}{\out{<hr>}}
@@ -65,7 +66,7 @@ Create a new \code{PermuTest} object. Note that it is not recommended to create 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{null_value}}{a number specifying the value of the parameter specified by the null hypothesis.}
+\item{\code{null_value}}{a number specifying the value of the parameter in the null hypothesis.}
 
 \item{\code{alternative}}{a character string specifying the alternative hypothesis, must be one of \code{"two_sided"} (default), \code{"greater"} or \code{"less"}.}
 
@@ -85,7 +86,7 @@ A \code{PermuTest} object.
 \if{html}{\out{<a id="method-Permutation Test-feed"></a>}}
 \if{latex}{\out{\hypertarget{method-Permutation Test-feed}{}}}
 \subsection{Method \code{feed()}}{
-Feed the data to the object.
+Feed the data to the test.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PermuTest$feed(...)}\if{html}{\out{</div>}}
 }
@@ -102,12 +103,32 @@ The object itself (invisibly).
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Permutation Test-plot_hist"></a>}}
-\if{latex}{\out{\hypertarget{method-Permutation Test-plot_hist}{}}}
-\subsection{Method \code{plot_hist()}}{
-Draw a histogram of the permutation distribution.
+\if{html}{\out{<a id="method-Permutation Test-print"></a>}}
+\if{latex}{\out{\hypertarget{method-Permutation Test-print}{}}}
+\subsection{Method \code{print()}}{
+Print the results of the test. Note that it works only if data has been fed.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PermuTest$plot_hist(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{PermuTest$print(digits = getOption("digits"))}\if{html}{\out{</div>}}
+}
+
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{digits}}{number of significant digits to be used.}
+}
+\if{html}{\out{</div>}}
+}
+\subsection{Returns}{
+The object itself (invisibly).
+}
+}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-Permutation Test-plot"></a>}}
+\if{latex}{\out{\hypertarget{method-Permutation Test-plot}{}}}
+\subsection{Method \code{plot()}}{
+Plot histogram(s) of the permutation distribution. Note that it works only if the test's type is \code{"permu"}.
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{PermuTest$plot(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

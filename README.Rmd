@@ -54,11 +54,7 @@ library(LearnNonparam)
 
 - check the results
     ```{r}
-    print(t$statistic)
-    print(t$p_value)
-
-    print(t$estimate)
-    print(t$ci)
+    t # or t$print()
 
     t$plot(bins = 12)
     ```
@@ -73,7 +69,7 @@ library(LearnNonparam)
 There is also support for chaining method calls, which means that you can do things like
 
 ```{r, eval = FALSE}
-pmt("twosample.wilcoxon", type = "permu", n_permu = 10000)$feed(Table2.6.2)$plot_hist(bins = 12)$p_value
+pmt("twosample.wilcoxon", type = "permu", n_permu = 10000)$feed(Table2.6.2)$print()$plot()
 ```
 
 ## Help

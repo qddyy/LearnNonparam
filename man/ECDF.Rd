@@ -9,29 +9,18 @@ This is the abstract base class for empirical cumulative distribution function o
 \section{Super classes}{
 \code{LearnNonparam::Permutation Test} -> \code{LearnNonparam::One Sample Test} -> \code{Empirical Cumulative Distribution Function}
 }
-\section{Active bindings}{
-\if{html}{\out{<div class="r6-active-bindings">}}
-\describe{
-\item{\code{ecdf}}{Empirical distribution.}
-
-\item{\code{upper}}{confidence bound.}
-
-\item{\code{lower}}{confidence bound.}
-}
-\if{html}{\out{</div>}}
-}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-Empirical Cumulative Distribution Function-new}{\code{ECDF$new()}}
-\item \href{#method-Empirical Cumulative Distribution Function-plot_ecdf}{\code{ECDF$plot_ecdf()}}
+\item \href{#method-Empirical Cumulative Distribution Function-plot}{\code{ECDF$plot()}}
 }
 }
 \if{html}{\out{
 <details open><summary>Inherited methods</summary>
 <ul>
 <li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="feed"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-feed'><code>LearnNonparam::Permutation Test$feed()</code></a></span></li>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="plot_hist"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-plot_hist'><code>LearnNonparam::Permutation Test$plot_hist()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="Permutation Test" data-id="print"><a href='../../LearnNonparam/html/Permutation Test.html#method-Permutation Test-print'><code>LearnNonparam::Permutation Test$print()</code></a></span></li>
 </ul>
 </details>
 }}
@@ -56,12 +45,12 @@ A \code{ECDF} object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-Empirical Cumulative Distribution Function-plot_ecdf"></a>}}
-\if{latex}{\out{\hypertarget{method-Empirical Cumulative Distribution Function-plot_ecdf}{}}}
-\subsection{Method \code{plot_ecdf()}}{
-Draw the empirical cumulative distribution function of the data fed (with confidence bounds).
+\if{html}{\out{<a id="method-Empirical Cumulative Distribution Function-plot"></a>}}
+\if{latex}{\out{\hypertarget{method-Empirical Cumulative Distribution Function-plot}{}}}
+\subsection{Method \code{plot()}}{
+Plot the empirical cumulative distribution function of the data fed (with confidence bounds).
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ECDF$plot_ecdf()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ECDF$plot()}\if{html}{\out{</div>}}
 }
 
 \subsection{Returns}{

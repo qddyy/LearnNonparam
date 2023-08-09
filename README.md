@@ -48,15 +48,15 @@ library(LearnNonparam)
 - check the results
 
   ``` r
-  print(t$statistic)
-  #> [1] 35
-  print(t$p_value)
-  #> [1] 0.0016
-
-  print(t$estimate)
-  #> [1] 6
-  print(t$ci)
-  #> [1] 3 9
+  t # or t$print()
+  #> 
+  #>   Two Sample Wilcoxon Test
+  #> 
+  #> statistic = 35, p-value = 0.0023
+  #> alternative hypothesis:
+  #>   true value of the parameter in the null hypothesis is not equal to 0 
+  #> estimate: 30.045
+  #> 95 percent confidence interval: 11.57 50.76
 
   t$plot(bins = 12)
   ```
@@ -76,7 +76,7 @@ There is also support for chaining method calls, which means that you
 can do things like
 
 ``` r
-pmt("twosample.wilcoxon", type = "permu", n_permu = 10000)$feed(Table2.6.2)$plot_hist(bins = 12)$p_value
+pmt("twosample.wilcoxon", type = "permu", n_permu = 10000)$feed(Table2.6.2)$print()$plot()
 ```
 
 ## Help
