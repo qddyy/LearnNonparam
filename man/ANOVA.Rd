@@ -2,6 +2,7 @@
 % Please edit documentation in R/ANOVA.R
 \name{ANOVA}
 \alias{ANOVA}
+\alias{ksample.anova}
 \title{K Sample Test Based on F Statistic}
 \description{
 Performs F statistic based k sample permutation test on data vectors.

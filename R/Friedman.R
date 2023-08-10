@@ -2,6 +2,7 @@
 #' 
 #' @description Performs Friedman test on data for a randomized complete block design. 
 #' 
+#' @aliases rcbd.friedman
 #' 
 #' @export
 #' 

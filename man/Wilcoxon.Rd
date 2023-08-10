@@ -2,6 +2,7 @@
 % Please edit documentation in R/Wilcoxon.R
 \name{Wilcoxon}
 \alias{Wilcoxon}
+\alias{twosample.wilcoxon}
 \title{Two Sample Wilcoxon Test}
 \description{
 Performs two sample Wilcoxon test, which is equivalant to the Mann-Whitney test, on data vectors. In addition, an estimation and a confidence interval of the location parameter will be calculated.

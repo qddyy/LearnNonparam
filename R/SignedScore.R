@@ -2,6 +2,7 @@
 #' 
 #' @description Performs two sample signed score test on data vectors. 
 #' 
+#' @aliases paired.signedscore
 #' 
 #' @export
 #' 

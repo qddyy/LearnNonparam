@@ -2,6 +2,7 @@
 #' 
 #' @description Performs k sample Jonckheere-Terpstra Test on data vectors. 
 #' 
+#' @aliases ksample.jt
 #' 
 #' @export
 #' 

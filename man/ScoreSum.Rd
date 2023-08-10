@@ -2,6 +2,7 @@
 % Please edit documentation in R/ScoreSum.R
 \name{ScoreSum}
 \alias{ScoreSum}
+\alias{twosample.scoresum}
 \title{Score Sum Test}
 \description{
 Performs two sample score sum test on data vectors, which is almost the same as wilcoxon rank sum test but uses not only rank but also scoring systems other than it.

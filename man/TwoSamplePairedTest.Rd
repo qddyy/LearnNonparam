@@ -4,7 +4,7 @@
 \alias{TwoSamplePairedTest}
 \title{TwoSamplePairedTest Class}
 \description{
-This Test specializes \code{PermuTest} for paired two sample permutation tests. Note that it is not recommended to create objects of this class directly.
+This class specializes \code{PermuTest} for paired two sample permutation tests. Note that it is not recommended to create objects of this class directly.
 }
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{TwoSamplePairedTest}

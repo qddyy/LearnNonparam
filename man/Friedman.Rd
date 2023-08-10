@@ -2,6 +2,7 @@
 % Please edit documentation in R/Friedman.R
 \name{Friedman}
 \alias{Friedman}
+\alias{rcbd.friedman}
 \title{Friedman Test}
 \description{
 Performs Friedman test on data for a randomized complete block design.

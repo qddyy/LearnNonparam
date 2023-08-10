@@ -2,6 +2,7 @@
 % Please edit documentation in R/TukeyHSD.R
 \name{TukeyHSD}
 \alias{TukeyHSD}
+\alias{multicomp.tukey}
 \title{Tukey's HSD}
 \description{
 Performs Tukey's honest significant difference method on data vectors. Note that procedure modified by Kramer is performed for unequal sample sizes.

@@ -2,6 +2,7 @@
 % Please edit documentation in R/Sign.R
 \name{Sign}
 \alias{Sign}
+\alias{paired.sign}
 \title{Sign Test}
 \description{
 Performs two sample sign test on data vectors.

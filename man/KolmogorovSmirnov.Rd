@@ -2,6 +2,7 @@
 % Please edit documentation in R/KolmogorovSmirnov.R
 \name{KolmogorovSmirnov}
 \alias{KolmogorovSmirnov}
+\alias{twosample.ks}
 \title{Two Sample Kolmogorov-Smirnov Test}
 \description{
 Performs two sample Kolmogorov-Smirnov test on data vectors.

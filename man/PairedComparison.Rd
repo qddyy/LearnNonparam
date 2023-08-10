@@ -2,6 +2,7 @@
 % Please edit documentation in R/PairedComparison.R
 \name{PairedComparison}
 \alias{PairedComparison}
+\alias{paired.comparison}
 \title{Paired Comparison}
 \description{
 Performs two sample paired comparison on data vectors.

@@ -2,6 +2,7 @@
 #' 
 #' @description Performs mean based two sample permutation test on data vectors. 
 #' 
+#' @aliases twosample.mean
 #' 
 #' @export
 #' 

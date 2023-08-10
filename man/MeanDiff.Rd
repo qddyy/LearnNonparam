@@ -2,6 +2,7 @@
 % Please edit documentation in R/MeanDiff.R
 \name{MeanDiff}
 \alias{MeanDiff}
+\alias{twosample.mean}
 \title{Two Sample Test Based on Mean}
 \description{
 Performs mean based two sample permutation test on data vectors.

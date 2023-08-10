@@ -2,6 +2,7 @@
 % Please edit documentation in R/Correlation.R
 \name{Correlation}
 \alias{Correlation}
+\alias{association.corr}
 \title{Two Sample Test Based on Correlation Coefficient}
 \description{
 Performs correlation coefficient based two sample permutation test on data vectors.

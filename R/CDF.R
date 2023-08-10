@@ -1,29 +1,30 @@
-#' @title `r ECDF$private_fields$.name`
+#' @title `r CDF$private_fields$.name`
 #' 
-#' @description This is the abstract base class for empirical cumulative distribution function objects. 
+#' @description Performs statistical inference on population cdf. 
 #' 
+#' @aliases onesample.cdf
 #' 
 #' @export
 #' 
-#' @import ggplot2
 #' @importFrom R6 R6Class
+#' @importFrom ggplot2 ggplot stat_function xlim labs
 
 
-ECDF <- R6Class(
-    classname = "ECDF",
+CDF <- R6Class(
+    classname = "CDF",
     inherit = OneSampleTest,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `ECDF` object. 
+        #' @description Create a new `CDF` object. 
         #' 
-        #' @param conf_level a number specifying confidence level of the interval.
+        #' @param conf_level a number specifying confidence level of the confidence bounds.
         #' 
-        #' @return A `ECDF` object. 
+        #' @return A `CDF` object. 
         initialize = function(conf_level = 0.95) {
             super$initialize(conf_level = conf_level)
         },
 
-        #' @description Plot the empirical cumulative distribution function of the data fed (with confidence bounds). 
+        #' @description Plot the estimate and confidence bounds for population cdf of the data fed. 
         #' 
         #' @return The object itself (invisibly). 
         plot = function() {
@@ -35,18 +36,18 @@ ECDF <- R6Class(
         }
     ),
     private = list(
-        .name = "Empirical Cumulative Distribution Function",
+        .name = "Cumulative Distribution Function",
 
         .print = function(...) {},
 
         .plot = function() {
-            ecdf <- ggplot() +
+            cdf <- ggplot() +
                 stat_function(fun = private$.estimate, geom = "step") +
                 stat_function(fun = private$.ci$lower, geom = "step", linetype = 2) +
                 stat_function(fun = private$.ci$upper, geom = "step", linetype = 2) +
                 xlim(c(min(private$.data), max(private$.data))) +
                 labs(x = "", y = "")
-            print(ecdf)
+            print(cdf)
         },
 
         .calculate_extra = function() {

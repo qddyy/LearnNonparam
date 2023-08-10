@@ -2,6 +2,7 @@
 % Please edit documentation in R/RCBDANOVA.R
 \name{RCBDANOVA}
 \alias{RCBDANOVA}
+\alias{rcbd.anova}
 \title{ANOVA for Randomized Complete Block Design}
 \description{
 Performs F-statistic based permutation test on data for a randomized complete block design.

@@ -2,6 +2,7 @@
 % Please edit documentation in R/MultiCompT.R
 \name{MultiCompT}
 \alias{MultiCompT}
+\alias{multicomp.t}
 \title{Multiple Comparison Based on t Statistic}
 \description{
 Performs t statistic based multiple comparison on data vectors.

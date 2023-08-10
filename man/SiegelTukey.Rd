@@ -2,6 +2,7 @@
 % Please edit documentation in R/SiegelTukey.R
 \name{SiegelTukey}
 \alias{SiegelTukey}
+\alias{twosample.siegel}
 \title{Siegel-Tukey Test}
 \description{
 Performs two sample Siegel-Tukey test on data vectors.

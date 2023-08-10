@@ -2,6 +2,7 @@
 #' 
 #' @description Performs k sample Kruskal-Wallis Test on data vectors. 
 #' 
+#' @aliases ksample.kw
 #' 
 #' @export
 #' 

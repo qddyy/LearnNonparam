@@ -2,6 +2,7 @@
 % Please edit documentation in R/Page.R
 \name{Page}
 \alias{Page}
+\alias{rcbd.page}
 \title{Page Test}
 \description{
 Performs Page test on data for a randomized complete block design.

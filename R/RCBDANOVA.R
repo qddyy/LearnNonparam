@@ -2,6 +2,7 @@
 #' 
 #' @description Performs F-statistic based permutation test on data for a randomized complete block design. 
 #' 
+#' @aliases rcbd.anova
 #' 
 #' @export
 #' 

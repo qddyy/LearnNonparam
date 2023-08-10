@@ -2,6 +2,7 @@
 #' 
 #' @description Performs two sample Kolmogorov-Smirnov test on data vectors. 
 #' 
+#' @aliases twosample.ks
 #' 
 #' @export
 #' 

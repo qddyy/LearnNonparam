@@ -2,6 +2,7 @@
 % Please edit documentation in R/KruskalWallis.R
 \name{KruskalWallis}
 \alias{KruskalWallis}
+\alias{ksample.kw}
 \title{Kruskal-Wallis Test}
 \description{
 Performs k sample Kruskal-Wallis Test on data vectors.

@@ -1,6 +1,6 @@
 tests <- list(
     onesample.quantile = Quantile,
-    onesample.ecdf = ECDF,
+    onesample.cdf = CDF,
 
     twosample.mean = MeanDiff,
     twosample.wilcoxon = Wilcoxon,

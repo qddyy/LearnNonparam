@@ -2,6 +2,7 @@
 #' 
 #' @description Performs two sample sign test on data vectors. 
 #' 
+#' @aliases paired.sign
 #' 
 #' @export
 #' 

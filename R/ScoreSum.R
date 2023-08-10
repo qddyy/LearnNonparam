@@ -2,6 +2,7 @@
 #' 
 #' @description Performs two sample score sum test on data vectors, which is almost the same as wilcoxon rank sum test but uses not only rank but also scoring systems other than it.
 #' 
+#' @aliases twosample.scoresum
 #' 
 #' @export
 #' 

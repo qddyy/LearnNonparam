@@ -5,9 +5,9 @@
 #' 
 #' @export
 #' 
-#' @import ggplot2
 #' @importFrom R6 R6Class
 #' @importFrom arrangements combinations
+#' @importFrom ggplot2 ggplot aes stat_bin geom_vline facet_grid labs theme element_text
 
 
 MultipleComparison <- R6Class(
@@ -66,7 +66,12 @@ MultipleComparison <- R6Class(
                     mapping = aes(xintercept = statistic),
                     linetype = "dashed"
                 ) +
-                facet_grid(j ~ i, scales = "free", switch = "both")
+                facet_grid(j ~ i, scales = "free", switch = "both") +
+                labs(
+                    title = "Permutation Distribution",
+                    x = "Statistic", y = "Count"
+                ) +
+                theme(plot.title = element_text(face = "bold", hjust = 0.5))
             print(histograms)
         },
 

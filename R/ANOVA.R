@@ -2,6 +2,7 @@
 #' 
 #' @description Performs F statistic based k sample permutation test on data vectors. 
 #' 
+#' @aliases ksample.anova
 #' 
 #' @export
 #' 

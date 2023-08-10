@@ -2,6 +2,7 @@
 #' 
 #' @description Performs Page test on data for a randomized complete block design. 
 #' 
+#' @aliases rcbd.page
 #' 
 #' @export
 #' 

@@ -2,6 +2,7 @@
 #' 
 #' @description Performs two sample Siegel-Tukey test on data vectors. 
 #' 
+#' @aliases twosample.siegel
 #' 
 #' @export SiegelTukey
 #' 

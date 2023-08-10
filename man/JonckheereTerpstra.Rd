@@ -2,6 +2,7 @@
 % Please edit documentation in R/JonckheereTerpstra.R
 \name{JonckheereTerpstra}
 \alias{JonckheereTerpstra}
+\alias{ksample.jt}
 \title{Jonckheere-Terpstra Test}
 \description{
 Performs k sample Jonckheere-Terpstra Test on data vectors.

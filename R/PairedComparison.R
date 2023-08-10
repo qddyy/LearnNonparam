@@ -2,6 +2,7 @@
 #' 
 #' @description Performs two sample paired comparison on data vectors. 
 #' 
+#' @aliases paired.comparison
 #' 
 #' @export
 #' 

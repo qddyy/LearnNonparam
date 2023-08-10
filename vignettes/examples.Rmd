@@ -24,7 +24,7 @@ library(LearnNonparam)
 ## Example 1.1.2
 
 ```{r}
-# See ?Quantile
+# See ?Quantile or ?onesample.quantile
 t <- pmt(
     "onesample.quantile", alternative = "greater",
     p = 0.5, null_value = 75
@@ -41,8 +41,8 @@ print(t$ci)
 ## Example 1.2.1
 
 ```{r}
-# See ?ECDF
-t <- pmt("onesample.ecdf")
+# See ?CDF or ?onesample.cdf
+t <- pmt("onesample.cdf")
 
 # See ?Table1.2.1
 t$feed(Table1.2.1)
@@ -53,7 +53,7 @@ t$plot()
 ## Example 1.2.4
 
 ```{r}
-# See ?Quantile
+# See ?Quantile or ?onesample.quantile
 t <- pmt(
     "onesample.quantile",
     p = 0.25, null_value = 0, conf_level = 0.90
@@ -72,7 +72,7 @@ print(t$ci)
 ## Example 2.1.1
 
 ```{r}
-# See ?MeanDiff
+# See ?MeanDiff or ?twosample.mean
 t <- pmt(
     "twosample.mean", alternative = "greater"
 )
@@ -92,7 +92,7 @@ print(t$p_value)
 ## Example 2.1.1 - wilcoxon
 
 ```{r}
-# See ?Wilcoxon
+# See ?Wilcoxon or ?twosample.wilcoxon
 t <- pmt(
     "twosample.wilcoxon", alternative = "greater"
 )
@@ -114,7 +114,7 @@ print(t$p_value)
 ```{r}
 start <- proc.time()
 
-# See ?MeanDiff
+# See ?MeanDiff or ?twosample.mean
 t <- pmt(
     "twosample.mean", alternative = "greater"
 )
@@ -151,7 +151,7 @@ print(end - start)
 ## Example 2.6.1
 
 ```{r}
-# See ?Wilcoxon
+# See ?Wilcoxon or ?twosample.wilcoxon
 t <- pmt(
     "twosample.wilcoxon", alternative = "greater"
 )
@@ -171,7 +171,7 @@ print(t$p_value)
 ## Example 2.6.2
 
 ```{r}
-# See ?Wilcoxon
+# See ?Wilcoxon or ?twosample.wilcoxon
 t <- pmt(
     "twosample.wilcoxon", conf_level = 0.90
 )
@@ -192,7 +192,7 @@ print(t$ci)
 ## Example 2.7.1
 
 ```{r}
-# See ?ScoreSum
+# See ?ScoreSum or ?twosample.scoresum
 t <- pmt(
     "twosample.scoresum", alternative = "greater", scoring = "expon"
 )
@@ -212,7 +212,7 @@ print(t$p_value)
 ## Example 2.8.1
 
 ```{r}
-# See ?SiegelTukey
+# See ?SiegelTukey or ?twosample.siegel
 t <- pmt(
     "twosample.siegel", alternative = "less", type = "approx"
 )
@@ -232,7 +232,7 @@ print(t$p_value)
 ## Example 2.8.2
 
 ```{r}
-# See ?RatioMeanDeviance
+# See ?RatioMeanDeviance or ?twosample.rmd
 t <- pmt(
     "twosample.rmd", alternative = "greater"
 )
@@ -252,6 +252,7 @@ print(t$p_value)
 ## Example 2.8.3
 
 ```{r}
+# See ?KolmogorovSmirnov or ?twosample.ks
 t <- pmt(
     "twosample.ks", n_permu = 5000
 )
@@ -275,7 +276,7 @@ print(t$p_value)
 ## Example 3.1.1
 
 ```{r}
-# See ?ANOVA
+# See ?ANOVA or ?ksample.anova
 t <- pmt(
     "ksample.anova", type = "approx"
 )
@@ -308,7 +309,7 @@ print(t$p_value)
 ## Example 3.2.1
 
 ```{r}
-# See ?KruskalWallis
+# See ?KruskalWallis or ?ksample.kw
 t <- pmt(
     "ksample.kw", type = "approx"
 )
@@ -330,7 +331,7 @@ print(t$p_value)
 ## Example 3.2.2 & 3.2.3
 
 ```{r}
-# See ?KruskalWallis
+# See ?KruskalWallis or ?ksample.kw
 t <- pmt(
     "ksample.kw", n_permu = 4000
 )
@@ -365,7 +366,7 @@ print(t$p_value)
 ## Example 3.3.1
 
 ```{r}
-# See ?MultiCompT
+# See ?MultiCompT or ?multicomp.t
 t <- pmt(
     "multicomp.t", n_permu = 5000
 )
@@ -391,7 +392,7 @@ print(t$multicomp)
 ```
 
 ```{r}
-# See ?TukeyHSD
+# See ?TukeyHSD or ?multicomp.tukey
 t <- pmt(
     "multicomp.tukey", n_permu = 5000
 )
@@ -411,7 +412,7 @@ print(t$multicomp)
 ## Example 3.4.1
 
 ```{r}
-# See ?JonckheereTerpstra
+# See ?JonckheereTerpstra or ?ksample.jt
 t <- pmt(
     "ksample.jt", alternative = "greater", n_permu = 4000
 )
@@ -440,7 +441,7 @@ print(t$p_value)
 ## Table 4.1.1
 
 ```{r}
-# See ?PairedComparison
+# See ?PairedComparison or ?paired.comparison
 t <- pmt(
     "paired.comparison", alternative = "greater"
 )
@@ -463,7 +464,7 @@ print(t$p_value)
 ## Table 4.1.3
 
 ```{r}
-# See ?PairedComparison
+# See ?PairedComparison or ?paired.comparison
 t <- pmt(
     "paired.comparison", alternative = "two_sided", n_permu = 4000
 )
@@ -485,7 +486,7 @@ print(t$p_value)
 ## Example 4.2.1 & 4.2.2
 
 ```{r}
-# See ?SignedScore
+# See ?Sign or ?paired.signedScore or ?paired.signedscore
 t <- pmt(
     "paired.signedscore", alternative = "greater",
     ranking_method = "with_zeros"
@@ -512,7 +513,7 @@ print(t$p_value)
 ## Table 4.2.3
 
 ```{r}
-# See ?SignedScore
+# See ?Sign or ?paired.signedScore or ?paired.signedscore
 t <- pmt(
     "paired.signedscore", alternative = "greater",
     ranking_method = "ignore"
@@ -533,7 +534,7 @@ print(t$p_value)
 ## Example 4.3.1
 
 ```{r}
-# See ?Sign
+# See ?Sign or ?paired.sign
 t <- pmt(
     "paired.sign", alternative = "greater"
 )
@@ -553,7 +554,7 @@ print(t$p_value)
 ## Example 4.4.1
 
 ```{r}
-# See ?RCBDANOVA
+# See ?RCBDANOVA or ?rcbd.anova
 t <- pmt(
     "rcbd.anova", n_permu = 5000
 )
@@ -584,7 +585,7 @@ print(t$p_value)
 ## Example 4.5.2
 
 ```{r}
-# See ?Friedman
+# See ?Friedman or ?rcbd.friedman
 t <- pmt(
     "rcbd.friedman", n_permu = 5000
 )
@@ -612,7 +613,7 @@ print(t$p_value)
 ## Example 4.6.1
 
 ```{r}
-# See ?Page
+# See ?Page or ?rcbd.page
 t <- pmt(
     "rcbd.page", alternative = "less", n_permu = 5000
 )
@@ -644,7 +645,7 @@ print(t$p_value)
 ## Example 5.1.1
 
 ```{r}
-# See ?Correlation
+# See ?Correlation or ?association.corr
 t <- pmt(
     "association.corr", method = "pearson",
     alternative = "greater", n_permu = 2000
@@ -665,7 +666,7 @@ print(t$p_value)
 ## Example 5.2.1
 
 ```{r}
-# See ?Correlation
+# See ?Correlation or ?association.corr
 t <- pmt(
     "association.corr", method = "spearman",
     alternative = "greater", n_permu = 5000
@@ -690,7 +691,7 @@ print(t$p_value)
 ## Example 5.3.2
 
 ```{r}
-# See ?Correlation
+# See ?Correlation or ?association.corr
 t <- pmt(
     "association.corr", method = "kendall",
     alternative = "greater", type = "approx"
@@ -711,7 +712,7 @@ print(t$p_value)
 ## Table 5.4.2
 
 ```{r}
-# See ?ChiSquare
+# See ?ChiSquare or ?table.chi
 t <- pmt(
     "table.chi", n_permu = 2000
 )

@@ -2,6 +2,7 @@
 #' 
 #' @description Performs two sample Ansari-Bradley test on data vectors. 
 #' 
+#' @aliases twosample.ansari
 #' 
 #' @export AnsariBradley
 #' 

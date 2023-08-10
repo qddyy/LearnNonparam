@@ -1,12 +1,12 @@
 #' @title PermuTest Class
 #' 
-#' @description This is the abstract base class for permutation test objects, which contains several scoring systems. 
+#' @description This is the abstract base class for permutation test objects, which contains several scoring systems. Note that it is not recommended to create objects of this class directly. 
 #' 
 #' 
 #' @export
 #' 
-#' @import ggplot2
 #' @importFrom R6 R6Class
+#' @importFrom ggplot2 ggplot aes stat_bin geom_vline labs theme element_text
 
 
 PermuTest <- R6Class(

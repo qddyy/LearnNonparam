@@ -2,6 +2,7 @@
 % Please edit documentation in R/RatioMeanDeviance.R
 \name{RatioMeanDeviance}
 \alias{RatioMeanDeviance}
+\alias{twosample.rmd}
 \title{Ratio Mean Deviance Test}
 \description{
 Performs two sample ratio mean deviance test on data vectors.

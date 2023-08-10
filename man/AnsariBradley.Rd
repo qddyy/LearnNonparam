@@ -2,6 +2,7 @@
 % Please edit documentation in R/AnsariBradley.R
 \name{AnsariBradley}
 \alias{AnsariBradley}
+\alias{twosample.ansari}
 \title{Ansari-Bradley Test}
 \description{
 Performs two sample Ansari-Bradley test on data vectors.

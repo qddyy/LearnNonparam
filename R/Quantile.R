@@ -2,6 +2,7 @@
 #' 
 #' @description Performs one sample quantile test on data vectors. In addition, a confidence interval will be calculated. 
 #' 
+#' @aliases onesample.quantile
 #' 
 #' @export
 #' 

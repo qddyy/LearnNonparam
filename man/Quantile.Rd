@@ -2,6 +2,7 @@
 % Please edit documentation in R/Quantile.R
 \name{Quantile}
 \alias{Quantile}
+\alias{onesample.quantile}
 \title{Quantile Test}
 \description{
 Performs one sample quantile test on data vectors. In addition, a confidence interval will be calculated.

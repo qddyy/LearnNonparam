@@ -2,6 +2,7 @@
 % Please edit documentation in R/SignedScore.R
 \name{SignedScore}
 \alias{SignedScore}
+\alias{paired.signedscore}
 \title{Signed Score Test}
 \description{
 Performs two sample signed score test on data vectors.

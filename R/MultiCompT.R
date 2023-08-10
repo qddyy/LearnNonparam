@@ -2,6 +2,7 @@
 #' 
 #' @description Performs t statistic based multiple comparison on data vectors. 
 #' 
+#' @aliases multicomp.t
 #' 
 #' @export
 #' 

@@ -2,6 +2,7 @@
 #' 
 #' @description Performs correlation coefficient based two sample permutation test on data vectors. 
 #' 
+#' @aliases association.corr
 #' 
 #' @export
 #' 

@@ -2,6 +2,7 @@
 #' 
 #' @description Performs two sample ratio mean deviance test on data vectors. 
 #' 
+#' @aliases twosample.rmd
 #' 
 #' @export
 #' 

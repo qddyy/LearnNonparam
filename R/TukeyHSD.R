@@ -2,6 +2,7 @@
 #' 
 #' @description Performs Tukey's honest significant difference method on data vectors. Note that procedure modified by Kramer is performed for unequal sample sizes. 
 #' 
+#' @aliases multicomp.tukey
 #' 
 #' @export
 #' 
