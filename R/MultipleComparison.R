@@ -117,7 +117,7 @@ MultipleComparison <- R6Class(
                 as.data.frame(cbind(
                     t(vapply(private$.c_groups, as.integer, integer(2))),
                     private$.statistic, private$.p_value
-                )), c("i", "j", "statistic", "p")
+                )), c("i", "j", "statistic", "p_value")
             )
 
             private$.multicomp$differ <- (private$.p_value < 1 - private$.conf_level)
