@@ -75,7 +75,7 @@ RCBD <- R6Class(
             )
         },
 
-        .calculate_scores = function() {
+        .calculate_score = function() {
             private$.data <- do.call(
                 data.frame, lapply(
                     X = private$.data, FUN = score,
