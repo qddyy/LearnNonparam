@@ -21,13 +21,7 @@ OneSampleTest <- R6Class(
         .plot = function() {},
 
         .feed = function(x) {
-            private$.data <- x
-        },
-
-        .calculate = function() {
-            private$.calculate_statistic()
-            private$.calculate_p()
-            private$.calculate_extra()
+            private$.raw_data <- x
         }
     )
 )

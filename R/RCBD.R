@@ -30,7 +30,7 @@ RCBD <- R6Class(
             rownames(data) <- paste0("treatment_", seq_len(dim[1]))
             colnames(data) <- paste0("block_", seq_len(dim[2]))
 
-            private$.data <- data
+            private$.raw_data <- data
         },
 
         .permute = function() {

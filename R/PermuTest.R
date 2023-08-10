@@ -85,6 +85,8 @@ PermuTest <- R6Class(
 
         .n_permu = NULL,
 
+        .raw_data = NULL,
+
         .data = NULL,
         .data_permu = NULL,
 
@@ -170,7 +172,7 @@ PermuTest <- R6Class(
 
         # @Override
         .feed = function(...) {
-            # private$.data <- ...
+            # private$.raw_data <- ...
         },
 
         # @Override
@@ -218,6 +220,7 @@ PermuTest <- R6Class(
         },
 
         .calculate = function() {
+            private$.data <- private$.raw_data
             if (private$.scoring != "none") {
                 private$.calculate_score()
             }
@@ -242,9 +245,7 @@ PermuTest <- R6Class(
             } else {
                 private$.type <- value
                 private$.check()
-                if (!is.null(private$.data)) {
-                    private$.calculate()
-                }
+                private$.calculate()
             }
         },
         #' @field method The method used. 
@@ -254,9 +255,7 @@ PermuTest <- R6Class(
             } else {
                 private$.method <- value
                 private$.check()
-                if (!is.null(private$.data)) {
-                    private$.calculate()
-                }
+                private$.calculate()
             }
         },
         #' @field scoring The scoring system used. 
@@ -266,9 +265,7 @@ PermuTest <- R6Class(
             } else {
                 private$.scoring <- value
                 private$.check()
-                if (!is.null(private$.data)) {
-                    private$.calculate()
-                }
+                private$.calculate()
             }
         },
         #' @field null_value The value of the parameter in the null hypothesis. 
@@ -278,9 +275,7 @@ PermuTest <- R6Class(
             } else {
                 private$.null_value <- value
                 private$.check()
-                if (!is.null(private$.data)) {
-                    private$.calculate()
-                }
+                private$.calculate()
             }
         },
         #' @field alternative The alternative hypothesis. 
@@ -290,12 +285,10 @@ PermuTest <- R6Class(
             } else {
                 private$.alternative <- value
                 private$.check()
-                if (!is.null(private$.data)) {
-                    if (private$.type == "permu") {
-                        private$.calculate_p_permu()
-                    } else {
-                        private$.calculate_p()
-                    }
+                if (private$.type == "permu") {
+                    private$.calculate_p_permu()
+                } else {
+                    private$.calculate_p()
                 }
             }
         },
@@ -306,9 +299,7 @@ PermuTest <- R6Class(
             } else {
                 private$.conf_level <- value
                 private$.check()
-                if (!is.null(private$.data)) {
-                    private$.calculate_extra()
-                }
+                private$.calculate_extra()
             }
         },
         #' @field n_permu The number of permutations used. 
@@ -318,7 +309,7 @@ PermuTest <- R6Class(
             } else {
                 private$.n_permu <- value
                 private$.check()
-                if (!is.null(private$.data) & private$.type == "permu") {
+                if (private$.type == "permu") {
                     private$.calculate()
                 }
             }

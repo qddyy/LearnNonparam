@@ -26,7 +26,7 @@ TwoSampleTest <- R6Class(
 
             names(data) <- c("x", "y")
 
-            private$.data <- data
+            private$.raw_data <- data
         },
 
         .permute = function() {

@@ -41,14 +41,6 @@ Wilcoxon <- R6Class(
 
         .correct = NULL,
 
-        .raw_data = NULL,
-
-        .feed = function(...) {
-            super$.feed(...)
-
-            private$.raw_data <- private$.data
-        },
-
         .calculate_p = function() {
             m <- length(private$.data$x)
             n <- length(private$.data$y)

@@ -19,7 +19,7 @@ ContingencyTableTest <- R6Class(
         .check = function() {}, # TODO
 
         .feed = function(table) {
-            private$.data <- as.matrix(table)
+            private$.raw_data <- as.matrix(table)
         },
 
         .permute = function() {
