@@ -29,8 +29,6 @@ SiegelTukey <- R6Class(
             super$initialize(...)
 
             private$.scoring <- "Siegel-Tukey rank"
-
-            private$.statistic_func <- function(x, y) sum(x)
         }
     ),
     private = list(
@@ -43,10 +41,6 @@ SiegelTukey <- R6Class(
         .calculate_extra = function() {},
 
         .calculate_p = function() {
-            raw_statistic <- private$.statistic
-            m <- length(private$.data$x)
-            private$.statistic <- raw_statistic - m * (m + 1) / 2
-
             raw_alternative <- private$.alternative
             private$.alternative <- switch(raw_alternative,
                 greater = "less", less = "greater", two_sided = "two_sided"
@@ -54,7 +48,6 @@ SiegelTukey <- R6Class(
 
             super$.calculate_p()
 
-            private$.statistic <- raw_statistic
             private$.alternative <- raw_alternative
         },
 

@@ -32,10 +32,7 @@ Wilcoxon <- R6Class(
 
             super$initialize(scoring = "rank", alternative = match.arg(alternative), n_permu = n_permu, conf_level = conf_level)
 
-            private$.statistic_func <- function(x, y) {
-                m <- length(x)
-                sum(x) - m * (m + 1) / 2
-            }
+            private$.statistic_func <- function(x, y) sum(x)
         }
     ),
     private = list(
@@ -56,23 +53,25 @@ Wilcoxon <- R6Class(
             m <- length(private$.data$x)
             n <- length(private$.data$y)
 
+            statistic <- private$.statistic - m * (m + 1) / 2
+
             ties <- tabulate(c(private$.data$x, private$.data$y))
             if (any(ties > 1)) {
                 private$.type <- "approx"
             }
-    
+
             if (private$.type == "exact") {
-                less <- pwilcox(private$.statistic, m, n)
-                greater <- pwilcox(private$.statistic - 1, m, n, lower.tail = FALSE)
+                less <- pwilcox(statistic, m, n)
+                greater <- pwilcox(statistic - 1, m, n, lower.tail = FALSE)
                 two_sided <- min(1, 2 * (
-                    if (private$.statistic > m * n / 2) greater else less
+                    if (statistic > m * n / 2) greater else less
                 ))
             }
 
             if (private$.type == "approx") {
                 N <- m + n
 
-                z <- private$.statistic - m * n / 2
+                z <- statistic - m * n / 2
                 correction <- if (private$.correct) switch(private$.alternative,
                     two_sided = sign(z) * 0.5, greater = 0.5, less = -0.5
                 ) else 0
