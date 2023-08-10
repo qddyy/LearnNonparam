@@ -3,7 +3,7 @@
 
 [![R-CMD-check](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml)
 
-This package implements the tests in chapters 1-5 of [Higgins
+This package implements most of the tests in chapters 1-5 of [Higgins
 (2003)](#references).
 
 It uses [R6](https://cran.r-project.org/package=R6) for clean OO-design
@@ -12,12 +12,11 @@ fast generation of permutations.
 
 ## Installation
 
-You can install the development version of LearnNonparam from
-[GitHub](https://github.com/) with:
+You can install the development version of this package with:
 
 ``` r
-# install.packages("devtools")
-devtools::install_github("qddyy/LearnNonparam")
+# install.packages('remotes')
+remotes::install_github('qddyy/LearnNonparam')
 ```
 
 ## Usage
@@ -52,7 +51,7 @@ library(LearnNonparam)
   #> 
   #>   Two Sample Wilcoxon Test
   #> 
-  #> statistic = 35, p-value = 0.0023
+  #> statistic = 56, p-value = 0.0028
   #> alternative hypothesis:
   #>   true value of the parameter in the null hypothesis is not equal to 0 
   #> estimate: 30.045
@@ -83,10 +82,22 @@ pmt("twosample.wilcoxon", type = "permu", n_permu = 10000)$feed(Table2.6.2)$prin
 
 Just use `?...` syntax.
 
-If you want to know all available methods and attributes, you can start
-by exploring `?PermuTest` (all tests’ **base class**).
+If you want to know available methods and attributes, you can start by
+exploring `?PermuTest` (all tests’ **base class**).
 
-If you want to know all available tests, see `pmts()`.
+If you want to know available tests, see `pmts()`.
+
+``` r
+pmts("twosample")
+#>                 key             class                               test
+#>      twosample.mean          MeanDiff      Two Sample Test Based on Mean
+#>  twosample.wilcoxon          Wilcoxon           Two Sample Wilcoxon Test
+#>  twosample.scoresum          ScoreSum                     Score Sum Test
+#>    twosample.ansari     AnsariBradley                Ansari-Bradley Test
+#>    twosample.siegel       SiegelTukey                  Siegel-Tukey Test
+#>       twosample.rmd RatioMeanDeviance           Ratio Mean Deviance Test
+#>        twosample.ks KolmogorovSmirnov Two Sample Kolmogorov-Smirnov Test
+```
 
 ## References
 

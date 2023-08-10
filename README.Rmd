@@ -2,7 +2,6 @@
 bibliography: ref.bib
 output:
   github_document:
-    html_preview: false
     fig_width: 8
     fig_height: 6
     dev: svg
@@ -20,17 +19,17 @@ knitr::opts_chunk$set(
 [![R-CMD-check](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml)
 
 
-This package implements the tests in chapters 1-5 of [@Higgins2003](#references).
+This package implements most of the tests in chapters 1-5 of [@Higgins2003](#references).
 
 It uses [R6](https://cran.r-project.org/package=R6) for clean OO-design and [arrangements](https://cran.r-project.org/package=arrangements) for fast generation of permutations.
 
 ## Installation
 
-You can install the development version of LearnNonparam from [GitHub](https://github.com/) with:
+You can install the development version of this package with:
 
 ```{r, eval = FALSE}
-# install.packages("devtools")
-devtools::install_github("qddyy/LearnNonparam")
+# install.packages('remotes')
+remotes::install_github('qddyy/LearnNonparam')
 ```
 
 ## Usage
@@ -78,8 +77,12 @@ pmt("twosample.wilcoxon", type = "permu", n_permu = 10000)$feed(Table2.6.2)$prin
 
 Just use `?...` syntax. 
 
-If you want to know all available methods and attributes, you can start by exploring `?PermuTest` (all tests' **base class**). 
+If you want to know available methods and attributes, you can start by exploring `?PermuTest` (all tests' **base class**). 
 
-If you want to know all available tests, see `pmts()`. 
+If you want to know available tests, see `pmts()`. 
+
+```{r}
+pmts("twosample")
+```
 
 ## References
