@@ -28,6 +28,9 @@
     <loc>/reference/AnsariBradley.html</loc>
   </url>
   <url>
+    <loc>/reference/CDF.html</loc>
+  </url>
+  <url>
     <loc>/reference/ChiSquare.html</loc>
   </url>
   <url>
@@ -35,9 +38,6 @@
   </url>
   <url>
     <loc>/reference/Correlation.html</loc>
-  </url>
-  <url>
-    <loc>/reference/ECDF.html</loc>
   </url>
   <url>
     <loc>/reference/Friedman.html</loc>

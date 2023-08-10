@@ -87,7 +87,7 @@
 <h3 id="example-1-1-2">Example 1.1.2<a class="anchor" aria-label="anchor" href="#example-1-1-2"></a>
 </h3>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?Quantile</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?Quantile or ?onesample.quantile</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"onesample.quantile"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>,</span>
 <span>    p <span class="op">=</span> <span class="fl">0.5</span>, null_value <span class="op">=</span> <span class="fl">75</span></span>
@@ -107,8 +107,8 @@
 <h3 id="example-1-2-1">Example 1.2.1<a class="anchor" aria-label="anchor" href="#example-1-2-1"></a>
 </h3>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?ECDF</span></span>
-<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span><span class="st">"onesample.ecdf"</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?CDF or ?onesample.cdf</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span><span class="st">"onesample.cdf"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># See ?Table1.2.1</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">feed</span><span class="op">(</span><span class="va">Table1.2.1</span><span class="op">)</span></span>
@@ -120,7 +120,7 @@
 <h3 id="example-1-2-4">Example 1.2.4<a class="anchor" aria-label="anchor" href="#example-1-2-4"></a>
 </h3>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?Quantile</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?Quantile or ?onesample.quantile</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"onesample.quantile"</span>,</span>
 <span>    p <span class="op">=</span> <span class="fl">0.25</span>, null_value <span class="op">=</span> <span class="fl">0</span>, conf_level <span class="op">=</span> <span class="fl">0.90</span></span>
@@ -141,7 +141,7 @@
 <h3 id="example-2-1-1">Example 2.1.1<a class="anchor" aria-label="anchor" href="#example-2-1-1"></a>
 </h3>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?MeanDiff</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?MeanDiff or ?twosample.mean</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"twosample.mean"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span></span>
 <span><span class="op">)</span></span>
@@ -163,7 +163,7 @@
 <h3 id="example-2-1-1---wilcoxon">Example 2.1.1 - wilcoxon<a class="anchor" aria-label="anchor" href="#example-2-1-1---wilcoxon"></a>
 </h3>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?Wilcoxon</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?Wilcoxon or ?twosample.wilcoxon</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"twosample.wilcoxon"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span></span>
 <span><span class="op">)</span></span>
@@ -177,7 +177,7 @@
 <span><span class="co"># )</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 11</span></span>
+<span><span class="co">#&gt; [1] 21</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.05714286</span></span></code></pre></div>
 </div>
@@ -187,7 +187,7 @@
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/proc.time.html" class="external-link">proc.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
-<span><span class="co"># See ?MeanDiff</span></span>
+<span><span class="co"># See ?MeanDiff or ?twosample.mean</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"twosample.mean"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span></span>
 <span><span class="op">)</span></span>
@@ -210,7 +210,7 @@
 <span><span class="co"># time: all permutaions</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.194   0.004   0.198</span></span>
+<span><span class="co">#&gt;   0.192   0.008   0.200</span></span>
 <span></span>
 <span></span>
 <span><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/proc.time.html" class="external-link">proc.time</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -218,20 +218,20 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.179</span></span>
+<span><span class="co">#&gt; [1] 0.192</span></span>
 <span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/proc.time.html" class="external-link">proc.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># time: 1000 permutaions</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.027   0.000   0.027</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.025   0.000   0.025</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-2-6-1">Example 2.6.1<a class="anchor" aria-label="anchor" href="#example-2-6-1"></a>
 </h3>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?Wilcoxon</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?Wilcoxon or ?twosample.wilcoxon</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"twosample.wilcoxon"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span></span>
 <span><span class="op">)</span></span>
@@ -245,7 +245,7 @@
 <span><span class="co"># )</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 4</span></span>
+<span><span class="co">#&gt; [1] 14</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.9</span></span></code></pre></div>
 </div>
@@ -253,7 +253,7 @@
 <h3 id="example-2-6-2">Example 2.6.2<a class="anchor" aria-label="anchor" href="#example-2-6-2"></a>
 </h3>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?Wilcoxon</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?Wilcoxon or ?twosample.wilcoxon</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"twosample.wilcoxon"</span>, conf_level <span class="op">=</span> <span class="fl">0.90</span></span>
 <span><span class="op">)</span></span>
@@ -276,7 +276,7 @@
 <h3 id="example-2-7-1">Example 2.7.1<a class="anchor" aria-label="anchor" href="#example-2-7-1"></a>
 </h3>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?ScoreSum</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?ScoreSum or ?twosample.scoresum</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"twosample.scoresum"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>, scoring <span class="op">=</span> <span class="st">"expon"</span></span>
 <span><span class="op">)</span></span>
@@ -298,7 +298,7 @@
 <h3 id="example-2-8-1">Example 2.8.1<a class="anchor" aria-label="anchor" href="#example-2-8-1"></a>
 </h3>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?SiegelTukey</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?SiegelTukey or ?twosample.siegel</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"twosample.siegel"</span>, alternative <span class="op">=</span> <span class="st">"less"</span>, type <span class="op">=</span> <span class="st">"approx"</span></span>
 <span><span class="op">)</span></span>
@@ -320,7 +320,7 @@
 <h3 id="example-2-8-2">Example 2.8.2<a class="anchor" aria-label="anchor" href="#example-2-8-2"></a>
 </h3>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?RatioMeanDeviance</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?RatioMeanDeviance or ?twosample.rmd</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"twosample.rmd"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span></span>
 <span><span class="op">)</span></span>
@@ -342,7 +342,8 @@
 <h3 id="example-2-8-3">Example 2.8.3<a class="anchor" aria-label="anchor" href="#example-2-8-3"></a>
 </h3>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?KolmogorovSmirnov or ?twosample.ks</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"twosample.ks"</span>, n_permu <span class="op">=</span> <span class="fl">5000</span></span>
 <span><span class="op">)</span></span>
 <span></span>
@@ -357,7 +358,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.4</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.8106</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.817</span></span></code></pre></div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -368,7 +369,7 @@
 <h3 id="example-3-1-1">Example 3.1.1<a class="anchor" aria-label="anchor" href="#example-3-1-1"></a>
 </h3>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?ANOVA</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?ANOVA or ?ksample.anova</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"ksample.anova"</span>, type <span class="op">=</span> <span class="st">"approx"</span></span>
 <span><span class="op">)</span></span>
@@ -399,13 +400,13 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 11552.89</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.055</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.059</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-3-2-1">Example 3.2.1<a class="anchor" aria-label="anchor" href="#example-3-2-1"></a>
 </h3>
 <div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?KruskalWallis</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?KruskalWallis or ?ksample.kw</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"ksample.kw"</span>, type <span class="op">=</span> <span class="st">"approx"</span></span>
 <span><span class="op">)</span></span>
@@ -429,7 +430,7 @@
 <h3 id="example-3-2-2-3-2-3">Example 3.2.2 &amp; 3.2.3<a class="anchor" aria-label="anchor" href="#example-3-2-2-3-2-3"></a>
 </h3>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?KruskalWallis</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?KruskalWallis or ?ksample.kw</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"ksample.kw"</span>, n_permu <span class="op">=</span> <span class="fl">4000</span></span>
 <span><span class="op">)</span></span>
@@ -459,7 +460,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">4000</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"permu"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.01375</span></span>
+<span><span class="co">#&gt; [1] 0.013</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
@@ -469,7 +470,7 @@
 <h3 id="example-3-3-1">Example 3.3.1<a class="anchor" aria-label="anchor" href="#example-3-3-1"></a>
 </h3>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?MultiCompT</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?MultiCompT or ?multicomp.t</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"multicomp.t"</span>, n_permu <span class="op">=</span> <span class="fl">5000</span></span>
 <span><span class="op">)</span></span>
@@ -496,7 +497,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">multicomp</span><span class="op">)</span></span>
 <span><span class="co">#&gt; NULL</span></span></code></pre></div>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?TukeyHSD</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?TukeyHSD or ?multicomp.tukey</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"multicomp.tukey"</span>, n_permu <span class="op">=</span> <span class="fl">5000</span></span>
 <span><span class="op">)</span></span>
@@ -519,7 +520,7 @@
 <h3 id="example-3-4-1">Example 3.4.1<a class="anchor" aria-label="anchor" href="#example-3-4-1"></a>
 </h3>
 <div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?JonckheereTerpstra</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?JonckheereTerpstra or ?ksample.jt</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"ksample.jt"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>, n_permu <span class="op">=</span> <span class="fl">4000</span></span>
 <span><span class="op">)</span></span>
@@ -537,7 +538,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 145</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.03025</span></span>
+<span><span class="co">#&gt; [1] 0.0315</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
@@ -552,7 +553,7 @@
 <h3 id="table-4-1-1">Table 4.1.1<a class="anchor" aria-label="anchor" href="#table-4-1-1"></a>
 </h3>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?PairedComparison</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?PairedComparison or ?paired.comparison</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"paired.comparison"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span></span>
 <span><span class="op">)</span></span>
@@ -572,13 +573,13 @@
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">4000</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.09925</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.094</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="table-4-1-3">Table 4.1.3<a class="anchor" aria-label="anchor" href="#table-4-1-3"></a>
 </h3>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?PairedComparison</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?PairedComparison or ?paired.comparison</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"paired.comparison"</span>, alternative <span class="op">=</span> <span class="st">"two_sided"</span>, n_permu <span class="op">=</span> <span class="fl">4000</span></span>
 <span><span class="op">)</span></span>
@@ -592,7 +593,7 @@
 <span><span class="co"># )</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.0255</span></span>
+<span><span class="co">#&gt; [1] 0.02175</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
@@ -602,7 +603,7 @@
 <h3 id="example-4-2-1-4-2-2">Example 4.2.1 &amp; 4.2.2<a class="anchor" aria-label="anchor" href="#example-4-2-1-4-2-2"></a>
 </h3>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?SignedScore</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?Sign or ?paired.signedScore or ?paired.signedscore</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"paired.signedscore"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>,</span>
 <span>    ranking_method <span class="op">=</span> <span class="st">"with_zeros"</span></span>
@@ -623,7 +624,7 @@
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">4000</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.09175</span></span>
+<span><span class="co">#&gt; [1] 0.098</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
@@ -633,7 +634,7 @@
 <h3 id="table-4-2-3">Table 4.2.3<a class="anchor" aria-label="anchor" href="#table-4-2-3"></a>
 </h3>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?SignedScore</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?Sign or ?paired.signedScore or ?paired.signedscore</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"paired.signedscore"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>,</span>
 <span>    ranking_method <span class="op">=</span> <span class="st">"ignore"</span></span>
@@ -651,13 +652,13 @@
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">4000</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.244</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.26075</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-4-3-1">Example 4.3.1<a class="anchor" aria-label="anchor" href="#example-4-3-1"></a>
 </h3>
 <div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?Sign</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?Sign or ?paired.sign</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"paired.sign"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span></span>
 <span><span class="op">)</span></span>
@@ -680,7 +681,7 @@
 <h3 id="example-4-4-1">Example 4.4.1<a class="anchor" aria-label="anchor" href="#example-4-4-1"></a>
 </h3>
 <div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?RCBDANOVA</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?RCBDANOVA or ?rcbd.anova</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"rcbd.anova"</span>, n_permu <span class="op">=</span> <span class="fl">5000</span></span>
 <span><span class="op">)</span></span>
@@ -701,7 +702,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 3968706</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.0562</span></span>
+<span><span class="co">#&gt; [1] 0.056</span></span>
 <span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
@@ -715,7 +716,7 @@
 <h3 id="example-4-5-2">Example 4.5.2<a class="anchor" aria-label="anchor" href="#example-4-5-2"></a>
 </h3>
 <div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?Friedman</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?Friedman or ?rcbd.friedman</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"rcbd.friedman"</span>, n_permu <span class="op">=</span> <span class="fl">5000</span></span>
 <span><span class="op">)</span></span>
@@ -733,7 +734,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 35055.56</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.043</span></span>
+<span><span class="co">#&gt; [1] 0.0384</span></span>
 <span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
@@ -747,7 +748,7 @@
 <h3 id="example-4-6-1">Example 4.6.1<a class="anchor" aria-label="anchor" href="#example-4-6-1"></a>
 </h3>
 <div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?Page</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?Page or ?rcbd.page</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"rcbd.page"</span>, alternative <span class="op">=</span> <span class="st">"less"</span>, n_permu <span class="op">=</span> <span class="fl">5000</span></span>
 <span><span class="op">)</span></span>
@@ -767,7 +768,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 9542</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.0044</span></span>
+<span><span class="co">#&gt; [1] 0.0036</span></span>
 <span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
@@ -783,7 +784,7 @@
 <h3 id="example-5-1-1">Example 5.1.1<a class="anchor" aria-label="anchor" href="#example-5-1-1"></a>
 </h3>
 <div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?Correlation</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?Correlation or ?association.corr</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"association.corr"</span>, method <span class="op">=</span> <span class="st">"pearson"</span>,</span>
 <span>    alternative <span class="op">=</span> <span class="st">"greater"</span>, n_permu <span class="op">=</span> <span class="fl">2000</span></span>
@@ -806,7 +807,7 @@
 <h3 id="example-5-2-1">Example 5.2.1<a class="anchor" aria-label="anchor" href="#example-5-2-1"></a>
 </h3>
 <div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?Correlation</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?Correlation or ?association.corr</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"association.corr"</span>, method <span class="op">=</span> <span class="st">"spearman"</span>,</span>
 <span>    alternative <span class="op">=</span> <span class="st">"greater"</span>, n_permu <span class="op">=</span> <span class="fl">5000</span></span>
@@ -834,7 +835,7 @@
 <h3 id="example-5-3-2">Example 5.3.2<a class="anchor" aria-label="anchor" href="#example-5-3-2"></a>
 </h3>
 <div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?Correlation</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?Correlation or ?association.corr</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"association.corr"</span>, method <span class="op">=</span> <span class="st">"kendall"</span>,</span>
 <span>    alternative <span class="op">=</span> <span class="st">"greater"</span>, type <span class="op">=</span> <span class="st">"approx"</span></span>
@@ -857,7 +858,7 @@
 <h3 id="table-5-4-2">Table 5.4.2<a class="anchor" aria-label="anchor" href="#table-5-4-2"></a>
 </h3>
 <div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?ChiSquare</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?ChiSquare or ?table.chi</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"table.chi"</span>, n_permu <span class="op">=</span> <span class="fl">2000</span></span>
 <span><span class="op">)</span></span>
@@ -868,7 +869,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 4.277778</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.303</span></span>
+<span><span class="co">#&gt; [1] 0.3075</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
