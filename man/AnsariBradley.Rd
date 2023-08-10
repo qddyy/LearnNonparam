@@ -32,7 +32,7 @@ Performs two sample Ansari-Bradley test on data vectors.
 Create a new \code{AnsariBradley} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AnsariBradley$new(
-  type = c("exact", "approx", "permu"),
+  type = c("permu", "approx"),
   alternative = c("two_sided", "less", "greater"),
   n_permu = NULL,
   conf_level = 0.95
@@ -42,7 +42,7 @@ Create a new \code{AnsariBradley} object.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{type}}{a character string specifying the way to calculate p-values, must be one of \code{"exact"} (default), \code{"approx"} or \code{"permu"}. Note that this parameter will be set to \code{"approx"} automatically when there exists ties.}
+\item{\code{type}}{a character string specifying the way to calculate p-values, must be one of \code{"permu"} (default) or \code{"approx"}.}
 
 \item{\code{alternative}}{a character string specifying the alternative hypothesis, must be one of \code{"two_sided"} (default), \code{"greater"} or \code{"less"}.}
 

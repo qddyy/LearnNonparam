@@ -32,7 +32,7 @@ Performs two sample Wilcoxon test, which is equivalant to the Mann-Whitney test,
 Create a new \code{Wilcoxon} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Wilcoxon$new(
-  type = c("exact", "approx", "permu"),
+  type = c("permu", "approx", "exact"),
   correct = TRUE,
   alternative = c("two_sided", "less", "greater"),
   n_permu = NULL,
@@ -43,7 +43,7 @@ Create a new \code{Wilcoxon} object.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{type}}{a character string specifying the way to calculate p-values, must be one of \code{"exact"} (default), \code{"approx"} or \code{"permu"}. Note that this parameter will be set to \code{"approx"} automatically when there exists ties.}
+\item{\code{type}}{a character string specifying the way to calculate p-values, must be one of \code{"permu"} (default), \code{"approx"} or \code{"exact"}. Note that this parameter will be set to \code{"approx"} automatically when there exists ties.}
 
 \item{\code{correct}}{a logical indicating whether to apply continuity correction in the normal approximation for the p-value.}
 
