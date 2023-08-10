@@ -214,7 +214,7 @@ print(t$p_value)
 ```{r}
 # See ?SiegelTukey or ?twosample.siegel
 t <- pmt(
-    "twosample.siegel", alternative = "less", type = "approx"
+    "twosample.siegel", alternative = "greater", type = "approx"
 )
 
 # See ?Table2.8.1
