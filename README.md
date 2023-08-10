@@ -35,29 +35,32 @@ library(LearnNonparam)
   (*Recommended*):
 
   ``` r
-  t <- pmt("twosample.wilcoxon", type = "permu", n_permu = 10000)
+  t <- pmt("twosample.wilcoxon", alternative = "greater", type = "permu", n_permu = 10000)
   ```
 
 - feed it the data (a data frame, a list, or some numeric vectors)
 
   ``` r
-  t$feed(Table2.6.2)
+  t$feed(rnorm(20, mean = 1), rnorm(20, mean = 0))
   ```
 
 - check the results
 
   ``` r
+  print(t$p_value)
+  #> [1] 0.0064
+
   t$print()
   #> 
-  #>   Two Sample Wilcoxon Test
+  #>       Two Sample Wilcoxon Test 
   #> 
-  #> statistic = 56, p-value = 0.0022
-  #> alternative hypothesis:
-  #>   true value of the parameter in the null hypothesis is not equal to 0 
-  #> estimate: 30.045
-  #> 95 percent confidence interval: 11.57 50.76
+  #> type: permu    method: default    
+  #> statistic = 499, p-value = 0.0064, 
+  #> alternative hypothesis: greater 
+  #> estimate: 0.9860916 
+  #> 95 percent confidence interval: 0.2231132 1.8261232
 
-  t$plot(bins = 12)
+  t$plot(bins = 20)
   ```
 
   <img src="man/figures/README-unnamed-chunk-7-1.svg" width="100%" />
@@ -68,7 +71,7 @@ library(LearnNonparam)
   t$type <- "approx"
 
   print(t$p_value)
-  #> [1] 0.008239019
+  #> [1] 0.008334399
   ```
 
 There is also support for chaining method calls, which means that you

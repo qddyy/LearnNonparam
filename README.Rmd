@@ -45,19 +45,21 @@ library(LearnNonparam)
 
     or you can use `pmt` (**p**er**m**utation **t**est) function (*Recommended*):
     ```{r}
-    t <- pmt("twosample.wilcoxon", type = "permu", n_permu = 10000)
+    t <- pmt("twosample.wilcoxon", alternative = "greater", type = "permu", n_permu = 10000)
     ```
 
 - feed it the data (a data frame, a list, or some numeric vectors)
     ```{r}
-    t$feed(Table2.6.2)
+    t$feed(rnorm(20, mean = 1), rnorm(20, mean = 0))
     ```
 
 - check the results
     ```{r}
+    print(t$p_value)
+
     t$print()
 
-    t$plot(bins = 12)
+    t$plot(bins = 20)
     ```
 
 - modify some attributes and see how the results change
