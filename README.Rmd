@@ -28,8 +28,8 @@ It uses [R6](https://cran.r-project.org/package=R6) for clean OO-design and [arr
 You can install the development version of this package with:
 
 ```{r, eval = FALSE}
-# install.packages('remotes')
-remotes::install_github('qddyy/LearnNonparam')
+# install.packages("remotes")
+remotes::install_github("qddyy/LearnNonparam")
 ```
 
 ## Usage
@@ -55,7 +55,7 @@ library(LearnNonparam)
 
 - check the results
     ```{r}
-    t # or t$print()
+    t$print()
 
     t$plot(bins = 12)
     ```
@@ -79,7 +79,7 @@ Just use `?...` syntax.
 
 If you want to know available methods and attributes, you can start by exploring `?PermuTest` (all tests' **base class**). 
 
-If you want to know available tests, see `pmts()`. 
+If you want to know available tests, see `pmts(...)`. 
 
 ```{r}
 pmts("twosample")

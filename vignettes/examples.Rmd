@@ -571,13 +571,10 @@ t$feed(Table4.4.3)
 #     Table4.4.3$block_6
 # )
 
-
 print(t$statistic)
 print(t$p_value)
 
-
 t$type <- "approx"
-# F-statistic
 print(t$statistic)
 print(t$p_value)
 ```
@@ -599,13 +596,10 @@ t$feed(Table4.5.3)
 #     Table4.5.3$block_3
 # )
 
-# Use SSX for speed
 print(t$statistic)
 print(t$p_value)
 
-
 t$type <- "approx"
-# chi-statistic
 print(t$statistic)
 print(t$p_value)
 ```
@@ -632,7 +626,6 @@ t$feed(Table4.4.3)
 
 print(t$statistic)
 print(t$p_value)
-
 
 t$type <- "approx"
 print(t$p_value)

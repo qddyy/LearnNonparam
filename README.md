@@ -15,8 +15,8 @@ fast generation of permutations.
 You can install the development version of this package with:
 
 ``` r
-# install.packages('remotes')
-remotes::install_github('qddyy/LearnNonparam')
+# install.packages("remotes")
+remotes::install_github("qddyy/LearnNonparam")
 ```
 
 ## Usage
@@ -47,11 +47,11 @@ library(LearnNonparam)
 - check the results
 
   ``` r
-  t # or t$print()
+  t$print()
   #> 
   #>   Two Sample Wilcoxon Test
   #> 
-  #> statistic = 56, p-value = 0.0028
+  #> statistic = 56, p-value = 0.0022
   #> alternative hypothesis:
   #>   true value of the parameter in the null hypothesis is not equal to 0 
   #> estimate: 30.045
@@ -85,7 +85,7 @@ Just use `?...` syntax.
 If you want to know available methods and attributes, you can start by
 exploring `?PermuTest` (all tests’ **base class**).
 
-If you want to know available tests, see `pmts()`.
+If you want to know available tests, see `pmts(...)`.
 
 ``` r
 pmts("twosample")
