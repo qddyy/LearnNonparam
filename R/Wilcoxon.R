@@ -41,13 +41,12 @@ Wilcoxon <- R6Class(
 
         .correct = NULL,
 
-        .diff = NULL,
+        .raw_data = NULL,
 
-        .calculate = function() {
-            combn_xy <- expand.grid(x = private$.data$x, y = private$.data$y)
-            private$.diff <- combn_xy$x - combn_xy$y
+        .feed = function(...) {
+            super$.feed(...)
 
-            super$.calculate()
+            private$.raw_data <- private$.data
         },
 
         .calculate_p = function() {
@@ -91,7 +90,13 @@ Wilcoxon <- R6Class(
         },
 
         .calculate_extra = function() {
-            private$.estimate <- median(private$.diff)
+            combn_xy <- expand.grid(
+                x = private$.raw_data$x,
+                y = private$.raw_data$y
+            )
+            diff <- combn_xy$x - combn_xy$y
+
+            private$.estimate <- median(diff)
 
             m <- length(private$.data$x)
             n <- length(private$.data$y)
@@ -103,9 +108,9 @@ Wilcoxon <- R6Class(
             k_a <- round(mu - z * sqrt(sigma2))
             k_b <- round(mu + z * sqrt(sigma2)) + 1
 
-            diff_sorted <- sort(private$.diff)
+            diff_sorted <- sort(diff)
 
-            private$.ci <- if (k_a >= 1 & k_b <= length(diff_sorted)) {
+            private$.ci <- if (k_a >= 1 & k_b <= length(diff)) {
                 c(diff_sorted[k_a], diff_sorted[k_b])
             } else c(NA, NA)
         }
