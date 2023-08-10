@@ -79,7 +79,7 @@ PermuTest <- R6Class(
         .name = "Permutation Test",
 
         .type = "permu",
-        .method = NULL,
+        .method = "default",
 
         .scoring = NULL,
 
@@ -108,11 +108,15 @@ PermuTest <- R6Class(
         .check = function() {},
 
         .print = function(digits) {
-            cat("\n")
-            cat("\t", private$.name)
-            cat("\n\n")
+            cat("\n", "\t", private$.name, "\n\n")
 
-            cat(paste(c(
+            cat(
+                paste("type:", private$.type),
+                paste("method:", private$.method),
+                "\n", sep = "    "
+            )
+
+            cat(
                 paste(
                     "statistic", "=", format(
                         private$.statistic, digits = max(1L, digits - 2L)
@@ -123,23 +127,14 @@ PermuTest <- R6Class(
                     paste(
                         "p-value", if (startsWith(p, "<")) p else paste("=", p)
                     )
-                }
-            ), collapse = ", "), sep = "\n")
-
-            cat("alternative hypothesis:\n")
-            cat(
-                "  true value of the parameter in the null hypothesis is",
-                switch(private$.alternative,
-                    less = "less than",
-                    greater = "greater than",
-                    two_sided = "not equal to"
-                ),
-                format(private$.null_value, digits = digits), "\n"
+                },
+                "\n", sep = ", "
             )
 
+            cat("alternative hypothesis:", private$.alternative, "\n")
+
             if (!is.null(private$.estimate)) {
-                cat("estimate:", format(private$.estimate, digits = digits))
-                cat("\n")
+                cat("estimate:", format(private$.estimate, digits = digits), "\n")
             }
 
             if (!is.null(private$.ci)) {

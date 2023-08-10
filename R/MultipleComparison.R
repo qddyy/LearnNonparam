@@ -23,15 +23,13 @@ MultipleComparison <- R6Class(
         .check = function() {}, # TODO
 
         .print = function(digits) {
-            cat("\n")
-            cat(strwrap(private$.name, prefix = "\t"), sep = "\n")
-            cat("\n")
+            cat("\n", "\t", private$.name, "\n\n")
 
             cat(
                 "family-wise confidence level:",
-                format(100 * private$.conf_level, digits = 2), "(%)"
+                format(100 * private$.conf_level, digits = 2), "(%)",
+                "\n\n"
             )
-            cat("\n\n")
 
             print(private$.multicomp, digits = digits, row.names = FALSE)
         },
