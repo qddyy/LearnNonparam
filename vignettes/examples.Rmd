@@ -381,14 +381,14 @@ t$feed(Table3.3.1)
 #     Table3.3.1$location_4
 # )
 
-print(t$multicomp)
+t$print()
 
 t$type <- "approx"
-print(t$multicomp)
+t$print()
 
 # try other scoring! ("vw", "expon")
 t$scoring <- "rank"
-print(t$multicomp)
+t$print()
 ```
 
 ```{r}
@@ -399,14 +399,14 @@ t <- pmt(
 
 t$feed(Table3.3.1)
 
-print(t$multicomp)
+t$print()
 
 t$type <- "approx"
-print(t$multicomp)
+t$print()
 
 # try other scoring! ("vw", "expon")
 t$scoring <- "rank"
-print(t$multicomp)
+t$print()
 ```
 
 ## Example 3.4.1
