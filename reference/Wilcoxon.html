@@ -73,7 +73,7 @@
 <p>Create a new <code>Wilcoxon</code> object.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/Wilcoxon.html">Wilcoxon</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
-<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"exact"</span>, <span class="st">"approx"</span>, <span class="st">"permu"</span><span class="op">)</span>,</span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"permu"</span>, <span class="st">"approx"</span>, <span class="st">"exact"</span><span class="op">)</span>,</span>
 <span>  correct <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two_sided"</span>, <span class="st">"less"</span>, <span class="st">"greater"</span><span class="op">)</span>,</span>
 <span>  n_permu <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -84,7 +84,7 @@
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>type</code></dt>
-<dd><p>a character string specifying the way to calculate p-values, must be one of <code>"exact"</code> (default), <code>"approx"</code> or <code>"permu"</code>. Note that this parameter will be set to <code>"approx"</code> automatically when there exists ties.</p></dd>
+<dd><p>a character string specifying the way to calculate p-values, must be one of <code>"permu"</code> (default), <code>"approx"</code> or <code>"exact"</code>. Note that this parameter will be set to <code>"approx"</code> automatically when there exists ties.</p></dd>
 
 
 <dt><code>correct</code></dt>
