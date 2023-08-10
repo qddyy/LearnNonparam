@@ -52,7 +52,7 @@ KruskalWallis <- R6Class(
             k <- as.integer(group[length(group)])
 
             private$.p_value <- pchisq(
-                private$.statistic, df = k - 1, , lower.tail = FALSE
+                private$.statistic, df = k - 1, lower.tail = FALSE
             )
         }
     )
