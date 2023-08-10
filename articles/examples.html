@@ -210,7 +210,7 @@
 <span><span class="co"># time: all permutaions</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.183   0.008   0.192</span></span>
+<span><span class="co">#&gt;   0.177   0.008   0.184</span></span>
 <span></span>
 <span></span>
 <span><span class="va">start</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/proc.time.html" class="external-link">proc.time</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -218,14 +218,14 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.195</span></span>
+<span><span class="co">#&gt; [1] 0.198</span></span>
 <span></span>
 <span><span class="va">end</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/proc.time.html" class="external-link">proc.time</a></span><span class="op">(</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># time: 1000 permutaions</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">end</span> <span class="op">-</span> <span class="va">start</span><span class="op">)</span></span>
 <span><span class="co">#&gt;    user  system elapsed </span></span>
-<span><span class="co">#&gt;   0.025   0.001   0.024</span></span></code></pre></div>
+<span><span class="co">#&gt;   0.022   0.000   0.023</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-2-6-1">Example 2.6.1<a class="anchor" aria-label="anchor" href="#example-2-6-1"></a>
@@ -358,7 +358,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 0.4</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.871</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.874</span></span></code></pre></div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -400,7 +400,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 11552.89</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.051</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.065</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-3-2-1">Example 3.2.1<a class="anchor" aria-label="anchor" href="#example-3-2-1"></a>
@@ -447,7 +447,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 8.246588</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.00975</span></span>
+<span><span class="co">#&gt; [1] 0.00925</span></span>
 <span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
@@ -460,7 +460,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">4000</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"permu"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.0155</span></span>
+<span><span class="co">#&gt; [1] 0.01325</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
@@ -491,13 +491,13 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; family-wise confidence level: 95 (%)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  i j   statistic      p differ</span></span>
-<span><span class="co">#&gt;  1 2  0.02737145 0.9782  FALSE</span></span>
-<span><span class="co">#&gt;  1 3 -1.77914406 0.0902  FALSE</span></span>
-<span><span class="co">#&gt;  1 4 -3.41048230 0.0030   TRUE</span></span>
-<span><span class="co">#&gt;  2 3 -1.80651550 0.0826  FALSE</span></span>
-<span><span class="co">#&gt;  2 4 -3.43785375 0.0022   TRUE</span></span>
-<span><span class="co">#&gt;  3 4 -1.63133824 0.1262  FALSE</span></span>
+<span><span class="co">#&gt;  i j   statistic p_value differ</span></span>
+<span><span class="co">#&gt;  1 2  0.02737145  0.9768  FALSE</span></span>
+<span><span class="co">#&gt;  1 3 -1.77914406  0.0916  FALSE</span></span>
+<span><span class="co">#&gt;  1 4 -3.41048230  0.0022   TRUE</span></span>
+<span><span class="co">#&gt;  2 3 -1.80651550  0.0848  FALSE</span></span>
+<span><span class="co">#&gt;  2 4 -3.43785375  0.0030   TRUE</span></span>
+<span><span class="co">#&gt;  3 4 -1.63133824  0.1212  FALSE</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
@@ -506,7 +506,7 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; family-wise confidence level: 95 (%)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  i j   statistic           p differ</span></span>
+<span><span class="co">#&gt;  i j   statistic     p_value differ</span></span>
 <span><span class="co">#&gt;  1 2  0.02737145 0.978434752  FALSE</span></span>
 <span><span class="co">#&gt;  1 3 -1.77914406 0.090419680  FALSE</span></span>
 <span><span class="co">#&gt;  1 4 -3.41048230 0.002773484   TRUE</span></span>
@@ -522,7 +522,7 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; family-wise confidence level: 95 (%)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  i j  statistic           p differ</span></span>
+<span><span class="co">#&gt;  i j  statistic     p_value differ</span></span>
 <span><span class="co">#&gt;  1 2  0.1224745 0.902523250  FALSE</span></span>
 <span><span class="co">#&gt;  1 3 -1.3880442 0.165123590  FALSE</span></span>
 <span><span class="co">#&gt;  1 4 -2.6536139 0.007963489   TRUE</span></span>
@@ -543,13 +543,13 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; family-wise confidence level: 95 (%)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  i j   statistic      p differ</span></span>
-<span><span class="co">#&gt;  1 2  0.03870907 1.0000  FALSE</span></span>
-<span><span class="co">#&gt;  1 3 -2.51608965 0.3114  FALSE</span></span>
-<span><span class="co">#&gt;  1 4 -4.82315032 0.0138   TRUE</span></span>
-<span><span class="co">#&gt;  2 3 -2.55479873 0.2988  FALSE</span></span>
-<span><span class="co">#&gt;  2 4 -4.86185939 0.0126   TRUE</span></span>
-<span><span class="co">#&gt;  3 4 -2.30706067 0.3768  FALSE</span></span>
+<span><span class="co">#&gt;  i j   statistic p_value differ</span></span>
+<span><span class="co">#&gt;  1 2  0.03870907  1.0000  FALSE</span></span>
+<span><span class="co">#&gt;  1 3 -2.51608965  0.3190  FALSE</span></span>
+<span><span class="co">#&gt;  1 4 -4.82315032  0.0126   TRUE</span></span>
+<span><span class="co">#&gt;  2 3 -2.55479873  0.3062  FALSE</span></span>
+<span><span class="co">#&gt;  2 4 -4.86185939  0.0120   TRUE</span></span>
+<span><span class="co">#&gt;  3 4 -2.30706067  0.3910  FALSE</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
@@ -558,7 +558,7 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; family-wise confidence level: 95 (%)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  i j   statistic          p differ</span></span>
+<span><span class="co">#&gt;  i j   statistic    p_value differ</span></span>
 <span><span class="co">#&gt;  1 2  0.03870907 0.99999236  FALSE</span></span>
 <span><span class="co">#&gt;  1 3 -2.51608965 0.31194094  FALSE</span></span>
 <span><span class="co">#&gt;  1 4 -4.82315032 0.01356971   TRUE</span></span>
@@ -574,7 +574,7 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; family-wise confidence level: 95 (%)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;  i j  statistic          p differ</span></span>
+<span><span class="co">#&gt;  i j  statistic    p_value differ</span></span>
 <span><span class="co">#&gt;  1 2  0.1732051 0.99934385  FALSE</span></span>
 <span><span class="co">#&gt;  1 3 -1.9629909 0.50683497  FALSE</span></span>
 <span><span class="co">#&gt;  1 4 -3.7527767 0.03978340   TRUE</span></span>
@@ -604,7 +604,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 145</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.02425</span></span>
+<span><span class="co">#&gt; [1] 0.02725</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
@@ -639,7 +639,7 @@
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">4000</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.09625</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.09525</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="table-4-1-3">Table 4.1.3<a class="anchor" aria-label="anchor" href="#table-4-1-3"></a>
@@ -659,7 +659,7 @@
 <span><span class="co"># )</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.02775</span></span>
+<span><span class="co">#&gt; [1] 0.026</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
@@ -690,7 +690,7 @@
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">4000</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.097</span></span>
+<span><span class="co">#&gt; [1] 0.09125</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
@@ -718,7 +718,7 @@
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">4000</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.24925</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.26175</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-4-3-1">Example 4.3.1<a class="anchor" aria-label="anchor" href="#example-4-3-1"></a>
@@ -768,7 +768,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 3968706</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.0578</span></span>
+<span><span class="co">#&gt; [1] 0.059</span></span>
 <span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
@@ -798,17 +798,17 @@
 <span></span>
 <span><span class="co"># Use SSX for speed</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 35055.56</span></span>
+<span><span class="co">#&gt; [1] 28.33333</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.0432</span></span>
+<span><span class="co">#&gt; [1] 0.0364</span></span>
 <span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="co"># chi-statistic</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 250.972</span></span>
+<span><span class="co">#&gt; [1] 7.5</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 4.032641e-54</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.05755845</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-4-6-1">Example 4.6.1<a class="anchor" aria-label="anchor" href="#example-4-6-1"></a>
@@ -832,14 +832,14 @@
 <span><span class="co"># )</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 9542</span></span>
+<span><span class="co">#&gt; [1] 134</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.0032</span></span>
+<span><span class="co">#&gt; [1] 0.012</span></span>
 <span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 1</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.01182581</span></span></code></pre></div>
 <div style="page-break-after: always;"></div>
 </div>
 </div>
@@ -935,7 +935,7 @@
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span><span class="op">)</span></span>
 <span><span class="co">#&gt; [1] 4.277778</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.3145</span></span>
+<span><span class="co">#&gt; [1] 0.3205</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
