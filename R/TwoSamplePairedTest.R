@@ -22,7 +22,7 @@ TwoSamplePairedTest <- R6Class(
         .feed = function(...) {
             super$.feed(...)
 
-            private$.raw_data <- as.data.frame(private$.data)
+            private$.raw_data <- as.data.frame(private$.raw_data)
         },
 
         .permute = function() {
