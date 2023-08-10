@@ -24,20 +24,18 @@ RatioMeanDeviance <- R6Class(
             super$initialize(alternative = match.arg(alternative), n_permu = n_permu)
 
             private$.statistic_func <- function(x, y) mean(x) / mean(y)
+
+            private$.scoring <- "dev"
         }
     ),
     private = list(
         .name = "Ratio Mean Deviance Test",
 
-        .calculate = function() {
-            x <- private$.data$x
-            y <- private$.data$y
-
-            private$.data <- list(x = abs(x - median(x)), y = abs(y - median(y)))
-
-            super$.calculate()
-
-            private$.data <- list(x = x, y = y)
+        .calculate_score = function() {
+            private$.data <- list(
+                x = abs(private$.data$x - median(private$.data$x)),
+                y = abs(private$.data$y - median(private$.data$y))
+            )
         }
     )
 )
