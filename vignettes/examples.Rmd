@@ -112,8 +112,6 @@ print(t$p_value)
 ## Example 2.3.1
 
 ```{r}
-start <- proc.time()
-
 # See ?MeanDiff or ?twosample.mean
 t <- pmt(
     "twosample.mean", alternative = "greater"
@@ -128,24 +126,22 @@ t$feed(Table2.3.1)
 # )
 
 print(t$statistic)
+
+# all permutaions
 print(t$p_value)
-
-end <- proc.time()
-
-# time: all permutaions
-print(end - start)
-
-
-start <- proc.time()
 
 t$n_permu <- 1000
-
+# 1000 permutaions
 print(t$p_value)
 
-end <- proc.time()
-
-# time: 1000 permutaions
-print(end - start)
+# time
+if (!require("microbenchmark")) {
+    install.packages("microbenchmark", repos = "https://cloud.r-project.org/")
+}
+microbenchmark::microbenchmark(
+    t$n_permu <- NULL,
+    t$n_permu <- 1000
+)
 ```
 
 ## Example 2.6.1
