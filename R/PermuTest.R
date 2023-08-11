@@ -1,6 +1,6 @@
 #' @title PermuTest Class
 #' 
-#' @description This is the abstract base class for permutation test objects, which contains several scoring systems. Note that it is not recommended to create objects of this class directly. 
+#' @description This is the abstract base class for permutation test objects. Note that it is not recommended to create objects of this class directly. 
 #' 
 #' 
 #' @export

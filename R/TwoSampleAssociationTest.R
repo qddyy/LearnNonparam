@@ -1,6 +1,6 @@
 #' @title TwoSampleAssociationTest Class
 #' 
-#' @description This class specializes `PermuTest` for two sample permutation tests for association. Note that it is not recommended to create objects of this class directly. 
+#' @description This class specializes `TwoSamplePairedTest` for two sample permutation tests for association. Note that it is not recommended to create objects of this class directly. 
 #' 
 #' 
 #' @export
