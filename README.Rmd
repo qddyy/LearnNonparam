@@ -39,8 +39,8 @@ library(LearnNonparam)
 ```
 
 - Create a test (for example, a `Wilcoxon` object)
-    ```{r}
-    t <- Wilcoxon$new(type = "permu", n_permu = 10000)
+    ```{r, eval = FALSE}
+    t <- Wilcoxon$new(alternative = "greater", type = "permu", n_permu = 10000)
     ```
 
     or you can use `pmt` (**p**er**m**utation **t**est) function (*Recommended*):

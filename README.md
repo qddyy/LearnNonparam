@@ -28,7 +28,7 @@ library(LearnNonparam)
 - Create a test (for example, a `Wilcoxon` object)
 
   ``` r
-  t <- Wilcoxon$new(type = "permu", n_permu = 10000)
+  t <- Wilcoxon$new(alternative = "greater", type = "permu", n_permu = 10000)
   ```
 
   or you can use `pmt` (**p**er**m**utation **t**est) function
@@ -48,17 +48,17 @@ library(LearnNonparam)
 
   ``` r
   print(t$p_value)
-  #> [1] 0.0064
+  #> [1] 0.0019
 
   t$print()
   #> 
   #>       Two Sample Wilcoxon Test 
   #> 
   #> type: permu    method: default    
-  #> statistic = 499, p-value = 0.0064, 
+  #> statistic = 514, p-value = 0.0019, 
   #> alternative hypothesis: greater 
-  #> estimate: 0.9860916 
-  #> 95 percent confidence interval: 0.2231132 1.8261232
+  #> estimate: 1.064333 
+  #> 95 percent confidence interval: 0.3204069 1.9678062
 
   t$plot(bins = 20)
   ```
@@ -71,7 +71,7 @@ library(LearnNonparam)
   t$type <- "approx"
 
   print(t$p_value)
-  #> [1] 0.008334399
+  #> [1] 0.002557631
   ```
 
 There is also support for chaining method calls, which means that you
