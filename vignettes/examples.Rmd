@@ -702,9 +702,7 @@ print(t$p_value)
 
 ```{r}
 # See ?ChiSquare or ?table.chi
-t <- pmt(
-    "table.chi", n_permu = 2000
-)
+t <- pmt("table.chi")
 
 # See ?Table5.4.2
 t$feed(Table5.4.2)
