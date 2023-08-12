@@ -72,7 +72,7 @@
 </h1></div>
 <p><a href="https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml" class="external-link"><img src="https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R-CMD-check"></a></p>
 <p>This package implements most of the tests in chapters 1-5 of <a href="#references">Higgins (2003)</a>.</p>
-<p>It uses <a href="https://cran.r-project.org/package=R6" class="external-link">R6</a> for clean OO-design and <a href="https://cran.r-project.org/package=arrangements" class="external-link">arrangements</a> for fast generation of permutations.</p>
+<p>It uses <a href="https://cran.r-project.org/package=R6" class="external-link">R6</a> for clean OO-design and <a href="https://cran.r-project.org/package=arrangements" class="external-link">arrangements</a> for fast generation of permutations, as well as <a href="https://cran.r-project.org/package=ggplot2" class="external-link">ggplot2</a> to draw pretty graphs.</p>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
@@ -104,17 +104,17 @@
 <p>check the results</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.0019</span></span>
+<span><span class="co">#&gt; [1] 0.0429</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;       Two Sample Wilcoxon Test </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; type: permu    method: default    </span></span>
-<span><span class="co">#&gt; statistic = 514, p-value = 0.0019, </span></span>
+<span><span class="co">#&gt; statistic = 474, p-value = 0.0429, </span></span>
 <span><span class="co">#&gt; alternative hypothesis: greater </span></span>
-<span><span class="co">#&gt; estimate: 1.064333 </span></span>
-<span><span class="co">#&gt; 95 percent confidence interval: 0.3204069 1.9678062</span></span>
+<span><span class="co">#&gt; estimate: 0.7251039 </span></span>
+<span><span class="co">#&gt; 95 percent confidence interval: -0.08956375  1.52093800</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">plot</span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-7-1.svg" width="100%"></p>
@@ -125,7 +125,7 @@
 <code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.002557631</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.04292744</span></span></code></pre></div>
 </li>
 </ul>
 <p>There is also support for chaining method calls, which means that you can do things like</p>
@@ -139,15 +139,12 @@
 <p>If you want to know available methods and attributes, you can start by exploring <code><a href="reference/PermuTest.html">?PermuTest</a></code> (all tests’ <strong>base class</strong>).</p>
 <p>If you want to know available tests, see <code>pmts(...)</code>.</p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/pmt.html">pmts</a></span><span class="op">(</span><span class="st">"twosample"</span><span class="op">)</span></span>
-<span><span class="co">#&gt;                 key             class                               test</span></span>
-<span><span class="co">#&gt;      twosample.mean          MeanDiff      Two Sample Test Based on Mean</span></span>
-<span><span class="co">#&gt;  twosample.wilcoxon          Wilcoxon           Two Sample Wilcoxon Test</span></span>
-<span><span class="co">#&gt;  twosample.scoresum          ScoreSum                     Score Sum Test</span></span>
-<span><span class="co">#&gt;    twosample.ansari     AnsariBradley                Ansari-Bradley Test</span></span>
-<span><span class="co">#&gt;    twosample.siegel       SiegelTukey                  Siegel-Tukey Test</span></span>
-<span><span class="co">#&gt;       twosample.rmd RatioMeanDeviance           Ratio Mean Deviance Test</span></span>
-<span><span class="co">#&gt;        twosample.ks KolmogorovSmirnov Two Sample Kolmogorov-Smirnov Test</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="reference/pmt.html">pmts</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div data-pagedtable="false">
+<script data-pagedtable-source type="application/json">
+{"columns":[{"label":["key"],"name":[1],"type":["chr"],"align":["left"]},{"label":["class"],"name":[2],"type":["chr"],"align":["left"]},{"label":["test"],"name":[3],"type":["chr"],"align":["left"]}],"data":[{"1":"onesample.quantile","2":"Quantile","3":"Quantile Test"},{"1":"onesample.cdf","2":"CDF","3":"Cumulative Distribution Function"},{"1":"twosample.mean","2":"MeanDiff","3":"Two Sample Test Based on Mean"},{"1":"twosample.wilcoxon","2":"Wilcoxon","3":"Two Sample Wilcoxon Test"},{"1":"twosample.scoresum","2":"ScoreSum","3":"Score Sum Test"},{"1":"twosample.ansari","2":"AnsariBradley","3":"Ansari-Bradley Test"},{"1":"twosample.siegel","2":"SiegelTukey","3":"Siegel-Tukey Test"},{"1":"twosample.rmd","2":"RatioMeanDeviance","3":"Ratio Mean Deviance Test"},{"1":"twosample.ks","2":"KolmogorovSmirnov","3":"Two Sample Kolmogorov-Smirnov Test"},{"1":"ksample.anova","2":"ANOVA","3":"K Sample Test Based on F Statistic"},{"1":"ksample.kw","2":"KruskalWallis","3":"Kruskal-Wallis Test"},{"1":"ksample.jt","2":"JonckheereTerpstra","3":"Jonckheere-Terpstra Test"},{"1":"multicomp.t","2":"MultiCompT","3":"Multiple Comparison Based on t Statistic"},{"1":"multicomp.tukey","2":"TukeyHSD","3":"Tukey's HSD"},{"1":"paired.comparison","2":"PairedComparison","3":"Paired Comparison"},{"1":"paired.sign","2":"Sign","3":"Sign Test"},{"1":"paired.signedscore","2":"SignedScore","3":"Signed Score Test"},{"1":"rcbd.anova","2":"RCBDANOVA","3":"ANOVA for Randomized Complete Block Design"},{"1":"rcbd.friedman","2":"Friedman","3":"Friedman Test"},{"1":"rcbd.page","2":"Page","3":"Page Test"},{"1":"association.corr","2":"Correlation","3":"Two Sample Test Based on Correlation Coefficient"},{"1":"table.chi","2":"ChiSquare","3":"Contingency Table Test Based on Chi-square Statistic"}],"options":{"columns":{"min":{},"max":[10]},"rows":{"min":[10],"max":[10]},"pages":{}}}
+  </script>
+</div>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
