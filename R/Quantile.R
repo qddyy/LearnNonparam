@@ -30,6 +30,8 @@ Quantile <- R6Class(
             private$.prob <- prob
 
             super$initialize(null_value = null_value, alternative = match.arg(alternative), conf_level = conf_level)
+
+            private$.type <- "exact"
         }
     ),
     private = list(

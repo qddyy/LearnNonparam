@@ -46,11 +46,11 @@ ChiSquare <- R6Class(
         },
 
         .calculate_p = function() {
-            k <- nrow(private$.data)
-            b <- ncol(private$.data)
+            r <- nrow(private$.data)
+            c <- ncol(private$.data)
 
             private$.p_value <- pchisq(
-                private$.statistic, df = (k - 1) * (b - 1), lower.tail = FALSE
+                private$.statistic, df = (r - 1) * (c - 1), lower.tail = FALSE
             )
         }
     )

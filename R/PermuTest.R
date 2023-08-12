@@ -131,7 +131,11 @@ PermuTest <- R6Class(
                 "\n", sep = ", "
             )
 
-            cat("alternative hypothesis:", private$.alternative, "\n")
+            cat(
+                "alternative hypothesis:",
+                if (private$.alternative == "two_sided") "two-sided" else private$.alternative,
+                "\n"
+            )
 
             if (!is.null(private$.estimate)) {
                 cat("estimate:", format(private$.estimate, digits = digits), "\n")
