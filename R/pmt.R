@@ -60,7 +60,7 @@ pmts <- function(category = c("all", "onesample", "twosample", "ksample", "multi
     }
     tests <- tests[keys]
 
-    test_info <- data.frame(
+    data.frame(
         key = keys,
         class = vapply(
             X = tests, FUN.VALUE = character(1), USE.NAMES = FALSE,
@@ -71,5 +71,4 @@ pmts <- function(category = c("all", "onesample", "twosample", "ksample", "multi
             FUN = function(test) test$private_fields$.name
         )
     )
-    print(test_info, row.names = FALSE)
 }

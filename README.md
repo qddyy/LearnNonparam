@@ -8,7 +8,9 @@ This package implements most of the tests in chapters 1-5 of [Higgins
 
 It uses [R6](https://cran.r-project.org/package=R6) for clean OO-design
 and [arrangements](https://cran.r-project.org/package=arrangements) for
-fast generation of permutations.
+fast generation of permutations, as well as
+[ggplot2](https://cran.r-project.org/package=ggplot2) to draw pretty
+graphs.
 
 ## Installation
 
@@ -28,14 +30,14 @@ library(LearnNonparam)
 - Create a test (for example, a `Wilcoxon` object)
 
   ``` r
-  t <- Wilcoxon$new(alternative = "greater", type = "permu", n_permu = 10000)
+  t <- Wilcoxon$new(alternative = "greater", type = "permu", n_permu = 1000000)
   ```
 
   or you can use `pmt` (**p**er**m**utation **t**est) function
   (*Recommended*):
 
   ``` r
-  t <- pmt("twosample.wilcoxon", alternative = "greater", type = "permu", n_permu = 10000)
+  t <- pmt("twosample.wilcoxon", alternative = "greater", type = "permu", n_permu = 1000000)
   ```
 
 - feed it the data (a data frame, a list, or some numeric vectors)
@@ -48,22 +50,22 @@ library(LearnNonparam)
 
   ``` r
   print(t$p_value)
-  #> [1] 0.0019
+  #> [1] 0.000803
 
   t$print()
   #> 
   #>       Two Sample Wilcoxon Test 
   #> 
   #> type: permu    method: default    
-  #> statistic = 514, p-value = 0.0019, 
+  #> statistic = 524, p-value = 0.000803, 
   #> alternative hypothesis: greater 
-  #> estimate: 1.064333 
-  #> 95 percent confidence interval: 0.3204069 1.9678062
+  #> estimate: 1.022835 
+  #> 95 percent confidence interval: 0.4251632 1.6830812
 
   t$plot(bins = 20)
   ```
 
-  <img src="man/figures/README-unnamed-chunk-7-1.svg" width="100%" />
+  <img src="man/figures/README-results-1.svg" width="100%" />
 
 - modify some attributes and see how the results change
 
@@ -71,14 +73,14 @@ library(LearnNonparam)
   t$type <- "approx"
 
   print(t$p_value)
-  #> [1] 0.002557631
+  #> [1] 0.001069631
   ```
 
 There is also support for chaining method calls, which means that you
 can do things like
 
 ``` r
-pmt("twosample.wilcoxon", type = "permu", n_permu = 10000)$feed(Table2.6.2)$print()$plot()
+pmt(...)$feed(...)$print(...)$plot(...)
 ```
 
 ## Help
@@ -91,16 +93,37 @@ exploring `?PermuTest` (all tests’ **base class**).
 If you want to know available tests, see `pmts(...)`.
 
 ``` r
-pmts("twosample")
-#>                 key             class                               test
-#>      twosample.mean          MeanDiff      Two Sample Test Based on Mean
-#>  twosample.wilcoxon          Wilcoxon           Two Sample Wilcoxon Test
-#>  twosample.scoresum          ScoreSum                     Score Sum Test
-#>    twosample.ansari     AnsariBradley                Ansari-Bradley Test
-#>    twosample.siegel       SiegelTukey                  Siegel-Tukey Test
-#>       twosample.rmd RatioMeanDeviance           Ratio Mean Deviance Test
-#>        twosample.ks KolmogorovSmirnov Two Sample Kolmogorov-Smirnov Test
+pmts()
 ```
+
+<div class="kable-table">
+
+| key                | class              | test                                                 |
+|:-------------------|:-------------------|:-----------------------------------------------------|
+| onesample.quantile | Quantile           | Quantile Test                                        |
+| onesample.cdf      | CDF                | Cumulative Distribution Function                     |
+| twosample.mean     | MeanDiff           | Two Sample Test Based on Mean                        |
+| twosample.wilcoxon | Wilcoxon           | Two Sample Wilcoxon Test                             |
+| twosample.scoresum | ScoreSum           | Score Sum Test                                       |
+| twosample.ansari   | AnsariBradley      | Ansari-Bradley Test                                  |
+| twosample.siegel   | SiegelTukey        | Siegel-Tukey Test                                    |
+| twosample.rmd      | RatioMeanDeviance  | Ratio Mean Deviance Test                             |
+| twosample.ks       | KolmogorovSmirnov  | Two Sample Kolmogorov-Smirnov Test                   |
+| ksample.anova      | ANOVA              | K Sample Test Based on F Statistic                   |
+| ksample.kw         | KruskalWallis      | Kruskal-Wallis Test                                  |
+| ksample.jt         | JonckheereTerpstra | Jonckheere-Terpstra Test                             |
+| multicomp.t        | MultiCompT         | Multiple Comparison Based on t Statistic             |
+| multicomp.tukey    | TukeyHSD           | Tukey’s HSD                                          |
+| paired.comparison  | PairedComparison   | Paired Comparison                                    |
+| paired.sign        | Sign               | Sign Test                                            |
+| paired.signedscore | SignedScore        | Signed Score Test                                    |
+| rcbd.anova         | RCBDANOVA          | ANOVA for Randomized Complete Block Design           |
+| rcbd.friedman      | Friedman           | Friedman Test                                        |
+| rcbd.page          | Page               | Page Test                                            |
+| association.corr   | Correlation        | Two Sample Test Based on Correlation Coefficient     |
+| table.chi          | ChiSquare          | Contingency Table Test Based on Chi-square Statistic |
+
+</div>
 
 ## References
 

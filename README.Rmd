@@ -2,6 +2,7 @@
 bibliography: ref.bib
 output:
   github_document:
+    df_print: kable
     fig_width: 8
     fig_height: 6
     dev: svg
@@ -21,7 +22,7 @@ knitr::opts_chunk$set(
 
 This package implements most of the tests in chapters 1-5 of [@Higgins2003](#references).
 
-It uses [R6](https://cran.r-project.org/package=R6) for clean OO-design and [arrangements](https://cran.r-project.org/package=arrangements) for fast generation of permutations.
+It uses [R6](https://cran.r-project.org/package=R6) for clean OO-design and [arrangements](https://cran.r-project.org/package=arrangements) for fast generation of permutations, as well as [ggplot2](https://cran.r-project.org/package=ggplot2) to draw pretty graphs.
 
 ## Installation
 
@@ -40,21 +41,21 @@ library(LearnNonparam)
 
 - Create a test (for example, a `Wilcoxon` object)
     ```{r, eval = FALSE}
-    t <- Wilcoxon$new(alternative = "greater", type = "permu", n_permu = 10000)
+    t <- Wilcoxon$new(alternative = "greater", type = "permu", n_permu = 1000000)
     ```
 
     or you can use `pmt` (**p**er**m**utation **t**est) function (*Recommended*):
-    ```{r}
-    t <- pmt("twosample.wilcoxon", alternative = "greater", type = "permu", n_permu = 10000)
+    ```{r, create}
+    t <- pmt("twosample.wilcoxon", alternative = "greater", type = "permu", n_permu = 1000000)
     ```
 
 - feed it the data (a data frame, a list, or some numeric vectors)
-    ```{r}
+    ```{r, feed}
     t$feed(rnorm(20, mean = 1), rnorm(20, mean = 0))
     ```
 
 - check the results
-    ```{r}
+    ```{r, results}
     print(t$p_value)
 
     t$print()
@@ -63,7 +64,7 @@ library(LearnNonparam)
     ```
 
 - modify some attributes and see how the results change
-    ```{r}
+    ```{r, modify}
     t$type <- "approx"
 
     print(t$p_value)
@@ -72,7 +73,7 @@ library(LearnNonparam)
 There is also support for chaining method calls, which means that you can do things like
 
 ```{r, eval = FALSE}
-pmt("twosample.wilcoxon", type = "permu", n_permu = 10000)$feed(Table2.6.2)$print()$plot()
+pmt(...)$feed(...)$print(...)$plot(...)
 ```
 
 ## Help
@@ -83,8 +84,8 @@ If you want to know available methods and attributes, you can start by exploring
 
 If you want to know available tests, see `pmts(...)`. 
 
-```{r}
-pmts("twosample")
+```{r, pmts}
+pmts()
 ```
 
 ## References
