@@ -104,17 +104,17 @@
 <p>check the results</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.0429</span></span>
+<span><span class="co">#&gt; [1] 0.0016</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;       Two Sample Wilcoxon Test </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; type: permu    method: default    </span></span>
-<span><span class="co">#&gt; statistic = 474, p-value = 0.0429, </span></span>
+<span><span class="co">#&gt; statistic = 520, p-value = 0.0016, </span></span>
 <span><span class="co">#&gt; alternative hypothesis: greater </span></span>
-<span><span class="co">#&gt; estimate: 0.7251039 </span></span>
-<span><span class="co">#&gt; 95 percent confidence interval: -0.08956375  1.52093800</span></span>
+<span><span class="co">#&gt; estimate: 0.9341049 </span></span>
+<span><span class="co">#&gt; 95 percent confidence interval: 0.3147991 1.4993907</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">plot</span><span class="op">(</span>bins <span class="op">=</span> <span class="fl">20</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-unnamed-chunk-7-1.svg" width="100%"></p>
@@ -125,7 +125,7 @@
 <code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/print.html" class="external-link">print</a></span><span class="op">(</span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span><span class="op">)</span></span>
-<span><span class="co">#&gt; [1] 0.04292744</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.001528315</span></span></code></pre></div>
 </li>
 </ul>
 <p>There is also support for chaining method calls, which means that you can do things like</p>
