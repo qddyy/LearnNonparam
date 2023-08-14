@@ -10,7 +10,7 @@
 
 
 TwoSampleAssociationTest <- R6Class(
-    classname = ,
+    classname = "TwoSampleAssociationTest",
     inherit = TwoSamplePairedTest,
     cloneable = FALSE,
     private = list(
