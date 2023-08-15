@@ -701,8 +701,8 @@ print(t$p_value)
 ## Table 5.4.2
 
 ```{r}
-# See ?ChiSquare or ?table.chi
-t <- pmt("table.chi")
+# See ?ChiSquare or ?table.chisq
+t <- pmt("table.chisq")
 
 # See ?Table5.4.2
 t$feed(Table5.4.2)

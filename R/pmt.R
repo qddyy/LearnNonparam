@@ -27,7 +27,7 @@ tests <- list(
 
     association.corr = Correlation,
 
-    table.chi = ChiSquare
+    table.chisq = ChiSquare
 )
 
 #' @title Syntactic Sugar for Object Construction

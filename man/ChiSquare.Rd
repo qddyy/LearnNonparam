@@ -2,7 +2,7 @@
 % Please edit documentation in R/ChiSquare.R
 \name{ChiSquare}
 \alias{ChiSquare}
-\alias{table.chi}
+\alias{table.chisq}
 \title{Contingency Table Test Based on Chi-square Statistic}
 \description{
 Performs chi-square statistic based permutation test on contingency tables.

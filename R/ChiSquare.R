@@ -2,7 +2,7 @@
 #' 
 #' @description Performs chi-square statistic based permutation test on contingency tables. 
 #' 
-#' @aliases table.chi
+#' @aliases table.chisq
 #' 
 #' @export
 #' 
