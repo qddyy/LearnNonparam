@@ -36,8 +36,9 @@ Sign <- R6Class(
     private = list(
         .name = "Sign Test",
 
-        .sign = NULL,
         .correct = NULL,
+
+        .sign = NULL,
 
         .calculate_statistic = function() {
             private$.sign <- sign(private$.data$x - private$.data$y)
@@ -61,7 +62,6 @@ Sign <- R6Class(
                 less <- pbinom(private$.statistic, size = n, prob = 0.5)
                 greater <- pbinom(private$.statistic - 1, size = n, prob = 0.5, lower.tail = FALSE)
             }
-
             if (private$.type == "approx") {
                 z <- private$.statistic - 1 / 2 * n
                 correction <- if (private$.correct) switch(private$.alternative,

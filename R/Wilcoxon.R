@@ -55,11 +55,7 @@ Wilcoxon <- R6Class(
             if (private$.type == "exact") {
                 less <- pwilcox(statistic, m, n)
                 greater <- pwilcox(statistic - 1, m, n, lower.tail = FALSE)
-                two_sided <- min(1, 2 * (
-                    if (private$.statistic > m * n / 2) greater else less
-                ))
             }
-
             if (private$.type == "approx") {
                 N <- m + n
 
@@ -73,8 +69,8 @@ Wilcoxon <- R6Class(
 
                 less <- pnorm(z)
                 greater <- pnorm(z, lower.tail = FALSE)
-                two_sided <- 2 * min(less, greater)
             }
+            two_sided <- 2 * min(less, greater)
 
             private$.p_value <- switch(private$.alternative,
                 greater = greater, less = less, two_sided = two_sided
