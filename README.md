@@ -50,17 +50,17 @@ library(LearnNonparam)
 
   ``` r
   print(t$p_value)
-  #> [1] 0.000803
+  #> [1] 0.000886
 
   t$print()
   #> 
   #>       Two Sample Wilcoxon Test 
   #> 
   #> type: permu    method: default    
-  #> statistic = 524, p-value = 0.000803, 
+  #> statistic = 523, p-value = 0.000886, 
   #> alternative hypothesis: greater 
-  #> estimate: 1.022835 
-  #> 95 percent confidence interval: 0.4251632 1.6830812
+  #> estimate: 1.164784 
+  #> 95 percent confidence interval: 0.3713987 1.9444147
 
   t$plot(bins = 20)
   ```
@@ -73,7 +73,7 @@ library(LearnNonparam)
   t$type <- "approx"
 
   print(t$p_value)
-  #> [1] 0.001069631
+  #> [1] 0.001170636
   ```
 
 There is also support for chaining method calls, which means that you
@@ -121,7 +121,7 @@ pmts()
 | rcbd.friedman      | Friedman           | Friedman Test                                        |
 | rcbd.page          | Page               | Page Test                                            |
 | association.corr   | Correlation        | Two Sample Test Based on Correlation Coefficient     |
-| table.chi          | ChiSquare          | Contingency Table Test Based on Chi-square Statistic |
+| table.chisq        | ChiSquare          | Contingency Table Test Based on Chi-square Statistic |
 
 </div>
 
