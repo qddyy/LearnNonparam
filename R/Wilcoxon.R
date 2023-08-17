@@ -80,11 +80,11 @@ Wilcoxon <- R6Class(
         },
 
         .calculate_extra = function() {
-            combn_xy <- expand.grid(
+            c_xy <- expand.grid(
                 x = private$.raw_data$x,
                 y = private$.raw_data$y
             )
-            diff <- combn_xy$x - combn_xy$y
+            diff <- c_xy$x - c_xy$y
 
             private$.estimate <- median(diff)
 
