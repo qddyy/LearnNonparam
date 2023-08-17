@@ -36,14 +36,26 @@ Correlation <- R6Class(
     private = list(
         .name = "Two Sample Test Based on Correlation Coefficient",
 
-        .calculate_statistic = function() {
-            private$.statistic_func <- switch(private$.method,
-                pearson = function(x, y) cor(x, y, method = "pearson"),
-                kendall = function(x, y) cor(x, y, method = "kendall"),
-                spearman = function(x, y) cor(x, y, method = "spearman")
-            )
+        .calculate = function() {
+            n <- nrow(private$.data)
 
-            super$.calculate_statistic()
+            if (private$.method == "kendall") {
+                private$.statistic_func <- cor
+                formals(private$.statistic_func)$method <- "kendall"
+            } else {
+                if (private$.method == "spearman") {
+                    private$.scoring <- "rank"
+                }
+                private$.statistic_func <- switch(private$.type,
+                    permu = function(x, y) sum(x * y),
+                    approx = function(x, y) {
+                        r <- cor(x, y, method = "pearson")
+                        r * sqrt((n - 2) / (1 - r^2))
+                    }
+                )
+            }
+
+            super$.calculate()
         },
 
         .calculate_p = function() {
@@ -65,14 +77,17 @@ Correlation <- R6Class(
                 v_1 <- sum(x_ties * (x_ties - 1)) * sum(y_ties * (y_ties - 1))
                 v_2 <- sum(x_ties * (x_ties - 1) * (x_ties - 2)) * sum(y_ties * (y_ties - 1) * (y_ties - 2))
                 var_S <- (v_0 - v_t - v_u) / 18 + v_1 / (2 * n * (n - 1)) + v_2 / (9 * n * (n - 1) * (n - 2))
-                
-                z <- S / sqrt(var_S)
-            } else {
-                z <- private$.statistic * sqrt(n - 1)
-            }
 
-            less <- pnorm(z)
-            greater <- pnorm(z, lower.tail = FALSE)
+                z <- S / sqrt(var_S)
+
+                less <- pnorm(z)
+                greater <- pnorm(z, lower.tail = FALSE)
+            } else {
+                df <- n - 2
+
+                less <- pt(private$.statistic, df = df)
+                greater <- pt(private$.statistic, df = df, lower.tail = FALSE)
+            }
             two_sided <- 2 * min(less, greater)
 
             private$.p_value <- switch(private$.alternative,
