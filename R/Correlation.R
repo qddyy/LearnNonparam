@@ -36,30 +36,36 @@ Correlation <- R6Class(
     private = list(
         .name = "Two Sample Test Based on Correlation Coefficient",
 
-        .calculate = function() {
-            n <- nrow(private$.data)
+        .calculate_score = function() {
+            private$.data <- data.frame(
+                x = score(private$.data$x, method = "rank"),
+                y = score(private$.data$y, method = "rank")
+            )
+        },
 
+        .calculate = function() {
+            if (private$.method != "pearson") {
+                private$.scoring <- "rank"
+            }
+
+            private$.statistic_func <- cor
             if (private$.method == "kendall") {
-                private$.statistic_func <- cor
-                formals(private$.statistic_func)$method <- "kendall"
-            } else {
-                if (private$.method == "spearman") {
-                    private$.scoring <- "rank"
-                }
-                private$.statistic_func <- switch(private$.type,
-                    permu = function(x, y) sum(x * y),
-                    approx = function(x, y) {
-                        r <- cor(x, y, method = "pearson")
-                        r * sqrt((n - 2) / (1 - r^2))
-                    }
-                )
+                formals(private$.statistic_func)$method <-  "kendall"
+            }
+
+            if (private$.type == "permu" & private$.method != "kendall") {
+                private$.statistic_func <- function(x, y) sum(x * y)
             }
 
             super$.calculate()
+
+            private$.scoring <- "none"
+            private$.data <- private$.raw_data
         },
 
         .calculate_p = function() {
             n <- nrow(private$.data)
+            r <- private$.statistic
 
             if (private$.method == "kendall") {
                 x <- private$.data$x
@@ -70,7 +76,7 @@ Correlation <- R6Class(
                 T_0 <- n * (n - 1) / 2
                 T_1 <- sum(x_ties * (x_ties - 1)) / 2
                 T_2 <- sum(y_ties * (y_ties - 1)) / 2
-                S <- private$.statistic * sqrt((T_0 - T_1) * (T_0 - T_2))
+                S <- r * sqrt((T_0 - T_1) * (T_0 - T_2))
                 v_0 <- n * (n - 1) * (2 * n + 5)
                 v_t <- sum(x_ties * (x_ties - 1) * (2 * x_ties + 5))
                 v_u <- sum(y_ties * (y_ties - 1) * (2 * y_ties + 5))
@@ -83,10 +89,10 @@ Correlation <- R6Class(
                 less <- pnorm(z)
                 greater <- pnorm(z, lower.tail = FALSE)
             } else {
-                df <- n - 2
+                statistic <- r * sqrt((n - 2) / (1 - r^2))
 
-                less <- pt(private$.statistic, df = df)
-                greater <- pt(private$.statistic, df = df, lower.tail = FALSE)
+                less <- pt(statistic, df = n - 2)
+                greater <- pt(statistic, df = n - 2, lower.tail = FALSE)
             }
             two_sided <- 2 * min(less, greater)
 

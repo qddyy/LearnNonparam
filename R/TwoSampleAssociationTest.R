@@ -28,13 +28,6 @@ TwoSampleAssociationTest <- R6Class(
                     data.frame(x = x, y = y)
                 }, x = private$.data$x
             )
-        },
-
-        .calculate_score = function() {
-            private$.data <- data.frame(
-                x = score(private$.data$x, method = private$.scoring),
-                y = score(private$.data$y, method = private$.scoring)
-            )
         }
     )
 )
