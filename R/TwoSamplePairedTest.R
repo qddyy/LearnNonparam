@@ -41,6 +41,8 @@ TwoSamplePairedTest <- R6Class(
                     )
                 }, x = private$.data$x, y = private$.data$y
             )
-        }
+        },
+
+        .calculate_score = function() {}
     )
 )

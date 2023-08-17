@@ -21,12 +21,19 @@ TwoSampleAssociationTest <- R6Class(
         .permute = function() {
             private$.data_permu <- lapply(
                 X = permutations(
-                    v = private$.data$x,
+                    v = private$.data$y,
                     nsample = private$.n_permu, layout = "list"
                 ),
                 FUN = function(x, y) {
                     data.frame(x = x, y = y)
-                }, y = private$.data$y
+                }, x = private$.data$x
+            )
+        },
+
+        .calculate_score = function() {
+            private$.data <- data.frame(
+                x = score(private$.data$x, method = private$.scoring),
+                y = score(private$.data$y, method = private$.scoring)
             )
         }
     )
