@@ -60,9 +60,11 @@ Wilcoxon <- R6Class(
                 N <- m + n
 
                 z <- statistic - m * n / 2
-                correction <- if (private$.correct) switch(private$.alternative,
-                    two_sided = sign(z) * 0.5, greater = 0.5, less = -0.5
-                ) else 0
+                correction <- if (private$.correct) {
+                    switch(private$.alternative,
+                        two_sided = sign(z) * 0.5, greater = 0.5, less = -0.5
+                    )
+                } else 0
                 z <- (z - correction) / sqrt(
                     (m * n / 12) * ((N + 1) - sum(ties^3 - ties) / (N * (N - 1)))
                 )

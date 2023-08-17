@@ -64,9 +64,11 @@ Sign <- R6Class(
             }
             if (private$.type == "approx") {
                 z <- private$.statistic - 1 / 2 * n
-                correction <- if (private$.correct) switch(private$.alternative,
-                    two_sided = sign(z) * 0.5, greater = 0.5, less = -0.5
-                ) else 0
+                correction <- if (private$.correct) {
+                    switch(private$.alternative,
+                        two_sided = sign(z) * 0.5, greater = 0.5, less = -0.5
+                    )
+                } else 0
                 z <- (z - correction) / sqrt(1 / 4 * n)
 
                 less <- pnorm(z)

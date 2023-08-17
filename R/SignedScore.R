@@ -17,8 +17,8 @@ SignedScore <- R6Class(
         #' @description Create a new `SignedScore` object. 
         #' 
         #' @param type a character string specifying the way to calculate p-values, must be one of `"permu"` (default) or `"approx"`. 
-        #' @param correct a logical indicating whether to apply continuity correction in the normal approximation for the p-value.
-        #' @param ranking_method a character string specifying the method of ranking data in computing adjusted signed ranks for tied data, must be one of `"with_zeros"` (default) or `"ignore"`. Note that the data fed will be modified when this parameter is set to "ignore". 
+        #' @param correct a logical indicating whether to apply continuity correction in the normal approximation for the p-value when `scoring` is set to `"rank"`.
+        #' @param ranking_method a character string specifying the method of ranking data in computing adjusted signed ranks for tied data, must be one of `"with_zeros"` (default) or `"ignore"`. Note that the data fed will be modified when this parameter is set to `"ignore"`. 
         #' 
         #' @param alternative a character string specifying the alternative hypothesis, must be one of `"two_sided"` (default), `"greater"` or `"less"`.
         #' @param n_permu an integer specifying how many permutations should be used to construct the permutation distribution. If `NULL` (default) then all permutations are used.
@@ -73,9 +73,11 @@ SignedScore <- R6Class(
 
             SR <- sum(pmax(0, private$.signed_score))
             z <- SR - 1 / 2 * sum(abs(private$.signed_score))
-            correction <- if (private$.correct) switch(private$.alternative,
-                two_sided = sign(z) * 0.5, greater = 0.5, less = -0.5
-            ) else 0
+            correction <- if (private$.scoring == "rank" & private$.correct) {
+                switch(private$.alternative,
+                    two_sided = sign(z) * 0.5, greater = 0.5, less = -0.5
+                )
+            } else 0
             z <- (z - correction) / sqrt(
                 1 / 4 * sum(private$.signed_score^2)
             )
