@@ -36,31 +36,49 @@ Correlation <- R6Class(
     private = list(
         .name = "Two Sample Test Based on Correlation Coefficient",
 
-        .calculate_score = function() {
-            private$.data <- data.frame(
-                x = score(private$.data$x, method = "rank"),
-                y = score(private$.data$y, method = "rank")
-            )
-        },
-
         .calculate = function() {
             if (private$.method != "pearson") {
                 private$.scoring <- "rank"
             }
 
-            private$.statistic_func <- cor
-            if (private$.method == "kendall") {
-                formals(private$.statistic_func)$method <-  "kendall"
-            }
-
-            if (private$.type == "permu" & private$.method != "kendall") {
-                private$.statistic_func <- function(x, y) sum(x * y)
-            }
-
             super$.calculate()
+        },
 
-            private$.scoring <- "none"
-            private$.data <- private$.raw_data
+        .calculate_score = function() {
+            private$.data <- data.frame(
+                x = rank(private$.data$x, ties.method = "min"),
+                y = rank(private$.data$y, ties.method = "min")
+            )
+        },
+
+        .calculate_statistic = function() {
+            if (private$.method == "kendall") {
+                x <- private$.data$x
+                n <- length(x)
+
+                order_x <- order(x)
+                x_reorder <- x[order_x]
+
+                j_index <- rep.int(seq_len(n), seq.int(0, n - 1))
+                i_index <- c(lapply(seq.int(1, n - 1), seq_len), recursive = T)
+                x_equal <- (x_reorder[i_index] == x_reorder[j_index])
+
+                i_index <- order_x[i_index]
+                j_index <- order_x[j_index]
+                private$.statistic_func <- function(x, y) {
+                    y_i <- y[i_index]
+                    y_j <- y[j_index]
+
+                    2 * mean(`[<-`(y_i < y_j, x_equal | y_i == y_j, 0.5)) - 1
+                }
+            } else {
+                private$.statistic_func <- switch(private$.type,
+                    permu = function(x, y) sum(x * y),
+                    approx = cor
+                )
+            }
+
+            super$.calculate_statistic()
         },
 
         .calculate_p = function() {
@@ -68,23 +86,15 @@ Correlation <- R6Class(
             r <- private$.statistic
 
             if (private$.method == "kendall") {
-                x <- private$.data$x
-                y <- private$.data$y
+                s <- tabulate(private$.data$x)
+                t <- tabulate(private$.data$y)
+                a <- (sum(s * (s - 1) * (2 * s + 5)) + sum(t * (t - 1) * (2 * t + 5))) / 18
+                b <- sum(s * (s - 1) * (s - 2)) * sum(t * (t - 1) * (t - 2)) / (9 * n * (n - 1) * (n - 2))
+                c <- sum(s * (s - 1)) * sum(t * (t - 1)) / (2 * n * (n - 1))
 
-                x_ties <- table(x[duplicated(x)]) + 1
-                y_ties <- table(y[duplicated(y)]) + 1
-                T_0 <- n * (n - 1) / 2
-                T_1 <- sum(x_ties * (x_ties - 1)) / 2
-                T_2 <- sum(y_ties * (y_ties - 1)) / 2
-                S <- r * sqrt((T_0 - T_1) * (T_0 - T_2))
-                v_0 <- n * (n - 1) * (2 * n + 5)
-                v_t <- sum(x_ties * (x_ties - 1) * (2 * x_ties + 5))
-                v_u <- sum(y_ties * (y_ties - 1) * (2 * y_ties + 5))
-                v_1 <- sum(x_ties * (x_ties - 1)) * sum(y_ties * (y_ties - 1))
-                v_2 <- sum(x_ties * (x_ties - 1) * (x_ties - 2)) * sum(y_ties * (y_ties - 1) * (y_ties - 2))
-                var_S <- (v_0 - v_t - v_u) / 18 + v_1 / (2 * n * (n - 1)) + v_2 / (9 * n * (n - 1) * (n - 2))
-
-                z <- S / sqrt(var_S)
+                z <- r / sqrt(
+                    (4 * n + 10) / (9 * n * (n - 1)) - 4 / (n^2 * (n - 1)^2) * (a - b - c)
+                )
 
                 less <- pnorm(z)
                 greater <- pnorm(z, lower.tail = FALSE)
