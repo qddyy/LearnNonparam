@@ -88,7 +88,7 @@
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va">LearnNonparam</span><span class="op">)</span></span></code></pre></div>
 <ul>
 <li>
-<p>Create a test (for example, a <code>Wilcoxon</code> object)</p>
+<p>Create a test object (for example, a <code>Wilcoxon</code> object)</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/Wilcoxon.html">Wilcoxon</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>alternative <span class="op">=</span> <span class="st">"greater"</span>, type <span class="op">=</span> <span class="st">"permu"</span>, n_permu <span class="op">=</span> <span class="fl">1000000</span><span class="op">)</span></span></code></pre></div>
 <p>or you can use <code>pmt</code> (<strong>p</strong>er<strong>m</strong>utation <strong>t</strong>est) function (<em>Recommended</em>):</p>
@@ -104,17 +104,17 @@
 <p>check the results</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.002202</span></span>
+<span><span class="co">#&gt; [1] 0.001341</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;       Two Sample Wilcoxon Test </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; type: permu    method: default    </span></span>
-<span><span class="co">#&gt; statistic = 514, p-value = 0.002202, </span></span>
+<span><span class="co">#&gt; statistic = 519, p-value = 0.001341, </span></span>
 <span><span class="co">#&gt; alternative hypothesis: greater </span></span>
-<span><span class="co">#&gt; estimate: 0.9788108 </span></span>
-<span><span class="co">#&gt; 95 percent confidence interval: 0.2957363 1.6217687</span></span>
+<span><span class="co">#&gt; estimate: 1.076735 </span></span>
+<span><span class="co">#&gt; 95 percent confidence interval: 0.3611423 1.7557380</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">plot</span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-results-1.svg" width="100%"></p>
@@ -125,7 +125,7 @@
 <code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.002557631</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.00166809</span></span></code></pre></div>
 </li>
 </ul>
 <p>There is also support for chaining method calls, which means that you can do things like</p>
