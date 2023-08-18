@@ -1,6 +1,6 @@
 Package: LearnNonparam
 Title: Non-parametric Tests
-Version: 1.1.10
+Version: 1.1.11
 Authors@R: 
     person("Yan", "Du", , "isduyan@outlook.com", role = c("aut", "cre"))
 Description: This package is based on the R6 package. Various non-parametric tests are implemented for the one-sample, two-sample, and k-sample cases. 
