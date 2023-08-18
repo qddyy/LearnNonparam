@@ -27,7 +27,7 @@ remotes::install_github("qddyy/LearnNonparam")
 library(LearnNonparam)
 ```
 
-- Create a test (for example, a `Wilcoxon` object)
+- Create a test object (for example, a `Wilcoxon` object)
 
   ``` r
   t <- Wilcoxon$new(alternative = "greater", type = "permu", n_permu = 1000000)
@@ -49,20 +49,20 @@ library(LearnNonparam)
 - check the results
 
   ``` r
-  print(t$p_value)
-  #> [1] 0.000886
+  t$p_value
+  #> [1] 0.001341
 
   t$print()
   #> 
   #>       Two Sample Wilcoxon Test 
   #> 
   #> type: permu    method: default    
-  #> statistic = 523, p-value = 0.000886, 
+  #> statistic = 519, p-value = 0.001341, 
   #> alternative hypothesis: greater 
-  #> estimate: 1.164784 
-  #> 95 percent confidence interval: 0.3713987 1.9444147
+  #> estimate: 1.076735 
+  #> 95 percent confidence interval: 0.3611423 1.7557380
 
-  t$plot(bins = 20)
+  t$plot(binwidth = 1)
   ```
 
   <img src="man/figures/README-results-1.svg" width="100%" />
@@ -72,25 +72,25 @@ library(LearnNonparam)
   ``` r
   t$type <- "approx"
 
-  print(t$p_value)
-  #> [1] 0.001170636
+  t$p_value
+  #> [1] 0.00166809
   ```
 
 There is also support for chaining method calls, which means that you
 can do things like
 
 ``` r
-pmt(...)$feed(...)$print(...)$plot(...)
+t <- pmt(...)$feed(...)$print(...)$plot(...)
 ```
 
 ## Help
 
 Just use `?...` syntax.
 
-If you want to know available methods and attributes, you can start by
-exploring `?PermuTest` (all tests’ **base class**).
+If you want to know all available methods and attributes, you can start
+by exploring `?PermuTest` (all tests’ **base class**).
 
-If you want to know available tests, see `pmts(...)`.
+If you want to know all available tests, see `pmts()`.
 
 ``` r
 pmts()
