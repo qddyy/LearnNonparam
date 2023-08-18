@@ -55,7 +55,7 @@ PermuTest <- R6Class(
         #' 
         #' @return The object itself (invisibly). 
         print = function(digits = getOption("digits")) {
-            if (!is.null(private$.data)) {
+            if (!is.null(private$.raw_data)) {
                 private$.print(digits = digits)
             }
 
@@ -68,7 +68,7 @@ PermuTest <- R6Class(
         #' 
         #' @return The object itself (invisibly). 
         plot = function(...) {
-            if (private$.type == "permu") {
+            if (!is.null(private$.raw_data) & private$.type == "permu") {
                 private$.plot(...)
             }
 

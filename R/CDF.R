@@ -28,7 +28,7 @@ CDF <- R6Class(
         #' 
         #' @return The object itself (invisibly). 
         plot = function() {
-            if (!is.null(private$.data)) {
+            if (!is.null(private$.raw_data)) {
                 private$.plot()
             }
 
