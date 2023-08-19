@@ -36,20 +36,17 @@ JonckheereTerpstra <- R6Class(
 
         .calculate_statistic = function() {
             k <- as.integer(names(private$.data)[length(private$.data)])
-            c_groups <- expand.grid(i = seq_len(k), j = seq_len(k))
-            c_groups <- c_groups[c_groups$i < c_groups$j, ]
-
+            ij <- list(
+                i = c(lapply(seq_len(k - 1), seq_len), recursive = TRUE),
+                j = rep.int(seq_len(k)[-1], seq_len(k - 1))
+            )
             private$.statistic_func <- function(data, group) {
-                group_loc <- split(seq_along(group), group)
-                sum(apply(
-                    c_groups, 1, function(ij) {
-                        c_xy <- expand.grid(
-                            x = data[group_loc[[ij[1]]]],
-                            y = data[group_loc[[ij[2]]]]
-                        )
-                        sum(c_xy$x < c_xy$y)
-                    }
-                ))
+                where <- split(seq_along(group), group)
+                sum(c(.mapply(
+                    FUN = function(i, j) {
+                        outer(data[where[[i]]], data[where[[j]]], "<")
+                    }, dots = ij, MoreArgs = NULL
+                ), recursive = TRUE))
             }
 
             super$.calculate_statistic()

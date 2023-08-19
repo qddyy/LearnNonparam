@@ -17,8 +17,8 @@ MultipleComparison <- R6Class(
     private = list(
         .name = "Multiple Comparison",
 
+        .ij = NULL,
         .multicomp = NULL,
-        .c_groups = NULL,
 
         .check = function() {}, # TODO
 
@@ -40,20 +40,13 @@ MultipleComparison <- R6Class(
                     data = do.call(
                         rbind, .mapply(
                             dots = list(
-                                private$.c_groups,
-                                split(
+                                i = private$.ij$i,
+                                j = private$.ij$j,
+                                statistic_permu = split(
                                     private$.statistic_permu,
                                     row(private$.statistic_permu)
                                 )
-                            ),
-                            FUN = function(ij, statistic_permu) {
-                                ij <- as.integer(ij)
-                                data.frame(
-                                    i = ij[1], j = ij[2],
-                                    statistic_permu = statistic_permu
-                                )
-                            },
-                            MoreArgs = NULL
+                            ), FUN = data.frame, MoreArgs = NULL
                         )
                     ),
                     mapping = aes(x = statistic_permu),
@@ -74,24 +67,24 @@ MultipleComparison <- R6Class(
         },
 
         .calculate_statistic = function() {
-            private$.c_groups <- combinations(
-                v = unique(names(private$.data)), k = 2, layout = "list"
-            )
-
             data <- unname(private$.data)
+            k <- as.integer(names(private$.data)[length(data)])
+            private$.ij <- ij <- list(
+                i = rep.int(seq_len(k - 1), seq.int(k - 1, 1)),
+                j = c(lapply(seq.int(2, k), seq.int, to = k), recursive = TRUE)
+            )
             statistic_func <- private$.statistic_func
             private$.statistic_func <- function(group) {
-                group_loc <- split(seq_along(group), group)
-                vapply(
-                    X = private$.c_groups, FUN.VALUE = numeric(1),
-                    FUN = function(ij) {
+                where <- split(seq_along(group), group)
+                c(.mapply(
+                    FUN = function(i, j) {
                         statistic_func(
-                            data[group_loc[[ij[1]]]],
-                            data[group_loc[[ij[2]]]],
+                            data[where[[i]]],
+                            data[where[[j]]],
                             setNames(data, group)
                         )
-                    }
-                )
+                    }, dots = ij, MoreArgs = NULL
+                ), recursive = TRUE)
             }
 
             private$.statistic <- private$.statistic_func(names(private$.data))
@@ -100,7 +93,7 @@ MultipleComparison <- R6Class(
         .calculate_statistic_permu = function() {
             private$.statistic_permu <- vapply(
                 X = private$.group_permu, FUN = private$.statistic_func,
-                FUN.VALUE = numeric(length(private$.c_groups))
+                FUN.VALUE = numeric(length(private$.ij$i))
             )
         },
 
@@ -111,14 +104,13 @@ MultipleComparison <- R6Class(
         },
 
         .calculate_extra = function() {
-            private$.multicomp <- setNames(
-                as.data.frame(cbind(
-                    t(vapply(private$.c_groups, as.integer, integer(2))),
-                    private$.statistic, private$.p_value
-                )), c("i", "j", "statistic", "p_value")
+            private$.multicomp <- data.frame(
+                i = private$.ij$i,
+                j = private$.ij$j,
+                statistic = private$.statistic,
+                p_value = private$.p_value,
+                differ = (private$.p_value < 1 - private$.conf_level)
             )
-
-            private$.multicomp$differ <- (private$.p_value < 1 - private$.conf_level)
         }
     )
 )
