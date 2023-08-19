@@ -16,7 +16,7 @@ Sign <- R6Class(
     public = list(
         #' @description Create a new `Sign` object. 
         #' 
-        #' @param type a character string specifying the way to calculate p-values, must be one of `"exact"` (default), `"approx"` or `"permu"`. 
+        #' @param type a character string specifying the way to calculate p-values, must be one of `"permu"` (default), `"approx"` or `"exact"`. 
         #' @param correct a logical indicating whether to apply continuity correction in the normal approximation for the p-value.
         #' 
         #' @param alternative a character string specifying the alternative hypothesis, must be one of `"two_sided"` (default), `"greater"` or `"less"`.
@@ -24,7 +24,7 @@ Sign <- R6Class(
         #' 
         #' @return A `Sign` object. 
         initialize = function(
-            type = c("exact", "approx", "permu"), correct = TRUE,
+            type = c("permu", "approx", "exact"), correct = TRUE,
             alternative = c("two_sided", "less", "greater"), n_permu = NULL
         ) {
             private$.correct <- correct
@@ -50,26 +50,26 @@ Sign <- R6Class(
             private$.statistic_permu <- apply(
                 X = private$.swapped_permu, MARGIN = 1,
                 FUN = function(is_swapped, sign) {
-                    mean(sign * (2 * is_swapped - 1))
+                    sum(sign * (2 * is_swapped - 1) == 1)
                 }, sign = private$.sign
             )
         },
 
         .calculate_p = function() {
-            n <- length(private$.data$x)
+            n <- nrow(private$.data)
 
             if (private$.type == "exact") {
                 less <- pbinom(private$.statistic, size = n, prob = 0.5)
                 greater <- pbinom(private$.statistic - 1, size = n, prob = 0.5, lower.tail = FALSE)
             }
             if (private$.type == "approx") {
-                z <- private$.statistic - 1 / 2 * n
+                z <- private$.statistic - n / 2
                 correction <- if (private$.correct) {
                     switch(private$.alternative,
                         two_sided = sign(z) * 0.5, greater = 0.5, less = -0.5
                     )
                 } else 0
-                z <- (z - correction) / sqrt(1 / 4 * n)
+                z <- (z - correction) / sqrt(n / 4)
 
                 less <- pnorm(z)
                 greater <- pnorm(z, lower.tail = FALSE)

@@ -532,7 +532,7 @@ print(t$p_value)
 ```{r}
 # See ?Sign or ?paired.sign
 t <- pmt(
-    "paired.sign", alternative = "greater"
+    "paired.sign", alternative = "greater", type = "exact"
 )
 
 t$feed(data.frame(
