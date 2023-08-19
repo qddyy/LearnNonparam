@@ -29,7 +29,9 @@ TwoSamplePairedTest <- R6Class(
             private$.swapped_permu <- if (is.null(private$.n_permu)) {
                 expand.grid(rep(list(c(TRUE, FALSE)), nrow(private$.data)))
             } else {
-                matrix(as.logical(rbinom(private$.n_permu * nrow(private$.data), 1, 0.5)), nrow = private$.n_permu)
+                matrix(as.logical(
+                    rbinom(private$.n_permu * nrow(private$.data), 1, 0.5)
+                ), nrow = private$.n_permu)
             }
 
             private$.data_permu <- apply(

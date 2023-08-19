@@ -59,8 +59,8 @@ Correlation <- R6Class(
                 order_x <- order(x)
                 x_reorder <- x[order_x]
 
-                j_index <- rep.int(seq_len(n), seq.int(0, n - 1))
-                i_index <- c(lapply(seq.int(1, n - 1), seq_len), recursive = T)
+                i_index <- c(lapply(seq_len(n - 1), seq_len), recursive = TRUE)
+                j_index <- rep.int(seq_len(n)[-1], seq_len(n - 1))
                 x_equal <- (x_reorder[i_index] == x_reorder[j_index])
 
                 i_index <- order_x[i_index]
