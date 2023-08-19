@@ -50,7 +50,7 @@ MultipleComparison <- R6Class(
                         )
                     ),
                     mapping = aes(x = statistic_permu),
-                    geom = "bar", fill = "#68aaa1"
+                    geom = "bar", fill = "#68aaa1", ...
                 ) +
                 geom_vline(
                     data = private$.multicomp[1:3],
