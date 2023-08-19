@@ -71,8 +71,8 @@ SignedScore <- R6Class(
         .calculate_p = function() {
             n <- nrow(private$.data)
 
-            SR <- sum(pmax(0, private$.signed_score))
-            z <- SR - 1 / 2 * sum(abs(private$.signed_score))
+            sa <- sum(pmax.int(0, private$.signed_score))
+            z <- sa - 1 / 2 * sum(abs(private$.signed_score))
             correction <- if (private$.scoring == "rank" & private$.correct) {
                 switch(private$.alternative,
                     two_sided = sign(z) * 0.5, greater = 0.5, less = -0.5
