@@ -32,7 +32,7 @@ Performs two sample sign test on data vectors.
 Create a new \code{Sign} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Sign$new(
-  type = c("exact", "approx", "permu"),
+  type = c("permu", "approx", "exact"),
   correct = TRUE,
   alternative = c("two_sided", "less", "greater"),
   n_permu = NULL
@@ -42,7 +42,7 @@ Create a new \code{Sign} object.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{type}}{a character string specifying the way to calculate p-values, must be one of \code{"exact"} (default), \code{"approx"} or \code{"permu"}.}
+\item{\code{type}}{a character string specifying the way to calculate p-values, must be one of \code{"permu"} (default), \code{"approx"} or \code{"exact"}.}
 
 \item{\code{correct}}{a logical indicating whether to apply continuity correction in the normal approximation for the p-value.}
 

@@ -53,30 +53,24 @@ Wilcoxon <- R6Class(
             }
 
             if (private$.type == "exact") {
-                less <- pwilcox(statistic, m, n)
-                greater <- pwilcox(statistic - 1, m, n, lower.tail = FALSE)
+                private$.p_value <- get_p_decrete(
+                    statistic, "wilcox", private$.side, m = m, n = n
+                )
             }
+
             if (private$.type == "approx") {
                 N <- m + n
 
                 z <- statistic - m * n / 2
                 correction <- if (private$.correct) {
-                    switch(private$.alternative,
-                        two_sided = sign(z) * 0.5, greater = 0.5, less = -0.5
-                    )
+                    switch(private$.side, lr = sign(z) * 0.5, r = 0.5, l = -0.5)
                 } else 0
                 z <- (z - correction) / sqrt(
                     (m * n / 12) * ((N + 1) - sum(ties^3 - ties) / (N * (N - 1)))
                 )
 
-                less <- pnorm(z)
-                greater <- pnorm(z, lower.tail = FALSE)
+                private$.p_value <- get_p_continous(z, "norm", private$.side)
             }
-            two_sided <- 2 * min(less, greater)
-
-            private$.p_value <- switch(private$.alternative,
-                greater = greater, less = less, two_sided = two_sided
-            )
         },
 
         .calculate_extra = function() {

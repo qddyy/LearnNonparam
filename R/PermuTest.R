@@ -34,6 +34,15 @@ PermuTest <- R6Class(
             private$.alternative <- match.arg(alternative)
 
             private$.conf_level <- conf_level
+
+            private$.side <- switch(private$.trend,
+                "+" = switch(private$.alternative,
+                    greater = "r", less = "l", two_sided = "lr"
+                ),
+                "-" = switch(private$.alternative,
+                    greater = "l", less = "r", two_sided = "lr"
+                ),
+            )
         },
 
         #' @description Feed the data to the test. 
@@ -86,12 +95,16 @@ PermuTest <- R6Class(
         .n_permu = NULL,
 
         .raw_data = NULL,
-
         .data = NULL,
         .data_permu = NULL,
 
+        .statistic_func = NULL,
+
         .statistic = NULL,
         .statistic_permu = NULL,
+
+        .trend = "+",
+        .side = NULL,
 
         .null_value = NULL,
         .alternative = NULL,
@@ -100,9 +113,6 @@ PermuTest <- R6Class(
         .estimate = NULL,
         .ci = NULL,
         .conf_level = NULL,
-
-        .statistic_func = NULL,
-        .trend = "+",
 
         # @Override
         .check = function() {},
@@ -204,18 +214,11 @@ PermuTest <- R6Class(
         },
 
         .calculate_p_permu = function() {
-            greater <- mean(private$.statistic_permu >= private$.statistic)
-            less <- mean(private$.statistic_permu <= private$.statistic)
-            two_sided <- mean(abs(private$.statistic_permu) >= abs(private$.statistic))
+            r <- quote(mean(private$.statistic_permu >= private$.statistic))
+            l <- quote(mean(private$.statistic_permu <= private$.statistic))
+            lr <- quote(mean(abs(private$.statistic_permu) >= abs(private$.statistic)))
 
-            private$.p_value <- switch(private$.trend,
-                "+" = switch(private$.alternative,
-                    greater = greater, less = less, two_sided = two_sided
-                ),
-                "-" = switch(private$.alternative,
-                    greater = less, less = greater, two_sided = two_sided
-                ),
-            )
+            private$.p_value <- eval(get(private$.side))
         },
 
         .calculate = function() {

@@ -49,8 +49,8 @@ ChiSquare <- R6Class(
             r <- nrow(private$.data)
             c <- ncol(private$.data)
 
-            private$.p_value <- pchisq(
-                private$.statistic, df = (r - 1) * (c - 1), lower.tail = FALSE
+            private$.p_value <- get_p_continous(
+                private$.statistic, "chisq", "r", df = (r - 1) * (c - 1)
             )
         }
     )

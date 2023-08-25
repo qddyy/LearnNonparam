@@ -19,3 +19,44 @@ score <- function(x, method, n = length(x)) {
         }
     )
 }
+
+# for .calculate_p
+
+get_p_continous <- function(x, dist, side, ...) {
+    F <- match.fun(paste0("p", dist))
+
+    l <- F(x, ...)
+    r <- 1 - l
+    lr <- 2 * min(l, r)
+
+    get(side)
+}
+
+get_p_decrete <- function(x, dist, side, ...) {
+    F <- match.fun(paste0("p", dist))
+    p <- match.fun(paste0("d", dist))
+
+    l <- F(x, ...)
+    r <- 1 - l + p(x, ...)
+    lr <- 2 * min(l, r, 0.5)
+
+    get(side)
+}
+
+get_p_binom <- function(x, n, p, side) {
+    if (side == "lr") {
+        if (p == 0) as.integer(x == 0) else if (p == 1) as.integer(x == n) else {
+            d <- dbinom(x, n, p) * (1 + 1e-07)
+            expect <- n * p
+            if (x < expect) {
+                y <- sum(dbinom(seq.int(ceiling(expect), n), n, p) <= d)
+                pbinom(x, n, p) + pbinom(n - y, n, p, lower.tail = FALSE)
+            } else if (x > expect) {
+                y <- sum(dbinom(seq.int(0, floor(expect)), n, p) <= d)
+                pbinom(y - 1, n, p) + pbinom(x - 1, n, p, lower.tail = FALSE)
+            } else 1
+        }
+    } else {
+        get_p_decrete(x, "binom", side, size = n, prob = p)
+    }
+}

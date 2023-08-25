@@ -69,8 +69,8 @@ MultiCompT <- R6Class(
             k <- as.integer(names(private$.data)[N])
             df <- if (private$.scoring == "none") N - k else Inf
 
-            private$.p_value <- 2 * pt(
-                abs(private$.statistic), df = df, lower.tail = FALSE
+            private$.p_value <- 2 * get_p_continous(
+                abs(private$.statistic), "t", "r", df = df
             )
         },
 

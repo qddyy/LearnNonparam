@@ -73,22 +73,14 @@ SignedScore <- R6Class(
 
             sa <- sum(pmax.int(0, private$.signed_score))
             z <- sa - 1 / 2 * sum(abs(private$.signed_score))
-            correction <- if (private$.scoring == "rank" & private$.correct) {
-                switch(private$.alternative,
-                    two_sided = sign(z) * 0.5, greater = 0.5, less = -0.5
-                )
+            correction <- correction <- if (private$.correct) {
+                switch(private$.side, lr = sign(z) * 0.5, r = 0.5, l = -0.5)
             } else 0
             z <- (z - correction) / sqrt(
                 1 / 4 * sum(private$.signed_score^2)
             )
 
-            less <- pnorm(z)
-            greater <- pnorm(z, lower.tail = FALSE)
-            two_sided <- 2 * min(less, greater)
-
-            private$.p_value <- switch(private$.alternative,
-                greater = greater, less = less, two_sided = two_sided
-            )
+            private$.p_value <- get_p_continous(z, "norm", private$.side)
         }
     )
 )

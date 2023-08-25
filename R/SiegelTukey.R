@@ -35,22 +35,11 @@ SiegelTukey <- R6Class(
     private = list(
         .name = "Siegel-Tukey Test",
 
-        .adjust_median = NULL,
-
         .trend = "-",
 
+        .adjust_median = NULL,
+
         .calculate_extra = function() {},
-
-        .calculate_p = function() {
-            raw_alternative <- private$.alternative
-            private$.alternative <- switch(raw_alternative,
-                greater = "less", less = "greater", two_sided = "two_sided"
-            )
-
-            super$.calculate_p()
-
-            private$.alternative <- raw_alternative
-        },
 
         .calculate_score = function() {
             x <- private$.data$x

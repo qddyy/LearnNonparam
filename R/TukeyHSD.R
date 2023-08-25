@@ -74,8 +74,8 @@ TukeyHSD <- R6Class(
             k <- as.integer(names(private$.data)[N])
             df <- if (private$.scoring == "none") N - k else Inf
 
-            private$.p_value <- ptukey(
-                abs(private$.statistic), nmeans = k, df = df, lower.tail = FALSE
+            private$.p_value <- get_p_continous(
+                abs(private$.statistic), "tukey", "r", nmeans = k, df = df
             )
         }
     )

@@ -74,13 +74,7 @@ AnsariBradley <- R6Class(
 
             z <- (private$.statistic - mu) / sqrt(sigma2)
 
-            greater <- pnorm(z)
-            less <- pnorm(z, lower.tail = FALSE)
-            two_sided <- 2 * min(less, greater)
-
-            private$.p_value <- switch(private$.alternative,
-                greater = greater, less = less, two_sided = two_sided
-            )
+            private$.p_value <- get_p_continous(z, "norm", private$.side)
         }
     )
 )

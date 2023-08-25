@@ -59,9 +59,9 @@ Sign <- R6Class(
             n <- nrow(private$.data)
 
             if (private$.type == "exact") {
-                less <- pbinom(private$.statistic, size = n, prob = 0.5)
-                greater <- pbinom(private$.statistic - 1, size = n, prob = 0.5, lower.tail = FALSE)
+                private$.p_value <- get_p_binom(private$.statistic, n, 0.5, private$.side)
             }
+
             if (private$.type == "approx") {
                 z <- private$.statistic - n / 2
                 correction <- if (private$.correct) {
@@ -71,14 +71,8 @@ Sign <- R6Class(
                 } else 0
                 z <- (z - correction) / sqrt(n / 4)
 
-                less <- pnorm(z)
-                greater <- pnorm(z, lower.tail = FALSE)
+                private$.p_value <- get_p_continous(z, "norm", private$.side)
             }
-            two_sided <- 2 * min(less, greater)
-
-            private$.p_value <- switch(private$.alternative,
-                greater = greater, less = less, two_sided = two_sided
-            )
         }
     )
 )

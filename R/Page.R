@@ -49,13 +49,7 @@ Page <- R6Class(
                 (k - 1) * k * (k + 1) / 12 * sum(vapply(private$.data, var, numeric(1)))
             )
 
-            less <- pnorm(z)
-            greater <- pnorm(z, lower.tail = FALSE)
-            two_sided <- 2 * min(less, greater)
-
-            private$.p_value <- switch(private$.alternative,
-                greater = greater, less = less, two_sided = two_sided
-            )
+            private$.p_value <- get_p_continous(z, "norm", private$.side)
         }
     )
 )

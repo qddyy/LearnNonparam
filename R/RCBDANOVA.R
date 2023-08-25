@@ -53,8 +53,8 @@ RCBDANOVA <- R6Class(
             k <- nrow(private$.data)
             b <- ncol(private$.data)
 
-            private$.p_value <- pf(
-                private$.statistic, df1 = k - 1, df2 = (k - 1) * (b - 1), , lower.tail = FALSE
+            private$.p_value <- get_p_continous(
+                private$.statistic, "f", "r", df1 = k - 1, df2 = (k - 1) * (b - 1)
             )
         }
     )

@@ -66,8 +66,8 @@ ANOVA <- R6Class(
             N <- length(private$.data)
             k <- as.integer(names(private$.data)[N])
 
-            private$.p_value <- pf(
-                private$.statistic, df1 = k - 1, df2 = N - k, , lower.tail = FALSE
+            private$.p_value <- get_p_continous(
+                private$.statistic, "f", "r", df1 = k - 1, df2 = N - k
             )
         }
     )

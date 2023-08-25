@@ -96,19 +96,12 @@ Correlation <- R6Class(
                     (4 * n + 10) / (9 * n * (n - 1)) - 4 / (n^2 * (n - 1)^2) * (a - b - c)
                 )
 
-                less <- pnorm(z)
-                greater <- pnorm(z, lower.tail = FALSE)
+                private$.p_value <- get_p_continous(z, "norm", private$.side)
             } else {
-                statistic <- r * sqrt((n - 2) / (1 - r^2))
+                t <- r * sqrt((n - 2) / (1 - r^2))
 
-                less <- pt(statistic, df = n - 2)
-                greater <- pt(statistic, df = n - 2, lower.tail = FALSE)
+                private$.p_value <- get_p_continous(t, "t", private$.side, df = n - 2)
             }
-            two_sided <- 2 * min(less, greater)
-
-            private$.p_value <- switch(private$.alternative,
-                greater = greater, less = less, two_sided = two_sided
-            )
         }
     )
 )

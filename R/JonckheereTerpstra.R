@@ -35,7 +35,7 @@ JonckheereTerpstra <- R6Class(
         .name = "Jonckheere-Terpstra Test",
 
         .calculate_statistic = function() {
-            k <- as.integer(names(private$.data)[length(private$.data)])
+            k <- as.integer(last(names(private$.data)))
             ij <- list(
                 i = c(lapply(seq_len(k - 1), seq_len), recursive = TRUE),
                 j = rep.int(seq_len(k)[-1], seq_len(k - 1))
@@ -60,13 +60,7 @@ JonckheereTerpstra <- R6Class(
                 1 / 72 * (N^2 * (2 * N + 3) - sum(n^2 * (2 * n + 3)))
             )
 
-            less <- pnorm(z)
-            greater <- pnorm(z, lower.tail = FALSE)
-            two_sided <- 2 * min(less, greater)
-
-            private$.p_value <- switch(private$.alternative,
-                greater = greater, less = less, two_sided = two_sided
-            )
+            private$.p_value <- get_p_continous(z, "norm", private$.side)
         }
     )
 )
