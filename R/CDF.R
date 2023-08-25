@@ -38,6 +38,8 @@ CDF <- R6Class(
     private = list(
         .name = "Cumulative Distribution Function",
 
+        .type = "approx",
+
         .print = function(...) {},
 
         .plot = function() {

@@ -67,12 +67,14 @@ MultipleComparison <- R6Class(
         },
 
         .calculate_statistic = function() {
-            data <- unname(private$.data)
-            k <- as.integer(names(private$.data)[length(data)])
+            k <- as.integer(last(names(private$.data)))
+            
             private$.ij <- ij <- list(
                 i = rep.int(seq_len(k - 1), seq.int(k - 1, 1)),
                 j = c(lapply(seq.int(2, k), seq.int, to = k), recursive = TRUE)
             )
+
+            data <- unname(private$.data)
             statistic_func <- private$.statistic_func
             private$.statistic_func <- function(group) {
                 where <- split(seq_along(group), group)

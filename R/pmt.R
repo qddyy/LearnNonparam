@@ -48,15 +48,15 @@ pmt <- function(key, ...) tests[[key]]$new(...)
 
 #' @rdname pmt
 #' 
-#' @param category a character string specifying which tests to show. If `"all"` (default) then available tests are shown. 
+#' @param which a character string specifying which tests to show. If `"all"` (default) then available tests are shown. 
 #' 
 #' @export
-pmts <- function(category = c("all", "onesample", "twosample", "ksample", "multicomp", "paired", "rcbd", "association", "table")) {
-    category <- match.arg(category)
+pmts <- function(which = c("all", "onesample", "twosample", "ksample", "multicomp", "paired", "rcbd", "association", "table")) {
+    which <- match.arg(which)
 
     keys <- names(tests)
-    if (category != "all") {
-        keys <- keys[startsWith(keys, category)]
+    if (which != "all") {
+        keys <- keys[startsWith(keys, which)]
     }
     tests <- tests[keys]
 

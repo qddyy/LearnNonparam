@@ -79,7 +79,7 @@ RCBD <- R6Class(
             private$.data <- do.call(
                 data.frame, lapply(
                     X = private$.data, FUN = score,
-                    n = nrow(private$.data), method = private$.scoring
+                    method = private$.scoring, n = nrow(private$.data)
                 )
             )
         }
