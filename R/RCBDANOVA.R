@@ -32,7 +32,7 @@ RCBDANOVA <- R6Class(
 
         .calculate_statistic = function() {
             private$.statistic_func <- switch(private$.type,
-                permu = function(df) sum(rowSums(df)^2),
+                permu = function(df) sum(rowMeans(df)^2),
                 approx = function(df) {
                     b <- ncol(df)
 
