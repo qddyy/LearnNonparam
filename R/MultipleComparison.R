@@ -6,7 +6,6 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom arrangements combinations
 #' @importFrom ggplot2 ggplot aes stat_bin geom_vline facet_grid labs theme element_text
 
 
