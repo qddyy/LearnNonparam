@@ -3,7 +3,7 @@ Title: Non-parametric Tests
 Version: 1.1.11
 Authors@R: 
     person("Yan", "Du", , "isduyan@outlook.com", role = c("aut", "cre"))
-Description: This package is based on the R6 package. Various non-parametric tests are implemented for the one-sample, two-sample, and k-sample cases. 
+Description: Implements various non-parametric tests in chapters 1-5 of the book "An introduction to modern nonparametric statistics" by James J. Higgins. 
 License: MIT + file LICENSE
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

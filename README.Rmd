@@ -25,6 +25,8 @@ This package implements most of the tests in chapters 1-5 of [@Higgins2003](#ref
 
 It uses [R6](https://cran.r-project.org/package=R6) for clean OO-design and [arrangements](https://cran.r-project.org/package=arrangements) for fast generation of permutations, as well as [ggplot2](https://cran.r-project.org/package=ggplot2) to draw pretty graphs.
 
+Examples in the book can be found [here](https://qddyy.github.io/LearnNonparam/articles/examples). 
+
 ## Installation
 
 You can install the development version of this package with:
@@ -79,14 +81,11 @@ t <- pmt(...)$feed(...)$print(...)$plot(...)
 
 ## Help
 
-Just use `?...` syntax. 
+- Explore `?PermuTest` (all tests' **base class**) for all available methods and attributes.
 
-If you want to know all available methods and attributes, you can start by exploring `?PermuTest` (all tests' **base class**). 
-
-If you want to know all available tests, see `pmts()`. 
-
-```{r, pmts}
-pmts()
-```
+- Check `pmts()` for all available tests. 
+    ```{r, pmts}
+    pmts()
+    ```
 
 ## References
