@@ -44,7 +44,7 @@ SignedScore <- R6Class(
 
         .signed_score = NULL,
 
-        .calculate_score = function() {
+        .calculate_statistic = function() {
             diff <- private$.data$x - private$.data$y
 
             if (private$.ranking_method == "ignore") {
@@ -53,9 +53,7 @@ SignedScore <- R6Class(
             }
 
             private$.signed_score <- sign(diff) * score(abs(diff), method = private$.scoring)
-        },
 
-        .calculate_statistic = function() {
             private$.statistic <- mean(private$.signed_score)
         },
 
