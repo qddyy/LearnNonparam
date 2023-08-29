@@ -44,17 +44,17 @@ Create a new \code{SignedScore} object.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{type}}{a character string specifying the way to calculate p-values, must be one of \code{"permu"} (default) or \code{"approx"}.}
+\item{\code{type}}{a character string specifying the way to calculate the p-value.}
 
 \item{\code{correct}}{a logical indicating whether to apply continuity correction in the normal approximation for the p-value when \code{scoring} is set to \code{"rank"}.}
 
 \item{\code{ranking_method}}{a character string specifying the method of ranking data in computing adjusted signed ranks for tied data, must be one of \code{"with_zeros"} (default) or \code{"ignore"}. Note that the data fed will be modified when this parameter is set to \code{"ignore"}.}
 
-\item{\code{alternative}}{a character string specifying the alternative hypothesis, must be one of \code{"two_sided"} (default), \code{"greater"} or \code{"less"}.}
+\item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 
 \item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If \code{NULL} (default) then all permutations are used.}
 
-\item{\code{scoring}}{a character string specifying which scoring system to be used, must be one of \code{"rank"} (default), \code{"vw"} or \code{"expon"}.}
+\item{\code{scoring}}{a character string specifying which scoring system to be used.}
 }
 \if{html}{\out{</div>}}
 }

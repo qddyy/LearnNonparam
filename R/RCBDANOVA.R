@@ -16,9 +16,7 @@ RCBDANOVA <- R6Class(
     public = list(
         #' @description Create a new `RCBDANOVA` object. 
         #' 
-        #' @param type a character string specifying the way to calculate p-values, must be one of `"permu"` (default) or `"approx"`. 
-        #' 
-        #' @param n_permu an integer specifying how many permutations should be used to construct the permutation distribution. If `NULL` (default) then all permutations are used.
+        #' @template init_params
         #' 
         #' @return A `RCBDANOVA` object. 
         initialize = function(type = c("permu", "approx"), n_permu = NULL) {

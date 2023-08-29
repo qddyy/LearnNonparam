@@ -68,13 +68,13 @@ Create a new \code{PermuTest} object. Note that it is not recommended to create 
 \describe{
 \item{\code{null_value}}{a number specifying the value of the parameter in the null hypothesis.}
 
-\item{\code{alternative}}{a character string specifying the alternative hypothesis, must be one of \code{"two_sided"} (default), \code{"greater"} or \code{"less"}.}
+\item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 
 \item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If \code{NULL} (default) then all permutations are used.}
 
 \item{\code{conf_level}}{a number specifying confidence level of the interval.}
 
-\item{\code{scoring}}{a character string specifying which scoring system to be used, must be one of \code{"none"} (default), \verb{"rank}, \code{"vw"} or \code{"expon"}.}
+\item{\code{scoring}}{a character string specifying which scoring system to be used.}
 }
 \if{html}{\out{</div>}}
 }

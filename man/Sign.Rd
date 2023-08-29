@@ -42,11 +42,11 @@ Create a new \code{Sign} object.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{type}}{a character string specifying the way to calculate p-values, must be one of \code{"permu"} (default), \code{"approx"} or \code{"exact"}.}
+\item{\code{type}}{a character string specifying the way to calculate the p-value.}
 
 \item{\code{correct}}{a logical indicating whether to apply continuity correction in the normal approximation for the p-value.}
 
-\item{\code{alternative}}{a character string specifying the alternative hypothesis, must be one of \code{"two_sided"} (default), \code{"greater"} or \code{"less"}.}
+\item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 
 \item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If \code{NULL} (default) then all permutations are used.}
 }

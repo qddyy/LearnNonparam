@@ -16,12 +16,7 @@ Wilcoxon <- R6Class(
     public = list(
         #' @description Create a new `Wilcoxon` object. 
         #' 
-        #' @param type a character string specifying the way to calculate p-values, must be one of `"permu"` (default), `"approx"` or `"exact"`. Note that this parameter will be set to `"approx"` automatically when there exists ties. 
-        #' @param correct a logical indicating whether to apply continuity correction in the normal approximation for the p-value.
-        #' 
-        #' @param alternative a character string specifying the alternative hypothesis, must be one of `"two_sided"` (default), `"greater"` or `"less"`.
-        #' @param n_permu an integer specifying how many permutations should be used to construct the permutation distribution. If `NULL` (default) then all permutations are used.
-        #' @param conf_level a number specifying confidence level of the interval.
+        #' @template init_params
         #' 
         #' @return A `Wilcoxon` object. 
         initialize = function(

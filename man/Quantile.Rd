@@ -51,9 +51,9 @@ Create a new \code{Quantile} object.
 \describe{
 \item{\code{prob}}{a numeric between 0 and 1 indicating the probability.}
 
-\item{\code{null_value}}{a number specifying the value of the quantile under the null hypothesis.}
+\item{\code{null_value}}{a number specifying the value of the parameter in the null hypothesis.}
 
-\item{\code{alternative}}{a character string specifying the alternative hypothesis, must be one of \code{"two_sided"} (default), \code{"greater"} or \code{"less"}.}
+\item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 
 \item{\code{conf_level}}{a number specifying confidence level of the interval.}
 }

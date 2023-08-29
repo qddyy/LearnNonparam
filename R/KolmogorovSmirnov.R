@@ -16,7 +16,7 @@ KolmogorovSmirnov <- R6Class(
     public = list(
         #' @description Create a new `KolmogorovSmirnov` object. 
         #' 
-        #' @param n_permu an integer specifying how many permutations should be used to construct the permutation distribution. If `NULL` (default) then all permutations are used.
+        #' @template init_params
         #' 
         #' @return A `KolmogorovSmirnov` object. 
         initialize = function(n_permu = NULL) {

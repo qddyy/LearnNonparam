@@ -16,11 +16,8 @@ TukeyHSD <- R6Class(
     public = list(
         #' @description Create a new `TukeyHSD` object. 
         #' 
-        #' @param type a character string specifying the way to calculate p-values, must be one of `"permu"` (default) or `"approx"`. 
-        #' 
+        #' @template init_params
         #' @param conf_level a numeric value between zero and one giving the family-wise confidence level to use. 
-        #' @param n_permu an integer specifying how many permutations should be used to construct the permutation distribution. If `NULL` (default) then all permutations are used. 
-        #' @param scoring a character string specifying which scoring system to be used, must be one of `"none"` (default), `"rank`, `"vw"` or `"expon"`. 
         #' 
         #' @return A `TukeyHSD` object. 
         initialize = function(

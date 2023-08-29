@@ -17,7 +17,6 @@ SiegelTukey <- R6Class(
         #' @description Create a new `SiegelTukey` object. 
         #' 
         #' @param adjust_median a logical indicating whether the median difference between groups is levelled before the test is conducted. 
-        #' 
         #' @param ... extra parameters passed to `Wilcoxon$new()`.
         #' 
         #' @return A `SiegelTukey` object. 

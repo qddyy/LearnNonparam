@@ -16,13 +16,9 @@ SignedScore <- R6Class(
     public = list(
         #' @description Create a new `SignedScore` object. 
         #' 
-        #' @param type a character string specifying the way to calculate p-values, must be one of `"permu"` (default) or `"approx"`. 
+        #' @template init_params
         #' @param correct a logical indicating whether to apply continuity correction in the normal approximation for the p-value when `scoring` is set to `"rank"`.
         #' @param ranking_method a character string specifying the method of ranking data in computing adjusted signed ranks for tied data, must be one of `"with_zeros"` (default) or `"ignore"`. Note that the data fed will be modified when this parameter is set to `"ignore"`. 
-        #' 
-        #' @param alternative a character string specifying the alternative hypothesis, must be one of `"two_sided"` (default), `"greater"` or `"less"`.
-        #' @param n_permu an integer specifying how many permutations should be used to construct the permutation distribution. If `NULL` (default) then all permutations are used.
-        #' @param scoring a character string specifying which scoring system to be used, must be one of `"rank"` (default), `"vw"` or `"expon"`.
         #' 
         #' @return A `SignedScore` object. 
         initialize = function(

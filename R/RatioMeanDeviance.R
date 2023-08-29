@@ -16,8 +16,7 @@ RatioMeanDeviance <- R6Class(
     public = list(
         #' @description Create a new `RatioMeanDeviance` object. 
         #' 
-        #' @param alternative a character string specifying the alternative hypothesis, must be one of `"two_sided"` (default), `"greater"` or `"less"`.
-        #' @param n_permu an integer specifying how many permutations should be used to construct the permutation distribution. If `NULL` (default) then all permutations are used.
+        #' @template init_params
         #' 
         #' @return A `RatioMeanDeviance` object. 
         initialize = function(alternative = c("two_sided", "less", "greater"), n_permu = NULL) {

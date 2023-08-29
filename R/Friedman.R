@@ -16,9 +16,7 @@ Friedman <- R6Class(
     public = list(
         #' @description Create a new `Friedman` object. 
         #' 
-        #' @param type a character string specifying the way to calculate p-values, must be one of `"permu"` (default) or `"approx"`. 
-        #' 
-        #' @param n_permu an integer specifying how many permutations should be used to construct the permutation distribution. If `NULL` (default) then all permutations are used.
+        #' @template init_params
         #' 
         #' @return A `Friedman` object. 
         initialize = function(

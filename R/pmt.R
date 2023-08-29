@@ -1,3 +1,10 @@
+#' @title Syntactic Sugar for Object Construction
+#' 
+#' @description Create a test object conveniently. 
+#' 
+#' @name pmt
+
+
 tests <- list(
     onesample.quantile = Quantile,
     onesample.cdf = CDF,
@@ -29,12 +36,6 @@ tests <- list(
 
     table.chisq = ChiSquare
 )
-
-#' @title Syntactic Sugar for Object Construction
-#' 
-#' @description Create a test object conveniently. 
-#' 
-#' @name pmt
 
 
 #' @rdname pmt

@@ -42,13 +42,13 @@ Create a new \code{TukeyHSD} object.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{type}}{a character string specifying the way to calculate p-values, must be one of \code{"permu"} (default) or \code{"approx"}.}
+\item{\code{type}}{a character string specifying the way to calculate the p-value.}
 
 \item{\code{conf_level}}{a numeric value between zero and one giving the family-wise confidence level to use.}
 
 \item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If \code{NULL} (default) then all permutations are used.}
 
-\item{\code{scoring}}{a character string specifying which scoring system to be used, must be one of \code{"none"} (default), \verb{"rank}, \code{"vw"} or \code{"expon"}.}
+\item{\code{scoring}}{a character string specifying which scoring system to be used.}
 }
 \if{html}{\out{</div>}}
 }
