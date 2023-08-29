@@ -21,10 +21,7 @@ KSampleTest <- R6Class(
         .check = function() {}, # TODO
 
         .feed = function(...) {
-            data <- list(...)
-            if (length(data) == 1 & (is.list(data[[1]]) | is.data.frame(data[[1]]))) {
-                data <- as.list(data[[1]])
-            }
+            data <- data_to_list(...)
 
             private$.raw_data <- setNames(
                 c(data, recursive = TRUE, use.names = FALSE),

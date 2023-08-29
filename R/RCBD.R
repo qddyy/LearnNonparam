@@ -19,12 +19,7 @@ RCBD <- R6Class(
         .check = function() {}, # TODO
 
         .feed = function(...) {
-            data <- list(...)
-            if (length(data) == 1 & (is.list(data[[1]]) | is.data.frame(data[[1]]))) {
-                data <- data[[1]]
-            } else {
-                data <- do.call(data.frame, data)
-            }
+            data <- do.call(data.frame, data_to_list(...))
 
             dim <- dim(data)
             rownames(data) <- paste0("treatment_", seq_len(dim[1]))

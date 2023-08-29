@@ -19,14 +19,7 @@ TwoSampleTest <- R6Class(
         .check = function() {}, # TODO
 
         .feed = function(...) {
-            data <- list(...)
-            if (length(data) == 1 & (is.list(data[[1]]) | is.data.frame(data[[1]]))) {
-                data <- as.list(data[[1]])
-            }
-
-            names(data) <- c("x", "y")
-
-            private$.raw_data <- data
+            private$.raw_data <- setNames(data_to_list(...), c("x", "y"))
         },
 
         .permute = function() {
