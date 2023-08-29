@@ -313,11 +313,19 @@ PermuTest <- R6Class(
         #' @field data Data fed into the object. 
         data = function() private$.data,
         #' @field data_permu All permutations used. 
-        data_permu = function() private$.data_permu,
+        data_permu = function() {
+            if (private$.type == "permu") {
+                private$.data_permu
+            }
+        },
         #' @field statistic The test statistic. 
         statistic = function() private$.statistic,
         #' @field statistic_permu Test statistics calculated on permutations. 
-        statistic_permu = function() private$.statistic_permu,
+        statistic_permu = function() function() {
+            if (private$.type == "permu") {
+                private$.statistic_permu
+            }
+        },
         #' @field p_value The p-value. 
         p_value = function() private$.p_value,
         #' @field estimate The estimated parameter. 
