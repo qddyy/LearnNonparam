@@ -1,7 +1,13 @@
 
 # LearnNonparam
 
-[![R-CMD-check](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml)
+[![R build
+status](https://github.com/qddyy/LearnNonparam/workflows/R-CMD-check/badge.svg)](https://github.com/qddyy/LearnNonparam/actions)
+[![License:
+MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://cran.r-project.org/web/licenses/MIT)
+[![](https://img.shields.io/badge/devel%20version-1.1.11-blue.svg)](https://github.com/qddyy/LearnNonparam)
+[![](https://img.shields.io/github/languages/code-size/qddyy/LearnNonparam.svg)](https://github.com/qddyy/LearnNonparam)
+[![CodeFactor](https://www.codefactor.io/repository/github/qddyy/LearnNonparam/badge)](https://www.codefactor.io/repository/github/qddyy/LearnNonparam)
 
 This package implements most of the tests in chapters 1-5 of [Higgins
 (2003)](#references).
@@ -49,17 +55,17 @@ library(LearnNonparam)
 
   ``` r
   t$p_value
-  #> [1] 0.001467
+  #> [1] 0.000316
 
   t$print()
   #> 
   #>       Two Sample Wilcoxon Test 
   #> 
   #> scoring: rank    type: permu    method: default    
-  #> statistic = 518, p-value = 0.001467, 
+  #> statistic = 532, p-value = 0.000316, 
   #> alternative hypothesis: greater 
-  #> estimate: 1.123556 
-  #> 95 percent confidence interval: 0.4687156 1.6737426
+  #> estimate: 1.005146 
+  #> 95 percent confidence interval: 0.4352536 1.6192285
 
   t$plot(binwidth = 1)
   ```
@@ -69,8 +75,10 @@ library(LearnNonparam)
 - modify some attributes and see how the results change
 
   ``` r
+  t$type <- "approx"
+
   t$p_value
-  #> [1] 0.001819413
+  #> [1] 0.0005070493
   ```
 
 There is also support for chaining method calls, which means that you

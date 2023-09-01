@@ -14,12 +14,22 @@ knitr::opts_chunk$set(
     fig.path = "man/figures/README-",
     out.width = "100%"
 )
+
+library(badger)
 ```
 
 # LearnNonparam
 
-[![R-CMD-check](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml)
-
+```{r, echo = FALSE, results = "asis"}
+ref <- "qddyy/LearnNonparam"
+cat(
+    badge_github_actions(ref),
+    badge_license(),
+	badge_devel(ref, "blue"),
+	badge_code_size(ref),
+    badge_codefactor(ref)
+)
+```
 
 This package implements most of the tests in chapters 1-5 of [@Higgins2003](#references).
 
@@ -67,10 +77,9 @@ library(LearnNonparam)
     ```
 
 - modify some attributes and see how the results change
-    ```{r, modify, include = FALSE}
+    ```{r, modify}
     t$type <- "approx"
-    ```
-    ```{r}
+
     t$p_value
     ```
 
