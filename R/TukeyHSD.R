@@ -32,7 +32,7 @@ TukeyHSD <- R6Class(
     private = list(
         .name = "Tukey's HSD",
 
-        .calculate_statistic = function() {
+        .define_statistic = function() {
             if (private$.scoring == "none") {
                 N <- length(private$.data)
                 k <- as.integer(names(private$.data)[N])
@@ -53,8 +53,6 @@ TukeyHSD <- R6Class(
                     )
                 }
             }
-
-            super$.calculate_statistic()
         },
 
         .calculate_p_permu = function() {

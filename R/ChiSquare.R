@@ -29,7 +29,7 @@ ChiSquare <- R6Class(
     private = list(
         .name = "Contingency Table Test Based on Chi-square Statistic",
 
-        .calculate_statistic = function() {
+        .define_statistic = function() {
             dim <- dim(private$.data)
             private$.statistic_func <- function(mat) {
                 row_sum <- .rowSums(mat, dim[1], dim[2])
@@ -39,8 +39,6 @@ ChiSquare <- R6Class(
 
                 sum((mat - expect)^2 / expect)
             }
-
-            super$.calculate_statistic()
         },
 
         .calculate_p = function() {

@@ -28,8 +28,6 @@ AnsariBradley <- R6Class(
             super$initialize(alternative = match.arg(alternative), n_permu = n_permu, conf_level = conf_level)
 
             private$.scoring <- "Ansari-Bradley rank"
-
-            private$.statistic_func <- function(x, y) sum(x)
         }
     ),
     private = list(
@@ -43,6 +41,10 @@ AnsariBradley <- R6Class(
 
             x_index <- seq_along(private$.data$x)
             private$.data <- list(x = ab_rank[x_index], y = ab_rank[-x_index])
+        },
+
+        .define_statistic = function() {
+            private$.statistic_func <- function(x, y) sum(x)
         },
 
         .calculate_p = function() {

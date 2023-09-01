@@ -28,7 +28,7 @@ RCBDANOVA <- R6Class(
     private = list(
         .name = "ANOVA for Randomized Complete Block Design",
 
-        .calculate_statistic = function() {
+        .define_statistic = function() {
             private$.statistic_func <- switch(private$.type,
                 permu = function(df) sum(rowMeans(df)^2),
                 approx = function(df) {
@@ -43,8 +43,6 @@ RCBDANOVA <- R6Class(
                     (b - 1) * sst / sse
                 }
             )
-
-            super$.calculate_statistic()
         },
 
         .calculate_p = function() {

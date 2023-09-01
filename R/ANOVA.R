@@ -31,7 +31,7 @@ ANOVA <- R6Class(
     private = list(
         .name = "K Sample Test Based on F Statistic",
 
-        .calculate_statistic = function() {
+        .define_statistic = function() {
             private$.statistic_func <- switch(private$.type,
                 permu = function(data, group) {
                     sum(vapply(
@@ -56,8 +56,6 @@ ANOVA <- R6Class(
                     mst / mse
                 }
             )
-
-            super$.calculate_statistic()
         },
 
         .calculate_p = function() {

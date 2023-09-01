@@ -34,21 +34,12 @@ Sign <- R6Class(
 
         .correct = NULL,
 
-        .sign = NULL,
+        .define_statistic = function() {
+            sign <- sign(private$.data$x - private$.data$y)
 
-        .calculate_statistic = function() {
-            private$.sign <- sign(private$.data$x - private$.data$y)
-
-            private$.statistic <- sum(private$.sign == 1)
-        },
-
-        .calculate_statistic_permu = function() {
-            private$.statistic_permu <- apply(
-                X = private$.swapped_permu, MARGIN = 1,
-                FUN = function(is_swapped, sign) {
-                    sum(sign * (2 * is_swapped - 1) == 1)
-                }, sign = private$.sign
-            )
+            private$.statistic_func <- function(is_swapped, sign = sign) {
+                sum(sign * (2 * is_swapped - 1) == 1)
+            }
         },
 
         .calculate_p = function() {

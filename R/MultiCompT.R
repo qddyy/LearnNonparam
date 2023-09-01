@@ -36,7 +36,7 @@ MultiCompT <- R6Class(
 
         .bonferroni = NULL,
 
-        .calculate_statistic = function() {
+        .define_statistic = function() {
             if (private$.scoring == "none") {
                 N <- length(private$.data)
                 k <- as.integer(names(private$.data)[N])
@@ -57,8 +57,6 @@ MultiCompT <- R6Class(
                     )
                 }
             }
-
-            super$.calculate_statistic()
         },
 
         .calculate_p = function() {

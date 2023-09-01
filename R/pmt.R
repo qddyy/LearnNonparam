@@ -9,7 +9,7 @@ tests <- list(
     onesample.quantile = Quantile,
     onesample.cdf = CDF,
 
-    twosample.mean = MeanDiff,
+    twosample.mean = Mean,
     twosample.wilcoxon = Wilcoxon,
     twosample.scoresum = ScoreSum,
     twosample.ansari = AnsariBradley,

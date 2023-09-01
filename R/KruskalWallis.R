@@ -33,7 +33,7 @@ KruskalWallis <- R6Class(
     private = list(
         .name = "Kruskal-Wallis Test",
 
-        .calculate_statistic = function() {
+        .define_statistic = function() {
             mean <- mean(private$.data)
             var <- var(private$.data)
             private$.statistic_func <- function(data, group) {
@@ -42,8 +42,6 @@ KruskalWallis <- R6Class(
                     FUN = function(x) length(x) * (mean(x) - mean)^2
                 )) / var
             }
-
-            super$.calculate_statistic()
         },
 
         .calculate_p = function() {

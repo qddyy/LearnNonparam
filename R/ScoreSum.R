@@ -21,11 +21,13 @@ ScoreSum <- R6Class(
         #' @return A `ScoreSum` object. 
         initialize = function(alternative = c("two_sided", "less", "greater"), n_permu = NULL, scoring = c("rank", "vw", "expon")) {
             super$initialize(scoring = match.arg(scoring), alternative = match.arg(alternative), n_permu = n_permu)
-
-            private$.statistic_func <- function(x, y) sum(x)
         }
     ),
     private = list(
-        .name = "Score Sum Test"
+        .name = "Score Sum Test",
+
+        .define_statistic = function() {
+            private$.statistic_func <- function(x, y) sum(x)
+        }
     )
 )

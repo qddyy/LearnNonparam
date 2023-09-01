@@ -48,7 +48,7 @@ Correlation <- R6Class(
             )
         },
 
-        .calculate_statistic = function() {
+        .define_statistic = function() {
             if (private$.method == "kendall") {
                 x <- private$.data$x
                 n <- length(x)
@@ -74,8 +74,6 @@ Correlation <- R6Class(
                     approx = cor
                 )
             }
-
-            super$.calculate_statistic()
         },
 
         .calculate_p = function() {

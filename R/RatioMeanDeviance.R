@@ -23,8 +23,6 @@ RatioMeanDeviance <- R6Class(
             super$initialize(alternative = match.arg(alternative), n_permu = n_permu)
 
             private$.scoring <- "dev"
-
-            private$.statistic_func <- function(x, y) mean(x) / mean(y)
         }
     ),
     private = list(
@@ -35,6 +33,10 @@ RatioMeanDeviance <- R6Class(
                 x = abs(private$.data$x - median(private$.data$x)),
                 y = abs(private$.data$y - median(private$.data$y))
             )
+        },
+
+        .define_statistic = function() {
+            private$.statistic_func <- function(x, y) mean(x) / mean(y)
         }
     )
 )

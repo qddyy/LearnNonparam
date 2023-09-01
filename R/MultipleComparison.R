@@ -24,10 +24,16 @@ MultipleComparison <- R6Class(
         .print = function(digits) {
             cat("\n", "\t", private$.name, "\n\n")
 
+            cat(sprintf(
+                "family-wise confidence level: %.0f%% \n\n",
+                private$.conf_level * 100
+            ))
+
             cat(
-                "family-wise confidence level:",
-                format(100 * private$.conf_level, digits = 2), "(%)",
-                "\n\n"
+                paste("scoring:", private$.scoring),
+                paste("type:", private$.type),
+                paste("method:", private$.method),
+                "\n\n", sep = "    "
             )
 
             print(private$.multicomp, digits = digits, row.names = FALSE)
@@ -77,7 +83,7 @@ MultipleComparison <- R6Class(
             statistic_func <- private$.statistic_func
             private$.statistic_func <- function(group) {
                 where <- split(seq_along(group), group)
-                c(.mapply(
+                as.numeric(.mapply(
                     FUN = function(i, j) {
                         statistic_func(
                             data[where[[i]]],
@@ -85,7 +91,7 @@ MultipleComparison <- R6Class(
                             setNames(data, group)
                         )
                     }, dots = ij, MoreArgs = NULL
-                ), recursive = TRUE)
+                ))
             }
 
             private$.statistic <- private$.statistic_func(names(private$.data))

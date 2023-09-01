@@ -20,13 +20,12 @@ PermuTest <- R6Class(
         #' @return A `PermuTest` object. 
         initialize = function(null_value = 0, alternative = c("two_sided", "less", "greater"), n_permu = NULL, conf_level = 0.95, scoring = c("none", "rank", "vw", "expon")) {
             private$.n_permu <- n_permu
-
             private$.scoring <- match.arg(scoring)
-
             private$.null_value <- null_value
             private$.alternative <- match.arg(alternative)
-
             private$.conf_level <- conf_level
+
+            private$.progress <- interactive()
 
             private$.side <- switch(private$.trend,
                 "+" = switch(private$.alternative,
@@ -107,6 +106,8 @@ PermuTest <- R6Class(
         .ci = NULL,
         .conf_level = NULL,
 
+        .progress = NULL,
+
         # @Override
         .check = function() {},
 
@@ -114,6 +115,7 @@ PermuTest <- R6Class(
             cat("\n", "\t", private$.name, "\n\n")
 
             cat(
+                paste("scoring:", private$.scoring),
                 paste("type:", private$.type),
                 paste("method:", private$.method),
                 "\n", sep = "    "
@@ -183,6 +185,11 @@ PermuTest <- R6Class(
         },
 
         # @Override
+        .define_statistic = function() {
+            # private$.statistic_func <- 
+        },
+
+        # @Override
         .calculate_statistic = function() {
             # private$.statistic <- ...
         },
@@ -220,10 +227,31 @@ PermuTest <- R6Class(
                 private$.calculate_score()
             }
 
+            private$.define_statistic()
+
             private$.calculate_statistic()
+
             if (private$.type == "permu") {
-                private$.permute()
-                private$.calculate_statistic_permu()
+                if (private$.progress) {
+                    cat("Permuting...\n")
+                    private$.permute()
+
+                    assign(
+                        "pb", ProgressBar$new(length(private$.data_permu)),
+                        envir = environment(private$.statistic_func)
+                    )
+                    body(private$.statistic_func) <- as.call(c(
+                        as.name("{"), expression(on.exit(pb$update())),
+                        body(private$.statistic_func)
+                    ))
+                    cat("Calculating statistic...\n")
+                    private$.calculate_statistic_permu()
+                    get("pb", envir = environment(private$.statistic_func))$finish()
+                } else {
+                    private$.permute()
+                    private$.calculate_statistic_permu()
+                }
+
                 private$.calculate_p_permu()
             } else {
                 private$.calculate_p()
@@ -321,7 +349,7 @@ PermuTest <- R6Class(
         #' @field statistic The test statistic. 
         statistic = function() private$.statistic,
         #' @field statistic_permu Test statistics calculated on permutations. 
-        statistic_permu = function() function() {
+        statistic_permu = function() {
             if (private$.type == "permu") {
                 private$.statistic_permu
             }

@@ -26,7 +26,7 @@ KolmogorovSmirnov <- R6Class(
     private = list(
         .name = "Two Sample Kolmogorov-Smirnov Test",
 
-        .calculate_statistic = function() {
+        .define_statistic = function() {
             m <- length(private$.data$x)
             n <- length(private$.data$y)
 
@@ -34,8 +34,6 @@ KolmogorovSmirnov <- R6Class(
             private$.statistic_func <- function(x, y) {
                 max(abs(cumsum(`[<-`(tmp, order(c(x, y)) <= m, -1 / n))))
             }
-
-            super$.calculate_statistic()
         }
     )
 )

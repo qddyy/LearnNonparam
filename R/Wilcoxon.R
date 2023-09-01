@@ -27,14 +27,16 @@ Wilcoxon <- R6Class(
             private$.correct <- correct
 
             super$initialize(scoring = "rank", alternative = match.arg(alternative), n_permu = n_permu, conf_level = conf_level)
-
-            private$.statistic_func <- function(x, y) sum(x)
         }
     ),
     private = list(
         .name = "Two Sample Wilcoxon Test",
 
         .correct = NULL,
+
+        .define_statistic = function() {
+            private$.statistic_func <- function(x, y) sum(x)
+        },
 
         .calculate_p = function() {
             m <- length(private$.data$x)

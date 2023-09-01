@@ -33,19 +33,12 @@ PairedComparison <- R6Class(
 
         .diff = NULL,
 
-        .calculate_statistic = function() {
+        .define_statistic = function() {
             private$.diff <- private$.data$x - private$.data$y
 
-            private$.statistic <- mean(private$.diff)
-        },
-
-        .calculate_statistic_permu = function() {
-            private$.statistic_permu <- apply(
-                X = private$.swapped_permu, MARGIN = 1,
-                FUN = function(is_swapped, diff) {
-                    mean(diff * (2 * is_swapped - 1))
-                }, diff = private$.diff
-            )
+            private$.statistic_func <- function(is_swapped, diff = private$.diff) {
+                mean(diff * (2 * is_swapped - 1))
+            }
         },
 
         .calculate_p = function() {

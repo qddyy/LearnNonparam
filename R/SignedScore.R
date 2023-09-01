@@ -40,7 +40,7 @@ SignedScore <- R6Class(
 
         .signed_score = NULL,
 
-        .calculate_statistic = function() {
+        .define_statistic = function() {
             diff <- private$.data$x - private$.data$y
 
             if (private$.ranking_method == "ignore") {
@@ -50,16 +50,9 @@ SignedScore <- R6Class(
 
             private$.signed_score <- sign(diff) * score(abs(diff), method = private$.scoring)
 
-            private$.statistic <- mean(private$.signed_score)
-        },
-
-        .calculate_statistic_permu = function() {
-            private$.statistic_permu <- apply(
-                X = private$.swapped_permu, MARGIN = 1,
-                FUN = function(is_swapped, signed_score) {
-                    mean(signed_score * (2 * is_swapped - 1))
-                }, signed_score = private$.signed_score
-            )
+            private$.statistic_func <- function(is_swapped, signed_score = private$.signed_score) {
+                mean(signed_score * (2 * is_swapped - 1))
+            }
         },
 
         .calculate_p = function() {
@@ -67,7 +60,7 @@ SignedScore <- R6Class(
 
             sa <- sum(pmax.int(0, private$.signed_score))
             z <- sa - 1 / 2 * sum(abs(private$.signed_score))
-            correction <- correction <- if (private$.correct) {
+            correction <- if (private$.correct) {
                 switch(private$.side, lr = sign(z) * 0.5, r = 0.5, l = -0.5)
             } else 0
             z <- (z - correction) / sqrt(
