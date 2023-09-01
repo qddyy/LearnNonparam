@@ -16,6 +16,7 @@ TwoSamplePairedTest <- R6Class(
         .name = "Paired Two Sample Permutation Test",
 
         .swapped_permu = NULL,
+        .use_swapped = TRUE,
 
         .check = function() {}, # TODO
 
@@ -24,6 +25,8 @@ TwoSamplePairedTest <- R6Class(
 
             private$.raw_data <- do.call(data.frame, private$.raw_data)
         },
+
+        .calculate_score = function() {},
 
         .permute = function() {
             private$.swapped_permu <- if (is.null(private$.n_permu)) {
@@ -45,6 +48,18 @@ TwoSamplePairedTest <- R6Class(
             )
         },
 
-        .calculate_score = function() {}
+        .calculate_statistic_permu = function() {
+            if (private$.use_swapped) {
+                f <- private$.statistic_func
+                private$.statistic_permu <- do.call(
+                    apply, c(
+                        list(X = private$.swapped_permu, MARGIN = 1, FUN = f),
+                        lapply(X = formals(f)[-1], FUN = eval, envir = environment(f))
+                    )
+                )
+            } else {
+                super$.calculate_statistic_permu()
+            }
+        }
     )
 )

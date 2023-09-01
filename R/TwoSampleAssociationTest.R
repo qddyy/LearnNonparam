@@ -11,12 +11,20 @@
 
 TwoSampleAssociationTest <- R6Class(
     classname = "TwoSampleAssociationTest",
-    inherit = TwoSamplePairedTest,
+    inherit = TwoSampleTest,
     cloneable = FALSE,
     private = list(
         .name = "Two Sample Permutation Test for Association",
 
         .check = function() {}, # TODO
+
+        .feed = function(...) {
+            super$.feed(...)
+
+            private$.raw_data <- do.call(data.frame, private$.raw_data)
+        },
+
+        .calculate_score = function() {},
 
         .permute = function() {
             private$.data_permu <- lapply(
