@@ -53,7 +53,7 @@ library(LearnNonparam)
     ```
 
 - feed it the data (a data frame, a list, or some numeric vectors)
-    ```{r, feed}
+    ```{r, feed, include = FALSE}
     t$feed(rnorm(20, mean = 1), rnorm(20, mean = 0))
     ```
 
@@ -67,9 +67,10 @@ library(LearnNonparam)
     ```
 
 - modify some attributes and see how the results change
-    ```{r, modify}
+    ```{r, modify, include = FALSE}
     t$type <- "approx"
-
+    ```
+    ```{r}
     t$p_value
     ```
 
@@ -81,7 +82,7 @@ t <- pmt(...)$feed(...)$print(...)$plot(...)
 
 ## Help
 
-- Explore `?PermuTest` (all tests' **base class**) for all available methods and attributes.
+- Explore `?PermuTest` (all tests' base class) for all available methods and attributes.
 
 - Check `pmts()` for all available tests. 
     ```{r, pmts}

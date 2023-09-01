@@ -1,21 +1,25 @@
 ---
-title: "examples"
+title: "Examples"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{examples}
+  %\VignetteIndexEntry{Examples}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
-```{r, include = FALSE}
+```{r, setup, include = FALSE}
 knitr::opts_chunk$set(
     collapse = TRUE, comment = "#>",
     warning = FALSE, message = FALSE, error = FALSE,
     fig.align = "center", fig.width = 16, fig.height = 9, out.width = "100%"
 )
+
+if (!require("microbenchmark")) {
+    install.packages("microbenchmark", repos = "https://cloud.r-project.org/")
+}
 ```
 
-```{r setup}
+```{r, library}
 library(LearnNonparam)
 ```
 
@@ -72,18 +76,13 @@ print(t$ci)
 ## Example 2.1.1
 
 ```{r}
-# See ?MeanDiff or ?twosample.mean
+# See ?Mean or ?twosample.mean
 t <- pmt(
     "twosample.mean", alternative = "greater"
 )
 
 # See ?Table2.1.1
 t$feed(Table2.1.1)
-# or
-# t$feed(
-#     Table2.1.1$new,
-#     Table2.1.1$traditional
-# )
 
 print(t$statistic)
 print(t$p_value)
@@ -99,11 +98,6 @@ t <- pmt(
 
 # See ?Table2.1.1
 t$feed(Table2.1.1)
-# or
-# t$feed(
-#     Table2.1.1$new,
-#     Table2.1.1$traditional
-# )
 
 print(t$statistic)
 print(t$p_value)
@@ -112,18 +106,13 @@ print(t$p_value)
 ## Example 2.3.1
 
 ```{r}
-# See ?MeanDiff or ?twosample.mean
+# See ?Mean or ?twosample.mean
 t <- pmt(
     "twosample.mean", alternative = "greater"
 )
 
 # See ?Table2.3.1
 t$feed(Table2.3.1)
-# or
-# t$feed(
-#     Table2.3.1$treatment_1,
-#     Table2.3.1$treatment_2
-# )
 
 print(t$statistic)
 
@@ -134,10 +123,7 @@ print(t$p_value)
 t$n_permu <- 1000
 print(t$p_value)
 
-# time
-if (!require("microbenchmark")) {
-    install.packages("microbenchmark", repos = "https://cloud.r-project.org/")
-}
+# install.packages("microbenchmark")
 microbenchmark::microbenchmark(
     t$n_permu <- NULL,
     t$n_permu <- 1000
@@ -154,11 +140,6 @@ t <- pmt(
 
 # See ?Table2.6.1
 t$feed(Table2.6.1)
-# or
-# t$feed(
-#     Table2.6.1$brand_2,
-#     Table2.6.1$brand_1
-# )
 
 print(t$statistic)
 print(t$p_value)
@@ -174,13 +155,7 @@ t <- pmt(
 
 # See ?Table2.6.2
 t$feed(Table2.6.2)
-# or
-# t$feed(
-#     Table2.6.2$granite,
-#     Table2.6.2$basalt
-# )
 
-# Hodges-Lehmann estimate
 print(t$estimate)
 print(t$ci)
 ```
@@ -195,11 +170,6 @@ t <- pmt(
 
 # See ?Table2.6.2
 t$feed(Table2.6.2)
-# or
-# t$feed(
-#     Table2.6.2$granite,
-#     Table2.6.2$basalt
-# )
 
 print(t$statistic)
 print(t$p_value)
@@ -215,11 +185,6 @@ t <- pmt(
 
 # See ?Table2.8.1
 t$feed(Table2.8.1)
-# or
-# t$feed(
-#     Table2.8.1$treatment_1,
-#     Table2.8.1$treatment_2
-# )
 
 print(t$statistic)
 print(t$p_value)
@@ -235,11 +200,6 @@ t <- pmt(
 
 # See ?Table2.8.1
 t$feed(Table2.8.1)
-# or
-# t$feed(
-#     Table2.8.1$treatment_1,
-#     Table2.8.1$treatment_2
-# )
 
 print(t$statistic)
 print(t$p_value)
@@ -255,11 +215,6 @@ t <- pmt(
 
 # See ?Table2.8.1
 t$feed(Table2.8.1)
-# or
-# t$feed(
-#     Table2.8.1$treatment_1,
-#     Table2.8.1$treatment_2
-# )
 
 print(t$statistic)
 print(t$p_value)
@@ -279,12 +234,6 @@ t <- pmt(
 
 # See ?Table3.1.2
 t$feed(Table3.1.2)
-# or
-# t$feed(
-#     Table3.1.2$x_1,
-#     Table3.1.2$x_2,
-#     Table3.1.2$x_3
-# )
 
 print(t$statistic)
 print(t$p_value)
@@ -309,13 +258,6 @@ t <- pmt(
 
 # See ?Table3.2.2
 t$feed(Table3.2.2)
-# or
-# t$feed(
-#     Table3.2.2$control,
-#     Table3.2.2$preservative_1,
-#     Table3.2.2$preservative_2,
-#     Table3.2.2$preservative_3
-# )
 
 print(t$statistic)
 print(t$p_value)
@@ -331,12 +273,6 @@ t <- pmt(
 
 # See ?Table3.2.3
 t$feed(Table3.2.3)
-# or
-# t$feed(
-#     Table3.2.3$product_1,
-#     Table3.2.3$product_2,
-#     Table3.2.3$product_3
-# )
 
 print(t$statistic)
 print(t$p_value)
@@ -366,20 +302,12 @@ t <- pmt(
 
 # See ?Table3.3.1
 t$feed(Table3.3.1)
-# or
-# t$feed(
-#     Table3.3.1$location_1,
-#     Table3.3.1$location_2,
-#     Table3.3.1$location_3,
-#     Table3.3.1$location_4
-# )
 
 t$print()
 
 t$type <- "approx"
 t$print()
 
-# try other scoring! ("vw", "expon")
 t$scoring <- "rank"
 t$print()
 ```
@@ -397,7 +325,6 @@ t$print()
 t$type <- "approx"
 t$print()
 
-# try other scoring! ("vw", "expon")
 t$scoring <- "rank"
 t$print()
 ```
@@ -412,13 +339,6 @@ t <- pmt(
 
 # See ?Table3.4.1
 t$feed(Table3.4.1)
-# or
-# t$feed(
-#     Table3.4.1$treatment_1,
-#     Table3.4.1$treatment_2,
-#     Table3.4.1$treatment_3,
-#     Table3.4.1$treatment_4
-# )
 
 print(t$statistic)
 print(t$p_value)
@@ -441,11 +361,6 @@ t <- pmt(
 
 # See ?Table4.1.1
 t$feed(Table4.1.1)
-# or
-# t$feed(
-#     Table4.1.1$recall_24h,
-#     Table4.1.1$survey
-# )
 
 print(t$statistic)
 print(t$p_value)
@@ -464,11 +379,6 @@ t <- pmt(
 
 # See ?Table4.1.3
 t$feed(Table4.1.3)
-# or
-# t$feed(
-#     Table4.1.3$drug_1,
-#     Table4.1.3$drug_2
-# )
 
 print(t$statistic)
 print(t$p_value)
@@ -480,7 +390,7 @@ print(t$p_value)
 ## Example 4.2.1 & 4.2.2
 
 ```{r}
-# See ?Sign or ?paired.signedScore or ?paired.signedscore
+# See ?SignedScore or ?paired.signedscore
 t <- pmt(
     "paired.signedscore", alternative = "greater",
     ranking_method = "with_zeros"
@@ -488,11 +398,6 @@ t <- pmt(
 
 # See ?Table4.1.1
 t$feed(Table4.1.1)
-# or
-# t$feed(
-#     Table4.1.1$recall_24h,
-#     Table4.1.1$survey
-# )
 
 print(t$statistic)
 print(t$p_value)
@@ -507,7 +412,7 @@ print(t$p_value)
 ## Table 4.2.3
 
 ```{r}
-# See ?Sign or ?paired.signedScore or ?paired.signedscore
+# See ?SignedScore or ?paired.signedscore
 t <- pmt(
     "paired.signedscore", alternative = "greater",
     ranking_method = "ignore"
@@ -555,15 +460,6 @@ t <- pmt(
 
 # See ?Table4.4.3
 t$feed(Table4.4.3)
-# or
-# t$feed(
-#     Table4.4.3$block_1,
-#     Table4.4.3$block_2,
-#     Table4.4.3$block_3,
-#     Table4.4.3$block_4,
-#     Table4.4.3$block_5,
-#     Table4.4.3$block_6
-# )
 
 print(t$statistic)
 print(t$p_value)
@@ -583,12 +479,6 @@ t <- pmt(
 
 # See ?Table4.5.3
 t$feed(Table4.5.3)
-# or
-# t$feed(
-#     Table4.5.3$block_1,
-#     Table4.5.3$block_2,
-#     Table4.5.3$block_3
-# )
 
 print(t$statistic)
 print(t$p_value)
@@ -608,15 +498,6 @@ t <- pmt(
 
 # See ?Table4.4.3
 t$feed(Table4.4.3)
-# or
-# t$feed(
-#     Table4.4.3$block_1,
-#     Table4.4.3$block_2,
-#     Table4.4.3$block_3,
-#     Table4.4.3$block_4,
-#     Table4.4.3$block_5,
-#     Table4.4.3$block_6
-# )
 
 print(t$statistic)
 print(t$p_value)
@@ -640,11 +521,6 @@ t <- pmt(
 
 # See ?Table5.1.2
 t$feed(Table5.1.2)
-# or
-# t$feed(
-#     Table5.1.2$heterophils,
-#     Table5.1.2$lymphocytes
-# )
 
 print(t$statistic)
 print(t$p_value)
@@ -661,11 +537,6 @@ t <- pmt(
 
 # See ?Table5.1.2
 t$feed(Table5.1.2)
-# or
-# t$feed(
-#     Table5.1.2$heterophils,
-#     Table5.1.2$lymphocytes
-# )
 
 print(t$statistic)
 print(t$p_value)
@@ -686,11 +557,6 @@ t <- pmt(
 
 # See ?Table5.2.2
 t$feed(Table5.2.2)
-# or
-# t$feed(
-#     Table5.2.2$judge_a,
-#     Table5.2.2$judge_b
-# )
 
 print(t$statistic)
 print(t$p_value)

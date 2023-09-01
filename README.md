@@ -45,25 +45,21 @@ library(LearnNonparam)
 
 - feed it the data (a data frame, a list, or some numeric vectors)
 
-  ``` r
-  t$feed(rnorm(20, mean = 1), rnorm(20, mean = 0))
-  ```
-
 - check the results
 
   ``` r
   t$p_value
-  #> [1] 0.000756
+  #> [1] 0.001467
 
   t$print()
   #> 
   #>       Two Sample Wilcoxon Test 
   #> 
-  #> type: permu    method: default    
-  #> statistic = 525, p-value = 0.000756, 
+  #> scoring: rank    type: permu    method: default    
+  #> statistic = 518, p-value = 0.001467, 
   #> alternative hypothesis: greater 
-  #> estimate: 1.180108 
-  #> 95 percent confidence interval: 0.5121898 1.7084101
+  #> estimate: 1.123556 
+  #> 95 percent confidence interval: 0.4687156 1.6737426
 
   t$plot(binwidth = 1)
   ```
@@ -73,10 +69,8 @@ library(LearnNonparam)
 - modify some attributes and see how the results change
 
   ``` r
-  t$type <- "approx"
-
   t$p_value
-  #> [1] 0.0009766741
+  #> [1] 0.001819413
   ```
 
 There is also support for chaining method calls, which means that you
@@ -88,8 +82,8 @@ t <- pmt(...)$feed(...)$print(...)$plot(...)
 
 ## Help
 
-- Explore `?PermuTest` (all tests’ **base class**) for all available
-  methods and attributes.
+- Explore `?PermuTest` (all tests’ base class) for all available methods
+  and attributes.
 
 - Check `pmts()` for all available tests.
 
@@ -103,7 +97,7 @@ t <- pmt(...)$feed(...)$print(...)$plot(...)
   |:-------------------|:-------------------|:-----------------------------------------------------|
   | onesample.quantile | Quantile           | Quantile Test                                        |
   | onesample.cdf      | CDF                | Cumulative Distribution Function                     |
-  | twosample.mean     | MeanDiff           | Two Sample Test Based on Mean                        |
+  | twosample.mean     | Mean               | Two Sample Test Based on Mean                        |
   | twosample.wilcoxon | Wilcoxon           | Two Sample Wilcoxon Test                             |
   | twosample.scoresum | ScoreSum           | Score Sum Test                                       |
   | twosample.ansari   | AnsariBradley      | Ansari-Bradley Test                                  |
