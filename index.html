@@ -70,11 +70,7 @@
 <div class="section level1">
 <div class="page-header"><h1 id="learnnonparam">LearnNonparam<a class="anchor" aria-label="anchor" href="#learnnonparam"></a>
 </h1></div>
-<p><a href="https://github.com/qddyy/LearnNonparam/actions" class="external-link"><img src="https://github.com/qddyy/LearnNonparam/workflows/R-CMD-check/badge.svg" alt="R CMD check"></a></p>
-<p><a href="https://cran.r-project.org/web/licenses/MIT" class="external-link"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a></p>
-<p><a href="https://github.com/qddyy/LearnNonparam" class="external-link"><img src="https://img.shields.io/github/r-package/v/LearnNonparam/actions" alt="GitHub R package version"></a></p>
-<p><a href="https://github.com/qddyy/LearnNonparam" class="external-link"><img src="https://img.shields.io/github/languages/code-size/qddyy/LearnNonparam.svg" alt="Code size"></a></p>
-<p><a href="https://www.codefactor.io/repository/github/qddyy/LearnNonparam" class="external-link"><img src="https://www.codefactor.io/repository/github/qddyy/LearnNonparam/badge" alt="CodeFactor"></a></p>
+<p><a href="https://github.com/qddyy/LearnNonparam/actions" class="external-link"><img src="https://github.com/qddyy/LearnNonparam/workflows/R-CMD-check/badge.svg" alt="R CMD check"></a> <a href="https://github.com/qddyy/LearnNonparam" class="external-link"><img src="https://img.shields.io/github/r-package/v/qddyy/LearnNonparam" alt="GitHub R package version"></a> <a href="https://cran.r-project.org/web/licenses/MIT" class="external-link"><img src="https://img.shields.io/badge/license-MIT-blue.svg" alt="MIT License"></a> <a href="https://github.com/qddyy/LearnNonparam" class="external-link"><img src="https://img.shields.io/github/languages/code-size/qddyy/LearnNonparam.svg" alt="Code size"></a> <a href="https://www.codefactor.io/repository/github/qddyy/LearnNonparam" class="external-link"><img src="https://www.codefactor.io/repository/github/qddyy/LearnNonparam/badge" alt="CodeFactor"></a></p>
 <p>This package implements most of the tests in chapters 1-5 of <a href="#references">Higgins (2003)</a>.</p>
 <p>It uses <a href="https://cran.r-project.org/package=R6" class="external-link">R6</a> for clean OO-design and <a href="https://cran.r-project.org/package=arrangements" class="external-link">arrangements</a> for fast generation of permutations, as well as <a href="https://cran.r-project.org/package=ggplot2" class="external-link">ggplot2</a> to draw pretty graphs.</p>
 <p>Examples in the book can be found <a href="https://qddyy.github.io/LearnNonparam/articles/examples" class="external-link">here</a>.</p>
@@ -105,17 +101,17 @@
 <p>check the results</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.000611</span></span>
+<span><span class="co">#&gt; [1] 0.001425</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;       Two Sample Wilcoxon Test </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; scoring: rank    type: permu    method: default    </span></span>
-<span><span class="co">#&gt; statistic = 527, p-value = 0.000611, </span></span>
+<span><span class="co">#&gt; statistic = 518, p-value = 0.001425, </span></span>
 <span><span class="co">#&gt; alternative hypothesis: greater </span></span>
-<span><span class="co">#&gt; estimate: 1.072794 </span></span>
-<span><span class="co">#&gt; 95 percent confidence interval: 0.401791 1.625496</span></span>
+<span><span class="co">#&gt; estimate: 1.02357 </span></span>
+<span><span class="co">#&gt; 95 percent confidence interval: 0.2892873 1.6251555</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">plot</span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-results-1.svg" width="100%"></p>
@@ -126,7 +122,7 @@
 <code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.0008126288</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.001819413</span></span></code></pre></div>
 </li>
 </ul>
 <p>There is also support for chaining method calls, which means that you can do things like</p>
