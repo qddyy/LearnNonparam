@@ -16,7 +16,7 @@ RCBD <- R6Class(
     private = list(
         .name = "Randomized Complete Block Design",
 
-        .check = function() {}, # TODO
+        .check = function() {},
 
         .feed = function(...) {
             data <- do.call(data.frame, data_to_list(...))

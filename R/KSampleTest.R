@@ -18,7 +18,7 @@ KSampleTest <- R6Class(
 
         .group_permu = NULL,
 
-        .check = function() {}, # TODO
+        .check = function() {},
 
         .feed = function(...) {
             data <- data_to_list(...)

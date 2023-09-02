@@ -18,7 +18,7 @@ TwoSamplePairedTest <- R6Class(
         .swapped_permu = NULL,
         .use_swapped = TRUE,
 
-        .check = function() {}, # TODO
+        .check = function() {},
 
         .feed = function(...) {
             super$.feed(...)

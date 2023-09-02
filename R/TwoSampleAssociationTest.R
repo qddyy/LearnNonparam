@@ -16,7 +16,7 @@ TwoSampleAssociationTest <- R6Class(
     private = list(
         .name = "Two Sample Permutation Test for Association",
 
-        .check = function() {}, # TODO
+        .check = function() {},
 
         .feed = function(...) {
             super$.feed(...)

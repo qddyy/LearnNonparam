@@ -1,13 +1,15 @@
 
 # LearnNonparam
 
-[![R build
-status](https://github.com/qddyy/LearnNonparam/workflows/R-CMD-check/badge.svg)](https://github.com/qddyy/LearnNonparam/actions)
-[![License:
-MIT](https://img.shields.io/badge/license-MIT-blue.svg)](https://cran.r-project.org/web/licenses/MIT)
-[![](https://img.shields.io/badge/devel%20version-1.1.11-blue.svg)](https://github.com/qddyy/LearnNonparam)
-[![](https://img.shields.io/github/languages/code-size/qddyy/LearnNonparam.svg)](https://github.com/qddyy/LearnNonparam)
+[![GitHub R package
+version](https://img.shields.io/github/r-package/v/qddyy/LearnNonparam)](https://github.com/qddyy/LearnNonparam)
+[![MIT
+License](https://img.shields.io/badge/license-MIT-blue.svg)](https://cran.r-project.org/web/licenses/MIT)
+[![Code
+size](https://img.shields.io/github/languages/code-size/qddyy/LearnNonparam.svg)](https://github.com/qddyy/LearnNonparam)
 [![CodeFactor](https://www.codefactor.io/repository/github/qddyy/LearnNonparam/badge)](https://www.codefactor.io/repository/github/qddyy/LearnNonparam)
+[![R CMD
+check](https://github.com/qddyy/LearnNonparam/workflows/R-CMD-check/badge.svg)](https://github.com/qddyy/LearnNonparam/actions)
 
 This package implements most of the tests in chapters 1-5 of [Higgins
 (2003)](#references).
@@ -49,23 +51,27 @@ library(LearnNonparam)
   t <- pmt("twosample.wilcoxon", alternative = "greater", type = "permu", n_permu = 1000000)
   ```
 
-- feed it the data (a data frame, a list, or some numeric vectors)
+- feed it the data (a data frame, a list, or numeric vectors)
+
+  ``` r
+  t$feed(rnorm(20, mean = 1), rnorm(20, mean = 0))
+  ```
 
 - check the results
 
   ``` r
   t$p_value
-  #> [1] 0.000316
+  #> [1] 0.004399
 
   t$print()
   #> 
   #>       Two Sample Wilcoxon Test 
   #> 
   #> scoring: rank    type: permu    method: default    
-  #> statistic = 532, p-value = 0.000316, 
+  #> statistic = 506, p-value = 0.004399, 
   #> alternative hypothesis: greater 
-  #> estimate: 1.005146 
-  #> 95 percent confidence interval: 0.4352536 1.6192285
+  #> estimate: 0.8583401 
+  #> 95 percent confidence interval: 0.1779122 1.3992529
 
   t$plot(binwidth = 1)
   ```
@@ -78,7 +84,7 @@ library(LearnNonparam)
   t$type <- "approx"
 
   t$p_value
-  #> [1] 0.0005070493
+  #> [1] 0.004893243
   ```
 
 There is also support for chaining method calls, which means that you

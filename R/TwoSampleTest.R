@@ -16,7 +16,7 @@ TwoSampleTest <- R6Class(
     private = list(
         .name = "Two Sample Permutation Test",
 
-        .check = function() {}, # TODO
+        .check = function() {},
 
         .feed = function(...) {
             private$.raw_data <- setNames(data_to_list(...), c("x", "y"))

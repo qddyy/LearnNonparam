@@ -16,7 +16,7 @@ ContingencyTableTest <- R6Class(
     private = list(
         .name = "Contingency Table Permutation Test",
 
-        .check = function() {}, # TODO
+        .check = function() {},
 
         .feed = function(table) {
             private$.raw_data <- as.matrix(table)

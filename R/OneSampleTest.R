@@ -16,7 +16,7 @@ OneSampleTest <- R6Class(
         .name = "One Sample Test",
         .type = "!permu",
 
-        .check = function() {}, # TODO
+        .check = function() {},
 
         .plot = function() {},
 

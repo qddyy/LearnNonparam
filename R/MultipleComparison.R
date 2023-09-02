@@ -19,7 +19,7 @@ MultipleComparison <- R6Class(
         .ij = NULL,
         .multicomp = NULL,
 
-        .check = function() {}, # TODO
+        .check = function() {},
 
         .print = function(digits) {
             cat("\n", "\t", private$.name, "\n\n")
