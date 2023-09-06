@@ -82,6 +82,8 @@ There is also support for chaining method calls, which means that you can do thi
 t <- pmt(...)$feed(...)$print(...)$plot(...)
 ```
 
+In addition, a progress bar will appear when calculating the permutation distribution if R is used interactively, which can be turned off with `options(pmt_progress = FALSE)`.
+
 ## Help
 
 - Explore `?PermuTest` (all tests' base class) for all available methods and attributes.

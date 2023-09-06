@@ -61,17 +61,17 @@ library(LearnNonparam)
 
   ``` r
   t$p_value
-  #> [1] 0.004399
+  #> [1] 0.000212
 
   t$print()
   #> 
   #>       Two Sample Wilcoxon Test 
   #> 
   #> scoring: rank    type: permu    method: default    
-  #> statistic = 506, p-value = 0.004399, 
+  #> statistic = 536, p-value = 0.000212, 
   #> alternative hypothesis: greater 
-  #> estimate: 0.8583401 
-  #> 95 percent confidence interval: 0.1779122 1.3992529
+  #> estimate: 0.9600879 
+  #> 95 percent confidence interval: 0.4694747 1.4489994
 
   t$plot(binwidth = 1)
   ```
@@ -84,7 +84,7 @@ library(LearnNonparam)
   t$type <- "approx"
 
   t$p_value
-  #> [1] 0.004893243
+  #> [1] 0.0003434111
   ```
 
 There is also support for chaining method calls, which means that you
@@ -93,6 +93,10 @@ can do things like
 ``` r
 t <- pmt(...)$feed(...)$print(...)$plot(...)
 ```
+
+In addition, a progress bar will appear when calculating the permutation
+distribution if R is used interactively, which can be turned off with
+`options(pmt_progress = FALSE)`.
 
 ## Help
 

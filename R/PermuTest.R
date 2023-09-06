@@ -25,8 +25,6 @@ PermuTest <- R6Class(
             private$.alternative <- match.arg(alternative)
             private$.conf_level <- conf_level
 
-            private$.progress <- interactive()
-
             private$.side <- switch(private$.trend,
                 "+" = switch(private$.alternative,
                     greater = "r", less = "l", two_sided = "lr"
@@ -105,8 +103,6 @@ PermuTest <- R6Class(
         .estimate = NULL,
         .ci = NULL,
         .conf_level = NULL,
-
-        .progress = NULL,
 
         # @Override
         .check = function() {},
@@ -228,11 +224,14 @@ PermuTest <- R6Class(
             }
 
             private$.define_statistic()
-
             private$.calculate_statistic()
 
             if (private$.type == "permu") {
-                if (private$.progress) {
+                if (!isFALSE(progress <- getOption("pmt_progress"))) {
+                    progress <- interactive()
+                }
+
+                if (progress) {
                     cat("Permuting...\n")
                     private$.permute()
 
