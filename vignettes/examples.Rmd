@@ -2,12 +2,13 @@
 title: "Examples"
 output: rmarkdown::html_vignette
 vignette: >
-  %\VignetteIndexEntry{Examples}
+  %\VignetteIndexEntry{examples}
   %\VignetteEngine{knitr::rmarkdown}
   %\VignetteEncoding{UTF-8}
 ---
 
 ```{r, setup, include = FALSE}
+options(rmarkdown.html_vignette.check_title = FALSE)
 knitr::opts_chunk$set(
     collapse = TRUE, comment = "#>",
     warning = FALSE, message = FALSE, error = FALSE,
@@ -31,15 +32,16 @@ library(LearnNonparam)
 # See ?Quantile or ?onesample.quantile
 t <- pmt(
     "onesample.quantile", alternative = "greater",
-    p = 0.5, null_value = 75
+    prob = 0.5, null_value = 75,
+    type = "approx", correct = FALSE
 )
 
 # See ?Table1.1.1
 t$feed(Table1.1.1)
 
-print(t$statistic)
-print(t$p_value)
-print(t$ci)
+t$statistic
+t$p_value
+t$ci
 ```
 
 ## Example 1.2.1
@@ -66,14 +68,12 @@ t <- pmt(
 # See ?Table1.2.1
 t$feed(Table1.2.1)
 
-print(t$ci)
+t$ci
 ```
-
-\newpage
 
 # Chapter 2
 
-## Example 2.1.1
+## Table 2.1.1
 
 ```{r}
 # See ?Mean or ?twosample.mean
@@ -84,11 +84,11 @@ t <- pmt(
 # See ?Table2.1.1
 t$feed(Table2.1.1)
 
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 ```
 
-## Example 2.1.1 - wilcoxon
+## Table 2.1.1 - wilcoxon
 
 ```{r}
 # See ?Wilcoxon or ?twosample.wilcoxon
@@ -99,8 +99,8 @@ t <- pmt(
 # See ?Table2.1.1
 t$feed(Table2.1.1)
 
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 ```
 
 ## Example 2.3.1
@@ -114,19 +114,19 @@ t <- pmt(
 # See ?Table2.3.1
 t$feed(Table2.3.1)
 
-print(t$statistic)
+t$statistic
 
 # all permutaions
-print(t$p_value)
+t$p_value
 
 # 1000 permutaions
 t$n_permu <- 1000
-print(t$p_value)
+t$p_value
 
 # install.packages("microbenchmark")
 microbenchmark::microbenchmark(
-    t$n_permu <- NULL,
-    t$n_permu <- 1000
+    use_all = {t$n_permu <- NULL},
+    use_1000 = {t$n_permu <- 1000}
 )
 ```
 
@@ -141,8 +141,8 @@ t <- pmt(
 # See ?Table2.6.1
 t$feed(Table2.6.1)
 
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 ```
 
 ## Example 2.6.2
@@ -156,8 +156,8 @@ t <- pmt(
 # See ?Table2.6.2
 t$feed(Table2.6.2)
 
-print(t$estimate)
-print(t$ci)
+t$estimate
+t$ci
 ```
 
 ## Example 2.7.1
@@ -171,8 +171,8 @@ t <- pmt(
 # See ?Table2.6.2
 t$feed(Table2.6.2)
 
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 ```
 
 ## Example 2.8.1
@@ -186,8 +186,8 @@ t <- pmt(
 # See ?Table2.8.1
 t$feed(Table2.8.1)
 
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 ```
 
 ## Example 2.8.2
@@ -201,8 +201,8 @@ t <- pmt(
 # See ?Table2.8.1
 t$feed(Table2.8.1)
 
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 ```
 
 ## Example 2.8.3
@@ -216,11 +216,9 @@ t <- pmt(
 # See ?Table2.8.1
 t$feed(Table2.8.1)
 
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 ```
-
-\newpage
 
 # Chapter 3
 
@@ -235,8 +233,8 @@ t <- pmt(
 # See ?Table3.1.2
 t$feed(Table3.1.2)
 
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 
 # Change n_permu first,
 # otherwise changing type to permu will use all permutations by default,
@@ -244,8 +242,8 @@ print(t$p_value)
 t$n_permu <- 1000
 t$type <- "permu"
 
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 ```
 
 ## Example 3.2.1
@@ -259,8 +257,8 @@ t <- pmt(
 # See ?Table3.2.2
 t$feed(Table3.2.2)
 
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 ```
 
 ## Example 3.2.2 & 3.2.3
@@ -274,22 +272,22 @@ t <- pmt(
 # See ?Table3.2.3
 t$feed(Table3.2.3)
 
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 
 
 t$type <- "approx"
-print(t$p_value)
+t$p_value
 
 
 t$scoring <- "expon"
 
 t$n_permu <- 4000
 t$type <- "permu"
-print(t$p_value)
+t$p_value
 
 t$type <- "approx"
-print(t$p_value)
+t$p_value
 ```
 
 ## Example 3.3.1
@@ -340,14 +338,12 @@ t <- pmt(
 # See ?Table3.4.1
 t$feed(Table3.4.1)
 
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 
 t$type <- "approx"
-print(t$p_value)
+t$p_value
 ```
-
-\newpage
 
 # Chapter 4
 
@@ -362,11 +358,11 @@ t <- pmt(
 # See ?Table4.1.1
 t$feed(Table4.1.1)
 
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 
 t$n_permu <- 4000
-print(t$p_value)
+t$p_value
 ```
 
 ## Table 4.1.3
@@ -380,11 +376,11 @@ t <- pmt(
 # See ?Table4.1.3
 t$feed(Table4.1.3)
 
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 
 t$type <- "approx"
-print(t$p_value)
+t$p_value
 ```
 
 ## Example 4.2.1 & 4.2.2
@@ -399,14 +395,14 @@ t <- pmt(
 # See ?Table4.1.1
 t$feed(Table4.1.1)
 
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 
 t$n_permu <- 4000
-print(t$p_value)
+t$p_value
 
 t$type <- "approx"
-print(t$p_value)
+t$p_value
 ```
 
 ## Table 4.2.3
@@ -423,11 +419,11 @@ t$feed(data.frame(
     zero = 0
 ))
 
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 
 t$n_permu <- 4000
-print(t$p_value)
+t$p_value
 ```
 
 ## Example 4.3.1
@@ -443,11 +439,11 @@ t$feed(data.frame(
     zero = 0
 ))
 
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 
 t$type <- "approx"
-print(t$p_value)
+t$p_value
 ```
 
 ## Example 4.4.1
@@ -461,12 +457,12 @@ t <- pmt(
 # See ?Table4.4.3
 t$feed(Table4.4.3)
 
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 
 t$type <- "approx"
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 ```
 
 ## Example 4.5.2
@@ -480,12 +476,12 @@ t <- pmt(
 # See ?Table4.5.3
 t$feed(Table4.5.3)
 
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 
 t$type <- "approx"
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 ```
 
 ## Example 4.6.1
@@ -499,14 +495,12 @@ t <- pmt(
 # See ?Table4.4.3
 t$feed(Table4.4.3)
 
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 
 t$type <- "approx"
-print(t$p_value)
+t$p_value
 ```
-
-\newpage
 
 # Chapter 5
 
@@ -522,8 +516,8 @@ t <- pmt(
 # See ?Table5.1.2
 t$feed(Table5.1.2)
 
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 ```
 
 ## Example 5.2.1
@@ -538,12 +532,12 @@ t <- pmt(
 # See ?Table5.1.2
 t$feed(Table5.1.2)
 
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 
 
 t$type <- "approx"
-print(t$p_value)
+t$p_value
 ```
 
 ## Example 5.3.2
@@ -558,8 +552,8 @@ t <- pmt(
 # See ?Table5.2.2
 t$feed(Table5.2.2)
 
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 ```
 
 ## Table 5.4.2
@@ -571,9 +565,9 @@ t <- pmt("table.chisq")
 # See ?Table5.4.2
 t$feed(Table5.4.2)
 
-print(t$statistic)
-print(t$p_value)
+t$statistic
+t$p_value
 
 t$type <- "approx"
-print(t$p_value)
+t$p_value
 ```
