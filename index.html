@@ -105,17 +105,17 @@
 <p>check the results</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.004399</span></span>
+<span><span class="co">#&gt; [1] 0.000212</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;       Two Sample Wilcoxon Test </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; scoring: rank    type: permu    method: default    </span></span>
-<span><span class="co">#&gt; statistic = 506, p-value = 0.004399, </span></span>
+<span><span class="co">#&gt; statistic = 536, p-value = 0.000212, </span></span>
 <span><span class="co">#&gt; alternative hypothesis: greater </span></span>
-<span><span class="co">#&gt; estimate: 0.8583401 </span></span>
-<span><span class="co">#&gt; 95 percent confidence interval: 0.1779122 1.3992529</span></span>
+<span><span class="co">#&gt; estimate: 0.9600879 </span></span>
+<span><span class="co">#&gt; 95 percent confidence interval: 0.4694747 1.4489994</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">plot</span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-results-1.svg" width="100%"></p>
@@ -126,12 +126,13 @@
 <code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.004893243</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.0003434111</span></span></code></pre></div>
 </li>
 </ul>
 <p>There is also support for chaining method calls, which means that you can do things like</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pmt.html">pmt</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span><span class="op">$</span><span class="fu">feed</span><span class="op">(</span><span class="va">...</span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="va">...</span><span class="op">)</span><span class="op">$</span><span class="fu">plot</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
+<p>In addition, a progress bar will appear when calculating the permutation distribution if R is used interactively, which can be turned off with <code>options(pmt_progress = FALSE)</code>.</p>
 </div>
 <div class="section level2">
 <h2 id="help">Help<a class="anchor" aria-label="anchor" href="#help"></a>
