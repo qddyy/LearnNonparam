@@ -71,9 +71,8 @@ MultipleComparison <- R6Class(
             print(histograms)
         },
 
-        .calculate_statistic = function() {
+        .define_statistic = function() {
             k <- as.integer(last(names(private$.data)))
-            
             private$.ij <- ij <- list(
                 i = rep.int(seq_len(k - 1), seq.int(k - 1, 1)),
                 j = c(lapply(seq.int(2, k), seq.int, to = k), recursive = TRUE)
@@ -93,7 +92,9 @@ MultipleComparison <- R6Class(
                     }, dots = ij, MoreArgs = NULL
                 ))
             }
+        },
 
+        .calculate_statistic = function() {
             private$.statistic <- private$.statistic_func(names(private$.data))
         },
 

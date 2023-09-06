@@ -53,6 +53,8 @@ TukeyHSD <- R6Class(
                     )
                 }
             }
+
+            super$.define_statistic()
         },
 
         .calculate_p_permu = function() {
