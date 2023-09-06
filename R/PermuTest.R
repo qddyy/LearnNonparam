@@ -181,12 +181,12 @@ PermuTest <- R6Class(
 
         # @Override
         .calculate_score = function() {
-            # private$.data <- 
+            # private$.data <- ...
         },
 
         # @Override
         .define_statistic = function() {
-            # private$.statistic_func <- 
+            # private$.statistic_func <- ...
         },
 
         # @Override
@@ -241,12 +241,14 @@ PermuTest <- R6Class(
                         envir = environment(private$.statistic_func)
                     )
                     body(private$.statistic_func) <- as.call(c(
-                        as.name("{"), expression(on.exit(pb$update())),
+                        as.name("{"),
+                        expression(on.exit(pb$update())),
                         body(private$.statistic_func)
                     ))
+
                     cat("Calculating statistic...\n")
                     private$.calculate_statistic_permu()
-                    get("pb", envir = environment(private$.statistic_func))$finish()
+                    cat("\n")
                 } else {
                     private$.permute()
                     private$.calculate_statistic_permu()

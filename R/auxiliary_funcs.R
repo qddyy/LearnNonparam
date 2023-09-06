@@ -72,6 +72,7 @@ get_p_binom <- function(x, n, p, side) {
 #' @importFrom R6 R6Class
 ProgressBar <- R6Class(
     classname = "ProgressBar",
+    cloneable = FALSE,
     public = list(
         initialize = function(n) {
             private$.n_steps <- n
@@ -90,11 +91,6 @@ ProgressBar <- R6Class(
                 )
                 flush.console()
             }
-        },
-
-        finish = function() {
-            cat("\n")
-            flush.console()
         }
     ),
     private = list(
