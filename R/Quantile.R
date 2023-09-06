@@ -21,10 +21,12 @@ Quantile <- R6Class(
         #' 
         #' @return A `Quantile` object. 
         initialize = function(
-            prob = 0.5,
+            type = c("approx", "exact"), correct = TRUE, prob = 0.5,
             null_value = 0, alternative = c("two_sided", "less", "greater"), conf_level = 0.95
         ) {
             private$.prob <- prob
+            private$.correct <- correct
+            private$.type <- match.arg(type)
 
             super$initialize(null_value = null_value, alternative = match.arg(alternative), conf_level = conf_level)
         }
@@ -32,9 +34,8 @@ Quantile <- R6Class(
     private = list(
         .name = "Quantile Test",
 
-        .type = "exact",
-
         .prob = NULL,
+        .correct = NULL,
 
         .calculate_statistic = function() {
             private$.statistic <- sum(private$.data > private$.null_value)
@@ -44,9 +45,23 @@ Quantile <- R6Class(
             n <- length(private$.data)
             p <- private$.prob
 
-            private$.p_value <- get_p_binom(
-                private$.statistic, n, p, private$.side
-            )
+            if (private$.type == "exact") {
+                private$.p_value <- get_p_binom(
+                    private$.statistic, n, p, private$.side
+                )
+            }
+
+            if (private$.type == "approx") {
+                z <- private$.statistic - n * p
+                correction <- if (private$.correct) {
+                    switch(private$.alternative,
+                        two_sided = sign(z) * 0.5, greater = 0.5, less = -0.5
+                    )
+                } else 0
+                z <- (z - correction) / sqrt(n * p * (1 - p))
+
+                private$.p_value <- get_p_continous(z, "norm", private$.side)
+            }
         },
 
         .calculate_extra = function() {
