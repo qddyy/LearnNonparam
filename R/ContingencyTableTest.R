@@ -31,7 +31,7 @@ ContingencyTableTest <- R6Class(
 
             private$.data_permu <- lapply(
                 X = permutations(
-                    v = rep(seq_len(r), row_sum),
+                    v = rep.int(seq_len(r), row_sum),
                     nsample = private$.n_permu, layout = "list"
                 ),
                 FUN = function(data, col_index) {
@@ -39,7 +39,7 @@ ContingencyTableTest <- R6Class(
                         X = split(data, col_index), USE.NAMES = FALSE,
                         FUN = tabulate, nbins = r, FUN.VALUE = integer(r)
                     )
-                }, col_index = rep(seq_len(c), col_sum)
+                }, col_index = rep.int(seq_len(c), col_sum)
             )
         },
 

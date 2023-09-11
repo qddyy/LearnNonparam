@@ -47,7 +47,7 @@ ANOVA <- R6Class(
                     bar_.. <- mean(data)
                     bar_i. <- c(
                         lapply(
-                            splited, function(x) rep.int(mean(x), length(x))
+                            splited, function(x) rep_len(mean(x), length(x))
                         ), recursive = TRUE, use.names = FALSE
                     )
 

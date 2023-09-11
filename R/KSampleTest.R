@@ -25,7 +25,7 @@ KSampleTest <- R6Class(
 
             private$.raw_data <- setNames(
                 c(data, recursive = TRUE, use.names = FALSE),
-                rep(seq_along(data), times = vapply(data, length, integer(1)))
+                rep.int(seq_along(data), vapply(data, length, integer(1)))
             )
         },
 

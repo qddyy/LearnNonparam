@@ -49,7 +49,7 @@ TwoSamplePairedTest <- R6Class(
         .calculate_statistic = function() {
             if (private$.use_swapped) {
                 private$.statistic <- private$.statistic_func(
-                    swapped = rep.int(FALSE, nrow(private$.data))
+                    swapped = rep_len(FALSE, nrow(private$.data))
                 )
             } else {
                 super$.calculate_statistic()
