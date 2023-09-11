@@ -6,6 +6,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
+#' @importFrom arrangements permutations
 
 
 TwoSamplePairedTest <- R6Class(
@@ -29,16 +30,13 @@ TwoSamplePairedTest <- R6Class(
         .calculate_score = function() {},
 
         .permute = function() {
-            private$.swapped_permu <- if (is.null(private$.n_permu)) {
-                expand.grid(rep(list(c(TRUE, FALSE)), nrow(private$.data)))
-            } else {
-                matrix(as.logical(
-                    rbinom(private$.n_permu * nrow(private$.data), 1, 0.5)
-                ), nrow = private$.n_permu)
-            }
+            private$.swapped_permu <- permutations(
+                v = c(TRUE, FALSE), k = nrow(private$.data), replace = TRUE,
+                nsample = private$.n_permu, layout = "list"
+            )
 
-            private$.data_permu <- apply(
-                X = private$.swapped_permu, MARGIN = 1,
+            private$.data_permu <- lapply(
+                X = private$.swapped_permu,
                 FUN = function(is_swapped, x, y) {
                     data.frame(
                         x = `[<-`(x, is_swapped, y[is_swapped]),
@@ -50,11 +48,17 @@ TwoSamplePairedTest <- R6Class(
 
         .calculate_statistic_permu = function() {
             if (private$.use_swapped) {
-                f <- private$.statistic_func
+                statistic_func <- private$.statistic_func
                 private$.statistic_permu <- do.call(
-                    apply, c(
-                        list(X = private$.swapped_permu, MARGIN = 1, FUN = f),
-                        lapply(X = formals(f)[-1], FUN = eval, envir = environment(f))
+                    vapply, c(
+                        list(
+                            X = private$.swapped_permu,
+                            FUN = statistic_func, FUN.VALUE = numeric(1)
+                        ),
+                        lapply(
+                            X = formals(statistic_func)[-1],
+                            FUN = eval, envir = environment(statistic_func)
+                        )
                     )
                 )
             } else {
