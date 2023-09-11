@@ -112,10 +112,19 @@ PermuTest <- R6Class(
 
             cat(
                 paste("scoring:", private$.scoring),
-                paste("type:", private$.type),
+                {
+                    type <- private$.type
+                    paste(
+                        "type:",
+                        if (type == "permu") {
+                            paste0(type, "(", format(private$.n_permu, digits = digits), ")")
+                        } else type
+                    )
+                },
                 paste("method:", private$.method),
-                "\n", sep = "    "
+                sep = "    "
             )
+            cat("\n")
 
             cat(
                 paste(
@@ -124,22 +133,24 @@ PermuTest <- R6Class(
                     )
                 ),
                 {
-                    p <- format.pval(private$.p_value, digits = max(1L, digits - 3L))
+                    p <- format.pval(private$.p_value, digits = max(1, digits - 2))
                     paste(
                         "p-value", if (startsWith(p, "<")) p else paste("=", p)
                     )
                 },
-                "\n", sep = ", "
+                sep = ", "
             )
+            cat("\n")
 
             cat(
                 "alternative hypothesis:",
-                if (private$.alternative == "two_sided") "two-sided" else private$.alternative,
-                "\n"
+                if (private$.alternative == "two_sided") "two-sided" else private$.alternative
             )
+            cat("\n")
 
             if (!is.null(private$.estimate)) {
-                cat("estimate:", format(private$.estimate, digits = digits), "\n")
+                cat("estimate:", format(private$.estimate, digits = digits))
+                cat("\n")
             }
 
             if (!is.null(private$.ci)) {
@@ -150,9 +161,8 @@ PermuTest <- R6Class(
                         format(private$.ci, digits = digits), collapse = " "
                     )
                 )
+                cat("\n")
             }
-
-            cat("\n")
         },
 
         .plot = function(...) {
