@@ -37,29 +37,30 @@ TwoSamplePairedTest <- R6Class(
 
             private$.data_permu <- lapply(
                 X = private$.swapped_permu,
-                FUN = function(is_swapped, x, y) {
+                FUN = function(swapped, x, y) {
                     data.frame(
-                        x = `[<-`(x, is_swapped, y[is_swapped]),
-                        y = `[<-`(y, is_swapped, x[is_swapped])
+                        x = `[<-`(x, swapped, y[swapped]),
+                        y = `[<-`(y, swapped, x[swapped])
                     )
                 }, x = private$.data$x, y = private$.data$y
             )
         },
 
+        .calculate_statistic = function() {
+            if (private$.use_swapped) {
+                private$.statistic <- private$.statistic_func(
+                    swapped = rep.int(FALSE, nrow(private$.data))
+                )
+            } else {
+                super$.calculate_statistic()
+            }
+        },
+
         .calculate_statistic_permu = function() {
             if (private$.use_swapped) {
-                statistic_func <- private$.statistic_func
-                private$.statistic_permu <- do.call(
-                    vapply, c(
-                        list(
-                            X = private$.swapped_permu,
-                            FUN = statistic_func, FUN.VALUE = numeric(1)
-                        ),
-                        lapply(
-                            X = formals(statistic_func)[-1],
-                            FUN = eval, envir = environment(statistic_func)
-                        )
-                    )
+                private$.statistic_permu <- vapply(
+                    X = private$.swapped_permu,
+                    FUN = private$.statistic_func, FUN.VALUE = numeric(1)
                 )
             } else {
                 super$.calculate_statistic_permu()

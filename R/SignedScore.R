@@ -38,7 +38,7 @@ SignedScore <- R6Class(
         .correct = NULL,
         .ranking_method = NULL,
 
-        .signed_score = NULL,
+        .score = NULL,
 
         .define_statistic = function() {
             diff <- private$.data$x - private$.data$y
@@ -48,23 +48,24 @@ SignedScore <- R6Class(
                 diff <- diff[diff != 0]
             }
 
-            private$.signed_score <- sign(diff) * score(abs(diff), method = private$.scoring)
+            private$.score <- score(abs(diff), method = private$.scoring)
 
-            private$.statistic_func <- function(is_swapped, signed_score = private$.signed_score) {
-                mean(signed_score * (2 * is_swapped - 1))
+            private$.statistic_func <- function(
+                swapped, diff_positive = (diff > 0), score = private$.score
+            ) {
+                sum(score[diff_positive != swapped])
             }
         },
 
         .calculate_p = function() {
             n <- nrow(private$.data)
 
-            sa <- sum(pmax.int(0, private$.signed_score))
-            z <- sa - 1 / 2 * sum(abs(private$.signed_score))
+            z <- private$.statistic - 1 / 2 * sum(private$.score)
             correction <- if (private$.correct) {
                 switch(private$.side, lr = sign(z) * 0.5, r = 0.5, l = -0.5)
             } else 0
             z <- (z - correction) / sqrt(
-                1 / 4 * sum(private$.signed_score^2)
+                1 / 4 * sum(private$.score^2)
             )
 
             private$.p_value <- get_p_continous(z, "norm", private$.side)

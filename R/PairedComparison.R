@@ -36,8 +36,8 @@ PairedComparison <- R6Class(
         .define_statistic = function() {
             private$.diff <- private$.data$x - private$.data$y
 
-            private$.statistic_func <- function(is_swapped, diff = private$.diff) {
-                mean(diff * (2 * is_swapped - 1))
+            private$.statistic_func <- function(swapped, diff = private$.diff) {
+                mean(diff * (2 * swapped - 1))
             }
         },
 
