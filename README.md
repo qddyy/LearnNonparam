@@ -11,6 +11,8 @@ size](https://img.shields.io/github/languages/code-size/qddyy/LearnNonparam.svg)
 [![R CMD
 check](https://github.com/qddyy/LearnNonparam/workflows/R-CMD-check/badge.svg)](https://github.com/qddyy/LearnNonparam/actions)
 
+## Overview
+
 This package implements most of the tests in chapters 1-5 of [Higgins
 (2003)](#references).
 
@@ -61,17 +63,17 @@ library(LearnNonparam)
 
   ``` r
   t$p_value
-  #> [1] 0.000212
+  #> [1] 0.006062
 
   t$print()
   #> 
   #>       Two Sample Wilcoxon Test 
   #> 
-  #> scoring: rank    type: permu    method: default    
-  #> statistic = 536, p-value = 0.000212, 
-  #> alternative hypothesis: greater 
-  #> estimate: 0.9600879 
-  #> 95 percent confidence interval: 0.4694747 1.4489994
+  #> scoring: rank    type: permu(1e+06)    method: default
+  #> statistic = 502, p-value = 0.006062
+  #> alternative hypothesis: greater
+  #> estimate: 0.8774262
+  #> 95 percent confidence interval: 0.1904005 1.5434681
 
   t$plot(binwidth = 1)
   ```
@@ -84,7 +86,7 @@ library(LearnNonparam)
   t$type <- "approx"
 
   t$p_value
-  #> [1] 0.0003434111
+  #> [1] 0.006660258
   ```
 
 There is also support for chaining method calls, which means that you
@@ -94,11 +96,12 @@ can do things like
 t <- pmt(...)$feed(...)$print(...)$plot(...)
 ```
 
-In addition, a progress bar will appear when calculating the permutation
-distribution if R is used interactively, which can be turned off with
-`options(pmt_progress = FALSE)`.
+## Tips
 
-## Help
+- Use `options(pmt_progress = FALSE)` to disable the progress bar.
+
+  (By default, a progress bar will appear when calculating the
+  permutation distribution if R is used interactively)
 
 - Explore `?PermuTest` (all tests’ base class) for all available methods
   and attributes.
