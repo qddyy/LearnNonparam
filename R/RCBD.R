@@ -32,20 +32,30 @@ RCBD <- R6Class(
             k <- nrow(private$.data)
             b <- ncol(private$.data)
 
-            private$.data_permu <- lapply(
-                X = permutations(
-                    n = factorial(k), k = b, replace = TRUE,
-                    nsample = private$.n_permu, layout = "list"
-                ),
-                FUN = function(index, permus) {
-                    do.call(
-                        data.frame, .mapply(
-                            dots = list(permus, index), MoreArgs = NULL,
-                            FUN = function(permu, i) permu[[i]]
+            private$.data_permu <- if (is.null(private$.n_permu)) {
+                lapply(
+                    X = permutations(
+                        n = factorial(k), k = b, replace = TRUE, layout = "list"
+                    ),
+                    FUN = function(index, permus) {
+                        do.call(
+                            data.frame, .mapply(
+                                dots = list(permus, index), MoreArgs = NULL,
+                                FUN = function(permu, i) permu[[i]]
+                            )
                         )
-                    )
-                }, permus = lapply(private$.data, permutations, layout = "list")
-            )
+                    }, permus = lapply(private$.data, permutations, layout = "list")
+                )
+            } else {
+                lapply(
+                    X = seq_len(private$.n_permu),
+                    FUN = function(data, ...) {
+                        do.call(
+                            data.frame, lapply(data, function(x) x[sample.int(k)])
+                        )
+                    }, data = private$.data
+                )
+            }
         },
 
         .calculate_statistic = function() {
