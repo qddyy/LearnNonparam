@@ -28,7 +28,7 @@ SiegelTukey <- R6Class(
 
             super$initialize(...)
 
-            private$.scoring <- "Siegel-Tukey rank"
+            private$.scoring <- "siegel-tukey rank"
         }
     ),
     private = list(

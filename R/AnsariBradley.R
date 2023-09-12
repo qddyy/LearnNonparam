@@ -27,7 +27,7 @@ AnsariBradley <- R6Class(
 
             super$initialize(alternative = match.arg(alternative), n_permu = n_permu, conf_level = conf_level)
 
-            private$.scoring <- "Ansari-Bradley rank"
+            private$.scoring <- "ansari-bradley rank"
         }
     ),
     private = list(

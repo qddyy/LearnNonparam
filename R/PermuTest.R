@@ -117,7 +117,7 @@ PermuTest <- R6Class(
                     paste(
                         "type:",
                         if (type == "permu") {
-                            paste0(type, "(", format(private$.n_permu, digits = digits), ")")
+                            paste0(type, "(", format(length(private$.statistic_permu), digits = digits), ")")
                         } else type
                     )
                 },
