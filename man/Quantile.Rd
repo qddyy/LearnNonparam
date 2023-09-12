@@ -39,6 +39,8 @@ Performs one sample quantile test on data vectors. In addition, a confidence int
 Create a new \code{Quantile} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Quantile$new(
+  type = c("approx", "exact"),
+  correct = TRUE,
   prob = 0.5,
   null_value = 0,
   alternative = c("two_sided", "less", "greater"),
@@ -49,6 +51,10 @@ Create a new \code{Quantile} object.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
+\item{\code{type}}{a character string specifying the way to calculate the p-value.}
+
+\item{\code{correct}}{a logical indicating whether to apply continuity correction in the normal approximation for the p-value.}
+
 \item{\code{prob}}{a numeric between 0 and 1 indicating the probability.}
 
 \item{\code{null_value}}{a number specifying the value of the parameter in the null hypothesis.}
