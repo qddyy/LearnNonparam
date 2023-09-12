@@ -81,6 +81,8 @@
 <p>Create a new <code>Quantile</code> object.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/Quantile.html">Quantile</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
+<span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"approx"</span>, <span class="st">"exact"</span><span class="op">)</span>,</span>
+<span>  correct <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  prob <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  null_value <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two_sided"</span>, <span class="st">"less"</span>, <span class="st">"greater"</span><span class="op">)</span>,</span>
@@ -90,7 +92,15 @@
 
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>prob</code></dt>
+<p></p><div class="arguments"><dl><dt><code>type</code></dt>
+<dd><p>a character string specifying the way to calculate the p-value.</p></dd>
+
+
+<dt><code>correct</code></dt>
+<dd><p>a logical indicating whether to apply continuity correction in the normal approximation for the p-value.</p></dd>
+
+
+<dt><code>prob</code></dt>
 <dd><p>a numeric between 0 and 1 indicating the probability.</p></dd>
 
 
