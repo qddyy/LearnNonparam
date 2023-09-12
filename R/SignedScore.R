@@ -48,7 +48,7 @@ SignedScore <- R6Class(
                 diff <- diff[diff != 0]
             }
 
-            private$.score <- score(abs(diff), method = private$.scoring)
+            private$.score <- get_score(abs(diff), method = private$.scoring)
 
             private$.statistic_func <- function(
                 swapped, diff_positive = (diff > 0), score = private$.score

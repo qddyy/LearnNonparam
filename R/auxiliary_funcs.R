@@ -1,20 +1,19 @@
-last <- function(x) x[length(x)]
+get_last <- function(x) x[length(x)]
 
 # for .feed
 
-data_to_list <- function(...) {
+get_data_from <- function(...) {
     data <- list(...)
 
     if (length(data) == 1 & is.list(data[[1]])) {
         data <- data[[1]]
     }
-
     if (all(vapply(data, length, numeric(1)) >= 2)) data
 }
 
 # for .calculate_score
 
-score <- function(x, method, n = length(x)) {
+get_score <- function(x, method, n = length(x)) {
     rank <- rank(x)
 
     switch(method,

@@ -32,7 +32,7 @@ JonckheereTerpstra <- R6Class(
         .name = "Jonckheere-Terpstra Test",
 
         .define_statistic = function() {
-            k <- as.integer(last(names(private$.data)))
+            k <- as.integer(get_last(names(private$.data)))
             ij <- list(
                 i = c(lapply(seq_len(k - 1), seq_len), recursive = TRUE),
                 j = rep.int(seq_len(k)[-1], seq_len(k - 1))

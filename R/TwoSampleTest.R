@@ -19,7 +19,7 @@ TwoSampleTest <- R6Class(
         .check = function() {},
 
         .feed = function(...) {
-            private$.raw_data <- setNames(data_to_list(...), c("x", "y"))
+            private$.raw_data <- setNames(get_data_from(...), c("x", "y"))
         },
 
         .permute = function() {
@@ -52,7 +52,7 @@ TwoSampleTest <- R6Class(
         },
 
         .calculate_score = function() {
-            scores <- score(c(private$.data$x, private$.data$y), method = private$.scoring)
+            scores <- get_score(c(private$.data$x, private$.data$y), method = private$.scoring)
 
             x_index <- seq_along(private$.data$x)
             private$.data <- list(x = scores[x_index], y = scores[-x_index])

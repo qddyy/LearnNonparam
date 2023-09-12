@@ -45,7 +45,7 @@ KruskalWallis <- R6Class(
         },
 
         .calculate_p = function() {
-            k <- as.integer(last(names(private$.data)))
+            k <- as.integer(get_last(names(private$.data)))
 
             private$.p_value <- get_p_continous(
                 private$.statistic, "chisq", "r", df = k - 1

@@ -19,7 +19,7 @@ RCBD <- R6Class(
         .check = function() {},
 
         .feed = function(...) {
-            data <- do.call(data.frame, data_to_list(...))
+            data <- do.call(data.frame, get_data_from(...))
 
             dim <- dim(data)
             rownames(data) <- paste0("treatment_", seq_len(dim[1]))
@@ -71,7 +71,7 @@ RCBD <- R6Class(
         .calculate_score = function() {
             private$.data <- do.call(
                 data.frame, lapply(
-                    X = private$.data, FUN = score,
+                    X = private$.data, FUN = get_score,
                     method = private$.scoring, n = nrow(private$.data)
                 )
             )

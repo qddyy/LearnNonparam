@@ -21,7 +21,7 @@ KSampleTest <- R6Class(
         .check = function() {},
 
         .feed = function(...) {
-            data <- data_to_list(...)
+            data <- get_data_from(...)
 
             private$.raw_data <- setNames(
                 c(data, recursive = TRUE, use.names = FALSE),
@@ -59,7 +59,7 @@ KSampleTest <- R6Class(
         },
 
         .calculate_score = function() {
-            private$.data <- score(private$.data, method = private$.scoring)
+            private$.data <- get_score(private$.data, method = private$.scoring)
         }
     )
 )

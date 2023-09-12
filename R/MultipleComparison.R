@@ -72,7 +72,7 @@ MultipleComparison <- R6Class(
         },
 
         .define_statistic = function() {
-            k <- as.integer(last(names(private$.data)))
+            k <- as.integer(get_last(names(private$.data)))
             private$.ij <- ij <- list(
                 i = rep.int(seq_len(k - 1), seq.int(k - 1, 1)),
                 j = c(lapply(seq.int(2, k), seq.int, to = k), recursive = TRUE)
