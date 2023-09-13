@@ -27,7 +27,8 @@ get_score <- function(x, method, n = length(x)) {
 
 # for .calculate_statistic_permu
 
-#' @importFrom RcppAlgos comboGeneral comboSample permuteGeneral permuteSample
+#' @importFrom RcppAlgos comboGeneral comboSample comboCount
+#' @importFrom RcppAlgos permuteGeneral permuteSample permuteCount
 get_arrangement <- function(
     which = c("combo", "permute", "gpermute"), n_sample = NULL,
     v = NULL, m = length(v), replace = FALSE,
