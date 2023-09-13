@@ -17,6 +17,7 @@ ProgressBar <- R6Class(
             if (private$.step %% private$.update_every == 0) {
                 percentage <- private$.step / private$.n_steps
                 cat(
+                    "\033[0;31m",
                     sprintf("\r %.0f%% >", percentage * 100),
                     strrep("=", private$.width * percentage)
                 )
