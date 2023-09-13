@@ -6,7 +6,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom arrangements permutations
+#' @importFrom RcppAlgos permuteGeneral
 
 
 RCBD <- R6Class(
@@ -28,34 +28,13 @@ RCBD <- R6Class(
             private$.raw_data <- data
         },
 
-        .permute = function() {
-            k <- nrow(private$.data)
-            b <- ncol(private$.data)
-
-            private$.data_permu <- if (is.null(private$.n_permu)) {
-                lapply(
-                    X = permutations(
-                        n = factorial(k), k = b, replace = TRUE, layout = "list"
-                    ),
-                    FUN = function(index, permus) {
-                        do.call(
-                            data.frame, .mapply(
-                                dots = list(permus, index), MoreArgs = NULL,
-                                FUN = function(permu, i) permu[[i]]
-                            )
-                        )
-                    }, permus = lapply(private$.data, permutations, layout = "list")
+        .calculate_score = function() {
+            private$.data <- do.call(
+                data.frame, lapply(
+                    X = private$.data, FUN = get_score,
+                    method = private$.scoring, n = nrow(private$.data)
                 )
-            } else {
-                lapply(
-                    X = seq_len(private$.n_permu),
-                    FUN = function(data, ...) {
-                        do.call(
-                            data.frame, lapply(data, function(x) x[sample.int(k)])
-                        )
-                    }, data = private$.data
-                )
-            }
+            )
         },
 
         .calculate_statistic = function() {
@@ -63,17 +42,26 @@ RCBD <- R6Class(
         },
 
         .calculate_statistic_permu = function() {
-            private$.statistic_permu <- vapply(
-                private$.data_permu, private$.statistic_func, numeric(1)
-            )
-        },
+            k <- nrow(private$.data)
+            b <- ncol(private$.data)
 
-        .calculate_score = function() {
-            private$.data <- do.call(
-                data.frame, lapply(
-                    X = private$.data, FUN = get_score,
-                    method = private$.scoring, n = nrow(private$.data)
-                )
+            private$.statistic_permu <- get_arrangement(
+                "permute", n_sample = private$.n_permu,
+                v = seq_len(factorial(k)), m = b, replace = TRUE,
+                func = function(index) {
+                    statistic_func(do.call(
+                        data.frame, .mapply(
+                            dots = list(data, index),
+                            FUN = function(data_i, i) {
+                                as.numeric(permuteGeneral(
+                                    v = data_i, lower = i, upper = i
+                                ))
+                            }, MoreArgs = NULL
+                        )
+                    ))
+                }, func_value = numeric(1),
+                statistic_func = private$.statistic_func,
+                data = private$.data
             )
         }
     )

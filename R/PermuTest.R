@@ -24,15 +24,6 @@ PermuTest <- R6Class(
             private$.null_value <- null_value
             private$.alternative <- match.arg(alternative)
             private$.conf_level <- conf_level
-
-            private$.side <- switch(private$.trend,
-                "+" = switch(private$.alternative,
-                    greater = "r", less = "l", two_sided = "lr"
-                ),
-                "-" = switch(private$.alternative,
-                    greater = "l", less = "r", two_sided = "lr"
-                ),
-            )
         },
 
         #' @description Feed the data to the test. 
@@ -210,19 +201,25 @@ PermuTest <- R6Class(
         },
 
         # @Override
-        .permute = function() {
-            # private$.data_permu <- ...
-        },
-
-        # @Override
         .calculate_statistic_permu = function() {
             # private$.statistic_permu <- ...
         },
 
+        .calculate_side = function() {
+            private$.side <- switch(private$.trend,
+                "+" = switch(private$.alternative,
+                    greater = "r", less = "l", two_sided = "lr"
+                ),
+                "-" = switch(private$.alternative,
+                    greater = "l", less = "r", two_sided = "lr"
+                ),
+            )
+        },
+
         .calculate_p_permu = function() {
-            r <- quote(mean(private$.statistic_permu >= private$.statistic))
             l <- quote(mean(private$.statistic_permu <= private$.statistic))
-            lr <- quote(mean(abs(private$.statistic_permu) >= abs(private$.statistic)))
+            r <- quote(mean(private$.statistic_permu >= private$.statistic))
+            lr <- quote(2 * min(eval(l), eval(r)))
 
             private$.p_value <- eval(get(private$.side))
         },
@@ -236,33 +233,9 @@ PermuTest <- R6Class(
             private$.define_statistic()
             private$.calculate_statistic()
 
+            private$.calculate_side()
             if (private$.type == "permu") {
-                if (!isFALSE(progress <- getOption("pmt_progress"))) {
-                    progress <- interactive()
-                }
-
-                if (progress) {
-                    cat("Permuting...\n")
-                    private$.permute()
-
-                    assign(
-                        "pb", ProgressBar$new(length(private$.data_permu)),
-                        envir = environment(private$.statistic_func)
-                    )
-                    body(private$.statistic_func) <- as.call(c(
-                        as.name("{"),
-                        expression(on.exit(pb$update())),
-                        body(private$.statistic_func)
-                    ))
-
-                    cat("Calculating statistic...\n")
-                    private$.calculate_statistic_permu()
-                    cat("\n")
-                } else {
-                    private$.permute()
-                    private$.calculate_statistic_permu()
-                }
-
+                private$.calculate_statistic_permu()
                 private$.calculate_p_permu()
             } else {
                 private$.calculate_p()
@@ -319,6 +292,7 @@ PermuTest <- R6Class(
             } else {
                 private$.alternative <- value
                 private$.check()
+                private$.calculate_side()
                 if (private$.type == "permu") {
                     private$.calculate_p_permu()
                 } else {
@@ -351,20 +325,8 @@ PermuTest <- R6Class(
 
         #' @field data Data fed into the object. 
         data = function() private$.data,
-        #' @field data_permu All permutations used. 
-        data_permu = function() {
-            if (private$.type == "permu") {
-                private$.data_permu
-            }
-        },
         #' @field statistic The test statistic. 
         statistic = function() private$.statistic,
-        #' @field statistic_permu Test statistics calculated on permutations. 
-        statistic_permu = function() {
-            if (private$.type == "permu") {
-                private$.statistic_permu
-            }
-        },
         #' @field p_value The p-value. 
         p_value = function() private$.p_value,
         #' @field estimate The estimated parameter. 

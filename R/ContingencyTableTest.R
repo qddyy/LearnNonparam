@@ -6,7 +6,6 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom arrangements permutations
 
 
 ContingencyTableTest <- R6Class(
@@ -22,34 +21,28 @@ ContingencyTableTest <- R6Class(
             private$.raw_data <- as.matrix(table)
         },
 
-        .permute = function() {
+        .calculate_statistic = function() {
+            private$.statistic <- private$.statistic_func(private$.data)
+        },
+
+        .calculate_statistic_permu = function() {
             r <- nrow(private$.data)
             c <- ncol(private$.data)
 
             row_sum <- .rowSums(private$.data, r, c)
             col_sum <- .colSums(private$.data, r, c)
 
-            private$.data_permu <- lapply(
-                X = permutations(
-                    v = rep.int(seq_len(r), row_sum),
-                    nsample = private$.n_permu, layout = "list"
-                ),
-                FUN = function(data, col_index) {
-                    vapply(
+            private$.statistic_permu <- get_arrangement(
+                "permute", n_sample = private$.n_permu,
+                v = rep.int(seq_len(r), row_sum),
+                func = function(data) {
+                    statistic_func(vapply(
                         X = split(data, col_index), USE.NAMES = FALSE,
                         FUN = tabulate, nbins = r, FUN.VALUE = integer(r)
-                    )
-                }, col_index = rep.int(seq_len(c), col_sum)
-            )
-        },
-
-        .calculate_statistic = function() {
-            private$.statistic <- private$.statistic_func(private$.data)
-        },
-
-        .calculate_statistic_permu = function() {
-            private$.statistic_permu <- vapply(
-                private$.data_permu, private$.statistic_func, numeric(1)
+                    ))
+                }, func_value = numeric(1),
+                statistic_func = private$.statistic_func,
+                col_index = rep.int(seq_len(c), col_sum)
             )
         }
     )

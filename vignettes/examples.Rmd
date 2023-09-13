@@ -210,7 +210,7 @@ t$p_value
 ```{r}
 # See ?KolmogorovSmirnov or ?twosample.ks
 t <- pmt(
-    "twosample.ks", n_permu = 5000
+    "twosample.ks"
 )
 
 # See ?Table2.8.1
@@ -350,9 +350,10 @@ t$p_value
 ## Table 4.1.1
 
 ```{r}
-# See ?PairedComparison or ?paired.comparison
+# See ?SignedDiff or ?paired.signeddiff
 t <- pmt(
-    "paired.comparison", alternative = "greater"
+    "paired.signeddiff", alternative = "greater",
+    scoring = "none"
 )
 
 # See ?Table4.1.1
@@ -360,23 +361,24 @@ t$feed(Table4.1.1)
 
 t$statistic
 t$p_value
-
-t$n_permu <- 4000
-t$p_value
 ```
 
-## Table 4.1.3
+## Example 4.1.1
 
 ```{r}
-# See ?PairedComparison or ?paired.comparison
+# See ?SignedDiff or ?paired.signeddiff
 t <- pmt(
-    "paired.comparison", alternative = "two_sided", n_permu = 4000
+    "paired.signeddiff", alternative = "two_sided",
+    scoring = "none", method = "ignore"
 )
 
 # See ?Table4.1.3
 t$feed(Table4.1.3)
 
 t$statistic
+t$p_value
+
+t$n_permu <- 4000
 t$p_value
 
 t$type <- "approx"
@@ -386,19 +388,16 @@ t$p_value
 ## Example 4.2.1 & 4.2.2
 
 ```{r}
-# See ?SignedScore or ?paired.signedscore
+# See ?SignedDiff or ?paired.signeddiff
 t <- pmt(
-    "paired.signedscore", alternative = "greater",
-    ranking_method = "with_zeros"
+    "paired.signeddiff", alternative = "greater",
+    scoring = "rank", method = "with_zeros"
 )
 
 # See ?Table4.1.1
 t$feed(Table4.1.1)
 
 t$statistic
-t$p_value
-
-t$n_permu <- 4000
 t$p_value
 
 t$type <- "approx"
@@ -408,10 +407,10 @@ t$p_value
 ## Table 4.2.3
 
 ```{r}
-# See ?SignedScore or ?paired.signedscore
+# See ?SignedDiff or ?paired.signeddiff
 t <- pmt(
-    "paired.signedscore", alternative = "greater",
-    ranking_method = "ignore"
+    "paired.signeddiff", alternative = "greater",
+    scoring = "rank", method = "ignore"
 )
 
 t$feed(data.frame(
@@ -420,9 +419,6 @@ t$feed(data.frame(
 ))
 
 t$statistic
-t$p_value
-
-t$n_permu <- 4000
 t$p_value
 ```
 

@@ -25,6 +25,48 @@ get_score <- function(x, method, n = length(x)) {
     )
 }
 
+# for .calculate_statistic_permu
+
+#' @importFrom RcppAlgos comboGeneral comboSample permuteGeneral permuteSample
+get_arrangement <- function(
+    which = c("combo", "permute", "gpermute"), n_sample = NULL,
+    v = NULL, m = length(v), replace = FALSE,
+    func = NULL, func_value = NULL,
+    progress = getOption("pmt_progress"), ...
+) {
+    list2env(list(...), envir = environment(func))
+
+    args <- list(v = v, m = m, repetition = replace)
+
+    if (!isFALSE(progress)) {
+        progress <- interactive()
+    }
+    if (progress) {
+        if (is.null(count <- n_sample)) {
+            count <- do.call(paste0(which, "Count"), args)
+        }
+        assign(
+            "pb", ProgressBar$new(count),
+            envir = environment(func)
+        )
+        body(func) <- as.call(c(
+            as.name("{"),
+            expression(on.exit(pb$update())),
+            body(func)
+        ))
+    }
+
+    args <- c(args, list(FUN = func, FUN.VALUE = func_value))
+
+    if (is.null(n_sample)) {
+        do.call(paste0(which, "General"), args)
+    } else {
+        args$n <- n_sample
+        args$seed <- getOption("pmt_seed")
+        do.call(paste0(which, "Sample"), args)
+    }
+}
+
 # for .calculate_p
 
 get_p_continous <- function(x, dist, side, ...) {
