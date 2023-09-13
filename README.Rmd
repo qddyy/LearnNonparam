@@ -28,7 +28,7 @@ knitr::opts_chunk$set(
 
 This package implements most of the tests in chapters 1-5 of [@Higgins2003](#references).
 
-It uses [R6](https://cran.r-project.org/package=R6) for clean OO-design and [arrangements](https://cran.r-project.org/package=arrangements) for fast generation of permutations, as well as [ggplot2](https://cran.r-project.org/package=ggplot2) to draw pretty graphs.
+It uses [R6](https://cran.r-project.org/package=R6) for clean OO-design and [RcppAlgos](https://cran.r-project.org/package=RcppAlgos) for fast generation of combinations/permutations, as well as [ggplot2](https://cran.r-project.org/package=ggplot2) to draw pretty graphs.
 
 Examples in the book can be found [here](https://qddyy.github.io/LearnNonparam/articles/examples). 
 

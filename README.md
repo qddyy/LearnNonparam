@@ -17,8 +17,8 @@ This package implements most of the tests in chapters 1-5 of [Higgins
 (2003)](#references).
 
 It uses [R6](https://cran.r-project.org/package=R6) for clean OO-design
-and [arrangements](https://cran.r-project.org/package=arrangements) for
-fast generation of permutations, as well as
+and [RcppAlgos](https://cran.r-project.org/package=RcppAlgos) for fast
+generation of combinations/permutations, as well as
 [ggplot2](https://cran.r-project.org/package=ggplot2) to draw pretty
 graphs.
 
@@ -63,17 +63,17 @@ library(LearnNonparam)
 
   ``` r
   t$p_value
-  #> [1] 0.006062
+  #> [1] 0.040509
 
   t$print()
   #> 
   #>       Two Sample Wilcoxon Test 
   #> 
-  #> scoring: rank    type: permu(1e+06)    method: default
-  #> statistic = 502, p-value = 0.006062
+  #> scoring: rank    type: permu(1000000)    method: default
+  #> statistic = 475, p-value = 0.040509
   #> alternative hypothesis: greater
-  #> estimate: 0.8774262
-  #> 95 percent confidence interval: 0.1904005 1.5434681
+  #> estimate: 0.6022225
+  #> 95 percent confidence interval: -0.04779505  1.30040094
 
   t$plot(binwidth = 1)
   ```
@@ -86,7 +86,7 @@ library(LearnNonparam)
   t$type <- "approx"
 
   t$p_value
-  #> [1] 0.006660258
+  #> [1] 0.04051587
   ```
 
 There is also support for chaining method calls, which means that you
@@ -130,9 +130,8 @@ t <- pmt(...)$feed(...)$print(...)$plot(...)
   | ksample.jt         | JonckheereTerpstra | Jonckheere-Terpstra Test                             |
   | multicomp.t        | MultiCompT         | Multiple Comparison Based on t Statistic             |
   | multicomp.tukey    | TukeyHSD           | Tukey’s HSD                                          |
-  | paired.comparison  | PairedComparison   | Paired Comparison                                    |
   | paired.sign        | Sign               | Sign Test                                            |
-  | paired.signedscore | SignedScore        | Signed Score Test                                    |
+  | paired.signeddiff  | SignedDiff         | Paired Comparison Based on Signed Differences        |
   | rcbd.anova         | RCBDANOVA          | ANOVA for Randomized Complete Block Design           |
   | rcbd.friedman      | Friedman           | Friedman Test                                        |
   | rcbd.page          | Page               | Page Test                                            |

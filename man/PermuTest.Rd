@@ -25,11 +25,7 @@ This is the abstract base class for permutation test objects. Note that it is no
 
 \item{\code{data}}{Data fed into the object.}
 
-\item{\code{data_permu}}{All permutations used.}
-
 \item{\code{statistic}}{The test statistic.}
-
-\item{\code{statistic_permu}}{Test statistics calculated on permutations.}
 
 \item{\code{p_value}}{The p-value.}
 
