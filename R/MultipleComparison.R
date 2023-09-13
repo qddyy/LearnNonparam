@@ -95,19 +95,23 @@ MultipleComparison <- R6Class(
         },
 
         .calculate_statistic = function() {
-            private$.statistic <- private$.statistic_func(names(private$.data))
+            private$.statistic <- private$.statistic_func(
+                as.integer(names(private$.data))
+            )
         },
 
         .calculate_statistic_permu = function() {
-            private$.statistic_permu <- vapply(
-                X = private$.group_permu, FUN = private$.statistic_func,
-                FUN.VALUE = numeric(length(private$.ij$i))
+            private$.statistic_permu <- get_arrangement(
+                "permute", n_sample = private$.n_permu,
+                v = as.integer(names(private$.data)),
+                func = private$.statistic_func,
+                func_value = numeric(length(private$.ij$i))
             )
         },
 
         .calculate_p_permu = function() {
             private$.p_value <- rowMeans(
-                abs(private$.statistic_permu) >= abs(private$.statistic)
+                abs(t(private$.statistic_permu)) >= abs(private$.statistic)
             )
         },
 
