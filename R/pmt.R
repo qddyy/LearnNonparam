@@ -24,9 +24,8 @@ tests <- list(
     multicomp.t = MultiCompT,
     multicomp.tukey = TukeyHSD,
 
-    paired.comparison = PairedComparison,
     paired.sign = Sign,
-    paired.signedscore = SignedScore,
+    paired.signeddiff = SignedDiff,
 
     rcbd.anova = RCBDANOVA,
     rcbd.friedman = Friedman,
