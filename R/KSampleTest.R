@@ -6,7 +6,6 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom arrangements permutations
 
 
 KSampleTest <- R6Class(
@@ -15,8 +14,6 @@ KSampleTest <- R6Class(
     cloneable = FALSE,
     private = list(
         .name = "K Sample Permutation Test",
-
-        .group_permu = NULL,
 
         .check = function() {},
 
@@ -29,16 +26,8 @@ KSampleTest <- R6Class(
             )
         },
 
-        .permute = function() {
-            private$.group_permu <- permutations(
-                v = as.integer(names(private$.data)),
-                nsample = private$.n_permu, layout = "list"
-            )
-
-            private$.data_permu <- lapply(
-                X = private$.group_permu,
-                FUN = setNames, object = unname(private$.data)
-            )
+        .calculate_score = function() {
+            private$.data <- get_score(private$.data, method = private$.scoring)
         },
 
         .calculate_statistic = function() {
@@ -48,18 +37,15 @@ KSampleTest <- R6Class(
         },
 
         .calculate_statistic_permu = function() {
-            private$.statistic_permu <- vapply(
-                X = private$.group_permu,
-                FUN = function(group, data, statistic_func) {
+            private$.statistic_permu <- get_arrangement(
+                "permute", n_sample = private$.n_permu,
+                v = as.integer(names(private$.data)),
+                func = function(group) {
                     statistic_func(data, group)
-                }, FUN.VALUE = numeric(1),
-                data = unname(private$.data),
-                statistic_func = private$.statistic_func
+                }, func_value = numeric(1),
+                statistic_func = private$.statistic_func,
+                data = unname(private$.data)
             )
-        },
-
-        .calculate_score = function() {
-            private$.data <- get_score(private$.data, method = private$.scoring)
         }
     )
 )

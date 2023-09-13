@@ -6,7 +6,6 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom arrangements combinations
 
 
 TwoSampleTest <- R6Class(
@@ -22,18 +21,11 @@ TwoSampleTest <- R6Class(
             private$.raw_data <- setNames(get_data_from(...), c("x", "y"))
         },
 
-        .permute = function() {
-            c_xy <- c(private$.data$x, private$.data$y)
+        .calculate_score = function() {
+            scores <- get_score(c(private$.data$x, private$.data$y), method = private$.scoring)
 
-            private$.data_permu <- lapply(
-                X = combinations(
-                    n = length(c_xy), k = length(private$.data$x),
-                    nsample = private$.n_permu, layout = "list"
-                ),
-                FUN = function(index, c_xy) {
-                    list(x = c_xy[index], y = c_xy[-index])
-                }, c_xy = c_xy
-            )
+            x_index <- seq_along(private$.data$x)
+            private$.data <- list(x = scores[x_index], y = scores[-x_index])
         },
 
         .calculate_statistic = function() {
@@ -43,19 +35,18 @@ TwoSampleTest <- R6Class(
         },
 
         .calculate_statistic_permu = function() {
-            private$.statistic_permu <- vapply(
-                X = private$.data_permu, FUN.VALUE = numeric(1),
-                FUN = function(data, statistic_func) {
-                    statistic_func(data$x, data$y)
-                }, statistic_func = private$.statistic_func
+            m <- length(private$.data$x)
+            n <- length(private$.data$y)
+
+            private$.statistic_permu <- get_arrangement(
+                "combo", n_sample = private$.n_permu,
+                v = seq_len(m + n), m = m,
+                func = function(index) {
+                    statistic_func(c_xy[index], c_xy[-index])
+                }, func_value = numeric(1),
+                statistic_func = private$.statistic_func,
+                c_xy = c(private$.data$x, private$.data$y)
             )
-        },
-
-        .calculate_score = function() {
-            scores <- get_score(c(private$.data$x, private$.data$y), method = private$.scoring)
-
-            x_index <- seq_along(private$.data$x)
-            private$.data <- list(x = scores[x_index], y = scores[-x_index])
         }
     )
 )

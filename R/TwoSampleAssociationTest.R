@@ -6,7 +6,6 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom arrangements permutations
 
 
 TwoSampleAssociationTest <- R6Class(
@@ -26,15 +25,15 @@ TwoSampleAssociationTest <- R6Class(
 
         .calculate_score = function() {},
 
-        .permute = function() {
-            private$.data_permu <- lapply(
-                X = permutations(
-                    v = private$.data$y,
-                    nsample = private$.n_permu, layout = "list"
-                ),
-                FUN = function(x, y) {
-                    data.frame(x = x, y = y)
-                }, x = private$.data$x
+        .calculate_statistic_permu = function() {
+            private$.statistic_permu <- get_arrangement(
+                "permute", n_sample = private$.n_permu,
+                v = private$.data$y,
+                func = function(y) {
+                    statistic_func(x, y)
+                }, func_value = numeric(1),
+                statistic_func = private$.statistic_func,
+                x = private$.data$x
             )
         }
     )
