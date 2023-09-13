@@ -4,7 +4,7 @@ Version: 1.2.0
 Authors@R: 
     person("Yan", "Du", , "isduyan@outlook.com", role = c("aut", "cre"))
 Description: Implements various non-parametric tests in chapters 1-5 of the book "An introduction to modern nonparametric statistics" by James J. Higgins. 
-License: MIT + file LICENSE
+License: GPL (>= 2)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
