@@ -63,17 +63,17 @@ library(LearnNonparam)
 
   ``` r
   t$p_value
-  #> [1] 0.040509
+  #> [1] 0.001336
 
   t$print()
   #> 
   #>       Two Sample Wilcoxon Test 
   #> 
   #> scoring: rank    type: permu(1000000)    method: default
-  #> statistic = 475, p-value = 0.040509
+  #> statistic = 519, p-value = 0.001336
   #> alternative hypothesis: greater
-  #> estimate: 0.6022225
-  #> 95 percent confidence interval: -0.04779505  1.30040094
+  #> estimate: 0.9461215
+  #> 95 percent confidence interval: 0.3867042 1.6248357
 
   t$plot(binwidth = 1)
   ```
@@ -86,7 +86,7 @@ library(LearnNonparam)
   t$type <- "approx"
 
   t$p_value
-  #> [1] 0.04051587
+  #> [1] 0.00166809
   ```
 
 There is also support for chaining method calls, which means that you
@@ -97,6 +97,8 @@ t <- pmt(...)$feed(...)$print(...)$plot(...)
 ```
 
 ## Tips
+
+- Use `options(pmt_seed = ...)` to initialize the random seed.
 
 - Use `options(pmt_progress = FALSE)` to disable the progress bar.
 

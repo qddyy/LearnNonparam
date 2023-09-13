@@ -14,6 +14,10 @@ knitr::opts_chunk$set(
     fig.path = "man/figures/README-",
     out.width = "100%"
 )
+
+seed <- 2023
+set.seed(seed)
+options(pmt_seed = seed)
 ```
 
 # LearnNonparam
@@ -85,6 +89,8 @@ t <- pmt(...)$feed(...)$print(...)$plot(...)
 ```
 
 ## Tips
+
+- Use `options(pmt_seed = ...)` to initialize the random seed. 
 
 - Use `options(pmt_progress = FALSE)` to disable the progress bar. 
 

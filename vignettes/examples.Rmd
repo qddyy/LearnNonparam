@@ -20,8 +20,9 @@ if (!require("microbenchmark")) {
 }
 ```
 
-```{r, library}
+```{r}
 library(LearnNonparam)
+options(pmt_seed = 2023)
 ```
 
 # Chapter 1
