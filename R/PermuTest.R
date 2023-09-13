@@ -217,11 +217,11 @@ PermuTest <- R6Class(
         },
 
         .calculate_p_permu = function() {
-            l <- mean(private$.statistic_permu <= private$.statistic)
-            r <- 1 - l
-            lr <- 2 * min(l, r)
+            l <- quote(mean(private$.statistic_permu <= private$.statistic))
+            r <- quote(mean(private$.statistic_permu >= private$.statistic))
+            lr <- quote(2 * min(eval(l), eval(r)))
 
-            private$.p_value <- get(private$.side)
+            private$.p_value <- eval(get(private$.side))
         },
 
         .calculate = function() {
