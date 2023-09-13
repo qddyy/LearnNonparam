@@ -193,7 +193,7 @@
 <span><span class="co"># 1000 permutaions</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.222</span></span>
+<span><span class="co">#&gt; [1] 0.189</span></span>
 <span></span>
 <span><span class="co"># install.packages("microbenchmark")</span></span>
 <span><span class="fu">microbenchmark</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html" class="external-link">microbenchmark</a></span><span class="op">(</span></span>
@@ -201,9 +201,9 @@
 <span>    use_1000 <span class="op">=</span> <span class="op">{</span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">1000</span><span class="op">}</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Unit: milliseconds</span></span>
-<span><span class="co">#&gt;      expr      min       lq      mean    median       uq      max neval</span></span>
-<span><span class="co">#&gt;   use_all 180.8215 200.3460 233.48825 231.06115 251.6490 427.8703   100</span></span>
-<span><span class="co">#&gt;  use_1000  13.1921  14.7815  18.44562  15.46525  20.4076  59.5220   100</span></span></code></pre></div>
+<span><span class="co">#&gt;      expr      min        lq      mean    median        uq      max neval</span></span>
+<span><span class="co">#&gt;   use_all 130.6304 136.35855 138.84893 138.13100 140.09660 234.3031   100</span></span>
+<span><span class="co">#&gt;  use_1000  10.5279  10.71545  11.28122  11.22505  11.37325  14.6696   100</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-2-6-1">Example 2.6.1<a class="anchor" aria-label="anchor" href="#example-2-6-1"></a>
@@ -296,7 +296,7 @@
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># See ?KolmogorovSmirnov or ?twosample.ks</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
-<span>    <span class="st">"twosample.ks"</span>, n_permu <span class="op">=</span> <span class="fl">5000</span></span>
+<span>    <span class="st">"twosample.ks"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># See ?Table2.8.1</span></span>
@@ -305,7 +305,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 0.4</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.866</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.8730159</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -337,7 +337,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 11552.89</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.047</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.04</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-3-2-1">Example 3.2.1<a class="anchor" aria-label="anchor" href="#example-3-2-1"></a>
@@ -371,7 +371,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 8.246588</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.00975</span></span>
+<span><span class="co">#&gt; [1] 0.01175</span></span>
 <span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
@@ -384,7 +384,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">4000</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"permu"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.0135</span></span>
+<span><span class="co">#&gt; [1] 0.011</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
@@ -411,12 +411,12 @@
 <span><span class="co">#&gt; scoring: none    type: permu    method: default    </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  i j   statistic p_value differ</span></span>
-<span><span class="co">#&gt;  1 2  0.02737145  0.9754  FALSE</span></span>
-<span><span class="co">#&gt;  1 3 -1.77914406  0.0876  FALSE</span></span>
-<span><span class="co">#&gt;  1 4 -3.41048230  0.0022   TRUE</span></span>
-<span><span class="co">#&gt;  2 3 -1.80651550  0.0896  FALSE</span></span>
-<span><span class="co">#&gt;  2 4 -3.43785375  0.0020   TRUE</span></span>
-<span><span class="co">#&gt;  3 4 -1.63133824  0.1104  FALSE</span></span>
+<span><span class="co">#&gt;  1 2  0.02737145     NaN     NA</span></span>
+<span><span class="co">#&gt;  1 3 -1.77914406     NaN     NA</span></span>
+<span><span class="co">#&gt;  1 4 -3.41048230     NaN     NA</span></span>
+<span><span class="co">#&gt;  2 3 -1.80651550     NaN     NA</span></span>
+<span><span class="co">#&gt;  2 4 -3.43785375     NaN     NA</span></span>
+<span><span class="co">#&gt;  3 4 -1.63133824     NaN     NA</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
@@ -468,12 +468,12 @@
 <span><span class="co">#&gt; scoring: none    type: permu    method: default    </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  i j   statistic p_value differ</span></span>
-<span><span class="co">#&gt;  1 2  0.03870907  1.0000  FALSE</span></span>
-<span><span class="co">#&gt;  1 3 -2.51608965  0.3118  FALSE</span></span>
-<span><span class="co">#&gt;  1 4 -4.82315032  0.0148   TRUE</span></span>
-<span><span class="co">#&gt;  2 3 -2.55479873  0.3006  FALSE</span></span>
-<span><span class="co">#&gt;  2 4 -4.86185939  0.0144   TRUE</span></span>
-<span><span class="co">#&gt;  3 4 -2.30706067  0.3832  FALSE</span></span>
+<span><span class="co">#&gt;  1 2  0.03870907     NaN     NA</span></span>
+<span><span class="co">#&gt;  1 3 -2.51608965     NaN     NA</span></span>
+<span><span class="co">#&gt;  1 4 -4.82315032     NaN     NA</span></span>
+<span><span class="co">#&gt;  2 3 -2.55479873     NaN     NA</span></span>
+<span><span class="co">#&gt;  2 4 -4.86185939     NaN     NA</span></span>
+<span><span class="co">#&gt;  3 4 -2.30706067     NaN     NA</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
@@ -524,7 +524,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 145</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.029</span></span>
+<span><span class="co">#&gt; [1] 0.03275</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
@@ -538,39 +538,41 @@
 <h3 id="table-4-1-1">Table 4.1.1<a class="anchor" aria-label="anchor" href="#table-4-1-1"></a>
 </h3>
 <div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?PairedComparison or ?paired.comparison</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?SignedDiff or ?paired.signeddiff</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
-<span>    <span class="st">"paired.comparison"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span></span>
+<span>    <span class="st">"paired.signeddiff"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>,</span>
+<span>    scoring <span class="op">=</span> <span class="st">"none"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># See ?Table4.1.1</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">feed</span><span class="op">(</span><span class="va">Table4.1.1</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
-<span><span class="co">#&gt; [1] -168</span></span>
+<span><span class="co">#&gt; [1] 960</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.9375</span></span>
-<span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">4000</span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.93275</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.09375</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="table-4-1-3">Table 4.1.3<a class="anchor" aria-label="anchor" href="#table-4-1-3"></a>
+<h3 id="example-4-1-1">Example 4.1.1<a class="anchor" aria-label="anchor" href="#example-4-1-1"></a>
 </h3>
 <div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?PairedComparison or ?paired.comparison</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?SignedDiff or ?paired.signeddiff</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
-<span>    <span class="st">"paired.comparison"</span>, alternative <span class="op">=</span> <span class="st">"two_sided"</span>, n_permu <span class="op">=</span> <span class="fl">4000</span></span>
+<span>    <span class="st">"paired.signeddiff"</span>, alternative <span class="op">=</span> <span class="st">"two_sided"</span>,</span>
+<span>    scoring <span class="op">=</span> <span class="st">"none"</span>, method <span class="op">=</span> <span class="st">"ignore"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># See ?Table4.1.3</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">feed</span><span class="op">(</span><span class="va">Table4.1.3</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
-<span><span class="co">#&gt; [1] -6.647059</span></span>
+<span><span class="co">#&gt; [1] 148</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.02525</span></span>
+<span><span class="co">#&gt; [1] 0.02502441</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">4000</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.023</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
@@ -580,10 +582,10 @@
 <h3 id="example-4-2-1-4-2-2">Example 4.2.1 &amp; 4.2.2<a class="anchor" aria-label="anchor" href="#example-4-2-1-4-2-2"></a>
 </h3>
 <div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?SignedScore or ?paired.signedscore</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?SignedDiff or ?paired.signeddiff</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
-<span>    <span class="st">"paired.signedscore"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>,</span>
-<span>    ranking_method <span class="op">=</span> <span class="st">"with_zeros"</span></span>
+<span>    <span class="st">"paired.signeddiff"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>,</span>
+<span>    scoring <span class="op">=</span> <span class="st">"rank"</span>, method <span class="op">=</span> <span class="st">"with_zeros"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># See ?Table4.1.1</span></span>
@@ -594,10 +596,6 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
 <span><span class="co">#&gt; [1] 0.09375</span></span>
 <span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">4000</span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.09925</span></span>
-<span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
 <span><span class="co">#&gt; [1] 0.08876493</span></span></code></pre></div>
@@ -606,10 +604,10 @@
 <h3 id="table-4-2-3">Table 4.2.3<a class="anchor" aria-label="anchor" href="#table-4-2-3"></a>
 </h3>
 <div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?SignedScore or ?paired.signedscore</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?SignedDiff or ?paired.signeddiff</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
-<span>    <span class="st">"paired.signedscore"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>,</span>
-<span>    ranking_method <span class="op">=</span> <span class="st">"ignore"</span></span>
+<span>    <span class="st">"paired.signeddiff"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>,</span>
+<span>    scoring <span class="op">=</span> <span class="st">"rank"</span>, method <span class="op">=</span> <span class="st">"ignore"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">feed</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/data.frame.html" class="external-link">data.frame</a></span><span class="op">(</span></span>
@@ -620,11 +618,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 23.5</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.25</span></span>
-<span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">4000</span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.23875</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.25</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-4-3-1">Example 4.3.1<a class="anchor" aria-label="anchor" href="#example-4-3-1"></a>
@@ -664,7 +658,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 110241.8</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.0544</span></span>
+<span><span class="co">#&gt; [1] 0.0548</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
@@ -710,7 +704,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 134</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.0114</span></span>
+<span><span class="co">#&gt; [1] 0.012</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>

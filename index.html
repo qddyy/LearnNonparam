@@ -75,7 +75,7 @@
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
 <p>This package implements most of the tests in chapters 1-5 of <a href="#references">Higgins (2003)</a>.</p>
-<p>It uses <a href="https://cran.r-project.org/package=R6" class="external-link">R6</a> for clean OO-design and <a href="https://cran.r-project.org/package=arrangements" class="external-link">arrangements</a> for fast generation of permutations, as well as <a href="https://cran.r-project.org/package=ggplot2" class="external-link">ggplot2</a> to draw pretty graphs.</p>
+<p>It uses <a href="https://cran.r-project.org/package=R6" class="external-link">R6</a> for clean OO-design and <a href="https://cran.r-project.org/package=RcppAlgos" class="external-link">RcppAlgos</a> for fast generation of combinations/permutations, as well as <a href="https://cran.r-project.org/package=ggplot2" class="external-link">ggplot2</a> to draw pretty graphs.</p>
 <p>Examples in the book can be found <a href="https://qddyy.github.io/LearnNonparam/articles/examples" class="external-link">here</a>.</p>
 </div>
 <div class="section level2">
@@ -109,17 +109,17 @@
 <p>check the results</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.006062</span></span>
+<span><span class="co">#&gt; [1] 0.040509</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;       Two Sample Wilcoxon Test </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; scoring: rank    type: permu(1e+06)    method: default</span></span>
-<span><span class="co">#&gt; statistic = 502, p-value = 0.006062</span></span>
+<span><span class="co">#&gt; scoring: rank    type: permu(1000000)    method: default</span></span>
+<span><span class="co">#&gt; statistic = 475, p-value = 0.040509</span></span>
 <span><span class="co">#&gt; alternative hypothesis: greater</span></span>
-<span><span class="co">#&gt; estimate: 0.8774262</span></span>
-<span><span class="co">#&gt; 95 percent confidence interval: 0.1904005 1.5434681</span></span>
+<span><span class="co">#&gt; estimate: 0.6022225</span></span>
+<span><span class="co">#&gt; 95 percent confidence interval: -0.04779505  1.30040094</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">plot</span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-results-1.svg" width="100%"></p>
@@ -130,7 +130,7 @@
 <code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.006660258</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.04051587</span></span></code></pre></div>
 </li>
 </ul>
 <p>There is also support for chaining method calls, which means that you can do things like</p>
@@ -234,41 +234,36 @@
 <td align="left">Tukey’s HSD</td>
 </tr>
 <tr class="odd">
-<td align="left">paired.comparison</td>
-<td align="left">PairedComparison</td>
-<td align="left">Paired Comparison</td>
-</tr>
-<tr class="even">
 <td align="left">paired.sign</td>
 <td align="left">Sign</td>
 <td align="left">Sign Test</td>
 </tr>
-<tr class="odd">
-<td align="left">paired.signedscore</td>
-<td align="left">SignedScore</td>
-<td align="left">Signed Score Test</td>
-</tr>
 <tr class="even">
+<td align="left">paired.signeddiff</td>
+<td align="left">SignedDiff</td>
+<td align="left">Paired Comparison Based on Signed Differences</td>
+</tr>
+<tr class="odd">
 <td align="left">rcbd.anova</td>
 <td align="left">RCBDANOVA</td>
 <td align="left">ANOVA for Randomized Complete Block Design</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">rcbd.friedman</td>
 <td align="left">Friedman</td>
 <td align="left">Friedman Test</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">rcbd.page</td>
 <td align="left">Page</td>
 <td align="left">Page Test</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">association.corr</td>
 <td align="left">Correlation</td>
 <td align="left">Two Sample Test Based on Correlation Coefficient</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">table.chisq</td>
 <td align="left">ChiSquare</td>
 <td align="left">Contingency Table Test Based on Chi-square Statistic</td>

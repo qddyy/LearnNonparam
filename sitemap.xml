@@ -70,9 +70,6 @@
     <loc>/reference/Page.html</loc>
   </url>
   <url>
-    <loc>/reference/PairedComparison.html</loc>
-  </url>
-  <url>
     <loc>/reference/PermuTest.html</loc>
   </url>
   <url>
@@ -97,7 +94,7 @@
     <loc>/reference/Sign.html</loc>
   </url>
   <url>
-    <loc>/reference/SignedScore.html</loc>
+    <loc>/reference/SignedDiff.html</loc>
   </url>
   <url>
     <loc>/reference/Table1.1.1.html</loc>
