@@ -77,9 +77,9 @@ t$ci
 ## Table 2.1.1
 
 ```{r}
-# See ?Mean or ?twosample.mean
+# See ?Difference or ?twosample.difference
 t <- pmt(
-    "twosample.mean", alternative = "greater"
+    "twosample.difference", alternative = "greater", method = "mean"
 )
 
 # See ?Table2.1.1
@@ -107,9 +107,9 @@ t$p_value
 ## Example 2.3.1
 
 ```{r}
-# See ?Mean or ?twosample.mean
+# See ?Difference or ?twosample.difference
 t <- pmt(
-    "twosample.mean", alternative = "greater"
+    "twosample.difference", alternative = "greater", method = "mean"
 )
 
 # See ?Table2.3.1
@@ -194,7 +194,7 @@ t$p_value
 ## Example 2.8.2
 
 ```{r}
-# See ?RatioMeanDeviance or ?twosample.rmd
+# See ?RatioDifferenceDeviance or ?twosample.rmd
 t <- pmt(
     "twosample.rmd", alternative = "greater"
 )
