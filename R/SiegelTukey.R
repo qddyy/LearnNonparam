@@ -27,8 +27,6 @@ SiegelTukey <- R6Class(
             private$.adjust_median <- adjust_median
 
             super$initialize(...)
-
-            private$.scoring <- "siegel-tukey rank"
         }
     ),
     private = list(
@@ -41,15 +39,16 @@ SiegelTukey <- R6Class(
         .calculate_extra = function() {},
 
         .calculate_score = function() {
-            x <- private$.data$x
-            y <- private$.data$y
-
             if (private$.adjust_median) {
-                x <- x - median(x)
-                y <- y - median(y)
+                private$.data <- lapply(
+                    private$.data, function(x) x - median(x)
+                )
             }
 
-            c_xy <- c(x, y)
+            super$.calculate_score()
+            private$.scoring <- "siegel-tukey rank"
+
+            c_xy <- c(private$.data$x, private$.data$y)
             N <- length(c_xy)
 
             rank_l <- outer(c(1, 4), seq.int(from = 0, to = N - 1, by = 4), "+")
@@ -66,11 +65,13 @@ SiegelTukey <- R6Class(
             }
 
             st_rank <- vapply(
-                X = split(c(rank_l, rev(rank_r)), sort(c_xy)),
-                FUN = mean, FUN.VALUE = numeric(1)
+                X = split(c(rank_l, rev(rank_r)), seq_len(N)),
+                FUN = mean, FUN.VALUE = numeric(1), USE.NAMES = FALSE
             )
 
-            private$.data <- list(x = st_rank[as.character(x)], y = st_rank[as.character(y)])
+            private$.data <- lapply(
+                private$.data, function(x) st_rank[x]
+            )
         }
     )
 )

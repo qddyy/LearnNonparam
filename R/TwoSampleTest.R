@@ -22,10 +22,12 @@ TwoSampleTest <- R6Class(
         },
 
         .calculate_score = function() {
-            scores <- get_score(c(private$.data$x, private$.data$y), method = private$.scoring)
+            score <- get_score(
+                c(private$.data$x, private$.data$y), method = private$.scoring
+            )
 
             x_index <- seq_along(private$.data$x)
-            private$.data <- list(x = scores[x_index], y = scores[-x_index])
+            private$.data <- list(x = score[x_index], y = score[-x_index])
         },
 
         .calculate_statistic = function() {

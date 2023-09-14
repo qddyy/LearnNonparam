@@ -8,7 +8,7 @@ get_data_from <- function(...) {
     if (length(data) == 1 & is.list(data[[1]])) {
         data <- data[[1]]
     }
-    if (all(vapply(data, length, numeric(1)) >= 2)) data
+    if (all(vapply(data, length, numeric(1)) >= 2)) as.list(data)
 }
 
 # for .calculate_score
