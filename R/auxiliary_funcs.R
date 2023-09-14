@@ -39,15 +39,17 @@ get_arrangement <- function(
 
     args <- list(v = v, m = m, repetition = replace)
 
+    n_possible <- do.call(paste0(which, "Count"), args)
+
     if (!isFALSE(progress)) {
         progress <- interactive()
     }
     if (progress) {
-        if (is.null(count <- n_sample)) {
-            count <- do.call(paste0(which, "Count"), args)
+        if (isTRUE((n_step <- n_possible) > n_sample)) {
+            n_step <- n_sample
         }
         assign(
-            "pb", ProgressBar$new(count),
+            "pb", ProgressBar$new(n_step),
             envir = environment(func)
         )
         body(func) <- as.call(c(
@@ -59,12 +61,15 @@ get_arrangement <- function(
 
     args <- c(args, list(FUN = func, FUN.VALUE = func_value))
 
-    if (is.null(n_sample)) {
-        do.call(paste0(which, "General"), args)
-    } else {
+    if (isTRUE(n_sample < n_possible)) {
         args$n <- n_sample
         args$seed <- getOption("pmt_seed")
         do.call(paste0(which, "Sample"), args)
+    } else {
+        possible <- do.call(paste0(which, "General"), args)
+        if (is.null(n_sample)) possible else {
+            possible[sample.int(n_possible, n_sample, replace = TRUE)]
+        }
     }
 }
 

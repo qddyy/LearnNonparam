@@ -211,7 +211,7 @@ t$p_value
 ```{r}
 # See ?KolmogorovSmirnov or ?twosample.ks
 t <- pmt(
-    "twosample.ks"
+    "twosample.ks", n_permu <- 5000
 )
 
 # See ?Table2.8.1
@@ -362,6 +362,9 @@ t$feed(Table4.1.1)
 
 t$statistic
 t$p_value
+
+t$n_permu <- 4000
+t$p_value
 ```
 
 ## Example 4.1.1
@@ -401,6 +404,9 @@ t$feed(Table4.1.1)
 t$statistic
 t$p_value
 
+t$n_permu <- 4000
+t$p_value
+
 t$type <- "approx"
 t$p_value
 ```
@@ -420,6 +426,9 @@ t$feed(data.frame(
 ))
 
 t$statistic
+t$p_value
+
+t$n_permu <- 4000
 t$p_value
 ```
 
