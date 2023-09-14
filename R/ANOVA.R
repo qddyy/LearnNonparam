@@ -35,8 +35,9 @@ ANOVA <- R6Class(
             private$.statistic_func <- switch(private$.type,
                 permu = function(data, group) {
                     sum(vapply(
-                        X = split(data, group), FUN.VALUE = numeric(1),
-                        FUN = function(x) sum(x)^2 / length(x)
+                        X = split(data, group),
+                        FUN = function(x) sum(x)^2 / length(x),
+                        FUN.VALUE = numeric(1), USE.NAMES = FALSE
                     ))
                 },
                 approx = function(data, group) {

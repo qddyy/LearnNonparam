@@ -42,8 +42,9 @@ MultiCompT <- R6Class(
                 k <- as.integer(names(private$.data)[N])
                 private$.statistic_func <- function(x, y, data) {
                     mse <- sum(vapply(
-                        X = split(data, names(data)), FUN.VALUE = numeric(1),
-                        FUN = function(x) (length(x) - 1) * var(x)
+                        X = split(data, names(data)),
+                        FUN = function(x) (length(x) - 1) * var(x),
+                        FUN.VALUE = numeric(1), USE.NAMES = FALSE
                     )) / (N - k)
                     (mean(x) - mean(y)) / sqrt(
                         mse * (1 / length(x) + 1 / length(y))
