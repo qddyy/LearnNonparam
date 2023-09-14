@@ -142,9 +142,9 @@
 <h3 id="table-2-1-1">Table 2.1.1<a class="anchor" aria-label="anchor" href="#table-2-1-1"></a>
 </h3>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?Mean or ?twosample.mean</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?Difference or ?twosample.difference</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
-<span>    <span class="st">"twosample.mean"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span></span>
+<span>    <span class="st">"twosample.difference"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>, method <span class="op">=</span> <span class="st">"mean"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># See ?Table2.1.1</span></span>
@@ -176,9 +176,9 @@
 <h3 id="example-2-3-1">Example 2.3.1<a class="anchor" aria-label="anchor" href="#example-2-3-1"></a>
 </h3>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?Mean or ?twosample.mean</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?Difference or ?twosample.difference</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
-<span>    <span class="st">"twosample.mean"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span></span>
+<span>    <span class="st">"twosample.difference"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>, method <span class="op">=</span> <span class="st">"mean"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># See ?Table2.3.1</span></span>
@@ -202,9 +202,9 @@
 <span>    use_1000 <span class="op">=</span> <span class="op">{</span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">1000</span><span class="op">}</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Unit: milliseconds</span></span>
-<span><span class="co">#&gt;      expr      min       lq     mean    median        uq      max neval</span></span>
-<span><span class="co">#&gt;   use_all 151.1521 156.8168 159.2255 158.77475 160.36785 257.3344   100</span></span>
-<span><span class="co">#&gt;  use_1000  11.7529  12.4039  12.9684  12.91905  13.02585  16.3945   100</span></span></code></pre></div>
+<span><span class="co">#&gt;      expr      min       lq      mean    median        uq      max neval</span></span>
+<span><span class="co">#&gt;   use_all 135.9230 142.8113 144.96857 144.20205 145.86220 239.9474   100</span></span>
+<span><span class="co">#&gt;  use_1000  10.9718  11.3066  11.76985  11.70315  11.87145  14.4737   100</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-2-6-1">Example 2.6.1<a class="anchor" aria-label="anchor" href="#example-2-6-1"></a>
@@ -278,7 +278,7 @@
 <h3 id="example-2-8-2">Example 2.8.2<a class="anchor" aria-label="anchor" href="#example-2-8-2"></a>
 </h3>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?RatioMeanDeviance or ?twosample.rmd</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?RatioDifferenceDeviance or ?twosample.rmd</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"twosample.rmd"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span></span>
 <span><span class="op">)</span></span>

@@ -37,6 +37,9 @@
     <loc>/reference/Correlation.html</loc>
   </url>
   <url>
+    <loc>/reference/Difference.html</loc>
+  </url>
+  <url>
     <loc>/reference/Friedman.html</loc>
   </url>
   <url>
@@ -50,9 +53,6 @@
   </url>
   <url>
     <loc>/reference/KruskalWallis.html</loc>
-  </url>
-  <url>
-    <loc>/reference/Mean.html</loc>
   </url>
   <url>
     <loc>/reference/MultiCompT.html</loc>
