@@ -15,9 +15,8 @@ knitr::opts_chunk$set(
     out.width = "100%"
 )
 
-seed <- 2023
-set.seed(seed)
-options(pmt_seed = seed)
+set.seed(2023)
+options(pmt_seed = 2023)
 ```
 
 # LearnNonparam
