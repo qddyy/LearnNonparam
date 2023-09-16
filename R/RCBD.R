@@ -6,7 +6,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom RcppAlgos permuteGeneral
+#' @importFrom RcppAlgos permuteCount permuteGeneral
 
 
 RCBD <- R6Class(
@@ -50,12 +50,10 @@ RCBD <- R6Class(
                 v = seq_len(factorial(k)), m = b, replace = TRUE,
                 func = function(index) {
                     statistic_func(do.call(
-                        data.frame, .mapply(
+                        cbind, .mapply(
                             dots = list(data, index),
-                            FUN = function(data_i, i) {
-                                as.numeric(permuteGeneral(
-                                    v = data_i, lower = i, upper = i
-                                ))
+                            FUN = function(block, i) {
+                                permuteGeneral(v = block, lower = i, upper = i)[1, ]
                             }, MoreArgs = NULL
                         )
                     ))

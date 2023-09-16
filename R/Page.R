@@ -33,7 +33,7 @@ Page <- R6Class(
 
         .define_statistic = function() {
             seq_row <- seq_len(nrow(private$.data))
-            private$.statistic_func <- function(df) sum(seq_row * rowSums(df))
+            private$.statistic_func <- function(data) sum(seq_row * rowSums(data))
         },
 
         .calculate_p = function() {
