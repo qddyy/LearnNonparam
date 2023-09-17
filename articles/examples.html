@@ -202,9 +202,9 @@
 <span>    use_1000 <span class="op">=</span> <span class="op">{</span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">1000</span><span class="op">}</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Unit: milliseconds</span></span>
-<span><span class="co">#&gt;      expr      min       lq      mean    median       uq      max neval</span></span>
-<span><span class="co">#&gt;   use_all 130.5293 135.3182 137.16503 136.42135 138.2861 226.1140   100</span></span>
-<span><span class="co">#&gt;  use_1000  10.5642  10.7517  11.24524  11.19635  11.3118  14.0451   100</span></span></code></pre></div>
+<span><span class="co">#&gt;      expr      min       lq      mean   median        uq      max neval</span></span>
+<span><span class="co">#&gt;   use_all 147.8293 159.4422 166.02207 164.1424 169.08445 294.6916   100</span></span>
+<span><span class="co">#&gt;  use_1000  11.0920  12.3568  13.52612  13.3229  14.24215  19.6162   100</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-2-6-1">Example 2.6.1<a class="anchor" aria-label="anchor" href="#example-2-6-1"></a>
@@ -296,9 +296,7 @@
 </h3>
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># See ?KolmogorovSmirnov or ?twosample.ks</span></span>
-<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
-<span>    <span class="st">"twosample.ks"</span>, <span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">5000</span></span>
-<span><span class="op">)</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span><span class="st">"twosample.ks"</span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># See ?Table2.8.1</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">feed</span><span class="op">(</span><span class="va">Table2.8.1</span><span class="op">)</span></span>
@@ -306,7 +304,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 0.4</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.8712</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.8730159</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -551,11 +549,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 960</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.09375</span></span>
-<span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">4000</span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.09575</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.09375</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-4-1-1">Example 4.1.1<a class="anchor" aria-label="anchor" href="#example-4-1-1"></a>
@@ -601,10 +595,6 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
 <span><span class="co">#&gt; [1] 0.09375</span></span>
 <span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">4000</span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.1015</span></span>
-<span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
 <span><span class="co">#&gt; [1] 0.08876493</span></span></code></pre></div>
@@ -627,11 +617,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 23.5</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.25</span></span>
-<span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">4000</span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.25025</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.25</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-4-3-1">Example 4.3.1<a class="anchor" aria-label="anchor" href="#example-4-3-1"></a>
