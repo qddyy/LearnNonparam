@@ -42,7 +42,7 @@ TwoSampleTest <- R6Class(
 
             private$.statistic_permu <- get_arrangement(
                 "combo", n_sample = private$.n_permu,
-                v = seq_len(m + n), m = m,
+                v = m + n, m = m,
                 func = function(index) {
                     statistic_func(c_xy[index], c_xy[-index])
                 }, func_value = numeric(1),

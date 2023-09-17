@@ -6,9 +6,9 @@ get_data_from <- function(...) {
     data <- list(...)
 
     if (length(data) == 1 & is.list(data[[1]])) {
-        data <- data[[1]]
+        data <- as.list(data[[1]])
     }
-    if (all(vapply(data, length, numeric(1)) >= 2)) as.list(data)
+    if (all(vapply(data, length, numeric(1)) >= 2)) data
 }
 
 # for .calculate_score
@@ -30,46 +30,38 @@ get_score <- function(x, method, n = length(x)) {
 #' @importFrom RcppAlgos comboGeneral comboSample comboCount
 #' @importFrom RcppAlgos permuteGeneral permuteSample permuteCount
 get_arrangement <- function(
-    which = c("combo", "permute", "gpermute"), n_sample = NULL,
+    which = c("combo", "permute"), n_sample = NULL,
     v = NULL, m = length(v), replace = FALSE,
-    func = NULL, func_value = NULL,
-    progress = getOption("pmt_progress"), ...
+    func = NULL, func_value = NULL, ...
 ) {
-    list2env(list(...), envir = environment(func))
+    envir <- list2env(list(...), envir = environment(func))
 
     args <- list(v = v, m = m, repetition = replace)
 
-    n_possible <- do.call(paste0(which, "Count"), args)
-
-    if (!isFALSE(progress)) {
+    if (!isFALSE(progress <- getOption("pmt_progress"))) {
         progress <- interactive()
     }
     if (progress) {
-        if (isTRUE((n_step <- n_possible) > n_sample)) {
-            n_step <- n_sample
+        if (is.null(n_step <- n_sample)) {
+            n_step <- do.call(paste0(which, "Count"), args)
         }
-        assign(
-            "pb", ProgressBar$new(n_step),
-            envir = environment(func)
-        )
+        assign("pb", ProgressBar$new(n_step), envir = envir)
         body(func) <- as.call(c(
             as.name("{"),
             expression(on.exit(pb$update())),
             body(func)
         ))
+        on.exit(get("pb", envir = envir)$close())
     }
 
     args <- c(args, list(FUN = func, FUN.VALUE = func_value))
 
-    if (isTRUE(n_sample < n_possible)) {
+    if (is.null(n_sample)) {
+        do.call(paste0(which, "General"), args)
+    } else {
         args$n <- n_sample
         args$seed <- getOption("pmt_seed")
         do.call(paste0(which, "Sample"), args)
-    } else {
-        possible <- do.call(paste0(which, "General"), args)
-        if (is.null(n_sample)) possible else {
-            possible[sample.int(n_possible, n_sample, replace = TRUE)]
-        }
     }
 }
 

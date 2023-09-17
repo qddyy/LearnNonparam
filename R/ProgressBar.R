@@ -4,6 +4,12 @@
 ProgressBar <- R6Class(
     classname = "ProgressBar",
     cloneable = FALSE,
+    private = list(
+        .step = 0,
+        .n_steps = NULL,
+        .update_every = NULL,
+        .width = NULL
+    ),
     public = list(
         initialize = function(n) {
             private$.n_steps <- n
@@ -23,12 +29,11 @@ ProgressBar <- R6Class(
                 )
                 flush.console()
             }
+        },
+
+        close = function() {
+            cat("\r", strrep(" ", private$.width))
+            flush.console()
         }
-    ),
-    private = list(
-        .step = 0,
-        .n_steps = NULL,
-        .update_every = NULL,
-        .width = NULL
     )
 )

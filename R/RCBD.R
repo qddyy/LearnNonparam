@@ -47,7 +47,7 @@ RCBD <- R6Class(
 
             private$.statistic_permu <- get_arrangement(
                 "permute", n_sample = private$.n_permu,
-                v = seq_len(factorial(k)), m = b, replace = TRUE,
+                v = permuteCount(k), m = b, replace = TRUE,
                 func = function(index) {
                     statistic_func(do.call(
                         cbind, .mapply(
