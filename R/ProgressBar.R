@@ -13,7 +13,7 @@ ProgressBar <- R6Class(
     public = list(
         initialize = function(n) {
             private$.n_steps <- n
-            private$.update_every <- ceiling(private$.n_steps / 100)
+            private$.update_every <- round(private$.n_steps / 100)
             private$.width <- getOption("width")
         },
 
@@ -32,7 +32,7 @@ ProgressBar <- R6Class(
         },
 
         close = function() {
-            cat("\r", strrep(" ", private$.width))
+            cat("\033[0m", "\r", strrep(" ", private$.width))
             flush.console()
         }
     )
