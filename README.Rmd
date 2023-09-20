@@ -8,11 +8,10 @@ output:
     dev: svg
 ---
 
-```{r, include = FALSE}
+```{r, setup, include = FALSE}
 knitr::opts_chunk$set(
     collapse = TRUE, comment = "#>",
-    fig.path = "man/figures/README-",
-    out.width = "100%"
+    fig.path = "man/figures/README-"
 )
 
 set.seed(2023)
@@ -20,6 +19,8 @@ options(pmt_seed = 2023)
 ```
 
 # LearnNonparam
+
+<img src="man/figures/logo.svg" alt="logo" width = "200" align="right" />
 
 [![GPL license](https://img.shields.io/github/license/qddyy/LearnNonparam)](https://cran.r-project.org/web/licenses/GPL-2)
 [![GitHub R package version](https://img.shields.io/github/r-package/v/qddyy/LearnNonparam)](https://github.com/qddyy/LearnNonparam)
@@ -29,9 +30,13 @@ options(pmt_seed = 2023)
 
 ## Overview
 
-This package implements most of the tests in chapters 1-5 of [@Higgins2003](#references).
+This package implements many nonparametric tests in chapters 1-5 of [@Higgins2003](#references).
 
-It uses [R6](https://cran.r-project.org/package=R6) for clean OO-design and [RcppAlgos](https://cran.r-project.org/package=RcppAlgos) for fast generation of combinations/permutations, as well as [ggplot2](https://cran.r-project.org/package=ggplot2) to draw pretty graphs.
+It uses
+
+- [R6](https://cran.r-project.org/package=R6) for clean OO-design
+- [RcppAlgos](https://cran.r-project.org/package=RcppAlgos) for fast generation of combinations/permutations
+- [ggplot2](https://cran.r-project.org/package=ggplot2) for pretty graphs
 
 Examples in the book can be found [here](https://qddyy.github.io/LearnNonparam/articles/examples). 
 
@@ -52,24 +57,24 @@ library(LearnNonparam)
 
 - Create a test object (for example, a `Wilcoxon` object)
     ```{r, eval = FALSE}
-    t <- Wilcoxon$new(alternative = "greater", type = "permu", n_permu = 1000000)
+    t <- Wilcoxon$new(alternative = "greater", type = "permu", n_permu = 1e7)
     ```
 
     or you can use `pmt` (**p**er**m**utation **t**est) function (*Recommended*):
     ```{r, create}
-    t <- pmt("twosample.wilcoxon", alternative = "greater", type = "permu", n_permu = 1000000)
+    t <- pmt("twosample.wilcoxon", alternative = "greater", type = "permu", n_permu = 1e7)
     ```
 
-- feed it the data (a data frame, a list, or numeric vectors)
+- feed it the data (`vector` | `data.frame` | `list`)
     ```{r, feed}
     t$feed(rnorm(20, mean = 1), rnorm(20, mean = 0))
     ```
 
 - check the results
-    ```{r, results}
+    ```{r, results, out.width = "100%"}
     t$p_value
 
-    t$print()
+    t$print(digits = 2)
 
     t$plot(binwidth = 1)
     ```

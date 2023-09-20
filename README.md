@@ -1,6 +1,8 @@
 
 # LearnNonparam
 
+<img src="man/figures/logo.svg" alt="logo" width = "200" align="right" />
+
 [![GPL
 license](https://img.shields.io/github/license/qddyy/LearnNonparam)](https://cran.r-project.org/web/licenses/GPL-2)
 [![GitHub R package
@@ -13,14 +15,16 @@ check](https://github.com/qddyy/LearnNonparam/workflows/R-CMD-check/badge.svg)](
 
 ## Overview
 
-This package implements most of the tests in chapters 1-5 of [Higgins
-(2003)](#references).
+This package implements many nonparametric tests in chapters 1-5 of
+[Higgins (2003)](#references).
 
-It uses [R6](https://cran.r-project.org/package=R6) for clean OO-design
-and [RcppAlgos](https://cran.r-project.org/package=RcppAlgos) for fast
-generation of combinations/permutations, as well as
-[ggplot2](https://cran.r-project.org/package=ggplot2) to draw pretty
-graphs.
+It uses
+
+- [R6](https://cran.r-project.org/package=R6) for clean OO-design
+- [RcppAlgos](https://cran.r-project.org/package=RcppAlgos) for fast
+  generation of combinations/permutations
+- [ggplot2](https://cran.r-project.org/package=ggplot2) for pretty
+  graphs
 
 Examples in the book can be found
 [here](https://qddyy.github.io/LearnNonparam/articles/examples).
@@ -43,17 +47,17 @@ library(LearnNonparam)
 - Create a test object (for example, a `Wilcoxon` object)
 
   ``` r
-  t <- Wilcoxon$new(alternative = "greater", type = "permu", n_permu = 1000000)
+  t <- Wilcoxon$new(alternative = "greater", type = "permu", n_permu = 1e7)
   ```
 
   or you can use `pmt` (**p**er**m**utation **t**est) function
   (*Recommended*):
 
   ``` r
-  t <- pmt("twosample.wilcoxon", alternative = "greater", type = "permu", n_permu = 1000000)
+  t <- pmt("twosample.wilcoxon", alternative = "greater", type = "permu", n_permu = 1e7)
   ```
 
-- feed it the data (a data frame, a list, or numeric vectors)
+- feed it the data (`vector` \| `data.frame` \| `list`)
 
   ``` r
   t$feed(rnorm(20, mean = 1), rnorm(20, mean = 0))
@@ -63,17 +67,17 @@ library(LearnNonparam)
 
   ``` r
   t$p_value
-  #> [1] 0.001336
+  #> [1] 0.0013483
 
-  t$print()
+  t$print(digits = 2)
   #> 
   #>       Two Sample Wilcoxon Test 
   #> 
-  #> scoring: rank    type: permu(1000000)    method: default
-  #> statistic = 519, p-value = 0.001336
+  #> scoring: rank    type: permu(1e+07)    method: default
+  #> statistic = 519, p-value = 0.0013
   #> alternative hypothesis: greater
-  #> estimate: 0.9461215
-  #> 95 percent confidence interval: 0.3867042 1.6248357
+  #> estimate: 0.95
+  #> 95 percent confidence interval: 0.39 1.62
 
   t$plot(binwidth = 1)
   ```
