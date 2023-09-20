@@ -82,7 +82,7 @@
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>This package implements many nonparametric tests in chapters 1-5 of <a href="#references">Higgins (2003)</a>.</p>
+<p>This package implements some non-parametric tests in chapters 1-5 of <a href="#references">Higgins (2003)</a>.</p>
 <p>It uses</p>
 <ul>
 <li>
@@ -157,7 +157,10 @@
 <h2 id="tips">Tips<a class="anchor" aria-label="anchor" href="#tips"></a>
 </h2>
 <ul>
-<li><p>Use <code>options(pmt_seed = ...)</code> to initialize the random seed.</p></li>
+<li>
+<p>Use <code>options(pmt_seed = &lt;seed&gt;)</code> to initialize the random seed.</p>
+<p>(passed to <code>RcppAlgos</code> for sampling combinations/permutations)</p>
+</li>
 <li>
 <p>Use <code>options(pmt_progress = FALSE)</code> to disable the progress bar.</p>
 <p>(By default, a progress bar will appear when calculating the permutation distribution if R is used interactively)</p>
