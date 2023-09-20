@@ -77,7 +77,7 @@
 <div class="section level1">
 <div class="page-header"><h1 id="learnnonparam">LearnNonparam<a class="anchor" aria-label="anchor" href="#learnnonparam"></a>
 </h1></div>
-<p><img src="reference/figures/logo.svg" alt="logo" width="200" align="right"></p>
+<p><img src="reference/figures/logo.svg" alt="logo" width="180" align="right"></p>
 <p><a href="https://cran.r-project.org/web/licenses/GPL-2" class="external-link"><img src="https://img.shields.io/github/license/qddyy/LearnNonparam" alt="GPL license"></a> <a href="https://github.com/qddyy/LearnNonparam" class="external-link"><img src="https://img.shields.io/github/r-package/v/qddyy/LearnNonparam" alt="GitHub R package version"></a> <a href="https://github.com/qddyy/LearnNonparam" class="external-link"><img src="https://img.shields.io/github/languages/code-size/qddyy/LearnNonparam.svg" alt="Code size"></a> <a href="https://www.codefactor.io/repository/github/qddyy/LearnNonparam" class="external-link"><img src="https://www.codefactor.io/repository/github/qddyy/LearnNonparam/badge" alt="CodeFactor"></a> <a href="https://github.com/qddyy/LearnNonparam/actions" class="external-link"><img src="https://github.com/qddyy/LearnNonparam/workflows/R-CMD-check/badge.svg" alt="R CMD check"></a></p>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
@@ -103,13 +103,13 @@
 <li>
 <p>Create a test object (for example, a <code>Wilcoxon</code> object)</p>
 <div class="sourceCode" id="cb3"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/Wilcoxon.html">Wilcoxon</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>alternative <span class="op">=</span> <span class="st">"greater"</span>, type <span class="op">=</span> <span class="st">"permu"</span>, n_permu <span class="op">=</span> <span class="fl">1000000</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/Wilcoxon.html">Wilcoxon</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>alternative <span class="op">=</span> <span class="st">"greater"</span>, type <span class="op">=</span> <span class="st">"permu"</span>, n_permu <span class="op">=</span> <span class="fl">1e7</span><span class="op">)</span></span></code></pre></div>
 <p>or you can use <code>pmt</code> (<strong>p</strong>er<strong>m</strong>utation <strong>t</strong>est) function (<em>Recommended</em>):</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pmt.html">pmt</a></span><span class="op">(</span><span class="st">"twosample.wilcoxon"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>, type <span class="op">=</span> <span class="st">"permu"</span>, n_permu <span class="op">=</span> <span class="fl">1000000</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pmt.html">pmt</a></span><span class="op">(</span><span class="st">"twosample.wilcoxon"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>, type <span class="op">=</span> <span class="st">"permu"</span>, n_permu <span class="op">=</span> <span class="fl">1e7</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
-<p>feed it the data (a data frame, a list, or numeric vectors)</p>
+<p>feed it the data (<code>vector</code> | <code>data.frame</code> | <code>list</code>)</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="fu">feed</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, mean <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, mean <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </li>
@@ -117,14 +117,14 @@
 <p>check the results</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.001312</span></span>
+<span><span class="co">#&gt; [1] 0.0013483</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;       Two Sample Wilcoxon Test </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; scoring: rank    type: permu(1000000)    method: default</span></span>
-<span><span class="co">#&gt; statistic = 519, p-value = 0.001312</span></span>
+<span><span class="co">#&gt; scoring: rank    type: permu(10000000)    method: default</span></span>
+<span><span class="co">#&gt; statistic = 519, p-value = 0.0013483</span></span>
 <span><span class="co">#&gt; alternative hypothesis: greater</span></span>
 <span><span class="co">#&gt; estimate: 0.9461215</span></span>
 <span><span class="co">#&gt; 95 percent confidence interval: 0.3867042 1.6248357</span></span>
