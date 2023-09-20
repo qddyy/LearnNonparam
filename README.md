@@ -1,7 +1,7 @@
 
 # LearnNonparam
 
-<img src="man/figures/logo.svg" alt="logo" width = "200" align="right" />
+<img src="man/figures/logo.svg" alt="logo" width = "250" align="right" />
 
 [![GPL
 license](https://img.shields.io/github/license/qddyy/LearnNonparam)](https://cran.r-project.org/web/licenses/GPL-2)
@@ -15,10 +15,8 @@ check](https://github.com/qddyy/LearnNonparam/workflows/R-CMD-check/badge.svg)](
 
 ## Overview
 
-This package implements many nonparametric tests in chapters 1-5 of
-[Higgins (2003)](#references).
-
-It uses
+This package implements some of the non-parametric tests in chapters 1-5
+of [Higgins (2003)](#references). It depends on
 
 - [R6](https://cran.r-project.org/package=R6) for clean OO-design
 - [RcppAlgos](https://cran.r-project.org/package=RcppAlgos) for fast
@@ -102,7 +100,9 @@ t <- pmt(...)$feed(...)$print(...)$plot(...)
 
 ## Tips
 
-- Use `options(pmt_seed = ...)` to initialize the random seed.
+- Use `options(pmt_seed = <seed>)` to initialize the random seed.
+
+  (passed to `RcppAlgos` for sampling combinations/permutations)
 
 - Use `options(pmt_progress = FALSE)` to disable the progress bar.
 
