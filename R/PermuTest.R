@@ -103,15 +103,13 @@ PermuTest <- R6Class(
 
             cat(
                 paste("scoring:", private$.scoring),
-                {
-                    type <- private$.type
-                    paste(
-                        "type:",
-                        if (type == "permu") {
-                            paste0(type, "(", format(length(private$.statistic_permu), digits = digits), ")")
-                        } else type
-                    )
-                },
+                paste(
+                    "type:",
+                    if ((type <- private$.type) == "permu") {
+                        n <- as.numeric(length(private$.statistic_permu))
+                        paste0(type, "(", format(n, digits = digits), ")")
+                    } else type
+                    ),
                 paste("method:", private$.method),
                 sep = "    "
             )
@@ -119,15 +117,12 @@ PermuTest <- R6Class(
 
             cat(
                 paste(
-                    "statistic", "=", format(
-                        private$.statistic, digits = max(1L, digits - 2L)
-                    )
+                    "statistic", "=",
+                    format(private$.statistic, digits = digits)
                 ),
                 {
-                    p <- format.pval(private$.p_value, digits = max(1, digits - 2))
-                    paste(
-                        "p-value", if (startsWith(p, "<")) p else paste("=", p)
-                    )
+                    p <- format.pval(private$.p_value, digits = digits)
+                    paste("p-value", if (!startsWith(p, "<")) paste("=", p) else p)
                 },
                 sep = ", "
             )
@@ -135,7 +130,9 @@ PermuTest <- R6Class(
 
             cat(
                 "alternative hypothesis:",
-                if (private$.alternative == "two_sided") "two-sided" else private$.alternative
+                if (
+                    (alternative <- private$.alternative) == "two_sided"
+                ) "two-sided" else alternative
             )
             cat("\n")
 
@@ -148,9 +145,7 @@ PermuTest <- R6Class(
                 cat(
                     format(100 * private$.conf_level, digits = 2),
                     "percent confidence interval:",
-                    paste(
-                        format(private$.ci, digits = digits), collapse = " "
-                    )
+                    paste(format(private$.ci, digits = digits), collapse = " ")
                 )
                 cat("\n")
             }
