@@ -18,10 +18,11 @@ ProgressBar <- R6Class(
     public = list(
         initialize = function(n) {
             private$.n_steps <- n
-            private$.update_i <- 0
             private$.update_every <- round(private$.n_steps / 100 + 0.5)
             private$.update_percentage <- private$.update_every / private$.n_steps
             private$.width <- getOption("width")
+
+            cat("\033[0;31m", "\r 0% |")
         },
 
         update = function() {
@@ -34,7 +35,7 @@ ProgressBar <- R6Class(
                 )
 
                 cat(
-                    "\033[0;31m", sprintf("\r %.0f%% |", percentage * 100),
+                    sprintf("\r %.0f%% |", percentage * 100),
                     strrep("=", private$.width * percentage), ">\r", sep = ""
                 )
                 flush.console()

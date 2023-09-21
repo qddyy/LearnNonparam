@@ -44,14 +44,13 @@ MultipleComparison <- R6Class(
                 stat_bin(
                     data = do.call(
                         rbind, .mapply(
-                            dots = list(
-                                i = private$.ij$i,
-                                j = private$.ij$j,
-                                statistic_permu = split(
-                                    private$.statistic_permu,
-                                    row(private$.statistic_permu)
+                            dots = c(private$.ij, list(seq_along(private$.ij$i))),
+                            FUN = function(i, j, k) {
+                                data.frame(
+                                    i = i, j = j,
+                                    statistic_permu = private$.statistic_permu[, k]
                                 )
-                            ), FUN = data.frame, MoreArgs = NULL
+                            }, MoreArgs = NULL
                         )
                     ),
                     mapping = aes(x = statistic_permu),
