@@ -31,12 +31,13 @@ get_score <- function(x, method, n = length(x)) {
 #' @importFrom RcppAlgos permuteGeneral permuteSample permuteCount
 get_arrangement <- function(
     which = c("combo", "permute"), n_sample = NULL,
-    v = NULL, m = length(v), replace = FALSE,
+    v = NULL, replace = FALSE, freq = NULL,
+    m = if (is.null(freq)) length(v) else sum(freq),
     func = NULL, func_value = NULL, ...
 ) {
     envir <- list2env(list(...), envir = environment(func))
 
-    args <- list(v = v, m = m, repetition = replace)
+    args <- list(v = v, m = m, repetition = replace, freqs = freq)
 
     if (!isFALSE(progress <- getOption("pmt_progress"))) {
         progress <- interactive()

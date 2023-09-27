@@ -235,10 +235,6 @@ t$test(Table3.1.2)
 t$statistic
 t$p_value
 
-# Change n_permu first,
-# otherwise changing type to permu will use all permutations by default,
-# which results in an error because there are too many permutations. 
-t$n_permu <- 1000
 t$type <- "permu"
 
 t$statistic
