@@ -22,7 +22,7 @@ MultipleComparison <- R6Class(
         .check = function() {},
 
         .print = function(digits) {
-            cat("\n", "\t", private$.name, "\n\n")
+            cat("\n\t", private$.name, "\n\n")
 
             cat(
                 paste("scoring:", private$.scoring),
@@ -36,7 +36,6 @@ MultipleComparison <- R6Class(
                 private$.conf_level * 100
             ))
 
-            cat(strrep("\t", nrow(private$.multicomp)))
             print(private$.multicomp, digits = digits, row.names = FALSE)
         },
 
