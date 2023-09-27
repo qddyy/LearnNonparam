@@ -7,7 +7,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom ggplot2 ggplot stat_function xlim labs theme element_text
+#' @importFrom ggplot2 ggplot geom_step xlim labs theme element_text
 
 
 CDF <- R6Class(
@@ -43,17 +43,23 @@ CDF <- R6Class(
         .print = function(...) {},
 
         .plot = function() {
-            cdf <- ggplot() +
-                stat_function(fun = private$.estimate, geom = "step") +
-                stat_function(fun = private$.ci$lower, geom = "step", linetype = 2) +
-                stat_function(fun = private$.ci$upper, geom = "step", linetype = 2) +
+            cdf_with_bounds <- ggplot(
+                data = data.frame(
+                    cdf = private$.estimate(private$.data),
+                    lower = private$.ci$lower(private$.data),
+                    upper = private$.ci$upper(private$.data)
+                ), mapping = aes(x = private$.data)
+            ) +
+                geom_step(mapping = aes(y = cdf)) +
+                geom_step(mapping = aes(y = lower), linetype = 2) +
+                geom_step(mapping = aes(y = upper), linetype = 2) +
                 xlim(c(min(private$.data), max(private$.data))) +
                 labs(
                     title = "Empirical CDF with Confidence Bounds",
                     x = expression(x), y = expression(F[n](x))
                 ) +
                 theme(plot.title = element_text(face = "bold", hjust = 0.5))
-            print(cdf)
+            print(cdf_with_bounds)
         },
 
         .calculate_extra = function() {
