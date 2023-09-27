@@ -77,11 +77,11 @@
 <div class="section level1">
 <div class="page-header"><h1 id="learnnonparam">LearnNonparam<a class="anchor" aria-label="anchor" href="#learnnonparam"></a>
 </h1></div>
-<p><img src="reference/figures/logo.svg" alt="logo" width="250" align="right"></p>
 <p><a href="https://cran.r-project.org/web/licenses/GPL-2" class="external-link"><img src="https://img.shields.io/github/license/qddyy/LearnNonparam" alt="GPL license"></a> <a href="https://github.com/qddyy/LearnNonparam" class="external-link"><img src="https://img.shields.io/github/r-package/v/qddyy/LearnNonparam" alt="GitHub R package version"></a> <a href="https://github.com/qddyy/LearnNonparam" class="external-link"><img src="https://img.shields.io/github/languages/code-size/qddyy/LearnNonparam.svg" alt="Code size"></a> <a href="https://www.codefactor.io/repository/github/qddyy/LearnNonparam" class="external-link"><img src="https://www.codefactor.io/repository/github/qddyy/LearnNonparam/badge" alt="CodeFactor"></a> <a href="https://github.com/qddyy/LearnNonparam/actions" class="external-link"><img src="https://github.com/qddyy/LearnNonparam/workflows/R-CMD-check/badge.svg" alt="R CMD check"></a></p>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
+<p><img src="reference/figures/logo.svg" alt="logo" width="20%" align="right"></p>
 <p>This package implements some of the non-parametric tests in chapters 1-5 of <a href="#references">Higgins (2003)</a>. It depends on</p>
 <ul>
 <li>
@@ -96,10 +96,13 @@
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>You can install the development version of this package with:</p>
+<p>You can install the development version of this package</p>
+<ul>
+<li>with ``</li>
+</ul>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"qddyy/LearnNonparam"</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
+<span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"qddyy/LearnNonparam"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
 <h2 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a>
@@ -161,7 +164,7 @@
 <p>(passed to <code>RcppAlgos</code> for sampling combinations/permutations)</p>
 </li>
 <li>
-<p>Use <code>options(pmt_progress = FALSE)</code> to disable the progress bar.</p>
+<p>Use <code>options(pmt_progress = FALSE)</code> to disable the progress bar to speed up the calculation.</p>
 <p>(By default, a progress bar will appear when calculating the permutation distribution if R is used interactively)</p>
 </li>
 <li><p>Explore <code><a href="reference/PermuTest.html">?PermuTest</a></code> (all tests’ base class) for all available methods and attributes.</p></li>
