@@ -1,8 +1,6 @@
 
 # LearnNonparam
 
-<img src="man/figures/logo.svg" alt="logo" width = "250" align="right" />
-
 [![GPL
 license](https://img.shields.io/github/license/qddyy/LearnNonparam)](https://cran.r-project.org/web/licenses/GPL-2)
 [![GitHub R package
@@ -15,8 +13,12 @@ check](https://github.com/qddyy/LearnNonparam/workflows/R-CMD-check/badge.svg)](
 
 ## Overview
 
+<img src="man/figures/logo.svg" alt="logo" width="18%" align="right" />
+
 This package implements some of the non-parametric tests in chapters 1-5
-of [Higgins (2003)](#references). It depends on
+of [Higgins (2003)](#references).
+
+It depends on
 
 - [R6](https://cran.r-project.org/package=R6) for clean OO-design
 - [RcppAlgos](https://cran.r-project.org/package=RcppAlgos) for fast
@@ -29,11 +31,11 @@ Examples in the book can be found
 
 ## Installation
 
-You can install the development version of this package with:
+You can install this package with
 
 ``` r
-# install.packages("remotes")
-remotes::install_github("qddyy/LearnNonparam")
+# install.packages("pak")
+pak::pkg_install("qddyy/LearnNonparam")
 ```
 
 ## Usage
@@ -104,7 +106,8 @@ t <- pmt(...)$test(...)$print(...)$plot(...)
 
   (passed to `RcppAlgos` for sampling combinations/permutations)
 
-- Use `options(pmt_progress = FALSE)` to disable the progress bar.
+- Use `options(pmt_progress = FALSE)` to disable the progress bar and
+  speed up the calculation.
 
   (By default, a progress bar will appear when calculating the
   permutation distribution if R is used interactively)
