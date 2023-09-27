@@ -23,7 +23,7 @@ This is the abstract base class for permutation test objects. Note that it is no
 
 \item{\code{n_permu}}{The number of permutations used.}
 
-\item{\code{data}}{Data fed into the object.}
+\item{\code{data}}{The data.}
 
 \item{\code{statistic}}{The test statistic.}
 
@@ -82,7 +82,7 @@ A \code{PermuTest} object.
 \if{html}{\out{<a id="method-PermuTest-test"></a>}}
 \if{latex}{\out{\hypertarget{method-PermuTest-test}{}}}
 \subsection{Method \code{test()}}{
-Feed the data to the test.
+Perform test on data.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PermuTest$test(...)}\if{html}{\out{</div>}}
 }
@@ -102,7 +102,7 @@ The object itself (invisibly).
 \if{html}{\out{<a id="method-PermuTest-print"></a>}}
 \if{latex}{\out{\hypertarget{method-PermuTest-print}{}}}
 \subsection{Method \code{print()}}{
-Print the results of the test. Note that it works only if data has been fed.
+Print the results of the test.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PermuTest$print(digits = getOption("digits"))}\if{html}{\out{</div>}}
 }

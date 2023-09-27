@@ -49,7 +49,7 @@ A \code{CDF} object.
 \if{html}{\out{<a id="method-CDF-plot"></a>}}
 \if{latex}{\out{\hypertarget{method-CDF-plot}{}}}
 \subsection{Method \code{plot()}}{
-Plot the estimate and confidence bounds for population cdf of the data fed.
+Plot the estimate and confidence bounds for population cdf of the data.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{CDF$plot()}\if{html}{\out{</div>}}
 }

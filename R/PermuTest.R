@@ -26,7 +26,7 @@ PermuTest <- R6Class(
             private$.conf_level <- conf_level
         },
 
-        #' @description Feed the data to the test. 
+        #' @description Perform test on data. 
         #' 
         #' @param ... the data. 
         #' 
@@ -39,7 +39,7 @@ PermuTest <- R6Class(
             invisible(self)
         },
 
-        #' @description Print the results of the test. Note that it works only if data has been fed. 
+        #' @description Print the results of the test. 
         #' 
         #' @param digits number of significant digits to be used. 
         #' 
@@ -318,7 +318,7 @@ PermuTest <- R6Class(
             }
         },
 
-        #' @field data Data fed into the object. 
+        #' @field data The data. 
         data = function() private$.data,
         #' @field statistic The test statistic. 
         statistic = function() private$.statistic,

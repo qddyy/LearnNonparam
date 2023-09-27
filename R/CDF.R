@@ -24,7 +24,7 @@ CDF <- R6Class(
             super$initialize(conf_level = conf_level)
         },
 
-        #' @description Plot the estimate and confidence bounds for population cdf of the data fed. 
+        #' @description Plot the estimate and confidence bounds for population cdf of the data. 
         #' 
         #' @return The object itself (invisibly). 
         plot = function() {
