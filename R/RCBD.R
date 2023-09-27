@@ -53,7 +53,7 @@ RCBD <- R6Class(
                         cbind, .mapply(
                             dots = list(data, index),
                             FUN = function(block, i) {
-                                permuteGeneral(v = block, lower = i, upper = i)[1, ]
+                                permuteSample(v = block, sampleVec = i)[1, ]
                             }, MoreArgs = NULL
                         )
                     ))
