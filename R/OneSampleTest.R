@@ -20,7 +20,7 @@ OneSampleTest <- R6Class(
 
         .plot = function() {},
 
-        .feed = function(x) {
+        .input = function(x) {
             private$.raw_data <- x
         }
     )

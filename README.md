@@ -55,10 +55,10 @@ library(LearnNonparam)
   t <- pmt("twosample.wilcoxon", alternative = "greater", type = "permu", n_permu = 1e7)
   ```
 
-- feed it the data (`vector` \| `data.frame` \| `list`)
+- test some data (`vector` \| `data.frame` \| `list`)
 
   ``` r
-  t$feed(rnorm(20, mean = 1), rnorm(20, mean = 0))
+  t$test(rnorm(20, mean = 1), rnorm(20, mean = 0))
   ```
 
 - check the results
@@ -95,7 +95,7 @@ There is also support for chaining method calls, which means that you
 can do things like
 
 ``` r
-t <- pmt(...)$feed(...)$print(...)$plot(...)
+t <- pmt(...)$test(...)$print(...)$plot(...)
 ```
 
 ## Tips

@@ -24,11 +24,6 @@ MultipleComparison <- R6Class(
         .print = function(digits) {
             cat("\n", "\t", private$.name, "\n\n")
 
-            cat(sprintf(
-                "family-wise confidence level: %.0f%% \n\n",
-                private$.conf_level * 100
-            ))
-
             cat(
                 paste("scoring:", private$.scoring),
                 paste("type:", private$.type),
@@ -36,6 +31,12 @@ MultipleComparison <- R6Class(
                 "\n\n", sep = "    "
             )
 
+            cat(sprintf(
+                "family-wise confidence level: %.0f%% \n\n",
+                private$.conf_level * 100
+            ))
+
+            cat(strrep("\t", nrow(private$.multicomp)))
             print(private$.multicomp, digits = digits, row.names = FALSE)
         },
 

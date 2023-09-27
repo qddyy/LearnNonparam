@@ -31,8 +31,8 @@ PermuTest <- R6Class(
         #' @param ... the data. 
         #' 
         #' @return The object itself (invisibly).
-        feed = function(...) {
-            private$.feed(...)
+        test = function(...) {
+            private$.input(...)
             private$.check()
             private$.calculate()
 
@@ -157,9 +157,7 @@ PermuTest <- R6Class(
                     mapping = aes(x = private$.statistic_permu),
                     geom = "bar", fill = "#68aaa1", ...
                 ) +
-                geom_vline(
-                    xintercept = private$.statistic, linetype = "dashed"
-                ) +
+                geom_vline(xintercept = private$.statistic, linetype = "dashed") +
                 labs(
                     title = "Permutation Distribution",
                     x = "Statistic", y = "Count"
@@ -169,7 +167,7 @@ PermuTest <- R6Class(
         },
 
         # @Override
-        .feed = function(...) {
+        .input = function(...) {
             # private$.raw_data <- ...
         },
 

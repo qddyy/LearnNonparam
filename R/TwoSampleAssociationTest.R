@@ -17,8 +17,8 @@ TwoSampleAssociationTest <- R6Class(
 
         .check = function() {},
 
-        .feed = function(...) {
-            super$.feed(...)
+        .input = function(...) {
+            super$.input(...)
 
             private$.raw_data <- do.call(data.frame, private$.raw_data)
         },

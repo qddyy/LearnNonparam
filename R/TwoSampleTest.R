@@ -17,7 +17,7 @@ TwoSampleTest <- R6Class(
 
         .check = function() {},
 
-        .feed = function(...) {
+        .input = function(...) {
             private$.raw_data <- setNames(get_data_from(...), c("x", "y"))
         },
 

@@ -18,7 +18,7 @@ RCBD <- R6Class(
 
         .check = function() {},
 
-        .feed = function(...) {
+        .input = function(...) {
             data <- do.call(data.frame, get_data_from(...))
 
             dim <- dim(data)

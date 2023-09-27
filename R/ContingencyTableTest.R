@@ -17,7 +17,7 @@ ContingencyTableTest <- R6Class(
 
         .check = function() {},
 
-        .feed = function(table) {
+        .input = function(table) {
             private$.raw_data <- as.matrix(table)
         },
 

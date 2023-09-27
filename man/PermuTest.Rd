@@ -39,7 +39,7 @@ This is the abstract base class for permutation test objects. Note that it is no
 \subsection{Public methods}{
 \itemize{
 \item \href{#method-PermuTest-new}{\code{PermuTest$new()}}
-\item \href{#method-PermuTest-feed}{\code{PermuTest$feed()}}
+\item \href{#method-PermuTest-test}{\code{PermuTest$test()}}
 \item \href{#method-PermuTest-print}{\code{PermuTest$print()}}
 \item \href{#method-PermuTest-plot}{\code{PermuTest$plot()}}
 }
@@ -79,12 +79,12 @@ A \code{PermuTest} object.
 }
 }
 \if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-PermuTest-feed"></a>}}
-\if{latex}{\out{\hypertarget{method-PermuTest-feed}{}}}
-\subsection{Method \code{feed()}}{
+\if{html}{\out{<a id="method-PermuTest-test"></a>}}
+\if{latex}{\out{\hypertarget{method-PermuTest-test}{}}}
+\subsection{Method \code{test()}}{
 Feed the data to the test.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PermuTest$feed(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{PermuTest$test(...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

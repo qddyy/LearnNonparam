@@ -1,6 +1,6 @@
 get_last <- function(x) x[length(x)]
 
-# for .feed
+# for .input
 
 get_data_from <- function(...) {
     data <- list(...)

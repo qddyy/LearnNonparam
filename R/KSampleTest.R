@@ -17,7 +17,7 @@ KSampleTest <- R6Class(
 
         .check = function() {},
 
-        .feed = function(...) {
+        .input = function(...) {
             data <- get_data_from(...)
 
             private$.raw_data <- setNames(

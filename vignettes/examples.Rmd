@@ -38,7 +38,7 @@ t <- pmt(
 )
 
 # See ?Table1.1.1
-t$feed(Table1.1.1)
+t$test(Table1.1.1)
 
 t$statistic
 t$p_value
@@ -52,7 +52,7 @@ t$ci
 t <- pmt("onesample.cdf")
 
 # See ?Table1.2.1
-t$feed(Table1.2.1)
+t$test(Table1.2.1)
 
 t$plot()
 ```
@@ -67,7 +67,7 @@ t <- pmt(
 )
 
 # See ?Table1.2.1
-t$feed(Table1.2.1)
+t$test(Table1.2.1)
 
 t$ci
 ```
@@ -83,7 +83,7 @@ t <- pmt(
 )
 
 # See ?Table2.1.1
-t$feed(Table2.1.1)
+t$test(Table2.1.1)
 
 t$statistic
 t$p_value
@@ -98,7 +98,7 @@ t <- pmt(
 )
 
 # See ?Table2.1.1
-t$feed(Table2.1.1)
+t$test(Table2.1.1)
 
 t$statistic
 t$p_value
@@ -113,7 +113,7 @@ t <- pmt(
 )
 
 # See ?Table2.3.1
-t$feed(Table2.3.1)
+t$test(Table2.3.1)
 
 t$statistic
 
@@ -140,7 +140,7 @@ t <- pmt(
 )
 
 # See ?Table2.6.1
-t$feed(Table2.6.1)
+t$test(Table2.6.1)
 
 t$statistic
 t$p_value
@@ -155,7 +155,7 @@ t <- pmt(
 )
 
 # See ?Table2.6.2
-t$feed(Table2.6.2)
+t$test(Table2.6.2)
 
 t$estimate
 t$ci
@@ -170,7 +170,7 @@ t <- pmt(
 )
 
 # See ?Table2.6.2
-t$feed(Table2.6.2)
+t$test(Table2.6.2)
 
 t$statistic
 t$p_value
@@ -185,7 +185,7 @@ t <- pmt(
 )
 
 # See ?Table2.8.1
-t$feed(Table2.8.1)
+t$test(Table2.8.1)
 
 t$statistic
 t$p_value
@@ -200,7 +200,7 @@ t <- pmt(
 )
 
 # See ?Table2.8.1
-t$feed(Table2.8.1)
+t$test(Table2.8.1)
 
 t$statistic
 t$p_value
@@ -213,7 +213,7 @@ t$p_value
 t <- pmt("twosample.ks")
 
 # See ?Table2.8.1
-t$feed(Table2.8.1)
+t$test(Table2.8.1)
 
 t$statistic
 t$p_value
@@ -230,7 +230,7 @@ t <- pmt(
 )
 
 # See ?Table3.1.2
-t$feed(Table3.1.2)
+t$test(Table3.1.2)
 
 t$statistic
 t$p_value
@@ -254,7 +254,7 @@ t <- pmt(
 )
 
 # See ?Table3.2.2
-t$feed(Table3.2.2)
+t$test(Table3.2.2)
 
 t$statistic
 t$p_value
@@ -269,7 +269,7 @@ t <- pmt(
 )
 
 # See ?Table3.2.3
-t$feed(Table3.2.3)
+t$test(Table3.2.3)
 
 t$statistic
 t$p_value
@@ -298,7 +298,7 @@ t <- pmt(
 )
 
 # See ?Table3.3.1
-t$feed(Table3.3.1)
+t$test(Table3.3.1)
 
 t$print()
 
@@ -315,7 +315,7 @@ t <- pmt(
     "multicomp.tukey", n_permu = 5000
 )
 
-t$feed(Table3.3.1)
+t$test(Table3.3.1)
 
 t$print()
 
@@ -335,7 +335,7 @@ t <- pmt(
 )
 
 # See ?Table3.4.1
-t$feed(Table3.4.1)
+t$test(Table3.4.1)
 
 t$statistic
 t$p_value
@@ -356,7 +356,7 @@ t <- pmt(
 )
 
 # See ?Table4.1.1
-t$feed(Table4.1.1)
+t$test(Table4.1.1)
 
 t$statistic
 t$p_value
@@ -372,7 +372,7 @@ t <- pmt(
 )
 
 # See ?Table4.1.3
-t$feed(Table4.1.3)
+t$test(Table4.1.3)
 
 t$statistic
 t$p_value
@@ -394,7 +394,7 @@ t <- pmt(
 )
 
 # See ?Table4.1.1
-t$feed(Table4.1.1)
+t$test(Table4.1.1)
 
 t$statistic
 t$p_value
@@ -412,7 +412,7 @@ t <- pmt(
     scoring = "rank", method = "ignore"
 )
 
-t$feed(data.frame(
+t$test(data.frame(
     diff = c(-5, -3, -3, 0, 0, 2, 4, 4, 4, 5),
     zero = 0
 ))
@@ -429,7 +429,7 @@ t <- pmt(
     "paired.sign", alternative = "greater", type = "exact"
 )
 
-t$feed(data.frame(
+t$test(data.frame(
     diff = c(rep(+1, 12), rep(-1, 5)),
     zero = 0
 ))
@@ -450,7 +450,7 @@ t <- pmt(
 )
 
 # See ?Table4.4.3
-t$feed(Table4.4.3)
+t$test(Table4.4.3)
 
 t$statistic
 t$p_value
@@ -469,7 +469,7 @@ t <- pmt(
 )
 
 # See ?Table4.5.3
-t$feed(Table4.5.3)
+t$test(Table4.5.3)
 
 t$statistic
 t$p_value
@@ -488,7 +488,7 @@ t <- pmt(
 )
 
 # See ?Table4.4.3
-t$feed(Table4.4.3)
+t$test(Table4.4.3)
 
 t$statistic
 t$p_value
@@ -509,7 +509,7 @@ t <- pmt(
 )
 
 # See ?Table5.1.2
-t$feed(Table5.1.2)
+t$test(Table5.1.2)
 
 t$statistic
 t$p_value
@@ -525,7 +525,7 @@ t <- pmt(
 )
 
 # See ?Table5.1.2
-t$feed(Table5.1.2)
+t$test(Table5.1.2)
 
 t$statistic
 t$p_value
@@ -545,7 +545,7 @@ t <- pmt(
 )
 
 # See ?Table5.2.2
-t$feed(Table5.2.2)
+t$test(Table5.2.2)
 
 t$statistic
 t$p_value
@@ -558,7 +558,7 @@ t$p_value
 t <- pmt("table.chisq")
 
 # See ?Table5.4.2
-t$feed(Table5.4.2)
+t$test(Table5.4.2)
 
 t$statistic
 t$p_value
