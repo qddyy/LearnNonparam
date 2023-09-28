@@ -18,22 +18,20 @@ check](https://github.com/qddyy/LearnNonparam/workflows/R-CMD-check/badge.svg)](
 This package implements some of the non-parametric tests in chapters 1-5
 of [Higgins (2003)](#references).
 
-It depends on
-
-- [R6](https://cran.r-project.org/package=R6) for clean OO-design
-- [RcppAlgos](https://cran.r-project.org/package=RcppAlgos) for fast
-  generation of combinations/permutations
-- [ggplot2](https://cran.r-project.org/package=ggplot2) for pretty
-  graphs
+It depends on [R6](https://cran.r-project.org/package=R6) for clean
+OO-design and [RcppAlgos](https://cran.r-project.org/package=RcppAlgos)
+for fast generation of combinations/permutations, as well as
+[ggplot2](https://cran.r-project.org/package=ggplot2) for pretty graphs.
 
 Examples in the book can be found
 [here](https://qddyy.github.io/LearnNonparam/articles/examples).
 
 ## Installation
 
-You can install this package with
-
 ``` r
+# install.packages("remotes")
+remotes::install_github("qddyy/LearnNonparam")
+# or
 # install.packages("pak")
 pak::pkg_install("qddyy/LearnNonparam")
 ```
@@ -51,19 +49,19 @@ library(LearnNonparam)
   ```
 
   or you can use `pmt` (**p**er**m**utation **t**est) function
-  (*Recommended*):
+  (\*\*Recommended\*):
 
   ``` r
   t <- pmt("twosample.wilcoxon", alternative = "greater", type = "permu", n_permu = 1e7)
   ```
 
-- test some data (`vector` \| `data.frame` \| `list`)
+- Test some data (`vector` \| `data.frame` \| `list`)
 
   ``` r
   t$test(rnorm(20, mean = 1), rnorm(20, mean = 0))
   ```
 
-- check the results
+- Check the results
 
   ``` r
   t$p_value
@@ -84,7 +82,7 @@ library(LearnNonparam)
 
   <img src="man/figures/README-results-1.svg" width="100%" />
 
-- modify some attributes and see how the results change
+- Modify some attributes and see how the results change
 
   ``` r
   t$type <- "approx"
@@ -93,8 +91,8 @@ library(LearnNonparam)
   #> [1] 0.00166809
   ```
 
-There is also support for chaining method calls, which means that you
-can do things like
+There is also support for chaining methods, which means that you can do
+things like
 
 ``` r
 t <- pmt(...)$test(...)$print(...)$plot(...)

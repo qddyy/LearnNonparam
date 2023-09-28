@@ -32,19 +32,16 @@ options(pmt_seed = 2023)
 
 This package implements some of the non-parametric tests in chapters 1-5 of [@Higgins2003](#references).
 
-It depends on
-
-- [R6](https://cran.r-project.org/package=R6) for clean OO-design
-- [RcppAlgos](https://cran.r-project.org/package=RcppAlgos) for fast generation of combinations/permutations
-- [ggplot2](https://cran.r-project.org/package=ggplot2) for pretty graphs
+It depends on [R6](https://cran.r-project.org/package=R6) for clean OO-design and [RcppAlgos](https://cran.r-project.org/package=RcppAlgos) for fast generation of combinations/permutations, as well as [ggplot2](https://cran.r-project.org/package=ggplot2) for pretty graphs. 
 
 Examples in the book can be found [here](https://qddyy.github.io/LearnNonparam/articles/examples). 
 
 ## Installation
 
-You can install this package with
-
 ```{r, install, eval = FALSE}
+# install.packages("remotes")
+remotes::install_github("qddyy/LearnNonparam")
+# or
 # install.packages("pak")
 pak::pkg_install("qddyy/LearnNonparam")
 ```
@@ -60,17 +57,17 @@ library(LearnNonparam)
     t <- Wilcoxon$new(alternative = "greater", type = "permu", n_permu = 1e7)
     ```
 
-    or you can use `pmt` (**p**er**m**utation **t**est) function (*Recommended*):
+    or you can use `pmt` (**p**er**m**utation **t**est) function (**Recommended*):
     ```{r, create}
     t <- pmt("twosample.wilcoxon", alternative = "greater", type = "permu", n_permu = 1e7)
     ```
 
-- test some data (`vector` | `data.frame` | `list`)
+- Test some data (`vector` | `data.frame` | `list`)
     ```{r, test}
     t$test(rnorm(20, mean = 1), rnorm(20, mean = 0))
     ```
 
-- check the results
+- Check the results
     ```{r, results, out.width = "100%"}
     t$p_value
 
@@ -79,14 +76,14 @@ library(LearnNonparam)
     t$plot(binwidth = 1)
     ```
 
-- modify some attributes and see how the results change
+- Modify some attributes and see how the results change
     ```{r, modify}
     t$type <- "approx"
 
     t$p_value
     ```
 
-There is also support for chaining method calls, which means that you can do things like
+There is also support for chaining methods, which means that you can do things like
 
 ```{r, chaining, eval = FALSE}
 t <- pmt(...)$test(...)$print(...)$plot(...)
