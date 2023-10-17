@@ -19,7 +19,7 @@ RCBD <- R6Class(
         .check = function() {},
 
         .input = function(...) {
-            data <- do.call(data.frame, get_data_from(...))
+            data <- do.call(data.frame, get_list(...))
 
             dim <- dim(data)
             rownames(data) <- paste0("treatment_", seq_len(dim[1]))

@@ -18,7 +18,7 @@ KSampleTest <- R6Class(
         .check = function() {},
 
         .input = function(...) {
-            data <- get_data_from(...)
+            data <- get_list(...)
 
             private$.raw_data <- setNames(
                 c(data, recursive = TRUE, use.names = FALSE),

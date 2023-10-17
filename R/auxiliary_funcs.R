@@ -2,7 +2,7 @@ get_last <- function(x) x[length(x)]
 
 # for .input
 
-get_data_from <- function(...) {
+get_list <- function(...) {
     data <- list(...)
 
     if (length(data) == 1 & is.list(data[[1]])) {
