@@ -75,13 +75,12 @@
       </header><div class="row">
   <div class="contents col-md-9">
 <div class="section level1">
-<div class="page-header"><h1 id="learnnonparam">LearnNonparam<a class="anchor" aria-label="anchor" href="#learnnonparam"></a>
+<div class="page-header"><h1 id="learnnonparam-">LearnNonparam <img src="reference/figures/logo.svg" alt="logo" width="16%" align="right"><a class="anchor" aria-label="anchor" href="#learnnonparam-"></a>
 </h1></div>
 <p><a href="https://cran.r-project.org/web/licenses/GPL-2" class="external-link"><img src="https://img.shields.io/github/license/qddyy/LearnNonparam" alt="GPL license"></a> <a href="https://github.com/qddyy/LearnNonparam" class="external-link"><img src="https://img.shields.io/github/r-package/v/qddyy/LearnNonparam" alt="GitHub R package version"></a> <a href="https://github.com/qddyy/LearnNonparam" class="external-link"><img src="https://img.shields.io/github/languages/code-size/qddyy/LearnNonparam.svg" alt="Code size"></a> <a href="https://www.codefactor.io/repository/github/qddyy/LearnNonparam" class="external-link"><img src="https://www.codefactor.io/repository/github/qddyy/LearnNonparam/badge" alt="CodeFactor"></a> <a href="https://github.com/qddyy/LearnNonparam/actions" class="external-link"><img src="https://github.com/qddyy/LearnNonparam/workflows/R-CMD-check/badge.svg" alt="R CMD check"></a></p>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p><img src="reference/figures/logo.svg" alt="logo" width="18%" align="right"></p>
 <p>This package implements some of the non-parametric tests in chapters 1-5 of <a href="#references">Higgins (2003)</a>.</p>
 <p>It depends on <a href="https://cran.r-project.org/package=R6" class="external-link">R6</a> for clean OO-design and <a href="https://cran.r-project.org/package=RcppAlgos" class="external-link">RcppAlgos</a> for fast generation of combinations/permutations, as well as <a href="https://cran.r-project.org/package=ggplot2" class="external-link">ggplot2</a> for pretty graphs.</p>
 <p>Examples in the book can be found <a href="https://qddyy.github.io/LearnNonparam/articles/examples" class="external-link">here</a>.</p>
@@ -90,10 +89,7 @@
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
-<span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"qddyy/LearnNonparam"</span><span class="op">)</span></span>
-<span><span class="co"># or</span></span>
-<span><span class="co"># install.packages("pak")</span></span>
+<code class="sourceCode R"><span><span class="co"># install.packages("pak")</span></span>
 <span><span class="fu">pak</span><span class="fu">::</span><span class="fu"><a href="https://pak.r-lib.org/reference/pkg_install.html" class="external-link">pkg_install</a></span><span class="op">(</span><span class="st">"qddyy/LearnNonparam"</span><span class="op">)</span></span></code></pre></div>
 </div>
 <div class="section level2">
@@ -126,10 +122,10 @@
 <span><span class="co">#&gt;       Two Sample Wilcoxon Test </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; scoring: rank    type: permu(1e+07)    method: default</span></span>
-<span><span class="co">#&gt; statistic = 519, p-value = 0.0013</span></span>
-<span><span class="co">#&gt; alternative hypothesis: greater</span></span>
+<span><span class="co">#&gt; statistic = 519, p_value = 0.0013</span></span>
+<span><span class="co">#&gt; alternative hypothesis: true location shift is greater than 0</span></span>
 <span><span class="co">#&gt; estimate: 0.95</span></span>
-<span><span class="co">#&gt; 95 percent confidence interval: 0.39 1.62</span></span>
+<span><span class="co">#&gt; 95% confidence interval: 0.39 1.62</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">plot</span><span class="op">(</span>binwidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
 <p><img src="reference/figures/README-results-1.svg" width="100%"></p>
