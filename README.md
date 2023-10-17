@@ -1,5 +1,5 @@
 
-# LearnNonparam
+# LearnNonparam <img src="man/figures/logo.svg" alt="logo" width="16%" align="right"/>
 
 [![GPL
 license](https://img.shields.io/github/license/qddyy/LearnNonparam)](https://cran.r-project.org/web/licenses/GPL-2)
@@ -12,8 +12,6 @@ size](https://img.shields.io/github/languages/code-size/qddyy/LearnNonparam.svg)
 check](https://github.com/qddyy/LearnNonparam/workflows/R-CMD-check/badge.svg)](https://github.com/qddyy/LearnNonparam/actions)
 
 ## Overview
-
-<img src="man/figures/logo.svg" alt="logo" width="18%" align="right" />
 
 This package implements some of the non-parametric tests in chapters 1-5
 of [Higgins (2003)](#references).
@@ -29,9 +27,6 @@ Examples in the book can be found
 ## Installation
 
 ``` r
-# install.packages("remotes")
-remotes::install_github("qddyy/LearnNonparam")
-# or
 # install.packages("pak")
 pak::pkg_install("qddyy/LearnNonparam")
 ```
@@ -72,10 +67,10 @@ library(LearnNonparam)
   #>       Two Sample Wilcoxon Test 
   #> 
   #> scoring: rank    type: permu(1e+07)    method: default
-  #> statistic = 519, p-value = 0.0013
-  #> alternative hypothesis: greater
+  #> statistic = 519, p_value = 0.0013
+  #> alternative hypothesis: true location shift is greater than 0
   #> estimate: 0.95
-  #> 95 percent confidence interval: 0.39 1.62
+  #> 95% confidence interval: 0.39 1.62
 
   t$plot(binwidth = 1)
   ```

@@ -1,5 +1,5 @@
 ---
-bibliography: ref.bib
+bibliography: man/references/ref.bib
 output:
   github_document:
     df_print: kable
@@ -18,7 +18,7 @@ set.seed(2023)
 options(pmt_seed = 2023)
 ```
 
-# LearnNonparam
+# LearnNonparam <img src="man/figures/logo.svg" alt="logo" width="16%" align="right"/>
 
 [![GPL license](https://img.shields.io/github/license/qddyy/LearnNonparam)](https://cran.r-project.org/web/licenses/GPL-2)
 [![GitHub R package version](https://img.shields.io/github/r-package/v/qddyy/LearnNonparam)](https://github.com/qddyy/LearnNonparam)
@@ -27,8 +27,6 @@ options(pmt_seed = 2023)
 [![R CMD check](https://github.com/qddyy/LearnNonparam/workflows/R-CMD-check/badge.svg)](https://github.com/qddyy/LearnNonparam/actions)
 
 ## Overview
-
-<img src="man/figures/logo.svg" alt="logo" width="18%" align="right" />
 
 This package implements some of the non-parametric tests in chapters 1-5 of [@Higgins2003](#references).
 
@@ -39,9 +37,6 @@ Examples in the book can be found [here](https://qddyy.github.io/LearnNonparam/a
 ## Installation
 
 ```{r, install, eval = FALSE}
-# install.packages("remotes")
-remotes::install_github("qddyy/LearnNonparam")
-# or
 # install.packages("pak")
 pak::pkg_install("qddyy/LearnNonparam")
 ```
