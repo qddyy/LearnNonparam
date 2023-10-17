@@ -57,7 +57,7 @@ AnsariBradley <- R6Class(
 
             mu <- if (even) m * (N + 2) / 4 else m * (N + 1)^2 / (4 * N)
 
-            if (!any(duplicated(c(private$.data$x, private$.data$y)))) {
+            if (anyDuplicated(c(private$.data$x, private$.data$y)) == 0) {
                 sigma2 <- if (even) {
                     (m * n * (N + 2) * (N - 2)) / (48 * (N - 1))
                 } else {
