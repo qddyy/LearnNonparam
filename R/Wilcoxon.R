@@ -31,10 +31,11 @@ Wilcoxon <- R6Class(
     ),
     private = list(
         .name = "Two Sample Wilcoxon Test",
+        .param_name = "location shift",
 
         .correct = NULL,
 
-        .define_statistic = function() {
+        .define = function() {
             private$.statistic_func <- function(x, y) sum(x)
         },
 

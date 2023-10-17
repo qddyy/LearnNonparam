@@ -27,10 +27,13 @@ SiegelTukey <- R6Class(
             private$.adjust_median <- adjust_median
 
             super$initialize(...)
+
+            private$.null_value <- 1
         }
     ),
     private = list(
         .name = "Siegel-Tukey Test",
+        .param_name = "ratio of scales",
 
         .trend = "-",
 

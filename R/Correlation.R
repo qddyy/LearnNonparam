@@ -48,7 +48,11 @@ Correlation <- R6Class(
             )
         },
 
-        .define_statistic = function() {
+        .define = function() {
+            private$.param_name <- switch(private$.method,
+                pearson = "correlation", kendall = "tau", spearman = "rho"
+            )
+
             if (private$.method == "kendall") {
                 x <- private$.data$x
                 n <- length(x)

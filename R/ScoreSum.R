@@ -26,7 +26,7 @@ ScoreSum <- R6Class(
     private = list(
         .name = "Score Sum Test",
 
-        .define_statistic = function() {
+        .define = function() {
             private$.statistic_func <- function(x, y) sum(x)
         }
     )

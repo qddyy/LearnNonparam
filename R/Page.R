@@ -31,7 +31,7 @@ Page <- R6Class(
     private = list(
         .name = "Page Test",
 
-        .define_statistic = function() {
+        .define = function() {
             seq_row <- seq_len(nrow(private$.data))
             private$.statistic_func <- function(data) sum(seq_row * rowSums(data))
         },

@@ -67,6 +67,7 @@ PermuTest <- R6Class(
     ),
     private = list(
         .name = "Permutation Test",
+        .param_name = NULL,
 
         .type = "permu",
         .method = "default",
@@ -77,7 +78,6 @@ PermuTest <- R6Class(
 
         .raw_data = NULL,
         .data = NULL,
-        .data_permu = NULL,
 
         .statistic_func = NULL,
 
@@ -109,7 +109,7 @@ PermuTest <- R6Class(
                         n <- as.numeric(length(private$.statistic_permu))
                         paste0(type, "(", format(n, digits = digits), ")")
                     } else type
-                    ),
+                ),
                 paste("method:", private$.method),
                 sep = "    "
             )
@@ -122,7 +122,7 @@ PermuTest <- R6Class(
                 ),
                 {
                     p <- format.pval(private$.p_value, digits = digits)
-                    paste("p-value", if (!startsWith(p, "<")) paste("=", p) else p)
+                    paste("p_value", if (!startsWith(p, "<")) paste("=", p) else p)
                 },
                 sep = ", "
             )
@@ -130,9 +130,15 @@ PermuTest <- R6Class(
 
             cat(
                 "alternative hypothesis:",
-                if (
-                    (alternative <- private$.alternative) == "two_sided"
-                ) "two-sided" else alternative
+                if (is.null(private$.param_name)) private$.alternative else {
+                    paste(
+                        "true", private$.param_name, "is",
+                        switch(private$.alternative,
+                            two_sided = "not equal to",
+                            less = "less than", greater = "greater than"
+                        ), private$.null_value
+                    )
+                }
             )
             cat("\n")
 
@@ -143,8 +149,7 @@ PermuTest <- R6Class(
 
             if (!is.null(private$.ci)) {
                 cat(
-                    format(100 * private$.conf_level, digits = 2),
-                    "percent confidence interval:",
+                    sprintf("%.0f%% confidence interval:", private$.conf_level * 100),
                     paste(format(private$.ci, digits = digits), collapse = " ")
                 )
                 cat("\n")
@@ -177,7 +182,8 @@ PermuTest <- R6Class(
         },
 
         # @Override
-        .define_statistic = function() {
+        .define = function() {
+            # private$.param_name <- ...
             # private$.statistic_func <- ...
         },
 
@@ -187,7 +193,10 @@ PermuTest <- R6Class(
         },
 
         # @Override
-        .calculate_p = function() {},
+        .calculate_p = function() {
+            # private$.p_value <- ...
+            # when private$.type != "permu"
+        },
 
         # @Override
         .calculate_extra = function() {
@@ -225,7 +234,8 @@ PermuTest <- R6Class(
                 private$.calculate_score()
             }
 
-            private$.define_statistic()
+            private$.define()
+
             private$.calculate_statistic()
 
             private$.calculate_side()

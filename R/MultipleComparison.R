@@ -70,7 +70,7 @@ MultipleComparison <- R6Class(
             print(histograms)
         },
 
-        .define_statistic = function() {
+        .define = function() {
             k <- as.integer(get_last(names(private$.data)))
             private$.ij <- ij <- list(
                 i = rep.int(seq_len(k - 1), seq.int(k - 1, 1)),

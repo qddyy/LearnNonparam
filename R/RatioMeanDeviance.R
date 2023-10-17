@@ -20,13 +20,14 @@ RatioMeanDeviance <- R6Class(
         #' 
         #' @return A `RatioMeanDeviance` object. 
         initialize = function(alternative = c("two_sided", "less", "greater"), n_permu = NULL) {
-            super$initialize(alternative = match.arg(alternative), n_permu = n_permu)
+            super$initialize(null_value = 1, alternative = match.arg(alternative), n_permu = n_permu)
 
             private$.scoring <- "dev"
         }
     ),
     private = list(
         .name = "Ratio Mean Deviance Test",
+        .param_name = "ratio of scales",
 
         .calculate_score = function() {
             private$.data <- list(
@@ -35,7 +36,7 @@ RatioMeanDeviance <- R6Class(
             )
         },
 
-        .define_statistic = function() {
+        .define = function() {
             private$.statistic_func <- function(x, y) mean(x) / mean(y)
         }
     )

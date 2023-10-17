@@ -31,7 +31,7 @@ Friedman <- R6Class(
     private = list(
         .name = "Friedman Test",
 
-        .define_statistic = function() {
+        .define = function() {
             private$.statistic_func <- switch(private$.type,
                 permu = function(data) sum(rowMeans(data)^2),
                 approx = function(df) {

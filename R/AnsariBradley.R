@@ -25,13 +25,14 @@ AnsariBradley <- R6Class(
         ) {
             private$.type <- match.arg(type)
 
-            super$initialize(alternative = match.arg(alternative), n_permu = n_permu, conf_level = conf_level)
+            super$initialize(null_value = 1, alternative = match.arg(alternative), n_permu = n_permu, conf_level = conf_level)
 
             private$.scoring <- "ansari-bradley rank"
         }
     ),
     private = list(
         .name = "Ansari-Bradley Test",
+        .param_name = "ratio of scales",
 
         .trend = "-",
 
@@ -43,7 +44,7 @@ AnsariBradley <- R6Class(
             private$.data <- list(x = ab_rank[x_index], y = ab_rank[-x_index])
         },
 
-        .define_statistic = function() {
+        .define = function() {
             private$.statistic_func <- function(x, y) sum(x)
         },
 

@@ -40,7 +40,7 @@ SignedDiff <- R6Class(
 
         .abs_diff = NULL,
 
-        .define_statistic = function() {
+        .define = function() {
             diff <- private$.data$x - private$.data$y
 
             if (private$.method == "ignore") {
