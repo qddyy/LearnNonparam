@@ -16,9 +16,8 @@ KruskalWallis <- R6Class(
     public = list(
         #' @description Create a new `KruskalWallis` object. 
         #' 
-        #' @param type a character string specifying the way to calculate p-values, must be one of `"permu"` (default) or `"approx"`. 
-        #' 
         #' @template init_params
+        #' @param type a character string specifying the way to calculate p-values, must be one of `"permu"` (default) or `"approx"`. 
         #' 
         #' @return A `KruskalWallis` object. 
         initialize = function(

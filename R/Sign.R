@@ -35,9 +35,8 @@ Sign <- R6Class(
         .correct = NULL,
 
         .define_statistic = function() {
-            private$.statistic_func <- function(
-                swapped, diff_positive = (private$.data$x > private$.data$y)
-            ) {
+            diff_positive <- (private$.data$x > private$.data$y)
+            private$.statistic_func <- function(swapped) {
                 sum(diff_positive != swapped)
             }
         },

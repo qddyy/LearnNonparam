@@ -48,16 +48,15 @@ SignedDiff <- R6Class(
                 diff <- diff[diff != 0]
             }
 
-            private$.abs_diff <- abs(diff)
+            private$.abs_diff <- abs_diff <- abs(diff)
             if (private$.scoring != "none") {
                 private$.abs_diff <- get_score(
                     private$.abs_diff, method = private$.scoring
                 )
             }
 
-            private$.statistic_func <- function(
-                swapped, diff_positive = (diff > 0), abs_diff = private$.abs_diff
-            ) {
+            diff_positive <- (diff > 0)
+            private$.statistic_func <- function(swapped) {
                 sum(abs_diff[diff_positive != swapped])
             }
         },
