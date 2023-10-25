@@ -22,7 +22,8 @@ if (!require("microbenchmark")) {
 
 ```{r}
 library(LearnNonparam)
-options(pmt_seed = 2023)
+
+set.seed(2023)
 ```
 
 # Chapter 1
@@ -525,7 +526,6 @@ t$test(Table5.1.2)
 
 t$statistic
 t$p_value
-
 
 t$type <- "approx"
 t$p_value

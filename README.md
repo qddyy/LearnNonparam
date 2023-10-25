@@ -1,5 +1,5 @@
 
-# LearnNonparam <img src="man/figures/logo.svg" alt="logo" width="16%" align="right"/>
+# LearnNonparam <img src="man/figures/logo.svg" alt="logo" width="14%" align="right"/>
 
 [![GPL
 license](https://img.shields.io/github/license/qddyy/LearnNonparam)](https://cran.r-project.org/web/licenses/GPL-2)
@@ -33,21 +33,17 @@ pak::pkg_install("qddyy/LearnNonparam")
 
 ## Usage
 
-``` r
-library(LearnNonparam)
-```
-
 - Create a test object (for example, a `Wilcoxon` object)
 
   ``` r
-  t <- Wilcoxon$new(alternative = "greater", type = "permu", n_permu = 1e7)
+  t <- Wilcoxon$new(alternative = "greater", type = "permu", n_permu = 1e6)
   ```
 
   or you can use `pmt` (**p**er**m**utation **t**est) function
   (\*\*Recommended\*):
 
   ``` r
-  t <- pmt("twosample.wilcoxon", alternative = "greater", type = "permu", n_permu = 1e7)
+  t <- pmt("twosample.wilcoxon", alternative = "greater", type = "permu", n_permu = 1e6)
   ```
 
 - Test some data (`vector` \| `data.frame` \| `list`)
@@ -60,13 +56,13 @@ library(LearnNonparam)
 
   ``` r
   t$p_value
-  #> [1] 0.0013483
+  #> [1] 0.001312
 
   t$print(digits = 2)
   #> 
   #>       Two Sample Wilcoxon Test 
   #> 
-  #> scoring: rank    type: permu(1e+07)    method: default
+  #> scoring: rank    type: permu(1e+06)    method: default
   #> statistic = 519, p_value = 0.0013
   #> alternative hypothesis: true location shift is greater than 0
   #> estimate: 0.95
@@ -94,10 +90,6 @@ t <- pmt(...)$test(...)$print(...)$plot(...)
 ```
 
 ## Tips
-
-- Use `options(pmt_seed = <seed>)` to initialize the random seed.
-
-  (passed to `RcppAlgos` for sampling combinations/permutations)
 
 - Use `options(pmt_progress = FALSE)` to disable the progress bar and
   speed up the calculation.
