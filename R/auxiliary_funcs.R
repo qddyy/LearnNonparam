@@ -33,15 +33,15 @@ get_arrangement <- function(
     which = c("combo", "permute"), n_sample = NULL,
     v = NULL, replace = FALSE, freq = NULL,
     m = if (is.null(freq)) length(v) else sum(freq),
-    func = NULL, func_value = NULL, ...
+    func = NULL, func_value = NULL, ...,
+    progress = getOption("pmt_progress")
 ) {
     envir <- list2env(list(...), envir = environment(func))
 
     args <- list(v = v, m = m, repetition = replace, freqs = freq)
 
-    if (!isFALSE(progress <- getOption("pmt_progress"))) {
-        progress <- interactive()
-    }
+    if (!isFALSE(progress)) progress <- interactive()
+
     if (progress) {
         if (is.null(n_step <- n_sample)) {
             n_step <- do.call(paste0(which, "Count"), args)
@@ -55,15 +55,21 @@ get_arrangement <- function(
         on.exit(get("pb", envir = envir)$close())
     }
 
-    args <- c(args, list(FUN = func, FUN.VALUE = func_value))
-
     if (is.null(n_sample)) {
-        do.call(paste0(which, "General"), args)
+        res <- do.call(
+            paste0(which, "General"),
+            c(args, list(FUN = func, FUN.VALUE = func_value))
+        )
+        if (is.matrix(res)) res <- t(res)
     } else {
-        args$n <- n_sample
-        args$seed <- getOption("pmt_seed")
-        do.call(paste0(which, "Sample"), args)
+        if (!is.null(freq)) v <- rep.int(v, freq)
+        res <- vapply(
+            X = integer(n_sample), FUN = function(...) {
+                func(sample(x = v, size = m, replace = replace))
+            }, FUN.VALUE = func_value
+        )
     }
+    res
 }
 
 # for .calculate_p

@@ -110,7 +110,7 @@ MultipleComparison <- R6Class(
 
         .calculate_p_permu = function() {
             private$.p_value <- rowMeans(
-                abs(t(private$.statistic_permu)) >= abs(private$.statistic)
+                abs(private$.statistic_permu) >= abs(private$.statistic)
             )
         },
 
