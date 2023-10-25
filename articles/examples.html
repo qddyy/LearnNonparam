@@ -211,8 +211,8 @@
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Unit: milliseconds</span></span>
 <span><span class="co">#&gt;      expr      min       lq      mean    median        uq      max neval</span></span>
-<span><span class="co">#&gt;   use_all 136.2814 145.3927 148.72467 148.37475 149.79625 290.1861   100</span></span>
-<span><span class="co">#&gt;  use_1000  19.6031  20.1252  22.26169  21.75695  22.15625  34.8625   100</span></span></code></pre></div>
+<span><span class="co">#&gt;   use_all 145.3205 161.2916 169.09254 168.32750 175.15880 300.1182   100</span></span>
+<span><span class="co">#&gt;  use_1000  27.0156  29.6757  32.33136  31.75595  34.20545  44.7333   100</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-2-6-1">Example 2.6.1<a class="anchor" aria-label="anchor" href="#example-2-6-1"></a>
@@ -471,12 +471,12 @@
 <span><span class="co">#&gt; family-wise confidence level: 95% </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;  i j   statistic p_value differ</span></span>
-<span><span class="co">#&gt;  1 2  0.03870907       1  FALSE</span></span>
-<span><span class="co">#&gt;  1 3 -2.51608965       1  FALSE</span></span>
-<span><span class="co">#&gt;  1 4 -4.82315032       1  FALSE</span></span>
-<span><span class="co">#&gt;  2 3 -2.55479873       1  FALSE</span></span>
-<span><span class="co">#&gt;  2 4 -4.86185939       1  FALSE</span></span>
-<span><span class="co">#&gt;  3 4 -2.30706067       1  FALSE</span></span>
+<span><span class="co">#&gt;  1 2  0.03870907  1.0000  FALSE</span></span>
+<span><span class="co">#&gt;  1 3 -2.51608965  0.3144  FALSE</span></span>
+<span><span class="co">#&gt;  1 4 -4.82315032  0.0160   TRUE</span></span>
+<span><span class="co">#&gt;  2 3 -2.55479873  0.3052  FALSE</span></span>
+<span><span class="co">#&gt;  2 4 -4.86185939  0.0146   TRUE</span></span>
+<span><span class="co">#&gt;  3 4 -2.30706067  0.3848  FALSE</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
