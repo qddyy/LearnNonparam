@@ -21,7 +21,7 @@ ChiSquare <- R6Class(
         #' @return A `ChiSquare` object. 
         initialize = function(
             type = c("permu", "approx"),
-            n_permu = NULL
+            n_permu = 0L
         ) {
             private$.type <- match.arg(type)
 

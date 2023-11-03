@@ -33,7 +33,7 @@ Create a new \code{ScoreSum} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ScoreSum$new(
   alternative = c("two_sided", "less", "greater"),
-  n_permu = NULL,
+  n_permu = 0L,
   scoring = c("rank", "vw", "expon")
 )}\if{html}{\out{</div>}}
 }
@@ -43,7 +43,7 @@ Create a new \code{ScoreSum} object.
 \describe{
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 
-\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If \code{NULL} (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If \code{0} (default) then all permutations are used.}
 
 \item{\code{scoring}}{a character string specifying which scoring system to be used.}
 }

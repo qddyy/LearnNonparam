@@ -31,7 +31,7 @@ Performs F-statistic based permutation test on data for a randomized complete bl
 \subsection{Method \code{new()}}{
 Create a new \code{RCBDANOVA} object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{RCBDANOVA$new(type = c("permu", "approx"), n_permu = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{RCBDANOVA$new(type = c("permu", "approx"), n_permu = 0L)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -39,7 +39,7 @@ Create a new \code{RCBDANOVA} object.
 \describe{
 \item{\code{type}}{a character string specifying the way to calculate the p-value.}
 
-\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If \code{NULL} (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If \code{0} (default) then all permutations are used.}
 }
 \if{html}{\out{</div>}}
 }

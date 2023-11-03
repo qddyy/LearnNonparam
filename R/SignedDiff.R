@@ -24,7 +24,7 @@ SignedDiff <- R6Class(
         #' @return A `SignedDiff` object. 
         initialize = function(
             type = c("permu", "approx"), method = c("with_zeros", "ignore"), correct = TRUE,
-            alternative = c("two_sided", "less", "greater"), n_permu = NULL, scoring = c("none", "rank", "vw", "expon")
+            alternative = c("two_sided", "less", "greater"), n_permu = 0L, scoring = c("none", "rank", "vw", "expon")
         ) {
             private$.correct <- correct
             private$.type <- match.arg(type)

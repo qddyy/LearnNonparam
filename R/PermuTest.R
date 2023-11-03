@@ -18,7 +18,7 @@ PermuTest <- R6Class(
         #' @template init_params
         #' 
         #' @return A `PermuTest` object. 
-        initialize = function(null_value = 0, alternative = c("two_sided", "less", "greater"), n_permu = NULL, conf_level = 0.95, scoring = c("none", "rank", "vw", "expon")) {
+        initialize = function(null_value = 0, alternative = c("two_sided", "less", "greater"), n_permu = 0L, conf_level = 0.95, scoring = c("none", "rank", "vw", "expon")) {
             private$.n_permu <- n_permu
             private$.scoring <- match.arg(scoring)
             private$.null_value <- null_value

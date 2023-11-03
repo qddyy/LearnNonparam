@@ -19,7 +19,7 @@ KolmogorovSmirnov <- R6Class(
         #' @template init_params
         #' 
         #' @return A `KolmogorovSmirnov` object. 
-        initialize = function(n_permu = NULL) {
+        initialize = function(n_permu = 0L) {
             super$initialize(alternative = "greater", n_permu = n_permu)
         }
     ),

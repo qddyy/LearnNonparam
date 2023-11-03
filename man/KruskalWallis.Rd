@@ -33,7 +33,7 @@ Create a new \code{KruskalWallis} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{KruskalWallis$new(
   type = c("permu", "approx"),
-  n_permu = NULL,
+  n_permu = 0L,
   scoring = c("rank", "vw", "expon")
 )}\if{html}{\out{</div>}}
 }
@@ -43,7 +43,7 @@ Create a new \code{KruskalWallis} object.
 \describe{
 \item{\code{type}}{a character string specifying the way to calculate p-values, must be one of \code{"permu"} (default) or \code{"approx"}.}
 
-\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If \code{NULL} (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If \code{0} (default) then all permutations are used.}
 
 \item{\code{scoring}}{a character string specifying which scoring system to be used.}
 }

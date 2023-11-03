@@ -22,7 +22,7 @@ Correlation <- R6Class(
         #' @return A `Correlation` object. 
         initialize = function(
             type = c("permu", "approx"), method = c("pearson", "kendall", "spearman"),
-            alternative = c("two_sided", "less", "greater"), n_permu = NULL
+            alternative = c("two_sided", "less", "greater"), n_permu = 0L
         ) {
             private$.type <- match.arg(type)
             private$.method <- match.arg(method)

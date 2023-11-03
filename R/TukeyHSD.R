@@ -22,7 +22,7 @@ TukeyHSD <- R6Class(
         #' @return A `TukeyHSD` object. 
         initialize = function(
             type = c("permu", "approx"),
-            conf_level = 0.95, n_permu = NULL, scoring = c("none", "rank", "vw", "expon")
+            conf_level = 0.95, n_permu = 0L, scoring = c("none", "rank", "vw", "expon")
         ) {
             private$.type <- match.arg(type)
             
