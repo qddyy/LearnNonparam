@@ -66,7 +66,7 @@ Create a new \code{PermuTest} object. Note that it is not recommended to create 
 
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 
-\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If \code{0} (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
 
 \item{\code{conf_level}}{a number specifying confidence level of the interval.}
 

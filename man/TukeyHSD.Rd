@@ -46,7 +46,7 @@ Create a new \code{TukeyHSD} object.
 
 \item{\code{conf_level}}{a numeric value between zero and one giving the family-wise confidence level to use.}
 
-\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If \code{0} (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
 
 \item{\code{scoring}}{a character string specifying which scoring system to be used.}
 }
