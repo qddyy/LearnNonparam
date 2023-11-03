@@ -37,17 +37,12 @@ TwoSampleTest <- R6Class(
         },
 
         .calculate_statistic_permu = function() {
-            m <- length(private$.data$x)
-            n <- length(private$.data$y)
-
-            private$.statistic_permu <- get_arrangement(
-                "combo", n_sample = private$.n_permu,
-                v = m + n, m = m,
-                func = function(index) {
-                    statistic_func(c_xy[index], c_xy[-index])
-                }, func_value = numeric(1),
+            private$.statistic_permu <- twosample_pmt(
+                n_1 = length(private$.data$x),
+                n_2 = length(private$.data$y),
+                c_xy = c(private$.data$x, private$.data$y),
                 statistic_func = private$.statistic_func,
-                c_xy = c(private$.data$x, private$.data$y)
+                n_sample = as.integer(private$.n_permu)
             )
         }
     )
