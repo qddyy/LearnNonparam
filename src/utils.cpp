@@ -1,4 +1,4 @@
-#include "utils.hpp"
+#include "utils.h"
 
 // for twosample_pmt
 int n_combination(int n, int k)
@@ -19,7 +19,7 @@ int n_permutation(IntegerVector group)
     double A = 1;
 
     int n_i = 0;
-    int n = group.length();
+    int n = group.size();
     int current = group[0];
     for (int i = 0; i < n; i++) {
         A *= (i + 1);

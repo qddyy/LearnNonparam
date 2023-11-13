@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <Rcpp.h>
 #include <cli/progress.h>
-#include "utils.hpp"
+#include "utils.h"
 
 using namespace Rcpp;
 

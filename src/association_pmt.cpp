@@ -1,6 +1,6 @@
 #include <Rcpp.h>
 #include <cli/progress.h>
-#include "utils.hpp"
+#include "utils.h"
 
 using namespace Rcpp;
 
@@ -11,7 +11,7 @@ NumericVector association_pmt(
     Function statistic_func,
     int n_permu)
 {
-    int n = y.length();
+    int n = y.size();
 
     int total;
     if (n_permu == 0) {

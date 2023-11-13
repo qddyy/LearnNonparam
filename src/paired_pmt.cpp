@@ -1,6 +1,6 @@
 #include <Rcpp.h>
 #include <cli/progress.h>
-#include "utils.hpp"
+#include "utils.h"
 
 using namespace Rcpp;
 
@@ -22,15 +22,31 @@ NumericVector paired_pmt(
 
     LogicalVector swapped(n);
 
-    for (int i = 0; i < total; i++) {
-        for (int j = 0; j < n; j++) {
-            swapped[j] = (i & (1 << j)) != 0;
+    if (n_permu == 0) {
+        for (int i = 0; i < total; i++) {
+            for (int j = 0; j < n; j++) {
+                swapped[j] = ((i & (1 << j)) != 0);
+            }
+
+            statistic_permu[i] = as<double>(statistic_func(swapped));
+
+            if (CLI_SHOULD_TICK) {
+                cli_progress_set(bar, i);
+            }
         }
+    } else {
+        int r_int;
+        for (int i = 0; i < total; i++) {
+            r_int = rand_int(total);
+            for (int j = 0; j < n; j++) {
+                swapped[j] = ((r_int & (1 << j)) != 0);
+            }
 
-        statistic_permu[i] = as<double>(statistic_func(swapped));
+            statistic_permu[i] = as<double>(statistic_func(swapped));
 
-        if (CLI_SHOULD_TICK) {
-            cli_progress_set(bar, i);
+            if (CLI_SHOULD_TICK) {
+                cli_progress_set(bar, i);
+            }
         }
     }
 
