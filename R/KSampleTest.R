@@ -41,7 +41,7 @@ KSampleTest <- R6Class(
                 data = unname(private$.data),
                 group = as.integer(names(private$.data)),
                 statistic_func = private$.statistic_func,
-                n_sample = as.integer(private$.n_permu)
+                n_permu = as.integer(private$.n_permu)
             )
         }
     )

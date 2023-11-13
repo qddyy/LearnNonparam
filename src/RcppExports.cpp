@@ -10,38 +10,67 @@ Rcpp::Rostream<true>&  Rcpp::Rcout = Rcpp::Rcpp_cout_get();
 Rcpp::Rostream<false>& Rcpp::Rcerr = Rcpp::Rcpp_cerr_get();
 #endif
 
-// ksample_pmt
-Rcpp::NumericVector ksample_pmt(Rcpp::NumericVector data, Rcpp::IntegerVector group, Rcpp::Function statistic_func, int n_sample);
-RcppExport SEXP _LearnNonparam_ksample_pmt(SEXP dataSEXP, SEXP groupSEXP, SEXP statistic_funcSEXP, SEXP n_sampleSEXP) {
+// association_pmt
+NumericVector association_pmt(NumericVector x, NumericVector y, Function statistic_func, int n_permu);
+RcppExport SEXP _LearnNonparam_association_pmt(SEXP xSEXP, SEXP ySEXP, SEXP statistic_funcSEXP, SEXP n_permuSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type data(dataSEXP);
-    Rcpp::traits::input_parameter< Rcpp::IntegerVector >::type group(groupSEXP);
-    Rcpp::traits::input_parameter< Rcpp::Function >::type statistic_func(statistic_funcSEXP);
-    Rcpp::traits::input_parameter< int >::type n_sample(n_sampleSEXP);
-    rcpp_result_gen = Rcpp::wrap(ksample_pmt(data, group, statistic_func, n_sample));
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
+    Rcpp::traits::input_parameter< Function >::type statistic_func(statistic_funcSEXP);
+    Rcpp::traits::input_parameter< int >::type n_permu(n_permuSEXP);
+    rcpp_result_gen = Rcpp::wrap(association_pmt(x, y, statistic_func, n_permu));
+    return rcpp_result_gen;
+END_RCPP
+}
+// ksample_pmt
+NumericVector ksample_pmt(NumericVector data, IntegerVector group, Function statistic_func, int n_permu);
+RcppExport SEXP _LearnNonparam_ksample_pmt(SEXP dataSEXP, SEXP groupSEXP, SEXP statistic_funcSEXP, SEXP n_permuSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericVector >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type group(groupSEXP);
+    Rcpp::traits::input_parameter< Function >::type statistic_func(statistic_funcSEXP);
+    Rcpp::traits::input_parameter< int >::type n_permu(n_permuSEXP);
+    rcpp_result_gen = Rcpp::wrap(ksample_pmt(data, group, statistic_func, n_permu));
+    return rcpp_result_gen;
+END_RCPP
+}
+// paired_pmt
+NumericVector paired_pmt(int n, Function statistic_func, int n_permu);
+RcppExport SEXP _LearnNonparam_paired_pmt(SEXP nSEXP, SEXP statistic_funcSEXP, SEXP n_permuSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< int >::type n(nSEXP);
+    Rcpp::traits::input_parameter< Function >::type statistic_func(statistic_funcSEXP);
+    Rcpp::traits::input_parameter< int >::type n_permu(n_permuSEXP);
+    rcpp_result_gen = Rcpp::wrap(paired_pmt(n, statistic_func, n_permu));
     return rcpp_result_gen;
 END_RCPP
 }
 // twosample_pmt
-Rcpp::NumericVector twosample_pmt(int n_1, int n_2, Rcpp::NumericVector c_xy, Rcpp::Function statistic_func, int n_sample);
-RcppExport SEXP _LearnNonparam_twosample_pmt(SEXP n_1SEXP, SEXP n_2SEXP, SEXP c_xySEXP, SEXP statistic_funcSEXP, SEXP n_sampleSEXP) {
+NumericVector twosample_pmt(int n_1, int n_2, NumericVector c_xy, Function statistic_func, int n_permu);
+RcppExport SEXP _LearnNonparam_twosample_pmt(SEXP n_1SEXP, SEXP n_2SEXP, SEXP c_xySEXP, SEXP statistic_funcSEXP, SEXP n_permuSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
     Rcpp::traits::input_parameter< int >::type n_1(n_1SEXP);
     Rcpp::traits::input_parameter< int >::type n_2(n_2SEXP);
-    Rcpp::traits::input_parameter< Rcpp::NumericVector >::type c_xy(c_xySEXP);
-    Rcpp::traits::input_parameter< Rcpp::Function >::type statistic_func(statistic_funcSEXP);
-    Rcpp::traits::input_parameter< int >::type n_sample(n_sampleSEXP);
-    rcpp_result_gen = Rcpp::wrap(twosample_pmt(n_1, n_2, c_xy, statistic_func, n_sample));
+    Rcpp::traits::input_parameter< NumericVector >::type c_xy(c_xySEXP);
+    Rcpp::traits::input_parameter< Function >::type statistic_func(statistic_funcSEXP);
+    Rcpp::traits::input_parameter< int >::type n_permu(n_permuSEXP);
+    rcpp_result_gen = Rcpp::wrap(twosample_pmt(n_1, n_2, c_xy, statistic_func, n_permu));
     return rcpp_result_gen;
 END_RCPP
 }
 
 static const R_CallMethodDef CallEntries[] = {
+    {"_LearnNonparam_association_pmt", (DL_FUNC) &_LearnNonparam_association_pmt, 4},
     {"_LearnNonparam_ksample_pmt", (DL_FUNC) &_LearnNonparam_ksample_pmt, 4},
+    {"_LearnNonparam_paired_pmt", (DL_FUNC) &_LearnNonparam_paired_pmt, 3},
     {"_LearnNonparam_twosample_pmt", (DL_FUNC) &_LearnNonparam_twosample_pmt, 5},
     {NULL, NULL, 0}
 };
