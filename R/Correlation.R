@@ -33,25 +33,18 @@ Correlation <- R6Class(
     private = list(
         .name = "Two Sample Test Based on Correlation Coefficient",
 
-        .calculate = function() {
-            if (private$.method != "pearson") {
-                private$.scoring <- "rank"
-            }
-
-            super$.calculate()
-        },
-
-        .calculate_score = function() {
-            private$.data <- data.frame(
-                x = rank(private$.data$x, ties.method = "min"),
-                y = rank(private$.data$y, ties.method = "min")
-            )
-        },
-
         .define = function() {
             private$.param_name <- switch(private$.method,
                 pearson = "correlation", kendall = "tau", spearman = "rho"
             )
+
+            if (private$.method != "pearson") {
+                private$.scoring <- "rank"
+                private$.data <- data.frame(
+                    x = rank(private$.data$x),
+                    y = rank(private$.data$y)
+                )
+            }
 
             if (private$.method == "kendall") {
                 x <- private$.data$x
