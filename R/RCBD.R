@@ -19,7 +19,7 @@ RCBD <- R6Class(
         .check = function() {},
 
         .input = function(...) {
-            data <- do.call(data.frame, get_list(...))
+            data <- do.call(cbind, get_list(...))
 
             dim <- dim(data)
             rownames(data) <- paste0("treatment_", seq_len(dim[1]))
@@ -29,11 +29,9 @@ RCBD <- R6Class(
         },
 
         .calculate_score = function() {
-            private$.data <- do.call(
-                data.frame, lapply(
-                    X = private$.data, FUN = get_score,
-                    method = private$.scoring, n = nrow(private$.data)
-                )
+            private$.data <- apply(
+                X = private$.data, MARGIN = 2, FUN = get_score,
+                method = private$.scoring, n = nrow(private$.data)
             )
         },
 
@@ -42,24 +40,10 @@ RCBD <- R6Class(
         },
 
         .calculate_statistic_permu = function() {
-            k <- nrow(private$.data)
-            b <- ncol(private$.data)
-
-            private$.statistic_permu <- get_arrangement(
-                "permute", n_sample = private$.n_permu,
-                v = permuteCount(k), m = b, replace = TRUE,
-                func = function(index) {
-                    statistic_func(do.call(
-                        cbind, .mapply(
-                            dots = list(data, index),
-                            FUN = function(block, i) {
-                                permuteSample(v = block, sampleVec = i)[1, ]
-                            }, MoreArgs = NULL
-                        )
-                    ))
-                }, func_value = numeric(1),
+            private$.statistic_permu <- rcbd_pmt(
+                data = apply(private$.data, 2, sort),
                 statistic_func = private$.statistic_func,
-                data = private$.data
+                n_permu = as.integer(private$.n_permu)
             )
         }
     )

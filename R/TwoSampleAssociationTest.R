@@ -26,9 +26,10 @@ TwoSampleAssociationTest <- R6Class(
         .calculate_score = function() {},
 
         .calculate_statistic_permu = function() {
+            data_y_order <- private$.data[order(private$.data$y),]
             private$.statistic_permu <- association_pmt(
-                x = private$.data$x,
-                y = private$.data$y,
+                x = data_y_order$x,
+                y = data_y_order$y,
                 statistic_func = private$.statistic_func,
                 n_permu = as.integer(private$.n_permu)
             )

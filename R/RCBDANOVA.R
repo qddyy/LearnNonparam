@@ -31,15 +31,15 @@ RCBDANOVA <- R6Class(
         .define = function() {
             private$.statistic_func <- switch(private$.type,
                 permu = function(data) sum(rowMeans(data)^2),
-                approx = function(df) {
-                    b <- ncol(df)
+                approx = function(data) {
+                    b <- ncol(data)
 
-                    bar_i. <- rowMeans(df)
-                    bar_.j <- colMeans(df)
+                    bar_i. <- rowMeans(data)
+                    bar_.j <- colMeans(data)
                     bar_.. <- mean(bar_i.)
 
                     sst <- b * sum((bar_i. - bar_..)^2)
-                    sse <- sum((df - outer(bar_i., bar_.j, "+") + bar_..)^2)
+                    sse <- sum((data - outer(bar_i., bar_.j, "+") + bar_..)^2)
                     (b - 1) * sst / sse
                 }
             )

@@ -1,6 +1,6 @@
 #include <Rcpp.h>
 #include <cli/progress.h>
-#include "utils.h"
+#include "utils.hpp"
 
 using namespace Rcpp;
 
@@ -11,11 +11,9 @@ NumericVector association_pmt(
     Function statistic_func,
     int n_permu)
 {
-    int n = y.size();
-
     int total;
     if (n_permu == 0) {
-        total = factorial(n);
+        total = n_permutation(y);
     } else {
         total = n_permu;
     }
@@ -23,24 +21,22 @@ NumericVector association_pmt(
     NumericVector statistic_permu(total);
     RObject bar = cli_progress_bar(total, NULL);
 
-    NumericVector y_permu(std::move(y));
-
     if (n_permu == 0) {
         int i = 0;
         do {
-            statistic_permu[i] = as<double>(statistic_func(x, y_permu));
+            statistic_permu[i] = as<double>(statistic_func(x, y));
 
             if (CLI_SHOULD_TICK) {
                 cli_progress_set(bar, i);
             }
 
             i++;
-        } while (std::next_permutation(y_permu.begin(), y_permu.end()));
+        } while (std::next_permutation(y.begin(), y.end()));
     } else {
         for (int i = 0; i < total; i++) {
-            std::random_shuffle(y_permu.begin(), y_permu.end(), rand_int);
+            std::random_shuffle(y.begin(), y.end(), rand_int);
 
-            statistic_permu[i] = as<double>(statistic_func(x, y_permu));
+            statistic_permu[i] = as<double>(statistic_func(x, y));
 
             if (CLI_SHOULD_TICK) {
                 cli_progress_set(bar, i);

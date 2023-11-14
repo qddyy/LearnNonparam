@@ -51,6 +51,19 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// rcbd_pmt
+NumericVector rcbd_pmt(NumericMatrix data, Function statistic_func, int n_permu);
+RcppExport SEXP _LearnNonparam_rcbd_pmt(SEXP dataSEXP, SEXP statistic_funcSEXP, SEXP n_permuSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< NumericMatrix >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< Function >::type statistic_func(statistic_funcSEXP);
+    Rcpp::traits::input_parameter< int >::type n_permu(n_permuSEXP);
+    rcpp_result_gen = Rcpp::wrap(rcbd_pmt(data, statistic_func, n_permu));
+    return rcpp_result_gen;
+END_RCPP
+}
 // twosample_pmt
 NumericVector twosample_pmt(int n_1, int n_2, NumericVector c_xy, Function statistic_func, int n_permu);
 RcppExport SEXP _LearnNonparam_twosample_pmt(SEXP n_1SEXP, SEXP n_2SEXP, SEXP c_xySEXP, SEXP statistic_funcSEXP, SEXP n_permuSEXP) {
@@ -71,6 +84,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_LearnNonparam_association_pmt", (DL_FUNC) &_LearnNonparam_association_pmt, 4},
     {"_LearnNonparam_ksample_pmt", (DL_FUNC) &_LearnNonparam_ksample_pmt, 4},
     {"_LearnNonparam_paired_pmt", (DL_FUNC) &_LearnNonparam_paired_pmt, 3},
+    {"_LearnNonparam_rcbd_pmt", (DL_FUNC) &_LearnNonparam_rcbd_pmt, 3},
     {"_LearnNonparam_twosample_pmt", (DL_FUNC) &_LearnNonparam_twosample_pmt, 5},
     {NULL, NULL, 0}
 };

@@ -41,7 +41,7 @@ Page <- R6Class(
             b <- ncol(private$.data)
             
             z <- (private$.statistic - b * k * (k + 1)^2 / 4) / sqrt(
-                (k - 1) * k * (k + 1) / 12 * sum(vapply(private$.data, var, numeric(1)))
+                (k - 1) * k * (k + 1) / 12 * sum(apply(private$.data, 2, var))
             )
 
             private$.p_value <- get_p_continous(z, "norm", private$.side)

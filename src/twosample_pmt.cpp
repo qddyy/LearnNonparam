@@ -1,7 +1,7 @@
 #include <algorithm>
 #include <Rcpp.h>
 #include <cli/progress.h>
-#include "utils.h"
+#include "utils.hpp"
 
 using namespace Rcpp;
 
@@ -22,8 +22,10 @@ NumericVector twosample_pmt(
     NumericVector statistic_permu(total);
     RObject bar = cli_progress_bar(total, NULL);
 
-    LogicalVector where_x(n_1 + n_2);
-    std::fill_n(where_x.begin(), n_1, TRUE);
+    LogicalVector where_x(n_1 + n_2, FALSE);
+    for (int k = 0; k < n_1; k++) {
+        where_x[k] = TRUE;
+    }
 
     if (n_permu == 0) {
         int i = 0;
