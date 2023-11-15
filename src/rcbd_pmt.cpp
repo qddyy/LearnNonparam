@@ -1,4 +1,4 @@
-#include "utils.hpp"
+#include "utils.h"
 #include <Rcpp.h>
 #include <algorithm>
 #include <cli/progress.h>
@@ -57,7 +57,7 @@ NumericVector rcbd_pmt(
     } else {
         for (int i = 0; i < total; i++) {
             for (int j = 0; j < n_col; j++) {
-                std::random_shuffle(data.column(j).begin(), data.column(j).end(), rand_int);
+                random_shuffle(data.column(j));
             }
             rcbd_do(i, data, statistic_func, statistic_permu, bar);
         }

@@ -1,4 +1,4 @@
-#include "utils.hpp"
+#include "utils.h"
 #include <Rcpp.h>
 #include <algorithm>
 #include <cli/progress.h>
@@ -45,7 +45,7 @@ NumericVector association_pmt(
         } while (std::next_permutation(y.begin(), y.end()));
     } else {
         for (int i = 0; i < total; i++) {
-            std::random_shuffle(y.begin(), y.end(), rand_int);
+            random_shuffle(y);
             association_do(i, x, y, statistic_func, statistic_permu, bar);
         }
     }

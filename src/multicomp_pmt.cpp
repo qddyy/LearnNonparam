@@ -1,4 +1,4 @@
-#include "utils.hpp"
+#include "utils.h"
 #include <Rcpp.h>
 #include <algorithm>
 #include <cli/progress.h>
@@ -60,7 +60,7 @@ NumericMatrix multicomp_pmt(
         } while (std::next_permutation(group.begin(), group.end()));
     } else {
         for (int i = 0; i < total; i++) {
-            std::random_shuffle(group.begin(), group.end(), rand_int);
+            random_shuffle(group);
             multicomp_do(i, n, n_pair, group_i, group_j, data, group, statistic_func, statistic_permu, split, bar);
         }
     }

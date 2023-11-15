@@ -1,9 +1,21 @@
-#include "utils.hpp"
+#include "utils.h"
 #include <Rcpp.h>
 #include <algorithm>
 #include <cli/progress.h>
 
 using namespace Rcpp;
+
+int n_combination(int n, int k)
+{
+    double C = 1;
+
+    for (int i = 1; i <= k; i++) {
+        C *= (i + n - k);
+        C /= i;
+    }
+
+    return (int)C;
+}
 
 inline void twosample_do(
     int i,
@@ -49,7 +61,7 @@ NumericVector twosample_pmt(
         } while (std::prev_permutation(where_x.begin(), where_x.end()));
     } else {
         for (int i = 0; i < total; i++) {
-            std::random_shuffle(c_xy.begin(), c_xy.end(), rand_int);
+            random_shuffle(c_xy);
             twosample_do(i, c_xy, statistic_func, statistic_permu, where_x, bar);
         }
     }

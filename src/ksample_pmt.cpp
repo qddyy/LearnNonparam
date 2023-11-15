@@ -1,4 +1,4 @@
-#include "utils.hpp"
+#include "utils.h"
 #include <Rcpp.h>
 #include <algorithm>
 #include <cli/progress.h>
@@ -45,7 +45,7 @@ NumericVector ksample_pmt(
         } while (std::next_permutation(group.begin(), group.end()));
     } else {
         for (int i = 0; i < total; i++) {
-            std::random_shuffle(group.begin(), group.end(), rand_int);
+            random_shuffle(group);
             ksample_do(i, data, group, statistic_func, statistic_permu, bar);
         }
     }

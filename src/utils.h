@@ -1,17 +1,26 @@
-#ifndef UTILS_H
-#define UTILS_H
+#pragma once
 
 #include <Rcpp.h>
+#include <algorithm>
 
 inline int rand_int(const int n)
 {
     return floor(unif_rand() * n);
 }
 
-int n_combination(int n, int k);
+template <typename T>
+void random_shuffle(T v)
+{
+    int j;
+    int n = v.size();
+    for (int i = 0; i < n - 1; i++) {
+        j = i + rand_int(n - i);
+        std::swap(v[i], v[j]);
+    }
+}
 
-template <typename Vec>
-int n_permutation(Vec v)
+template <typename T>
+int n_permutation(T v)
 {
     double A = 1;
 
@@ -31,5 +40,3 @@ int n_permutation(Vec v)
 
     return (int)A;
 }
-
-#endif

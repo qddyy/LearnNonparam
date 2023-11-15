@@ -1,4 +1,4 @@
-#include "utils.hpp"
+#include "utils.h"
 #include <Rcpp.h>
 #include <algorithm>
 #include <cli/progress.h>
@@ -54,7 +54,7 @@ NumericVector table_pmt(
         } while (std::next_permutation(row_loc.begin(), row_loc.end()));
     } else {
         for (int i = 0; i < total; i++) {
-            std::random_shuffle(row_loc.begin(), row_loc.end(), rand_int);
+            random_shuffle(row_loc);
             table_do(i, n, row_loc, col_loc, statistic_func, statistic_permu, data, bar);
         }
     }
