@@ -21,7 +21,7 @@ AnsariBradley <- R6Class(
         #' @return A `AnsariBradley` object. 
         initialize = function(
             type = c("permu", "approx"),
-            alternative = c("two_sided", "less", "greater"), n_permu = NULL, conf_level = 0.95
+            alternative = c("two_sided", "less", "greater"), n_permu = 0L, conf_level = 0.95
         ) {
             private$.type <- match.arg(type)
 

@@ -22,7 +22,7 @@ KruskalWallis <- R6Class(
         #' @return A `KruskalWallis` object. 
         initialize = function(
             type = c("permu", "approx"),
-            n_permu = NULL, scoring = c("rank", "vw", "expon")
+            n_permu = 0L, scoring = c("rank", "vw", "expon")
         ) {
             private$.type <- match.arg(type)
 

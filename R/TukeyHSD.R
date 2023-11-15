@@ -22,7 +22,7 @@ TukeyHSD <- R6Class(
         #' @return A `TukeyHSD` object. 
         initialize = function(
             type = c("permu", "approx"),
-            conf_level = 0.95, n_permu = NULL, scoring = c("none", "rank", "vw", "expon")
+            conf_level = 0.95, n_permu = 0L, scoring = c("none", "rank", "vw", "expon")
         ) {
             private$.type <- match.arg(type)
             
@@ -36,9 +36,9 @@ TukeyHSD <- R6Class(
             if (private$.scoring == "none") {
                 N <- length(private$.data)
                 k <- as.integer(names(private$.data)[N])
-                private$.statistic_func <- function(x, y, data) {
+                private$.statistic_func <- function(x, y, data, group) {
                     mse <- sum(vapply(
-                        X = split(data, names(data)),
+                        X = split(data, group),
                         FUN = function(x) (length(x) - 1) * var(x),
                         FUN.VALUE = numeric(1), USE.NAMES = FALSE
                     )) / (N - k)
@@ -48,14 +48,12 @@ TukeyHSD <- R6Class(
                 }
             } else {
                 var <- var(private$.data)
-                private$.statistic_func <- function(x, y, data) {
+                private$.statistic_func <- function(x, y, ...) {
                     (mean(x) - mean(y)) / sqrt(
                         var / 2 * (1 / length(x) + 1 / length(y))
                     )
                 }
             }
-
-            super$.define()
         },
 
         .calculate_p_permu = function() {

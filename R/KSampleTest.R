@@ -37,16 +37,11 @@ KSampleTest <- R6Class(
         },
 
         .calculate_statistic_permu = function() {
-            group_count <- tabulate(as.integer(names(private$.data)))
-
-            private$.statistic_permu <- get_arrangement(
-                "permute", n_sample = private$.n_permu,
-                v = seq_along(group_count), freq = group_count,
-                func = function(group) {
-                    statistic_func(data, group)
-                }, func_value = numeric(1),
+            private$.statistic_permu <- ksample_pmt(
+                data = unname(private$.data),
+                group = as.integer(names(private$.data)),
                 statistic_func = private$.statistic_func,
-                data = unname(private$.data)
+                n_permu = as.integer(private$.n_permu)
             )
         }
     )

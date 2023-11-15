@@ -21,7 +21,7 @@ Friedman <- R6Class(
         #' @return A `Friedman` object. 
         initialize = function(
             type = c("permu", "approx"),
-            n_permu = NULL
+            n_permu = 0L
         ) {
             private$.type <- match.arg(type)
 
@@ -34,9 +34,9 @@ Friedman <- R6Class(
         .define = function() {
             private$.statistic_func <- switch(private$.type,
                 permu = function(data) sum(rowMeans(data)^2),
-                approx = function(df) {
-                    ncol(df)^2 / sum(vapply(df, var, numeric(1))) *
-                    sum((rowMeans(df) - (nrow(df) + 1) / 2)^2)
+                approx = function(data) {
+                    ncol(data)^2 / sum(apply(data, 2, var)) *
+                    sum((rowMeans(data) - (nrow(data) + 1) / 2)^2)
                 }
             )
         },

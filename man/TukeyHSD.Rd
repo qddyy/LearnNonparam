@@ -34,7 +34,7 @@ Create a new \code{TukeyHSD} object.
 \if{html}{\out{<div class="r">}}\preformatted{TukeyHSD$new(
   type = c("permu", "approx"),
   conf_level = 0.95,
-  n_permu = NULL,
+  n_permu = 0L,
   scoring = c("none", "rank", "vw", "expon")
 )}\if{html}{\out{</div>}}
 }
@@ -46,7 +46,7 @@ Create a new \code{TukeyHSD} object.
 
 \item{\code{conf_level}}{a numeric value between zero and one giving the family-wise confidence level to use.}
 
-\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If \code{NULL} (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
 
 \item{\code{scoring}}{a character string specifying which scoring system to be used.}
 }

@@ -53,7 +53,7 @@ Create a new \code{PermuTest} object. Note that it is not recommended to create 
 \if{html}{\out{<div class="r">}}\preformatted{PermuTest$new(
   null_value = 0,
   alternative = c("two_sided", "less", "greater"),
-  n_permu = NULL,
+  n_permu = 0L,
   conf_level = 0.95,
   scoring = c("none", "rank", "vw", "expon")
 )}\if{html}{\out{</div>}}
@@ -66,7 +66,7 @@ Create a new \code{PermuTest} object. Note that it is not recommended to create 
 
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 
-\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If \code{NULL} (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
 
 \item{\code{conf_level}}{a number specifying confidence level of the interval.}
 

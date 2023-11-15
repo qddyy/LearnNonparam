@@ -33,7 +33,7 @@ Create a new \code{RatioMeanDeviance} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{RatioMeanDeviance$new(
   alternative = c("two_sided", "less", "greater"),
-  n_permu = NULL
+  n_permu = 0L
 )}\if{html}{\out{</div>}}
 }
 
@@ -42,7 +42,7 @@ Create a new \code{RatioMeanDeviance} object.
 \describe{
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 
-\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If \code{NULL} (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
 }
 \if{html}{\out{</div>}}
 }

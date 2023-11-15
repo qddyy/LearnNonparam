@@ -32,17 +32,11 @@ ContingencyTableTest <- R6Class(
             row_sum <- .rowSums(private$.data, r, c)
             col_sum <- .colSums(private$.data, r, c)
 
-            private$.statistic_permu <- get_arrangement(
-                "permute", n_sample = private$.n_permu,
-                v = rep.int(seq_len(r), row_sum),
-                func = function(data) {
-                    statistic_func(vapply(
-                        X = split(data, col_index), USE.NAMES = FALSE,
-                        FUN = tabulate, nbins = r, FUN.VALUE = integer(r)
-                    ))
-                }, func_value = numeric(1),
+            private$.statistic_permu <- table_pmt(
+                row_loc = rep.int(seq_len(r), row_sum) - 1,
+                col_loc = rep.int(seq_len(c), col_sum) - 1,
                 statistic_func = private$.statistic_func,
-                col_index = rep.int(seq_len(c), col_sum)
+                n_permu = as.integer(private$.n_permu)
             )
         }
     )

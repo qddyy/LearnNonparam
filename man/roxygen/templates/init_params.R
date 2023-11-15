@@ -1,6 +1,6 @@
 #' @param scoring a character string specifying which scoring system to be used. 
 #'
-#' @param n_permu an integer specifying how many permutations should be used to construct the permutation distribution. If `NULL` (default) then all permutations are used. 
+#' @param n_permu an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used. 
 #' 
 #' @param type a character string specifying the way to calculate the p-value. 
 #' 

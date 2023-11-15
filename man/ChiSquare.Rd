@@ -31,7 +31,7 @@ Performs chi-square statistic based permutation test on contingency tables.
 \subsection{Method \code{new()}}{
 Create a new \code{ChiSquare} object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ChiSquare$new(type = c("permu", "approx"), n_permu = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ChiSquare$new(type = c("permu", "approx"), n_permu = 0L)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
@@ -39,7 +39,7 @@ Create a new \code{ChiSquare} object.
 \describe{
 \item{\code{type}}{a character string specifying the way to calculate the p-value.}
 
-\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If \code{NULL} (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
 }
 \if{html}{\out{</div>}}
 }

@@ -21,7 +21,7 @@ Difference <- R6Class(
         #' @return A `Difference` object. 
         initialize = function(
             method = c("mean", "median"),
-            alternative = c("two_sided", "less", "greater"), n_permu = NULL
+            alternative = c("two_sided", "less", "greater"), n_permu = 0L
         ) {
             private$.method <- match.arg(method)
 

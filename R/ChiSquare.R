@@ -21,7 +21,7 @@ ChiSquare <- R6Class(
         #' @return A `ChiSquare` object. 
         initialize = function(
             type = c("permu", "approx"),
-            n_permu = NULL
+            n_permu = 0L
         ) {
             private$.type <- match.arg(type)
 
@@ -34,13 +34,13 @@ ChiSquare <- R6Class(
         .define = function() {
             dim <- dim(private$.data)
             sum <- sum(private$.data)
-            private$.statistic_func <- function(mat) {
-                row_sum <- .rowSums(mat, dim[1], dim[2])
-                col_sum <- .colSums(mat, dim[1], dim[2])
+            private$.statistic_func <- function(data) {
+                row_sum <- .rowSums(data, dim[1], dim[2])
+                col_sum <- .colSums(data, dim[1], dim[2])
 
                 expect <- row_sum %*% matrix(col_sum, nrow = 1) / sum
 
-                sum((mat - expect)^2 / expect)
+                sum((data - expect)^2 / expect)
             }
         },
 

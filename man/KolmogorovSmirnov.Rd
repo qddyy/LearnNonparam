@@ -31,13 +31,13 @@ Performs two sample Kolmogorov-Smirnov test on data vectors.
 \subsection{Method \code{new()}}{
 Create a new \code{KolmogorovSmirnov} object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{KolmogorovSmirnov$new(n_permu = NULL)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{KolmogorovSmirnov$new(n_permu = 0L)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If \code{NULL} (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
 }
 \if{html}{\out{</div>}}
 }

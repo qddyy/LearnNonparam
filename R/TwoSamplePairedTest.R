@@ -32,10 +32,10 @@ TwoSamplePairedTest <- R6Class(
         },
 
         .calculate_statistic_permu = function() {
-            private$.statistic_permu <- get_arrangement(
-                "permute", n_sample = private$.n_permu,
-                v = c(TRUE, FALSE), m = nrow(private$.data), replace = TRUE,
-                func = private$.statistic_func, func_value = numeric(1)
+            private$.statistic_permu <- paired_pmt(
+                n = length(private$.data$x),
+                statistic_func = private$.statistic_func,
+                n_permu = as.integer(private$.n_permu)
             )
         }
     )

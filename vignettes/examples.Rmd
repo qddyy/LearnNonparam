@@ -127,7 +127,7 @@ t$p_value
 
 # install.packages("microbenchmark")
 microbenchmark::microbenchmark(
-    use_all = {t$n_permu <- NULL},
+    use_all = {t$n_permu <- 0},
     use_1000 = {t$n_permu <- 1000}
 )
 ```
