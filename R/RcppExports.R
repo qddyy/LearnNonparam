@@ -9,6 +9,10 @@ ksample_pmt <- function(data, group, statistic_func, n_permu) {
     .Call(`_LearnNonparam_ksample_pmt`, data, group, statistic_func, n_permu)
 }
 
+multicomp_pmt <- function(group_i, group_j, data, group, statistic_func, n_permu) {
+    .Call(`_LearnNonparam_multicomp_pmt`, group_i, group_j, data, group, statistic_func, n_permu)
+}
+
 paired_pmt <- function(n, statistic_func, n_permu) {
     .Call(`_LearnNonparam_paired_pmt`, n, statistic_func, n_permu)
 }

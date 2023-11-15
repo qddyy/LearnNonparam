@@ -1,8 +1,21 @@
+#include "utils.hpp"
 #include <Rcpp.h>
 #include <cli/progress.h>
-#include "utils.hpp"
 
 using namespace Rcpp;
+
+inline void paired_do(
+    int i,
+    Function statistic_func,
+    NumericVector statistic_permu,
+    LogicalVector swapped, RObject bar)
+{
+    statistic_permu[i] = as<double>(statistic_func(swapped));
+
+    if (CLI_SHOULD_TICK) {
+        cli_progress_set(bar, i);
+    }
+}
 
 // [[Rcpp::export]]
 NumericVector paired_pmt(
@@ -27,12 +40,7 @@ NumericVector paired_pmt(
             for (int j = 0; j < n; j++) {
                 swapped[j] = ((i & (1 << j)) != 0);
             }
-
-            statistic_permu[i] = as<double>(statistic_func(swapped));
-
-            if (CLI_SHOULD_TICK) {
-                cli_progress_set(bar, i);
-            }
+            paired_do(i, statistic_func, statistic_permu, swapped, bar);
         }
     } else {
         int r_int;
@@ -41,12 +49,7 @@ NumericVector paired_pmt(
             for (int j = 0; j < n; j++) {
                 swapped[j] = ((r_int & (1 << j)) != 0);
             }
-
-            statistic_permu[i] = as<double>(statistic_func(swapped));
-
-            if (CLI_SHOULD_TICK) {
-                cli_progress_set(bar, i);
-            }
+            paired_do(i, statistic_func, statistic_permu, swapped, bar);
         }
     }
 

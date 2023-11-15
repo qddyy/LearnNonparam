@@ -70,41 +70,37 @@ MultipleComparison <- R6Class(
             print(histograms)
         },
 
-        .define = function() {
-            k <- as.integer(get_last(names(private$.data)))
-            private$.ij <- ij <- list(
+        .input = function(...) {
+            super$.input(...)
+
+            k <- as.integer(get_last(names(private$.raw_data)))
+            private$.ij <- list(
                 i = rep.int(seq_len(k - 1), seq.int(k - 1, 1)),
                 j = c(lapply(seq.int(2, k), seq.int, to = k), recursive = TRUE)
             )
-
-            data <- unname(private$.data)
-            statistic_func <- private$.statistic_func
-            private$.statistic_func <- function(group) {
-                where <- split(seq_along(group), group)
-                as.numeric(.mapply(
-                    FUN = function(i, j) {
-                        statistic_func(
-                            data[where[[i]]],
-                            data[where[[j]]],
-                            setNames(data, group)
-                        )
-                    }, dots = ij, MoreArgs = NULL
-                ))
-            }
         },
 
         .calculate_statistic = function() {
-            private$.statistic <- private$.statistic_func(
-                as.integer(names(private$.data))
-            )
+            data <- unname(private$.data)
+            group <- as.integer(names(private$.data))
+            where <- split(seq_along(group), group)
+            private$.statistic <- as.numeric(.mapply(
+                FUN = function(i, j) {
+                    private$.statistic_func(
+                        data[where[[i]]], data[where[[j]]], data, group
+                    )
+                }, dots = private$.ij, MoreArgs = NULL
+            ))
         },
 
         .calculate_statistic_permu = function() {
-            private$.statistic_permu <- get_arrangement(
-                "permute", n_sample = private$.n_permu,
-                v = as.integer(names(private$.data)),
-                func = private$.statistic_func,
-                func_value = numeric(length(private$.ij$i))
+            private$.statistic_permu <- multicomp_pmt(
+                group_i = private$.ij$i - 1,
+                group_j = private$.ij$j - 1,
+                data = unname(private$.data),
+                group = as.integer(names(private$.data)) - 1,
+                statistic_func = private$.statistic_func,
+                n_permu = as.integer(private$.n_permu)
             )
         },
 

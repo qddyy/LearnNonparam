@@ -5,6 +5,20 @@
 
 using namespace Rcpp;
 
+inline void rcbd_do(
+    int i,
+    NumericMatrix data,
+    Function statistic_func,
+    NumericVector statistic_permu,
+    RObject bar)
+{
+    statistic_permu[i] = as<double>(statistic_func(data));
+
+    if (CLI_SHOULD_TICK) {
+        cli_progress_set(bar, i);
+    }
+}
+
 // [[Rcpp::export]]
 NumericVector rcbd_pmt(
     NumericMatrix data,
@@ -30,12 +44,7 @@ NumericVector rcbd_pmt(
         int j = 0;
         while (j < n_col) {
             if (j == 0) {
-                statistic_permu[i] = as<double>(statistic_func(data));
-
-                if (CLI_SHOULD_TICK) {
-                    cli_progress_set(bar, i);
-                }
-
+                rcbd_do(i, data, statistic_func, statistic_permu, bar);
                 i++;
             }
 
@@ -50,12 +59,7 @@ NumericVector rcbd_pmt(
             for (int j = 0; j < n_col; j++) {
                 std::random_shuffle(data.column(j).begin(), data.column(j).end(), rand_int);
             }
-
-            statistic_permu[i] = as<double>(statistic_func(data));
-
-            if (CLI_SHOULD_TICK) {
-                cli_progress_set(bar, i);
-            }
+            rcbd_do(i, data, statistic_func, statistic_permu, bar);
         }
     }
 

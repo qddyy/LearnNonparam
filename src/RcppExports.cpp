@@ -38,6 +38,22 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// multicomp_pmt
+NumericMatrix multicomp_pmt(IntegerVector group_i, IntegerVector group_j, NumericVector data, IntegerVector group, Function statistic_func, int n_permu);
+RcppExport SEXP _LearnNonparam_multicomp_pmt(SEXP group_iSEXP, SEXP group_jSEXP, SEXP dataSEXP, SEXP groupSEXP, SEXP statistic_funcSEXP, SEXP n_permuSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type group_i(group_iSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type group_j(group_jSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type data(dataSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type group(groupSEXP);
+    Rcpp::traits::input_parameter< Function >::type statistic_func(statistic_funcSEXP);
+    Rcpp::traits::input_parameter< int >::type n_permu(n_permuSEXP);
+    rcpp_result_gen = Rcpp::wrap(multicomp_pmt(group_i, group_j, data, group, statistic_func, n_permu));
+    return rcpp_result_gen;
+END_RCPP
+}
 // paired_pmt
 NumericVector paired_pmt(int n, Function statistic_func, int n_permu);
 RcppExport SEXP _LearnNonparam_paired_pmt(SEXP nSEXP, SEXP statistic_funcSEXP, SEXP n_permuSEXP) {
@@ -83,6 +99,7 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_LearnNonparam_association_pmt", (DL_FUNC) &_LearnNonparam_association_pmt, 4},
     {"_LearnNonparam_ksample_pmt", (DL_FUNC) &_LearnNonparam_ksample_pmt, 4},
+    {"_LearnNonparam_multicomp_pmt", (DL_FUNC) &_LearnNonparam_multicomp_pmt, 6},
     {"_LearnNonparam_paired_pmt", (DL_FUNC) &_LearnNonparam_paired_pmt, 3},
     {"_LearnNonparam_rcbd_pmt", (DL_FUNC) &_LearnNonparam_rcbd_pmt, 3},
     {"_LearnNonparam_twosample_pmt", (DL_FUNC) &_LearnNonparam_twosample_pmt, 5},

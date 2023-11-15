@@ -1,9 +1,23 @@
-#include <algorithm>
-#include <Rcpp.h>
-#include <cli/progress.h>
 #include "utils.hpp"
+#include <Rcpp.h>
+#include <algorithm>
+#include <cli/progress.h>
 
 using namespace Rcpp;
+
+inline void twosample_do(
+    int i,
+    NumericVector c_xy,
+    Function statistic_func,
+    NumericVector statistic_permu,
+    LogicalVector where_x, RObject bar)
+{
+    statistic_permu[i] = as<double>(statistic_func(c_xy[where_x], c_xy[!where_x]));
+
+    if (CLI_SHOULD_TICK) {
+        cli_progress_set(bar, i);
+    }
+}
 
 // [[Rcpp::export]]
 NumericVector twosample_pmt(
@@ -30,23 +44,13 @@ NumericVector twosample_pmt(
     if (n_permu == 0) {
         int i = 0;
         do {
-            statistic_permu[i] = as<double>(statistic_func(c_xy[where_x], c_xy[!where_x]));
-
-            if (CLI_SHOULD_TICK) {
-                cli_progress_set(bar, i);
-            }
-
+            twosample_do(i, c_xy, statistic_func, statistic_permu, where_x, bar);
             i++;
         } while (std::prev_permutation(where_x.begin(), where_x.end()));
     } else {
         for (int i = 0; i < total; i++) {
             std::random_shuffle(c_xy.begin(), c_xy.end(), rand_int);
-
-            statistic_permu[i] = as<double>(statistic_func(c_xy[where_x], c_xy[!where_x]));
-
-            if (CLI_SHOULD_TICK) {
-                cli_progress_set(bar, i);
-            }
+            twosample_do(i, c_xy, statistic_func, statistic_permu, where_x, bar);
         }
     }
 

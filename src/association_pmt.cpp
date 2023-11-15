@@ -1,8 +1,23 @@
+#include "utils.hpp"
 #include <Rcpp.h>
 #include <cli/progress.h>
-#include "utils.hpp"
 
 using namespace Rcpp;
+
+inline void association_do(
+    int i,
+    NumericVector x,
+    NumericVector y,
+    Function statistic_func,
+    NumericVector statistic_permu,
+    RObject bar)
+{
+    statistic_permu[i] = as<double>(statistic_func(x, y));
+
+    if (CLI_SHOULD_TICK) {
+        cli_progress_set(bar, i);
+    }
+}
 
 // [[Rcpp::export]]
 NumericVector association_pmt(
@@ -24,23 +39,13 @@ NumericVector association_pmt(
     if (n_permu == 0) {
         int i = 0;
         do {
-            statistic_permu[i] = as<double>(statistic_func(x, y));
-
-            if (CLI_SHOULD_TICK) {
-                cli_progress_set(bar, i);
-            }
-
+            association_do(i, x, y, statistic_func, statistic_permu, bar);
             i++;
         } while (std::next_permutation(y.begin(), y.end()));
     } else {
         for (int i = 0; i < total; i++) {
             std::random_shuffle(y.begin(), y.end(), rand_int);
-
-            statistic_permu[i] = as<double>(statistic_func(x, y));
-
-            if (CLI_SHOULD_TICK) {
-                cli_progress_set(bar, i);
-            }
+            association_do(i, x, y, statistic_func, statistic_permu, bar);
         }
     }
 
