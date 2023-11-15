@@ -16,11 +16,6 @@ check](https://github.com/qddyy/LearnNonparam/workflows/R-CMD-check/badge.svg)](
 This package implements some of the non-parametric tests in chapters 1-5
 of [Higgins (2003)](#references).
 
-It depends on [R6](https://cran.r-project.org/package=R6) for clean
-OO-design and [RcppAlgos](https://cran.r-project.org/package=RcppAlgos)
-for fast generation of combinations/permutations, as well as
-[ggplot2](https://cran.r-project.org/package=ggplot2) for pretty graphs.
-
 Examples in the book can be found
 [here](https://qddyy.github.io/LearnNonparam/articles/examples).
 
@@ -36,33 +31,29 @@ pak::pkg_install("qddyy/LearnNonparam")
 - Create a test object (for example, a `Wilcoxon` object)
 
   ``` r
-  t <- Wilcoxon$new(alternative = "greater", type = "permu", n_permu = 1e6)
+  t <- Wilcoxon$new(alternative = "greater", type = "permu", n_permu = 1e7)
   ```
 
   or you can use `pmt` (**p**er**m**utation **t**est) function
   (\*\*Recommended\*):
 
   ``` r
-  t <- pmt("twosample.wilcoxon", alternative = "greater", type = "permu", n_permu = 1e6)
+  t <- pmt("twosample.wilcoxon", alternative = "greater", type = "permu", n_permu = 1e7)
   ```
 
 - Test some data (`vector` \| `data.frame` \| `list`)
-
-  ``` r
-  t$test(rnorm(20, mean = 1), rnorm(20, mean = 0))
-  ```
 
 - Check the results
 
   ``` r
   t$p_value
-  #> [1] 0.001312
+  #> [1] 0.0013138
 
   t$print(digits = 2)
   #> 
   #>       Two Sample Wilcoxon Test 
   #> 
-  #> scoring: rank    type: permu(1e+06)    method: default
+  #> scoring: rank    type: permu(1e+07)    method: default
   #> statistic = 519, p_value = 0.0013
   #> alternative hypothesis: true location shift is greater than 0
   #> estimate: 0.95
@@ -71,7 +62,7 @@ pak::pkg_install("qddyy/LearnNonparam")
   t$plot(binwidth = 1)
   ```
 
-  <img src="man/figures/README-results-1.svg" width="100%" />
+  <img src="man/figures/README-results-1.png" width="100%" />
 
 - Modify some attributes and see how the results change
 
@@ -91,16 +82,15 @@ t <- pmt(...)$test(...)$print(...)$plot(...)
 
 ## Tips
 
-- Use `options(pmt_progress = FALSE)` to disable the progress bar and
-  speed up the calculation.
+- This package uses `iterator` progress bar provided by the `cli`
+  package, which can be customized. See
+  <https://cli.r-lib.org/articles/progress-advanced.html#customization>.
 
-  (By default, a progress bar will appear when calculating the
-  permutation distribution if R is used interactively)
+- Check
 
-- Explore `?PermuTest` (all tests’ base class) for all available methods
-  and attributes.
-
-- Check `pmts()` for all available tests.
+  - `?PermuTest` (all tests’ base class) for all available methods and
+    attributes.
+  - `pmts()` for all available tests.
 
   ``` r
   pmts()
