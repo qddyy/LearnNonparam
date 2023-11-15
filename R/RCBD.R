@@ -6,7 +6,6 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom RcppAlgos permuteCount permuteGeneral
 
 
 RCBD <- R6Class(

@@ -21,6 +21,10 @@ rcbd_pmt <- function(data, statistic_func, n_permu) {
     .Call(`_LearnNonparam_rcbd_pmt`, data, statistic_func, n_permu)
 }
 
+table_pmt <- function(row_loc, col_loc, statistic_func, n_permu) {
+    .Call(`_LearnNonparam_table_pmt`, row_loc, col_loc, statistic_func, n_permu)
+}
+
 twosample_pmt <- function(n_1, n_2, c_xy, statistic_func, n_permu) {
     .Call(`_LearnNonparam_twosample_pmt`, n_1, n_2, c_xy, statistic_func, n_permu)
 }

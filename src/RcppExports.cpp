@@ -80,6 +80,20 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// table_pmt
+NumericVector table_pmt(IntegerVector row_loc, IntegerVector col_loc, Function statistic_func, int n_permu);
+RcppExport SEXP _LearnNonparam_table_pmt(SEXP row_locSEXP, SEXP col_locSEXP, SEXP statistic_funcSEXP, SEXP n_permuSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< IntegerVector >::type row_loc(row_locSEXP);
+    Rcpp::traits::input_parameter< IntegerVector >::type col_loc(col_locSEXP);
+    Rcpp::traits::input_parameter< Function >::type statistic_func(statistic_funcSEXP);
+    Rcpp::traits::input_parameter< int >::type n_permu(n_permuSEXP);
+    rcpp_result_gen = Rcpp::wrap(table_pmt(row_loc, col_loc, statistic_func, n_permu));
+    return rcpp_result_gen;
+END_RCPP
+}
 // twosample_pmt
 NumericVector twosample_pmt(int n_1, int n_2, NumericVector c_xy, Function statistic_func, int n_permu);
 RcppExport SEXP _LearnNonparam_twosample_pmt(SEXP n_1SEXP, SEXP n_2SEXP, SEXP c_xySEXP, SEXP statistic_funcSEXP, SEXP n_permuSEXP) {
@@ -102,6 +116,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_LearnNonparam_multicomp_pmt", (DL_FUNC) &_LearnNonparam_multicomp_pmt, 6},
     {"_LearnNonparam_paired_pmt", (DL_FUNC) &_LearnNonparam_paired_pmt, 3},
     {"_LearnNonparam_rcbd_pmt", (DL_FUNC) &_LearnNonparam_rcbd_pmt, 3},
+    {"_LearnNonparam_table_pmt", (DL_FUNC) &_LearnNonparam_table_pmt, 4},
     {"_LearnNonparam_twosample_pmt", (DL_FUNC) &_LearnNonparam_twosample_pmt, 5},
     {NULL, NULL, 0}
 };
