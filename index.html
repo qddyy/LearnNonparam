@@ -107,52 +107,7 @@
 <p>Test some data (<code>vector</code> | <code>data.frame</code> | <code>list</code>)</p>
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">2023</span><span class="op">)</span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, mean <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, mean <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span>
-<span><span class="co">#&gt; ■■■ 5% | ETA: 20s ■■■ 6% | ETA: 20s ■■■ 7% | ETA: 20s ■■■ 8% | ETA: 20s ■■■■ 9%</span></span>
-<span><span class="co">#&gt; | ETA: 20s ■■■■ 10% | ETA: 20s ■■■■ 11% | ETA: 19s ■■■■■ 12% | ETA: 19s ■■■■■</span></span>
-<span><span class="co">#&gt; 13% | ETA: 19s ■■■■■ 14% | ETA: 19s ■■■■■ 15% | ETA: 18s ■■■■■■ 16% | ETA: 18s</span></span>
-<span><span class="co">#&gt; ■■■■■■ 17% | ETA: 18s ■■■■■■ 18% | ETA: 18s ■■■■■■■ 19% | ETA: 18s ■■■■■■■ 19%</span></span>
-<span><span class="co">#&gt; | ETA: 18s ■■■■■■■ 20% | ETA: 17s ■■■■■■■ 21% | ETA: 17s ■■■■■■■■ 22% | ETA:</span></span>
-<span><span class="co">#&gt; 17s ■■■■■■■■ 23% | ETA: 17s ■■■■■■■■ 24% | ETA: 17s ■■■■■■■■ 25% | ETA: 17s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■ 25% | ETA: 17s ■■■■■■■■■ 26% | ETA: 16s ■■■■■■■■■ 27% | ETA: 16s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■ 28% | ETA: 16s ■■■■■■■■■■ 29% | ETA: 16s ■■■■■■■■■■ 30% | ETA: 15s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■ 31% | ETA: 15s ■■■■■■■■■■■ 32% | ETA: 15s ■■■■■■■■■■■ 33% | ETA: 15s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■ 34% | ETA: 14s ■■■■■■■■■■■■ 35% | ETA: 14s ■■■■■■■■■■■■ 36% | ETA:</span></span>
-<span><span class="co">#&gt; 14s ■■■■■■■■■■■■ 37% | ETA: 14s ■■■■■■■■■■■■ 38% | ETA: 14s ■■■■■■■■■■■■■ 39% |</span></span>
-<span><span class="co">#&gt; ETA: 13s ■■■■■■■■■■■■■ 40% | ETA: 13s ■■■■■■■■■■■■■ 41% | ETA: 13s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■ 42% | ETA: 13s ■■■■■■■■■■■■■■ 43% | ETA: 12s ■■■■■■■■■■■■■■ 44%</span></span>
-<span><span class="co">#&gt; | ETA: 12s ■■■■■■■■■■■■■■ 45% | ETA: 12s ■■■■■■■■■■■■■■■ 46% | ETA: 12s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■ 47% | ETA: 12s ■■■■■■■■■■■■■■■ 48% | ETA: 11s ■■■■■■■■■■■■■■■■</span></span>
-<span><span class="co">#&gt; 49% | ETA: 11s ■■■■■■■■■■■■■■■■ 50% | ETA: 11s ■■■■■■■■■■■■■■■■ 51% | ETA: 11s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■ 52% | ETA: 10s ■■■■■■■■■■■■■■■■■ 53% | ETA: 10s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■ 54% | ETA: 10s ■■■■■■■■■■■■■■■■■ 55% | ETA: 10s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■ 56% | ETA: 10s ■■■■■■■■■■■■■■■■■■ 57% | ETA: 9s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■ 57% | ETA: 9s ■■■■■■■■■■■■■■■■■■■ 58% | ETA: 9s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■ 59% | ETA: 9s ■■■■■■■■■■■■■■■■■■■ 60% | ETA: 9s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■ 61% | ETA: 8s ■■■■■■■■■■■■■■■■■■■■ 62% | ETA: 8s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■■ 63% | ETA: 8s ■■■■■■■■■■■■■■■■■■■■ 64% | ETA: 8s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■■ 65% | ETA: 8s ■■■■■■■■■■■■■■■■■■■■■ 66% | ETA: 7s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■■■ 67% | ETA: 7s ■■■■■■■■■■■■■■■■■■■■■ 68% | ETA: 7s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■■■■ 69% | ETA: 7s ■■■■■■■■■■■■■■■■■■■■■■ 70% | ETA: 7s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■■■■ 71% | ETA: 6s ■■■■■■■■■■■■■■■■■■■■■■ 72% | ETA: 6s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■■■■■ 72% | ETA: 6s ■■■■■■■■■■■■■■■■■■■■■■■ 73% | ETA: 6s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■■■■■ 74% | ETA: 6s ■■■■■■■■■■■■■■■■■■■■■■■■ 75% | ETA: 5s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■■■■■■ 76% | ETA: 5s ■■■■■■■■■■■■■■■■■■■■■■■■ 77% | ETA: 5s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■■■■■■ 78% | ETA: 5s ■■■■■■■■■■■■■■■■■■■■■■■■■ 79% | ETA: 5s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■■■■■■■ 80% | ETA: 4s ■■■■■■■■■■■■■■■■■■■■■■■■■ 81% | ETA: 4s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■■■■■■■■ 82% | ETA: 4s ■■■■■■■■■■■■■■■■■■■■■■■■■■ 83% | ETA:</span></span>
-<span><span class="co">#&gt; 4s ■■■■■■■■■■■■■■■■■■■■■■■■■■ 84% | ETA: 3s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 85% |</span></span>
-<span><span class="co">#&gt; ETA: 3s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 86% | ETA: 3s ■■■■■■■■■■■■■■■■■■■■■■■■■■■</span></span>
-<span><span class="co">#&gt; 87% | ETA: 3s ■■■■■■■■■■■■■■■■■■■■■■■■■■■ 88% | ETA: 3s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 89% | ETA: 2s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 90% |</span></span>
-<span><span class="co">#&gt; ETA: 2s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 90% | ETA: 2s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■</span></span>
-<span><span class="co">#&gt; 91% | ETA: 2s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 92% | ETA: 2s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 93% | ETA: 1s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 94% |</span></span>
-<span><span class="co">#&gt; ETA: 1s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 95% | ETA: 1s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 96% | ETA: 1s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 97%</span></span>
-<span><span class="co">#&gt; | ETA: 1s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 98% | ETA: 0s</span></span>
-<span><span class="co">#&gt; ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■ 99% | ETA: 0s ■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■■</span></span>
-<span><span class="co">#&gt; 100% | ETA: 0s</span></span></code></pre></div>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, mean <span class="op">=</span> <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, mean <span class="op">=</span> <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
 <p>Check the results</p>
