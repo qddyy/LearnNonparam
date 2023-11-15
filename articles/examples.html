@@ -202,7 +202,7 @@
 <span><span class="co"># 1000 permutaions</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.188</span></span>
+<span><span class="co">#&gt; [1] 0.203</span></span>
 <span></span>
 <span><span class="co"># install.packages("microbenchmark")</span></span>
 <span><span class="fu">microbenchmark</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html" class="external-link">microbenchmark</a></span><span class="op">(</span></span>
@@ -210,12 +210,9 @@
 <span>    use_1000 <span class="op">=</span> <span class="op">{</span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">1000</span><span class="op">}</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Unit: milliseconds</span></span>
-<span><span class="co">#&gt;      expr        min         lq       mean     median         uq       max</span></span>
-<span><span class="co">#&gt;   use_all 104.245372 107.670494 109.501509 108.349120 110.212581 184.74369</span></span>
-<span><span class="co">#&gt;  use_1000   8.186598   8.283459   8.787733   8.406147   8.614631  11.76463</span></span>
-<span><span class="co">#&gt;  neval</span></span>
-<span><span class="co">#&gt;    100</span></span>
-<span><span class="co">#&gt;    100</span></span></code></pre></div>
+<span><span class="co">#&gt;      expr        min         lq       mean     median        uq       max neval</span></span>
+<span><span class="co">#&gt;   use_all 102.240706 104.252869 106.203097 105.033698 106.18048 178.32793   100</span></span>
+<span><span class="co">#&gt;  use_1000   8.198032   8.305457   8.864159   8.412052   8.58767  14.02232   100</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-2-6-1">Example 2.6.1<a class="anchor" aria-label="anchor" href="#example-2-6-1"></a>
