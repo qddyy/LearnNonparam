@@ -61,7 +61,7 @@ NumericVector twosample_pmt(
         } while (std::prev_permutation(where_x.begin(), where_x.end()));
     } else {
         for (int i = 0; i < total; i++) {
-            random_shuffle(c_xy);
+            random_shuffle(where_x);
             twosample_do(i, c_xy, statistic_func, statistic_permu, where_x, bar);
         }
     }

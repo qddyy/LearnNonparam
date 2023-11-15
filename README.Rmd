@@ -5,9 +5,11 @@ output:
     df_print: kable
     fig_width: 8
     fig_height: 6
+    dev: svg
 ---
 
 ```{r, setup, include = FALSE}
+options(cli.progress_show_after = Inf)
 knitr::opts_chunk$set(
     collapse = TRUE, comment = "#>",
     fig.path = "man/figures/README-", out.width = "100%"
@@ -50,7 +52,7 @@ pak::pkg_install("qddyy/LearnNonparam")
     ```
 
 - Test some data (`vector` | `data.frame` | `list`)
-    ```{r, test, include = FALSE}
+    ```{r, test}
     set.seed(2023)
     t$test(rnorm(20, mean = 1), rnorm(20, mean = 0))
     ```
@@ -84,8 +86,8 @@ t <- pmt(...)$test(...)$print(...)$plot(...)
 - Check
     - `?PermuTest` (all tests' base class) for all available methods and attributes. 
     - `pmts()` for all available tests. 
-    ```{r, pmts}
-    pmts()
-    ```
+        ```{r, pmts}
+        pmts()
+        ```
 
 ## References
