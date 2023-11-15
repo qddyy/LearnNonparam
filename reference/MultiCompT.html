@@ -76,7 +76,7 @@
 <span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"permu"</span>, <span class="st">"approx"</span><span class="op">)</span>,</span>
 <span>  bonferroni <span class="op">=</span> <span class="cn">TRUE</span>,</span>
 <span>  conf_level <span class="op">=</span> <span class="fl">0.95</span>,</span>
-<span>  n_permu <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  n_permu <span class="op">=</span> <span class="fl">0L</span>,</span>
 <span>  scoring <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"none"</span>, <span class="st">"rank"</span>, <span class="st">"vw"</span>, <span class="st">"expon"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
@@ -96,7 +96,7 @@
 
 
 <dt><code>n_permu</code></dt>
-<dd><p>an integer specifying how many permutations should be used to construct the permutation distribution. If <code>NULL</code> (default) then all permutations are used.</p></dd>
+<dd><p>an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.</p></dd>
 
 
 <dt><code>scoring</code></dt>
