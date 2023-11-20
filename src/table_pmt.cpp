@@ -1,21 +1,19 @@
 #include "utils.h"
-#include <Rcpp.h>
-#include <algorithm>
-#include <cli/progress.h>
 
 using namespace Rcpp;
 
 inline void table_do(
-    int i, int n,
-    IntegerVector row_loc,
-    IntegerVector col_loc,
-    Function statistic_func,
-    NumericVector statistic_permu,
-    IntegerMatrix data, RObject bar)
+    unsigned& i,
+    const unsigned& n,
+    const IntegerVector& row_loc,
+    const IntegerVector& col_loc,
+    const Function& statistic_func,
+    NumericVector& statistic_permu,
+    RObject& bar, IntegerMatrix& data)
 {
-    std::fill(data.begin(), data.end(), 0);
+    data.fill(0);
 
-    for (int j = 0; j < n; j++) {
+    for (unsigned j = 0; j < n; j++) {
         data(row_loc[j], col_loc[j])++;
     }
 
@@ -24,38 +22,36 @@ inline void table_do(
     if (CLI_SHOULD_TICK) {
         cli_progress_set(bar, i);
     }
+    i++;
 }
 
 // [[Rcpp::export]]
 NumericVector table_pmt(
     IntegerVector row_loc,
-    IntegerVector col_loc,
-    Function statistic_func,
-    int n_permu)
+    const IntegerVector col_loc,
+    const Function statistic_func,
+    const unsigned n_permu)
 {
-    int total;
-    if (n_permu == 0) {
-        total = n_permutation(row_loc);
-    } else {
-        total = n_permu;
-    }
+    RObject bar;
+    cli_progress_init_timer();
+    NumericVector statistic_permu;
 
-    NumericVector statistic_permu(total);
-    RObject bar = cli_progress_bar(total, NULL);
-
-    int n = row_loc.size();
+    unsigned n = row_loc.size();
     IntegerMatrix data(row_loc[n - 1] + 1, col_loc[n - 1] + 1);
 
+    unsigned i = 0;
     if (n_permu == 0) {
-        int i = 0;
+        std::tie(statistic_permu, bar) = statistic_permu_with_bar(n_permutation(row_loc), true);
+
         do {
-            table_do(i, n, row_loc, col_loc, statistic_func, statistic_permu, data, bar);
-            i++;
+            table_do(i, n, row_loc, col_loc, statistic_func, statistic_permu, bar, data);
         } while (std::next_permutation(row_loc.begin(), row_loc.end()));
     } else {
-        for (int i = 0; i < total; i++) {
+        std::tie(statistic_permu, bar) = statistic_permu_with_bar(n_permu, false);
+
+        while (i < n_permu) {
             random_shuffle(row_loc);
-            table_do(i, n, row_loc, col_loc, statistic_func, statistic_permu, data, bar);
+            table_do(i, n, row_loc, col_loc, statistic_func, statistic_permu, bar, data);
         }
     }
 

@@ -37,10 +37,11 @@ TwoSampleTest <- R6Class(
         },
 
         .calculate_statistic_permu = function() {
+            n_1 <- length(private$.data$x)
+            n_2 <- length(private$.data$y)
             private$.statistic_permu <- twosample_pmt(
-                n_1 = length(private$.data$x),
-                n_2 = length(private$.data$y),
-                c_xy = c(private$.data$x, private$.data$y),
+                data = c(private$.data$x, private$.data$y),
+                where_y = rep.int(c(FALSE, TRUE), c(n_1, n_2)),
                 statistic_func = private$.statistic_func,
                 n_permu = as.integer(private$.n_permu)
             )

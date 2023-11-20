@@ -1,55 +1,52 @@
 #include "utils.h"
-#include <Rcpp.h>
-#include <cli/progress.h>
 
 using namespace Rcpp;
 
 inline void paired_do(
-    int i,
-    Function statistic_func,
-    NumericVector statistic_permu,
-    LogicalVector swapped, RObject bar)
+    unsigned& i,
+    const unsigned& k,
+    const unsigned& n,
+    const Function& statistic_func,
+    NumericVector& statistic_permu,
+    RObject& bar, LogicalVector& swapped)
 {
+    for (unsigned j = 0; j < n; j++) {
+        swapped[j] = ((i & (1 << j)) != 0);
+    }
+
     statistic_permu[i] = as<double>(statistic_func(swapped));
 
     if (CLI_SHOULD_TICK) {
         cli_progress_set(bar, i);
     }
+    i++;
 }
 
 // [[Rcpp::export]]
 NumericVector paired_pmt(
-    int n,
-    Function statistic_func,
-    int n_permu)
+    const unsigned n,
+    const Function statistic_func,
+    const unsigned n_permu)
 {
-    int total;
-    if (n_permu == 0) {
-        total = (1 << n);
-    } else {
-        total = n_permu;
-    }
-
-    NumericVector statistic_permu(total);
-    RObject bar = cli_progress_bar(total, NULL);
+    RObject bar;
+    cli_progress_init_timer();
+    NumericVector statistic_permu;
 
     LogicalVector swapped(n);
+    unsigned total = (1 << n);
 
+    unsigned i = 0;
     if (n_permu == 0) {
-        for (int i = 0; i < total; i++) {
-            for (int j = 0; j < n; j++) {
-                swapped[j] = ((i & (1 << j)) != 0);
-            }
-            paired_do(i, statistic_func, statistic_permu, swapped, bar);
+        std::tie(statistic_permu, bar) = statistic_permu_with_bar(total, true);
+
+        while (i < total) {
+            paired_do(i, i, n, statistic_func, statistic_permu, bar, swapped);
         }
     } else {
-        int r_int;
-        for (int i = 0; i < total; i++) {
-            r_int = rand_int(total);
-            for (int j = 0; j < n; j++) {
-                swapped[j] = ((r_int & (1 << j)) != 0);
-            }
-            paired_do(i, statistic_func, statistic_permu, swapped, bar);
+        std::tie(statistic_permu, bar) = statistic_permu_with_bar(n_permu, false);
+
+        while (i < n_permu) {
+            paired_do(i, rand_int(total), n, statistic_func, statistic_permu, bar, swapped);
         }
     }
 

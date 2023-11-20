@@ -98,7 +98,7 @@ MultipleComparison <- R6Class(
                 group_i = private$.ij$i - 1,
                 group_j = private$.ij$j - 1,
                 data = unname(private$.data),
-                group = as.integer(names(private$.data)) - 1,
+                group = as.integer(names(private$.data)),
                 statistic_func = private$.statistic_func,
                 n_permu = as.integer(private$.n_permu)
             )

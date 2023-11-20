@@ -1,50 +1,45 @@
 #include "utils.h"
-#include <Rcpp.h>
-#include <algorithm>
-#include <cli/progress.h>
 
 using namespace Rcpp;
 
 inline void ksample_do(
-    int i,
-    NumericVector data,
-    IntegerVector group,
-    Function statistic_func,
-    NumericVector statistic_permu,
-    RObject bar)
+    unsigned& i,
+    const NumericVector& data,
+    const IntegerVector& group,
+    const Function& statistic_func,
+    NumericVector& statistic_permu,
+    RObject& bar)
 {
     statistic_permu[i] = as<double>(statistic_func(data, group));
 
     if (CLI_SHOULD_TICK) {
         cli_progress_set(bar, i);
     }
+    i++;
 }
 
 // [[Rcpp::export]]
 NumericVector ksample_pmt(
-    NumericVector data,
+    const NumericVector data,
     IntegerVector group,
-    Function statistic_func,
-    int n_permu)
+    const Function statistic_func,
+    const unsigned n_permu)
 {
-    int total;
-    if (n_permu == 0) {
-        total = n_permutation(group);
-    } else {
-        total = n_permu;
-    }
+    RObject bar;
+    cli_progress_init_timer();
+    NumericVector statistic_permu;
 
-    NumericVector statistic_permu(total);
-    RObject bar = cli_progress_bar(total, NULL);
-
+    unsigned i = 0;
     if (n_permu == 0) {
-        int i = 0;
+        std::tie(statistic_permu, bar) = statistic_permu_with_bar(n_permutation(group), true);
+
         do {
             ksample_do(i, data, group, statistic_func, statistic_permu, bar);
-            i++;
         } while (std::next_permutation(group.begin(), group.end()));
     } else {
-        for (int i = 0; i < total; i++) {
+        std::tie(statistic_permu, bar) = statistic_permu_with_bar(n_permu, false);
+
+        while (i < n_permu) {
             random_shuffle(group);
             ksample_do(i, data, group, statistic_func, statistic_permu, bar);
         }

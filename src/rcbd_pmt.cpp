@@ -1,51 +1,46 @@
 #include "utils.h"
-#include <Rcpp.h>
-#include <algorithm>
-#include <cli/progress.h>
 
 using namespace Rcpp;
 
 inline void rcbd_do(
-    int i,
-    NumericMatrix data,
-    Function statistic_func,
-    NumericVector statistic_permu,
-    RObject bar)
+    unsigned& i,
+    const NumericMatrix& data,
+    const Function& statistic_func,
+    NumericVector& statistic_permu,
+    RObject& bar)
 {
     statistic_permu[i] = as<double>(statistic_func(data));
 
     if (CLI_SHOULD_TICK) {
         cli_progress_set(bar, i);
     }
+    i++;
 }
 
 // [[Rcpp::export]]
 NumericVector rcbd_pmt(
     NumericMatrix data,
-    Function statistic_func,
-    int n_permu)
+    const Function statistic_func,
+    const unsigned n_permu)
 {
-    int n_col = data.ncol();
+    RObject bar;
+    cli_progress_init_timer();
+    NumericVector statistic_permu;
 
-    int total = 1;
+    unsigned n_col = data.ncol();
+
+    unsigned i = 0;
+    unsigned j = 0;
     if (n_permu == 0) {
-        for (int k = 0; k < n_col; k++) {
+        unsigned total = 1;
+        for (unsigned k = 0; k < n_col; k++) {
             total *= n_permutation(data.column(k));
         }
-    } else {
-        total = n_permu;
-    }
+        std::tie(statistic_permu, bar) = statistic_permu_with_bar(total, true);
 
-    NumericVector statistic_permu(total);
-    RObject bar = cli_progress_bar(total, NULL);
-
-    if (n_permu == 0) {
-        int i = 0;
-        int j = 0;
         while (j < n_col) {
             if (j == 0) {
                 rcbd_do(i, data, statistic_func, statistic_permu, bar);
-                i++;
             }
 
             if (std::next_permutation(data.column(j).begin(), data.column(j).end())) {
@@ -55,8 +50,10 @@ NumericVector rcbd_pmt(
             }
         }
     } else {
-        for (int i = 0; i < total; i++) {
-            for (int j = 0; j < n_col; j++) {
+        std::tie(statistic_permu, bar) = statistic_permu_with_bar(n_permu, false);
+
+        while (i < n_permu) {
+            for (j = 0; j < n_col; j++) {
                 random_shuffle(data.column(j));
             }
             rcbd_do(i, data, statistic_func, statistic_permu, bar);

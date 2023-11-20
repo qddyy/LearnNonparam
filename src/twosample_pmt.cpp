@@ -1,68 +1,47 @@
 #include "utils.h"
-#include <Rcpp.h>
-#include <algorithm>
-#include <cli/progress.h>
 
 using namespace Rcpp;
 
-int n_combination(int n, int k)
-{
-    double C = 1;
-
-    for (int i = 1; i <= k; i++) {
-        C *= (i + n - k);
-        C /= i;
-    }
-
-    return (int)C;
-}
-
 inline void twosample_do(
-    int i,
-    NumericVector c_xy,
-    Function statistic_func,
-    NumericVector statistic_permu,
-    LogicalVector where_x, RObject bar)
+    unsigned& i,
+    const NumericVector& data,
+    const LogicalVector& where_y,
+    const Function& statistic_func,
+    NumericVector& statistic_permu,
+    RObject& bar)
 {
-    statistic_permu[i] = as<double>(statistic_func(c_xy[where_x], c_xy[!where_x]));
+    statistic_permu[i] = as<double>(statistic_func(data[!where_y], data[where_y]));
 
     if (CLI_SHOULD_TICK) {
         cli_progress_set(bar, i);
     }
+    i++;
 }
 
 // [[Rcpp::export]]
 NumericVector twosample_pmt(
-    int n_1, int n_2,
-    NumericVector c_xy,
-    Function statistic_func,
-    int n_permu)
+    const NumericVector data,
+    LogicalVector where_y,
+    const Function statistic_func,
+    const unsigned n_permu)
 {
-    int total;
+    RObject bar;
+    cli_progress_init_timer();
+    NumericVector statistic_permu;
+
+    unsigned i = 0;
     if (n_permu == 0) {
-        total = n_combination(n_1 + n_2, std::min(n_1, n_2));
-    } else {
-        total = n_permu;
-    }
+        std::tie(statistic_permu, bar) = statistic_permu_with_bar(n_permutation(where_y), true);
 
-    NumericVector statistic_permu(total);
-    RObject bar = cli_progress_bar(total, NULL);
-
-    LogicalVector where_x(n_1 + n_2, FALSE);
-    for (int k = 0; k < n_1; k++) {
-        where_x[k] = TRUE;
-    }
-
-    if (n_permu == 0) {
-        int i = 0;
         do {
-            twosample_do(i, c_xy, statistic_func, statistic_permu, where_x, bar);
-            i++;
-        } while (std::prev_permutation(where_x.begin(), where_x.end()));
+            twosample_do(i, data, where_y, statistic_func, statistic_permu, bar);
+        } while (std::next_permutation(where_y.begin(), where_y.end()));
     } else {
-        for (int i = 0; i < total; i++) {
-            random_shuffle(where_x);
-            twosample_do(i, c_xy, statistic_func, statistic_permu, where_x, bar);
+        std::tie(statistic_permu, bar) = statistic_permu_with_bar(n_permu, false);
+
+        while (i < n_permu) {
+            random_shuffle(where_y);
+            twosample_do(i, data, where_y, statistic_func, statistic_permu, bar);
         }
     }
 
