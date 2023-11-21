@@ -26,7 +26,13 @@ MultipleComparison <- R6Class(
 
             cat(
                 paste("scoring:", private$.scoring),
-                paste("type:", private$.type),
+                paste(
+                    "type:",
+                    if ((type <- private$.type) == "permu") {
+                        n <- as.numeric(ncol(private$.statistic_permu))
+                        paste0(type, "(", format(n, digits = digits), ")")
+                    } else type
+                ),
                 paste("method:", private$.method),
                 "\n\n", sep = "    "
             )
@@ -42,18 +48,14 @@ MultipleComparison <- R6Class(
         .plot = function(...) {
             histograms <- ggplot() +
                 stat_bin(
-                    data = do.call(
-                        rbind, .mapply(
-                            dots = c(private$.ij, list(seq_along(private$.ij$i))),
-                            FUN = function(i, j, k) {
-                                data.frame(
-                                    i = i, j = j,
-                                    statistic_permu = private$.statistic_permu[, k]
-                                )
-                            }, MoreArgs = NULL
+                    data = {
+                        n <- ncol(private$.statistic_permu)
+                        data.frame(
+                            i = rep.int(private$.ij$i, n),
+                            j = rep.int(private$.ij$j, n)
                         )
-                    ),
-                    mapping = aes(x = statistic_permu),
+                    },
+                    mapping = aes(x = as.vector(private$.statistic_permu)),
                     geom = "bar", fill = "#68aaa1", ...
                 ) +
                 geom_vline(
