@@ -30,7 +30,7 @@ KolmogorovSmirnov <- R6Class(
             m <- length(private$.data$x)
             n <- length(private$.data$y)
 
-            tmp <- rep_len(1 / m, m + n)
+            tmp <- rep.int(1 / m, m + n)
             private$.statistic_func <- function(x, y) {
                 max(abs(cumsum(`[<-`(tmp, order(c(x, y)) <= m, -1 / n))))
             }

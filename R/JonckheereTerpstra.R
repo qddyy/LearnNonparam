@@ -34,16 +34,18 @@ JonckheereTerpstra <- R6Class(
         .define = function() {
             k <- as.integer(get_last(names(private$.data)))
             ij <- list(
-                i = c(lapply(seq_len(k - 1), seq_len), recursive = TRUE),
+                i = unlist(lapply(
+                    seq_len(k - 1), seq_len
+                ), recursive = FALSE, use.names = FALSE),
                 j = rep.int(seq_len(k)[-1], seq_len(k - 1))
             )
             private$.statistic_func <- function(data, group) {
                 where <- split(seq_along(group), group)
-                sum(c(.mapply(
+                sum(unlist(.mapply(
                     FUN = function(i, j) {
                         outer(data[where[[i]]], data[where[[j]]], "<")
                     }, dots = ij, MoreArgs = NULL
-                ), recursive = TRUE))
+                ), recursive = FALSE, use.names = FALSE))
             }
         },
 

@@ -78,7 +78,9 @@ MultipleComparison <- R6Class(
             k <- as.integer(get_last(names(private$.raw_data)))
             private$.ij <- list(
                 i = rep.int(seq_len(k - 1), seq.int(k - 1, 1)),
-                j = c(lapply(seq.int(2, k), seq.int, to = k), recursive = TRUE)
+                j = unlist(lapply(
+                    seq.int(2, k), seq.int, to = k
+                ), recursive = FALSE, use.names = FALSE)
             )
         },
 

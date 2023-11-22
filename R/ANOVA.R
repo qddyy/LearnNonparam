@@ -46,11 +46,9 @@ ANOVA <- R6Class(
                     k <- length(splited)
 
                     bar_.. <- mean(data)
-                    bar_i. <- c(
-                        lapply(
-                            splited, function(x) rep_len(mean(x), length(x))
-                        ), recursive = TRUE, use.names = FALSE
-                    )
+                    bar_i. <- unlist(lapply(
+                        splited, function(x) rep.int(mean(x), length(x))
+                    ), recursive = FALSE, use.names = FALSE)
 
                     mst <- sum((bar_i. - bar_..)^2) / (k - 1)
                     mse <- sum((data - bar_i.)^2) / (N - k)
