@@ -29,6 +29,7 @@ SiegelTukey <- R6Class(
             super$initialize(...)
 
             private$.null_value <- 1
+            private$.scoring <- "siegel-tukey rank"
         }
     ),
     private = list(
@@ -48,9 +49,6 @@ SiegelTukey <- R6Class(
                 )
             }
 
-            super$.calculate_score()
-            private$.scoring <- "siegel-tukey rank"
-
             c_xy <- c(private$.data$x, private$.data$y)
             N <- length(c_xy)
 
@@ -67,14 +65,14 @@ SiegelTukey <- R6Class(
                 rank_r <- rank_r[index_floor]
             }
 
-            st_rank <- vapply(
-                X = split(c(rank_l, rev(rank_r)), seq_len(N)),
-                FUN = mean, FUN.VALUE = numeric(1), USE.NAMES = FALSE
-            )
+            rank_xy <- rank(c_xy, ties.method = "first")
+            st_rank <- unlist(lapply(
+                split(c(rank_l, rev(rank_r)), c_xy[order(rank_xy)]),
+                function(x) if ((len <- length(x)) == 1) x else rep.int(mean(x), len)
+            ), recursive = FALSE, use.names = FALSE)[rank_xy]
 
-            private$.data <- lapply(
-                private$.data, function(x) st_rank[x]
-            )
+            x_index <- seq_along(private$.data$x)
+            private$.data <- list(x = st_rank[x_index], y = st_rank[-x_index])
         }
     )
 )
