@@ -123,7 +123,7 @@
 <span><span class="co"># See ?Table1.2.1</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table1.2.1</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="fu">plot</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">plot</span><span class="op">(</span>style <span class="op">=</span> <span class="st">"ggplot2"</span><span class="op">)</span></span></code></pre></div>
 <p><img src="examples_files/figure-html/unnamed-chunk-3-1.png" width="100%" style="display: block; margin: auto;"></p>
 </div>
 <div class="section level3">
@@ -210,12 +210,9 @@
 <span>    use_1000 <span class="op">=</span> <span class="op">{</span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">1000</span><span class="op">}</span></span>
 <span><span class="op">)</span></span>
 <span><span class="co">#&gt; Unit: milliseconds</span></span>
-<span><span class="co">#&gt;      expr        min         lq       mean     median         uq       max</span></span>
-<span><span class="co">#&gt;   use_all 100.587014 102.720484 105.072756 103.772484 104.843840 177.51043</span></span>
-<span><span class="co">#&gt;  use_1000   7.966142   8.064461   8.498488   8.202127   8.336057  14.49608</span></span>
-<span><span class="co">#&gt;  neval</span></span>
-<span><span class="co">#&gt;    100</span></span>
-<span><span class="co">#&gt;    100</span></span></code></pre></div>
+<span><span class="co">#&gt;      expr        min        lq       mean     median         uq       max neval</span></span>
+<span><span class="co">#&gt;   use_all 100.183982 102.74977 104.702650 103.947984 105.179729 173.62233   100</span></span>
+<span><span class="co">#&gt;  use_1000   7.856578   8.05085   8.635329   8.139912   8.437763  17.01257   100</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-2-6-1">Example 2.6.1<a class="anchor" aria-label="anchor" href="#example-2-6-1"></a>
