@@ -90,7 +90,7 @@ Perform test on data.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{...}}{the data.}
+\item{\code{...}}{data.}
 }
 \if{html}{\out{</div>}}
 }
@@ -110,7 +110,7 @@ Print the results of the test.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{digits}}{number of significant digits to be used.}
+\item{\code{digits}}{an integer specifying the minimum number of significant digits to be printed in values.}
 }
 \if{html}{\out{</div>}}
 }
@@ -124,13 +124,15 @@ The object itself (invisibly).
 \subsection{Method \code{plot()}}{
 Plot histogram(s) of the permutation distribution. Note that it works only if the test's type is \code{"permu"}.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PermuTest$plot(...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{PermuTest$plot(style = c("graphics", "ggplot2"), ...)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{...}}{extra parameters passed to \code{ggplot2::stat_bin}.}
+\item{\code{style}}{a character string specifying which package to be used.}
+
+\item{\code{...}}{extra parameters passed to \code{graphics::hist} or \code{ggplot2::stat_bin}.}
 }
 \if{html}{\out{</div>}}
 }

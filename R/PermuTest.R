@@ -6,7 +6,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom ggplot2 ggplot aes stat_bin geom_vline labs theme element_text
+#' @importFrom cli cli_abort
 
 
 PermuTest <- R6Class(
@@ -28,7 +28,7 @@ PermuTest <- R6Class(
 
         #' @description Perform test on data. 
         #' 
-        #' @param ... the data. 
+        #' @param ... data. 
         #' 
         #' @return The object itself (invisibly).
         test = function(...) {
@@ -41,7 +41,7 @@ PermuTest <- R6Class(
 
         #' @description Print the results of the test. 
         #' 
-        #' @param digits number of significant digits to be used. 
+        #' @param digits an integer specifying the minimum number of significant digits to be printed in values. 
         #' 
         #' @return The object itself (invisibly). 
         print = function(digits = getOption("digits")) {
@@ -54,12 +54,17 @@ PermuTest <- R6Class(
 
         #' @description Plot histogram(s) of the permutation distribution. Note that it works only if the test's type is `"permu"`. 
         #' 
-        #' @param ... extra parameters passed to `ggplot2::stat_bin`. 
+        #' @template plot_params
+        #' @param ... extra parameters passed to `graphics::hist` or `ggplot2::stat_bin`. 
         #' 
         #' @return The object itself (invisibly). 
-        plot = function(...) {
+        plot = function(style = c("graphics", "ggplot2"), ...) {
             if (!is.null(private$.raw_data) & private$.type == "permu") {
-                private$.plot(...)
+                if (match.arg(style) == "graphics") {
+                    private$.plot(...)
+                } else if (requireNamespace("ggplot2")) {
+                    print(private$.autoplot(...))
+                }
             }
 
             invisible(self)
@@ -157,18 +162,40 @@ PermuTest <- R6Class(
         },
 
         .plot = function(...) {
-            histogram <- ggplot() +
-                stat_bin(
-                    mapping = aes(x = private$.statistic_permu),
-                    geom = "bar", fill = "#68aaa1", ...
+            do_call(
+                func = hist,
+                fixed = list(
+                    x = private$.statistic_permu,
+                    plot = TRUE,
+                    xlab = "Statistic",
+                    main = "Permutation Distribution"
+                ), ...
+            )
+            abline(v = private$.statistic, lty = "dashed")
+        },
+
+        .autoplot = function(...) {
+            ggplot2::ggplot() +
+                do_call(
+                    func = ggplot2::stat_bin,
+                    default = list(fill = "#68aaa1"),
+                    fixed = list(
+                        geom = "bar",
+                        mapping = ggplot2::aes(x = .data$statistic),
+                        data = data.frame(statistic = private$.statistic_permu)
+                    ), ...
                 ) +
-                geom_vline(xintercept = private$.statistic, linetype = "dashed") +
-                labs(
+                ggplot2::geom_vline(
+                    xintercept = private$.statistic,
+                    linetype = "dashed"
+                ) +
+                ggplot2::labs(
                     title = "Permutation Distribution",
                     x = "Statistic", y = "Count"
                 ) +
-                theme(plot.title = element_text(face = "bold", hjust = 0.5))
-            print(histogram)
+                ggplot2::theme(
+                    plot.title = ggplot2::element_text(face = "bold", hjust = 0.5)
+                )
         },
 
         # @Override

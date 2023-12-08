@@ -7,7 +7,6 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom ggplot2 ggplot geom_step xlim labs theme element_text
 
 
 CDF <- R6Class(
@@ -26,11 +25,13 @@ CDF <- R6Class(
 
         #' @description Plot the estimate and confidence bounds for population cdf of the data. 
         #' 
+        #' @template plot_params
+        #' 
         #' @return The object itself (invisibly). 
-        plot = function() {
-            if (!is.null(private$.raw_data)) {
-                private$.plot()
-            }
+        plot = function(style = c("graphics", "ggplot2")) {
+            private$.type <- "permu"
+            super$plot(style = style)
+            private$.type <- "approx"
 
             invisible(self)
         }
@@ -40,38 +41,69 @@ CDF <- R6Class(
 
         .type = "approx",
 
+        .lims_for_plot = NULL,
+
         .print = function(...) {},
 
         .plot = function() {
-            cdf_with_bounds <- ggplot(
+            plot(
+                private$.estimate, lty = "solid",
+                xlim = private$.lims_for_plot$x,
+                ylim = private$.lims_for_plot$y,
+                main = "Empirical CDF with Confidence Bounds",
+                xlab = expression(x), ylab = expression(F[n](x))
+            )
+            plot(private$.ci$lower, lty = "dashed", add = TRUE)
+            plot(private$.ci$upper, lty = "dashed", add = TRUE)
+        },
+
+        .autoplot = function() {
+            ggplot2::ggplot(
                 data = data.frame(
+                    x = private$.data,
                     cdf = private$.estimate(private$.data),
                     lower = private$.ci$lower(private$.data),
                     upper = private$.ci$upper(private$.data)
-                ), mapping = aes(x = private$.data)
+                ), mapping = ggplot2::aes(x = .data$x)
             ) +
-                geom_step(mapping = aes(y = cdf)) +
-                geom_step(mapping = aes(y = lower), linetype = 2) +
-                geom_step(mapping = aes(y = upper), linetype = 2) +
-                xlim(c(min(private$.data), max(private$.data))) +
-                labs(
+                ggplot2::geom_step(
+                    mapping = ggplot2::aes(y = .data$cdf), linetype = "solid"
+                ) +
+                ggplot2::geom_step(
+                    mapping = ggplot2::aes(y = .data$lower), linetype = "dashed"
+                ) +
+                ggplot2::geom_step(
+                    mapping = ggplot2::aes(y = .data$upper), linetype = "dashed"
+                ) +
+                ggplot2::lims(
+                    x = private$.lims_for_plot$x, y = private$.lims_for_plot$y
+                ) +
+                ggplot2::labs(
                     title = "Empirical CDF with Confidence Bounds",
                     x = expression(x), y = expression(F[n](x))
                 ) +
-                theme(plot.title = element_text(face = "bold", hjust = 0.5))
-            print(cdf_with_bounds)
+                ggplot2::theme(
+                    plot.title = ggplot2::element_text(face = "bold", hjust = 0.5)
+                )
         },
 
         .calculate_extra = function() {
-            private$.estimate <- F_n <- ecdf(private$.data)
-
             n <- length(private$.data)
-            A <- 1 / sqrt(n) * qnorm(1 - (1 - private$.conf_level) / 2)
-            delta_n <- function(x) A * sqrt(F_n(x) * (1 - F_n(x)))
+            sorted <- sort(private$.data)
 
+            F_n <- seq.int(0, n) / n
+            private$.estimate <- stepfun(x = sorted, y = F_n, right = TRUE)
+
+            A <- 1 / sqrt(n) * qnorm(1 - (1 - private$.conf_level) / 2)
+            delta_n <- A * sqrt(F_n * (1 - F_n))
             private$.ci <- list(
-                lower = function(x) F_n(x) - delta_n(x),
-                upper = function(x) F_n(x) + delta_n(x)
+                lower = stepfun(x = sorted, y = F_n - delta_n, right = TRUE),
+                upper = stepfun(x = sorted, y = F_n + delta_n, right = TRUE)
+            )
+
+            private$.lims_for_plot <- list(
+                x = c(sorted[1], get_last(sorted)),
+                y = c(min(F_n - delta_n), max(F_n + delta_n))
             )
         }
     )

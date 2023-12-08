@@ -51,9 +51,16 @@ A \code{CDF} object.
 \subsection{Method \code{plot()}}{
 Plot the estimate and confidence bounds for population cdf of the data.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CDF$plot()}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{CDF$plot(style = c("graphics", "ggplot2"))}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{style}}{a character string specifying which package to be used.}
+}
+\if{html}{\out{</div>}}
+}
 \subsection{Returns}{
 The object itself (invisibly).
 }

@@ -11,6 +11,19 @@ get_list <- function(...) {
     if (all(vapply(data, length, numeric(1)) >= 2)) data
 }
 
+# for .plot & .ggplot
+
+do_call <- function(func, default = NULL, fixed = NULL, ...) {
+    env_args <- list2env(as.list(default))
+    env_args <- list2env(list(...), envir = env_args)
+    env_args <- list2env(as.list(fixed), envir = env_args)
+
+    eval(
+        as.call(c(func, sapply(names(env_args), as.name, simplify = FALSE))),
+        envir = env_args, enclos = parent.frame()
+    )
+}
+
 # for .calculate_score
 
 get_score <- function(x, method, n = length(x)) {

@@ -63,7 +63,7 @@ pak::pkg_install("qddyy/LearnNonparam")
 
     t$print(digits = 2)
 
-    t$plot(binwidth = 1)
+    t$plot(style = "ggplot2", binwidth = 1)
     ```
 
 - Modify some attributes and see how the results change
@@ -81,13 +81,12 @@ t <- pmt(...)$test(...)$print(...)$plot(...)
 
 ## Tips
 
-- This package uses `iterator` progress bar provided by the `cli` package, which can be customized. See <https://cli.r-lib.org/articles/progress-advanced.html#customization>. 
+Check
 
-- Check
-    - `?PermuTest` (all tests' base class) for all available methods and attributes. 
-    - `pmts()` for all available tests. 
-        ```{r, pmts}
-        pmts()
-        ```
+- `?PermuTest` (all tests' base class) for all available methods and attributes. 
+- `pmts()` for all available tests. 
+    ```{r, pmts}
+    pmts()
+    ```
 
 ## References

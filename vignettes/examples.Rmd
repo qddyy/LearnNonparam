@@ -15,8 +15,8 @@ knitr::opts_chunk$set(
     fig.align = "center", fig.width = 16, fig.height = 9, out.width = "100%"
 )
 
-if (!require("microbenchmark")) {
-    install.packages("microbenchmark", repos = "https://cloud.r-project.org/")
+for (pkg in c("ggplot2", "microbenchmark")) {
+    if (!require(pkg)) install.packages(pkg, repos = "https://cloud.r-project.org/")
 }
 ```
 
@@ -55,7 +55,7 @@ t <- pmt("onesample.cdf")
 # See ?Table1.2.1
 t$test(Table1.2.1)
 
-t$plot()
+t$plot(style = "ggplot2")
 ```
 
 ## Example 1.2.4

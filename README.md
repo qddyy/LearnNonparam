@@ -64,7 +64,8 @@ pak::pkg_install("qddyy/LearnNonparam")
   #> estimate: 0.95
   #> 95% confidence interval: 0.39 1.62
 
-  t$plot(binwidth = 1)
+  t$plot(style = "ggplot2", binwidth = 1)
+  #> Loading required namespace: ggplot2
   ```
 
   <img src="man/figures/README-results-1.svg" width="100%" />
@@ -87,48 +88,44 @@ t <- pmt(...)$test(...)$print(...)$plot(...)
 
 ## Tips
 
-- This package uses `iterator` progress bar provided by the `cli`
-  package, which can be customized. See
-  <https://cli.r-lib.org/articles/progress-advanced.html#customization>.
+Check
 
-- Check
+- `?PermuTest` (all tests’ base class) for all available methods and
+  attributes.
 
-  - `?PermuTest` (all tests’ base class) for all available methods and
-    attributes.
+- `pmts()` for all available tests.
 
-  - `pmts()` for all available tests.
+  ``` r
+  pmts()
+  ```
 
-    ``` r
-    pmts()
-    ```
+  <div class="kable-table">
 
-    <div class="kable-table">
+  | key                  | class              | test                                                 |
+  |:---------------------|:-------------------|:-----------------------------------------------------|
+  | onesample.quantile   | Quantile           | Quantile Test                                        |
+  | onesample.cdf        | CDF                | Cumulative Distribution Function                     |
+  | twosample.difference | Difference         | Two Sample Test Based on Mean or Median              |
+  | twosample.wilcoxon   | Wilcoxon           | Two Sample Wilcoxon Test                             |
+  | twosample.scoresum   | ScoreSum           | Score Sum Test                                       |
+  | twosample.ansari     | AnsariBradley      | Ansari-Bradley Test                                  |
+  | twosample.siegel     | SiegelTukey        | Siegel-Tukey Test                                    |
+  | twosample.rmd        | RatioMeanDeviance  | Ratio Mean Deviance Test                             |
+  | twosample.ks         | KolmogorovSmirnov  | Two Sample Kolmogorov-Smirnov Test                   |
+  | ksample.anova        | ANOVA              | K Sample Test Based on F Statistic                   |
+  | ksample.kw           | KruskalWallis      | Kruskal-Wallis Test                                  |
+  | ksample.jt           | JonckheereTerpstra | Jonckheere-Terpstra Test                             |
+  | multicomp.t          | MultiCompT         | Multiple Comparison Based on t Statistic             |
+  | multicomp.tukey      | TukeyHSD           | Tukey’s HSD                                          |
+  | paired.sign          | Sign               | Sign Test                                            |
+  | paired.signeddiff    | SignedDiff         | Paired Comparison Based on Signed Differences        |
+  | rcbd.anova           | RCBDANOVA          | ANOVA for Randomized Complete Block Design           |
+  | rcbd.friedman        | Friedman           | Friedman Test                                        |
+  | rcbd.page            | Page               | Page Test                                            |
+  | association.corr     | Correlation        | Two Sample Test Based on Correlation Coefficient     |
+  | table.chisq          | ChiSquare          | Contingency Table Test Based on Chi-square Statistic |
 
-    | key                  | class              | test                                                 |
-    |:---------------------|:-------------------|:-----------------------------------------------------|
-    | onesample.quantile   | Quantile           | Quantile Test                                        |
-    | onesample.cdf        | CDF                | Cumulative Distribution Function                     |
-    | twosample.difference | Difference         | Two Sample Test Based on Mean or Median              |
-    | twosample.wilcoxon   | Wilcoxon           | Two Sample Wilcoxon Test                             |
-    | twosample.scoresum   | ScoreSum           | Score Sum Test                                       |
-    | twosample.ansari     | AnsariBradley      | Ansari-Bradley Test                                  |
-    | twosample.siegel     | SiegelTukey        | Siegel-Tukey Test                                    |
-    | twosample.rmd        | RatioMeanDeviance  | Ratio Mean Deviance Test                             |
-    | twosample.ks         | KolmogorovSmirnov  | Two Sample Kolmogorov-Smirnov Test                   |
-    | ksample.anova        | ANOVA              | K Sample Test Based on F Statistic                   |
-    | ksample.kw           | KruskalWallis      | Kruskal-Wallis Test                                  |
-    | ksample.jt           | JonckheereTerpstra | Jonckheere-Terpstra Test                             |
-    | multicomp.t          | MultiCompT         | Multiple Comparison Based on t Statistic             |
-    | multicomp.tukey      | TukeyHSD           | Tukey’s HSD                                          |
-    | paired.sign          | Sign               | Sign Test                                            |
-    | paired.signeddiff    | SignedDiff         | Paired Comparison Based on Signed Differences        |
-    | rcbd.anova           | RCBDANOVA          | ANOVA for Randomized Complete Block Design           |
-    | rcbd.friedman        | Friedman           | Friedman Test                                        |
-    | rcbd.page            | Page               | Page Test                                            |
-    | association.corr     | Correlation        | Two Sample Test Based on Correlation Coefficient     |
-    | table.chisq          | ChiSquare          | Contingency Table Test Based on Chi-square Statistic |
-
-    </div>
+  </div>
 
 ## References
 

@@ -6,7 +6,6 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom ggplot2 ggplot aes stat_bin geom_vline facet_grid labs theme element_text
 
 
 MultipleComparison <- R6Class(
@@ -46,30 +45,76 @@ MultipleComparison <- R6Class(
         },
 
         .plot = function(...) {
-            histograms <- ggplot() +
-                stat_bin(
-                    data = {
-                        n <- ncol(private$.statistic_permu)
-                        data.frame(
-                            i = rep.int(private$.ij$i, n),
-                            j = rep.int(private$.ij$j, n)
-                        )
-                    },
-                    mapping = aes(x = as.vector(private$.statistic_permu)),
-                    geom = "bar", fill = "#68aaa1", ...
+            n <- get_last(private$.ij$i)
+
+            dots <- c(private$.ij, list(seq_len(n * (n + 1) / 2)))
+
+            layout_matrix <- matrix(0, n, n)
+            .mapply(
+                FUN = function(i, j, k) {
+                    layout_matrix[j - 1, i] <<- k
+                }, dots = dots, MoreArgs = NULL
+            )
+
+            defaut_par <- par(no.readonly = TRUE)
+            par(oma = c(0, 0, 3, 0))
+            layout(layout_matrix)
+            .mapply(
+                FUN = function(i, j, k) {
+                    do_call(
+                        func = hist,
+                        fixed = list(
+                            x = private$.statistic_permu[k, ],
+                            plot = TRUE,
+                            xlab = "Statistic",
+                            main = paste(i, "versus", j)
+                        ), ...
+                    )
+                    abline(v = private$.statistic[k], lty = "dashed")
+                }, dots = dots, MoreArgs = NULL
+            )
+            mtext(
+                text = expression(bold("Permutation Distribution")),
+                side = 3, line = 0, outer = TRUE
+            )
+            par(defaut_par)
+        },
+
+        .autoplot = function(...) {
+            ggplot2::ggplot() +
+                do_call(
+                    func = ggplot2::stat_bin,
+                    default = list(fill = "#68aaa1"),
+                    fixed = list(
+                        geom = "bar",
+                        mapping = ggplot2::aes(x = .data$statistic),
+                        data = {
+                            n <- ncol(private$.statistic_permu)
+                            data.frame(
+                                i = rep.int(private$.ij$i, n),
+                                j = rep.int(private$.ij$j, n),
+                                statistic = as.vector(private$.statistic_permu)
+                            )
+                        }
+                    ), ...
                 ) +
-                geom_vline(
+                ggplot2::geom_vline(
                     data = private$.multicomp[1:3],
-                    mapping = aes(xintercept = statistic),
+                    mapping = ggplot2::aes(xintercept = statistic),
                     linetype = "dashed"
                 ) +
-                facet_grid(j ~ i, scales = "free", switch = "both") +
-                labs(
+                ggplot2::facet_grid(
+                    rows = ggplot2::vars(.data$j),
+                    cols = ggplot2::vars(.data$i),
+                    scales = "free", switch = "both"
+                ) +
+                ggplot2::labs(
                     title = "Permutation Distribution",
                     x = "Statistic", y = "Count"
                 ) +
-                theme(plot.title = element_text(face = "bold", hjust = 0.5))
-            print(histograms)
+                ggplot2::theme(
+                    plot.title = ggplot2::element_text(face = "bold", hjust = 0.5)
+                )
         },
 
         .input = function(...) {
