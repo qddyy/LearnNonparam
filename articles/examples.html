@@ -149,330 +149,121 @@
 <div class="section level3">
 <h3 id="table-2-1-1">Table 2.1.1<a class="anchor" aria-label="anchor" href="#table-2-1-1"></a>
 </h3>
-<div class="sourceCode" id="cb5"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb5-1"><a href="#cb5-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Difference or ?twosample.difference</span></span>
-<span id="cb5-2"><a href="#cb5-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">pmt</span>(</span>
-<span id="cb5-3"><a href="#cb5-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"twosample.difference"</span>, <span class="at">alternative =</span> <span class="st">"greater"</span>, <span class="at">method =</span> <span class="st">"mean"</span></span>
-<span id="cb5-4"><a href="#cb5-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb5-5"><a href="#cb5-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-6"><a href="#cb5-6" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Table2.1.1</span></span>
-<span id="cb5-7"><a href="#cb5-7" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">test</span>(Table2.<span class="fl">1.1</span>)</span>
-<span id="cb5-8"><a href="#cb5-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb5-9"><a href="#cb5-9" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb5-10"><a href="#cb5-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb5-11"><a href="#cb5-11" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>statistic</span>
-<span id="cb5-12"><a href="#cb5-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 16.16667</span></span>
-<span id="cb5-13"><a href="#cb5-13" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb5-14"><a href="#cb5-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.05714286</span></span></code></pre></div>
+<div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># See ?Difference or ?twosample.difference</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
+<span>    <span class="st">"twosample.difference"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>, method <span class="op">=</span> <span class="st">"mean"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># See ?Table2.1.1</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table2.1.1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
+<span><span class="co">#&gt; [1] 16.16667</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.05714286</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="table-2-1-1---wilcoxon">Table 2.1.1 - wilcoxon<a class="anchor" aria-label="anchor" href="#table-2-1-1---wilcoxon"></a>
 </h3>
-<div class="sourceCode" id="cb6"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb6-1"><a href="#cb6-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Wilcoxon or ?twosample.wilcoxon</span></span>
-<span id="cb6-2"><a href="#cb6-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">pmt</span>(</span>
-<span id="cb6-3"><a href="#cb6-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"twosample.wilcoxon"</span>, <span class="at">alternative =</span> <span class="st">"greater"</span></span>
-<span id="cb6-4"><a href="#cb6-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb6-5"><a href="#cb6-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-6"><a href="#cb6-6" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Table2.1.1</span></span>
-<span id="cb6-7"><a href="#cb6-7" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">test</span>(Table2.<span class="fl">1.1</span>)</span>
-<span id="cb6-8"><a href="#cb6-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb6-9"><a href="#cb6-9" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb6-10"><a href="#cb6-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb6-11"><a href="#cb6-11" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>statistic</span>
-<span id="cb6-12"><a href="#cb6-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 21</span></span>
-<span id="cb6-13"><a href="#cb6-13" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb6-14"><a href="#cb6-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.05714286</span></span></code></pre></div>
+<div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># See ?Wilcoxon or ?twosample.wilcoxon</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
+<span>    <span class="st">"twosample.wilcoxon"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># See ?Table2.1.1</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table2.1.1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
+<span><span class="co">#&gt; [1] 21</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.05714286</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-2-3-1">Example 2.3.1<a class="anchor" aria-label="anchor" href="#example-2-3-1"></a>
 </h3>
-<div class="sourceCode" id="cb7"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb7-1"><a href="#cb7-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Difference or ?twosample.difference</span></span>
-<span id="cb7-2"><a href="#cb7-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">pmt</span>(</span>
-<span id="cb7-3"><a href="#cb7-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"twosample.difference"</span>, <span class="at">alternative =</span> <span class="st">"greater"</span>, <span class="at">method =</span> <span class="st">"mean"</span></span>
-<span id="cb7-4"><a href="#cb7-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-5"><a href="#cb7-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-6"><a href="#cb7-6" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Table2.3.1</span></span>
-<span id="cb7-7"><a href="#cb7-7" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">test</span>(Table2.<span class="fl">3.1</span>)</span>
-<span id="cb7-8"><a href="#cb7-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb7-9"><a href="#cb7-9" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-10"><a href="#cb7-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-11"><a href="#cb7-11" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>statistic</span>
-<span id="cb7-12"><a href="#cb7-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 1.675</span></span>
-<span id="cb7-13"><a href="#cb7-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-14"><a href="#cb7-14" aria-hidden="true" tabindex="-1"></a><span class="co"># all permutaions</span></span>
-<span id="cb7-15"><a href="#cb7-15" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb7-16"><a href="#cb7-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.1966589</span></span>
-<span id="cb7-17"><a href="#cb7-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-18"><a href="#cb7-18" aria-hidden="true" tabindex="-1"></a><span class="co"># 1000 permutaions</span></span>
-<span id="cb7-19"><a href="#cb7-19" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>n_permu <span class="ot">&lt;-</span> <span class="dv">1000</span></span>
-<span id="cb7-20"><a href="#cb7-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb7-21"><a href="#cb7-21" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-22"><a href="#cb7-22" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb7-23"><a href="#cb7-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.203</span></span>
-<span id="cb7-24"><a href="#cb7-24" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb7-25"><a href="#cb7-25" aria-hidden="true" tabindex="-1"></a><span class="co"># install.packages("microbenchmark")</span></span>
-<span id="cb7-26"><a href="#cb7-26" aria-hidden="true" tabindex="-1"></a>microbenchmark<span class="sc">::</span><span class="fu">microbenchmark</span>(</span>
-<span id="cb7-27"><a href="#cb7-27" aria-hidden="true" tabindex="-1"></a>    <span class="at">use_all =</span> {t<span class="sc">$</span>n_permu <span class="ot">&lt;-</span> <span class="dv">0</span>},</span>
-<span id="cb7-28"><a href="#cb7-28" aria-hidden="true" tabindex="-1"></a>    <span class="at">use_1000 =</span> {t<span class="sc">$</span>n_permu <span class="ot">&lt;-</span> <span class="dv">1000</span>}</span>
-<span id="cb7-29"><a href="#cb7-29" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb7-30"><a href="#cb7-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb7-31"><a href="#cb7-31" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-32"><a href="#cb7-32" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-33"><a href="#cb7-33" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-34"><a href="#cb7-34" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-35"><a href="#cb7-35" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-36"><a href="#cb7-36" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-37"><a href="#cb7-37" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-38"><a href="#cb7-38" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-39"><a href="#cb7-39" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-40"><a href="#cb7-40" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-41"><a href="#cb7-41" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-42"><a href="#cb7-42" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-43"><a href="#cb7-43" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-44"><a href="#cb7-44" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-45"><a href="#cb7-45" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-46"><a href="#cb7-46" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-47"><a href="#cb7-47" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-48"><a href="#cb7-48" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-49"><a href="#cb7-49" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-50"><a href="#cb7-50" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-51"><a href="#cb7-51" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-52"><a href="#cb7-52" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-53"><a href="#cb7-53" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-54"><a href="#cb7-54" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-55"><a href="#cb7-55" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-56"><a href="#cb7-56" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-57"><a href="#cb7-57" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-58"><a href="#cb7-58" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-59"><a href="#cb7-59" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-60"><a href="#cb7-60" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-61"><a href="#cb7-61" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-62"><a href="#cb7-62" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-63"><a href="#cb7-63" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-64"><a href="#cb7-64" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-65"><a href="#cb7-65" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-66"><a href="#cb7-66" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-67"><a href="#cb7-67" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-68"><a href="#cb7-68" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-69"><a href="#cb7-69" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-70"><a href="#cb7-70" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-71"><a href="#cb7-71" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-72"><a href="#cb7-72" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-73"><a href="#cb7-73" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-74"><a href="#cb7-74" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-75"><a href="#cb7-75" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-76"><a href="#cb7-76" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-77"><a href="#cb7-77" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-78"><a href="#cb7-78" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-79"><a href="#cb7-79" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-80"><a href="#cb7-80" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-81"><a href="#cb7-81" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-82"><a href="#cb7-82" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-83"><a href="#cb7-83" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-84"><a href="#cb7-84" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-85"><a href="#cb7-85" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-86"><a href="#cb7-86" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-87"><a href="#cb7-87" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-88"><a href="#cb7-88" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-89"><a href="#cb7-89" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-90"><a href="#cb7-90" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-91"><a href="#cb7-91" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-92"><a href="#cb7-92" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-93"><a href="#cb7-93" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-94"><a href="#cb7-94" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-95"><a href="#cb7-95" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-96"><a href="#cb7-96" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-97"><a href="#cb7-97" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-98"><a href="#cb7-98" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-99"><a href="#cb7-99" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-100"><a href="#cb7-100" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-101"><a href="#cb7-101" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-102"><a href="#cb7-102" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-103"><a href="#cb7-103" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-104"><a href="#cb7-104" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-105"><a href="#cb7-105" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-106"><a href="#cb7-106" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-107"><a href="#cb7-107" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-108"><a href="#cb7-108" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-109"><a href="#cb7-109" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-110"><a href="#cb7-110" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-111"><a href="#cb7-111" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-112"><a href="#cb7-112" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-113"><a href="#cb7-113" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-114"><a href="#cb7-114" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-115"><a href="#cb7-115" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-116"><a href="#cb7-116" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-117"><a href="#cb7-117" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-118"><a href="#cb7-118" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-119"><a href="#cb7-119" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-120"><a href="#cb7-120" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-121"><a href="#cb7-121" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-122"><a href="#cb7-122" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-123"><a href="#cb7-123" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-124"><a href="#cb7-124" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-125"><a href="#cb7-125" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-126"><a href="#cb7-126" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-127"><a href="#cb7-127" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-128"><a href="#cb7-128" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-129"><a href="#cb7-129" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-130"><a href="#cb7-130" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-131"><a href="#cb7-131" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-132"><a href="#cb7-132" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-133"><a href="#cb7-133" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-134"><a href="#cb7-134" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-135"><a href="#cb7-135" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-136"><a href="#cb7-136" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-137"><a href="#cb7-137" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-138"><a href="#cb7-138" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-139"><a href="#cb7-139" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-140"><a href="#cb7-140" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-141"><a href="#cb7-141" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-142"><a href="#cb7-142" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-143"><a href="#cb7-143" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-144"><a href="#cb7-144" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-145"><a href="#cb7-145" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-146"><a href="#cb7-146" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-147"><a href="#cb7-147" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-148"><a href="#cb7-148" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-149"><a href="#cb7-149" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-150"><a href="#cb7-150" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-151"><a href="#cb7-151" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-152"><a href="#cb7-152" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-153"><a href="#cb7-153" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-154"><a href="#cb7-154" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-155"><a href="#cb7-155" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-156"><a href="#cb7-156" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-157"><a href="#cb7-157" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-158"><a href="#cb7-158" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-159"><a href="#cb7-159" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-160"><a href="#cb7-160" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-161"><a href="#cb7-161" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-162"><a href="#cb7-162" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-163"><a href="#cb7-163" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-164"><a href="#cb7-164" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-165"><a href="#cb7-165" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-166"><a href="#cb7-166" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-167"><a href="#cb7-167" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-168"><a href="#cb7-168" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-169"><a href="#cb7-169" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-170"><a href="#cb7-170" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-171"><a href="#cb7-171" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-172"><a href="#cb7-172" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-173"><a href="#cb7-173" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-174"><a href="#cb7-174" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-175"><a href="#cb7-175" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-176"><a href="#cb7-176" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-177"><a href="#cb7-177" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-178"><a href="#cb7-178" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-179"><a href="#cb7-179" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-180"><a href="#cb7-180" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-181"><a href="#cb7-181" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-182"><a href="#cb7-182" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-183"><a href="#cb7-183" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-184"><a href="#cb7-184" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-185"><a href="#cb7-185" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-186"><a href="#cb7-186" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-187"><a href="#cb7-187" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-188"><a href="#cb7-188" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-189"><a href="#cb7-189" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-190"><a href="#cb7-190" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-191"><a href="#cb7-191" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-192"><a href="#cb7-192" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-193"><a href="#cb7-193" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-194"><a href="#cb7-194" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-195"><a href="#cb7-195" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-196"><a href="#cb7-196" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-197"><a href="#cb7-197" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-198"><a href="#cb7-198" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-199"><a href="#cb7-199" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-200"><a href="#cb7-200" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-201"><a href="#cb7-201" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-202"><a href="#cb7-202" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-203"><a href="#cb7-203" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-204"><a href="#cb7-204" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-205"><a href="#cb7-205" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-206"><a href="#cb7-206" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-207"><a href="#cb7-207" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-208"><a href="#cb7-208" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-209"><a href="#cb7-209" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-210"><a href="#cb7-210" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-211"><a href="#cb7-211" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-212"><a href="#cb7-212" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-213"><a href="#cb7-213" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-214"><a href="#cb7-214" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-215"><a href="#cb7-215" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-216"><a href="#cb7-216" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-217"><a href="#cb7-217" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-218"><a href="#cb7-218" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-219"><a href="#cb7-219" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-220"><a href="#cb7-220" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-221"><a href="#cb7-221" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-222"><a href="#cb7-222" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-223"><a href="#cb7-223" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-224"><a href="#cb7-224" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-225"><a href="#cb7-225" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-226"><a href="#cb7-226" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-227"><a href="#cb7-227" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-228"><a href="#cb7-228" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-229"><a href="#cb7-229" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-230"><a href="#cb7-230" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb7-231"><a href="#cb7-231" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; Unit: milliseconds</span></span>
-<span id="cb7-232"><a href="#cb7-232" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;      expr       min         lq       mean   median         uq       max neval</span></span>
-<span id="cb7-233"><a href="#cb7-233" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   use_all 99.123417 101.456995 103.573531 102.8435 103.610412 175.55634   100</span></span>
-<span id="cb7-234"><a href="#cb7-234" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  use_1000  7.772161   7.915513   8.292728   8.0048   8.204481  10.37125   100</span></span></code></pre></div>
+<div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># See ?Difference or ?twosample.difference</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
+<span>    <span class="st">"twosample.difference"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>, method <span class="op">=</span> <span class="st">"mean"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># See ?Table2.3.1</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table2.3.1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
+<span><span class="co">#&gt; [1] 1.675</span></span>
+<span></span>
+<span><span class="co"># all permutaions</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.1966589</span></span>
+<span></span>
+<span><span class="co"># 1000 permutaions</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.203</span></span>
+<span></span>
+<span><span class="co"># install.packages("microbenchmark")</span></span>
+<span><span class="fu">microbenchmark</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html" class="external-link">microbenchmark</a></span><span class="op">(</span></span>
+<span>    use_all <span class="op">=</span> <span class="op">{</span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">0</span><span class="op">}</span>,</span>
+<span>    use_1000 <span class="op">=</span> <span class="op">{</span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">1000</span><span class="op">}</span></span>
+<span><span class="op">)</span></span>
+<span><span class="co">#&gt; Unit: milliseconds</span></span>
+<span><span class="co">#&gt;      expr        min        lq       mean     median         uq       max neval</span></span>
+<span><span class="co">#&gt;   use_all 100.586191 103.79421 105.783741 105.357153 106.112320 178.77800   100</span></span>
+<span><span class="co">#&gt;  use_1000   7.773042   8.02421   8.519761   8.152835   8.389527  11.12495   100</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-2-6-1">Example 2.6.1<a class="anchor" aria-label="anchor" href="#example-2-6-1"></a>
 </h3>
-<div class="sourceCode" id="cb8"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb8-1"><a href="#cb8-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Wilcoxon or ?twosample.wilcoxon</span></span>
-<span id="cb8-2"><a href="#cb8-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">pmt</span>(</span>
-<span id="cb8-3"><a href="#cb8-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"twosample.wilcoxon"</span>, <span class="at">alternative =</span> <span class="st">"greater"</span></span>
-<span id="cb8-4"><a href="#cb8-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb8-5"><a href="#cb8-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-6"><a href="#cb8-6" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Table2.6.1</span></span>
-<span id="cb8-7"><a href="#cb8-7" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">test</span>(Table2.<span class="fl">6.1</span>)</span>
-<span id="cb8-8"><a href="#cb8-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb8-9"><a href="#cb8-9" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb8-10"><a href="#cb8-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb8-11"><a href="#cb8-11" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>statistic</span>
-<span id="cb8-12"><a href="#cb8-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 14</span></span>
-<span id="cb8-13"><a href="#cb8-13" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb8-14"><a href="#cb8-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.9</span></span></code></pre></div>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># See ?Wilcoxon or ?twosample.wilcoxon</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
+<span>    <span class="st">"twosample.wilcoxon"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># See ?Table2.6.1</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table2.6.1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
+<span><span class="co">#&gt; [1] 14</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.9</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-2-6-2">Example 2.6.2<a class="anchor" aria-label="anchor" href="#example-2-6-2"></a>
 </h3>
-<div class="sourceCode" id="cb9"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb9-1"><a href="#cb9-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Wilcoxon or ?twosample.wilcoxon</span></span>
-<span id="cb9-2"><a href="#cb9-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">pmt</span>(</span>
-<span id="cb9-3"><a href="#cb9-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"twosample.wilcoxon"</span>, <span class="at">conf_level =</span> <span class="fl">0.90</span></span>
-<span id="cb9-4"><a href="#cb9-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb9-5"><a href="#cb9-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-6"><a href="#cb9-6" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Table2.6.2</span></span>
-<span id="cb9-7"><a href="#cb9-7" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">test</span>(Table2.<span class="fl">6.2</span>)</span>
-<span id="cb9-8"><a href="#cb9-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb9-9"><a href="#cb9-9" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb9-10"><a href="#cb9-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb9-11"><a href="#cb9-11" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>estimate</span>
-<span id="cb9-12"><a href="#cb9-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] NA</span></span>
-<span id="cb9-13"><a href="#cb9-13" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>ci</span>
-<span id="cb9-14"><a href="#cb9-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] NA NA</span></span></code></pre></div>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># See ?Wilcoxon or ?twosample.wilcoxon</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
+<span>    <span class="st">"twosample.wilcoxon"</span>, conf_level <span class="op">=</span> <span class="fl">0.90</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># See ?Table2.6.2</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table2.6.2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">estimate</span></span>
+<span><span class="co">#&gt; [1] NA</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">ci</span></span>
+<span><span class="co">#&gt; [1] NA NA</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-2-7-1">Example 2.7.1<a class="anchor" aria-label="anchor" href="#example-2-7-1"></a>
 </h3>
-<div class="sourceCode" id="cb10"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb10-1"><a href="#cb10-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?ScoreSum or ?twosample.scoresum</span></span>
-<span id="cb10-2"><a href="#cb10-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">pmt</span>(</span>
-<span id="cb10-3"><a href="#cb10-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"twosample.scoresum"</span>, <span class="at">alternative =</span> <span class="st">"greater"</span>, <span class="at">scoring =</span> <span class="st">"expon"</span></span>
-<span id="cb10-4"><a href="#cb10-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb10-5"><a href="#cb10-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-6"><a href="#cb10-6" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Table2.6.2</span></span>
-<span id="cb10-7"><a href="#cb10-7" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">test</span>(Table2.<span class="fl">6.2</span>)</span>
-<span id="cb10-8"><a href="#cb10-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb10-9"><a href="#cb10-9" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb10-10"><a href="#cb10-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb10-11"><a href="#cb10-11" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>statistic</span>
-<span id="cb10-12"><a href="#cb10-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 9.752597</span></span>
-<span id="cb10-13"><a href="#cb10-13" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb10-14"><a href="#cb10-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.002164502</span></span></code></pre></div>
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># See ?ScoreSum or ?twosample.scoresum</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
+<span>    <span class="st">"twosample.scoresum"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>, scoring <span class="op">=</span> <span class="st">"expon"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># See ?Table2.6.2</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table2.6.2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
+<span><span class="co">#&gt; [1] 9.752597</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.002164502</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-2-8-1">Example 2.8.1<a class="anchor" aria-label="anchor" href="#example-2-8-1"></a>
@@ -494,36 +285,34 @@
 <div class="section level3">
 <h3 id="example-2-8-2">Example 2.8.2<a class="anchor" aria-label="anchor" href="#example-2-8-2"></a>
 </h3>
-<div class="sourceCode" id="cb12"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb12-1"><a href="#cb12-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?RatioDifferenceDeviance or ?twosample.rmd</span></span>
-<span id="cb12-2"><a href="#cb12-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">pmt</span>(</span>
-<span id="cb12-3"><a href="#cb12-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"twosample.rmd"</span>, <span class="at">alternative =</span> <span class="st">"greater"</span></span>
-<span id="cb12-4"><a href="#cb12-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb12-5"><a href="#cb12-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-6"><a href="#cb12-6" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Table2.8.1</span></span>
-<span id="cb12-7"><a href="#cb12-7" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">test</span>(Table2.<span class="fl">8.1</span>)</span>
-<span id="cb12-8"><a href="#cb12-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb12-9"><a href="#cb12-9" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb12-10"><a href="#cb12-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb12-11"><a href="#cb12-11" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>statistic</span>
-<span id="cb12-12"><a href="#cb12-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 4.666667</span></span>
-<span id="cb12-13"><a href="#cb12-13" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb12-14"><a href="#cb12-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.06349206</span></span></code></pre></div>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># See ?RatioDifferenceDeviance or ?twosample.rmd</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
+<span>    <span class="st">"twosample.rmd"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># See ?Table2.8.1</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table2.8.1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
+<span><span class="co">#&gt; [1] 4.666667</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.06349206</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-2-8-3">Example 2.8.3<a class="anchor" aria-label="anchor" href="#example-2-8-3"></a>
 </h3>
-<div class="sourceCode" id="cb13"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb13-1"><a href="#cb13-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?KolmogorovSmirnov or ?twosample.ks</span></span>
-<span id="cb13-2"><a href="#cb13-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">pmt</span>(<span class="st">"twosample.ks"</span>)</span>
-<span id="cb13-3"><a href="#cb13-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-4"><a href="#cb13-4" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Table2.8.1</span></span>
-<span id="cb13-5"><a href="#cb13-5" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">test</span>(Table2.<span class="fl">8.1</span>)</span>
-<span id="cb13-6"><a href="#cb13-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb13-7"><a href="#cb13-7" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb13-8"><a href="#cb13-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb13-9"><a href="#cb13-9" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>statistic</span>
-<span id="cb13-10"><a href="#cb13-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.4</span></span>
-<span id="cb13-11"><a href="#cb13-11" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb13-12"><a href="#cb13-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.8730159</span></span></code></pre></div>
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># See ?KolmogorovSmirnov or ?twosample.ks</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span><span class="st">"twosample.ks"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># See ?Table2.8.1</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table2.8.1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
+<span><span class="co">#&gt; [1] 0.4</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.8730159</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -532,27 +321,26 @@
 <div class="section level3">
 <h3 id="example-3-1-1">Example 3.1.1<a class="anchor" aria-label="anchor" href="#example-3-1-1"></a>
 </h3>
-<div class="sourceCode" id="cb14"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb14-1"><a href="#cb14-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?ANOVA or ?ksample.anova</span></span>
-<span id="cb14-2"><a href="#cb14-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">pmt</span>(</span>
-<span id="cb14-3"><a href="#cb14-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ksample.anova"</span>, <span class="at">type =</span> <span class="st">"approx"</span></span>
-<span id="cb14-4"><a href="#cb14-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb14-5"><a href="#cb14-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-6"><a href="#cb14-6" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Table3.1.2</span></span>
-<span id="cb14-7"><a href="#cb14-7" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">test</span>(Table3.<span class="fl">1.2</span>)</span>
-<span id="cb14-8"><a href="#cb14-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-9"><a href="#cb14-9" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>statistic</span>
-<span id="cb14-10"><a href="#cb14-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 3.781445</span></span>
-<span id="cb14-11"><a href="#cb14-11" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb14-12"><a href="#cb14-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.05327082</span></span>
-<span id="cb14-13"><a href="#cb14-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-14"><a href="#cb14-14" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="st">"permu"</span></span>
-<span id="cb14-15"><a href="#cb14-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb14-16"><a href="#cb14-16" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb14-17"><a href="#cb14-17" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb14-18"><a href="#cb14-18" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>statistic</span>
-<span id="cb14-19"><a href="#cb14-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 11552.89</span></span>
-<span id="cb14-20"><a href="#cb14-20" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb14-21"><a href="#cb14-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.05127412</span></span></code></pre></div>
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># See ?ANOVA or ?ksample.anova</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
+<span>    <span class="st">"ksample.anova"</span>, type <span class="op">=</span> <span class="st">"approx"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># See ?Table3.1.2</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table3.1.2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
+<span><span class="co">#&gt; [1] 3.781445</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.05327082</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"permu"</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
+<span><span class="co">#&gt; [1] 11552.89</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.05127412</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-3-2-1">Example 3.2.1<a class="anchor" aria-label="anchor" href="#example-3-2-1"></a>
@@ -574,182 +362,176 @@
 <div class="section level3">
 <h3 id="example-3-2-2-3-2-3">Example 3.2.2 &amp; 3.2.3<a class="anchor" aria-label="anchor" href="#example-3-2-2-3-2-3"></a>
 </h3>
-<div class="sourceCode" id="cb16"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb16-1"><a href="#cb16-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?KruskalWallis or ?ksample.kw</span></span>
-<span id="cb16-2"><a href="#cb16-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">pmt</span>(</span>
-<span id="cb16-3"><a href="#cb16-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ksample.kw"</span>, <span class="at">n_permu =</span> <span class="dv">4000</span></span>
-<span id="cb16-4"><a href="#cb16-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb16-5"><a href="#cb16-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-6"><a href="#cb16-6" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Table3.2.3</span></span>
-<span id="cb16-7"><a href="#cb16-7" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">test</span>(Table3.<span class="fl">2.3</span>)</span>
-<span id="cb16-8"><a href="#cb16-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb16-9"><a href="#cb16-9" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb16-10"><a href="#cb16-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-11"><a href="#cb16-11" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>statistic</span>
-<span id="cb16-12"><a href="#cb16-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 8.246588</span></span>
-<span id="cb16-13"><a href="#cb16-13" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb16-14"><a href="#cb16-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.0115</span></span>
-<span id="cb16-15"><a href="#cb16-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-16"><a href="#cb16-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-17"><a href="#cb16-17" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="st">"approx"</span></span>
-<span id="cb16-18"><a href="#cb16-18" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb16-19"><a href="#cb16-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.01619109</span></span>
-<span id="cb16-20"><a href="#cb16-20" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-21"><a href="#cb16-21" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-22"><a href="#cb16-22" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>scoring <span class="ot">&lt;-</span> <span class="st">"expon"</span></span>
-<span id="cb16-23"><a href="#cb16-23" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-24"><a href="#cb16-24" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>n_permu <span class="ot">&lt;-</span> <span class="dv">4000</span></span>
-<span id="cb16-25"><a href="#cb16-25" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="st">"permu"</span></span>
-<span id="cb16-26"><a href="#cb16-26" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb16-27"><a href="#cb16-27" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb16-28"><a href="#cb16-28" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb16-29"><a href="#cb16-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.01375</span></span>
-<span id="cb16-30"><a href="#cb16-30" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb16-31"><a href="#cb16-31" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="st">"approx"</span></span>
-<span id="cb16-32"><a href="#cb16-32" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb16-33"><a href="#cb16-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.02152193</span></span></code></pre></div>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># See ?KruskalWallis or ?ksample.kw</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
+<span>    <span class="st">"ksample.kw"</span>, n_permu <span class="op">=</span> <span class="fl">4000</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># See ?Table3.2.3</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table3.2.3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
+<span><span class="co">#&gt; [1] 8.246588</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.0115</span></span>
+<span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.01619109</span></span>
+<span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">scoring</span> <span class="op">&lt;-</span> <span class="st">"expon"</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">4000</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"permu"</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.01375</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.02152193</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-3-3-1">Example 3.3.1<a class="anchor" aria-label="anchor" href="#example-3-3-1"></a>
 </h3>
-<div class="sourceCode" id="cb17"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb17-1"><a href="#cb17-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?MultiCompT or ?multicomp.t</span></span>
-<span id="cb17-2"><a href="#cb17-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">pmt</span>(</span>
-<span id="cb17-3"><a href="#cb17-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"multicomp.t"</span>, <span class="at">n_permu =</span> <span class="dv">5000</span></span>
-<span id="cb17-4"><a href="#cb17-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb17-5"><a href="#cb17-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-6"><a href="#cb17-6" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Table3.3.1</span></span>
-<span id="cb17-7"><a href="#cb17-7" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">test</span>(Table3.<span class="fl">3.1</span>)</span>
-<span id="cb17-8"><a href="#cb17-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb17-9"><a href="#cb17-9" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb17-10"><a href="#cb17-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-11"><a href="#cb17-11" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">print</span>()</span>
-<span id="cb17-12"><a href="#cb17-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb17-13"><a href="#cb17-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Multiple Comparison Based on t Statistic </span></span>
-<span id="cb17-14"><a href="#cb17-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb17-15"><a href="#cb17-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; scoring: none    type: permu(5000)    method: default    </span></span>
-<span id="cb17-16"><a href="#cb17-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb17-17"><a href="#cb17-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; family-wise confidence level: 95% </span></span>
-<span id="cb17-18"><a href="#cb17-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb17-19"><a href="#cb17-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     group_i    group_j   statistic p_value differ</span></span>
-<span id="cb17-20"><a href="#cb17-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_1 location_2  0.02737145  0.9790  FALSE</span></span>
-<span id="cb17-21"><a href="#cb17-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_1 location_3 -1.77914406  0.0888  FALSE</span></span>
-<span id="cb17-22"><a href="#cb17-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_1 location_4 -3.41048230  0.0030   TRUE</span></span>
-<span id="cb17-23"><a href="#cb17-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_2 location_3 -1.80651550  0.0896  FALSE</span></span>
-<span id="cb17-24"><a href="#cb17-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_2 location_4 -3.43785375  0.0028   TRUE</span></span>
-<span id="cb17-25"><a href="#cb17-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_3 location_4 -1.63133824  0.1198  FALSE</span></span>
-<span id="cb17-26"><a href="#cb17-26" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-27"><a href="#cb17-27" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="st">"approx"</span></span>
-<span id="cb17-28"><a href="#cb17-28" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">print</span>()</span>
-<span id="cb17-29"><a href="#cb17-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb17-30"><a href="#cb17-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Multiple Comparison Based on t Statistic </span></span>
-<span id="cb17-31"><a href="#cb17-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb17-32"><a href="#cb17-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; scoring: none    type: approx    method: default    </span></span>
-<span id="cb17-33"><a href="#cb17-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb17-34"><a href="#cb17-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; family-wise confidence level: 95% </span></span>
-<span id="cb17-35"><a href="#cb17-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb17-36"><a href="#cb17-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     group_i    group_j   statistic     p_value differ</span></span>
-<span id="cb17-37"><a href="#cb17-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_1 location_2  0.02737145 0.978434752  FALSE</span></span>
-<span id="cb17-38"><a href="#cb17-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_1 location_3 -1.77914406 0.090419680  FALSE</span></span>
-<span id="cb17-39"><a href="#cb17-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_1 location_4 -3.41048230 0.002773484   TRUE</span></span>
-<span id="cb17-40"><a href="#cb17-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_2 location_3 -1.80651550 0.085909110  FALSE</span></span>
-<span id="cb17-41"><a href="#cb17-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_2 location_4 -3.43785375 0.002603664   TRUE</span></span>
-<span id="cb17-42"><a href="#cb17-42" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_3 location_4 -1.63133824 0.118466249  FALSE</span></span>
-<span id="cb17-43"><a href="#cb17-43" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb17-44"><a href="#cb17-44" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>scoring <span class="ot">&lt;-</span> <span class="st">"rank"</span></span>
-<span id="cb17-45"><a href="#cb17-45" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">print</span>()</span>
-<span id="cb17-46"><a href="#cb17-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb17-47"><a href="#cb17-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Multiple Comparison Based on t Statistic </span></span>
-<span id="cb17-48"><a href="#cb17-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb17-49"><a href="#cb17-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; scoring: rank    type: approx    method: default    </span></span>
-<span id="cb17-50"><a href="#cb17-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb17-51"><a href="#cb17-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; family-wise confidence level: 95% </span></span>
-<span id="cb17-52"><a href="#cb17-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb17-53"><a href="#cb17-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     group_i    group_j  statistic     p_value differ</span></span>
-<span id="cb17-54"><a href="#cb17-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_1 location_2  0.1224745 0.902523250  FALSE</span></span>
-<span id="cb17-55"><a href="#cb17-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_1 location_3 -1.3880442 0.165123590  FALSE</span></span>
-<span id="cb17-56"><a href="#cb17-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_1 location_4 -2.6536139 0.007963489   TRUE</span></span>
-<span id="cb17-57"><a href="#cb17-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_2 location_3 -1.5105187 0.130911128  FALSE</span></span>
-<span id="cb17-58"><a href="#cb17-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_2 location_4 -2.7760884 0.005501725   TRUE</span></span>
-<span id="cb17-59"><a href="#cb17-59" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_3 location_4 -1.2655697 0.205667180  FALSE</span></span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb18-1"><a href="#cb18-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?TukeyHSD or ?multicomp.tukey</span></span>
-<span id="cb18-2"><a href="#cb18-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">pmt</span>(</span>
-<span id="cb18-3"><a href="#cb18-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"multicomp.tukey"</span>, <span class="at">n_permu =</span> <span class="dv">5000</span></span>
-<span id="cb18-4"><a href="#cb18-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb18-5"><a href="#cb18-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-6"><a href="#cb18-6" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">test</span>(Table3.<span class="fl">3.1</span>)</span>
-<span id="cb18-7"><a href="#cb18-7" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb18-8"><a href="#cb18-8" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb18-9"><a href="#cb18-9" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-10"><a href="#cb18-10" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">print</span>()</span>
-<span id="cb18-11"><a href="#cb18-11" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb18-12"><a href="#cb18-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Tukey's HSD </span></span>
-<span id="cb18-13"><a href="#cb18-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb18-14"><a href="#cb18-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; scoring: none    type: permu(5000)    method: default    </span></span>
-<span id="cb18-15"><a href="#cb18-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb18-16"><a href="#cb18-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; family-wise confidence level: 95% </span></span>
-<span id="cb18-17"><a href="#cb18-17" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb18-18"><a href="#cb18-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     group_i    group_j   statistic p_value differ</span></span>
-<span id="cb18-19"><a href="#cb18-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_1 location_2  0.03870907  1.0000  FALSE</span></span>
-<span id="cb18-20"><a href="#cb18-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_1 location_3 -2.51608965  0.3186  FALSE</span></span>
-<span id="cb18-21"><a href="#cb18-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_1 location_4 -4.82315032  0.0134   TRUE</span></span>
-<span id="cb18-22"><a href="#cb18-22" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_2 location_3 -2.55479873  0.3038  FALSE</span></span>
-<span id="cb18-23"><a href="#cb18-23" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_2 location_4 -4.86185939  0.0128   TRUE</span></span>
-<span id="cb18-24"><a href="#cb18-24" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_3 location_4 -2.30706067  0.3882  FALSE</span></span>
-<span id="cb18-25"><a href="#cb18-25" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-26"><a href="#cb18-26" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="st">"approx"</span></span>
-<span id="cb18-27"><a href="#cb18-27" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">print</span>()</span>
-<span id="cb18-28"><a href="#cb18-28" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb18-29"><a href="#cb18-29" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Tukey's HSD </span></span>
-<span id="cb18-30"><a href="#cb18-30" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb18-31"><a href="#cb18-31" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; scoring: none    type: approx    method: default    </span></span>
-<span id="cb18-32"><a href="#cb18-32" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb18-33"><a href="#cb18-33" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; family-wise confidence level: 95% </span></span>
-<span id="cb18-34"><a href="#cb18-34" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb18-35"><a href="#cb18-35" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     group_i    group_j   statistic    p_value differ</span></span>
-<span id="cb18-36"><a href="#cb18-36" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_1 location_2  0.03870907 0.99999236  FALSE</span></span>
-<span id="cb18-37"><a href="#cb18-37" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_1 location_3 -2.51608965 0.31194094  FALSE</span></span>
-<span id="cb18-38"><a href="#cb18-38" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_1 location_4 -4.82315032 0.01356971   TRUE</span></span>
-<span id="cb18-39"><a href="#cb18-39" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_2 location_3 -2.55479873 0.29951264  FALSE</span></span>
-<span id="cb18-40"><a href="#cb18-40" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_2 location_4 -4.86185939 0.01277452   TRUE</span></span>
-<span id="cb18-41"><a href="#cb18-41" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_3 location_4 -2.30706067 0.38453323  FALSE</span></span>
-<span id="cb18-42"><a href="#cb18-42" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb18-43"><a href="#cb18-43" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>scoring <span class="ot">&lt;-</span> <span class="st">"rank"</span></span>
-<span id="cb18-44"><a href="#cb18-44" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">print</span>()</span>
-<span id="cb18-45"><a href="#cb18-45" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb18-46"><a href="#cb18-46" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;   Tukey's HSD </span></span>
-<span id="cb18-47"><a href="#cb18-47" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb18-48"><a href="#cb18-48" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; scoring: rank    type: approx    method: default    </span></span>
-<span id="cb18-49"><a href="#cb18-49" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb18-50"><a href="#cb18-50" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; family-wise confidence level: 95% </span></span>
-<span id="cb18-51"><a href="#cb18-51" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb18-52"><a href="#cb18-52" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;     group_i    group_j  statistic    p_value differ</span></span>
-<span id="cb18-53"><a href="#cb18-53" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_1 location_2  0.1732051 0.99934385  FALSE</span></span>
-<span id="cb18-54"><a href="#cb18-54" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_1 location_3 -1.9629909 0.50683497  FALSE</span></span>
-<span id="cb18-55"><a href="#cb18-55" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_1 location_4 -3.7527767 0.03978340   TRUE</span></span>
-<span id="cb18-56"><a href="#cb18-56" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_2 location_3 -2.1361960 0.43109997  FALSE</span></span>
-<span id="cb18-57"><a href="#cb18-57" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_2 location_4 -3.9259818 0.02817015   TRUE</span></span>
-<span id="cb18-58"><a href="#cb18-58" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt;  location_3 location_4 -1.7897858 0.58494735  FALSE</span></span></code></pre></div>
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># See ?MultiCompT or ?multicomp.t</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
+<span>    <span class="st">"multicomp.t"</span>, n_permu <span class="op">=</span> <span class="fl">5000</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># See ?Table3.3.1</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table3.3.1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Multiple Comparison Based on t Statistic </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; scoring: none    type: permu(5000)    method: default    </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; family-wise confidence level: 95% </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     group_i    group_j   statistic p_value differ</span></span>
+<span><span class="co">#&gt;  location_1 location_2  0.02737145  0.9790  FALSE</span></span>
+<span><span class="co">#&gt;  location_1 location_3 -1.77914406  0.0888  FALSE</span></span>
+<span><span class="co">#&gt;  location_1 location_4 -3.41048230  0.0030   TRUE</span></span>
+<span><span class="co">#&gt;  location_2 location_3 -1.80651550  0.0896  FALSE</span></span>
+<span><span class="co">#&gt;  location_2 location_4 -3.43785375  0.0028   TRUE</span></span>
+<span><span class="co">#&gt;  location_3 location_4 -1.63133824  0.1198  FALSE</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Multiple Comparison Based on t Statistic </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; scoring: none    type: approx    method: default    </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; family-wise confidence level: 95% </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     group_i    group_j   statistic     p_value differ</span></span>
+<span><span class="co">#&gt;  location_1 location_2  0.02737145 0.978434752  FALSE</span></span>
+<span><span class="co">#&gt;  location_1 location_3 -1.77914406 0.090419680  FALSE</span></span>
+<span><span class="co">#&gt;  location_1 location_4 -3.41048230 0.002773484   TRUE</span></span>
+<span><span class="co">#&gt;  location_2 location_3 -1.80651550 0.085909110  FALSE</span></span>
+<span><span class="co">#&gt;  location_2 location_4 -3.43785375 0.002603664   TRUE</span></span>
+<span><span class="co">#&gt;  location_3 location_4 -1.63133824 0.118466249  FALSE</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">scoring</span> <span class="op">&lt;-</span> <span class="st">"rank"</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Multiple Comparison Based on t Statistic </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; scoring: rank    type: approx    method: default    </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; family-wise confidence level: 95% </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     group_i    group_j  statistic     p_value differ</span></span>
+<span><span class="co">#&gt;  location_1 location_2  0.1224745 0.902523250  FALSE</span></span>
+<span><span class="co">#&gt;  location_1 location_3 -1.3880442 0.165123590  FALSE</span></span>
+<span><span class="co">#&gt;  location_1 location_4 -2.6536139 0.007963489   TRUE</span></span>
+<span><span class="co">#&gt;  location_2 location_3 -1.5105187 0.130911128  FALSE</span></span>
+<span><span class="co">#&gt;  location_2 location_4 -2.7760884 0.005501725   TRUE</span></span>
+<span><span class="co">#&gt;  location_3 location_4 -1.2655697 0.205667180  FALSE</span></span></code></pre></div>
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># See ?TukeyHSD or ?multicomp.tukey</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
+<span>    <span class="st">"multicomp.tukey"</span>, n_permu <span class="op">=</span> <span class="fl">5000</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table3.3.1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Tukey's HSD </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; scoring: none    type: permu(5000)    method: default    </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; family-wise confidence level: 95% </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     group_i    group_j   statistic p_value differ</span></span>
+<span><span class="co">#&gt;  location_1 location_2  0.03870907  1.0000  FALSE</span></span>
+<span><span class="co">#&gt;  location_1 location_3 -2.51608965  0.3186  FALSE</span></span>
+<span><span class="co">#&gt;  location_1 location_4 -4.82315032  0.0134   TRUE</span></span>
+<span><span class="co">#&gt;  location_2 location_3 -2.55479873  0.3038  FALSE</span></span>
+<span><span class="co">#&gt;  location_2 location_4 -4.86185939  0.0128   TRUE</span></span>
+<span><span class="co">#&gt;  location_3 location_4 -2.30706067  0.3882  FALSE</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Tukey's HSD </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; scoring: none    type: approx    method: default    </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; family-wise confidence level: 95% </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     group_i    group_j   statistic    p_value differ</span></span>
+<span><span class="co">#&gt;  location_1 location_2  0.03870907 0.99999236  FALSE</span></span>
+<span><span class="co">#&gt;  location_1 location_3 -2.51608965 0.31194094  FALSE</span></span>
+<span><span class="co">#&gt;  location_1 location_4 -4.82315032 0.01356971   TRUE</span></span>
+<span><span class="co">#&gt;  location_2 location_3 -2.55479873 0.29951264  FALSE</span></span>
+<span><span class="co">#&gt;  location_2 location_4 -4.86185939 0.01277452   TRUE</span></span>
+<span><span class="co">#&gt;  location_3 location_4 -2.30706067 0.38453323  FALSE</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">scoring</span> <span class="op">&lt;-</span> <span class="st">"rank"</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;   Tukey's HSD </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; scoring: rank    type: approx    method: default    </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt; family-wise confidence level: 95% </span></span>
+<span><span class="co">#&gt; </span></span>
+<span><span class="co">#&gt;     group_i    group_j  statistic    p_value differ</span></span>
+<span><span class="co">#&gt;  location_1 location_2  0.1732051 0.99934385  FALSE</span></span>
+<span><span class="co">#&gt;  location_1 location_3 -1.9629909 0.50683497  FALSE</span></span>
+<span><span class="co">#&gt;  location_1 location_4 -3.7527767 0.03978340   TRUE</span></span>
+<span><span class="co">#&gt;  location_2 location_3 -2.1361960 0.43109997  FALSE</span></span>
+<span><span class="co">#&gt;  location_2 location_4 -3.9259818 0.02817015   TRUE</span></span>
+<span><span class="co">#&gt;  location_3 location_4 -1.7897858 0.58494735  FALSE</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-3-4-1">Example 3.4.1<a class="anchor" aria-label="anchor" href="#example-3-4-1"></a>
 </h3>
-<div class="sourceCode" id="cb19"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb19-1"><a href="#cb19-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?JonckheereTerpstra or ?ksample.jt</span></span>
-<span id="cb19-2"><a href="#cb19-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">pmt</span>(</span>
-<span id="cb19-3"><a href="#cb19-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"ksample.jt"</span>, <span class="at">alternative =</span> <span class="st">"greater"</span>, <span class="at">n_permu =</span> <span class="dv">4000</span></span>
-<span id="cb19-4"><a href="#cb19-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb19-5"><a href="#cb19-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-6"><a href="#cb19-6" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Table3.4.1</span></span>
-<span id="cb19-7"><a href="#cb19-7" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">test</span>(Table3.<span class="fl">4.1</span>)</span>
-<span id="cb19-8"><a href="#cb19-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb19-9"><a href="#cb19-9" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb19-10"><a href="#cb19-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-11"><a href="#cb19-11" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>statistic</span>
-<span id="cb19-12"><a href="#cb19-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 145</span></span>
-<span id="cb19-13"><a href="#cb19-13" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb19-14"><a href="#cb19-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.0295</span></span>
-<span id="cb19-15"><a href="#cb19-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb19-16"><a href="#cb19-16" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="st">"approx"</span></span>
-<span id="cb19-17"><a href="#cb19-17" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb19-18"><a href="#cb19-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.0285154</span></span></code></pre></div>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># See ?JonckheereTerpstra or ?ksample.jt</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
+<span>    <span class="st">"ksample.jt"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>, n_permu <span class="op">=</span> <span class="fl">4000</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># See ?Table3.4.1</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table3.4.1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
+<span><span class="co">#&gt; [1] 145</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.0295</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.0285154</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -758,91 +540,85 @@
 <div class="section level3">
 <h3 id="table-4-1-1">Table 4.1.1<a class="anchor" aria-label="anchor" href="#table-4-1-1"></a>
 </h3>
-<div class="sourceCode" id="cb20"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb20-1"><a href="#cb20-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?SignedDiff or ?paired.signeddiff</span></span>
-<span id="cb20-2"><a href="#cb20-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">pmt</span>(</span>
-<span id="cb20-3"><a href="#cb20-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"paired.signeddiff"</span>, <span class="at">alternative =</span> <span class="st">"greater"</span>,</span>
-<span id="cb20-4"><a href="#cb20-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">scoring =</span> <span class="st">"none"</span></span>
-<span id="cb20-5"><a href="#cb20-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb20-6"><a href="#cb20-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-7"><a href="#cb20-7" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Table4.1.1</span></span>
-<span id="cb20-8"><a href="#cb20-8" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">test</span>(Table4.<span class="fl">1.1</span>)</span>
-<span id="cb20-9"><a href="#cb20-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb20-10"><a href="#cb20-10" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb20-11"><a href="#cb20-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb20-12"><a href="#cb20-12" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>statistic</span>
-<span id="cb20-13"><a href="#cb20-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 960</span></span>
-<span id="cb20-14"><a href="#cb20-14" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb20-15"><a href="#cb20-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.09375</span></span></code></pre></div>
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># See ?SignedDiff or ?paired.signeddiff</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
+<span>    <span class="st">"paired.signeddiff"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>,</span>
+<span>    scoring <span class="op">=</span> <span class="st">"none"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># See ?Table4.1.1</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table4.1.1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
+<span><span class="co">#&gt; [1] 960</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.09375</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-4-1-1">Example 4.1.1<a class="anchor" aria-label="anchor" href="#example-4-1-1"></a>
 </h3>
-<div class="sourceCode" id="cb21"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb21-1"><a href="#cb21-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?SignedDiff or ?paired.signeddiff</span></span>
-<span id="cb21-2"><a href="#cb21-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">pmt</span>(</span>
-<span id="cb21-3"><a href="#cb21-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"paired.signeddiff"</span>, <span class="at">alternative =</span> <span class="st">"two_sided"</span>,</span>
-<span id="cb21-4"><a href="#cb21-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">scoring =</span> <span class="st">"none"</span>, <span class="at">method =</span> <span class="st">"ignore"</span></span>
-<span id="cb21-5"><a href="#cb21-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb21-6"><a href="#cb21-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-7"><a href="#cb21-7" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Table4.1.3</span></span>
-<span id="cb21-8"><a href="#cb21-8" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">test</span>(Table4.<span class="fl">1.3</span>)</span>
-<span id="cb21-9"><a href="#cb21-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb21-10"><a href="#cb21-10" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb21-11"><a href="#cb21-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-12"><a href="#cb21-12" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>statistic</span>
-<span id="cb21-13"><a href="#cb21-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 148</span></span>
-<span id="cb21-14"><a href="#cb21-14" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb21-15"><a href="#cb21-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.02502441</span></span>
-<span id="cb21-16"><a href="#cb21-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-17"><a href="#cb21-17" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>n_permu <span class="ot">&lt;-</span> <span class="dv">4000</span></span>
-<span id="cb21-18"><a href="#cb21-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb21-19"><a href="#cb21-19" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb21-20"><a href="#cb21-20" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb21-21"><a href="#cb21-21" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.3495</span></span>
-<span id="cb21-22"><a href="#cb21-22" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb21-23"><a href="#cb21-23" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="st">"approx"</span></span>
-<span id="cb21-24"><a href="#cb21-24" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb21-25"><a href="#cb21-25" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.0267714</span></span></code></pre></div>
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># See ?SignedDiff or ?paired.signeddiff</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
+<span>    <span class="st">"paired.signeddiff"</span>, alternative <span class="op">=</span> <span class="st">"two_sided"</span>,</span>
+<span>    scoring <span class="op">=</span> <span class="st">"none"</span>, method <span class="op">=</span> <span class="st">"ignore"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># See ?Table4.1.3</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table4.1.3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
+<span><span class="co">#&gt; [1] 148</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.02502441</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">4000</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.3495</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.0267714</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-4-2-1-4-2-2">Example 4.2.1 &amp; 4.2.2<a class="anchor" aria-label="anchor" href="#example-4-2-1-4-2-2"></a>
 </h3>
-<div class="sourceCode" id="cb22"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb22-1"><a href="#cb22-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?SignedDiff or ?paired.signeddiff</span></span>
-<span id="cb22-2"><a href="#cb22-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">pmt</span>(</span>
-<span id="cb22-3"><a href="#cb22-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"paired.signeddiff"</span>, <span class="at">alternative =</span> <span class="st">"greater"</span>,</span>
-<span id="cb22-4"><a href="#cb22-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">scoring =</span> <span class="st">"rank"</span>, <span class="at">method =</span> <span class="st">"with_zeros"</span></span>
-<span id="cb22-5"><a href="#cb22-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb22-6"><a href="#cb22-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-7"><a href="#cb22-7" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Table4.1.1</span></span>
-<span id="cb22-8"><a href="#cb22-8" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">test</span>(Table4.<span class="fl">1.1</span>)</span>
-<span id="cb22-9"><a href="#cb22-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb22-10"><a href="#cb22-10" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb22-11"><a href="#cb22-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-12"><a href="#cb22-12" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>statistic</span>
-<span id="cb22-13"><a href="#cb22-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 960</span></span>
-<span id="cb22-14"><a href="#cb22-14" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb22-15"><a href="#cb22-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.09375</span></span>
-<span id="cb22-16"><a href="#cb22-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb22-17"><a href="#cb22-17" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="st">"approx"</span></span>
-<span id="cb22-18"><a href="#cb22-18" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb22-19"><a href="#cb22-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0</span></span></code></pre></div>
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># See ?SignedDiff or ?paired.signeddiff</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
+<span>    <span class="st">"paired.signeddiff"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>,</span>
+<span>    scoring <span class="op">=</span> <span class="st">"rank"</span>, method <span class="op">=</span> <span class="st">"with_zeros"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># See ?Table4.1.1</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table4.1.1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
+<span><span class="co">#&gt; [1] 960</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.09375</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="table-4-2-3">Table 4.2.3<a class="anchor" aria-label="anchor" href="#table-4-2-3"></a>
 </h3>
-<div class="sourceCode" id="cb23"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb23-1"><a href="#cb23-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?SignedDiff or ?paired.signeddiff</span></span>
-<span id="cb23-2"><a href="#cb23-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">pmt</span>(</span>
-<span id="cb23-3"><a href="#cb23-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"paired.signeddiff"</span>, <span class="at">alternative =</span> <span class="st">"greater"</span>,</span>
-<span id="cb23-4"><a href="#cb23-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">scoring =</span> <span class="st">"rank"</span>, <span class="at">method =</span> <span class="st">"ignore"</span></span>
-<span id="cb23-5"><a href="#cb23-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb23-6"><a href="#cb23-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-7"><a href="#cb23-7" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">test</span>(<span class="fu">c</span>(<span class="sc">-</span><span class="dv">5</span>, <span class="sc">-</span><span class="dv">3</span>, <span class="sc">-</span><span class="dv">3</span>, <span class="dv">0</span>, <span class="dv">0</span>, <span class="dv">2</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">4</span>, <span class="dv">5</span>), <span class="dv">0</span>)</span>
-<span id="cb23-8"><a href="#cb23-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb23-9"><a href="#cb23-9" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb23-10"><a href="#cb23-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb23-11"><a href="#cb23-11" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>statistic</span>
-<span id="cb23-12"><a href="#cb23-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 19</span></span>
-<span id="cb23-13"><a href="#cb23-13" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb23-14"><a href="#cb23-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.265625</span></span></code></pre></div>
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># See ?SignedDiff or ?paired.signeddiff</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
+<span>    <span class="st">"paired.signeddiff"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>,</span>
+<span>    scoring <span class="op">=</span> <span class="st">"rank"</span>, method <span class="op">=</span> <span class="st">"ignore"</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="op">-</span><span class="fl">5</span>, <span class="op">-</span><span class="fl">3</span>, <span class="op">-</span><span class="fl">3</span>, <span class="fl">0</span>, <span class="fl">0</span>, <span class="fl">2</span>, <span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">4</span>, <span class="fl">5</span><span class="op">)</span>, <span class="fl">0</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
+<span><span class="co">#&gt; [1] 19</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.265625</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-4-3-1">Example 4.3.1<a class="anchor" aria-label="anchor" href="#example-4-3-1"></a>
@@ -867,72 +643,69 @@
 <div class="section level3">
 <h3 id="example-4-4-1">Example 4.4.1<a class="anchor" aria-label="anchor" href="#example-4-4-1"></a>
 </h3>
-<div class="sourceCode" id="cb25"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb25-1"><a href="#cb25-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?RCBDANOVA or ?rcbd.anova</span></span>
-<span id="cb25-2"><a href="#cb25-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">pmt</span>(</span>
-<span id="cb25-3"><a href="#cb25-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"rcbd.anova"</span>, <span class="at">n_permu =</span> <span class="dv">5000</span></span>
-<span id="cb25-4"><a href="#cb25-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb25-5"><a href="#cb25-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-6"><a href="#cb25-6" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Table4.4.3</span></span>
-<span id="cb25-7"><a href="#cb25-7" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">test</span>(Table4.<span class="fl">4.3</span>)</span>
-<span id="cb25-8"><a href="#cb25-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb25-9"><a href="#cb25-9" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb25-10"><a href="#cb25-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-11"><a href="#cb25-11" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>statistic</span>
-<span id="cb25-12"><a href="#cb25-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 110241.8</span></span>
-<span id="cb25-13"><a href="#cb25-13" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb25-14"><a href="#cb25-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.054</span></span>
-<span id="cb25-15"><a href="#cb25-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb25-16"><a href="#cb25-16" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="st">"approx"</span></span>
-<span id="cb25-17"><a href="#cb25-17" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>statistic</span>
-<span id="cb25-18"><a href="#cb25-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 3.121093</span></span>
-<span id="cb25-19"><a href="#cb25-19" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb25-20"><a href="#cb25-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.057516</span></span></code></pre></div>
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># See ?RCBDANOVA or ?rcbd.anova</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
+<span>    <span class="st">"rcbd.anova"</span>, n_permu <span class="op">=</span> <span class="fl">5000</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># See ?Table4.4.3</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table4.4.3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
+<span><span class="co">#&gt; [1] 110241.8</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.054</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
+<span><span class="co">#&gt; [1] 3.121093</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.057516</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-4-5-2">Example 4.5.2<a class="anchor" aria-label="anchor" href="#example-4-5-2"></a>
 </h3>
-<div class="sourceCode" id="cb26"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb26-1"><a href="#cb26-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Friedman or ?rcbd.friedman</span></span>
-<span id="cb26-2"><a href="#cb26-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">pmt</span>(</span>
-<span id="cb26-3"><a href="#cb26-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"rcbd.friedman"</span>, <span class="at">n_permu =</span> <span class="dv">5000</span></span>
-<span id="cb26-4"><a href="#cb26-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb26-5"><a href="#cb26-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-6"><a href="#cb26-6" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Table4.5.3</span></span>
-<span id="cb26-7"><a href="#cb26-7" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">test</span>(Table4.<span class="fl">5.3</span>)</span>
-<span id="cb26-8"><a href="#cb26-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb26-9"><a href="#cb26-9" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb26-10"><a href="#cb26-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-11"><a href="#cb26-11" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>statistic</span>
-<span id="cb26-12"><a href="#cb26-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 28.33333</span></span>
-<span id="cb26-13"><a href="#cb26-13" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb26-14"><a href="#cb26-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.0478</span></span>
-<span id="cb26-15"><a href="#cb26-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb26-16"><a href="#cb26-16" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="st">"approx"</span></span>
-<span id="cb26-17"><a href="#cb26-17" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>statistic</span>
-<span id="cb26-18"><a href="#cb26-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 7.5</span></span>
-<span id="cb26-19"><a href="#cb26-19" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb26-20"><a href="#cb26-20" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.05755845</span></span></code></pre></div>
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># See ?Friedman or ?rcbd.friedman</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
+<span>    <span class="st">"rcbd.friedman"</span>, n_permu <span class="op">=</span> <span class="fl">5000</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># See ?Table4.5.3</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table4.5.3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
+<span><span class="co">#&gt; [1] 28.33333</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.0478</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
+<span><span class="co">#&gt; [1] 7.5</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.05755845</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-4-6-1">Example 4.6.1<a class="anchor" aria-label="anchor" href="#example-4-6-1"></a>
 </h3>
-<div class="sourceCode" id="cb27"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb27-1"><a href="#cb27-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Page or ?rcbd.page</span></span>
-<span id="cb27-2"><a href="#cb27-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">pmt</span>(</span>
-<span id="cb27-3"><a href="#cb27-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"rcbd.page"</span>, <span class="at">alternative =</span> <span class="st">"less"</span>, <span class="at">n_permu =</span> <span class="dv">5000</span></span>
-<span id="cb27-4"><a href="#cb27-4" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb27-5"><a href="#cb27-5" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-6"><a href="#cb27-6" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Table4.4.3</span></span>
-<span id="cb27-7"><a href="#cb27-7" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">test</span>(Table4.<span class="fl">4.3</span>)</span>
-<span id="cb27-8"><a href="#cb27-8" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb27-9"><a href="#cb27-9" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb27-10"><a href="#cb27-10" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-11"><a href="#cb27-11" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>statistic</span>
-<span id="cb27-12"><a href="#cb27-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 134</span></span>
-<span id="cb27-13"><a href="#cb27-13" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb27-14"><a href="#cb27-14" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.0112</span></span>
-<span id="cb27-15"><a href="#cb27-15" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb27-16"><a href="#cb27-16" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="st">"approx"</span></span>
-<span id="cb27-17"><a href="#cb27-17" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb27-18"><a href="#cb27-18" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.01182581</span></span></code></pre></div>
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># See ?Page or ?rcbd.page</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
+<span>    <span class="st">"rcbd.page"</span>, alternative <span class="op">=</span> <span class="st">"less"</span>, n_permu <span class="op">=</span> <span class="fl">5000</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># See ?Table4.4.3</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table4.4.3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
+<span><span class="co">#&gt; [1] 134</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.0112</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.01182581</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -941,44 +714,42 @@
 <div class="section level3">
 <h3 id="example-5-1-1">Example 5.1.1<a class="anchor" aria-label="anchor" href="#example-5-1-1"></a>
 </h3>
-<div class="sourceCode" id="cb28"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb28-1"><a href="#cb28-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Correlation or ?association.corr</span></span>
-<span id="cb28-2"><a href="#cb28-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">pmt</span>(</span>
-<span id="cb28-3"><a href="#cb28-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"association.corr"</span>, <span class="at">method =</span> <span class="st">"pearson"</span>,</span>
-<span id="cb28-4"><a href="#cb28-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">alternative =</span> <span class="st">"greater"</span>, <span class="at">n_permu =</span> <span class="dv">2000</span></span>
-<span id="cb28-5"><a href="#cb28-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb28-6"><a href="#cb28-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-7"><a href="#cb28-7" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Table5.1.2</span></span>
-<span id="cb28-8"><a href="#cb28-8" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">test</span>(Table5.<span class="fl">1.2</span>)</span>
-<span id="cb28-9"><a href="#cb28-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb28-10"><a href="#cb28-10" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb28-11"><a href="#cb28-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb28-12"><a href="#cb28-12" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>statistic</span>
-<span id="cb28-13"><a href="#cb28-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 198766597</span></span>
-<span id="cb28-14"><a href="#cb28-14" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb28-15"><a href="#cb28-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0</span></span></code></pre></div>
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># See ?Correlation or ?association.corr</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
+<span>    <span class="st">"association.corr"</span>, method <span class="op">=</span> <span class="st">"pearson"</span>,</span>
+<span>    alternative <span class="op">=</span> <span class="st">"greater"</span>, n_permu <span class="op">=</span> <span class="fl">2000</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># See ?Table5.1.2</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table5.1.2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
+<span><span class="co">#&gt; [1] 198766597</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-5-2-1">Example 5.2.1<a class="anchor" aria-label="anchor" href="#example-5-2-1"></a>
 </h3>
-<div class="sourceCode" id="cb29"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb29-1"><a href="#cb29-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Correlation or ?association.corr</span></span>
-<span id="cb29-2"><a href="#cb29-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">pmt</span>(</span>
-<span id="cb29-3"><a href="#cb29-3" aria-hidden="true" tabindex="-1"></a>    <span class="st">"association.corr"</span>, <span class="at">method =</span> <span class="st">"spearman"</span>,</span>
-<span id="cb29-4"><a href="#cb29-4" aria-hidden="true" tabindex="-1"></a>    <span class="at">alternative =</span> <span class="st">"greater"</span>, <span class="at">n_permu =</span> <span class="dv">5000</span></span>
-<span id="cb29-5"><a href="#cb29-5" aria-hidden="true" tabindex="-1"></a>)</span>
-<span id="cb29-6"><a href="#cb29-6" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-7"><a href="#cb29-7" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Table5.1.2</span></span>
-<span id="cb29-8"><a href="#cb29-8" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">test</span>(Table5.<span class="fl">1.2</span>)</span>
-<span id="cb29-9"><a href="#cb29-9" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb29-10"><a href="#cb29-10" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb29-11"><a href="#cb29-11" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-12"><a href="#cb29-12" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>statistic</span>
-<span id="cb29-13"><a href="#cb29-13" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 2059</span></span>
-<span id="cb29-14"><a href="#cb29-14" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb29-15"><a href="#cb29-15" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0</span></span>
-<span id="cb29-16"><a href="#cb29-16" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb29-17"><a href="#cb29-17" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="st">"approx"</span></span>
-<span id="cb29-18"><a href="#cb29-18" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb29-19"><a href="#cb29-19" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 2.329431e-07</span></span></code></pre></div>
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># See ?Correlation or ?association.corr</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
+<span>    <span class="st">"association.corr"</span>, method <span class="op">=</span> <span class="st">"spearman"</span>,</span>
+<span>    alternative <span class="op">=</span> <span class="st">"greater"</span>, n_permu <span class="op">=</span> <span class="fl">5000</span></span>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># See ?Table5.1.2</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table5.1.2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
+<span><span class="co">#&gt; [1] 2059</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 2.329431e-07</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-5-3-2">Example 5.3.2<a class="anchor" aria-label="anchor" href="#example-5-3-2"></a>
@@ -1001,22 +772,21 @@
 <div class="section level3">
 <h3 id="table-5-4-2">Table 5.4.2<a class="anchor" aria-label="anchor" href="#table-5-4-2"></a>
 </h3>
-<div class="sourceCode" id="cb31"><pre class="sourceCode r"><code class="sourceCode r"><span id="cb31-1"><a href="#cb31-1" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?ChiSquare or ?table.chisq</span></span>
-<span id="cb31-2"><a href="#cb31-2" aria-hidden="true" tabindex="-1"></a>t <span class="ot">&lt;-</span> <span class="fu">pmt</span>(<span class="st">"table.chisq"</span>)</span>
-<span id="cb31-3"><a href="#cb31-3" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-4"><a href="#cb31-4" aria-hidden="true" tabindex="-1"></a><span class="co"># See ?Table5.4.2</span></span>
-<span id="cb31-5"><a href="#cb31-5" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span><span class="fu">test</span>(Table5.<span class="fl">4.2</span>)</span>
-<span id="cb31-6"><a href="#cb31-6" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; </span></span>
-<span id="cb31-7"><a href="#cb31-7" aria-hidden="true" tabindex="-1"></a> [K [0m</span>
-<span id="cb31-8"><a href="#cb31-8" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-9"><a href="#cb31-9" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>statistic</span>
-<span id="cb31-10"><a href="#cb31-10" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 4.277778</span></span>
-<span id="cb31-11"><a href="#cb31-11" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb31-12"><a href="#cb31-12" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.3142857</span></span>
-<span id="cb31-13"><a href="#cb31-13" aria-hidden="true" tabindex="-1"></a></span>
-<span id="cb31-14"><a href="#cb31-14" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>type <span class="ot">&lt;-</span> <span class="st">"approx"</span></span>
-<span id="cb31-15"><a href="#cb31-15" aria-hidden="true" tabindex="-1"></a>t<span class="sc">$</span>p_value</span>
-<span id="cb31-16"><a href="#cb31-16" aria-hidden="true" tabindex="-1"></a><span class="co">#&gt; [1] 0.1177856</span></span></code></pre></div>
+<div class="sourceCode" id="cb31"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="co"># See ?ChiSquare or ?table.chisq</span></span>
+<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span><span class="st">"table.chisq"</span><span class="op">)</span></span>
+<span></span>
+<span><span class="co"># See ?Table5.4.2</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table5.4.2</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
+<span><span class="co">#&gt; [1] 4.277778</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.3142857</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
+<span><span class="co">#&gt; [1] 0.1177856</span></span></code></pre></div>
 </div>
 </div>
   </div>
