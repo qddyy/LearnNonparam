@@ -113,17 +113,17 @@
 <p>Check the results</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.0013154</span></span>
+<span><span class="co">#&gt; [1] 0.0405571</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;       Two Sample Wilcoxon Test </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; scoring: rank    type: permu(1e+07)    method: default</span></span>
-<span><span class="co">#&gt; statistic = 519, p_value = 0.0013</span></span>
+<span><span class="co">#&gt; statistic = 475, p_value = 0.041</span></span>
 <span><span class="co">#&gt; alternative hypothesis: true location shift is greater than 0</span></span>
-<span><span class="co">#&gt; estimate: 0.95</span></span>
-<span><span class="co">#&gt; 95% confidence interval: 0.39 1.62</span></span>
+<span><span class="co">#&gt; estimate: NA</span></span>
+<span><span class="co">#&gt; 95% confidence interval: NA NA</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">plot</span><span class="op">(</span>style <span class="op">=</span> <span class="st">"ggplot2"</span>, binwidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span>
 <span><span class="co">#&gt; Loading required namespace: ggplot2</span></span></code></pre></div>
@@ -135,7 +135,7 @@
 <code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.00166809</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.04051587</span></span></code></pre></div>
 </li>
 </ul>
 <p>There is also support for chaining methods, which means that you can do things like</p>
