@@ -28,6 +28,10 @@ pak::pkg_install("qddyy/LearnNonparam")
 
 ## Usage
 
+``` r
+set.seed(2023)
+```
+
 - Create a test object (for example, a `Wilcoxon` object)
 
   ``` r
@@ -44,7 +48,6 @@ pak::pkg_install("qddyy/LearnNonparam")
 - Test some data (`vector` \| `data.frame` \| `list`)
 
   ``` r
-  set.seed(2023)
   t$test(rnorm(20, mean = 1), rnorm(20, mean = 0))
   ```
 
@@ -61,8 +64,8 @@ pak::pkg_install("qddyy/LearnNonparam")
   #> scoring: rank    type: permu(1e+07)    method: default
   #> statistic = 475, p_value = 0.041
   #> alternative hypothesis: true location shift is greater than 0
-  #> estimate: NA
-  #> 95% confidence interval: NA NA
+  #> estimate: 0.52
+  #> 95% confidence interval: -0.064  1.284
 
   t$plot(style = "ggplot2", binwidth = 1)
   #> Loading required namespace: ggplot2

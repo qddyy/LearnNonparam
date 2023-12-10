@@ -40,6 +40,10 @@ pak::pkg_install("qddyy/LearnNonparam")
 
 ## Usage
 
+```{r}
+set.seed(2023)
+```
+
 - Create a test object (for example, a `Wilcoxon` object)
     ```{r, eval = FALSE}
     t <- Wilcoxon$new(alternative = "greater", type = "permu", n_permu = 1e7)
@@ -52,7 +56,6 @@ pak::pkg_install("qddyy/LearnNonparam")
 
 - Test some data (`vector` | `data.frame` | `list`)
     ```{r, test}
-    set.seed(2023)
     t$test(rnorm(20, mean = 1), rnorm(20, mean = 0))
     ```
 

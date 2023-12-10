@@ -72,9 +72,9 @@ Wilcoxon <- R6Class(
         },
 
         .calculate_extra = function() {
-            x <- private$.raw_data$x
-            y <- private$.raw_data$y
-            
+            x <- private$.raw_data[[1]]
+            y <- private$.raw_data[[2]]
+
             diff <- as.vector(outer(x, y, "-"))
 
             private$.estimate <- median(diff)
