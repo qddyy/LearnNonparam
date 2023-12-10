@@ -9,7 +9,7 @@ inline void table_do(
     const IntegerVector& col_loc,
     const Function& statistic_func,
     NumericVector& statistic_permu,
-    RObject& bar, IntegerMatrix& data)
+    ProgressBar& bar, IntegerMatrix& data)
 {
     data.fill(0);
 
@@ -19,9 +19,7 @@ inline void table_do(
 
     statistic_permu[i] = as<double>(statistic_func(data));
 
-    if (CLI_SHOULD_TICK) {
-        cli_progress_set(bar, i);
-    }
+    bar.update(i);
     i++;
 }
 
@@ -32,8 +30,7 @@ NumericVector table_pmt(
     const Function statistic_func,
     const unsigned n_permu)
 {
-    RObject bar;
-    cli_progress_init_timer();
+    ProgressBar bar;
     NumericVector statistic_permu;
 
     unsigned n = row_loc.size();
@@ -55,7 +52,7 @@ NumericVector table_pmt(
         }
     }
 
-    cli_progress_done(bar);
+    bar.done();
 
     return statistic_permu;
 }

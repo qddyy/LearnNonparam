@@ -52,17 +52,17 @@ pak::pkg_install("qddyy/LearnNonparam")
 
   ``` r
   t$p_value
-  #> [1] 0.0013154
+  #> [1] 0.0405571
 
   t$print(digits = 2)
   #> 
   #>       Two Sample Wilcoxon Test 
   #> 
   #> scoring: rank    type: permu(1e+07)    method: default
-  #> statistic = 519, p_value = 0.0013
+  #> statistic = 475, p_value = 0.041
   #> alternative hypothesis: true location shift is greater than 0
-  #> estimate: 0.95
-  #> 95% confidence interval: 0.39 1.62
+  #> estimate: NA
+  #> 95% confidence interval: NA NA
 
   t$plot(style = "ggplot2", binwidth = 1)
   #> Loading required namespace: ggplot2
@@ -76,7 +76,7 @@ pak::pkg_install("qddyy/LearnNonparam")
   t$type <- "approx"
 
   t$p_value
-  #> [1] 0.00166809
+  #> [1] 0.04051587
   ```
 
 There is also support for chaining methods, which means that you can do

@@ -8,13 +8,11 @@ inline void association_do(
     const NumericVector& y,
     const Function& statistic_func,
     NumericVector& statistic_permu,
-    RObject& bar)
+    ProgressBar& bar)
 {
     statistic_permu[i] = as<double>(statistic_func(x, y));
 
-    if (CLI_SHOULD_TICK) {
-        cli_progress_set(bar, i);
-    }
+    bar.update(i);
     i++;
 }
 
@@ -25,8 +23,7 @@ NumericVector association_pmt(
     const Function statistic_func,
     const unsigned n_permu)
 {
-    RObject bar;
-    cli_progress_init_timer();
+    ProgressBar bar;
     NumericVector statistic_permu;
 
     unsigned i = 0;
@@ -45,7 +42,7 @@ NumericVector association_pmt(
         }
     }
 
-    cli_progress_done(bar);
+    bar.done();
 
     return statistic_permu;
 }

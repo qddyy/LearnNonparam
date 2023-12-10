@@ -7,13 +7,11 @@ inline void rcbd_do(
     const NumericMatrix& data,
     const Function& statistic_func,
     NumericVector& statistic_permu,
-    RObject& bar)
+    ProgressBar& bar)
 {
     statistic_permu[i] = as<double>(statistic_func(data));
 
-    if (CLI_SHOULD_TICK) {
-        cli_progress_set(bar, i);
-    }
+    bar.update(i);
     i++;
 }
 
@@ -23,8 +21,7 @@ NumericVector rcbd_pmt(
     const Function statistic_func,
     const unsigned n_permu)
 {
-    RObject bar;
-    cli_progress_init_timer();
+    ProgressBar bar;
     NumericVector statistic_permu;
 
     unsigned n_col = data.ncol();
@@ -60,7 +57,7 @@ NumericVector rcbd_pmt(
         }
     }
 
-    cli_progress_done(bar);
+    bar.done();
 
     return statistic_permu;
 }

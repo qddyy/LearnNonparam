@@ -1,16 +1,17 @@
 #include "utils.h"
 
-std::tuple<NumericVector, RObject> statistic_permu_with_bar(
+std::tuple<NumericVector, ProgressBar> statistic_permu_with_bar(
     const unsigned n, const bool exact,
     const unsigned statistic_size)
 {
-    RObject bar = cli_progress_bar(n, NULL);
-    cli_progress_set_type(bar, "iterator");
+    Environment base("package:base");
+    Function interactive = base["interactive"];
 
+    ProgressBar bar(n, as<bool>(interactive()));
     if (exact) {
-        cli_progress_set_name(bar, "Building exact permutation distribution");
+        bar.set_label("Building exact permutation distribution");
     } else {
-        cli_progress_set_name(bar, "Sampling from exact permutation distribution");
+        bar.set_label("Sampling from exact permutation distribution");
     }
 
     NumericVector statistic_permu(no_init(n * statistic_size));
@@ -18,5 +19,5 @@ std::tuple<NumericVector, RObject> statistic_permu_with_bar(
         statistic_permu.attr("dim") = IntegerVector::create(statistic_size, n);
     }
 
-    return std::tuple<NumericVector, RObject>(statistic_permu, bar);
+    return std::tuple<NumericVector, ProgressBar>(statistic_permu, bar);
 }

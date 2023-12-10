@@ -12,7 +12,7 @@ inline void multicomp_do(
     const IntegerVector& group,
     const Function& statistic_func,
     NumericVector& statistic_permu,
-    RObject& bar, List& split)
+    ProgressBar& bar, List& split)
 {
     for (unsigned j = 1; j <= n; j++) {
         split[j - 1] = data[group == j];
@@ -22,9 +22,7 @@ inline void multicomp_do(
         statistic_permu(k, i) = as<double>(statistic_func(split[group_i[k]], split[group_j[k]], data, group));
     }
 
-    if (CLI_SHOULD_TICK) {
-        cli_progress_set(bar, i);
-    }
+    bar.update(i);
     i++;
 }
 
@@ -37,8 +35,7 @@ NumericVector multicomp_pmt(
     const Function statistic_func,
     const unsigned n_permu)
 {
-    RObject bar;
-    cli_progress_init_timer();
+    ProgressBar bar;
     NumericVector statistic_permu;
 
     unsigned n_pair = group_i.size();
@@ -61,7 +58,7 @@ NumericVector multicomp_pmt(
         }
     }
 
-    cli_progress_done(bar);
+    bar.done();
 
     return statistic_permu;
 }

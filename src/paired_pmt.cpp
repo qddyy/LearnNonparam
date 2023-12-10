@@ -8,7 +8,7 @@ inline void paired_do(
     const unsigned& n,
     const Function& statistic_func,
     NumericVector& statistic_permu,
-    RObject& bar, LogicalVector& swapped)
+    ProgressBar& bar, LogicalVector& swapped)
 {
     for (unsigned j = 0; j < n; j++) {
         swapped[j] = ((i & (1 << j)) != 0);
@@ -16,9 +16,7 @@ inline void paired_do(
 
     statistic_permu[i] = as<double>(statistic_func(swapped));
 
-    if (CLI_SHOULD_TICK) {
-        cli_progress_set(bar, i);
-    }
+    bar.update(i);
     i++;
 }
 
@@ -28,8 +26,7 @@ NumericVector paired_pmt(
     const Function statistic_func,
     const unsigned n_permu)
 {
-    RObject bar;
-    cli_progress_init_timer();
+    ProgressBar bar;
     NumericVector statistic_permu;
 
     LogicalVector swapped(n);
@@ -50,7 +47,7 @@ NumericVector paired_pmt(
         }
     }
 
-    cli_progress_done(bar);
+    bar.done();
 
     return statistic_permu;
 }
