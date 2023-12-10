@@ -90,7 +90,7 @@ Perform test on data.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{...}}{data.}
+\item{\code{...}}{data to be tested. Can be a \code{data.frame}, a \code{list} or numeric vector(s).}
 }
 \if{html}{\out{</div>}}
 }

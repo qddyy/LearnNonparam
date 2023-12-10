@@ -17,8 +17,8 @@ ContingencyTableTest <- R6Class(
 
         .check = function() {},
 
-        .input = function(table) {
-            private$.raw_data <- as.matrix(table)
+        .preprocess = function(table) {
+            private$.data <- unname(do_call(cbind, private$.raw_data))
         },
 
         .calculate_statistic = function() {

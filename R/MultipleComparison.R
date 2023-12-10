@@ -15,10 +15,62 @@ MultipleComparison <- R6Class(
     private = list(
         .name = "Multiple Comparison",
 
-        .ij = NULL,
+        .group_ij = NULL,
         .multicomp = NULL,
 
         .check = function() {},
+
+        .preprocess = function(...) {
+            super$.preprocess(...)
+
+            k <- as.integer(get_last(names(private$.data)))
+            private$.group_ij <- list(
+                i = rep.int(seq_len(k - 1), seq.int(k - 1, 1)),
+                j = unlist(lapply(
+                    seq.int(2, k), seq.int, to = k
+                ), recursive = FALSE, use.names = FALSE)
+            )
+        },
+
+        .calculate_statistic = function() {
+            data <- unname(private$.data)
+            group <- as.integer(names(private$.data))
+            where <- split(seq_along(group), group)
+            private$.statistic <- as.numeric(.mapply(
+                FUN = function(i, j) {
+                    private$.statistic_func(
+                        data[where[[i]]], data[where[[j]]], data, group
+                    )
+                }, dots = private$.group_ij, MoreArgs = NULL
+            ))
+        },
+
+        .calculate_statistic_permu = function() {
+            private$.statistic_permu <- multicomp_pmt(
+                group_i = private$.group_ij$i - 1,
+                group_j = private$.group_ij$j - 1,
+                data = unname(private$.data),
+                group = as.integer(names(private$.data)),
+                statistic_func = private$.statistic_func,
+                n_permu = as.integer(private$.n_permu)
+            )
+        },
+
+        .calculate_p_permu = function() {
+            private$.p_value <- rowMeans(
+                abs(private$.statistic_permu) >= abs(private$.statistic)
+            )
+        },
+
+        .calculate_extra = function() {
+            private$.multicomp <- data.frame(
+                group_i = private$.group_ij$i,
+                group_j = private$.group_ij$j,
+                statistic = private$.statistic,
+                p_value = private$.p_value,
+                differ = (private$.p_value < 1 - private$.conf_level)
+            )
+        },
 
         .print = function(digits) {
             cat("\n\t", private$.name, "\n\n")
@@ -41,13 +93,17 @@ MultipleComparison <- R6Class(
                 private$.conf_level * 100
             ))
 
-            print(private$.multicomp, digits = digits, row.names = FALSE)
+            data_names <- names(private$.raw_data)
+            multicomp <- private$.multicomp
+            multicomp$group_i <- data_names[multicomp$group_i]
+            multicomp$group_j <- data_names[multicomp$group_j]
+            print(multicomp, digits = digits, row.names = FALSE)
         },
 
         .plot = function(...) {
-            n <- get_last(private$.ij$i)
+            n <- get_last(private$.group_ij$i)
 
-            dots <- c(private$.ij, list(seq_len(n * (n + 1) / 2)))
+            dots <- c(private$.group_ij, list(seq_len(n * (n + 1) / 2)))
 
             layout_matrix <- matrix(0, n, n)
             .mapply(
@@ -59,6 +115,8 @@ MultipleComparison <- R6Class(
             defaut_par <- par(no.readonly = TRUE)
             par(oma = c(0, 0, 3, 0))
             layout(layout_matrix)
+
+            data_names <- names(private$.raw_data)
             .mapply(
                 FUN = function(i, j, k) {
                     do_call(
@@ -67,7 +125,7 @@ MultipleComparison <- R6Class(
                             x = private$.statistic_permu[k, ],
                             plot = TRUE,
                             xlab = "Statistic",
-                            main = paste(i, "versus", j)
+                            main = paste(data_names[i], "versus", data_names[j])
                         ), ...
                     )
                     abline(v = private$.statistic[k], lty = "dashed")
@@ -77,6 +135,7 @@ MultipleComparison <- R6Class(
                 text = expression(bold("Permutation Distribution")),
                 side = 3, line = 0, outer = TRUE
             )
+
             par(defaut_par)
         },
 
@@ -91,8 +150,8 @@ MultipleComparison <- R6Class(
                         data = {
                             n <- ncol(private$.statistic_permu)
                             data.frame(
-                                i = rep.int(private$.ij$i, n),
-                                j = rep.int(private$.ij$j, n),
+                                group_i = rep.int(private$.group_ij$i, n),
+                                group_j = rep.int(private$.group_ij$j, n),
                                 statistic = as.vector(private$.statistic_permu)
                             )
                         }
@@ -104,9 +163,15 @@ MultipleComparison <- R6Class(
                     linetype = "dashed"
                 ) +
                 ggplot2::facet_grid(
-                    rows = ggplot2::vars(.data$j),
-                    cols = ggplot2::vars(.data$i),
-                    scales = "free", switch = "both"
+                    rows = ggplot2::vars(.data$group_j),
+                    cols = ggplot2::vars(.data$group_i),
+                    scales = "free", switch = "both",
+                    labeller = {
+                        data_names <- names(private$.raw_data)
+                        ggplot2::as_labeller(
+                            function(index) data_names[as.integer(index)]
+                        )
+                    }
                 ) +
                 ggplot2::labs(
                     title = "Permutation Distribution",
@@ -115,58 +180,6 @@ MultipleComparison <- R6Class(
                 ggplot2::theme(
                     plot.title = ggplot2::element_text(face = "bold", hjust = 0.5)
                 )
-        },
-
-        .input = function(...) {
-            super$.input(...)
-
-            k <- as.integer(get_last(names(private$.raw_data)))
-            private$.ij <- list(
-                i = rep.int(seq_len(k - 1), seq.int(k - 1, 1)),
-                j = unlist(lapply(
-                    seq.int(2, k), seq.int, to = k
-                ), recursive = FALSE, use.names = FALSE)
-            )
-        },
-
-        .calculate_statistic = function() {
-            data <- unname(private$.data)
-            group <- as.integer(names(private$.data))
-            where <- split(seq_along(group), group)
-            private$.statistic <- as.numeric(.mapply(
-                FUN = function(i, j) {
-                    private$.statistic_func(
-                        data[where[[i]]], data[where[[j]]], data, group
-                    )
-                }, dots = private$.ij, MoreArgs = NULL
-            ))
-        },
-
-        .calculate_statistic_permu = function() {
-            private$.statistic_permu <- multicomp_pmt(
-                group_i = private$.ij$i - 1,
-                group_j = private$.ij$j - 1,
-                data = unname(private$.data),
-                group = as.integer(names(private$.data)),
-                statistic_func = private$.statistic_func,
-                n_permu = as.integer(private$.n_permu)
-            )
-        },
-
-        .calculate_p_permu = function() {
-            private$.p_value <- rowMeans(
-                abs(private$.statistic_permu) >= abs(private$.statistic)
-            )
-        },
-
-        .calculate_extra = function() {
-            private$.multicomp <- data.frame(
-                i = private$.ij$i,
-                j = private$.ij$j,
-                statistic = private$.statistic,
-                p_value = private$.p_value,
-                differ = (private$.p_value < 1 - private$.conf_level)
-            )
         }
     )
 )

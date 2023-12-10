@@ -1,18 +1,5 @@
 get_last <- function(x) x[length(x)]
 
-# for .input
-
-get_list <- function(...) {
-    data <- list(...)
-
-    if (length(data) == 1 & is.list(data[[1]])) {
-        data <- as.list(data[[1]])
-    }
-    if (all(vapply(data, length, numeric(1)) >= 2)) data
-}
-
-# for .plot & .ggplot
-
 do_call <- function(func, default = NULL, fixed = NULL, ...) {
     env_args <- list2env(as.list(default))
     env_args <- list2env(list(...), envir = env_args)
@@ -24,7 +11,33 @@ do_call <- function(func, default = NULL, fixed = NULL, ...) {
     )
 }
 
-# for .calculate_score
+# for test()
+
+get_data <- function(call, env) {
+    data_exprs <- as.list(call)[-1]
+    n_data <- length(data_exprs)
+
+    if (n_data == 1 & is.list(data_1 <- eval(data_exprs[[1]], envir = env))) {
+        data_exprs <- data_1
+    }
+
+    data_names <- names(data_exprs)
+    if (is.null(data_names)) {
+        data_names <- rep_len("", n_data)
+    }
+
+    unlist(.mapply(
+        dots = list(data_exprs, data_names),
+        FUN = function(data, name) {
+            setNames(
+                list(eval(data, envir = env)),
+                if (name != "") name else deparse(data, width.cutoff = 20)[1]
+            )
+        }, MoreArgs = NULL
+    ), recursive = FALSE, use.names = TRUE)
+}
+
+# for .calculate_score()
 
 get_score <- function(x, method, n = length(x)) {
     rank <- rank(x)
@@ -38,7 +51,7 @@ get_score <- function(x, method, n = length(x)) {
     )
 }
 
-# for .calculate_p
+# for .calculate_p()
 
 get_p_continous <- function(x, dist, side, ...) {
     F <- match.fun(paste0("p", dist))

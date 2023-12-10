@@ -409,10 +409,7 @@ t <- pmt(
     scoring = "rank", method = "ignore"
 )
 
-t$test(data.frame(
-    diff = c(-5, -3, -3, 0, 0, 2, 4, 4, 4, 5),
-    zero = 0
-))
+t$test(c(-5, -3, -3, 0, 0, 2, 4, 4, 4, 5), 0)
 
 t$statistic
 t$p_value
@@ -426,10 +423,7 @@ t <- pmt(
     "paired.sign", alternative = "greater", type = "exact"
 )
 
-t$test(data.frame(
-    diff = c(rep(+1, 12), rep(-1, 5)),
-    zero = 0
-))
+t$test(c(rep(+1, 12), rep(-1, 5)), 0)
 
 t$statistic
 t$p_value

@@ -17,10 +17,10 @@ TwoSamplePairedTest <- R6Class(
 
         .check = function() {},
 
-        .input = function(...) {
-            super$.input(...)
+        .preprocess = function() {
+            super$.preprocess()
 
-            private$.raw_data <- do.call(data.frame, private$.raw_data)
+            private$.data <- do_call(data.frame, private$.data)
         },
 
         .calculate_score = function() {},
@@ -33,7 +33,7 @@ TwoSamplePairedTest <- R6Class(
 
         .calculate_statistic_permu = function() {
             private$.statistic_permu <- paired_pmt(
-                n = length(private$.data$x),
+                n = nrow(private$.data),
                 statistic_func = private$.statistic_func,
                 n_permu = as.integer(private$.n_permu)
             )

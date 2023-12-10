@@ -17,14 +17,8 @@ RCBD <- R6Class(
 
         .check = function() {},
 
-        .input = function(...) {
-            data <- do.call(cbind, get_list(...))
-
-            dim <- dim(data)
-            rownames(data) <- paste0("treatment_", seq_len(dim[1]))
-            colnames(data) <- paste0("block_", seq_len(dim[2]))
-
-            private$.raw_data <- data
+        .preprocess = function() {
+            private$.data <- unname(do_call(cbind, private$.raw_data))
         },
 
         .calculate_score = function() {

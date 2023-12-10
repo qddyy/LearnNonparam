@@ -43,9 +43,29 @@ CDF <- R6Class(
 
         .lims_for_plot = NULL,
 
+        .calculate_extra = function() {
+            n <- length(private$.data)
+            sorted <- sort(private$.data)
+
+            F_n <- seq.int(0, n) / n
+            private$.estimate <- stepfun(sorted, F_n, right = TRUE)
+
+            A <- 1 / sqrt(n) * qnorm(1 - (1 - private$.conf_level) / 2)
+            delta_n <- A * sqrt(F_n * (1 - F_n))
+            private$.ci <- list(
+                lower = stepfun(sorted, F_n - delta_n, right = TRUE),
+                upper = stepfun(sorted, F_n + delta_n, right = TRUE)
+            )
+
+            private$.lims_for_plot <- list(
+                x = c(sorted[1], get_last(sorted)),
+                y = c(min(F_n - delta_n), max(F_n + delta_n))
+            )
+        },
+
         .print = function(...) {},
 
-        .plot = function() {
+        .plot = function(...) {
             plot(
                 private$.estimate, lty = "solid",
                 xlim = private$.lims_for_plot$x,
@@ -57,7 +77,7 @@ CDF <- R6Class(
             plot(private$.ci$upper, lty = "dashed", add = TRUE)
         },
 
-        .autoplot = function() {
+        .autoplot = function(...) {
             ggplot2::ggplot(
                 data = data.frame(
                     x = private$.data,
@@ -85,26 +105,6 @@ CDF <- R6Class(
                 ggplot2::theme(
                     plot.title = ggplot2::element_text(face = "bold", hjust = 0.5)
                 )
-        },
-
-        .calculate_extra = function() {
-            n <- length(private$.data)
-            sorted <- sort(private$.data)
-
-            F_n <- seq.int(0, n) / n
-            private$.estimate <- stepfun(x = sorted, y = F_n, right = TRUE)
-
-            A <- 1 / sqrt(n) * qnorm(1 - (1 - private$.conf_level) / 2)
-            delta_n <- A * sqrt(F_n * (1 - F_n))
-            private$.ci <- list(
-                lower = stepfun(x = sorted, y = F_n - delta_n, right = TRUE),
-                upper = stepfun(x = sorted, y = F_n + delta_n, right = TRUE)
-            )
-
-            private$.lims_for_plot <- list(
-                x = c(sorted[1], get_last(sorted)),
-                y = c(min(F_n - delta_n), max(F_n + delta_n))
-            )
         }
     )
 )

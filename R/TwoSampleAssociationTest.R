@@ -17,16 +17,16 @@ TwoSampleAssociationTest <- R6Class(
 
         .check = function() {},
 
-        .input = function(...) {
-            super$.input(...)
+        .preprocess = function() {
+            super$.preprocess()
 
-            private$.raw_data <- do.call(data.frame, private$.raw_data)
+            private$.data <- do_call(data.frame, private$.data)
         },
 
         .calculate_score = function() {},
 
         .calculate_statistic_permu = function() {
-            data_y_order <- private$.data[order(private$.data$y),]
+            data_y_order <- private$.data[order(private$.data$y), ]
             private$.statistic_permu <- association_pmt(
                 x = data_y_order$x,
                 y = data_y_order$y,

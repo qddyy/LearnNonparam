@@ -18,10 +18,11 @@ OneSampleTest <- R6Class(
 
         .check = function() {},
 
-        .plot = function() {},
+        .preprocess = function() {
+            private$.data <- private$.raw_data[[1]]
+        },
 
-        .input = function(x) {
-            private$.raw_data <- x
-        }
+        .plot = function(...) {},
+        .autoplot = function(...) {}
     )
 )

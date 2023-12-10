@@ -28,11 +28,11 @@ PermuTest <- R6Class(
 
         #' @description Perform test on data. 
         #' 
-        #' @param ... data. 
+        #' @param ... data to be tested. Can be a `data.frame`, a `list` or numeric vector(s). 
         #' 
         #' @return The object itself (invisibly).
         test = function(...) {
-            private$.input(...)
+            private$.raw_data <- get_data(match.call(), parent.frame())
             private$.check()
             private$.calculate()
 
@@ -81,6 +81,7 @@ PermuTest <- R6Class(
 
         .n_permu = NULL,
 
+        .data_name = NULL,
         .raw_data = NULL,
         .data = NULL,
 
@@ -100,8 +101,86 @@ PermuTest <- R6Class(
         .ci = NULL,
         .conf_level = NULL,
 
+        .calculate = function() {
+            private$.preprocess()
+            if (private$.scoring != "none") {
+                private$.calculate_score()
+            }
+
+            private$.define()
+
+            private$.calculate_statistic()
+
+            private$.calculate_side()
+            if (private$.type == "permu") {
+                private$.calculate_statistic_permu()
+                private$.calculate_p_permu()
+            } else {
+                private$.calculate_p()
+            }
+
+            private$.calculate_extra()
+        },
+
         # @Override
         .check = function() {},
+
+        # @Override
+        .preprocess = function() {
+            # private$.data <- ...
+        },
+
+        # @Override
+        .calculate_score = function() {
+            # private$.data <- ...
+        },
+
+        # @Override
+        .define = function() {
+            # private$.param_name <- ...
+            # private$.statistic_func <- ...
+        },
+
+        # @Override
+        .calculate_statistic = function() {
+            # private$.statistic <- ...
+        },
+
+        # @Override
+        .calculate_p = function() {
+            # private$.p_value <- ...
+            # when private$.type != "permu"
+        },
+
+        # @Override
+        .calculate_extra = function() {
+            # private$.estimate <- ...
+            # private$.ci <- ...
+        },
+
+        # @Override
+        .calculate_statistic_permu = function() {
+            # private$.statistic_permu <- ...
+        },
+
+        .calculate_side = function() {
+            private$.side <- switch(private$.trend,
+                "+" = switch(private$.alternative,
+                    greater = "r", less = "l", two_sided = "lr"
+                ),
+                "-" = switch(private$.alternative,
+                    greater = "l", less = "r", two_sided = "lr"
+                ),
+            )
+        },
+
+        .calculate_p_permu = function() {
+            l <- quote(mean(private$.statistic_permu <= private$.statistic))
+            r <- quote(mean(private$.statistic_permu >= private$.statistic))
+            lr <- quote(2 * min(eval(l), eval(r)))
+
+            private$.p_value <- eval(get(private$.side))
+        },
 
         .print = function(digits) {
             cat("\n", "\t", private$.name, "\n\n")
@@ -196,84 +275,6 @@ PermuTest <- R6Class(
                 ggplot2::theme(
                     plot.title = ggplot2::element_text(face = "bold", hjust = 0.5)
                 )
-        },
-
-        # @Override
-        .input = function(...) {
-            # private$.raw_data <- ...
-        },
-
-        # @Override
-        .calculate_score = function() {
-            # private$.data <- ...
-        },
-
-        # @Override
-        .define = function() {
-            # private$.param_name <- ...
-            # private$.statistic_func <- ...
-        },
-
-        # @Override
-        .calculate_statistic = function() {
-            # private$.statistic <- ...
-        },
-
-        # @Override
-        .calculate_p = function() {
-            # private$.p_value <- ...
-            # when private$.type != "permu"
-        },
-
-        # @Override
-        .calculate_extra = function() {
-            # private$.estimate <- ...
-            # private$.ci <- ...
-        },
-
-        # @Override
-        .calculate_statistic_permu = function() {
-            # private$.statistic_permu <- ...
-        },
-
-        .calculate_side = function() {
-            private$.side <- switch(private$.trend,
-                "+" = switch(private$.alternative,
-                    greater = "r", less = "l", two_sided = "lr"
-                ),
-                "-" = switch(private$.alternative,
-                    greater = "l", less = "r", two_sided = "lr"
-                ),
-            )
-        },
-
-        .calculate_p_permu = function() {
-            l <- quote(mean(private$.statistic_permu <= private$.statistic))
-            r <- quote(mean(private$.statistic_permu >= private$.statistic))
-            lr <- quote(2 * min(eval(l), eval(r)))
-
-            private$.p_value <- eval(get(private$.side))
-        },
-
-        .calculate = function() {
-            private$.data <- private$.raw_data
-            if (private$.scoring != "none") {
-                private$.calculate_score()
-            }
-
-            private$.define()
-
-            private$.calculate_statistic()
-
-            private$.calculate_side()
-            if (private$.type == "permu") {
-                private$.calculate_statistic_permu()
-                private$.calculate_p_permu()
-            } else {
-                private$.calculate_p()
-            }
-
-            private$.calculate_extra()
         }
     ),
     active = list(
@@ -356,7 +357,7 @@ PermuTest <- R6Class(
         },
 
         #' @field data The data. 
-        data = function() private$.data,
+        data = function() private$.raw_data,
         #' @field statistic The test statistic. 
         statistic = function() private$.statistic,
         #' @field p_value The p-value. 
