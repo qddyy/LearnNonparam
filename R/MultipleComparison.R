@@ -85,13 +85,17 @@ MultipleComparison <- R6Class(
                     } else type
                 ),
                 paste("method:", private$.method),
-                "\n\n", sep = "    "
+                sep = "    "
             )
+            cat("\n\n")
 
-            cat(sprintf(
-                "family-wise confidence level: %.0f%% \n\n",
-                private$.conf_level * 100
-            ))
+            cat(
+                "family-wise confidence level:",
+                paste0(
+                    format(private$.conf_level * 100, digits = digits), "%"
+                )
+            )
+            cat("\n\n")
 
             data_names <- names(private$.raw_data)
             multicomp <- private$.multicomp

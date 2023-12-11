@@ -232,8 +232,14 @@ PermuTest <- R6Class(
 
             if (!is.null(private$.ci)) {
                 cat(
-                    sprintf("%.0f%% confidence interval:", private$.conf_level * 100),
-                    paste(format(private$.ci, digits = digits), collapse = " ")
+                    paste0(
+                        format(private$.conf_level * 100, digits = digits), "%"
+                    ),
+                    "confidence interval:",
+                    paste0(
+                        "(", format(private$.ci[1], digits = digits), ",",
+                        " ", format(private$.ci[2], digits = digits), ")"
+                    )
                 )
                 cat("\n")
             }

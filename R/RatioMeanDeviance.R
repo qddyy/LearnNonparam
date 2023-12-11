@@ -21,8 +21,6 @@ RatioMeanDeviance <- R6Class(
         #' @return A `RatioMeanDeviance` object. 
         initialize = function(alternative = c("two_sided", "less", "greater"), n_permu = 0L) {
             super$initialize(null_value = 1, alternative = match.arg(alternative), n_permu = n_permu)
-
-            private$.scoring <- "dev"
         }
     ),
     private = list(

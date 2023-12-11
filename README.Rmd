@@ -41,22 +41,22 @@ pak::pkg_install("qddyy/LearnNonparam")
 ## Usage
 
 ```{r}
-set.seed(2023)
+set.seed(0)
 ```
 
 - Create a test object (for example, a `Wilcoxon` object)
     ```{r, eval = FALSE}
-    t <- Wilcoxon$new(alternative = "greater", type = "permu", n_permu = 1e7)
+    t <- Wilcoxon$new(alternative = "two_sided", type = "permu", n_permu = 1e6)
     ```
 
-    or you can use `pmt` (**p**er**m**utation **t**est) function (**Recommended*):
+    or you can use `pmt` (**p**er**m**utation **t**est) function (*Recommended*):
     ```{r, create}
-    t <- pmt("twosample.wilcoxon", alternative = "greater", type = "permu", n_permu = 1e7)
+    t <- pmt("twosample.wilcoxon", alternative = "two_sided", type = "permu", n_permu = 1e6)
     ```
 
-- Test some data (`vector` | `data.frame` | `list`)
+- Test some data
     ```{r, test}
-    t$test(rnorm(20, mean = 1), rnorm(20, mean = 0))
+    t$test(rnorm(20, 1), rnorm(20, 0))
     ```
 
 - Check the results

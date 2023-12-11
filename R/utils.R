@@ -13,11 +13,15 @@ do_call <- function(func, default = NULL, fixed = NULL, ...) {
 
 # for test()
 
+deparse_1 <- function(expr) {
+    paste(deparse(expr, width.cutoff = 500), collapse = " ")
+}
+
 get_data <- function(call, env) {
     data_exprs <- as.list(call)[-1]
     n_data <- length(data_exprs)
 
-    if (n_data == 1 & is.list(data_1 <- eval(data_exprs[[1]], envir = env))) {
+    if ((n_data == 1) & is.list(data_1 <- eval(data_exprs[[1]], envir = env))) {
         data_exprs <- data_1
     }
 
@@ -31,7 +35,7 @@ get_data <- function(call, env) {
         FUN = function(data, name) {
             setNames(
                 list(eval(data, envir = env)),
-                if (name != "") name else deparse(data, width.cutoff = 20)[1]
+                if (name != "") name else deparse_1(data)
             )
         }, MoreArgs = NULL
     ), recursive = FALSE, use.names = TRUE)

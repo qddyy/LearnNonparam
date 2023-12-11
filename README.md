@@ -29,43 +29,43 @@ pak::pkg_install("qddyy/LearnNonparam")
 ## Usage
 
 ``` r
-set.seed(2023)
+set.seed(0)
 ```
 
 - Create a test object (for example, a `Wilcoxon` object)
 
   ``` r
-  t <- Wilcoxon$new(alternative = "greater", type = "permu", n_permu = 1e7)
+  t <- Wilcoxon$new(alternative = "two_sided", type = "permu", n_permu = 1e6)
   ```
 
   or you can use `pmt` (**p**er**m**utation **t**est) function
-  (\*\*Recommended\*):
+  (*Recommended*):
 
   ``` r
-  t <- pmt("twosample.wilcoxon", alternative = "greater", type = "permu", n_permu = 1e7)
+  t <- pmt("twosample.wilcoxon", alternative = "two_sided", type = "permu", n_permu = 1e6)
   ```
 
-- Test some data (`vector` \| `data.frame` \| `list`)
+- Test some data
 
   ``` r
-  t$test(rnorm(20, mean = 1), rnorm(20, mean = 0))
+  t$test(rnorm(20, 1), rnorm(20, 0))
   ```
 
 - Check the results
 
   ``` r
   t$p_value
-  #> [1] 0.0405571
+  #> [1] 0.000326
 
   t$print(digits = 2)
   #> 
   #>       Two Sample Wilcoxon Test 
   #> 
-  #> scoring: rank    type: permu(1e+07)    method: default
-  #> statistic = 475, p_value = 0.041
-  #> alternative hypothesis: true location shift is greater than 0
-  #> estimate: 0.52
-  #> 95% confidence interval: -0.064  1.284
+  #> scoring: rank    type: permu(1e+06)    method: default
+  #> statistic = 539, p_value = 0.00033
+  #> alternative hypothesis: true location shift is not equal to 0
+  #> estimate: 1.3
+  #> 95% confidence interval: (0.65, 1.9)
 
   t$plot(style = "ggplot2", binwidth = 1)
   #> Loading required namespace: ggplot2
@@ -79,7 +79,7 @@ set.seed(2023)
   t$type <- "approx"
 
   t$p_value
-  #> [1] 0.04051587
+  #> [1] 0.0005090729
   ```
 
 There is also support for chaining methods, which means that you can do
