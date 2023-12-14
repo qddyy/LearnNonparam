@@ -202,17 +202,7 @@
 <span><span class="co"># 1000 permutaions</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.203</span></span>
-<span></span>
-<span><span class="co"># install.packages("microbenchmark")</span></span>
-<span><span class="fu">microbenchmark</span><span class="fu">::</span><span class="fu"><a href="https://rdrr.io/pkg/microbenchmark/man/microbenchmark.html" class="external-link">microbenchmark</a></span><span class="op">(</span></span>
-<span>    use_all <span class="op">=</span> <span class="op">{</span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">0</span><span class="op">}</span>,</span>
-<span>    use_1000 <span class="op">=</span> <span class="op">{</span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">1000</span><span class="op">}</span></span>
-<span><span class="op">)</span></span>
-<span><span class="co">#&gt; Unit: milliseconds</span></span>
-<span><span class="co">#&gt;      expr       min         lq       mean     median         uq       max neval</span></span>
-<span><span class="co">#&gt;   use_all 99.826641 103.283869 105.299103 104.578266 105.768361 182.40394   100</span></span>
-<span><span class="co">#&gt;  use_1000  7.773069   7.983462   8.497235   8.095786   8.400635  11.32377   100</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.203</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-2-6-1">Example 2.6.1<a class="anchor" aria-label="anchor" href="#example-2-6-1"></a>
@@ -374,7 +364,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 8.246588</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.0115</span></span>
+<span><span class="co">#&gt; [1] 0.01025</span></span>
 <span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
@@ -387,7 +377,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">4000</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"permu"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.01375</span></span>
+<span><span class="co">#&gt; [1] 0.0155</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
@@ -414,12 +404,12 @@
 <span><span class="co">#&gt; family-wise confidence level: 95%</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     group_i    group_j   statistic p_value differ</span></span>
-<span><span class="co">#&gt;  location_1 location_2  0.02737145  0.9790  FALSE</span></span>
-<span><span class="co">#&gt;  location_1 location_3 -1.77914406  0.0888  FALSE</span></span>
-<span><span class="co">#&gt;  location_1 location_4 -3.41048230  0.0030   TRUE</span></span>
-<span><span class="co">#&gt;  location_2 location_3 -1.80651550  0.0896  FALSE</span></span>
-<span><span class="co">#&gt;  location_2 location_4 -3.43785375  0.0028   TRUE</span></span>
-<span><span class="co">#&gt;  location_3 location_4 -1.63133824  0.1198  FALSE</span></span>
+<span><span class="co">#&gt;  location_1 location_2  0.02737145  0.9784  FALSE</span></span>
+<span><span class="co">#&gt;  location_1 location_3 -1.77914406  0.0932  FALSE</span></span>
+<span><span class="co">#&gt;  location_1 location_4 -3.41048230  0.0028   TRUE</span></span>
+<span><span class="co">#&gt;  location_2 location_3 -1.80651550  0.0786  FALSE</span></span>
+<span><span class="co">#&gt;  location_2 location_4 -3.43785375  0.0026   TRUE</span></span>
+<span><span class="co">#&gt;  location_3 location_4 -1.63133824  0.1196  FALSE</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
@@ -472,11 +462,11 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;     group_i    group_j   statistic p_value differ</span></span>
 <span><span class="co">#&gt;  location_1 location_2  0.03870907  1.0000  FALSE</span></span>
-<span><span class="co">#&gt;  location_1 location_3 -2.51608965  0.3186  FALSE</span></span>
-<span><span class="co">#&gt;  location_1 location_4 -4.82315032  0.0134   TRUE</span></span>
-<span><span class="co">#&gt;  location_2 location_3 -2.55479873  0.3038  FALSE</span></span>
-<span><span class="co">#&gt;  location_2 location_4 -4.86185939  0.0128   TRUE</span></span>
-<span><span class="co">#&gt;  location_3 location_4 -2.30706067  0.3882  FALSE</span></span>
+<span><span class="co">#&gt;  location_1 location_3 -2.51608965  0.3134  FALSE</span></span>
+<span><span class="co">#&gt;  location_1 location_4 -4.82315032  0.0150   TRUE</span></span>
+<span><span class="co">#&gt;  location_2 location_3 -2.55479873  0.3006  FALSE</span></span>
+<span><span class="co">#&gt;  location_2 location_4 -4.86185939  0.0144   TRUE</span></span>
+<span><span class="co">#&gt;  location_3 location_4 -2.30706067  0.3792  FALSE</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
@@ -527,7 +517,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 145</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.0295</span></span>
+<span><span class="co">#&gt; [1] 0.03325</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
@@ -575,7 +565,7 @@
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">4000</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.3495</span></span>
+<span><span class="co">#&gt; [1] 0.024</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
@@ -655,7 +645,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 110241.8</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.054</span></span>
+<span><span class="co">#&gt; [1] 0.0594</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
@@ -678,7 +668,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 28.33333</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.0478</span></span>
+<span><span class="co">#&gt; [1] 0.0466</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
@@ -701,7 +691,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 134</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.0112</span></span>
+<span><span class="co">#&gt; [1] 0.0136</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"approx"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
