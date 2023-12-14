@@ -15,8 +15,8 @@ knitr::opts_chunk$set(
     fig.align = "center", fig.width = 16, fig.height = 9, out.width = "100%"
 )
 
-for (pkg in c("ggplot2", "microbenchmark")) {
-    if (!require(pkg)) install.packages(pkg, repos = "https://cloud.r-project.org/")
+if (!requireNamespace("ggplot2")) {
+    install.packages("ggplot2", repos = "https://cloud.r-project.org/")
 }
 ```
 
@@ -124,12 +124,6 @@ t$p_value
 # 1000 permutaions
 t$n_permu <- 1000
 t$p_value
-
-# install.packages("microbenchmark")
-microbenchmark::microbenchmark(
-    use_all = {t$n_permu <- 0},
-    use_1000 = {t$n_permu <- 1000}
-)
 ```
 
 ## Example 2.6.1
