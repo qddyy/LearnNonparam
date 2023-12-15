@@ -2,18 +2,13 @@
 
 using namespace Rcpp;
 
-inline void twosample_do(
-    unsigned& i,
+inline bool twosample_update(
+    PermuBar& bar,
     const NumericVector& data,
     const LogicalVector& where_y,
-    const Function& statistic_func,
-    NumericVector& statistic_permu,
-    ProgressBar& bar)
+    const Function& statistic_func)
 {
-    statistic_permu[i] = as<double>(statistic_func(data[!where_y], data[where_y]));
-
-    bar.update(i);
-    i++;
+    return bar.update(as<double>(statistic_func(data[!where_y], data[where_y])));
 }
 
 // [[Rcpp::export]]
@@ -23,26 +18,21 @@ NumericVector twosample_pmt(
     const Function statistic_func,
     const unsigned n_permu)
 {
-    ProgressBar bar;
-    NumericVector statistic_permu;
-
-    unsigned i = 0;
     if (n_permu == 0) {
-        std::tie(statistic_permu, bar) = statistic_permu_with_bar(n_permutation(where_y), true);
+        PermuBar bar(n_permutation(where_y), true);
 
         do {
-            twosample_do(i, data, where_y, statistic_func, statistic_permu, bar);
+            twosample_update(bar, data, where_y, statistic_func);
         } while (std::next_permutation(where_y.begin(), where_y.end()));
+
+        return bar.statistic_permu;
     } else {
-        std::tie(statistic_permu, bar) = statistic_permu_with_bar(n_permu, false);
+        PermuBar bar(n_permu, false);
 
-        while (i < n_permu) {
+        do {
             random_shuffle(where_y);
-            twosample_do(i, data, where_y, statistic_func, statistic_permu, bar);
-        }
+        } while (twosample_update(bar, data, where_y, statistic_func));
+
+        return bar.statistic_permu;
     }
-
-    bar.done();
-
-    return statistic_permu;
 }

@@ -2,22 +2,18 @@
 
 using namespace Rcpp;
 
-inline void paired_do(
-    unsigned& i,
-    const unsigned& k,
+inline bool paired_update(
+    PermuBar& bar,
+    const unsigned& i,
     const unsigned& n,
     const Function& statistic_func,
-    NumericVector& statistic_permu,
-    ProgressBar& bar, LogicalVector& swapped)
+    LogicalVector& swapped)
 {
     for (unsigned j = 0; j < n; j++) {
         swapped[j] = ((i & (1 << j)) != 0);
     }
 
-    statistic_permu[i] = as<double>(statistic_func(swapped));
-
-    bar.update(i);
-    i++;
+    return bar.update(as<double>(statistic_func(swapped)));
 }
 
 // [[Rcpp::export]]
@@ -26,28 +22,27 @@ NumericVector paired_pmt(
     const Function statistic_func,
     const unsigned n_permu)
 {
-    ProgressBar bar;
-    NumericVector statistic_permu;
+    unsigned total = (1 << n);
 
     LogicalVector swapped(n);
-    unsigned total = (1 << n);
 
     unsigned i = 0;
     if (n_permu == 0) {
-        std::tie(statistic_permu, bar) = statistic_permu_with_bar(total, true);
+        PermuBar bar(total, true);
 
-        while (i < total) {
-            paired_do(i, i, n, statistic_func, statistic_permu, bar, swapped);
-        }
+        do {
+            paired_update(bar, i, n, statistic_func, swapped);
+            i++;
+        } while (i < total);
+
+        return bar.statistic_permu;
     } else {
-        std::tie(statistic_permu, bar) = statistic_permu_with_bar(n_permu, false);
+        PermuBar bar(n_permu, false);
 
-        while (i < n_permu) {
-            paired_do(i, rand_int(total), n, statistic_func, statistic_permu, bar, swapped);
-        }
+        do {
+            i = rand_int(total);
+        } while (paired_update(bar, i, n, statistic_func, swapped));
+
+        return bar.statistic_permu;
     }
-
-    bar.done();
-
-    return statistic_permu;
 }

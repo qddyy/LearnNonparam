@@ -2,25 +2,21 @@
 
 using namespace Rcpp;
 
-inline void table_do(
-    unsigned& i,
+inline bool table_update(
+    PermuBar& bar,
     const unsigned& n,
     const IntegerVector& row_loc,
     const IntegerVector& col_loc,
     const Function& statistic_func,
-    NumericVector& statistic_permu,
-    ProgressBar& bar, IntegerMatrix& data)
+    IntegerMatrix& data)
 {
     data.fill(0);
 
-    for (unsigned j = 0; j < n; j++) {
-        data(row_loc[j], col_loc[j])++;
+    for (unsigned i = 0; i < n; i++) {
+        data(row_loc[i], col_loc[i])++;
     }
 
-    statistic_permu[i] = as<double>(statistic_func(data));
-
-    bar.update(i);
-    i++;
+    return bar.update(as<double>(statistic_func(data)));
 }
 
 // [[Rcpp::export]]
@@ -30,29 +26,25 @@ NumericVector table_pmt(
     const Function statistic_func,
     const unsigned n_permu)
 {
-    ProgressBar bar;
-    NumericVector statistic_permu;
-
     unsigned n = row_loc.size();
-    IntegerMatrix data(row_loc[n - 1] + 1, col_loc[n - 1] + 1);
 
-    unsigned i = 0;
+    IntegerMatrix data(no_init(row_loc[n - 1] + 1, col_loc[n - 1] + 1));
+
     if (n_permu == 0) {
-        std::tie(statistic_permu, bar) = statistic_permu_with_bar(n_permutation(row_loc), true);
+        PermuBar bar(n_permutation(row_loc), true);
 
         do {
-            table_do(i, n, row_loc, col_loc, statistic_func, statistic_permu, bar, data);
+            table_update(bar, n, row_loc, col_loc, statistic_func, data);
         } while (std::next_permutation(row_loc.begin(), row_loc.end()));
+
+        return bar.statistic_permu;
     } else {
-        std::tie(statistic_permu, bar) = statistic_permu_with_bar(n_permu, false);
+        PermuBar bar(n_permu, false);
 
-        while (i < n_permu) {
+        do {
             random_shuffle(row_loc);
-            table_do(i, n, row_loc, col_loc, statistic_func, statistic_permu, bar, data);
-        }
+        } while (table_update(bar, n, row_loc, col_loc, statistic_func, data));
+
+        return bar.statistic_permu;
     }
-
-    bar.done();
-
-    return statistic_permu;
 }

@@ -2,28 +2,27 @@
 
 using namespace Rcpp;
 
-inline void multicomp_do(
-    unsigned& i,
-    const unsigned& n,
+inline bool multicomp_update(
+    PermuBar& bar,
     const unsigned& n_pair,
+    const unsigned& n_group,
     const IntegerVector& group_i,
     const IntegerVector& group_j,
     const NumericVector& data,
     const IntegerVector& group,
     const Function& statistic_func,
-    NumericVector& statistic_permu,
-    ProgressBar& bar, List& split)
+    List& split)
 {
-    for (unsigned j = 1; j <= n; j++) {
-        split[j - 1] = data[group == j];
+    for (unsigned i = 1; i <= n_group; i++) {
+        split[i - 1] = data[group == i];
     }
 
-    for (unsigned k = 0; k < n_pair; k++) {
-        statistic_permu(k, i) = as<double>(statistic_func(split[group_i[k]], split[group_j[k]], data, group));
+    unsigned j;
+    for (j = 0; j < n_pair - 1; j++) {
+        bar.update(as<double>(statistic_func(split[group_i[j]], split[group_j[j]], data, group)));
     }
 
-    bar.update(i);
-    i++;
+    return bar.update(as<double>(statistic_func(split[group_i[j]], split[group_j[j]], data, group)));
 }
 
 // [[Rcpp::export]]
@@ -35,30 +34,26 @@ NumericVector multicomp_pmt(
     const Function statistic_func,
     const unsigned n_permu)
 {
-    ProgressBar bar;
-    NumericVector statistic_permu;
+    unsigned n_group = group[group.size() - 1];
+    unsigned n_pair = n_group * (n_group - 1) / 2;
 
-    unsigned n_pair = group_i.size();
-    unsigned n = group[group.size() - 1];
-    List split(n);
+    List split(n_group);
 
-    unsigned i = 0;
     if (n_permu == 0) {
-        std::tie(statistic_permu, bar) = statistic_permu_with_bar(n_permutation(group), true, n_pair);
+        PermuBar bar(n_permutation(group), true, n_pair);
 
         do {
-            multicomp_do(i, n, n_pair, group_i, group_j, data, group, statistic_func, statistic_permu, bar, split);
+            multicomp_update(bar, n_pair, n_group, group_i, group_j, data, group, statistic_func, split);
         } while (std::next_permutation(group.begin(), group.end()));
+
+        return bar.statistic_permu;
     } else {
-        std::tie(statistic_permu, bar) = statistic_permu_with_bar(n_permu, false, n_pair);
+        PermuBar bar(n_permu, false, n_pair);
 
-        while (i < n_permu) {
+        do {
             random_shuffle(group);
-            multicomp_do(i, n, n_pair, group_i, group_j, data, group, statistic_func, statistic_permu, bar, split);
-        }
+        } while (multicomp_update(bar, n_pair, n_group, group_i, group_j, data, group, statistic_func, split));
+
+        return bar.statistic_permu;
     }
-
-    bar.done();
-
-    return statistic_permu;
 }

@@ -2,17 +2,13 @@
 
 using namespace Rcpp;
 
-inline void rcbd_do(
-    unsigned& i,
+inline bool rcbd_update(
+    PermuBar& bar,
     const NumericMatrix& data,
-    const Function& statistic_func,
-    NumericVector& statistic_permu,
-    ProgressBar& bar)
+    const Function& statistic_func
+    )
 {
-    statistic_permu[i] = as<double>(statistic_func(data));
-
-    bar.update(i);
-    i++;
+    return bar.update(as<double>(statistic_func(data)));
 }
 
 // [[Rcpp::export]]
@@ -21,43 +17,39 @@ NumericVector rcbd_pmt(
     const Function statistic_func,
     const unsigned n_permu)
 {
-    ProgressBar bar;
-    NumericVector statistic_permu;
-
     unsigned n_col = data.ncol();
 
     unsigned i = 0;
-    unsigned j = 0;
     if (n_permu == 0) {
         unsigned total = 1;
-        for (unsigned k = 0; k < n_col; k++) {
-            total *= n_permutation(data.column(k));
+        for (unsigned j = 0; j < n_col; j++) {
+            total *= n_permutation(data.column(j));
         }
-        std::tie(statistic_permu, bar) = statistic_permu_with_bar(total, true);
 
-        while (j < n_col) {
-            if (j == 0) {
-                rcbd_do(i, data, statistic_func, statistic_permu, bar);
+        PermuBar bar(total, true);
+
+        while (i < n_col) {
+            if (i == 0) {
+                rcbd_update(bar, data, statistic_func);
             }
 
-            if (std::next_permutation(data.column(j).begin(), data.column(j).end())) {
-                j = 0;
+            if (std::next_permutation(data.column(i).begin(), data.column(i).end())) {
+                i = 0;
             } else {
-                j++;
+                i++;
             }
         }
+
+        return bar.statistic_permu;
     } else {
-        std::tie(statistic_permu, bar) = statistic_permu_with_bar(n_permu, false);
+        PermuBar bar(n_permu, false);
 
-        while (i < n_permu) {
-            for (j = 0; j < n_col; j++) {
-                random_shuffle(data.column(j));
+        do {
+            for (i = 0; i < n_col; i++) {
+                random_shuffle(data.column(i));
             }
-            rcbd_do(i, data, statistic_func, statistic_permu, bar);
-        }
+        } while (rcbd_update(bar, data, statistic_func));
+
+        return bar.statistic_permu;
     }
-
-    bar.done();
-
-    return statistic_permu;
 }
