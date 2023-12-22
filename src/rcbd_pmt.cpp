@@ -2,24 +2,18 @@
 
 using namespace Rcpp;
 
-inline bool rcbd_update(
-    PermuBar& bar,
-    const NumericMatrix& data,
-    const Function& statistic_func
-    )
-{
-    return bar.update(as<double>(statistic_func(data)));
-}
-
 // [[Rcpp::export]]
 NumericVector rcbd_pmt(
     NumericMatrix data,
     const Function statistic_func,
     const unsigned n_permu)
 {
-    unsigned n_col = data.ncol();
+    auto rcbd_statistic = [&]() -> double {
+        return as<double>(statistic_func(data));
+    };
 
     unsigned i = 0;
+    unsigned n_col = data.ncol();
     if (n_permu == 0) {
         unsigned total = 1;
         for (unsigned j = 0; j < n_col; j++) {
@@ -30,7 +24,7 @@ NumericVector rcbd_pmt(
 
         while (i < n_col) {
             if (i == 0) {
-                rcbd_update(bar, data, statistic_func);
+                bar.update(rcbd_statistic());
             }
 
             if (std::next_permutation(data.column(i).begin(), data.column(i).end())) {
@@ -48,7 +42,7 @@ NumericVector rcbd_pmt(
             for (i = 0; i < n_col; i++) {
                 random_shuffle(data.column(i));
             }
-        } while (rcbd_update(bar, data, statistic_func));
+        } while (bar.update(rcbd_statistic()));
 
         return bar.statistic_permu;
     }
