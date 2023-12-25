@@ -76,7 +76,7 @@ set.seed(0)
 - Modify some attributes and see how the results change
 
   ``` r
-  t$type <- "approx"
+  t$type <- "asymp"
 
   t$p_value
   #> [1] 0.0005090729

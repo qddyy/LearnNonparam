@@ -7,6 +7,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
+#' @importFrom stats pt
 
 
 MultiCompT <- R6Class(
@@ -22,7 +23,7 @@ MultiCompT <- R6Class(
         #' 
         #' @return A `MultiCompT` object. 
         initialize = function(
-            type = c("permu", "approx"), bonferroni = TRUE,
+            type = c("permu", "asymp"), bonferroni = TRUE,
             conf_level = 0.95, n_permu = 0L, scoring = c("none", "rank", "vw", "expon")
         ) {
             private$.type <- match.arg(type)

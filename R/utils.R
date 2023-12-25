@@ -33,7 +33,7 @@ get_data <- function(call, env) {
     unlist(.mapply(
         dots = list(data_exprs, data_names),
         FUN = function(data, name) {
-            setNames(
+            `names<-`(
                 list(eval(data, envir = env)),
                 if (name != "") name else deparse_1(data)
             )
@@ -78,6 +78,7 @@ get_p_decrete <- function(x, dist, side, ...) {
     get(side)
 }
 
+#' @importFrom stats pbinom dbinom
 get_p_binom <- function(x, n, p, side) {
     if (side == "lr") {
         if (p == 0) as.integer(x == 0) else if (p == 1) as.integer(x == n) else {

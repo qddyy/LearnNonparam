@@ -32,7 +32,7 @@ Performs Tukey's honest significant difference method on data vectors. Note that
 Create a new \code{TukeyHSD} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TukeyHSD$new(
-  type = c("permu", "approx"),
+  type = c("permu", "asymp"),
   conf_level = 0.95,
   n_permu = 0L,
   scoring = c("none", "rank", "vw", "expon")

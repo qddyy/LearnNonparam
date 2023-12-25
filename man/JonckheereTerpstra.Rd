@@ -32,7 +32,7 @@ Performs k sample Jonckheere-Terpstra Test on data vectors.
 Create a new \code{JonckheereTerpstra} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{JonckheereTerpstra$new(
-  type = c("permu", "approx"),
+  type = c("permu", "asymp"),
   alternative = c("two_sided", "less", "greater"),
   n_permu = 0L
 )}\if{html}{\out{</div>}}

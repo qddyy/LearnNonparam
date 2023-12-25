@@ -32,7 +32,7 @@ Performs two sample Wilcoxon test, which is equivalant to the Mann-Whitney test,
 Create a new \code{Wilcoxon} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Wilcoxon$new(
-  type = c("permu", "approx", "exact"),
+  type = c("permu", "asymp", "exact"),
   correct = TRUE,
   alternative = c("two_sided", "less", "greater"),
   n_permu = 0L,

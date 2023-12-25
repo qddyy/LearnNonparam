@@ -7,6 +7,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
+#' @importFrom stats qnorm
 
 
 CDF <- R6Class(
@@ -31,7 +32,7 @@ CDF <- R6Class(
         plot = function(style = c("graphics", "ggplot2")) {
             private$.type <- "permu"
             super$plot(style = style)
-            private$.type <- "approx"
+            private$.type <- "asymp"
 
             invisible(self)
         }
@@ -39,7 +40,7 @@ CDF <- R6Class(
     private = list(
         .name = "Cumulative Distribution Function",
 
-        .type = "approx",
+        .type = "asymp",
 
         .lims_for_plot = NULL,
 

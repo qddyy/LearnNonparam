@@ -32,7 +32,7 @@ Performs Page test on data for a randomized complete block design.
 Create a new \code{Page} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Page$new(
-  type = c("permu", "approx"),
+  type = c("permu", "asymp"),
   alternative = c("two_sided", "less", "greater"),
   n_permu = 0L
 )}\if{html}{\out{</div>}}

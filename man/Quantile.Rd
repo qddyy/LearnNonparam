@@ -39,7 +39,7 @@ Performs one sample quantile test on data vectors. In addition, a confidence int
 Create a new \code{Quantile} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Quantile$new(
-  type = c("approx", "exact"),
+  type = c("asymp", "exact"),
   correct = TRUE,
   prob = 0.5,
   null_value = 0,

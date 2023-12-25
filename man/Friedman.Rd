@@ -31,7 +31,7 @@ Performs Friedman test on data for a randomized complete block design.
 \subsection{Method \code{new()}}{
 Create a new \code{Friedman} object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{Friedman$new(type = c("permu", "approx"), n_permu = 0L)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{Friedman$new(type = c("permu", "asymp"), n_permu = 0L)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

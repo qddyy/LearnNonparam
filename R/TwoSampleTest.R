@@ -18,7 +18,7 @@ TwoSampleTest <- R6Class(
         .check = function() {},
 
         .preprocess = function() {
-            private$.data <- setNames(private$.raw_data, c("x", "y"))
+            private$.data <- `names<-`(private$.raw_data, c("x", "y"))
         },
 
         .calculate_score = function() {

@@ -19,7 +19,7 @@ KSampleTest <- R6Class(
 
         .preprocess = function() {
             data <- private$.raw_data
-            private$.data <- setNames(
+            private$.data <- `names<-`(
                 unlist(data, recursive = FALSE, use.names = FALSE),
                 rep.int(seq_along(data), vapply(data, length, integer(1)))
             )

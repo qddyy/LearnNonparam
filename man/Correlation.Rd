@@ -32,7 +32,7 @@ Performs correlation coefficient based two sample permutation test on data vecto
 Create a new \code{Correlation} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Correlation$new(
-  type = c("permu", "approx"),
+  type = c("permu", "asymp"),
   method = c("pearson", "kendall", "spearman"),
   alternative = c("two_sided", "less", "greater"),
   n_permu = 0L

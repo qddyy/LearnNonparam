@@ -32,7 +32,7 @@ Performs two sample signed score test on data vectors.
 Create a new \code{SignedDiff} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{SignedDiff$new(
-  type = c("permu", "approx"),
+  type = c("permu", "asymp"),
   method = c("with_zeros", "ignore"),
   correct = TRUE,
   alternative = c("two_sided", "less", "greater"),

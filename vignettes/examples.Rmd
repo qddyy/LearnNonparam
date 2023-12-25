@@ -35,7 +35,7 @@ set.seed(2023)
 t <- pmt(
     "onesample.quantile", alternative = "greater",
     prob = 0.5, null_value = 75,
-    type = "approx", correct = FALSE
+    type = "asymp", correct = FALSE
 )
 
 # See ?Table1.1.1
@@ -176,7 +176,7 @@ t$p_value
 ```{r}
 # See ?SiegelTukey or ?twosample.siegel
 t <- pmt(
-    "twosample.siegel", alternative = "greater", type = "approx"
+    "twosample.siegel", alternative = "greater", type = "asymp"
 )
 
 # See ?Table2.8.1
@@ -221,7 +221,7 @@ t$p_value
 ```{r}
 # See ?ANOVA or ?ksample.anova
 t <- pmt(
-    "ksample.anova", type = "approx"
+    "ksample.anova", type = "asymp"
 )
 
 # See ?Table3.1.2
@@ -241,7 +241,7 @@ t$p_value
 ```{r}
 # See ?KruskalWallis or ?ksample.kw
 t <- pmt(
-    "ksample.kw", type = "approx"
+    "ksample.kw", type = "asymp"
 )
 
 # See ?Table3.2.2
@@ -266,7 +266,7 @@ t$statistic
 t$p_value
 
 
-t$type <- "approx"
+t$type <- "asymp"
 t$p_value
 
 
@@ -276,7 +276,7 @@ t$n_permu <- 4000
 t$type <- "permu"
 t$p_value
 
-t$type <- "approx"
+t$type <- "asymp"
 t$p_value
 ```
 
@@ -293,7 +293,7 @@ t$test(Table3.3.1)
 
 t$print()
 
-t$type <- "approx"
+t$type <- "asymp"
 t$print()
 
 t$scoring <- "rank"
@@ -310,7 +310,7 @@ t$test(Table3.3.1)
 
 t$print()
 
-t$type <- "approx"
+t$type <- "asymp"
 t$print()
 
 t$scoring <- "rank"
@@ -331,7 +331,7 @@ t$test(Table3.4.1)
 t$statistic
 t$p_value
 
-t$type <- "approx"
+t$type <- "asymp"
 t$p_value
 ```
 
@@ -371,7 +371,7 @@ t$p_value
 t$n_permu <- 4000
 t$p_value
 
-t$type <- "approx"
+t$type <- "asymp"
 t$p_value
 ```
 
@@ -390,7 +390,7 @@ t$test(Table4.1.1)
 t$statistic
 t$p_value
 
-t$type <- "approx"
+t$type <- "asymp"
 t$p_value
 ```
 
@@ -422,7 +422,7 @@ t$test(c(rep(+1, 12), rep(-1, 5)), 0)
 t$statistic
 t$p_value
 
-t$type <- "approx"
+t$type <- "asymp"
 t$p_value
 ```
 
@@ -440,7 +440,7 @@ t$test(Table4.4.3)
 t$statistic
 t$p_value
 
-t$type <- "approx"
+t$type <- "asymp"
 t$statistic
 t$p_value
 ```
@@ -459,7 +459,7 @@ t$test(Table4.5.3)
 t$statistic
 t$p_value
 
-t$type <- "approx"
+t$type <- "asymp"
 t$statistic
 t$p_value
 ```
@@ -478,7 +478,7 @@ t$test(Table4.4.3)
 t$statistic
 t$p_value
 
-t$type <- "approx"
+t$type <- "asymp"
 t$p_value
 ```
 
@@ -515,7 +515,7 @@ t$test(Table5.1.2)
 t$statistic
 t$p_value
 
-t$type <- "approx"
+t$type <- "asymp"
 t$p_value
 ```
 
@@ -525,7 +525,7 @@ t$p_value
 # See ?Correlation or ?association.corr
 t <- pmt(
     "association.corr", method = "kendall",
-    alternative = "greater", type = "approx"
+    alternative = "greater", type = "asymp"
 )
 
 # See ?Table5.2.2
@@ -547,6 +547,6 @@ t$test(Table5.4.2)
 t$statistic
 t$p_value
 
-t$type <- "approx"
+t$type <- "asymp"
 t$p_value
 ```

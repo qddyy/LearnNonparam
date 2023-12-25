@@ -32,7 +32,7 @@ Performs two sample sign test on data vectors.
 Create a new \code{Sign} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Sign$new(
-  type = c("permu", "approx", "exact"),
+  type = c("permu", "asymp", "exact"),
   correct = TRUE,
   alternative = c("two_sided", "less", "greater"),
   n_permu = 0L

@@ -7,6 +7,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
+#' @importFrom stats pt pnorm
 
 
 Correlation <- R6Class(
@@ -21,7 +22,7 @@ Correlation <- R6Class(
         #' 
         #' @return A `Correlation` object. 
         initialize = function(
-            type = c("permu", "approx"), method = c("pearson", "kendall", "spearman"),
+            type = c("permu", "asymp"), method = c("pearson", "kendall", "spearman"),
             alternative = c("two_sided", "less", "greater"), n_permu = 0L
         ) {
             private$.type <- match.arg(type)
@@ -70,7 +71,7 @@ Correlation <- R6Class(
             } else {
                 private$.statistic_func <- switch(private$.type,
                     permu = function(x, y) sum(x * y),
-                    approx = cor
+                    asymp = cor
                 )
             }
         },

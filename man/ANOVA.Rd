@@ -31,7 +31,7 @@ Performs F statistic based k sample permutation test on data vectors.
 \subsection{Method \code{new()}}{
 Create a new \code{ANOVA} object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ANOVA$new(type = c("permu", "approx"), n_permu = 0L)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ANOVA$new(type = c("permu", "asymp"), n_permu = 0L)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

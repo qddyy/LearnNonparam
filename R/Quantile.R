@@ -7,6 +7,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
+#' @importFrom stats pnorm qnorm
 
 
 Quantile <- R6Class(
@@ -21,7 +22,7 @@ Quantile <- R6Class(
         #' 
         #' @return A `Quantile` object. 
         initialize = function(
-            type = c("approx", "exact"), correct = TRUE, prob = 0.5,
+            type = c("asymp", "exact"), correct = TRUE, prob = 0.5,
             null_value = 0, alternative = c("two_sided", "less", "greater"), conf_level = 0.95
         ) {
             private$.prob <- prob
@@ -51,7 +52,7 @@ Quantile <- R6Class(
                 )
             }
 
-            if (private$.type == "approx") {
+            if (private$.type == "asymp") {
                 z <- private$.statistic - n * p
                 correction <- if (private$.correct) {
                     switch(private$.alternative,

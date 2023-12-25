@@ -32,7 +32,7 @@ Performs t statistic based multiple comparison on data vectors.
 Create a new \code{MultiCompT} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{MultiCompT$new(
-  type = c("permu", "approx"),
+  type = c("permu", "asymp"),
   bonferroni = TRUE,
   conf_level = 0.95,
   n_permu = 0L,

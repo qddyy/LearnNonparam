@@ -7,6 +7,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
+#' @importFrom stats pnorm qnorm pwilcox dwilcox
 
 
 Wilcoxon <- R6Class(
@@ -20,7 +21,7 @@ Wilcoxon <- R6Class(
         #' 
         #' @return A `Wilcoxon` object. 
         initialize = function(
-            type = c("permu", "approx", "exact"), correct = TRUE,
+            type = c("permu", "asymp", "exact"), correct = TRUE,
             alternative = c("two_sided", "less", "greater"), n_permu = 0L, conf_level = 0.95
         ) {
             private$.type <- match.arg(type)
@@ -47,7 +48,7 @@ Wilcoxon <- R6Class(
 
             ties <- tabulate(c(private$.data$x, private$.data$y))
             if (any(ties > 1)) {
-                private$.type <- "approx"
+                private$.type <- "asymp"
             }
 
             if (private$.type == "exact") {
@@ -56,7 +57,7 @@ Wilcoxon <- R6Class(
                 )
             }
 
-            if (private$.type == "approx") {
+            if (private$.type == "asymp") {
                 N <- m + n
 
                 z <- statistic - m * n / 2

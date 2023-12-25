@@ -7,6 +7,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
+#' @importFrom stats ptukey
 
 
 TukeyHSD <- R6Class(
@@ -21,7 +22,7 @@ TukeyHSD <- R6Class(
         #' 
         #' @return A `TukeyHSD` object. 
         initialize = function(
-            type = c("permu", "approx"),
+            type = c("permu", "asymp"),
             conf_level = 0.95, n_permu = 0L, scoring = c("none", "rank", "vw", "expon")
         ) {
             private$.type <- match.arg(type)

@@ -7,6 +7,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
+#' @importFrom stats pchisq
 
 
 Friedman <- R6Class(
@@ -20,7 +21,7 @@ Friedman <- R6Class(
         #' 
         #' @return A `Friedman` object. 
         initialize = function(
-            type = c("permu", "approx"),
+            type = c("permu", "asymp"),
             n_permu = 0L
         ) {
             private$.type <- match.arg(type)
@@ -34,7 +35,7 @@ Friedman <- R6Class(
         .define = function() {
             private$.statistic_func <- switch(private$.type,
                 permu = function(data) sum(rowMeans(data)^2),
-                approx = function(data) {
+                asymp = function(data) {
                     ncol(data)^2 / sum(apply(data, 2, var)) *
                     sum((rowMeans(data) - (nrow(data) + 1) / 2)^2)
                 }

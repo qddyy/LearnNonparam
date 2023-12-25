@@ -32,10 +32,9 @@ Performs two sample Ansari-Bradley test on data vectors.
 Create a new \code{AnsariBradley} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{AnsariBradley$new(
-  type = c("permu", "approx"),
+  type = c("permu", "asymp"),
   alternative = c("two_sided", "less", "greater"),
-  n_permu = 0L,
-  conf_level = 0.95
+  n_permu = 0L
 )}\if{html}{\out{</div>}}
 }
 
@@ -47,8 +46,6 @@ Create a new \code{AnsariBradley} object.
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 
 \item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
-
-\item{\code{conf_level}}{a number specifying confidence level of the interval.}
 }
 \if{html}{\out{</div>}}
 }

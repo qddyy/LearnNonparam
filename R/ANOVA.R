@@ -7,6 +7,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
+#' @importFrom stats pf
 
 
 ANOVA <- R6Class(
@@ -20,7 +21,7 @@ ANOVA <- R6Class(
         #' 
         #' @return A `ANOVA` object. 
         initialize = function(
-            type = c("permu", "approx"),
+            type = c("permu", "asymp"),
             n_permu = 0L
         ) {
             private$.type <- match.arg(type)
@@ -40,7 +41,7 @@ ANOVA <- R6Class(
                         FUN.VALUE = numeric(1), USE.NAMES = FALSE
                     ))
                 },
-                approx = function(data, group) {
+                asymp = function(data, group) {
                     N <- length(data)
                     splited <- split(data, group)
                     k <- length(splited)

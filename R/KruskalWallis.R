@@ -7,6 +7,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
+#' @importFrom stats pchisq
 
 
 KruskalWallis <- R6Class(
@@ -17,11 +18,11 @@ KruskalWallis <- R6Class(
         #' @description Create a new `KruskalWallis` object. 
         #' 
         #' @template init_params
-        #' @param type a character string specifying the way to calculate p-values, must be one of `"permu"` (default) or `"approx"`. 
+        #' @param type a character string specifying the way to calculate p-values, must be one of `"permu"` (default) or `"asymp"`. 
         #' 
         #' @return A `KruskalWallis` object. 
         initialize = function(
-            type = c("permu", "approx"),
+            type = c("permu", "asymp"),
             n_permu = 0L, scoring = c("rank", "vw", "expon")
         ) {
             private$.type <- match.arg(type)
