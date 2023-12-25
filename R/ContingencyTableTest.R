@@ -36,7 +36,7 @@ ContingencyTableTest <- R6Class(
                 row_loc = rep.int(seq_len(r), row_sum) - 1,
                 col_loc = rep.int(seq_len(c), col_sum) - 1,
                 statistic_func = private$.statistic_func,
-                n_permu = as.integer(private$.n_permu)
+                n_permu = private$.n_permu
             )
         }
     )

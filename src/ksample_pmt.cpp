@@ -7,7 +7,7 @@ NumericVector ksample_pmt(
     const NumericVector data,
     IntegerVector group,
     const Function statistic_func,
-    const unsigned n_permu)
+    const R_xlen_t n_permu)
 {
     auto ksample_statistic = [&]() -> double {
         return as<double>(statistic_func(data, group));

@@ -10,7 +10,8 @@ using namespace Rcpp;
 
 // runif(max = n) (tied to the same RNG which R uses)
 
-inline unsigned rand_int(const unsigned& n)
+template <typename T>
+T rand_int(T n)
 {
     return floor(unif_rand() * n);
 }
@@ -20,9 +21,9 @@ inline unsigned rand_int(const unsigned& n)
 template <typename T>
 void random_shuffle(T&& v)
 {
-    unsigned j;
-    unsigned n = v.size();
-    for (unsigned i = 0; i < n - 1; i++) {
+    R_len_t j;
+    R_len_t n = v.size();
+    for (R_len_t i = 0; i < n - 1; i++) {
         j = i + rand_int(n - i);
         std::swap(v[i], v[j]);
     }
@@ -31,14 +32,14 @@ void random_shuffle(T&& v)
 // number of permutations
 
 template <typename T>
-unsigned n_permutation(T&& v)
+R_xlen_t n_permutation(T&& v)
 {
     double A = 1;
 
-    unsigned n_i = 0;
-    unsigned n = v.size();
+    R_len_t n_i = 0;
+    R_len_t n = v.size();
     double current = v[0];
-    for (unsigned i = 0; i < n; i++) {
+    for (R_len_t i = 0; i < n; i++) {
         A *= (i + 1);
         if (v[i] == current) {
             n_i++;
@@ -49,17 +50,17 @@ unsigned n_permutation(T&& v)
         current = v[i];
     }
 
-    return (unsigned)A;
+    return (R_xlen_t)A;
 }
 
 // progress bar
 
 class PermuBar {
 private:
-    unsigned _total;
+    R_xlen_t _total;
 
-    unsigned _update_i = 0;
-    unsigned _update_every;
+    R_xlen_t _update_i = 0;
+    R_xlen_t _update_every;
 
     NumericVector::iterator _iter;
     NumericVector::iterator _end;
@@ -74,7 +75,7 @@ private:
 
         buffer << "\015";
 
-        unsigned percent = 100 - 100 * (_end - _iter) / _total;
+        unsigned percent = 100 - (unsigned)(100 * (_end - _iter) / _total);
 
         buffer << "\033[31m" << percent << "%";
 
@@ -103,7 +104,7 @@ private:
 public:
     NumericVector statistic_permu;
 
-    PermuBar(unsigned n_permu, bool exact, unsigned statistic_size = 1)
+    PermuBar(R_xlen_t n_permu, bool exact, R_len_t statistic_size = 1)
     {
         _total = n_permu * statistic_size;
 

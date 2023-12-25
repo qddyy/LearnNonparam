@@ -7,7 +7,7 @@ NumericVector twosample_pmt(
     const NumericVector data,
     LogicalVector where_y,
     const Function statistic_func,
-    const unsigned n_permu)
+    const R_xlen_t n_permu)
 {
     auto twosample_statistic = [&]() -> double {
         return as<double>(statistic_func(data[!where_y], data[where_y]));

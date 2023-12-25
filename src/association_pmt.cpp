@@ -7,7 +7,7 @@ NumericVector association_pmt(
     const NumericVector x,
     NumericVector y,
     const Function statistic_func,
-    const unsigned n_permu)
+    const R_xlen_t n_permu)
 {
     auto association_statistic = [&]() -> double {
         return as<double>(statistic_func(x, y));

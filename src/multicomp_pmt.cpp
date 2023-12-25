@@ -9,19 +9,19 @@ NumericVector multicomp_pmt(
     const NumericVector data,
     IntegerVector group,
     const Function statistic_func,
-    const unsigned n_permu)
+    const R_xlen_t n_permu)
 {
-    unsigned n_group = group[group.size() - 1];
-    unsigned n_pair = n_group * (n_group - 1) / 2;
+    R_len_t n_group = group[group.size() - 1];
+    R_len_t n_pair = n_group * (n_group - 1) / 2;
 
     List split(n_group);
     auto do_split = [&]() {
-        for (unsigned i = 1; i <= n_group; i++) {
+        for (R_len_t i = 1; i <= n_group; i++) {
             split[i - 1] = data[group == i];
         }
     };
 
-    unsigned j;
+    R_len_t j;
 
     auto multicomp_statistic = [&]() -> double {
         return as<double>(statistic_func(split[group_i[j]], split[group_j[j]], data, group));

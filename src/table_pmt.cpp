@@ -7,15 +7,15 @@ NumericVector table_pmt(
     IntegerVector row_loc,
     const IntegerVector col_loc,
     const Function statistic_func,
-    const unsigned n_permu)
+    const R_xlen_t n_permu)
 {
-    unsigned n = row_loc.size();
+    R_len_t n = row_loc.size();
 
     IntegerMatrix data(no_init(row_loc[n - 1] + 1, col_loc[n - 1] + 1));
 
     auto table_statistic = [&]() -> double {
         data.fill(0);
-        for (unsigned i = 0; i < n; i++) {
+        for (R_len_t i = 0; i < n; i++) {
             data(row_loc[i], col_loc[i])++;
         }
 

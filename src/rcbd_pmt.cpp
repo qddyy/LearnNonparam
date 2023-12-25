@@ -6,17 +6,17 @@ using namespace Rcpp;
 NumericVector rcbd_pmt(
     NumericMatrix data,
     const Function statistic_func,
-    const unsigned n_permu)
+    const R_xlen_t n_permu)
 {
     auto rcbd_statistic = [&]() -> double {
         return as<double>(statistic_func(data));
     };
 
-    unsigned i = 0;
-    unsigned n_col = data.ncol();
+    R_len_t i = 0;
+    R_len_t n_col = data.ncol();
     if (n_permu == 0) {
-        unsigned total = 1;
-        for (unsigned j = 0; j < n_col; j++) {
+        R_xlen_t total = 1;
+        for (R_len_t j = 0; j < n_col; j++) {
             total *= n_permutation(data.column(j));
         }
 

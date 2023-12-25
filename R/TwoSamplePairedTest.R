@@ -35,7 +35,7 @@ TwoSamplePairedTest <- R6Class(
             private$.statistic_permu <- paired_pmt(
                 n = nrow(private$.data),
                 statistic_func = private$.statistic_func,
-                n_permu = as.integer(private$.n_permu)
+                n_permu = private$.n_permu
             )
         }
     )

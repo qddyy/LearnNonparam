@@ -43,7 +43,7 @@ TwoSampleTest <- R6Class(
                 data = c(private$.data$x, private$.data$y),
                 where_y = rep.int(c(FALSE, TRUE), c(n_1, n_2)),
                 statistic_func = private$.statistic_func,
-                n_permu = as.integer(private$.n_permu)
+                n_permu = private$.n_permu
             )
         }
     )
