@@ -6,6 +6,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
+#' @importFrom graphics par layout mtext hist abline
 
 
 MultipleComparison <- R6Class(

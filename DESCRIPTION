@@ -10,7 +10,9 @@ Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.2.3
 Imports: 
     R6,
-    Rcpp
+    Rcpp,
+    stats,
+    graphics
 Depends: 
     R (>= 2.10)
 LinkingTo: 

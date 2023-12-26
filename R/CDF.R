@@ -7,7 +7,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom stats qnorm
+#' @importFrom stats qnorm plot.stepfun
 
 
 CDF <- R6Class(
@@ -67,28 +67,28 @@ CDF <- R6Class(
         .print = function(...) {},
 
         .plot = function(...) {
-            plot(
+            plot.stepfun(
                 private$.estimate, lty = "solid",
                 xlim = private$.lims_for_plot$x,
                 ylim = private$.lims_for_plot$y,
                 main = "Empirical CDF with Confidence Bounds",
                 xlab = expression(x), ylab = expression(F[n](x))
             )
-            plot(private$.ci$lower, lty = "dashed", add = TRUE)
-            plot(private$.ci$upper, lty = "dashed", add = TRUE)
+            plot.stepfun(private$.ci$lower, lty = "dashed", add = TRUE)
+            plot.stepfun(private$.ci$upper, lty = "dashed", add = TRUE)
         },
 
         .autoplot = function(...) {
             ggplot2::ggplot(
                 data = data.frame(
                     x = private$.data,
-                    cdf = private$.estimate(private$.data),
+                    ecdf = private$.estimate(private$.data),
                     lower = private$.ci$lower(private$.data),
                     upper = private$.ci$upper(private$.data)
                 ), mapping = ggplot2::aes(x = .data$x)
             ) +
                 ggplot2::geom_step(
-                    mapping = ggplot2::aes(y = .data$cdf), linetype = "solid"
+                    mapping = ggplot2::aes(y = .data$ecdf), linetype = "solid"
                 ) +
                 ggplot2::geom_step(
                     mapping = ggplot2::aes(y = .data$lower), linetype = "dashed"

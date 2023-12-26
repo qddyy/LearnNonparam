@@ -6,6 +6,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
+#' @importFrom graphics hist abline
 
 
 PermuTest <- R6Class(
