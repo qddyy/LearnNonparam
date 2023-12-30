@@ -5,38 +5,6 @@
 #' @name pmt
 
 
-tests <- list(
-    onesample.quantile = Quantile,
-    onesample.cdf = CDF,
-
-    twosample.difference = Difference,
-    twosample.wilcoxon = Wilcoxon,
-    twosample.scoresum = ScoreSum,
-    twosample.ansari = AnsariBradley,
-    twosample.siegel = SiegelTukey,
-    twosample.rmd = RatioMeanDeviance,
-    twosample.ks = KolmogorovSmirnov,
-
-    ksample.anova = ANOVA,
-    ksample.kw = KruskalWallis,
-    ksample.jt = JonckheereTerpstra,
-
-    multicomp.t = MultiCompT,
-    multicomp.tukey = TukeyHSD,
-
-    paired.sign = Sign,
-    paired.signeddiff = SignedDiff,
-
-    rcbd.anova = RCBDANOVA,
-    rcbd.friedman = Friedman,
-    rcbd.page = Page,
-
-    association.corr = Correlation,
-
-    table.chisq = ChiSquare
-)
-
-
 #' @rdname pmt
 #' 
 #' @param key a character string corresponding to the desired test. Check `pmts()` to see available keys. 
@@ -72,3 +40,34 @@ pmts <- function(which = c("all", "onesample", "twosample", "ksample", "multicom
         )
     )
 }
+
+tests <- list(
+    onesample.quantile = Quantile,
+    onesample.cdf = CDF,
+
+    twosample.difference = Difference,
+    twosample.wilcoxon = Wilcoxon,
+    twosample.scoresum = ScoreSum,
+    twosample.ansari = AnsariBradley,
+    twosample.siegel = SiegelTukey,
+    twosample.rmd = RatioMeanDeviance,
+    twosample.ks = KolmogorovSmirnov,
+
+    ksample.anova = ANOVA,
+    ksample.kw = KruskalWallis,
+    ksample.jt = JonckheereTerpstra,
+
+    multicomp.t = MultiCompT,
+    multicomp.tukey = TukeyHSD,
+
+    paired.sign = Sign,
+    paired.signeddiff = SignedDiff,
+
+    rcbd.anova = RCBDANOVA,
+    rcbd.friedman = Friedman,
+    rcbd.page = Page,
+
+    association.corr = Correlation,
+
+    table.chisq = ChiSquare
+)
