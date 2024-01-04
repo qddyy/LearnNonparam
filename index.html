@@ -139,19 +139,8 @@
 <span><span class="co">#&gt; [1] 0.0005090729</span></span></code></pre></div>
 </li>
 </ul>
-<p>There is also support for chaining methods, which means that you can do things like</p>
+<p>All available tests:</p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pmt.html">pmt</a></span><span class="op">(</span><span class="va">...</span><span class="op">)</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">...</span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="va">...</span><span class="op">)</span><span class="op">$</span><span class="fu">plot</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div>
-</div>
-<div class="section level2">
-<h2 id="tips">Tips<a class="anchor" aria-label="anchor" href="#tips"></a>
-</h2>
-<p>Check</p>
-<ul>
-<li><p><code><a href="reference/PermuTest.html">?PermuTest</a></code> (all tests’ base class) for all available methods and attributes.</p></li>
-<li>
-<p><code><a href="reference/pmt.html">pmts()</a></code> for all available tests.</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="reference/pmt.html">pmts</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <div class="kable-table">
 <table class="table">
@@ -242,9 +231,9 @@
 <td align="left">Sign Test</td>
 </tr>
 <tr class="even">
-<td align="left">paired.signeddiff</td>
-<td align="left">SignedDiff</td>
-<td align="left">Paired Comparison Based on Signed Differences</td>
+<td align="left">paired.difference</td>
+<td align="left">PairedDifference</td>
+<td align="left">Paired Comparison Based on Differences</td>
 </tr>
 <tr class="odd">
 <td align="left">rcbd.anova</td>
@@ -274,8 +263,6 @@
 </tbody>
 </table>
 </div>
-</li>
-</ul>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
