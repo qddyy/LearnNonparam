@@ -82,53 +82,39 @@ set.seed(0)
   #> [1] 0.0005090729
   ```
 
-There is also support for chaining methods, which means that you can do
-things like
+All available tests:
 
 ``` r
-t <- pmt(...)$test(...)$print(...)$plot(...)
+pmts()
 ```
 
-## Tips
+<div class="kable-table">
 
-Check
+| key                  | class              | test                                                 |
+|:---------------------|:-------------------|:-----------------------------------------------------|
+| onesample.quantile   | Quantile           | Quantile Test                                        |
+| onesample.cdf        | CDF                | Cumulative Distribution Function                     |
+| twosample.difference | Difference         | Two Sample Test Based on Mean or Median              |
+| twosample.wilcoxon   | Wilcoxon           | Two Sample Wilcoxon Test                             |
+| twosample.scoresum   | ScoreSum           | Score Sum Test                                       |
+| twosample.ansari     | AnsariBradley      | Ansari-Bradley Test                                  |
+| twosample.siegel     | SiegelTukey        | Siegel-Tukey Test                                    |
+| twosample.rmd        | RatioMeanDeviance  | Ratio Mean Deviance Test                             |
+| twosample.ks         | KolmogorovSmirnov  | Two Sample Kolmogorov-Smirnov Test                   |
+| ksample.anova        | ANOVA              | K Sample Test Based on F Statistic                   |
+| ksample.kw           | KruskalWallis      | Kruskal-Wallis Test                                  |
+| ksample.jt           | JonckheereTerpstra | Jonckheere-Terpstra Test                             |
+| multicomp.t          | MultiCompT         | Multiple Comparison Based on t Statistic             |
+| multicomp.tukey      | TukeyHSD           | Tukey’s HSD                                          |
+| paired.sign          | Sign               | Sign Test                                            |
+| paired.difference    | PairedDifference   | Paired Comparison Based on Differences               |
+| rcbd.anova           | RCBDANOVA          | ANOVA for Randomized Complete Block Design           |
+| rcbd.friedman        | Friedman           | Friedman Test                                        |
+| rcbd.page            | Page               | Page Test                                            |
+| association.corr     | Correlation        | Two Sample Test Based on Correlation Coefficient     |
+| table.chisq          | ChiSquare          | Contingency Table Test Based on Chi-square Statistic |
 
-- `?PermuTest` (all tests’ base class) for all available methods and
-  attributes.
-
-- `pmts()` for all available tests.
-
-  ``` r
-  pmts()
-  ```
-
-  <div class="kable-table">
-
-  | key                  | class              | test                                                 |
-  |:---------------------|:-------------------|:-----------------------------------------------------|
-  | onesample.quantile   | Quantile           | Quantile Test                                        |
-  | onesample.cdf        | CDF                | Cumulative Distribution Function                     |
-  | twosample.difference | Difference         | Two Sample Test Based on Mean or Median              |
-  | twosample.wilcoxon   | Wilcoxon           | Two Sample Wilcoxon Test                             |
-  | twosample.scoresum   | ScoreSum           | Score Sum Test                                       |
-  | twosample.ansari     | AnsariBradley      | Ansari-Bradley Test                                  |
-  | twosample.siegel     | SiegelTukey        | Siegel-Tukey Test                                    |
-  | twosample.rmd        | RatioMeanDeviance  | Ratio Mean Deviance Test                             |
-  | twosample.ks         | KolmogorovSmirnov  | Two Sample Kolmogorov-Smirnov Test                   |
-  | ksample.anova        | ANOVA              | K Sample Test Based on F Statistic                   |
-  | ksample.kw           | KruskalWallis      | Kruskal-Wallis Test                                  |
-  | ksample.jt           | JonckheereTerpstra | Jonckheere-Terpstra Test                             |
-  | multicomp.t          | MultiCompT         | Multiple Comparison Based on t Statistic             |
-  | multicomp.tukey      | TukeyHSD           | Tukey’s HSD                                          |
-  | paired.sign          | Sign               | Sign Test                                            |
-  | paired.signeddiff    | SignedDiff         | Paired Comparison Based on Signed Differences        |
-  | rcbd.anova           | RCBDANOVA          | ANOVA for Randomized Complete Block Design           |
-  | rcbd.friedman        | Friedman           | Friedman Test                                        |
-  | rcbd.page            | Page               | Page Test                                            |
-  | association.corr     | Correlation        | Two Sample Test Based on Correlation Coefficient     |
-  | table.chisq          | ChiSquare          | Contingency Table Test Based on Chi-square Statistic |
-
-  </div>
+</div>
 
 ## References
 

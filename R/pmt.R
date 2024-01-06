@@ -61,7 +61,7 @@ tests <- list(
     multicomp.tukey = TukeyHSD,
 
     paired.sign = Sign,
-    paired.signeddiff = SignedDiff,
+    paired.difference = PairedDifference,
 
     rcbd.anova = RCBDANOVA,
     rcbd.friedman = Friedman,

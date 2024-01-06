@@ -340,9 +340,9 @@ t$p_value
 ## Table 4.1.1
 
 ```{r}
-# See ?SignedDiff or ?paired.signeddiff
+# See ?PairedDifference or ?paired.difference
 t <- pmt(
-    "paired.signeddiff", alternative = "greater",
+    "paired.difference", alternative = "greater",
     scoring = "none"
 )
 
@@ -356,10 +356,10 @@ t$p_value
 ## Example 4.1.1
 
 ```{r}
-# See ?SignedDiff or ?paired.signeddiff
+# See ?PairedDifference or ?paired.difference
 t <- pmt(
-    "paired.signeddiff", alternative = "two_sided",
-    scoring = "none", method = "ignore"
+    "paired.difference", alternative = "two_sided",
+    scoring = "none", method = "without_zeros"
 )
 
 # See ?Table4.1.3
@@ -378,9 +378,9 @@ t$p_value
 ## Example 4.2.1 & 4.2.2
 
 ```{r}
-# See ?SignedDiff or ?paired.signeddiff
+# See ?PairedDifference or ?paired.difference
 t <- pmt(
-    "paired.signeddiff", alternative = "greater",
+    "paired.difference", alternative = "greater",
     scoring = "rank", method = "with_zeros"
 )
 
@@ -391,21 +391,6 @@ t$statistic
 t$p_value
 
 t$type <- "asymp"
-t$p_value
-```
-
-## Table 4.2.3
-
-```{r}
-# See ?SignedDiff or ?paired.signeddiff
-t <- pmt(
-    "paired.signeddiff", alternative = "greater",
-    scoring = "rank", method = "ignore"
-)
-
-t$test(c(-5, -3, -3, 0, 0, 2, 4, 4, 4, 5), 0)
-
-t$statistic
 t$p_value
 ```
 

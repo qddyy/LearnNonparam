@@ -75,20 +75,10 @@ set.seed(0)
     t$p_value
     ```
 
-There is also support for chaining methods, which means that you can do things like
+All available tests:
 
-```{r, chaining, eval = FALSE}
-t <- pmt(...)$test(...)$print(...)$plot(...)
+```{r}
+pmts()
 ```
-
-## Tips
-
-Check
-
-- `?PermuTest` (all tests' base class) for all available methods and attributes. 
-- `pmts()` for all available tests. 
-    ```{r, pmts}
-    pmts()
-    ```
 
 ## References
