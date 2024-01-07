@@ -38,24 +38,29 @@ MultiCompT <- R6Class(
         .bonferroni = NULL,
 
         .define = function() {
+            lengths <- vapply(
+                X = split(private$.data, names(private$.data)),
+                FUN = length, FUN.VALUE = integer(1), USE.NAMES = FALSE
+            )
+
             if (private$.scoring == "none") {
                 N <- length(private$.data)
                 k <- as.integer(names(private$.data)[N])
-                private$.statistic_func <- function(x, y, data, group) {
-                    mse <- sum(vapply(
-                        X = split(data, group),
-                        FUN = function(x) (length(x) - 1) * var(x),
+                private$.statistic_func <- function(i, j, data, group) {
+                    means <- vapply(
+                        X = split(data, group), FUN = mean,
                         FUN.VALUE = numeric(1), USE.NAMES = FALSE
-                    )) / (N - k)
-                    (mean(x) - mean(y)) / sqrt(
-                        mse * (1 / length(x) + 1 / length(y))
+                    )
+                    mse <- sum((data - means[group])^2) / (N - k)
+                    (means[i] - means[j]) / sqrt(
+                        mse * (1 / lengths[i] + 1 / lengths[j])
                     )
                 }
             } else {
                 var <- var(private$.data)
-                private$.statistic_func <- function(x, y, ...) {
-                    (mean(x) - mean(y)) / sqrt(
-                        var * (1 / length(x) + 1 / length(y))
+                private$.statistic_func <- function(i, j, data, group) {
+                    (mean(data[group == i]) - mean(data[group == j])) / sqrt(
+                        var * (1 / lengths[i] + 1 / lengths[j])
                     )
                 }
             }

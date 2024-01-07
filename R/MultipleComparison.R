@@ -36,20 +36,17 @@ MultipleComparison <- R6Class(
         .calculate_statistic = function() {
             data <- unname(private$.data)
             group <- as.integer(names(private$.data))
-            where <- split(seq_along(group), group)
             private$.statistic <- as.numeric(.mapply(
                 FUN = function(i, j) {
-                    private$.statistic_func(
-                        data[where[[i]]], data[where[[j]]], data, group
-                    )
+                    private$.statistic_func(i, j, data, group)
                 }, dots = private$.group_ij, MoreArgs = NULL
             ))
         },
 
         .calculate_statistic_permu = function() {
             private$.statistic_permu <- multicomp_pmt(
-                group_i = private$.group_ij$i - 1,
-                group_j = private$.group_ij$j - 1,
+                group_i = private$.group_ij$i,
+                group_j = private$.group_ij$j,
                 data = unname(private$.data),
                 group = as.integer(names(private$.data)),
                 statistic_func = private$.statistic_func,
