@@ -161,7 +161,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 16.16667</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.05714286</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] NA</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="table-2-1-1---wilcoxon">Table 2.1.1 - wilcoxon<a class="anchor" aria-label="anchor" href="#table-2-1-1---wilcoxon"></a>
@@ -178,7 +178,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 21</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.05714286</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 1</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-2-3-1">Example 2.3.1<a class="anchor" aria-label="anchor" href="#example-2-3-1"></a>
@@ -197,12 +197,12 @@
 <span></span>
 <span><span class="co"># all permutaions</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.1966589</span></span>
+<span><span class="co">#&gt; [1] NA</span></span>
 <span></span>
 <span><span class="co"># 1000 permutaions</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">1000</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.203</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] NA</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-2-6-1">Example 2.6.1<a class="anchor" aria-label="anchor" href="#example-2-6-1"></a>
@@ -219,7 +219,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 14</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.9</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 1</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-2-6-2">Example 2.6.2<a class="anchor" aria-label="anchor" href="#example-2-6-2"></a>
@@ -253,7 +253,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 9.752597</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.002164502</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 1</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-2-8-1">Example 2.8.1<a class="anchor" aria-label="anchor" href="#example-2-8-1"></a>
@@ -287,7 +287,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 1.00463</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.4206349</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] NA</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-2-8-3">Example 2.8.3<a class="anchor" aria-label="anchor" href="#example-2-8-3"></a>
@@ -302,7 +302,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 0.4</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.8730159</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 1</span></span></code></pre></div>
 </div>
 </div>
 <div class="section level2">
@@ -399,51 +399,51 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Multiple Comparison Based on t Statistic </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; scoring: none    type: permu(5000)    method: default</span></span>
+<span><span class="co">#&gt; scoring: none    type: permu(5000)    method: bonferroni</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; family-wise confidence level: 95%</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     group_i    group_j   statistic p_value differ</span></span>
-<span><span class="co">#&gt;  location_1 location_2  0.02737145  0.9784  FALSE</span></span>
-<span><span class="co">#&gt;  location_1 location_3 -1.77914406  0.0932  FALSE</span></span>
-<span><span class="co">#&gt;  location_1 location_4 -3.41048230  0.0028   TRUE</span></span>
-<span><span class="co">#&gt;  location_2 location_3 -1.80651550  0.0786  FALSE</span></span>
-<span><span class="co">#&gt;  location_2 location_4 -3.43785375  0.0026   TRUE</span></span>
-<span><span class="co">#&gt;  location_3 location_4 -1.63133824  0.1196  FALSE</span></span>
+<span><span class="co">#&gt;                           statistic p_value  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_2  0.02737145  0.9784  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_3 -1.77914406  0.0932  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_4 -3.41048230  0.0028 *</span></span>
+<span><span class="co">#&gt; location_2 ~ location_3 -1.80651550  0.0786  </span></span>
+<span><span class="co">#&gt; location_2 ~ location_4 -3.43785375  0.0026 *</span></span>
+<span><span class="co">#&gt; location_3 ~ location_4 -1.63133824  0.1196</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"asymp"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Multiple Comparison Based on t Statistic </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; scoring: none    type: asymp    method: default</span></span>
+<span><span class="co">#&gt; scoring: none    type: asymp    method: bonferroni</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; family-wise confidence level: 95%</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     group_i    group_j   statistic     p_value differ</span></span>
-<span><span class="co">#&gt;  location_1 location_2  0.02737145 0.978434752  FALSE</span></span>
-<span><span class="co">#&gt;  location_1 location_3 -1.77914406 0.090419680  FALSE</span></span>
-<span><span class="co">#&gt;  location_1 location_4 -3.41048230 0.002773484   TRUE</span></span>
-<span><span class="co">#&gt;  location_2 location_3 -1.80651550 0.085909110  FALSE</span></span>
-<span><span class="co">#&gt;  location_2 location_4 -3.43785375 0.002603664   TRUE</span></span>
-<span><span class="co">#&gt;  location_3 location_4 -1.63133824 0.118466249  FALSE</span></span>
+<span><span class="co">#&gt;                           statistic     p_value  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_2  0.02737145 0.978434752  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_3 -1.77914406 0.090419680  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_4 -3.41048230 0.002773484 *</span></span>
+<span><span class="co">#&gt; location_2 ~ location_3 -1.80651550 0.085909110  </span></span>
+<span><span class="co">#&gt; location_2 ~ location_4 -3.43785375 0.002603664 *</span></span>
+<span><span class="co">#&gt; location_3 ~ location_4 -1.63133824 0.118466249</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">scoring</span> <span class="op">&lt;-</span> <span class="st">"rank"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;   Multiple Comparison Based on t Statistic </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; scoring: rank    type: asymp    method: default</span></span>
+<span><span class="co">#&gt; scoring: rank    type: asymp    method: bonferroni</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; family-wise confidence level: 95%</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     group_i    group_j  statistic     p_value differ</span></span>
-<span><span class="co">#&gt;  location_1 location_2  0.1224745 0.902523250  FALSE</span></span>
-<span><span class="co">#&gt;  location_1 location_3 -1.3880442 0.165123590  FALSE</span></span>
-<span><span class="co">#&gt;  location_1 location_4 -2.6536139 0.007963489   TRUE</span></span>
-<span><span class="co">#&gt;  location_2 location_3 -1.5105187 0.130911128  FALSE</span></span>
-<span><span class="co">#&gt;  location_2 location_4 -2.7760884 0.005501725   TRUE</span></span>
-<span><span class="co">#&gt;  location_3 location_4 -1.2655697 0.205667180  FALSE</span></span></code></pre></div>
+<span><span class="co">#&gt;                          statistic     p_value  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_2  0.1224745 0.902523250  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_3 -1.3880442 0.165123590  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_4 -2.6536139 0.007963489 *</span></span>
+<span><span class="co">#&gt; location_2 ~ location_3 -1.5105187 0.130911128  </span></span>
+<span><span class="co">#&gt; location_2 ~ location_4 -2.7760884 0.005501725 *</span></span>
+<span><span class="co">#&gt; location_3 ~ location_4 -1.2655697 0.205667180</span></span></code></pre></div>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># See ?TukeyHSD or ?multicomp.tukey</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
@@ -460,13 +460,13 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; family-wise confidence level: 95%</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     group_i    group_j   statistic p_value differ</span></span>
-<span><span class="co">#&gt;  location_1 location_2  0.03870907  1.0000  FALSE</span></span>
-<span><span class="co">#&gt;  location_1 location_3 -2.51608965  0.3134  FALSE</span></span>
-<span><span class="co">#&gt;  location_1 location_4 -4.82315032  0.0150   TRUE</span></span>
-<span><span class="co">#&gt;  location_2 location_3 -2.55479873  0.3006  FALSE</span></span>
-<span><span class="co">#&gt;  location_2 location_4 -4.86185939  0.0144   TRUE</span></span>
-<span><span class="co">#&gt;  location_3 location_4 -2.30706067  0.3792  FALSE</span></span>
+<span><span class="co">#&gt;                           statistic p_value  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_2  0.03870907  1.0000  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_3 -2.51608965  0.3134  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_4 -4.82315032  0.0150 *</span></span>
+<span><span class="co">#&gt; location_2 ~ location_3 -2.55479873  0.3006  </span></span>
+<span><span class="co">#&gt; location_2 ~ location_4 -4.86185939  0.0144 *</span></span>
+<span><span class="co">#&gt; location_3 ~ location_4 -2.30706067  0.3792</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"asymp"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
@@ -477,13 +477,13 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; family-wise confidence level: 95%</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     group_i    group_j   statistic    p_value differ</span></span>
-<span><span class="co">#&gt;  location_1 location_2  0.03870907 0.99999236  FALSE</span></span>
-<span><span class="co">#&gt;  location_1 location_3 -2.51608965 0.31194094  FALSE</span></span>
-<span><span class="co">#&gt;  location_1 location_4 -4.82315032 0.01356971   TRUE</span></span>
-<span><span class="co">#&gt;  location_2 location_3 -2.55479873 0.29951264  FALSE</span></span>
-<span><span class="co">#&gt;  location_2 location_4 -4.86185939 0.01277452   TRUE</span></span>
-<span><span class="co">#&gt;  location_3 location_4 -2.30706067 0.38453323  FALSE</span></span>
+<span><span class="co">#&gt;                           statistic    p_value  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_2  0.03870907 0.99999236  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_3 -2.51608965 0.31194094  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_4 -4.82315032 0.01356971 *</span></span>
+<span><span class="co">#&gt; location_2 ~ location_3 -2.55479873 0.29951264  </span></span>
+<span><span class="co">#&gt; location_2 ~ location_4 -4.86185939 0.01277452 *</span></span>
+<span><span class="co">#&gt; location_3 ~ location_4 -2.30706067 0.38453323</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">scoring</span> <span class="op">&lt;-</span> <span class="st">"rank"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
@@ -494,13 +494,13 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; family-wise confidence level: 95%</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;     group_i    group_j  statistic    p_value differ</span></span>
-<span><span class="co">#&gt;  location_1 location_2  0.1732051 0.99934385  FALSE</span></span>
-<span><span class="co">#&gt;  location_1 location_3 -1.9629909 0.50683497  FALSE</span></span>
-<span><span class="co">#&gt;  location_1 location_4 -3.7527767 0.03978340   TRUE</span></span>
-<span><span class="co">#&gt;  location_2 location_3 -2.1361960 0.43109997  FALSE</span></span>
-<span><span class="co">#&gt;  location_2 location_4 -3.9259818 0.02817015   TRUE</span></span>
-<span><span class="co">#&gt;  location_3 location_4 -1.7897858 0.58494735  FALSE</span></span></code></pre></div>
+<span><span class="co">#&gt;                          statistic    p_value  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_2  0.1732051 0.99934385  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_3 -1.9629909 0.50683497  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_4 -3.7527767 0.03978340 *</span></span>
+<span><span class="co">#&gt; location_2 ~ location_3 -2.1361960 0.43109997  </span></span>
+<span><span class="co">#&gt; location_2 ~ location_4 -3.9259818 0.02817015 *</span></span>
+<span><span class="co">#&gt; location_3 ~ location_4 -1.7897858 0.58494735</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-3-4-1">Example 3.4.1<a class="anchor" aria-label="anchor" href="#example-3-4-1"></a>

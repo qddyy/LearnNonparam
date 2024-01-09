@@ -74,7 +74,7 @@
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/MultiCompT.html">MultiCompT</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
 <span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"permu"</span>, <span class="st">"asymp"</span><span class="op">)</span>,</span>
-<span>  bonferroni <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"bonferroni"</span>, <span class="st">"no_bonferroni"</span><span class="op">)</span>,</span>
 <span>  conf_level <span class="op">=</span> <span class="fl">0.95</span>,</span>
 <span>  n_permu <span class="op">=</span> <span class="fl">0L</span>,</span>
 <span>  scoring <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"none"</span>, <span class="st">"rank"</span>, <span class="st">"vw"</span>, <span class="st">"expon"</span><span class="op">)</span></span>
@@ -85,10 +85,6 @@
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>type</code></dt>
 <dd><p>a character string specifying the way to calculate the p-value.</p></dd>
-
-
-<dt><code>bonferroni</code></dt>
-<dd><p>a logical indicating whether to apply bonferroni adjustment.</p></dd>
 
 
 <dt><code>conf_level</code></dt>
