@@ -1,6 +1,6 @@
 #' @title TwoSampleTest Class
 #' 
-#' @description This class specializes `PermuTest` for two sample permutation tests. Note that it is not recommended to create objects of this class directly. 
+#' @description This class specializes `PermuTest` for two sample permutation tests. Note that it is not recommended to create objects of this class directly.
 #' 
 #' 
 #' @export
@@ -37,11 +37,10 @@ TwoSampleTest <- R6Class(
         },
 
         .calculate_statistic_permu = function() {
-            n_1 <- length(private$.data$x)
-            n_2 <- length(private$.data$y)
+            data <- unlist(private$.data, recursive = FALSE, use.names = TRUE)
             private$.statistic_permu <- twosample_pmt(
-                data = c(private$.data$x, private$.data$y),
-                where_y = rep.int(c(FALSE, TRUE), c(n_1, n_2)),
+                data = unname(data),
+                where_y = startsWith(names(data), "y"),
                 statistic_func = private$.statistic_func,
                 n_permu = private$.n_permu
             )

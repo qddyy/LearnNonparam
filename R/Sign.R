@@ -1,6 +1,6 @@
 #' @title `r Sign$private_fields$.name`
 #' 
-#' @description Performs two sample sign test on data vectors. 
+#' @description Performs two sample sign test on data vectors.
 #' 
 #' @aliases paired.sign
 #' 
@@ -15,11 +15,11 @@ Sign <- R6Class(
     inherit = TwoSamplePairedTest,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `Sign` object. 
+        #' @description Create a new `Sign` object.
         #' 
         #' @template init_params
         #' 
-        #' @return A `Sign` object. 
+        #' @return A `Sign` object.
         initialize = function(
             type = c("permu", "asymp", "exact"), correct = TRUE,
             alternative = c("two_sided", "less", "greater"), n_permu = 0L

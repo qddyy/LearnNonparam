@@ -1,6 +1,6 @@
 #' @title `r CDF$private_fields$.name`
 #' 
-#' @description Performs statistical inference on population cdf. 
+#' @description Performs statistical inference on population cdf.
 #' 
 #' @aliases onesample.cdf
 #' 
@@ -15,7 +15,7 @@ CDF <- R6Class(
     inherit = OneSampleTest,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `CDF` object. 
+        #' @description Create a new `CDF` object.
         #' 
         #' @param conf_level a number specifying confidence level of the confidence bounds.
         #' 
@@ -24,11 +24,11 @@ CDF <- R6Class(
             super$initialize(conf_level = conf_level)
         },
 
-        #' @description Plot the estimate and confidence bounds for population cdf of the data. 
+        #' @description Plot the estimate and confidence bounds for population cdf of the data.
         #' 
         #' @template plot_params
         #' 
-        #' @return The object itself (invisibly). 
+        #' @return The object itself (invisibly).
         plot = function(style = c("graphics", "ggplot2")) {
             private$.type <- "permu"
             super$plot(style = style)

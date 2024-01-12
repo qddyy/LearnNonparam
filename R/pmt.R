@@ -1,14 +1,14 @@
 #' @title Syntactic Sugar for Object Construction
 #' 
-#' @description Create a test object conveniently. 
+#' @description Create a test object conveniently.
 #' 
 #' @name pmt
 
 
 #' @rdname pmt
 #' 
-#' @param key a character string corresponding to the desired test. Check `pmts()` to see available keys. 
-#' @param ... extra parameters passed to the `new()` method of the test class. 
+#' @param key a character string corresponding to the desired test. Check `pmts()` to see available keys.
+#' @param ... extra parameters passed to the `new()` method of the test class.
 #' 
 #' @export
 pmt <- function(key, ...) tests[[key]]$new(...)
@@ -16,7 +16,7 @@ pmt <- function(key, ...) tests[[key]]$new(...)
 
 #' @rdname pmt
 #' 
-#' @param which a character string specifying which tests to show. If `"all"` (default) then available tests are shown. 
+#' @param which a character string specifying which tests to show. If `"all"` (default) then available tests are shown.
 #' 
 #' @export
 pmts <- function(which = c("all", "onesample", "twosample", "ksample", "multicomp", "paired", "rcbd", "association", "table")) {

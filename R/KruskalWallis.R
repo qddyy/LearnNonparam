@@ -1,6 +1,6 @@
 #' @title `r KruskalWallis$private_fields$.name`
 #' 
-#' @description Performs k sample Kruskal-Wallis Test on data vectors. 
+#' @description Performs k sample Kruskal-Wallis Test on data vectors.
 #' 
 #' @aliases ksample.kw
 #' 
@@ -15,12 +15,12 @@ KruskalWallis <- R6Class(
     inherit = KSampleTest,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `KruskalWallis` object. 
+        #' @description Create a new `KruskalWallis` object.
         #' 
         #' @template init_params
-        #' @param type a character string specifying the way to calculate p-values, must be one of `"permu"` (default) or `"asymp"`. 
+        #' @param type a character string specifying the way to calculate p-values, must be one of `"permu"` (default) or `"asymp"`.
         #' 
-        #' @return A `KruskalWallis` object. 
+        #' @return A `KruskalWallis` object.
         initialize = function(
             type = c("permu", "asymp"),
             n_permu = 0L, scoring = c("rank", "vw", "expon")

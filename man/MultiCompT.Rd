@@ -33,7 +33,7 @@ Create a new \code{MultiCompT} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{MultiCompT$new(
   type = c("permu", "asymp"),
-  bonferroni = TRUE,
+  method = c("bonferroni", "no_bonferroni"),
   conf_level = 0.95,
   n_permu = 0L,
   scoring = c("none", "rank", "vw", "expon")
@@ -44,8 +44,6 @@ Create a new \code{MultiCompT} object.
 \if{html}{\out{<div class="arguments">}}
 \describe{
 \item{\code{type}}{a character string specifying the way to calculate the p-value.}
-
-\item{\code{bonferroni}}{a logical indicating whether to apply bonferroni adjustment.}
 
 \item{\code{conf_level}}{a numeric value between zero and one giving the family-wise confidence level to use.}
 

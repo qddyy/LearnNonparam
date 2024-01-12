@@ -1,6 +1,6 @@
 #' @title `r ANOVA$private_fields$.name`
 #' 
-#' @description Performs F statistic based k sample permutation test on data vectors. 
+#' @description Performs F statistic based k sample permutation test on data vectors.
 #' 
 #' @aliases ksample.anova
 #' 
@@ -15,11 +15,11 @@ ANOVA <- R6Class(
     inherit = KSampleTest,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `ANOVA` object. 
+        #' @description Create a new `ANOVA` object.
         #' 
         #' @template init_params
         #' 
-        #' @return A `ANOVA` object. 
+        #' @return A `ANOVA` object.
         initialize = function(
             type = c("permu", "asymp"),
             n_permu = 0L

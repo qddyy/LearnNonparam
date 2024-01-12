@@ -1,6 +1,6 @@
 #' @title `r Difference$private_fields$.name`
 #' 
-#' @description Performs mean based two sample permutation test on data vectors. 
+#' @description Performs mean based two sample permutation test on data vectors.
 #' 
 #' @aliases twosample.difference
 #' 
@@ -14,11 +14,11 @@ Difference <- R6Class(
     inherit = TwoSampleTest,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `Difference` object. 
+        #' @description Create a new `Difference` object.
         #' 
         #' @template init_params
         #' 
-        #' @return A `Difference` object. 
+        #' @return A `Difference` object.
         initialize = function(
             method = c("mean", "median"),
             alternative = c("two_sided", "less", "greater"), n_permu = 0L

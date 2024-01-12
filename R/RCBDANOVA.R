@@ -1,6 +1,6 @@
 #' @title `r RCBDANOVA$private_fields$.name`
 #' 
-#' @description Performs F-statistic based permutation test on data for a randomized complete block design. 
+#' @description Performs F-statistic based permutation test on data for a randomized complete block design.
 #' 
 #' @aliases rcbd.anova
 #' 
@@ -15,11 +15,11 @@ RCBDANOVA <- R6Class(
     inherit = RCBD,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `RCBDANOVA` object. 
+        #' @description Create a new `RCBDANOVA` object.
         #' 
         #' @template init_params
         #' 
-        #' @return A `RCBDANOVA` object. 
+        #' @return A `RCBDANOVA` object.
         initialize = function(type = c("permu", "asymp"), n_permu = 0L) {
             private$.type <- match.arg(type)
 

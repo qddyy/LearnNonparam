@@ -1,6 +1,6 @@
 #' @title `r RatioMeanDeviance$private_fields$.name`
 #' 
-#' @description Performs two sample ratio mean deviance test on data vectors. 
+#' @description Performs two sample ratio mean deviance test on data vectors.
 #' 
 #' @aliases twosample.rmd
 #' 
@@ -14,11 +14,11 @@ RatioMeanDeviance <- R6Class(
     inherit = TwoSampleTest,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `RatioMeanDeviance` object. 
+        #' @description Create a new `RatioMeanDeviance` object.
         #' 
         #' @template init_params
         #' 
-        #' @return A `RatioMeanDeviance` object. 
+        #' @return A `RatioMeanDeviance` object.
         initialize = function(alternative = c("two_sided", "less", "greater"), n_permu = 0L) {
             super$initialize(null_value = 1, alternative = match.arg(alternative), n_permu = n_permu)
         }

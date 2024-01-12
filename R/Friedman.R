@@ -1,6 +1,6 @@
 #' @title `r Friedman$private_fields$.name`
 #' 
-#' @description Performs Friedman test on data for a randomized complete block design. 
+#' @description Performs Friedman test on data for a randomized complete block design.
 #' 
 #' @aliases rcbd.friedman
 #' 
@@ -15,11 +15,11 @@ Friedman <- R6Class(
     inherit = RCBD,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `Friedman` object. 
+        #' @description Create a new `Friedman` object.
         #' 
         #' @template init_params
         #' 
-        #' @return A `Friedman` object. 
+        #' @return A `Friedman` object.
         initialize = function(
             type = c("permu", "asymp"),
             n_permu = 0L

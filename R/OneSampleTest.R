@@ -1,6 +1,6 @@
 #' @title OneSampleTest Class
 #' 
-#' @description This class specializes `PermuTest` for one sample tests. Note that it is not recommended to create objects of this class directly. 
+#' @description This class specializes `PermuTest` for one sample tests. Note that it is not recommended to create objects of this class directly.
 #' 
 #' 
 #' @export

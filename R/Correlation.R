@@ -1,6 +1,6 @@
 #' @title `r Correlation$private_fields$.name`
 #' 
-#' @description Performs correlation coefficient based two sample permutation test on data vectors. 
+#' @description Performs correlation coefficient based two sample permutation test on data vectors.
 #' 
 #' @aliases association.corr
 #' 
@@ -15,12 +15,12 @@ Correlation <- R6Class(
     inherit = TwoSampleAssociationTest,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `Correlation` object. 
+        #' @description Create a new `Correlation` object.
         #' 
         #' @template init_params
-        #' @param method a character string indicating which correlation coefficient is to be computed. 
+        #' @param method a character string indicating which correlation coefficient is to be computed.
         #' 
-        #' @return A `Correlation` object. 
+        #' @return A `Correlation` object.
         initialize = function(
             type = c("permu", "asymp"), method = c("pearson", "kendall", "spearman"),
             alternative = c("two_sided", "less", "greater"), n_permu = 0L

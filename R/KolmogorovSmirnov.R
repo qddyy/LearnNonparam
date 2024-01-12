@@ -1,6 +1,6 @@
 #' @title `r KolmogorovSmirnov$private_fields$.name`
 #' 
-#' @description Performs two sample Kolmogorov-Smirnov test on data vectors. 
+#' @description Performs two sample Kolmogorov-Smirnov test on data vectors.
 #' 
 #' @aliases twosample.ks
 #' 
@@ -14,11 +14,11 @@ KolmogorovSmirnov <- R6Class(
     inherit = TwoSampleTest,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `KolmogorovSmirnov` object. 
+        #' @description Create a new `KolmogorovSmirnov` object.
         #' 
         #' @template init_params
         #' 
-        #' @return A `KolmogorovSmirnov` object. 
+        #' @return A `KolmogorovSmirnov` object.
         initialize = function(n_permu = 0L) {
             super$initialize(alternative = "greater", n_permu = n_permu)
         }
@@ -30,9 +30,10 @@ KolmogorovSmirnov <- R6Class(
             m <- length(private$.data$x)
             n <- length(private$.data$y)
 
-            tmp <- rep.int(1 / m, m + n)
+            geq_m <- -1 / n
+            leq_m <- rep.int(1 / m, m + n)
             private$.statistic_func <- function(x, y) {
-                max(abs(cumsum(`[<-`(tmp, order(c(x, y)) <= m, -1 / n))))
+                max(abs(cumsum(`[<-`(leq_m, order(c(x, y)) > m, geq_m))))
             }
         }
     )

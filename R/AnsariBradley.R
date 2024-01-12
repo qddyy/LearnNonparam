@@ -1,6 +1,6 @@
 #' @title `r AnsariBradley$private_fields$.name`
 #' 
-#' @description Performs two sample Ansari-Bradley test on data vectors. 
+#' @description Performs two sample Ansari-Bradley test on data vectors.
 #' 
 #' @aliases twosample.ansari
 #' 
@@ -15,11 +15,11 @@ AnsariBradley <- R6Class(
     inherit = TwoSampleTest,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `AnsariBradley` object. 
+        #' @description Create a new `AnsariBradley` object.
         #' 
         #' @template init_params
         #' 
-        #' @return A `AnsariBradley` object. 
+        #' @return A `AnsariBradley` object.
         initialize = function(
             type = c("permu", "asymp"),
             alternative = c("two_sided", "less", "greater"), n_permu = 0L

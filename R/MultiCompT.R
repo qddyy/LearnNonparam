@@ -1,6 +1,6 @@
 #' @title `r MultiCompT$private_fields$.name`
 #' 
-#' @description Performs t statistic based multiple comparison on data vectors. 
+#' @description Performs t statistic based multiple comparison on data vectors.
 #' 
 #' @aliases multicomp.t
 #' 
@@ -15,27 +15,24 @@ MultiCompT <- R6Class(
     inherit = MultipleComparison,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `MultiCompT` object. 
+        #' @description Create a new `MultiCompT` object.
         #' 
         #' @template init_params
-        #' @param conf_level a numeric value between zero and one giving the family-wise confidence level to use. 
-        #' @param bonferroni a logical indicating whether to apply bonferroni adjustment. 
+        #' @param conf_level a numeric value between zero and one giving the family-wise confidence level to use.
         #' 
         #' @return A `MultiCompT` object. 
         initialize = function(
-            type = c("permu", "asymp"), bonferroni = TRUE,
+            type = c("permu", "asymp"), method = c("bonferroni", "no_bonferroni"),
             conf_level = 0.95, n_permu = 0L, scoring = c("none", "rank", "vw", "expon")
         ) {
             private$.type <- match.arg(type)
-            private$.bonferroni <- bonferroni
-            
+            private$.method <- match.arg(method)
+
             super$initialize(conf_level = conf_level, n_permu = n_permu, scoring = match.arg(scoring))
         }
     ),
     private = list(
         .name = "Multiple Comparison Based on t Statistic",
-
-        .bonferroni = NULL,
 
         .define = function() {
             lengths <- vapply(
@@ -77,13 +74,9 @@ MultiCompT <- R6Class(
         },
 
         .calculate_extra = function() {
-            super$.calculate_extra()
-
-            if (private$.bonferroni) {
-                private$.multicomp$differ <- (
-                    private$.p_value < (1 - private$.conf_level) / nrow(private$.multicomp)
-                )
-            }
+            private$.differ <- private$.p_value < (1 - private$.conf_level) / (
+                if (private$.method == "bonferroni") length(private$.p_value) else 1
+            )
         }
     )
 )

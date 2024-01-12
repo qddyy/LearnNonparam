@@ -1,6 +1,6 @@
 #' @title `r Quantile$private_fields$.name`
 #' 
-#' @description Performs one sample quantile test on data vectors. In addition, a confidence interval will be calculated. 
+#' @description Performs one sample quantile test on data vectors. In addition, a confidence interval will be calculated.
 #' 
 #' @aliases onesample.quantile
 #' 
@@ -15,12 +15,12 @@ Quantile <- R6Class(
     inherit = OneSampleTest,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `Quantile` object. 
+        #' @description Create a new `Quantile` object.
         #' 
         #' @template init_params
-        #' @param prob a numeric between 0 and 1 indicating the probability. 
+        #' @param prob a numeric between 0 and 1 indicating the probability.
         #' 
-        #' @return A `Quantile` object. 
+        #' @return A `Quantile` object.
         initialize = function(
             type = c("asymp", "exact"), correct = TRUE, prob = 0.5,
             null_value = 0, alternative = c("two_sided", "less", "greater"), conf_level = 0.95
@@ -69,7 +69,7 @@ Quantile <- R6Class(
             n <- length(private$.data)
             beta <- 1 - (1 - private$.conf_level) / 2
             p <- private$.prob
-            
+
             d <- qnorm(beta) * sqrt(n * p * (1 - p))
             a <- round(p * n - d)
             b <- round(p * n + 1 + d)
@@ -80,7 +80,7 @@ Quantile <- R6Class(
         }
     ),
     active = list(
-        #' @field prob The probability. 
+        #' @field prob The probability.
         prob = function(value) {
             if (missing(value)) {
                 private$.prob

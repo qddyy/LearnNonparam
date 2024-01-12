@@ -5,7 +5,7 @@
 \alias{multicomp.tukey}
 \title{Tukey's HSD}
 \description{
-Performs Tukey's honest significant difference method on data vectors. Note that procedure modified by Kramer is performed for unequal sample sizes.
+Performs Tukey's honest significant difference method on data vectors. Procedure modified by Kramer is performed for unequal sample sizes.
 }
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:KSampleTest]{LearnNonparam::KSampleTest}} -> \code{\link[LearnNonparam:MultipleComparison]{LearnNonparam::MultipleComparison}} -> \code{TukeyHSD}

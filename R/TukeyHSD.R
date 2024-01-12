@@ -1,6 +1,6 @@
 #' @title `r TukeyHSD$private_fields$.name`
 #' 
-#' @description Performs Tukey's honest significant difference method on data vectors. Note that procedure modified by Kramer is performed for unequal sample sizes. 
+#' @description Performs Tukey's honest significant difference method on data vectors. Procedure modified by Kramer is performed for unequal sample sizes.
 #' 
 #' @aliases multicomp.tukey
 #' 
@@ -15,18 +15,18 @@ TukeyHSD <- R6Class(
     inherit = MultipleComparison,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `TukeyHSD` object. 
+        #' @description Create a new `TukeyHSD` object.
         #' 
         #' @template init_params
-        #' @param conf_level a numeric value between zero and one giving the family-wise confidence level to use. 
+        #' @param conf_level a numeric value between zero and one giving the family-wise confidence level to use.
         #' 
-        #' @return A `TukeyHSD` object. 
+        #' @return A `TukeyHSD` object.
         initialize = function(
             type = c("permu", "asymp"),
             conf_level = 0.95, n_permu = 0L, scoring = c("none", "rank", "vw", "expon")
         ) {
             private$.type <- match.arg(type)
-            
+
             super$initialize(conf_level = conf_level, n_permu = n_permu, scoring = match.arg(scoring))
         }
     ),

@@ -1,6 +1,6 @@
 #' @title `r Wilcoxon$private_fields$.name`
 #' 
-#' @description Performs two sample Wilcoxon test, which is equivalant to the Mann-Whitney test, on data vectors. In addition, an estimation and a confidence interval of the location parameter will be calculated. 
+#' @description Performs two sample Wilcoxon test, which is equivalant to the Mann-Whitney test, on data vectors. In addition, an estimation and a confidence interval of the location parameter will be calculated.
 #' 
 #' @aliases twosample.wilcoxon
 #' 
@@ -15,11 +15,11 @@ Wilcoxon <- R6Class(
     inherit = TwoSampleTest,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `Wilcoxon` object. 
+        #' @description Create a new `Wilcoxon` object.
         #' 
         #' @template init_params
         #' 
-        #' @return A `Wilcoxon` object. 
+        #' @return A `Wilcoxon` object.
         initialize = function(
             type = c("permu", "asymp", "exact"), correct = TRUE,
             alternative = c("two_sided", "less", "greater"), n_permu = 0L, conf_level = 0.95

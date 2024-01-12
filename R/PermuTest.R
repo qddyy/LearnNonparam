@@ -1,6 +1,6 @@
 #' @title PermuTest Class
 #' 
-#' @description This is the abstract base class for permutation test objects. Note that it is not recommended to create objects of this class directly. 
+#' @description This is the abstract base class for permutation test objects. Note that it is not recommended to create objects of this class directly.
 #' 
 #' 
 #' @export
@@ -13,11 +13,11 @@ PermuTest <- R6Class(
     classname = "PermuTest",
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `PermuTest` object. Note that it is not recommended to create objects of this class directly. 
+        #' @description Create a new `PermuTest` object. Note that it is not recommended to create objects of this class directly.
         #' 
         #' @template init_params
         #' 
-        #' @return A `PermuTest` object. 
+        #' @return A `PermuTest` object.
         initialize = function(null_value = 0, alternative = c("two_sided", "less", "greater"), n_permu = 0L, conf_level = 0.95, scoring = c("none", "rank", "vw", "expon")) {
             private$.n_permu <- n_permu
             private$.scoring <- match.arg(scoring)
@@ -26,9 +26,9 @@ PermuTest <- R6Class(
             private$.conf_level <- conf_level
         },
 
-        #' @description Perform test on data. 
+        #' @description Perform test on data.
         #' 
-        #' @param ... data to be tested. Can be a `data.frame`, a `list` or numeric vector(s). 
+        #' @param ... data to be tested. Can be a `data.frame`, a `list` or numeric vector(s).
         #' 
         #' @return The object itself (invisibly).
         test = function(...) {
@@ -39,11 +39,11 @@ PermuTest <- R6Class(
             invisible(self)
         },
 
-        #' @description Print the results of the test. 
+        #' @description Print the results of the test.
         #' 
-        #' @param digits an integer specifying the minimum number of significant digits to be printed in values. 
+        #' @param digits an integer specifying the minimum number of significant digits to be printed in values.
         #' 
-        #' @return The object itself (invisibly). 
+        #' @return The object itself (invisibly).
         print = function(digits = getOption("digits")) {
             if (!is.null(private$.raw_data)) {
                 private$.print(digits = digits)
@@ -52,12 +52,12 @@ PermuTest <- R6Class(
             invisible(self)
         },
 
-        #' @description Plot histogram(s) of the permutation distribution. Note that it works only if the test's type is `"permu"`. 
+        #' @description Plot histogram(s) of the permutation distribution. Note that it works only if the test's type is `"permu"`.
         #' 
         #' @template plot_params
-        #' @param ... extra parameters passed to `graphics::hist` or `ggplot2::stat_bin`. 
+        #' @param ... extra parameters passed to `graphics::hist` or `ggplot2::stat_bin`.
         #' 
-        #' @return The object itself (invisibly). 
+        #' @return The object itself (invisibly).
         plot = function(style = c("graphics", "ggplot2"), ...) {
             if (!is.null(private$.raw_data) & private$.type == "permu") {
                 if (match.arg(style) == "graphics") {
@@ -175,11 +175,11 @@ PermuTest <- R6Class(
         },
 
         .calculate_p_permu = function() {
-            l <- quote(mean(private$.statistic_permu <= private$.statistic))
-            r <- quote(mean(private$.statistic_permu >= private$.statistic))
-            lr <- quote(2 * min(eval(l), eval(r)))
-
-            private$.p_value <- eval(get(private$.side))
+            private$.p_value <- switch(private$.side,
+                l = mean(private$.statistic_permu <= private$.statistic),
+                r = mean(private$.statistic_permu >= private$.statistic),
+                lr = mean(abs(private$.statistic_permu) >= abs(private$.statistic))
+            )
         },
 
         .print = function(digits) {
@@ -284,7 +284,7 @@ PermuTest <- R6Class(
         }
     ),
     active = list(
-        #' @field type The type of the test. 
+        #' @field type The type of the test.
         type = function(value) {
             if (missing(value)) {
                 private$.type
@@ -294,7 +294,7 @@ PermuTest <- R6Class(
                 private$.calculate()
             }
         },
-        #' @field method The method used. 
+        #' @field method The method used.
         method = function(value) {
             if (missing(value)) {
                 private$.method
@@ -304,7 +304,7 @@ PermuTest <- R6Class(
                 private$.calculate()
             }
         },
-        #' @field scoring The scoring system used. 
+        #' @field scoring The scoring system used.
         scoring = function(value) {
             if (missing(value)) {
                 private$.scoring
@@ -314,7 +314,7 @@ PermuTest <- R6Class(
                 private$.calculate()
             }
         },
-        #' @field null_value The value of the parameter in the null hypothesis. 
+        #' @field null_value The value of the parameter in the null hypothesis.
         null_value = function(value) {
             if (missing(value)) {
                 private$.null_value
@@ -324,7 +324,7 @@ PermuTest <- R6Class(
                 private$.calculate()
             }
         },
-        #' @field alternative The alternative hypothesis. 
+        #' @field alternative The alternative hypothesis.
         alternative = function(value) {
             if (missing(value)) {
                 private$.alternative
@@ -339,7 +339,7 @@ PermuTest <- R6Class(
                 }
             }
         },
-        #' @field conf_level The confidence level of the interval. 
+        #' @field conf_level The confidence level of the interval.
         conf_level = function(value) {
             if (missing(value)) {
                 private$.conf_level
@@ -349,7 +349,7 @@ PermuTest <- R6Class(
                 private$.calculate_extra()
             }
         },
-        #' @field n_permu The number of permutations used. 
+        #' @field n_permu The number of permutations used.
         n_permu = function(value) {
             if (missing(value)) {
                 private$.n_permu
@@ -362,15 +362,15 @@ PermuTest <- R6Class(
             }
         },
 
-        #' @field data The data. 
+        #' @field data The data.
         data = function() private$.raw_data,
-        #' @field statistic The test statistic. 
+        #' @field statistic The test statistic.
         statistic = function() private$.statistic,
-        #' @field p_value The p-value. 
+        #' @field p_value The p-value.
         p_value = function() private$.p_value,
-        #' @field estimate The estimated parameter. 
+        #' @field estimate The estimated parameter.
         estimate = function() private$.estimate,
-        #' @field ci The confidence interval. 
+        #' @field ci The confidence interval.
         ci = function() private$.ci
     )
 )

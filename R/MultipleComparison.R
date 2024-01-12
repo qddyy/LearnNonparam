@@ -1,6 +1,6 @@
 #' @title MultipleComparison Class
 #' 
-#' @description This class specializes `KSampleTest` for multiple comparisons. Note that it is not recommended to create objects of this class directly. 
+#' @description This class specializes `KSampleTest` for multiple comparisons. Note that it is not recommended to create objects of this class directly.
 #' 
 #' 
 #' @export
@@ -17,7 +17,7 @@ MultipleComparison <- R6Class(
         .name = "Multiple Comparison",
 
         .group_ij = NULL,
-        .multicomp = NULL,
+        .differ = NULL,
 
         .check = function() {},
 
@@ -61,13 +61,7 @@ MultipleComparison <- R6Class(
         },
 
         .calculate_extra = function() {
-            private$.multicomp <- data.frame(
-                group_i = private$.group_ij$i,
-                group_j = private$.group_ij$j,
-                statistic = private$.statistic,
-                p_value = private$.p_value,
-                differ = (private$.p_value < 1 - private$.conf_level)
-            )
+            private$.differ <- (private$.p_value < 1 - private$.conf_level)
         },
 
         .print = function(digits) {
@@ -96,10 +90,18 @@ MultipleComparison <- R6Class(
             cat("\n\n")
 
             data_names <- names(private$.raw_data)
-            multicomp <- private$.multicomp
-            multicomp$group_i <- data_names[multicomp$group_i]
-            multicomp$group_j <- data_names[multicomp$group_j]
-            print(multicomp, digits = digits, row.names = FALSE)
+            print(
+                data.frame(
+                    statistic = private$.statistic,
+                    p_value = private$.p_value,
+                    ifelse(private$.differ, "*", ""),
+                    row.names = paste(
+                        data_names[private$.group_ij$i],
+                        data_names[private$.group_ij$j],
+                        sep = " ~ "
+                    ), fix.empty.names = FALSE
+                ), digits = digits
+            )
         },
 
         .plot = function(...) {
@@ -127,7 +129,7 @@ MultipleComparison <- R6Class(
                             x = private$.statistic_permu[k, ],
                             plot = TRUE,
                             xlab = "Statistic",
-                            main = paste(data_names[i], "versus", data_names[j])
+                            main = paste(data_names[i], data_names[j], sep = " ~ ")
                         ), ...
                     )
                     abline(v = private$.statistic[k], lty = "dashed")
@@ -152,21 +154,25 @@ MultipleComparison <- R6Class(
                         data = {
                             n <- ncol(private$.statistic_permu)
                             data.frame(
-                                group_i = rep.int(private$.group_ij$i, n),
-                                group_j = rep.int(private$.group_ij$j, n),
+                                i = rep.int(private$.group_ij$i, n),
+                                j = rep.int(private$.group_ij$j, n),
                                 statistic = as.vector(private$.statistic_permu)
                             )
                         }
                     ), ...
                 ) +
                 ggplot2::geom_vline(
-                    data = private$.multicomp[1:3],
-                    mapping = ggplot2::aes(xintercept = statistic),
+                    data = data.frame(
+                        i = private$.group_ij$i,
+                        j = private$.group_ij$j,
+                        statistic = private$.statistic
+                    ),
+                    mapping = ggplot2::aes(xintercept = .data$statistic),
                     linetype = "dashed"
                 ) +
                 ggplot2::facet_grid(
-                    rows = ggplot2::vars(.data$group_j),
-                    cols = ggplot2::vars(.data$group_i),
+                    rows = ggplot2::vars(.data$j),
+                    cols = ggplot2::vars(.data$i),
                     scales = "free", switch = "both",
                     labeller = {
                         data_names <- names(private$.raw_data)
@@ -177,7 +183,7 @@ MultipleComparison <- R6Class(
                 ) +
                 ggplot2::labs(
                     title = "Permutation Distribution",
-                    x = "Statistic", y = "Count"
+                    x = "Statistic", y = "Frequency"
                 ) +
                 ggplot2::theme(
                     plot.title = ggplot2::element_text(face = "bold", hjust = 0.5)

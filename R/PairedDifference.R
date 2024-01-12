@@ -1,6 +1,6 @@
 #' @title `r PairedDifference$private_fields$.name`
 #' 
-#' @description Performs two sample signed score test on data vectors. 
+#' @description Performs two sample signed score test on data vectors.
 #' 
 #' @aliases paired.difference
 #' 
@@ -18,8 +18,8 @@ PairedDifference <- R6Class(
         #' @description Create a new `PairedDifference` object. 
         #' 
         #' @template init_params
-        #' @param scoring a character string specifying which scoring system to be used on the absolute differences. 
-        #' @param method a character string specifying the method of ranking data in computing adjusted signed ranks for tied data, must be one of `"with_zeros"` (default) or `"ignore"`. Note that the data will be modified when this parameter is set to `"ignore"`. 
+        #' @param scoring a character string specifying which scoring system to be used on the absolute differences.
+        #' @param method a character string specifying the method of ranking data in computing adjusted signed ranks for tied data, must be one of `"with_zeros"` (default) or `"ignore"`. Note that the data will be modified when this parameter is set to `"ignore"`.
         #' @param correct a logical indicating whether to apply continuity correction in the normal approximation for the p-value when `scoring` is set to `"rank"`.
         #' 
         #' @return A `PairedDifference` object. 

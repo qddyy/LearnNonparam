@@ -27,7 +27,7 @@ get_data <- function(call, env) {
 
     data_names <- names(data_exprs)
     if (is.null(data_names)) {
-        data_names <- rep_len("", n_data)
+        data_names <- rep.int("", n_data)
     }
 
     unlist(.mapply(
@@ -81,7 +81,11 @@ get_p_decrete <- function(x, dist, side, ...) {
 #' @importFrom stats pbinom dbinom
 get_p_binom <- function(x, n, p, side) {
     if (side == "lr") {
-        if (p == 0) as.integer(x == 0) else if (p == 1) as.integer(x == n) else {
+        if (p == 0) {
+            as.integer(x == 0)
+        } else if (p == 1) {
+            as.integer(x == n)
+        } else {
             d <- dbinom(x, n, p) * (1 + 1e-07)
             expect <- n * p
             if (x < expect) {

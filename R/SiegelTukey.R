@@ -1,6 +1,6 @@
 #' @title `r SiegelTukey$private_fields$.name`
 #' 
-#' @description Performs two sample Siegel-Tukey test on data vectors. 
+#' @description Performs two sample Siegel-Tukey test on data vectors.
 #' 
 #' @aliases twosample.siegel
 #' 
@@ -14,12 +14,12 @@ SiegelTukey <- R6Class(
     inherit = Wilcoxon,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `SiegelTukey` object. 
+        #' @description Create a new `SiegelTukey` object.
         #' 
         #' @param adjust_median a logical indicating whether the median difference between groups is levelled before the test is conducted. 
         #' @param ... extra parameters passed to `Wilcoxon$new()`.
         #' 
-        #' @return A `SiegelTukey` object. 
+        #' @return A `SiegelTukey` object.
         initialize = function(
             adjust_median = FALSE,
             ...

@@ -1,6 +1,6 @@
 #' @title `r Page$private_fields$.name`
 #' 
-#' @description Performs Page test on data for a randomized complete block design. 
+#' @description Performs Page test on data for a randomized complete block design.
 #' 
 #' @aliases rcbd.page
 #' 
@@ -15,7 +15,7 @@ Page <- R6Class(
     inherit = RCBD,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `Page` object. 
+        #' @description Create a new `Page` object.
         #' 
         #' @template init_params
         #' 
@@ -40,7 +40,7 @@ Page <- R6Class(
         .calculate_p = function() {
             k <- nrow(private$.data)
             b <- ncol(private$.data)
-            
+
             z <- (private$.statistic - b * k * (k + 1)^2 / 4) / sqrt(
                 (k - 1) * k * (k + 1) / 12 * sum(apply(private$.data, 2, var))
             )

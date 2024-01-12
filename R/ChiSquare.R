@@ -1,6 +1,6 @@
 #' @title `r ChiSquare$private_fields$.name`
 #' 
-#' @description Performs chi-square statistic based permutation test on contingency tables. 
+#' @description Performs chi-square statistic based permutation test on contingency tables.
 #' 
 #' @aliases table.chisq
 #' 
@@ -15,11 +15,11 @@ ChiSquare <- R6Class(
     inherit = ContingencyTableTest,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `ChiSquare` object. 
+        #' @description Create a new `ChiSquare` object.
         #' 
         #' @template init_params
         #' 
-        #' @return A `ChiSquare` object. 
+        #' @return A `ChiSquare` object.
         initialize = function(
             type = c("permu", "asymp"),
             n_permu = 0L

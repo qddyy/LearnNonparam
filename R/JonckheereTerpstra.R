@@ -1,6 +1,6 @@
 #' @title `r JonckheereTerpstra$private_fields$.name`
 #' 
-#' @description Performs k sample Jonckheere-Terpstra Test on data vectors. 
+#' @description Performs k sample Jonckheere-Terpstra Test on data vectors.
 #' 
 #' @aliases ksample.jt
 #' 
@@ -15,11 +15,11 @@ JonckheereTerpstra <- R6Class(
     inherit = KSampleTest,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `JonckheereTerpstra` object. 
+        #' @description Create a new `JonckheereTerpstra` object.
         #' 
         #' @template init_params
         #' 
-        #' @return A `JonckheereTerpstra` object. 
+        #' @return A `JonckheereTerpstra` object.
         initialize = function(
             type = c("permu", "asymp"),
             alternative = c("two_sided", "less", "greater"), n_permu = 0L
