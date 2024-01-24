@@ -24,9 +24,9 @@ ChiSquare <- R6Class(
             type = c("permu", "asymp"),
             n_permu = 0L
         ) {
-            private$.type <- match.arg(type)
-
-            super$initialize(alternative = "greater", n_permu = n_permu)
+            private$.init(
+                type = type, n_permu = n_permu
+            )
         }
     ),
     private = list(
@@ -43,6 +43,10 @@ ChiSquare <- R6Class(
 
                 sum((data - expect)^2 / expect)
             }
+        },
+
+        .calculate_side = function() {
+            private$.side <- "r"
         },
 
         .calculate_p = function() {

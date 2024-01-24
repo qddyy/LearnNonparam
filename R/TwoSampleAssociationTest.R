@@ -1,6 +1,6 @@
 #' @title TwoSampleAssociationTest Class
 #' 
-#' @description This class specializes `TwoSamplePairedTest` for two sample permutation tests for association. Note that it is not recommended to create objects of this class directly.
+#' @description Abstract class for two sample permutation tests for association.
 #' 
 #' 
 #' @export
@@ -14,8 +14,6 @@ TwoSampleAssociationTest <- R6Class(
     cloneable = FALSE,
     private = list(
         .name = "Two Sample Permutation Test for Association",
-
-        .check = function() {},
 
         .preprocess = function() {
             super$.preprocess()

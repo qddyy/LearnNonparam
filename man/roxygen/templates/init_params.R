@@ -1,4 +1,4 @@
-#' @param scoring a character string specifying which scoring system to be used. 
+#' @param scoring a character string specifying which scoring system to be used.
 #'
 #' @param n_permu an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used. 
 #' 

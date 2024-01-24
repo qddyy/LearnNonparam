@@ -4,7 +4,7 @@
 \alias{MultipleComparison}
 \title{MultipleComparison Class}
 \description{
-This class specializes \code{KSampleTest} for multiple comparisons. Note that it is not recommended to create objects of this class directly.
+Abstract class for multiple comparisons.
 }
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:KSampleTest]{LearnNonparam::KSampleTest}} -> \code{MultipleComparison}

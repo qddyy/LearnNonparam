@@ -10,6 +10,13 @@ Performs two sample signed score test on data vectors.
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{\link[LearnNonparam:TwoSamplePairedTest]{LearnNonparam::TwoSamplePairedTest}} -> \code{PairedDifference}
 }
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{correct}}{Whether to apply continuity correction.}
+}
+\if{html}{\out{</div>}}
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
@@ -34,10 +41,10 @@ Create a new \code{PairedDifference} object.
 \if{html}{\out{<div class="r">}}\preformatted{PairedDifference$new(
   type = c("permu", "asymp"),
   method = c("with_zeros", "without_zeros"),
-  correct = TRUE,
+  scoring = c("none", "rank", "vw", "expon"),
   alternative = c("two_sided", "less", "greater"),
   n_permu = 0L,
-  scoring = c("none", "rank", "vw", "expon")
+  correct = TRUE
 )}\if{html}{\out{</div>}}
 }
 
@@ -48,13 +55,13 @@ Create a new \code{PairedDifference} object.
 
 \item{\code{method}}{a character string specifying the method of ranking data in computing adjusted signed ranks for tied data, must be one of \code{"with_zeros"} (default) or \code{"ignore"}. Note that the data will be modified when this parameter is set to \code{"ignore"}.}
 
-\item{\code{correct}}{a logical indicating whether to apply continuity correction in the normal approximation for the p-value when \code{scoring} is set to \code{"rank"}.}
+\item{\code{scoring}}{a character string specifying which scoring system to be used on the absolute differences.}
 
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 
 \item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
 
-\item{\code{scoring}}{a character string specifying which scoring system to be used on the absolute differences.}
+\item{\code{correct}}{a logical indicating whether to apply continuity correction in the normal approximation for the p-value when \code{scoring} is set to \code{"rank"}.}
 }
 \if{html}{\out{</div>}}
 }

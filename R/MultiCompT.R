@@ -19,16 +19,19 @@ MultiCompT <- R6Class(
         #' 
         #' @template init_params
         #' @param conf_level a numeric value between zero and one giving the family-wise confidence level to use.
+        #' @param method a character string specifying whether to use bonferroni correction.
         #' 
         #' @return A `MultiCompT` object. 
         initialize = function(
-            type = c("permu", "asymp"), method = c("bonferroni", "no_bonferroni"),
-            conf_level = 0.95, n_permu = 0L, scoring = c("none", "rank", "vw", "expon")
+            type = c("permu", "asymp"),
+            method = c("bonferroni", "no_bonferroni"),
+            scoring = c("none", "rank", "vw", "expon"),
+            conf_level = 0.95, n_permu = 0L
         ) {
-            private$.type <- match.arg(type)
-            private$.method <- match.arg(method)
-
-            super$initialize(conf_level = conf_level, n_permu = n_permu, scoring = match.arg(scoring))
+            private$.init(
+                type = type, method = method, scoring = scoring,
+                conf_level = conf_level, n_permu = n_permu
+            )
         }
     ),
     private = list(

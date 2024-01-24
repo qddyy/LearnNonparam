@@ -40,10 +40,6 @@ pak::pkg_install("qddyy/LearnNonparam")
 
 ## Usage
 
-```{r}
-set.seed(0)
-```
-
 - Create a test object (for example, a `Wilcoxon` object)
     ```{r, eval = FALSE}
     t <- Wilcoxon$new(alternative = "two_sided", type = "permu", n_permu = 1e6)

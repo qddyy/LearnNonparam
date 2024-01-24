@@ -1,5 +1,3 @@
-get_last <- function(x) x[length(x)]
-
 do_call <- function(func, default = NULL, fixed = NULL, ...) {
     env_args <- list2env(as.list(default))
     env_args <- list2env(list(...), envir = env_args)
@@ -11,11 +9,27 @@ do_call <- function(func, default = NULL, fixed = NULL, ...) {
     )
 }
 
-# for test()
-
 deparse_1 <- function(expr) {
     paste(deparse(expr, width.cutoff = 500), collapse = " ")
 }
+
+# for .init()
+
+match_arg <- function(arg, choices) {
+    if (is.null(choices)) {
+        warning(
+            paste0(
+                "Can't modify", " ",
+                "'", deparse_1(substitute(arg)), "'",
+                ", ignored"
+            )
+        )
+    } else {
+        match.arg(arg = arg, choices = choices, several.ok = FALSE)
+    }
+}
+
+# for test()
 
 get_data <- function(call, env) {
     data_exprs <- as.list(call)[-1]
@@ -32,10 +46,10 @@ get_data <- function(call, env) {
 
     unlist(.mapply(
         dots = list(data_exprs, data_names),
-        FUN = function(data, name) {
+        FUN = function(data_expr, data_name) {
             `names<-`(
-                list(eval(data, envir = env)),
-                if (name != "") name else deparse_1(data)
+                list(eval(data_expr, envir = env)),
+                if (data_name != "") data_name else deparse_1(data_expr)
             )
         }, MoreArgs = NULL
     ), recursive = FALSE, use.names = TRUE)
@@ -64,7 +78,7 @@ get_p_continous <- function(x, dist, side, ...) {
     r <- 1 - l
     lr <- 2 * min(l, r)
 
-    get(side)
+    eval(as.name(side))
 }
 
 get_p_decrete <- function(x, dist, side, ...) {
@@ -75,7 +89,7 @@ get_p_decrete <- function(x, dist, side, ...) {
     r <- 1 - l + p(x, ...)
     lr <- 2 * min(l, r, 0.5)
 
-    get(side)
+    eval(as.name(side))
 }
 
 #' @importFrom stats pbinom dbinom

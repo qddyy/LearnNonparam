@@ -10,6 +10,13 @@ Performs two sample sign test on data vectors.
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{\link[LearnNonparam:TwoSamplePairedTest]{LearnNonparam::TwoSamplePairedTest}} -> \code{Sign}
 }
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{correct}}{Whether to apply continuity correction.}
+}
+\if{html}{\out{</div>}}
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
@@ -33,9 +40,9 @@ Create a new \code{Sign} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Sign$new(
   type = c("permu", "asymp", "exact"),
-  correct = TRUE,
   alternative = c("two_sided", "less", "greater"),
-  n_permu = 0L
+  n_permu = 0L,
+  correct = TRUE
 )}\if{html}{\out{</div>}}
 }
 
@@ -44,11 +51,11 @@ Create a new \code{Sign} object.
 \describe{
 \item{\code{type}}{a character string specifying the way to calculate the p-value.}
 
-\item{\code{correct}}{a logical indicating whether to apply continuity correction in the normal approximation for the p-value.}
-
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 
 \item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
+
+\item{\code{correct}}{a logical indicating whether to apply continuity correction in the normal approximation for the p-value.}
 }
 \if{html}{\out{</div>}}
 }

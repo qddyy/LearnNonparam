@@ -33,9 +33,9 @@ Create a new \code{TukeyHSD} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{TukeyHSD$new(
   type = c("permu", "asymp"),
+  scoring = c("none", "rank", "vw", "expon"),
   conf_level = 0.95,
-  n_permu = 0L,
-  scoring = c("none", "rank", "vw", "expon")
+  n_permu = 0L
 )}\if{html}{\out{</div>}}
 }
 
@@ -44,11 +44,11 @@ Create a new \code{TukeyHSD} object.
 \describe{
 \item{\code{type}}{a character string specifying the way to calculate the p-value.}
 
+\item{\code{scoring}}{a character string specifying which scoring system to be used.}
+
 \item{\code{conf_level}}{a numeric value between zero and one giving the family-wise confidence level to use.}
 
 \item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
-
-\item{\code{scoring}}{a character string specifying which scoring system to be used.}
 }
 \if{html}{\out{</div>}}
 }

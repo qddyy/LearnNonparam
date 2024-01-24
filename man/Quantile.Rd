@@ -13,7 +13,11 @@ Performs one sample quantile test on data vectors. In addition, a confidence int
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
+\item{\code{null_value}}{The true quantile in the null hypothesis.}
+
 \item{\code{prob}}{The probability.}
+
+\item{\code{correct}}{Whether to apply continuity correction.}
 }
 \if{html}{\out{</div>}}
 }
@@ -40,11 +44,11 @@ Create a new \code{Quantile} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Quantile$new(
   type = c("asymp", "exact"),
-  correct = TRUE,
-  prob = 0.5,
-  null_value = 0,
   alternative = c("two_sided", "less", "greater"),
-  conf_level = 0.95
+  null_value = 0,
+  conf_level = 0.95,
+  prob = 0.5,
+  correct = TRUE
 )}\if{html}{\out{</div>}}
 }
 
@@ -53,15 +57,15 @@ Create a new \code{Quantile} object.
 \describe{
 \item{\code{type}}{a character string specifying the way to calculate the p-value.}
 
-\item{\code{correct}}{a logical indicating whether to apply continuity correction in the normal approximation for the p-value.}
-
-\item{\code{prob}}{a numeric between 0 and 1 indicating the probability.}
+\item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 
 \item{\code{null_value}}{a number specifying the value of the parameter in the null hypothesis.}
 
-\item{\code{alternative}}{a character string specifying the alternative hypothesis.}
-
 \item{\code{conf_level}}{a number specifying confidence level of the interval.}
+
+\item{\code{prob}}{a numeric between 0 and 1 indicating the probability.}
+
+\item{\code{correct}}{a logical indicating whether to apply continuity correction in the normal approximation for the p-value.}
 }
 \if{html}{\out{</div>}}
 }

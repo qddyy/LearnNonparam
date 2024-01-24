@@ -19,15 +19,24 @@ RatioMeanDeviance <- R6Class(
         #' @template init_params
         #' 
         #' @return A `RatioMeanDeviance` object.
-        initialize = function(alternative = c("two_sided", "less", "greater"), n_permu = 0L) {
-            super$initialize(null_value = 1, alternative = match.arg(alternative), n_permu = n_permu)
+        initialize = function(
+            alternative = c("two_sided", "less", "greater"),
+            n_permu = 0L
+        ) {
+            private$.init(
+                alternative = alternative, n_permu = n_permu
+            )
         }
     ),
     private = list(
         .name = "Ratio Mean Deviance Test",
         .param_name = "ratio of scales",
 
-        .calculate_score = function() {
+        .null_value = 1,
+
+        .preprocess = function() {
+            super$.preprocess()
+
             private$.data <- list(
                 x = abs(private$.data$x - median(private$.data$x)),
                 y = abs(private$.data$y - median(private$.data$y))

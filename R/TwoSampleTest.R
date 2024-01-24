@@ -1,6 +1,6 @@
 #' @title TwoSampleTest Class
 #' 
-#' @description This class specializes `PermuTest` for two sample permutation tests. Note that it is not recommended to create objects of this class directly.
+#' @description Abstract class for two sample permutation tests.
 #' 
 #' 
 #' @export
@@ -14,8 +14,6 @@ TwoSampleTest <- R6Class(
     cloneable = FALSE,
     private = list(
         .name = "Two Sample Permutation Test",
-
-        .check = function() {},
 
         .preprocess = function() {
             private$.data <- `names<-`(private$.raw_data, c("x", "y"))

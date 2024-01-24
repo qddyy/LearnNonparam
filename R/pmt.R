@@ -1,14 +1,14 @@
 #' @title Syntactic Sugar for Object Construction
 #' 
-#' @description Create a test object conveniently.
+#' @description construct a test object in a unified way.
 #' 
 #' @name pmt
 
 
 #' @rdname pmt
 #' 
-#' @param key a character string corresponding to the desired test. Check `pmts()` to see available keys.
-#' @param ... extra parameters passed to the `new()` method of the test class.
+#' @param key a character string corresponding to the desired test. Check `pmts` to see available keys.
+#' @param ... extra parameters passed to the constructor.
 #' 
 #' @export
 pmt <- function(key, ...) tests[[key]]$new(...)

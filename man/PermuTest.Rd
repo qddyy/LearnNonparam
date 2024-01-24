@@ -4,18 +4,18 @@
 \alias{PermuTest}
 \title{PermuTest Class}
 \description{
-This is the abstract base class for permutation test objects. Note that it is not recommended to create objects of this class directly.
+Abstract class for permutation tests.
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{type}}{The type of the test.}
+\item{\code{type}}{The way to calculate the p-value.}
 
 \item{\code{method}}{The method used.}
 
 \item{\code{scoring}}{The scoring system used.}
 
-\item{\code{null_value}}{The value of the parameter in the null hypothesis.}
+\item{\code{null_value}}{The true value of the parameter in the null hypothesis.}
 
 \item{\code{alternative}}{The alternative hypothesis.}
 
@@ -48,35 +48,10 @@ This is the abstract base class for permutation test objects. Note that it is no
 \if{html}{\out{<a id="method-PermuTest-new"></a>}}
 \if{latex}{\out{\hypertarget{method-PermuTest-new}{}}}
 \subsection{Method \code{new()}}{
-Create a new \code{PermuTest} object. Note that it is not recommended to create objects of this class directly.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PermuTest$new(
-  null_value = 0,
-  alternative = c("two_sided", "less", "greater"),
-  n_permu = 0L,
-  conf_level = 0.95,
-  scoring = c("none", "rank", "vw", "expon")
-)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{PermuTest$new(...)}\if{html}{\out{</div>}}
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{null_value}}{a number specifying the value of the parameter in the null hypothesis.}
-
-\item{\code{alternative}}{a character string specifying the alternative hypothesis.}
-
-\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
-
-\item{\code{conf_level}}{a number specifying confidence level of the interval.}
-
-\item{\code{scoring}}{a character string specifying which scoring system to be used.}
-}
-\if{html}{\out{</div>}}
-}
-\subsection{Returns}{
-A \code{PermuTest} object.
-}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-PermuTest-test"></a>}}

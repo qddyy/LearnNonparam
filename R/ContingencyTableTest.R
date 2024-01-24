@@ -1,6 +1,6 @@
 #' @title ContingencyTableTest Class
 #' 
-#' @description This class specializes `PermuTest` for permutation tests for contingency tables. Note that it is not recommended to create objects of this class directly.
+#' @description Abstract class for permutation tests on contingency tables.
 #' 
 #' 
 #' @export
@@ -14,8 +14,6 @@ ContingencyTableTest <- R6Class(
     cloneable = FALSE,
     private = list(
         .name = "Contingency Table Permutation Test",
-
-        .check = function() {},
 
         .preprocess = function(table) {
             private$.data <- unname(do_call(cbind, private$.raw_data))

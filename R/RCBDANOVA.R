@@ -20,10 +20,13 @@ RCBDANOVA <- R6Class(
         #' @template init_params
         #' 
         #' @return A `RCBDANOVA` object.
-        initialize = function(type = c("permu", "asymp"), n_permu = 0L) {
-            private$.type <- match.arg(type)
-
-            super$initialize(alternative = "greater", n_permu = n_permu)
+        initialize = function(
+            type = c("permu", "asymp"),
+            n_permu = 0L
+        ) {
+            private$.init(
+                type = type, n_permu = n_permu
+            )
         }
     ),
     private = list(

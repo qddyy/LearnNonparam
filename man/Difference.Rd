@@ -41,6 +41,8 @@ Create a new \code{Difference} object.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
+\item{\code{method}}{a character string specifying whether to use the mean or the median.}
+
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 
 \item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}

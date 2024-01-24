@@ -22,18 +22,19 @@ JonckheereTerpstra <- R6Class(
         #' @return A `JonckheereTerpstra` object.
         initialize = function(
             type = c("permu", "asymp"),
-            alternative = c("two_sided", "less", "greater"), n_permu = 0L
+            alternative = c("two_sided", "less", "greater"),
+            n_permu = 0L
         ) {
-            private$.type <- match.arg(type)
-
-            super$initialize(alternative = match.arg(alternative), n_permu = n_permu)
+            private$.init(
+                type = type, alternative = alternative, n_permu = n_permu
+            )
         }
     ),
     private = list(
         .name = "Jonckheere-Terpstra Test",
 
         .define = function() {
-            k <- as.integer(get_last(names(private$.data)))
+            k <- as.integer(names(private$.data)[length(private$.data)])
             ij <- list(
                 i = unlist(lapply(
                     seq_len(k - 1), seq_len
@@ -44,7 +45,7 @@ JonckheereTerpstra <- R6Class(
                 where <- split(seq_along(group), group)
                 sum(unlist(.mapply(
                     FUN = function(i, j) {
-                        outer(data[where[[i]]], data[where[[j]]], "<")
+                        outer(data[where[[i]]], data[where[[j]]], `<`)
                     }, dots = ij, MoreArgs = NULL
                 ), recursive = FALSE, use.names = FALSE))
             }

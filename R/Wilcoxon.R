@@ -21,20 +21,36 @@ Wilcoxon <- R6Class(
         #' 
         #' @return A `Wilcoxon` object.
         initialize = function(
-            type = c("permu", "asymp", "exact"), correct = TRUE,
-            alternative = c("two_sided", "less", "greater"), n_permu = 0L, conf_level = 0.95
+            type = c("permu", "asymp", "exact"),
+            alternative = c("two_sided", "less", "greater"),
+            conf_level = 0.95, n_permu = 0L, correct = TRUE
         ) {
-            private$.type <- match.arg(type)
-            private$.correct <- correct
-
-            super$initialize(scoring = "rank", alternative = match.arg(alternative), n_permu = n_permu, conf_level = conf_level)
+            private$.init(
+                type = type, alternative = alternative,
+                conf_level = conf_level, n_permu = n_permu, correct = correct
+            )
         }
     ),
     private = list(
         .name = "Two Sample Wilcoxon Test",
         .param_name = "location shift",
 
+        .scoring = "rank",
+        .null_value = 0,
+
         .correct = NULL,
+
+        .init = function(correct, ...) {
+            super$.init(...)
+
+            if (!missing(correct)) {
+                if (length(correct) == 1 & is.logical(correct)) {
+                    private$.correct <- correct
+                } else {
+                    stop("'correct' must be a single logical value")
+                }
+            }
+        },
 
         .define = function() {
             private$.statistic_func <- function(x, y) sum(x)
@@ -49,6 +65,7 @@ Wilcoxon <- R6Class(
             ties <- tabulate(c(private$.data$x, private$.data$y))
             if (any(ties > 1)) {
                 private$.type <- "asymp"
+                warning("There are ties in data, changing 'type' to 'asymp'")
             }
 
             if (private$.type == "exact") {
@@ -76,7 +93,7 @@ Wilcoxon <- R6Class(
             x <- private$.raw_data[[1]]
             y <- private$.raw_data[[2]]
 
-            diff <- as.vector(outer(x, y, "-"))
+            diff <- sort(as.vector(outer(x, y, "-")))
 
             private$.estimate <- median(diff)
 
@@ -90,11 +107,23 @@ Wilcoxon <- R6Class(
             k_a <- round(mu - z * sqrt(sigma2))
             k_b <- round(mu + z * sqrt(sigma2)) + 1
 
-            diff_sorted <- sort(diff)
-
-            private$.ci <- if (k_a >= 1 & k_b <= length(diff)) {
-                c(diff_sorted[k_a], diff_sorted[k_b])
-            } else c(NA, NA)
+            private$.ci <- c(
+                if (k_a >= 1) diff[k_a] else -Inf,
+                if (k_b <= m * n) diff[k_b] else Inf
+            )
+        }
+    ),
+    active = list(
+        #' @template active_params
+        correct = function(value) {
+            if (missing(value)) {
+                private$.correct
+            } else {
+                private$.init(correct = value)
+                if (!is.null(private$.raw_data) & private$.type == "asymp") {
+                    private$.calculate_p()
+                }
+            }
         }
     )
 )

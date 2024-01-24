@@ -34,9 +34,9 @@ Create a new \code{MultiCompT} object.
 \if{html}{\out{<div class="r">}}\preformatted{MultiCompT$new(
   type = c("permu", "asymp"),
   method = c("bonferroni", "no_bonferroni"),
+  scoring = c("none", "rank", "vw", "expon"),
   conf_level = 0.95,
-  n_permu = 0L,
-  scoring = c("none", "rank", "vw", "expon")
+  n_permu = 0L
 )}\if{html}{\out{</div>}}
 }
 
@@ -45,11 +45,13 @@ Create a new \code{MultiCompT} object.
 \describe{
 \item{\code{type}}{a character string specifying the way to calculate the p-value.}
 
+\item{\code{method}}{a character string specifying whether to use bonferroni correction.}
+
+\item{\code{scoring}}{a character string specifying which scoring system to be used.}
+
 \item{\code{conf_level}}{a numeric value between zero and one giving the family-wise confidence level to use.}
 
 \item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
-
-\item{\code{scoring}}{a character string specifying which scoring system to be used.}
 }
 \if{html}{\out{</div>}}
 }

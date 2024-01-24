@@ -24,13 +24,15 @@ Friedman <- R6Class(
             type = c("permu", "asymp"),
             n_permu = 0L
         ) {
-            private$.type <- match.arg(type)
-
-            super$initialize(scoring = "rank", alternative = "greater", n_permu = n_permu)
+            private$.init(
+                type = type, n_permu = n_permu
+            )
         }
     ),
     private = list(
         .name = "Friedman Test",
+
+        .scoring = "rank",
 
         .define = function() {
             private$.statistic_func <- switch(private$.type,
@@ -40,6 +42,10 @@ Friedman <- R6Class(
                     sum((rowMeans(data) - (nrow(data) + 1) / 2)^2)
                 }
             )
+        },
+
+        .calculate_side = function() {
+            private$.side <- "r"
         },
 
         .calculate_p = function() {

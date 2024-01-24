@@ -1,6 +1,6 @@
 #' @title MultipleComparison Class
 #' 
-#' @description This class specializes `KSampleTest` for multiple comparisons. Note that it is not recommended to create objects of this class directly.
+#' @description Abstract class for multiple comparisons.
 #' 
 #' 
 #' @export
@@ -19,12 +19,10 @@ MultipleComparison <- R6Class(
         .group_ij = NULL,
         .differ = NULL,
 
-        .check = function() {},
-
         .preprocess = function(...) {
             super$.preprocess(...)
 
-            k <- as.integer(get_last(names(private$.data)))
+            k <- as.integer(names(private$.data)[length(private$.data)])
             private$.group_ij <- list(
                 i = rep.int(seq_len(k - 1), seq.int(k - 1, 1)),
                 j = unlist(lapply(
@@ -54,6 +52,10 @@ MultipleComparison <- R6Class(
             )
         },
 
+        .calculate_n_permu = function() {
+            ncol(private$.statistic_permu)
+        },
+
         .calculate_p_permu = function() {
             private$.p_value <- rowMeans(
                 abs(private$.statistic_permu) >= abs(private$.statistic)
@@ -72,8 +74,8 @@ MultipleComparison <- R6Class(
                 paste(
                     "type:",
                     if ((type <- private$.type) == "permu") {
-                        n <- as.numeric(ncol(private$.statistic_permu))
-                        paste0(type, "(", format(n, digits = digits), ")")
+                        n_permu <- as.numeric(private$.calculate_n_permu())
+                        paste0(type, "(", format(n_permu, digits = digits), ")")
                     } else type
                 ),
                 paste("method:", private$.method),
@@ -105,11 +107,11 @@ MultipleComparison <- R6Class(
         },
 
         .plot = function(...) {
-            n <- get_last(private$.group_ij$i)
+            n <- as.integer(names(private$.data)[length(private$.data)])
 
-            dots <- c(private$.group_ij, list(seq_len(n * (n + 1) / 2)))
+            dots <- c(private$.group_ij, list(seq_len(n * (n - 1) / 2)))
 
-            layout_matrix <- matrix(0, n, n)
+            layout_matrix <- matrix(0, n - 1, n - 1)
             .mapply(
                 FUN = function(i, j, k) {
                     layout_matrix[j - 1, i] <<- k
@@ -117,58 +119,57 @@ MultipleComparison <- R6Class(
             )
 
             defaut_par <- par(no.readonly = TRUE)
+            on.exit(par(defaut_par))
+
             par(oma = c(0, 0, 3, 0))
             layout(layout_matrix)
 
-            data_names <- names(private$.raw_data)
             .mapply(
-                FUN = function(i, j, k) {
-                    do_call(
-                        func = hist,
-                        fixed = list(
-                            x = private$.statistic_permu[k, ],
-                            plot = TRUE,
-                            xlab = "Statistic",
-                            main = paste(data_names[i], data_names[j], sep = " ~ ")
-                        ), ...
-                    )
-                    abline(v = private$.statistic[k], lty = "dashed")
+                FUN = {
+                    data_names <- names(private$.raw_data)
+                    function(i, j, k) {
+                        do_call(
+                            func = hist,
+                            default = list(border = "white"),
+                            fixed = list(
+                                x = private$.statistic_permu[k, ],
+                                plot = TRUE,
+                                xlab = "Statistic",
+                                main = paste(data_names[i], "~", data_names[j])
+                            ), ...
+                        )
+                        abline(v = private$.statistic[k], lty = "dashed")
+                    }
                 }, dots = dots, MoreArgs = NULL
             )
             mtext(
                 text = expression(bold("Permutation Distribution")),
                 side = 3, line = 0, outer = TRUE
             )
-
-            par(defaut_par)
         },
 
         .autoplot = function(...) {
             ggplot2::ggplot() +
                 do_call(
                     func = ggplot2::stat_bin,
-                    default = list(fill = "#68aaa1"),
+                    default = list(fill = "gray"),
                     fixed = list(
                         geom = "bar",
                         mapping = ggplot2::aes(x = .data$statistic),
-                        data = {
-                            n <- ncol(private$.statistic_permu)
-                            data.frame(
-                                i = rep.int(private$.group_ij$i, n),
-                                j = rep.int(private$.group_ij$j, n),
-                                statistic = as.vector(private$.statistic_permu)
-                            )
-                        }
+                        data = data.frame(
+                            i = rep.int(private$.group_ij$i, private$.n_permu),
+                            j = rep.int(private$.group_ij$j, private$.n_permu),
+                            statistic = as.vector(private$.statistic_permu)
+                        )
                     ), ...
                 ) +
                 ggplot2::geom_vline(
+                    mapping = ggplot2::aes(xintercept = .data$statistic),
                     data = data.frame(
                         i = private$.group_ij$i,
                         j = private$.group_ij$j,
                         statistic = private$.statistic
-                    ),
-                    mapping = ggplot2::aes(xintercept = .data$statistic),
-                    linetype = "dashed"
+                    ), linetype = "dashed"
                 ) +
                 ggplot2::facet_grid(
                     rows = ggplot2::vars(.data$j),
@@ -186,7 +187,9 @@ MultipleComparison <- R6Class(
                     x = "Statistic", y = "Frequency"
                 ) +
                 ggplot2::theme(
-                    plot.title = ggplot2::element_text(face = "bold", hjust = 0.5)
+                    plot.title = ggplot2::element_text(
+                        face = "bold", hjust = 0.5
+                    )
                 )
         }
     )

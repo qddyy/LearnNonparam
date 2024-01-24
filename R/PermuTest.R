@@ -1,6 +1,6 @@
 #' @title PermuTest Class
 #' 
-#' @description This is the abstract base class for permutation test objects. Note that it is not recommended to create objects of this class directly.
+#' @description Abstract class for permutation tests.
 #' 
 #' 
 #' @export
@@ -13,17 +13,8 @@ PermuTest <- R6Class(
     classname = "PermuTest",
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `PermuTest` object. Note that it is not recommended to create objects of this class directly.
-        #' 
-        #' @template init_params
-        #' 
-        #' @return A `PermuTest` object.
-        initialize = function(null_value = 0, alternative = c("two_sided", "less", "greater"), n_permu = 0L, conf_level = 0.95, scoring = c("none", "rank", "vw", "expon")) {
-            private$.n_permu <- n_permu
-            private$.scoring <- match.arg(scoring)
-            private$.null_value <- null_value
-            private$.alternative <- match.arg(alternative)
-            private$.conf_level <- conf_level
+        initialize = function(...) {
+            stop("Can't construct an object from abstract class")
         },
 
         #' @description Perform test on data.
@@ -33,7 +24,6 @@ PermuTest <- R6Class(
         #' @return The object itself (invisibly).
         test = function(...) {
             private$.raw_data <- get_data(match.call(), parent.frame())
-            private$.check()
             private$.calculate()
 
             invisible(self)
@@ -77,7 +67,7 @@ PermuTest <- R6Class(
         .type = "permu",
         .method = "default",
 
-        .scoring = NULL,
+        .scoring = "none",
 
         .n_permu = NULL,
 
@@ -85,21 +75,76 @@ PermuTest <- R6Class(
         .raw_data = NULL,
         .data = NULL,
 
+        .null_value = NULL,
+
         .statistic_func = NULL,
 
         .statistic = NULL,
         .statistic_permu = NULL,
 
+        .alternative = "two_sided",
         .trend = "+",
         .side = NULL,
 
-        .null_value = NULL,
-        .alternative = NULL,
         .p_value = NULL,
 
         .estimate = NULL,
         .ci = NULL,
         .conf_level = NULL,
+
+        .init = function(
+            type, method, scoring, n_permu,
+            null_value, alternative, conf_level
+        ) {
+            if (!missing(n_permu)) {
+                if (length(n_permu) == 1 & is.finite(n_permu) & n_permu >= 0) {
+                    private$.n_permu <- n_permu
+                } else {
+                    stop("'n_permu' must be a non-negative integer")
+                }
+            }
+
+            if (!missing(null_value)) {
+                if (length(null_value) == 1 & !is.na(null_value)) {
+                    private$.null_value <- null_value
+                } else {
+                    stop("'null_value' must be a single number")
+                }
+            }
+
+            if (!missing(conf_level)) {
+                if (
+                    length(conf_level) == 1 & is.finite(conf_level) &
+                    conf_level > 0 & conf_level < 1
+                ) {
+                    private$.conf_level <- conf_level
+                } else {
+                    stop("'conf_level' must be a single number between 0 and 1")
+                }
+            }
+
+            choices <- lapply(formals(self$initialize), eval)
+            if (!missing(type)) {
+                private$.type <- match_arg(
+                    arg = type, choices = choices$type
+                )
+            }
+            if (!missing(method)) {
+                private$.method <- match_arg(
+                    arg = method, choices = choices$method
+                )
+            }
+            if (!missing(scoring)) {
+                private$.scoring <- match_arg(
+                    arg = scoring, choices = choices$scoring
+                )
+            }
+            if (!missing(alternative)) {
+                private$.alternative <- match_arg(
+                    arg = alternative, choices = choices$alternative
+                )
+            }
+        },
 
         .calculate = function() {
             private$.preprocess()
@@ -121,9 +166,6 @@ PermuTest <- R6Class(
 
             private$.calculate_extra()
         },
-
-        # @Override
-        .check = function() {},
 
         # @Override
         .preprocess = function() {
@@ -163,6 +205,10 @@ PermuTest <- R6Class(
             # private$.statistic_permu <- ...
         },
 
+        .calculate_n_permu = function() {
+            length(private$.statistic_permu)
+        },
+
         .calculate_side = function() {
             private$.side <- switch(private$.trend,
                 "+" = switch(private$.alternative,
@@ -175,11 +221,11 @@ PermuTest <- R6Class(
         },
 
         .calculate_p_permu = function() {
-            private$.p_value <- switch(private$.side,
-                l = mean(private$.statistic_permu <= private$.statistic),
-                r = mean(private$.statistic_permu >= private$.statistic),
-                lr = mean(abs(private$.statistic_permu) >= abs(private$.statistic))
-            )
+            private$.p_value <- mean(switch(private$.side,
+                l = private$.statistic_permu <= private$.statistic,
+                r = private$.statistic_permu >= private$.statistic,
+                lr = abs(private$.statistic_permu) >= abs(private$.statistic)
+            ))
         },
 
         .print = function(digits) {
@@ -190,8 +236,8 @@ PermuTest <- R6Class(
                 paste(
                     "type:",
                     if ((type <- private$.type) == "permu") {
-                        n <- as.numeric(length(private$.statistic_permu))
-                        paste0(type, "(", format(n, digits = digits), ")")
+                        n_permu <- as.numeric(private$.calculate_n_permu())
+                        paste0(type, "(", format(n_permu, digits = digits), ")")
                     } else type
                 ),
                 paste("method:", private$.method),
@@ -206,7 +252,10 @@ PermuTest <- R6Class(
                 ),
                 {
                     p <- format.pval(private$.p_value, digits = digits)
-                    paste("p_value", if (!startsWith(p, "<")) paste("=", p) else p)
+                    paste(
+                        "p-value",
+                        if (!startsWith(p, "<")) paste("=", p) else p
+                    )
                 },
                 sep = ", "
             )
@@ -214,7 +263,10 @@ PermuTest <- R6Class(
 
             cat(
                 "alternative hypothesis:",
-                if (is.null(private$.param_name)) private$.alternative else {
+                if (
+                    is.null(private$.param_name) |
+                    is.null(private$.null_value)
+                ) private$.alternative else {
                     paste(
                         "true", private$.param_name, "is",
                         switch(private$.alternative,
@@ -234,10 +286,8 @@ PermuTest <- R6Class(
             if (!is.null(private$.ci)) {
                 cat(
                     paste0(
-                        format(private$.conf_level * 100, digits = digits), "%"
-                    ),
-                    "confidence interval:",
-                    paste0(
+                        format(private$.conf_level * 100, digits = digits), "%",
+                        " ", "confidence interval:", " ",
                         "(", format(private$.ci[1], digits = digits), ",",
                         " ", format(private$.ci[2], digits = digits), ")"
                     )
@@ -249,6 +299,7 @@ PermuTest <- R6Class(
         .plot = function(...) {
             do_call(
                 func = hist,
+                default = list(border = "white"),
                 fixed = list(
                     x = private$.statistic_permu,
                     plot = TRUE,
@@ -263,7 +314,7 @@ PermuTest <- R6Class(
             ggplot2::ggplot() +
                 do_call(
                     func = ggplot2::stat_bin,
-                    default = list(fill = "#68aaa1"),
+                    default = list(fill = "gray"),
                     fixed = list(
                         geom = "bar",
                         mapping = ggplot2::aes(x = .data$statistic),
@@ -271,27 +322,29 @@ PermuTest <- R6Class(
                     ), ...
                 ) +
                 ggplot2::geom_vline(
-                    xintercept = private$.statistic,
-                    linetype = "dashed"
+                    xintercept = private$.statistic, linetype = "dashed"
                 ) +
                 ggplot2::labs(
                     title = "Permutation Distribution",
-                    x = "Statistic", y = "Count"
+                    x = "Statistic", y = "Frequency"
                 ) +
                 ggplot2::theme(
-                    plot.title = ggplot2::element_text(face = "bold", hjust = 0.5)
+                    plot.title = ggplot2::element_text(
+                        face = "bold", hjust = 0.5
+                    )
                 )
         }
     ),
     active = list(
-        #' @field type The type of the test.
+        #' @field type The way to calculate the p-value.
         type = function(value) {
             if (missing(value)) {
                 private$.type
             } else {
-                private$.type <- value
-                private$.check()
-                private$.calculate()
+                private$.init(type = value)
+                if (!is.null(private$.raw_data)) {
+                    private$.calculate()
+                }
             }
         },
         #' @field method The method used.
@@ -299,9 +352,10 @@ PermuTest <- R6Class(
             if (missing(value)) {
                 private$.method
             } else {
-                private$.method <- value
-                private$.check()
-                private$.calculate()
+                private$.init(method = value)
+                if (!is.null(private$.raw_data)) {
+                    private$.calculate()
+                }
             }
         },
         #' @field scoring The scoring system used.
@@ -309,19 +363,21 @@ PermuTest <- R6Class(
             if (missing(value)) {
                 private$.scoring
             } else {
-                private$.scoring <- value
-                private$.check()
-                private$.calculate()
+                private$.init(scoring = value)
+                if (!is.null(private$.raw_data)) {
+                    private$.calculate()
+                }
             }
         },
-        #' @field null_value The value of the parameter in the null hypothesis.
+        #' @field null_value The true value of the parameter in the null hypothesis.
         null_value = function(value) {
             if (missing(value)) {
                 private$.null_value
             } else {
-                private$.null_value <- value
-                private$.check()
-                private$.calculate()
+                private$.init(null_value = value)
+                if (!is.null(private$.raw_data)) {
+                    private$.calculate()
+                }
             }
         },
         #' @field alternative The alternative hypothesis.
@@ -329,13 +385,14 @@ PermuTest <- R6Class(
             if (missing(value)) {
                 private$.alternative
             } else {
-                private$.alternative <- value
-                private$.check()
+                private$.init(alternative = value)
                 private$.calculate_side()
-                if (private$.type == "permu") {
-                    private$.calculate_p_permu()
-                } else {
-                    private$.calculate_p()
+                if (!is.null(private$.raw_data)) {
+                    if (private$.type == "permu") {
+                        private$.calculate_p_permu()
+                    } else {
+                        private$.calculate_p()
+                    }
                 }
             }
         },
@@ -344,9 +401,10 @@ PermuTest <- R6Class(
             if (missing(value)) {
                 private$.conf_level
             } else {
-                private$.conf_level <- value
-                private$.check()
-                private$.calculate_extra()
+                private$.init(conf_level = value)
+                if (!is.null(private$.raw_data)) {
+                    private$.calculate_extra()
+                }
             }
         },
         #' @field n_permu The number of permutations used.
@@ -354,9 +412,8 @@ PermuTest <- R6Class(
             if (missing(value)) {
                 private$.n_permu
             } else {
-                private$.n_permu <- value
-                private$.check()
-                if (private$.type == "permu") {
+                private$.init(n_permu = value)
+                if (!is.null(private$.raw_data) & private$.type == "permu") {
                     private$.calculate()
                 }
             }

@@ -16,39 +16,29 @@ SiegelTukey <- R6Class(
     public = list(
         #' @description Create a new `SiegelTukey` object.
         #' 
-        #' @param adjust_median a logical indicating whether the median difference between groups is levelled before the test is conducted. 
-        #' @param ... extra parameters passed to `Wilcoxon$new()`.
+        #' @template init_params
         #' 
         #' @return A `SiegelTukey` object.
         initialize = function(
-            adjust_median = FALSE,
-            ...
+            type = c("permu", "asymp", "exact"),
+            alternative = c("two_sided", "less", "greater"),
+            n_permu = 0L, correct = TRUE
         ) {
-            private$.adjust_median <- adjust_median
-
-            super$initialize(...)
-
-            private$.null_value <- 1
-            private$.scoring <- "siegel-tukey rank"
+            super$.init(
+                type = type, alternative = alternative,
+                n_permu = n_permu, correct = correct
+            )
         }
     ),
     private = list(
         .name = "Siegel-Tukey Test",
         .param_name = "ratio of scales",
 
+        .scoring = "Siegel-Tukey rank",
+        .null_value = 1,
         .trend = "-",
 
-        .adjust_median = NULL,
-
-        .calculate_extra = function() {},
-
         .calculate_score = function() {
-            if (private$.adjust_median) {
-                private$.data <- lapply(
-                    private$.data, function(x) x - median(x)
-                )
-            }
-
             c_xy <- c(private$.data$x, private$.data$y)
             N <- length(c_xy)
 
@@ -73,6 +63,8 @@ SiegelTukey <- R6Class(
 
             x_index <- seq_along(private$.data$x)
             private$.data <- list(x = st_rank[x_index], y = st_rank[-x_index])
-        }
+        },
+
+        .calculate_extra = function() {}
     )
 )

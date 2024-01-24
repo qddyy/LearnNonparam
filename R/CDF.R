@@ -7,7 +7,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom stats qnorm plot.stepfun
+#' @importFrom stats qnorm stepfun plot.stepfun
 
 
 CDF <- R6Class(
@@ -19,9 +19,11 @@ CDF <- R6Class(
         #' 
         #' @param conf_level a number specifying confidence level of the confidence bounds.
         #' 
-        #' @return A `CDF` object. 
-        initialize = function(conf_level = 0.95) {
-            super$initialize(conf_level = conf_level)
+        #' @return A `CDF` object.
+        initialize = function(
+            conf_level = 0.95
+        ) {
+            private$.init(conf_level = conf_level)
         },
 
         #' @description Plot the estimate and confidence bounds for population cdf of the data.
@@ -30,9 +32,13 @@ CDF <- R6Class(
         #' 
         #' @return The object itself (invisibly).
         plot = function(style = c("graphics", "ggplot2")) {
-            private$.type <- "permu"
-            super$plot(style = style)
-            private$.type <- "asymp"
+            if (!is.null(private$.raw_data)) {
+                if (match.arg(style) == "graphics") {
+                    private$.plot()
+                } else if (requireNamespace("ggplot2")) {
+                    print(private$.autoplot())
+                }
+            }
 
             invisible(self)
         }
@@ -44,67 +50,92 @@ CDF <- R6Class(
 
         .lims_for_plot = NULL,
 
+        .preprocess = function() {
+            super$.preprocess()
+
+            private$.data <- sort(private$.data)
+        },
+
         .calculate_extra = function() {
             n <- length(private$.data)
-            sorted <- sort(private$.data)
 
             F_n <- seq.int(0, n) / n
-            private$.estimate <- stepfun(sorted, F_n, right = TRUE)
+            private$.estimate <- stepfun(private$.data, F_n)
 
             A <- 1 / sqrt(n) * qnorm(1 - (1 - private$.conf_level) / 2)
             delta_n <- A * sqrt(F_n * (1 - F_n))
             private$.ci <- list(
-                lower = stepfun(sorted, F_n - delta_n, right = TRUE),
-                upper = stepfun(sorted, F_n + delta_n, right = TRUE)
+                lower = stepfun(private$.data, F_n - delta_n),
+                upper = stepfun(private$.data, F_n + delta_n)
             )
 
             private$.lims_for_plot <- list(
-                x = c(sorted[1], get_last(sorted)),
+                x = c(private$.data[1], private$.data[n]),
                 y = c(min(F_n - delta_n), max(F_n + delta_n))
             )
         },
 
         .print = function(...) {},
 
-        .plot = function(...) {
+        .plot = function() {
             plot.stepfun(
-                private$.estimate, lty = "solid",
+                private$.estimate,
+                lty = "solid", do.points = FALSE,
                 xlim = private$.lims_for_plot$x,
                 ylim = private$.lims_for_plot$y,
-                main = "Empirical CDF with Confidence Bounds",
-                xlab = expression(x), ylab = expression(F[n](x))
+                main = paste(
+                    "Empirical CDF with",
+                    paste0(private$.conf_level * 100, "%"),
+                    "Confidence Bounds"
+                ), xlab = expression(x), ylab = expression(F[n](x))
             )
-            plot.stepfun(private$.ci$lower, lty = "dashed", add = TRUE)
-            plot.stepfun(private$.ci$upper, lty = "dashed", add = TRUE)
+            plot.stepfun(
+                private$.ci$lower, lty = "dashed", do.points = FALSE, add = TRUE
+            )
+            plot.stepfun(
+                private$.ci$upper, lty = "dashed", do.points = FALSE, add = TRUE
+            )
         },
 
-        .autoplot = function(...) {
-            ggplot2::ggplot(
-                data = data.frame(
-                    x = private$.data,
-                    ecdf = private$.estimate(private$.data),
-                    lower = private$.ci$lower(private$.data),
-                    upper = private$.ci$upper(private$.data)
-                ), mapping = ggplot2::aes(x = .data$x)
-            ) +
+        .autoplot = function() {
+            ggplot2::ggplot() +
                 ggplot2::geom_step(
-                    mapping = ggplot2::aes(y = .data$ecdf), linetype = "solid"
+                    mapping = ggplot2::aes(x = .data$x, y = .data$ecdf),
+                    data = data.frame(
+                        x = c(private$.data[1], private$.data),
+                        ecdf = c(0, private$.estimate(private$.data))
+                    ), linetype = "solid"
                 ) +
-                ggplot2::geom_step(
-                    mapping = ggplot2::aes(y = .data$lower), linetype = "dashed"
+                ggplot2::geom_rect(
+                    mapping = ggplot2::aes(
+                        xmin = .data$xmin, xmax = .data$xmax,
+                        ymin = .data$ymin, ymax = .data$ymax
+                    ),
+                    data = {
+                        n <- length(private$.data)
+                        data.frame(
+                            xmin = private$.data[-n],
+                            xmax = private$.data[-1],
+                            ymin = private$.ci$lower(private$.data[-n]),
+                            ymax = private$.ci$upper(private$.data[-n])
+                        )
+                    }, alpha = 0.25
                 ) +
-                ggplot2::geom_step(
-                    mapping = ggplot2::aes(y = .data$upper), linetype = "dashed"
-                ) +
+                ggplot2::geom_hline(yintercept = c(0, 1), linetype = "dashed") +
                 ggplot2::lims(
                     x = private$.lims_for_plot$x, y = private$.lims_for_plot$y
                 ) +
                 ggplot2::labs(
-                    title = "Empirical CDF with Confidence Bounds",
-                    x = expression(x), y = expression(F[n](x))
+                    title = paste(
+                        "Empirical CDF with",
+                        paste0(private$.conf_level * 100, "%"),
+                        "Confidence Bounds"
+                    ), x = expression(x), y = expression(F[n](x))
                 ) +
                 ggplot2::theme(
-                    plot.title = ggplot2::element_text(face = "bold", hjust = 0.5)
+                    plot.title = ggplot2::element_text(
+                        face = "bold", hjust = 0.5
+                    )
                 )
         }
     )

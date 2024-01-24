@@ -1,0 +1,1 @@
+#' @field correct Whether to apply continuity correction.

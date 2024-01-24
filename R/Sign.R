@@ -21,19 +21,32 @@ Sign <- R6Class(
         #' 
         #' @return A `Sign` object.
         initialize = function(
-            type = c("permu", "asymp", "exact"), correct = TRUE,
-            alternative = c("two_sided", "less", "greater"), n_permu = 0L
+            type = c("permu", "asymp", "exact"),
+            alternative = c("two_sided", "less", "greater"),
+            n_permu = 0L, correct = TRUE
         ) {
-            private$.correct <- correct
-            private$.type <- match.arg(type)
-
-            super$initialize(alternative = match.arg(alternative), n_permu = n_permu)
+            private$.init(
+                type = type, alternative = alternative,
+                n_permu = n_permu, correct = correct
+            )
         }
     ),
     private = list(
         .name = "Sign Test",
 
         .correct = NULL,
+
+        .init = function(correct, ...) {
+            super$.init(...)
+
+            if (!missing(correct)) {
+                if (length(correct) == 1 & is.logical(correct)) {
+                    private$.correct <- correct
+                } else {
+                    stop("'correct' must be a single logical value")
+                }
+            }
+        },
 
         .define = function() {
             diff_positive <- (private$.data$x > private$.data$y)
@@ -46,19 +59,32 @@ Sign <- R6Class(
             n <- nrow(private$.data)
 
             if (private$.type == "exact") {
-                private$.p_value <- get_p_binom(private$.statistic, n, 0.5, private$.side)
+                private$.p_value <- get_p_binom(
+                    private$.statistic, n, 0.5, private$.side
+                )
             }
 
             if (private$.type == "asymp") {
                 z <- private$.statistic - n / 2
                 correction <- if (private$.correct) {
-                    switch(private$.alternative,
-                        two_sided = sign(z) * 0.5, greater = 0.5, less = -0.5
-                    )
+                    switch(private$.side, lr = sign(z) * 0.5, r = 0.5, l = -0.5)
                 } else 0
                 z <- (z - correction) / sqrt(n / 4)
 
                 private$.p_value <- get_p_continous(z, "norm", private$.side)
+            }
+        }
+    ),
+    active = list(
+        #' @template active_params
+        correct = function(value) {
+            if (missing(value)) {
+                private$.correct
+            } else {
+                private$.init(correct = value)
+                if (!is.null(private$.raw_data) & private$.type == "asymp") {
+                    private$.calculate_p()
+                }
             }
         }
     )

@@ -19,8 +19,10 @@ KolmogorovSmirnov <- R6Class(
         #' @template init_params
         #' 
         #' @return A `KolmogorovSmirnov` object.
-        initialize = function(n_permu = 0L) {
-            super$initialize(alternative = "greater", n_permu = n_permu)
+        initialize = function(
+            n_permu = 0L
+        ) {
+            private$.init(n_permu = n_permu)
         }
     ),
     private = list(
@@ -35,6 +37,10 @@ KolmogorovSmirnov <- R6Class(
             private$.statistic_func <- function(x, y) {
                 max(abs(cumsum(`[<-`(leq_m, order(c(x, y)) > m, geq_m))))
             }
+        },
+
+        .calculate_side = function() {
+            private$.side <- "r"
         }
     )
 )

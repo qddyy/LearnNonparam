@@ -32,20 +32,20 @@ Performs two sample score sum test on data vectors, which is almost the same as 
 Create a new \code{ScoreSum} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{ScoreSum$new(
+  scoring = c("rank", "vw", "expon"),
   alternative = c("two_sided", "less", "greater"),
-  n_permu = 0L,
-  scoring = c("rank", "vw", "expon")
+  n_permu = 0L
 )}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
+\item{\code{scoring}}{a character string specifying which scoring system to be used.}
+
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 
 \item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
-
-\item{\code{scoring}}{a character string specifying which scoring system to be used.}
 }
 \if{html}{\out{</div>}}
 }

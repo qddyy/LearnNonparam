@@ -44,7 +44,7 @@ Create a new \code{Correlation} object.
 \describe{
 \item{\code{type}}{a character string specifying the way to calculate the p-value.}
 
-\item{\code{method}}{a character string indicating which correlation coefficient is to be computed.}
+\item{\code{method}}{a character string specifying the correlation coefficient to be used.}
 
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 

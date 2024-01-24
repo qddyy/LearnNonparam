@@ -31,15 +31,24 @@ Performs two sample Siegel-Tukey test on data vectors.
 \subsection{Method \code{new()}}{
 Create a new \code{SiegelTukey} object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{SiegelTukey$new(adjust_median = FALSE, ...)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{SiegelTukey$new(
+  type = c("permu", "asymp", "exact"),
+  alternative = c("two_sided", "less", "greater"),
+  n_permu = 0L,
+  correct = TRUE
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{adjust_median}}{a logical indicating whether the median difference between groups is levelled before the test is conducted.}
+\item{\code{type}}{a character string specifying the way to calculate the p-value.}
 
-\item{\code{...}}{extra parameters passed to \code{Wilcoxon$new()}.}
+\item{\code{alternative}}{a character string specifying the alternative hypothesis.}
+
+\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
+
+\item{\code{correct}}{a logical indicating whether to apply continuity correction in the normal approximation for the p-value.}
 }
 \if{html}{\out{</div>}}
 }

@@ -22,14 +22,16 @@ Quantile <- R6Class(
         #' 
         #' @return A `Quantile` object.
         initialize = function(
-            type = c("asymp", "exact"), correct = TRUE, prob = 0.5,
-            null_value = 0, alternative = c("two_sided", "less", "greater"), conf_level = 0.95
+            type = c("asymp", "exact"), 
+            alternative = c("two_sided", "less", "greater"),
+            null_value = 0, conf_level = 0.95,
+            prob = 0.5, correct = TRUE
         ) {
-            private$.prob <- prob
-            private$.correct <- correct
-            private$.type <- match.arg(type)
-
-            super$initialize(null_value = null_value, alternative = match.arg(alternative), conf_level = conf_level)
+            private$.init(
+                type = type, alternative = alternative,
+                null_value = null_value, conf_level = conf_level,
+                prob = prob, correct = correct
+            )
         }
     ),
     private = list(
@@ -37,6 +39,33 @@ Quantile <- R6Class(
 
         .prob = NULL,
         .correct = NULL,
+
+        .init = function(prob, correct, ...) {
+            super$.init(...)
+
+            if (!missing(prob)) {
+                if (
+                    length(prob) == 1 & is.finite(prob) &
+                    prob >= 0 & prob <= 1
+                ) {
+                    private$.prob <- prob
+                } else {
+                    stop("'prob' must be a single number between 0 and 1")
+                }
+            }
+
+            if (!missing(correct)) {
+                if (length(correct) == 1 & is.logical(correct)) {
+                    private$.correct <- correct
+                } else {
+                    stop("'correct' must be a single logical value")
+                }
+            }
+        },
+
+        .define = function() {
+            private$.param_name <- paste(private$.prob, "quantile")
+        },
 
         .calculate_statistic = function() {
             private$.statistic <- sum(private$.data > private$.null_value)
@@ -55,9 +84,7 @@ Quantile <- R6Class(
             if (private$.type == "asymp") {
                 z <- private$.statistic - n * p
                 correction <- if (private$.correct) {
-                    switch(private$.alternative,
-                        two_sided = sign(z) * 0.5, greater = 0.5, less = -0.5
-                    )
+                    switch(private$.side, lr = sign(z) * 0.5, r = 0.5, l = -0.5)
                 } else 0
                 z <- (z - correction) / sqrt(n * p * (1 - p))
 
@@ -76,18 +103,47 @@ Quantile <- R6Class(
 
             y <- sort(private$.data)
 
-            private$.ci <- if (a >= 1 & b <= n) c(y[a], y[b]) else c(NA, NA)
+            private$.ci <- c(
+                if (a >= 1) y[a] else -Inf,
+                if (b <= n) y[b] else Inf
+            )
         }
     ),
     active = list(
+        #' @field null_value The true quantile in the null hypothesis.
+        null_value = function(value) {
+            if (missing(value)) {
+                private$.null_value
+            } else {
+                private$.init(null_value = value)
+                if (!is.null(private$.raw_data)) {
+                    private$.calculate_statistic()
+                    private$.calculate_p()
+                }
+            }
+        },
         #' @field prob The probability.
         prob = function(value) {
             if (missing(value)) {
                 private$.prob
             } else {
-                private$.prob <- value
-                private$.check()
-                private$.calculate()
+                private$.init(prob = value)
+                if (!is.null(private$.raw_data)) {
+                    private$.define()
+                    private$.calculate_p()
+                    private$.calculate_extra()
+                }
+            }
+        },
+        #' @template active_params
+        correct = function(value) {
+            if (missing(value)) {
+                private$.correct
+            } else {
+                private$.init(correct = value)
+                if (!is.null(private$.raw_data) & private$.type == "asymp") {
+                    private$.calculate_p()
+                }
             }
         }
     )

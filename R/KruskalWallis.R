@@ -23,11 +23,12 @@ KruskalWallis <- R6Class(
         #' @return A `KruskalWallis` object.
         initialize = function(
             type = c("permu", "asymp"),
-            n_permu = 0L, scoring = c("rank", "vw", "expon")
+            scoring = c("rank", "vw", "expon"),
+            n_permu = 0L
         ) {
-            private$.type <- match.arg(type)
-
-            super$initialize(scoring = match.arg(scoring), alternative = "greater", n_permu = n_permu)
+            private$.init(
+                type = type, scoring = scoring, n_permu = n_permu
+            )
         }
     ),
     private = list(
@@ -45,8 +46,12 @@ KruskalWallis <- R6Class(
             }
         },
 
+        .calculate_side = function() {
+            private$.side <- "r"
+        },
+
         .calculate_p = function() {
-            k <- as.integer(get_last(names(private$.data)))
+            k <- as.integer(names(private$.data)[length(private$.data)])
 
             private$.p_value <- get_p_continous(
                 private$.statistic, "chisq", "r", df = k - 1

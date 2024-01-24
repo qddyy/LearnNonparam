@@ -19,8 +19,14 @@ ScoreSum <- R6Class(
         #' @template init_params
         #' 
         #' @return A `ScoreSum` object.
-        initialize = function(alternative = c("two_sided", "less", "greater"), n_permu = 0L, scoring = c("rank", "vw", "expon")) {
-            super$initialize(scoring = match.arg(scoring), alternative = match.arg(alternative), n_permu = n_permu)
+        initialize = function(
+            scoring = c("rank", "vw", "expon"),
+            alternative = c("two_sided", "less", "greater"),
+            n_permu = 0L
+        ) {
+            private$.init(
+                scoring = scoring, alternative = alternative, n_permu = n_permu
+            )
         }
     ),
     private = list(

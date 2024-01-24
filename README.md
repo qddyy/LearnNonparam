@@ -28,10 +28,6 @@ pak::pkg_install("qddyy/LearnNonparam")
 
 ## Usage
 
-``` r
-set.seed(0)
-```
-
 - Create a test object (for example, a `Wilcoxon` object)
 
   ``` r
@@ -55,17 +51,17 @@ set.seed(0)
 
   ``` r
   t$p_value
-  #> [1] 0.000326
+  #> [1] 0.008967
 
   t$print(digits = 2)
   #> 
   #>       Two Sample Wilcoxon Test 
   #> 
   #> scoring: rank    type: permu(1e+06)    method: default
-  #> statistic = 539, p_value = 0.00033
+  #> statistic = 497, p-value = 0.009
   #> alternative hypothesis: true location shift is not equal to 0
-  #> estimate: 1.3
-  #> 95% confidence interval: (0.65, 1.9)
+  #> estimate: 0.8
+  #> 95% confidence interval: (0.13, 1.4)
 
   t$plot(style = "ggplot2", binwidth = 1)
   #> Loading required namespace: ggplot2
@@ -79,7 +75,7 @@ set.seed(0)
   t$type <- "asymp"
 
   t$p_value
-  #> [1] 0.0005090729
+  #> [1] 0.01929238
   ```
 
 All available tests:

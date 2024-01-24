@@ -17,22 +17,28 @@ Difference <- R6Class(
         #' @description Create a new `Difference` object.
         #' 
         #' @template init_params
+        #' @param method a character string specifying whether to use the mean or the median.
         #' 
         #' @return A `Difference` object.
         initialize = function(
             method = c("mean", "median"),
-            alternative = c("two_sided", "less", "greater"), n_permu = 0L
+            alternative = c("two_sided", "less", "greater"),
+            n_permu = 0L
         ) {
-            private$.method <- match.arg(method)
-
-            super$initialize(alternative = match.arg(alternative), n_permu = n_permu)
+            private$.init(
+                method = method, alternative = alternative, n_permu = n_permu
+            )
         }
     ),
     private = list(
         .name = "Two Sample Test Based on Mean or Median",
 
+        .null_value = 0,
+
         .define = function() {
-            private$.param_name <- paste("difference", "in", paste0(private$.method, "s"))
+            private$.param_name <- paste0(
+                "difference in", " ", private$.method, "s"
+            )
 
             private$.statistic_func <- switch(private$.method,
                 mean = function(x, y) mean(x) - mean(y),

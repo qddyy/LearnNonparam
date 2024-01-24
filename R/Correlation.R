@@ -18,21 +18,25 @@ Correlation <- R6Class(
         #' @description Create a new `Correlation` object.
         #' 
         #' @template init_params
-        #' @param method a character string indicating which correlation coefficient is to be computed.
+        #' @param method a character string specifying the correlation coefficient to be used.
         #' 
         #' @return A `Correlation` object.
         initialize = function(
-            type = c("permu", "asymp"), method = c("pearson", "kendall", "spearman"),
-            alternative = c("two_sided", "less", "greater"), n_permu = 0L
+            type = c("permu", "asymp"),
+            method = c("pearson", "kendall", "spearman"),
+            alternative = c("two_sided", "less", "greater"),
+            n_permu = 0L
         ) {
-            private$.type <- match.arg(type)
-            private$.method <- match.arg(method)
-
-            super$initialize(alternative = match.arg(alternative), n_permu = n_permu)
+            private$.init(
+                type = type, method = method,
+                alternative = alternative, n_permu = n_permu
+            )
         }
     ),
     private = list(
         .name = "Two Sample Test Based on Correlation Coefficient",
+
+        .null_value = 0,
 
         .define = function() {
             private$.param_name <- switch(private$.method,
@@ -95,7 +99,9 @@ Correlation <- R6Class(
             } else {
                 t <- r * sqrt((n - 2) / (1 - r^2))
 
-                private$.p_value <- get_p_continous(t, "t", private$.side, df = n - 2)
+                private$.p_value <- get_p_continous(
+                    t, "t", private$.side, df = n - 2
+                )
             }
         }
     )

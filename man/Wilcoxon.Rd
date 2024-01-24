@@ -10,6 +10,13 @@ Performs two sample Wilcoxon test, which is equivalant to the Mann-Whitney test,
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{Wilcoxon}
 }
+\section{Active bindings}{
+\if{html}{\out{<div class="r6-active-bindings">}}
+\describe{
+\item{\code{correct}}{Whether to apply continuity correction.}
+}
+\if{html}{\out{</div>}}
+}
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
@@ -33,10 +40,10 @@ Create a new \code{Wilcoxon} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Wilcoxon$new(
   type = c("permu", "asymp", "exact"),
-  correct = TRUE,
   alternative = c("two_sided", "less", "greater"),
+  conf_level = 0.95,
   n_permu = 0L,
-  conf_level = 0.95
+  correct = TRUE
 )}\if{html}{\out{</div>}}
 }
 
@@ -45,13 +52,13 @@ Create a new \code{Wilcoxon} object.
 \describe{
 \item{\code{type}}{a character string specifying the way to calculate the p-value.}
 
-\item{\code{correct}}{a logical indicating whether to apply continuity correction in the normal approximation for the p-value.}
-
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
+
+\item{\code{conf_level}}{a number specifying confidence level of the interval.}
 
 \item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
 
-\item{\code{conf_level}}{a number specifying confidence level of the interval.}
+\item{\code{correct}}{a logical indicating whether to apply continuity correction in the normal approximation for the p-value.}
 }
 \if{html}{\out{</div>}}
 }
