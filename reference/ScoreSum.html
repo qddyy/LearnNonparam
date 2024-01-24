@@ -73,24 +73,24 @@
 <p>Create a new <code>ScoreSum</code> object.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/ScoreSum.html">ScoreSum</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
+<span>  scoring <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rank"</span>, <span class="st">"vw"</span>, <span class="st">"expon"</span><span class="op">)</span>,</span>
 <span>  alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two_sided"</span>, <span class="st">"less"</span>, <span class="st">"greater"</span><span class="op">)</span>,</span>
-<span>  n_permu <span class="op">=</span> <span class="fl">0L</span>,</span>
-<span>  scoring <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"rank"</span>, <span class="st">"vw"</span>, <span class="st">"expon"</span><span class="op">)</span></span>
+<span>  n_permu <span class="op">=</span> <span class="fl">0L</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>alternative</code></dt>
+<p></p><div class="arguments"><dl><dt><code>scoring</code></dt>
+<dd><p>a character string specifying which scoring system to be used.</p></dd>
+
+
+<dt><code>alternative</code></dt>
 <dd><p>a character string specifying the alternative hypothesis.</p></dd>
 
 
 <dt><code>n_permu</code></dt>
 <dd><p>an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.</p></dd>
-
-
-<dt><code>scoring</code></dt>
-<dd><p>a character string specifying which scoring system to be used.</p></dd>
 
 
 </dl><p></p></div>

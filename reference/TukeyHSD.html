@@ -74,9 +74,9 @@
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/TukeyHSD.html">TukeyHSD</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
 <span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"permu"</span>, <span class="st">"asymp"</span><span class="op">)</span>,</span>
+<span>  scoring <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"none"</span>, <span class="st">"rank"</span>, <span class="st">"vw"</span>, <span class="st">"expon"</span><span class="op">)</span>,</span>
 <span>  conf_level <span class="op">=</span> <span class="fl">0.95</span>,</span>
-<span>  n_permu <span class="op">=</span> <span class="fl">0L</span>,</span>
-<span>  scoring <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"none"</span>, <span class="st">"rank"</span>, <span class="st">"vw"</span>, <span class="st">"expon"</span><span class="op">)</span></span>
+<span>  n_permu <span class="op">=</span> <span class="fl">0L</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -86,16 +86,16 @@
 <dd><p>a character string specifying the way to calculate the p-value.</p></dd>
 
 
+<dt><code>scoring</code></dt>
+<dd><p>a character string specifying which scoring system to be used.</p></dd>
+
+
 <dt><code>conf_level</code></dt>
 <dd><p>a numeric value between zero and one giving the family-wise confidence level to use.</p></dd>
 
 
 <dt><code>n_permu</code></dt>
 <dd><p>an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.</p></dd>
-
-
-<dt><code>scoring</code></dt>
-<dd><p>a character string specifying which scoring system to be used.</p></dd>
 
 
 </dl><p></p></div>

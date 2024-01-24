@@ -58,6 +58,14 @@
     <h2>Super classes</h2>
     <p><code><a href="PermuTest.html">LearnNonparam::PermuTest</a></code> -&gt; <code><a href="TwoSampleTest.html">LearnNonparam::TwoSampleTest</a></code> -&gt; <code><a href="TwoSamplePairedTest.html">LearnNonparam::TwoSamplePairedTest</a></code> -&gt; <code>PairedDifference</code></p>
     </div>
+    <div id="active-bindings">
+    <h2>Active bindings</h2>
+    <p></p><div class="r6-active-bindings"><dl><dt><code>correct</code></dt>
+<dd><p>Whether to apply continuity correction.</p></dd>
+
+
+</dl><p></p></div>
+    </div>
     <div id="methods">
     <h2>Methods</h2>
     
@@ -75,10 +83,10 @@
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/PairedDifference.html">PairedDifference</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
 <span>  type <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"permu"</span>, <span class="st">"asymp"</span><span class="op">)</span>,</span>
 <span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"with_zeros"</span>, <span class="st">"without_zeros"</span><span class="op">)</span>,</span>
-<span>  correct <span class="op">=</span> <span class="cn">TRUE</span>,</span>
+<span>  scoring <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"none"</span>, <span class="st">"rank"</span>, <span class="st">"vw"</span>, <span class="st">"expon"</span><span class="op">)</span>,</span>
 <span>  alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two_sided"</span>, <span class="st">"less"</span>, <span class="st">"greater"</span><span class="op">)</span>,</span>
 <span>  n_permu <span class="op">=</span> <span class="fl">0L</span>,</span>
-<span>  scoring <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"none"</span>, <span class="st">"rank"</span>, <span class="st">"vw"</span>, <span class="st">"expon"</span><span class="op">)</span></span>
+<span>  correct <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
@@ -92,8 +100,8 @@
 <dd><p>a character string specifying the method of ranking data in computing adjusted signed ranks for tied data, must be one of <code>"with_zeros"</code> (default) or <code>"ignore"</code>. Note that the data will be modified when this parameter is set to <code>"ignore"</code>.</p></dd>
 
 
-<dt><code>correct</code></dt>
-<dd><p>a logical indicating whether to apply continuity correction in the normal approximation for the p-value when <code>scoring</code> is set to <code>"rank"</code>.</p></dd>
+<dt><code>scoring</code></dt>
+<dd><p>a character string specifying which scoring system to be used on the absolute differences.</p></dd>
 
 
 <dt><code>alternative</code></dt>
@@ -104,8 +112,8 @@
 <dd><p>an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.</p></dd>
 
 
-<dt><code>scoring</code></dt>
-<dd><p>a character string specifying which scoring system to be used on the absolute differences.</p></dd>
+<dt><code>correct</code></dt>
+<dd><p>a logical indicating whether to apply continuity correction in the normal approximation for the p-value when <code>scoring</code> is set to <code>"rank"</code>.</p></dd>
 
 
 </dl><p></p></div>
