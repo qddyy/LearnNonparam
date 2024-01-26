@@ -421,12 +421,12 @@
 <span><span class="co">#&gt; family-wise confidence level: 95%</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;                           statistic     p_value  </span></span>
-<span><span class="co">#&gt; location_1 ~ location_2  0.02737145 0.002603664 *</span></span>
-<span><span class="co">#&gt; location_1 ~ location_3 -1.77914406 0.002603664 *</span></span>
-<span><span class="co">#&gt; location_1 ~ location_4 -3.41048230 0.002603664 *</span></span>
-<span><span class="co">#&gt; location_2 ~ location_3 -1.80651550 0.002603664 *</span></span>
+<span><span class="co">#&gt; location_1 ~ location_2  0.02737145 0.978434752  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_3 -1.77914406 0.090419680  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_4 -3.41048230 0.002773484 *</span></span>
+<span><span class="co">#&gt; location_2 ~ location_3 -1.80651550 0.085909110  </span></span>
 <span><span class="co">#&gt; location_2 ~ location_4 -3.43785375 0.002603664 *</span></span>
-<span><span class="co">#&gt; location_3 ~ location_4 -1.63133824 0.002603664 *</span></span>
+<span><span class="co">#&gt; location_3 ~ location_4 -1.63133824 0.118466249</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">scoring</span> <span class="op">&lt;-</span> <span class="st">"rank"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
@@ -438,12 +438,12 @@
 <span><span class="co">#&gt; family-wise confidence level: 95%</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;                          statistic     p_value  </span></span>
-<span><span class="co">#&gt; location_1 ~ location_2  0.1224745 0.005501725 *</span></span>
-<span><span class="co">#&gt; location_1 ~ location_3 -1.3880442 0.005501725 *</span></span>
-<span><span class="co">#&gt; location_1 ~ location_4 -2.6536139 0.005501725 *</span></span>
-<span><span class="co">#&gt; location_2 ~ location_3 -1.5105187 0.005501725 *</span></span>
+<span><span class="co">#&gt; location_1 ~ location_2  0.1224745 0.902523250  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_3 -1.3880442 0.165123590  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_4 -2.6536139 0.007963489 *</span></span>
+<span><span class="co">#&gt; location_2 ~ location_3 -1.5105187 0.130911128  </span></span>
 <span><span class="co">#&gt; location_2 ~ location_4 -2.7760884 0.005501725 *</span></span>
-<span><span class="co">#&gt; location_3 ~ location_4 -1.2655697 0.005501725 *</span></span></code></pre></div>
+<span><span class="co">#&gt; location_3 ~ location_4 -1.2655697 0.205667180</span></span></code></pre></div>
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># See ?TukeyHSD or ?multicomp.tukey</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
