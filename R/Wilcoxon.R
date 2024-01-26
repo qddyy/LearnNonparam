@@ -25,10 +25,11 @@ Wilcoxon <- R6Class(
             alternative = c("two_sided", "less", "greater"),
             conf_level = 0.95, n_permu = 0L, correct = TRUE
         ) {
-            private$.init(
-                type = type, alternative = alternative,
-                conf_level = conf_level, n_permu = n_permu, correct = correct
-            )
+            self$type <- type
+            self$alternative <- alternative
+            self$conf_level <- conf_level
+            self$n_permu <- n_permu
+            self$correct <- correct
         }
     ),
     private = list(
@@ -39,18 +40,6 @@ Wilcoxon <- R6Class(
         .null_value = 0,
 
         .correct = NULL,
-
-        .init = function(correct, ...) {
-            super$.init(...)
-
-            if (!missing(correct)) {
-                if (length(correct) == 1 & is.logical(correct)) {
-                    private$.correct <- correct
-                } else {
-                    stop("'correct' must be a single logical value")
-                }
-            }
-        },
 
         .define = function() {
             private$.statistic_func <- function(x, y) sum(x)
@@ -64,8 +53,8 @@ Wilcoxon <- R6Class(
 
             ties <- tabulate(c(private$.data$x, private$.data$y))
             if (any(ties > 1)) {
+                warn_without_call("There exist ties, setting 'type' to 'asymp'")
                 private$.type <- "asymp"
-                warning("There are ties in data, changing 'type' to 'asymp'")
             }
 
             if (private$.type == "exact") {
@@ -118,11 +107,13 @@ Wilcoxon <- R6Class(
         correct = function(value) {
             if (missing(value)) {
                 private$.correct
-            } else {
-                private$.init(correct = value)
+            } else if (length(value) == 1 & is.logical(value)) {
+                private$.correct <- value
                 if (!is.null(private$.raw_data) & private$.type == "asymp") {
                     private$.calculate_p()
                 }
+            } else {
+                stop_without_call("'correct' must be a single logical value")
             }
         }
     )

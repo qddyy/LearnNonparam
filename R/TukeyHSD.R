@@ -27,20 +27,17 @@ TukeyHSD <- R6Class(
             scoring = c("none", "rank", "vw", "expon"),
             conf_level = 0.95, n_permu = 0L
         ) {
-            private$.init(
-                type = type, scoring = scoring,
-                conf_level = conf_level, n_permu = n_permu
-            )
+            self$type <- type
+            self$scoring <- scoring
+            self$conf_level <- conf_level
+            self$n_permu <- n_permu
         }
     ),
     private = list(
         .name = "Tukey's HSD",
 
         .define = function() {
-            lengths <- vapply(
-                X = split(private$.data, names(private$.data)),
-                FUN = length, FUN.VALUE = integer(1), USE.NAMES = FALSE
-            )
+            lengths <- lengths(split(private$.data, names(private$.data)))
 
             if (private$.scoring == "none") {
                 N <- length(private$.data)
@@ -76,8 +73,9 @@ TukeyHSD <- R6Class(
         },
 
         .calculate_p_permu = function() {
-            private$.p_value <- rowMeans(
-                outer(private$.statistic, private$.statistic_permu, `<=`)
+            private$.p_value <- .rowMeans(
+                outer(private$.statistic, private$.statistic_permu, `<=`),
+                length(private$.statistic), length(private$.statistic_permu)
             )
         },
 

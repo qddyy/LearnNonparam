@@ -14,13 +14,11 @@ MultipleComparison <- R6Class(
     inherit = KSampleTest,
     cloneable = FALSE,
     private = list(
-        .name = "Multiple Comparison",
-
         .group_ij = NULL,
         .differ = NULL,
 
-        .preprocess = function(...) {
-            super$.preprocess(...)
+        .preprocess = function() {
+            super$.preprocess()
 
             k <- as.integer(names(private$.data)[length(private$.data)])
             private$.group_ij <- list(
@@ -57,8 +55,9 @@ MultipleComparison <- R6Class(
         },
 
         .calculate_p_permu = function() {
-            private$.p_value <- rowMeans(
-                abs(private$.statistic_permu) >= abs(private$.statistic)
+            private$.p_value <- .rowMeans(
+                abs(private$.statistic_permu) >= abs(private$.statistic),
+                nrow(private$.statistic_permu), ncol(private$.statistic_permu)
             )
         },
 

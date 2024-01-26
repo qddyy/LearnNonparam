@@ -18,7 +18,6 @@ KruskalWallis <- R6Class(
         #' @description Create a new `KruskalWallis` object.
         #' 
         #' @template init_params
-        #' @param type a character string specifying the way to calculate p-values, must be one of `"permu"` (default) or `"asymp"`.
         #' 
         #' @return A `KruskalWallis` object.
         initialize = function(
@@ -26,9 +25,9 @@ KruskalWallis <- R6Class(
             scoring = c("rank", "vw", "expon"),
             n_permu = 0L
         ) {
-            private$.init(
-                type = type, scoring = scoring, n_permu = n_permu
-            )
+            self$type <- type
+            self$scoring <- scoring
+            self$n_permu <- n_permu
         }
     ),
     private = list(

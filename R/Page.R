@@ -12,7 +12,7 @@
 
 Page <- R6Class(
     classname = "Page",
-    inherit = RCBD,
+    inherit = RCBDTest,
     cloneable = FALSE,
     public = list(
         #' @description Create a new `Page` object.
@@ -25,9 +25,9 @@ Page <- R6Class(
             alternative = c("two_sided", "less", "greater"),
             n_permu = 0L
         ) {
-            private$.init(
-                type = type, alternative = alternative, n_permu = n_permu
-            )
+            self$type <- type
+            self$alternative <- alternative
+            self$n_permu <- n_permu
         }
     ),
     private = list(
@@ -36,8 +36,12 @@ Page <- R6Class(
         .scoring = "rank",
 
         .define = function() {
+            m <- nrow(private$.data)
+            n <- ncol(private$.data)
             seq_row <- seq_len(nrow(private$.data))
-            private$.statistic_func <- function(data) sum(seq_row * rowSums(data))
+            private$.statistic_func <- function(data) {
+                sum(seq_row * .rowSums(data, m, n))
+            }
         },
 
         .calculate_p = function() {

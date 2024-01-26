@@ -4,7 +4,7 @@
 \alias{TwoSampleTest}
 \title{TwoSampleTest Class}
 \description{
-Abstract class for two sample permutation tests.
+Abstract class for two sample tests.
 }
 \section{Super class}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{TwoSampleTest}

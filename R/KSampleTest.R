@@ -13,13 +13,18 @@ KSampleTest <- R6Class(
     inherit = PermuTest,
     cloneable = FALSE,
     private = list(
-        .name = "K Sample Permutation Test",
-
         .preprocess = function() {
-            data <- private$.raw_data
-            private$.data <- `names<-`(
-                unlist(data, recursive = FALSE, use.names = FALSE),
-                rep.int(seq_along(data), vapply(data, length, integer(1)))
+            if (length(private$.raw_data) < 3) {
+                stop_without_call("Must provide at least three samples")
+            }
+
+            private$.data <- unlist(
+                private$.raw_data,
+                recursive = FALSE, use.names = FALSE
+            )
+            names(private$.data) <- rep.int(
+                seq_along(private$.raw_data),
+                lengths(private$.raw_data, use.names = FALSE)
             )
         },
 

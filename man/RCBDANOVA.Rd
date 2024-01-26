@@ -8,7 +8,7 @@
 Performs F-statistic based permutation test on data for a randomized complete block design.
 }
 \section{Super classes}{
-\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:RCBD]{LearnNonparam::RCBD}} -> \code{RCBDANOVA}
+\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:RCBDTest]{LearnNonparam::RCBDTest}} -> \code{RCBDANOVA}
 }
 \section{Methods}{
 \subsection{Public methods}{

@@ -22,7 +22,7 @@ KolmogorovSmirnov <- R6Class(
         initialize = function(
             n_permu = 0L
         ) {
-            private$.init(n_permu = n_permu)
+            self$n_permu <- n_permu
         }
     ),
     private = list(

@@ -1,1 +1,1 @@
-#' @param style a character string specifying which package to be used. 
+#' @param style a character string specifying which package to be used.

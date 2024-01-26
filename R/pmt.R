@@ -7,7 +7,7 @@
 
 #' @rdname pmt
 #' 
-#' @param key a character string corresponding to the desired test. Check `pmts` to see available keys.
+#' @param key a character string corresponding to the desired test. See `pmts` for available keys.
 #' @param ... extra parameters passed to the constructor.
 #' 
 #' @export
@@ -16,10 +16,16 @@ pmt <- function(key, ...) tests[[key]]$new(...)
 
 #' @rdname pmt
 #' 
-#' @param which a character string specifying which tests to show. If `"all"` (default) then available tests are shown.
+#' @param which a character string specifying which tests to show. If `"all"` (default) then all available tests are shown.
 #' 
 #' @export
-pmts <- function(which = c("all", "onesample", "twosample", "ksample", "multicomp", "paired", "rcbd", "association", "table")) {
+pmts <- function(
+    which = c(
+        "all",
+        "onesample", "twosample", "ksample", "multicomp",
+        "paired", "rcbd", "association", "table"
+    )
+) {
     which <- match.arg(which)
 
     keys <- names(tests)

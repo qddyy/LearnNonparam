@@ -402,7 +402,10 @@ t <- pmt(
     "paired.sign", alternative = "greater", type = "exact"
 )
 
-t$test(c(rep(+1, 12), rep(-1, 5)), 0)
+t$test(
+    rep(c(+1, -1), c(12, 5)),
+    rep(0, 17)
+)
 
 t$statistic
 t$p_value

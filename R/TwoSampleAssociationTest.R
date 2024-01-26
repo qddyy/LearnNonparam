@@ -1,6 +1,6 @@
 #' @title TwoSampleAssociationTest Class
 #' 
-#' @description Abstract class for two sample permutation tests for association.
+#' @description Abstract class for two sample tests for association.
 #' 
 #' 
 #' @export
@@ -13,10 +13,12 @@ TwoSampleAssociationTest <- R6Class(
     inherit = TwoSampleTest,
     cloneable = FALSE,
     private = list(
-        .name = "Two Sample Permutation Test for Association",
-
         .preprocess = function() {
             super$.preprocess()
+
+            if (length(private$.data$x) != length(private$.data$y)) {
+                stop_without_call("Both samples must be of equal length")
+            }
 
             private$.data <- do_call(data.frame, private$.data)
         },

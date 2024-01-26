@@ -1,6 +1,6 @@
-#' @title RCBD Class
+#' @title RCBDTest Class
 #' 
-#' @description Abstract class for randomized complete block design.
+#' @description Abstract class for tests for randomized complete block design.
 #' 
 #' 
 #' @export
@@ -8,14 +8,16 @@
 #' @importFrom R6 R6Class
 
 
-RCBD <- R6Class(
-    classname = "RCBD",
+RCBDTest <- R6Class(
+    classname = "RCBDTest",
     inherit = PermuTest,
     cloneable = FALSE,
     private = list(
-        .name = "Randomized Complete Block Design",
-
         .preprocess = function() {
+            if (length(unique(lengths(private$.raw_data))) > 1) {
+                stop_without_call("All samples must be of equal length")
+            }
+
             private$.data <- unname(do_call(cbind, private$.raw_data))
         },
 

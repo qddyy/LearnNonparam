@@ -25,21 +25,15 @@ Difference <- R6Class(
             alternative = c("two_sided", "less", "greater"),
             n_permu = 0L
         ) {
-            private$.init(
-                method = method, alternative = alternative, n_permu = n_permu
-            )
+            self$method <- method
+            self$alternative <- alternative
+            self$n_permu <- n_permu
         }
     ),
     private = list(
         .name = "Two Sample Test Based on Mean or Median",
 
-        .null_value = 0,
-
         .define = function() {
-            private$.param_name <- paste0(
-                "difference in", " ", private$.method, "s"
-            )
-
             private$.statistic_func <- switch(private$.method,
                 mean = function(x, y) mean(x) - mean(y),
                 median = function(x, y) median(x) - median(y)

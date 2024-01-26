@@ -41,7 +41,7 @@ Create a new \code{KruskalWallis} object.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{type}}{a character string specifying the way to calculate p-values, must be one of \code{"permu"} (default) or \code{"asymp"}.}
+\item{\code{type}}{a character string specifying the way to calculate the p-value.}
 
 \item{\code{scoring}}{a character string specifying which scoring system to be used.}
 

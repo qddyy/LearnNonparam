@@ -8,7 +8,7 @@
 Performs Friedman test on data for a randomized complete block design.
 }
 \section{Super classes}{
-\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:RCBD]{LearnNonparam::RCBD}} -> \code{Friedman}
+\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:RCBDTest]{LearnNonparam::RCBDTest}} -> \code{Friedman}
 }
 \section{Methods}{
 \subsection{Public methods}{

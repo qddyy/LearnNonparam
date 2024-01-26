@@ -1,6 +1,6 @@
 #' @title TwoSampleTest Class
 #' 
-#' @description Abstract class for two sample permutation tests.
+#' @description Abstract class for two sample tests.
 #' 
 #' 
 #' @export
@@ -13,9 +13,11 @@ TwoSampleTest <- R6Class(
     inherit = PermuTest,
     cloneable = FALSE,
     private = list(
-        .name = "Two Sample Permutation Test",
-
         .preprocess = function() {
+            if (length(private$.raw_data) != 2) {
+                stop_without_call("Must provide two samples")
+            }
+
             private$.data <- `names<-`(private$.raw_data, c("x", "y"))
         },
 

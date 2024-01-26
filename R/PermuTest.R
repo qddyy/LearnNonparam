@@ -14,7 +14,7 @@ PermuTest <- R6Class(
     cloneable = FALSE,
     public = list(
         initialize = function(...) {
-            stop("Can't construct an object from abstract class")
+            stop_without_call("Can't construct an object from abstract class")
         },
 
         #' @description Perform test on data.
@@ -52,7 +52,8 @@ PermuTest <- R6Class(
             if (!is.null(private$.raw_data) & private$.type == "permu") {
                 if (match.arg(style) == "graphics") {
                     private$.plot(...)
-                } else if (requireNamespace("ggplot2")) {
+                } else {
+                    requireNamespace("ggplot2")
                     print(private$.autoplot(...))
                 }
             }
@@ -61,7 +62,7 @@ PermuTest <- R6Class(
         }
     ),
     private = list(
-        .name = "Permutation Test",
+        .name = NULL,
         .param_name = NULL,
 
         .type = "permu",
@@ -92,60 +93,6 @@ PermuTest <- R6Class(
         .ci = NULL,
         .conf_level = NULL,
 
-        .init = function(
-            type, method, scoring, n_permu,
-            null_value, alternative, conf_level
-        ) {
-            if (!missing(n_permu)) {
-                if (length(n_permu) == 1 & is.finite(n_permu) & n_permu >= 0) {
-                    private$.n_permu <- n_permu
-                } else {
-                    stop("'n_permu' must be a non-negative integer")
-                }
-            }
-
-            if (!missing(null_value)) {
-                if (length(null_value) == 1 & !is.na(null_value)) {
-                    private$.null_value <- null_value
-                } else {
-                    stop("'null_value' must be a single number")
-                }
-            }
-
-            if (!missing(conf_level)) {
-                if (
-                    length(conf_level) == 1 & is.finite(conf_level) &
-                    conf_level > 0 & conf_level < 1
-                ) {
-                    private$.conf_level <- conf_level
-                } else {
-                    stop("'conf_level' must be a single number between 0 and 1")
-                }
-            }
-
-            choices <- lapply(formals(self$initialize), eval)
-            if (!missing(type)) {
-                private$.type <- match_arg(
-                    arg = type, choices = choices$type
-                )
-            }
-            if (!missing(method)) {
-                private$.method <- match_arg(
-                    arg = method, choices = choices$method
-                )
-            }
-            if (!missing(scoring)) {
-                private$.scoring <- match_arg(
-                    arg = scoring, choices = choices$scoring
-                )
-            }
-            if (!missing(alternative)) {
-                private$.alternative <- match_arg(
-                    arg = alternative, choices = choices$alternative
-                )
-            }
-        },
-
         .calculate = function() {
             private$.preprocess()
             if (private$.scoring != "none") {
@@ -167,40 +114,33 @@ PermuTest <- R6Class(
             private$.calculate_extra()
         },
 
-        # @Override
         .preprocess = function() {
             # private$.data <- ...
         },
 
-        # @Override
         .calculate_score = function() {
             # private$.data <- ...
         },
 
-        # @Override
         .define = function() {
             # private$.param_name <- ...
             # private$.statistic_func <- ...
         },
 
-        # @Override
         .calculate_statistic = function() {
             # private$.statistic <- ...
         },
 
-        # @Override
         .calculate_p = function() {
             # private$.p_value <- ...
             # when private$.type != "permu"
         },
 
-        # @Override
         .calculate_extra = function() {
             # private$.estimate <- ...
             # private$.ci <- ...
         },
 
-        # @Override
         .calculate_statistic_permu = function() {
             # private$.statistic_permu <- ...
         },
@@ -287,7 +227,7 @@ PermuTest <- R6Class(
                 cat(
                     paste0(
                         format(private$.conf_level * 100, digits = digits), "%",
-                        " ", "confidence interval:", " ",
+                        " confidence interval: ",
                         "(", format(private$.ci[1], digits = digits), ",",
                         " ", format(private$.ci[2], digits = digits), ")"
                     )
@@ -333,6 +273,25 @@ PermuTest <- R6Class(
                         face = "bold", hjust = 0.5
                     )
                 )
+        },
+
+        .on_type_change = function() private$.calculate(),
+        .on_method_change = function() private$.calculate(),
+        .on_scoring_change = function() private$.calculate(),
+        .on_null_value_change = function() private$.calculate(),
+        .on_conf_level_change = function() private$.calculate_extra(),
+        .on_alternative_change = function() {
+            private$.calculate_side()
+            if (private$.type == "permu") {
+                private$.calculate_p_permu()
+            } else {
+                private$.calculate_p()
+            }
+        },
+        .on_n_permu_change = function() {
+            if (private$.type == "permu") {
+                private$.calculate()
+            }
         }
     ),
     active = list(
@@ -340,10 +299,15 @@ PermuTest <- R6Class(
         type = function(value) {
             if (missing(value)) {
                 private$.type
+            } else if (is.null(choices <- formals(self$initialize)$type)) {
+                stop_without_call(
+                    "Can't specify 'type' of a ",
+                    "<", class(self)[1], ">", " object"
+                )
             } else {
-                private$.init(type = value)
+                private$.type <- match.arg(value, eval(choices))
                 if (!is.null(private$.raw_data)) {
-                    private$.calculate()
+                    private$.on_type_change()
                 }
             }
         },
@@ -351,10 +315,15 @@ PermuTest <- R6Class(
         method = function(value) {
             if (missing(value)) {
                 private$.method
+            } else if (is.null(choices <- formals(self$initialize)$method)) {
+                stop_without_call(
+                    "Can't specify 'method' of a ",
+                    "<", class(self)[1], ">", " object"
+                )
             } else {
-                private$.init(method = value)
+                private$.method <- match.arg(value, eval(choices))
                 if (!is.null(private$.raw_data)) {
-                    private$.calculate()
+                    private$.on_method_change()
                 }
             }
         },
@@ -362,21 +331,15 @@ PermuTest <- R6Class(
         scoring = function(value) {
             if (missing(value)) {
                 private$.scoring
+            } else if (is.null(choices <- formals(self$initialize)$scoring)) {
+                stop_without_call(
+                    "Can't specify 'scoring' of a ",
+                    "<", class(self)[1], ">", " object"
+                )
             } else {
-                private$.init(scoring = value)
+                private$.scoring <- match.arg(value, eval(choices))
                 if (!is.null(private$.raw_data)) {
-                    private$.calculate()
-                }
-            }
-        },
-        #' @field null_value The true value of the parameter in the null hypothesis.
-        null_value = function(value) {
-            if (missing(value)) {
-                private$.null_value
-            } else {
-                private$.init(null_value = value)
-                if (!is.null(private$.raw_data)) {
-                    private$.calculate()
+                    private$.on_scoring_change()
                 }
             }
         },
@@ -384,38 +347,72 @@ PermuTest <- R6Class(
         alternative = function(value) {
             if (missing(value)) {
                 private$.alternative
+            } else if (is.null(choices <- formals(self$initialize)$alternative)) {
+                stop_without_call(
+                    "Can't specify 'alternative' of a ",
+                    "<", class(self)[1], ">", " object"
+                )
             } else {
-                private$.init(alternative = value)
-                private$.calculate_side()
+                private$.alternative <- match.arg(value, eval(choices))
                 if (!is.null(private$.raw_data)) {
-                    if (private$.type == "permu") {
-                        private$.calculate_p_permu()
-                    } else {
-                        private$.calculate_p()
-                    }
+                    private$.on_alternative_change()
                 }
+            }
+        },
+        #' @field null_value The true value of the parameter in the null hypothesis.
+        null_value = function(value) {
+            if (missing(value)) {
+                private$.null_value
+            } else if (is.null(formals(self$initialize)$null_value)) {
+                stop_without_call(
+                    "Can't specify 'null_value' of a ",
+                    "<", class(self)[1], ">", " object"
+                )
+            } else if (length(value) == 1 & !is.na(value)) {
+                private$.null_value <- value
+                if (!is.null(private$.raw_data)) {
+                    private$.on_null_value_change()
+                }
+            } else {
+                stop_without_call("'null_value' must be a single number")
             }
         },
         #' @field conf_level The confidence level of the interval.
         conf_level = function(value) {
             if (missing(value)) {
                 private$.conf_level
-            } else {
-                private$.init(conf_level = value)
+            } else if (is.null(formals(self$initialize)$conf_level)) {
+                stop_without_call(
+                    "Can't specify 'conf_level' of a ",
+                    "<", class(self)[1], ">", " object"
+                )
+            } else if (
+                length(value) == 1 & is.finite(value) & value > 0 & value < 1
+            ) {
+                private$.conf_level <- value
                 if (!is.null(private$.raw_data)) {
-                    private$.calculate_extra()
+                    private$.on_conf_level_change()
                 }
+            } else {
+                stop_without_call("'conf_level' must be a single number between 0 and 1")
             }
         },
         #' @field n_permu The number of permutations used.
         n_permu = function(value) {
             if (missing(value)) {
                 private$.n_permu
-            } else {
-                private$.init(n_permu = value)
-                if (!is.null(private$.raw_data) & private$.type == "permu") {
-                    private$.calculate()
+            } else if (is.null(formals(self$initialize)$n_permu)) {
+                stop_without_call(
+                    "Can't specify 'n_permu' of a ",
+                    "<", class(self)[1], ">", " object"
+                )
+            } else if (length(value) == 1 & is.finite(value) & value >= 0) {
+                private$.n_permu <- as.integer(value)
+                if (!is.null(private$.raw_data)) {
+                    private$.on_n_permu_change()
                 }
+            } else {
+                stop_without_call("'n_permu' must be a non-negative integer")
             }
         },
 

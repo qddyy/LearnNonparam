@@ -27,10 +27,10 @@ Correlation <- R6Class(
             alternative = c("two_sided", "less", "greater"),
             n_permu = 0L
         ) {
-            private$.init(
-                type = type, method = method,
-                alternative = alternative, n_permu = n_permu
-            )
+            self$type <- type
+            self$method <- method
+            self$alternative <- alternative
+            self$n_permu <- n_permu
         }
     ),
     private = list(

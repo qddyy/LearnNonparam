@@ -1,3 +1,8 @@
+stop_without_call <- function(...) stop(..., call. = FALSE)
+warn_without_call <- function(...) warning(..., call. = FALSE)
+
+deparse_1 <- function(x) paste(deparse(x, width.cutoff = 500), collapse = " ")
+
 do_call <- function(func, default = NULL, fixed = NULL, ...) {
     env_args <- list2env(as.list(default))
     env_args <- list2env(list(...), envir = env_args)
@@ -9,34 +14,18 @@ do_call <- function(func, default = NULL, fixed = NULL, ...) {
     )
 }
 
-deparse_1 <- function(expr) {
-    paste(deparse(expr, width.cutoff = 500), collapse = " ")
-}
-
-# for .init()
-
-match_arg <- function(arg, choices) {
-    if (is.null(choices)) {
-        warning(
-            paste0(
-                "Can't modify", " ",
-                "'", deparse_1(substitute(arg)), "'",
-                ", ignored"
-            )
-        )
-    } else {
-        match.arg(arg = arg, choices = choices, several.ok = FALSE)
-    }
-}
-
 # for test()
 
 get_data <- function(call, env) {
     data_exprs <- as.list(call)[-1]
     n_data <- length(data_exprs)
 
-    if ((n_data == 1) & is.list(data_1 <- eval(data_exprs[[1]], envir = env))) {
+    if (
+        (n_data == 1) &
+        is.list(data_1 <- eval(data_exprs[[1]], envir = env))
+    ) {
         data_exprs <- data_1
+        n_data <- length(data_1)
     }
 
     data_names <- names(data_exprs)
@@ -44,15 +33,22 @@ get_data <- function(call, env) {
         data_names <- rep.int("", n_data)
     }
 
-    unlist(.mapply(
-        dots = list(data_exprs, data_names),
-        FUN = function(data_expr, data_name) {
-            `names<-`(
-                list(eval(data_expr, envir = env)),
-                if (data_name != "") data_name else deparse_1(data_expr)
-            )
-        }, MoreArgs = NULL
-    ), recursive = FALSE, use.names = TRUE)
+    `names<-`(lapply(
+        seq.int(1, n_data), function(i) {
+            if (data_names[[i]] == "") {
+                data_names[[i]] <<- deparse_1(data_exprs[[i]])
+            }
+
+            data_i <- eval(data_exprs[[i]], envir = env)
+            if (!is.numeric(data_i)) {
+                stop_without_call("The ", i, "-th sample is not numeric")
+            }
+            if (anyNA(data_i)) {
+                warn_without_call("The ", i, "-th sample contains NA, removed")
+                data_i[!is.na(data_i)]
+            } else data_i
+        }
+    ), data_names)
 }
 
 # for .calculate_score()
@@ -76,7 +72,7 @@ get_p_continous <- function(x, dist, side, ...) {
 
     l <- F(x, ...)
     r <- 1 - l
-    lr <- 2 * min(l, r)
+    lr <- 2 * pmin(l, r)
 
     eval(as.name(side))
 }
@@ -87,7 +83,7 @@ get_p_decrete <- function(x, dist, side, ...) {
 
     l <- F(x, ...)
     r <- 1 - l + p(x, ...)
-    lr <- 2 * min(l, r, 0.5)
+    lr <- 2 * pmin(l, r, 0.5)
 
     eval(as.name(side))
 }

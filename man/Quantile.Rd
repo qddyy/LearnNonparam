@@ -13,8 +13,6 @@ Performs one sample quantile test on data vectors. In addition, a confidence int
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{null_value}}{The true quantile in the null hypothesis.}
-
 \item{\code{prob}}{The probability.}
 
 \item{\code{correct}}{Whether to apply continuity correction.}

@@ -55,7 +55,7 @@ Create a new \code{PairedDifference} object.
 
 \item{\code{method}}{a character string specifying the method of ranking data in computing adjusted signed ranks for tied data, must be one of \code{"with_zeros"} (default) or \code{"ignore"}. Note that the data will be modified when this parameter is set to \code{"ignore"}.}
 
-\item{\code{scoring}}{a character string specifying which scoring system to be used on the absolute differences.}
+\item{\code{scoring}}{a character string specifying which scoring system to be used.}
 
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 

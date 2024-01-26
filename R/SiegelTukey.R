@@ -24,10 +24,10 @@ SiegelTukey <- R6Class(
             alternative = c("two_sided", "less", "greater"),
             n_permu = 0L, correct = TRUE
         ) {
-            super$.init(
-                type = type, alternative = alternative,
-                n_permu = n_permu, correct = correct
-            )
+            self$type <- type
+            self$alternative <- alternative
+            self$n_permu <- n_permu
+            self$correct <- correct
         }
     ),
     private = list(
@@ -42,8 +42,8 @@ SiegelTukey <- R6Class(
             c_xy <- c(private$.data$x, private$.data$y)
             N <- length(c_xy)
 
-            rank_l <- outer(c(1, 4), seq.int(from = 0, to = N - 1, by = 4), "+")
-            rank_r <- outer(c(0, 1), seq.int(from = 2, to = N, by = 4), "+")
+            rank_l <- outer(c(1, 4), seq.int(0, N - 1, by = 4), "+")
+            rank_r <- outer(c(0, 1), seq.int(2, N, by = 4), "+")
 
             index_floor <- seq_len(floor(N / 2))
             index_ceiling <- seq_len(ceiling(N / 2))

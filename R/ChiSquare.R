@@ -24,20 +24,20 @@ ChiSquare <- R6Class(
             type = c("permu", "asymp"),
             n_permu = 0L
         ) {
-            private$.init(
-                type = type, n_permu = n_permu
-            )
+            self$type <- type
+            self$n_permu <- n_permu
         }
     ),
     private = list(
         .name = "Contingency Table Test Based on Chi-square Statistic",
 
         .define = function() {
-            dim <- dim(private$.data)
+            m <- nrow(private$.data)
+            n <- ncol(private$.data)
             sum <- sum(private$.data)
             private$.statistic_func <- function(data) {
-                row_sum <- .rowSums(data, dim[1], dim[2])
-                col_sum <- .colSums(data, dim[1], dim[2])
+                row_sum <- .rowSums(data, m, n)
+                col_sum <- .colSums(data, m, n)
 
                 expect <- row_sum %*% matrix(col_sum, nrow = 1) / sum
 

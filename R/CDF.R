@@ -23,7 +23,7 @@ CDF <- R6Class(
         initialize = function(
             conf_level = 0.95
         ) {
-            private$.init(conf_level = conf_level)
+            self$conf_level <- conf_level
         },
 
         #' @description Plot the estimate and confidence bounds for population cdf of the data.
@@ -35,7 +35,8 @@ CDF <- R6Class(
             if (!is.null(private$.raw_data)) {
                 if (match.arg(style) == "graphics") {
                     private$.plot()
-                } else if (requireNamespace("ggplot2")) {
+                } else {
+                    requireNamespace("ggplot2")
                     print(private$.autoplot())
                 }
             }

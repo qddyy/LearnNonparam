@@ -18,8 +18,8 @@ MultiCompT <- R6Class(
         #' @description Create a new `MultiCompT` object.
         #' 
         #' @template init_params
-        #' @param conf_level a numeric value between zero and one giving the family-wise confidence level to use.
         #' @param method a character string specifying whether to use bonferroni correction.
+        #' @param conf_level a numeric value between zero and one giving the family-wise confidence level to use.
         #' 
         #' @return A `MultiCompT` object. 
         initialize = function(
@@ -28,20 +28,18 @@ MultiCompT <- R6Class(
             scoring = c("none", "rank", "vw", "expon"),
             conf_level = 0.95, n_permu = 0L
         ) {
-            private$.init(
-                type = type, method = method, scoring = scoring,
-                conf_level = conf_level, n_permu = n_permu
-            )
+            self$type <- type
+            self$method <- method
+            self$scoring <- scoring
+            self$conf_level <- conf_level
+            self$n_permu <- n_permu
         }
     ),
     private = list(
         .name = "Multiple Comparison Based on t Statistic",
 
         .define = function() {
-            lengths <- vapply(
-                X = split(private$.data, names(private$.data)),
-                FUN = length, FUN.VALUE = integer(1), USE.NAMES = FALSE
-            )
+            lengths <- lengths(split(private$.data, names(private$.data)))
 
             if (private$.scoring == "none") {
                 N <- length(private$.data)
@@ -71,8 +69,8 @@ MultiCompT <- R6Class(
             k <- as.integer(names(private$.data)[N])
             df <- if (private$.scoring == "none") N - k else Inf
 
-            private$.p_value <- 2 * get_p_continous(
-                abs(private$.statistic), "t", "r", df = df
+            private$.p_value <- get_p_continous(
+                private$.statistic, "t", "lr", df = df
             )
         },
 
@@ -80,6 +78,10 @@ MultiCompT <- R6Class(
             private$.differ <- private$.p_value < (1 - private$.conf_level) / (
                 if (private$.method == "bonferroni") length(private$.p_value) else 1
             )
+        },
+
+        .on_method_change = function() {
+            private$.calculate_extra()
         }
     )
 )

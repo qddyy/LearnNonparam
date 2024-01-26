@@ -24,9 +24,8 @@ ANOVA <- R6Class(
             type = c("permu", "asymp"),
             n_permu = 0L
         ) {
-            private$.init(
-                type = type, n_permu = n_permu
-            )
+            self$type <- type
+            self$n_permu <- n_permu
         }
     ),
     private = list(

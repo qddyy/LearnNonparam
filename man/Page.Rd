@@ -8,7 +8,7 @@
 Performs Page test on data for a randomized complete block design.
 }
 \section{Super classes}{
-\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:RCBD]{LearnNonparam::RCBD}} -> \code{Page}
+\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:RCBDTest]{LearnNonparam::RCBDTest}} -> \code{Page}
 }
 \section{Methods}{
 \subsection{Public methods}{

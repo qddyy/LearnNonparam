@@ -12,7 +12,7 @@
 
 Friedman <- R6Class(
     classname = "Friedman",
-    inherit = RCBD,
+    inherit = RCBDTest,
     cloneable = FALSE,
     public = list(
         #' @description Create a new `Friedman` object.
@@ -24,9 +24,8 @@ Friedman <- R6Class(
             type = c("permu", "asymp"),
             n_permu = 0L
         ) {
-            private$.init(
-                type = type, n_permu = n_permu
-            )
+            self$type <- type
+            self$n_permu <- n_permu
         }
     ),
     private = list(
@@ -35,11 +34,13 @@ Friedman <- R6Class(
         .scoring = "rank",
 
         .define = function() {
+            m <- nrow(private$.data)
+            n <- ncol(private$.data)
             private$.statistic_func <- switch(private$.type,
-                permu = function(data) sum(rowMeans(data)^2),
+                permu = function(data) sum(.rowMeans(data, m, n)^2),
                 asymp = function(data) {
-                    ncol(data)^2 / sum(apply(data, 2, var)) *
-                    sum((rowMeans(data) - (nrow(data) + 1) / 2)^2)
+                    n^2 / sum(apply(data, 2, var)) *
+                    sum((.rowMeans(data, m, n) - (m + 1) / 2)^2)
                 }
             )
         },

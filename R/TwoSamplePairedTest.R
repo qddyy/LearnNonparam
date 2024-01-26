@@ -1,6 +1,6 @@
 #' @title TwoSamplePairedTest Class
 #' 
-#' @description Abstract class for paired two sample permutation tests.
+#' @description Abstract class for paired two sample tests.
 #' 
 #' 
 #' @export
@@ -13,10 +13,12 @@ TwoSamplePairedTest <- R6Class(
     inherit = TwoSampleTest,
     cloneable = FALSE,
     private = list(
-        .name = "Paired Two Sample Permutation Test",
-
         .preprocess = function() {
             super$.preprocess()
+
+            if (length(private$.data$x) != length(private$.data$y)) {
+                stop_without_call("Both samples must be of equal length")
+            }
 
             private$.data <- do_call(data.frame, private$.data)
         },

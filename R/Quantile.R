@@ -22,16 +22,17 @@ Quantile <- R6Class(
         #' 
         #' @return A `Quantile` object.
         initialize = function(
-            type = c("asymp", "exact"), 
+            type = c("asymp", "exact"),
             alternative = c("two_sided", "less", "greater"),
             null_value = 0, conf_level = 0.95,
             prob = 0.5, correct = TRUE
         ) {
-            private$.init(
-                type = type, alternative = alternative,
-                null_value = null_value, conf_level = conf_level,
-                prob = prob, correct = correct
-            )
+            self$type <- type
+            self$alternative <- alternative
+            self$null_value <- null_value
+            self$conf_level <- conf_level
+            self$prob <- prob
+            self$correct <- correct
         }
     ),
     private = list(
@@ -39,29 +40,6 @@ Quantile <- R6Class(
 
         .prob = NULL,
         .correct = NULL,
-
-        .init = function(prob, correct, ...) {
-            super$.init(...)
-
-            if (!missing(prob)) {
-                if (
-                    length(prob) == 1 & is.finite(prob) &
-                    prob >= 0 & prob <= 1
-                ) {
-                    private$.prob <- prob
-                } else {
-                    stop("'prob' must be a single number between 0 and 1")
-                }
-            }
-
-            if (!missing(correct)) {
-                if (length(correct) == 1 & is.logical(correct)) {
-                    private$.correct <- correct
-                } else {
-                    stop("'correct' must be a single logical value")
-                }
-            }
-        },
 
         .define = function() {
             private$.param_name <- paste(private$.prob, "quantile")
@@ -107,43 +85,42 @@ Quantile <- R6Class(
                 if (a >= 1) y[a] else -Inf,
                 if (b <= n) y[b] else Inf
             )
+        },
+
+        .on_null_value_change = function() {
+            private$.calculate_statistic()
+            private$.calculate_p()
         }
     ),
     active = list(
-        #' @field null_value The true quantile in the null hypothesis.
-        null_value = function(value) {
-            if (missing(value)) {
-                private$.null_value
-            } else {
-                private$.init(null_value = value)
-                if (!is.null(private$.raw_data)) {
-                    private$.calculate_statistic()
-                    private$.calculate_p()
-                }
-            }
-        },
         #' @field prob The probability.
         prob = function(value) {
             if (missing(value)) {
                 private$.prob
-            } else {
-                private$.init(prob = value)
+            } else if (
+                length(value) == 1 & is.finite(value) & value >= 0 & value <= 1
+            ) {
+                private$.prob <- value
                 if (!is.null(private$.raw_data)) {
                     private$.define()
                     private$.calculate_p()
                     private$.calculate_extra()
                 }
+            } else {
+                stop_without_call("'prob' must be a single number between 0 and 1")
             }
         },
         #' @template active_params
         correct = function(value) {
             if (missing(value)) {
                 private$.correct
-            } else {
-                private$.init(correct = value)
+            } else if (length(value) == 1 & is.logical(value)) {
+                private$.correct <- value
                 if (!is.null(private$.raw_data) & private$.type == "asymp") {
                     private$.calculate_p()
                 }
+            } else {
+                stop_without_call("'correct' must be a single logical value")
             }
         }
     )

@@ -25,28 +25,16 @@ Sign <- R6Class(
             alternative = c("two_sided", "less", "greater"),
             n_permu = 0L, correct = TRUE
         ) {
-            private$.init(
-                type = type, alternative = alternative,
-                n_permu = n_permu, correct = correct
-            )
+            self$type <- type
+            self$alternative <- alternative
+            self$n_permu <- n_permu
+            self$correct <- correct
         }
     ),
     private = list(
         .name = "Sign Test",
 
         .correct = NULL,
-
-        .init = function(correct, ...) {
-            super$.init(...)
-
-            if (!missing(correct)) {
-                if (length(correct) == 1 & is.logical(correct)) {
-                    private$.correct <- correct
-                } else {
-                    stop("'correct' must be a single logical value")
-                }
-            }
-        },
 
         .define = function() {
             diff_positive <- (private$.data$x > private$.data$y)
@@ -80,11 +68,13 @@ Sign <- R6Class(
         correct = function(value) {
             if (missing(value)) {
                 private$.correct
-            } else {
-                private$.init(correct = value)
+            } else if (length(value) == 1 & is.logical(value)) {
+                private$.correct <- value
                 if (!is.null(private$.raw_data) & private$.type == "asymp") {
                     private$.calculate_p()
                 }
+            } else {
+                stop_without_call("'correct' must be a single logical value")
             }
         }
     )

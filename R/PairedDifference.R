@@ -18,7 +18,6 @@ PairedDifference <- R6Class(
         #' @description Create a new `PairedDifference` object. 
         #' 
         #' @template init_params
-        #' @param scoring a character string specifying which scoring system to be used on the absolute differences.
         #' @param method a character string specifying the method of ranking data in computing adjusted signed ranks for tied data, must be one of `"with_zeros"` (default) or `"ignore"`. Note that the data will be modified when this parameter is set to `"ignore"`.
         #' @param correct a logical indicating whether to apply continuity correction in the normal approximation for the p-value when `scoring` is set to `"rank"`.
         #' 
@@ -30,10 +29,12 @@ PairedDifference <- R6Class(
             alternative = c("two_sided", "less", "greater"),
             n_permu = 0L, correct = TRUE
         ) {
-            private$.init(
-                type = type, method = method, scoring = scoring,
-                alternative = alternative, n_permu = n_permu, correct = correct
-            )
+            self$type <- type
+            self$method <- method
+            self$scoring <- scoring
+            self$alternative <- alternative
+            self$n_permu <- n_permu
+            self$correct <- correct
         }
     ),
     private = list(
@@ -42,18 +43,6 @@ PairedDifference <- R6Class(
         .correct = NULL,
 
         .abs_diff = NULL,
-
-        .init = function(correct, ...) {
-            super$.init(...)
-
-            if (!missing(correct)) {
-                if (length(correct) == 1 & is.logical(correct)) {
-                    private$.correct <- correct
-                } else {
-                    stop("'correct' must be a single logical value")
-                }
-            }
-        },
 
         .define = function() {
             diff <- private$.data$x - private$.data$y
@@ -95,11 +84,16 @@ PairedDifference <- R6Class(
         correct = function(value) {
             if (missing(value)) {
                 private$.correct
-            } else {
-                private$.init(correct = value)
-                if (!is.null(private$.raw_data) & private$.type == "asymp") {
+            } else if (length(value) == 1 & is.logical(value)) {
+                private$.correct <- value
+                if (
+                    !is.null(private$.raw_data) &
+                    private$.type == "asymp" & private$.scoring == "rank"
+                ) {
                     private$.calculate_p()
                 }
+            } else {
+                stop_without_call("'correct' must be a single logical value")
             }
         }
     )

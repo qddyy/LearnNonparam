@@ -13,11 +13,11 @@ pmts(
 )
 }
 \arguments{
-\item{key}{a character string corresponding to the desired test. Check \code{pmts} to see available keys.}
+\item{key}{a character string corresponding to the desired test. See \code{pmts} for available keys.}
 
 \item{...}{extra parameters passed to the constructor.}
 
-\item{which}{a character string specifying which tests to show. If \code{"all"} (default) then available tests are shown.}
+\item{which}{a character string specifying which tests to show. If \code{"all"} (default) then all available tests are shown.}
 }
 \description{
 construct a test object in a unified way.

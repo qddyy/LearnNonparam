@@ -1,6 +1,6 @@
 #' @title ContingencyTableTest Class
 #' 
-#' @description Abstract class for permutation tests on contingency tables.
+#' @description Abstract class for tests on contingency tables.
 #' 
 #' 
 #' @export
@@ -13,10 +13,19 @@ ContingencyTableTest <- R6Class(
     inherit = PermuTest,
     cloneable = FALSE,
     private = list(
-        .name = "Contingency Table Permutation Test",
+        .preprocess = function() {
+            if (length(unique(lengths(private$.raw_data))) > 1) {
+                stop_without_call("All samples must be of equal length")
+            }
 
-        .preprocess = function(table) {
-            private$.data <- unname(do_call(cbind, private$.raw_data))
+            private$.data <- unname(
+                do_call(cbind, lapply(private$.raw_data, as.integer))
+            )
+
+            if (any(private$.data < 0)) {
+                private$.data <- NULL
+                stop_without_call("All samples must be non-negative")
+            }
         },
 
         .calculate_statistic = function() {

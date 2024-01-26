@@ -12,7 +12,7 @@
 
 RCBDANOVA <- R6Class(
     classname = "RCBDANOVA",
-    inherit = RCBD,
+    inherit = RCBDTest,
     cloneable = FALSE,
     public = list(
         #' @description Create a new `RCBDANOVA` object.
@@ -24,27 +24,26 @@ RCBDANOVA <- R6Class(
             type = c("permu", "asymp"),
             n_permu = 0L
         ) {
-            private$.init(
-                type = type, n_permu = n_permu
-            )
+            self$type <- type
+            self$n_permu <- n_permu
         }
     ),
     private = list(
         .name = "ANOVA for Randomized Complete Block Design",
 
         .define = function() {
+            m <- nrow(private$.data)
+            n <- ncol(private$.data)
             private$.statistic_func <- switch(private$.type,
-                permu = function(data) sum(rowMeans(data)^2),
+                permu = function(data) sum(.rowMeans(data, m, n)^2),
                 asymp = function(data) {
-                    b <- ncol(data)
-
-                    bar_i. <- rowMeans(data)
-                    bar_.j <- colMeans(data)
+                    bar_i. <- .rowMeans(data, m, n)
+                    bar_.j <- .colMeans(data, m, n)
                     bar_.. <- mean(bar_i.)
 
-                    sst <- b * sum((bar_i. - bar_..)^2)
+                    sst <- n * sum((bar_i. - bar_..)^2)
                     sse <- sum((data - outer(bar_i., bar_.j, "+") + bar_..)^2)
-                    (b - 1) * sst / sse
+                    (n - 1) * sst / sse
                 }
             )
         },

@@ -4,7 +4,7 @@
 \alias{ContingencyTableTest}
 \title{ContingencyTableTest Class}
 \description{
-Abstract class for permutation tests on contingency tables.
+Abstract class for tests on contingency tables.
 }
 \section{Super class}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{ContingencyTableTest}

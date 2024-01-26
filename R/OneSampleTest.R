@@ -13,9 +13,11 @@ OneSampleTest <- R6Class(
     inherit = PermuTest,
     cloneable = FALSE,
     private = list(
-        .name = "One Sample Test",
-
         .preprocess = function() {
+            if (length(private$.raw_data) != 1) {
+                stop_without_call("Must provide only one sample")
+            }
+
             private$.data <- private$.raw_data[[1]]
         },
 
