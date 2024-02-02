@@ -38,18 +38,21 @@ Correlation <- R6Class(
 
         .null_value = 0,
 
-        .define = function() {
-            private$.param_name <- switch(private$.method,
-                pearson = "correlation", kendall = "tau", spearman = "rho"
-            )
+        .preprocess = function() {
+            super$.preprocess()
 
             if (private$.method != "pearson") {
-                private$.scoring <- "rank"
                 private$.data <- data.frame(
                     x = rank(private$.data$x),
                     y = rank(private$.data$y)
                 )
             }
+        },
+
+        .define = function() {
+            private$.param_name <- switch(private$.method,
+                pearson = "correlation", kendall = "tau", spearman = "rho"
+            )
 
             if (private$.method == "kendall") {
                 x <- private$.data$x

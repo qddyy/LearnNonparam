@@ -106,24 +106,22 @@ MultipleComparison <- R6Class(
         },
 
         .plot = function(...) {
-            n <- as.integer(names(private$.data)[length(private$.data)])
+            original_par <- par(no.readonly = TRUE)
+            on.exit(par(original_par))
 
+            n <- as.integer(names(private$.data)[length(private$.data)])
             dots <- c(private$.group_ij, list(seq_len(n * (n - 1) / 2)))
 
             layout_matrix <- matrix(0, n - 1, n - 1)
             .mapply(
-                FUN = function(i, j, k) {
-                    layout_matrix[j - 1, i] <<- k
-                }, dots = dots, MoreArgs = NULL
+                dots = dots, MoreArgs = NULL,
+                FUN = function(i, j, k) layout_matrix[j - 1, i] <<- k
             )
-
-            defaut_par <- par(no.readonly = TRUE)
-            on.exit(par(defaut_par))
-
-            par(oma = c(0, 0, 3, 0))
             layout(layout_matrix)
 
+            par(oma = c(0, 0, 3, 0))
             .mapply(
+                dots = dots, MoreArgs = NULL,
                 FUN = {
                     data_names <- names(private$.raw_data)
                     function(i, j, k) {
@@ -139,11 +137,11 @@ MultipleComparison <- R6Class(
                         )
                         abline(v = private$.statistic[k], lty = "dashed")
                     }
-                }, dots = dots, MoreArgs = NULL
+                }
             )
             mtext(
-                text = expression(bold("Permutation Distribution")),
-                side = 3, line = 0, outer = TRUE
+                side = 3, line = 0, outer = TRUE,
+                text = expression(bold("Permutation Distribution"))
             )
         },
 

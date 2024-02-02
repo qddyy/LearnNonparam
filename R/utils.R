@@ -34,7 +34,7 @@ get_data <- function(call, env) {
     }
 
     `names<-`(lapply(
-        seq.int(1, n_data), function(i) {
+        seq_len(n_data), function(i) {
             if (data_names[[i]] == "") {
                 data_names[[i]] <<- deparse_1(data_exprs[[i]])
             }

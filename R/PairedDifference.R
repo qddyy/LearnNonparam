@@ -15,13 +15,13 @@ PairedDifference <- R6Class(
     inherit = TwoSamplePairedTest,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `PairedDifference` object. 
+        #' @description Create a new `PairedDifference` object.
         #' 
         #' @template init_params
         #' @param method a character string specifying the method of ranking data in computing adjusted signed ranks for tied data, must be one of `"with_zeros"` (default) or `"ignore"`. Note that the data will be modified when this parameter is set to `"ignore"`.
         #' @param correct a logical indicating whether to apply continuity correction in the normal approximation for the p-value when `scoring` is set to `"rank"`.
         #' 
-        #' @return A `PairedDifference` object. 
+        #' @return A `PairedDifference` object.
         initialize = function(
             type = c("permu", "asymp"),
             method = c("with_zeros", "without_zeros"),

@@ -58,7 +58,7 @@ SiegelTukey <- R6Class(
             rank_xy <- rank(c_xy, ties.method = "first")
             st_rank <- unlist(lapply(
                 split(c(rank_l, rev(rank_r)), c_xy[order(rank_xy)]),
-                function(x) if ((len <- length(x)) == 1) x else rep.int(mean(x), len)
+                function(x) rep.int(mean(x), length(x))
             ), recursive = FALSE, use.names = FALSE)[rank_xy]
 
             x_index <- seq_along(private$.data$x)
