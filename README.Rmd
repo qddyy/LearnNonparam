@@ -71,7 +71,7 @@ pak::pkg_install("qddyy/LearnNonparam")
     t$p_value
     ```
 
-All available tests:
+implemented:
 
 ```{r}
 pmts()

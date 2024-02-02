@@ -7,16 +7,26 @@
 
 #' @rdname pmt
 #' 
-#' @param key a character string corresponding to the desired test. See `pmts` for available keys.
+#' @param key a character string corresponding to the desired test. Check `pmts` for valid keys.
 #' @param ... extra parameters passed to the constructor.
 #' 
 #' @export
-pmt <- function(key, ...) tests[[key]]$new(...)
+pmt <- function(key, ...) {
+    if (key %in% names(implemented)) {
+        implemented[[key]]$new(...)
+    } else {
+        stop_without_call(
+            "The key '", key,
+            "' is not valid. ",
+            "Check 'pmts' for valid keys."
+        )
+    }
+}
 
 
 #' @rdname pmt
 #' 
-#' @param which a character string specifying which tests to show. If `"all"` (default) then all available tests are shown.
+#' @param which a character string specifying which tests to show.
 #' 
 #' @export
 pmts <- function(
@@ -28,26 +38,25 @@ pmts <- function(
 ) {
     which <- match.arg(which)
 
-    keys <- names(tests)
+    keys <- names(implemented)
     if (which != "all") {
         keys <- keys[startsWith(keys, which)]
     }
-    tests <- tests[keys]
 
     data.frame(
         key = keys,
         class = vapply(
-            X = tests, FUN.VALUE = character(1), USE.NAMES = FALSE,
+            X = implemented[keys], FUN.VALUE = character(1), USE.NAMES = FALSE,
             FUN = function(test) test$classname
         ),
         test = vapply(
-            X = tests, FUN.VALUE = character(1), USE.NAMES = FALSE,
+            X = implemented[keys], FUN.VALUE = character(1), USE.NAMES = FALSE,
             FUN = function(test) test$private_fields$.name
         )
     )
 }
 
-tests <- list(
+implemented <- list(
     onesample.quantile = Quantile,
     onesample.cdf = CDF,
 
@@ -63,8 +72,7 @@ tests <- list(
     ksample.kw = KruskalWallis,
     ksample.jt = JonckheereTerpstra,
 
-    multicomp.t = MultiCompT,
-    multicomp.tukey = TukeyHSD,
+    multicomp.studentized = Studentized,
 
     paired.sign = Sign,
     paired.difference = PairedDifference,
