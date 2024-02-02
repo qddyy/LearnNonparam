@@ -55,9 +55,6 @@
     <loc>/reference/KruskalWallis.html</loc>
   </url>
   <url>
-    <loc>/reference/MultiCompT.html</loc>
-  </url>
-  <url>
     <loc>/reference/MultipleComparison.html</loc>
   </url>
   <url>
@@ -92,6 +89,9 @@
   </url>
   <url>
     <loc>/reference/Sign.html</loc>
+  </url>
+  <url>
+    <loc>/reference/Studentized.html</loc>
   </url>
   <url>
     <loc>/reference/Table1.1.1.html</loc>
@@ -149,9 +149,6 @@
   </url>
   <url>
     <loc>/reference/Table5.4.2.html</loc>
-  </url>
-  <url>
-    <loc>/reference/TukeyHSD.html</loc>
   </url>
   <url>
     <loc>/reference/TwoSampleAssociationTest.html</loc>

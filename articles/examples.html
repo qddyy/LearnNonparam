@@ -387,9 +387,9 @@
 <h3 id="example-3-3-1">Example 3.3.1<a class="anchor" aria-label="anchor" href="#example-3-3-1"></a>
 </h3>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?MultiCompT or ?multicomp.t</span></span>
+<code class="sourceCode R"><span><span class="co"># See ?Studentized or ?multicomp.studentized</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
-<span>    <span class="st">"multicomp.t"</span>, n_permu <span class="op">=</span> <span class="fl">5000</span></span>
+<span>    <span class="st">"multicomp.studentized"</span>, n_permu <span class="op">=</span> <span class="fl">5000</span>, method <span class="op">=</span> <span class="st">"bonferroni"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># See ?Table3.3.1</span></span>
@@ -397,7 +397,7 @@
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Multiple Comparison Based on t Statistic </span></span>
+<span><span class="co">#&gt;   Multiple Comparison Based on Studentized Statistic </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; scoring: none    type: permu(5000)    method: bonferroni</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -414,7 +414,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"asymp"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Multiple Comparison Based on t Statistic </span></span>
+<span><span class="co">#&gt;   Multiple Comparison Based on Studentized Statistic </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; scoring: none    type: asymp    method: bonferroni</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -431,7 +431,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">scoring</span> <span class="op">&lt;-</span> <span class="st">"rank"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Multiple Comparison Based on t Statistic </span></span>
+<span><span class="co">#&gt;   Multiple Comparison Based on Studentized Statistic </span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; scoring: rank    type: asymp    method: bonferroni</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -443,37 +443,32 @@
 <span><span class="co">#&gt; location_1 ~ location_4 -2.6536139 0.007963489 *</span></span>
 <span><span class="co">#&gt; location_2 ~ location_3 -1.5105187 0.130911128  </span></span>
 <span><span class="co">#&gt; location_2 ~ location_4 -2.7760884 0.005501725 *</span></span>
-<span><span class="co">#&gt; location_3 ~ location_4 -1.2655697 0.205667180</span></span></code></pre></div>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="co"># See ?TukeyHSD or ?multicomp.tukey</span></span>
-<span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
-<span>    <span class="st">"multicomp.tukey"</span>, n_permu <span class="op">=</span> <span class="fl">5000</span></span>
-<span><span class="op">)</span></span>
+<span><span class="co">#&gt; location_3 ~ location_4 -1.2655697 0.205667180</span></span>
 <span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table3.3.1</span><span class="op">)</span></span>
 <span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">method</span> <span class="op">&lt;-</span> <span class="st">"tukey"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Tukey's HSD </span></span>
+<span><span class="co">#&gt;   Multiple Comparison Based on Studentized Statistic </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; scoring: none    type: permu(5000)    method: default</span></span>
+<span><span class="co">#&gt; scoring: rank    type: asymp    method: tukey</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; family-wise confidence level: 95%</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;                          statistic p_value  </span></span>
-<span><span class="co">#&gt; location_1 ~ location_2 0.03870907  1.0000  </span></span>
-<span><span class="co">#&gt; location_1 ~ location_3 2.51608965  0.3134  </span></span>
-<span><span class="co">#&gt; location_1 ~ location_4 4.82315032  0.0150 *</span></span>
-<span><span class="co">#&gt; location_2 ~ location_3 2.55479873  0.3006  </span></span>
-<span><span class="co">#&gt; location_2 ~ location_4 4.86185939  0.0144 *</span></span>
-<span><span class="co">#&gt; location_3 ~ location_4 2.30706067  0.3792</span></span>
+<span><span class="co">#&gt;                         statistic    p_value  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_2 0.1732051 0.99934385  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_3 1.9629909 0.50683497  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_4 3.7527767 0.03978340 *</span></span>
+<span><span class="co">#&gt; location_2 ~ location_3 2.1361960 0.43109997  </span></span>
+<span><span class="co">#&gt; location_2 ~ location_4 3.9259818 0.02817015 *</span></span>
+<span><span class="co">#&gt; location_3 ~ location_4 1.7897858 0.58494735</span></span>
 <span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"asymp"</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">scoring</span> <span class="op">&lt;-</span> <span class="st">"none"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Tukey's HSD </span></span>
+<span><span class="co">#&gt;   Multiple Comparison Based on Studentized Statistic </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; scoring: none    type: asymp    method: default</span></span>
+<span><span class="co">#&gt; scoring: none    type: asymp    method: tukey</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; family-wise confidence level: 95%</span></span>
 <span><span class="co">#&gt; </span></span>
@@ -485,27 +480,27 @@
 <span><span class="co">#&gt; location_2 ~ location_4 4.86185939 0.01277452 *</span></span>
 <span><span class="co">#&gt; location_3 ~ location_4 2.30706067 0.38453323</span></span>
 <span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="va">scoring</span> <span class="op">&lt;-</span> <span class="st">"rank"</span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"permu"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;   Tukey's HSD </span></span>
+<span><span class="co">#&gt;   Multiple Comparison Based on Studentized Statistic </span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt; scoring: rank    type: asymp    method: default</span></span>
+<span><span class="co">#&gt; scoring: none    type: permu(5000)    method: tukey</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt; family-wise confidence level: 95%</span></span>
 <span><span class="co">#&gt; </span></span>
-<span><span class="co">#&gt;                         statistic    p_value  </span></span>
-<span><span class="co">#&gt; location_1 ~ location_2 0.1732051 0.99934385  </span></span>
-<span><span class="co">#&gt; location_1 ~ location_3 1.9629909 0.50683497  </span></span>
-<span><span class="co">#&gt; location_1 ~ location_4 3.7527767 0.03978340 *</span></span>
-<span><span class="co">#&gt; location_2 ~ location_3 2.1361960 0.43109997  </span></span>
-<span><span class="co">#&gt; location_2 ~ location_4 3.9259818 0.02817015 *</span></span>
-<span><span class="co">#&gt; location_3 ~ location_4 1.7897858 0.58494735</span></span></code></pre></div>
+<span><span class="co">#&gt;                          statistic p_value  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_2 0.03870907  1.0000  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_3 2.51608965  0.3134  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_4 4.82315032  0.0150 *</span></span>
+<span><span class="co">#&gt; location_2 ~ location_3 2.55479873  0.3006  </span></span>
+<span><span class="co">#&gt; location_2 ~ location_4 4.86185939  0.0144 *</span></span>
+<span><span class="co">#&gt; location_3 ~ location_4 2.30706067  0.3792</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-3-4-1">Example 3.4.1<a class="anchor" aria-label="anchor" href="#example-3-4-1"></a>
 </h3>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># See ?JonckheereTerpstra or ?ksample.jt</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"ksample.jt"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>, n_permu <span class="op">=</span> <span class="fl">4000</span></span>
@@ -530,7 +525,7 @@
 <div class="section level3">
 <h3 id="table-4-1-1">Table 4.1.1<a class="anchor" aria-label="anchor" href="#table-4-1-1"></a>
 </h3>
-<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># See ?PairedDifference or ?paired.difference</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"paired.difference"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>,</span>
@@ -548,7 +543,7 @@
 <div class="section level3">
 <h3 id="example-4-1-1">Example 4.1.1<a class="anchor" aria-label="anchor" href="#example-4-1-1"></a>
 </h3>
-<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># See ?PairedDifference or ?paired.difference</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"paired.difference"</span>, alternative <span class="op">=</span> <span class="st">"two_sided"</span>,</span>
@@ -574,7 +569,7 @@
 <div class="section level3">
 <h3 id="example-4-2-1-4-2-2">Example 4.2.1 &amp; 4.2.2<a class="anchor" aria-label="anchor" href="#example-4-2-1-4-2-2"></a>
 </h3>
-<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># See ?PairedDifference or ?paired.difference</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"paired.difference"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>,</span>
@@ -596,7 +591,7 @@
 <div class="section level3">
 <h3 id="example-4-3-1">Example 4.3.1<a class="anchor" aria-label="anchor" href="#example-4-3-1"></a>
 </h3>
-<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb22"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># See ?Sign or ?paired.sign</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"paired.sign"</span>, alternative <span class="op">=</span> <span class="st">"greater"</span>, type <span class="op">=</span> <span class="st">"exact"</span></span>
@@ -619,7 +614,7 @@
 <div class="section level3">
 <h3 id="example-4-4-1">Example 4.4.1<a class="anchor" aria-label="anchor" href="#example-4-4-1"></a>
 </h3>
-<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb23"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># See ?RCBDANOVA or ?rcbd.anova</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"rcbd.anova"</span>, n_permu <span class="op">=</span> <span class="fl">5000</span></span>
@@ -642,7 +637,7 @@
 <div class="section level3">
 <h3 id="example-4-5-2">Example 4.5.2<a class="anchor" aria-label="anchor" href="#example-4-5-2"></a>
 </h3>
-<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb24"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># See ?Friedman or ?rcbd.friedman</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"rcbd.friedman"</span>, n_permu <span class="op">=</span> <span class="fl">5000</span></span>
@@ -665,7 +660,7 @@
 <div class="section level3">
 <h3 id="example-4-6-1">Example 4.6.1<a class="anchor" aria-label="anchor" href="#example-4-6-1"></a>
 </h3>
-<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb25"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># See ?Page or ?rcbd.page</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"rcbd.page"</span>, alternative <span class="op">=</span> <span class="st">"less"</span>, n_permu <span class="op">=</span> <span class="fl">5000</span></span>
@@ -690,7 +685,7 @@
 <div class="section level3">
 <h3 id="example-5-1-1">Example 5.1.1<a class="anchor" aria-label="anchor" href="#example-5-1-1"></a>
 </h3>
-<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb26"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># See ?Correlation or ?association.corr</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"association.corr"</span>, method <span class="op">=</span> <span class="st">"pearson"</span>,</span>
@@ -708,7 +703,7 @@
 <div class="section level3">
 <h3 id="example-5-2-1">Example 5.2.1<a class="anchor" aria-label="anchor" href="#example-5-2-1"></a>
 </h3>
-<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb27"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># See ?Correlation or ?association.corr</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"association.corr"</span>, method <span class="op">=</span> <span class="st">"spearman"</span>,</span>
@@ -730,7 +725,7 @@
 <div class="section level3">
 <h3 id="example-5-3-2">Example 5.3.2<a class="anchor" aria-label="anchor" href="#example-5-3-2"></a>
 </h3>
-<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb28"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># See ?Correlation or ?association.corr</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"association.corr"</span>, method <span class="op">=</span> <span class="st">"kendall"</span>,</span>
@@ -748,7 +743,7 @@
 <div class="section level3">
 <h3 id="table-5-4-2">Table 5.4.2<a class="anchor" aria-label="anchor" href="#table-5-4-2"></a>
 </h3>
-<div class="sourceCode" id="cb30"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb29"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># See ?ChiSquare or ?table.chisq</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span><span class="st">"table.chisq"</span><span class="op">)</span></span>
 <span></span>
