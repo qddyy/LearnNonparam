@@ -1,6 +1,5 @@
 #include "utils.h"
 
-using namespace Rcpp;
 
 // [[Rcpp::export]]
 NumericVector twosample_pmt(
@@ -9,15 +8,15 @@ NumericVector twosample_pmt(
     const Function statistic_func,
     const R_xlen_t n_permu)
 {
-    auto twosample_statistic = [&]() -> double {
-        return as<double>(statistic_func(data[!where_y], data[where_y]));
+    auto twosample_update = [&](PermuBar& bar) -> bool {
+        return bar.update(as<double>(statistic_func(data[!where_y], data[where_y])));
     };
 
     if (n_permu == 0) {
         PermuBar bar(n_permutation(where_y), true);
 
         do {
-            bar.update(twosample_statistic());
+            twosample_update(bar);
         } while (std::next_permutation(where_y.begin(), where_y.end()));
 
         return bar.statistic_permu;
@@ -26,7 +25,7 @@ NumericVector twosample_pmt(
 
         do {
             random_shuffle(where_y);
-        } while (bar.update(twosample_statistic()));
+        } while (twosample_update(bar));
 
         return bar.statistic_permu;
     }

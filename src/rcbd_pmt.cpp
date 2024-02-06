@@ -1,6 +1,5 @@
 #include "utils.h"
 
-using namespace Rcpp;
 
 // [[Rcpp::export]]
 NumericVector rcbd_pmt(
@@ -8,8 +7,8 @@ NumericVector rcbd_pmt(
     const Function statistic_func,
     const R_xlen_t n_permu)
 {
-    auto rcbd_statistic = [&]() -> double {
-        return as<double>(statistic_func(data));
+    auto rcbd_update = [&](PermuBar& bar) -> bool {
+        return bar.update(as<double>(statistic_func(data)));
     };
 
     R_len_t i = 0;
@@ -24,7 +23,7 @@ NumericVector rcbd_pmt(
 
         while (i < n_col) {
             if (i == 0) {
-                bar.update(rcbd_statistic());
+                rcbd_update(bar);
             }
 
             if (std::next_permutation(data.column(i).begin(), data.column(i).end())) {
@@ -42,7 +41,7 @@ NumericVector rcbd_pmt(
             for (i = 0; i < n_col; i++) {
                 random_shuffle(data.column(i));
             }
-        } while (bar.update(rcbd_statistic()));
+        } while (rcbd_update(bar));
 
         return bar.statistic_permu;
     }

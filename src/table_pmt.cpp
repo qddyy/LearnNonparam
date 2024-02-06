@@ -1,6 +1,5 @@
 #include "utils.h"
 
-using namespace Rcpp;
 
 // [[Rcpp::export]]
 NumericVector table_pmt(
@@ -13,20 +12,19 @@ NumericVector table_pmt(
 
     IntegerMatrix data(no_init(row_loc[n - 1] + 1, col_loc[n - 1] + 1));
 
-    auto table_statistic = [&]() -> double {
+    auto table_update = [&](PermuBar& bar) -> bool {
         data.fill(0);
         for (R_len_t i = 0; i < n; i++) {
             data(row_loc[i], col_loc[i])++;
         }
-
-        return as<double>(statistic_func(data));
+        return bar.update(as<double>(statistic_func(data)));
     };
 
     if (n_permu == 0) {
         PermuBar bar(n_permutation(row_loc), true);
 
         do {
-            bar.update(table_statistic());
+            table_update(bar);
         } while (std::next_permutation(row_loc.begin(), row_loc.end()));
 
         return bar.statistic_permu;
@@ -35,7 +33,7 @@ NumericVector table_pmt(
 
         do {
             random_shuffle(row_loc);
-        } while (bar.update(table_statistic()));
+        } while (table_update(bar));
 
         return bar.statistic_permu;
     }

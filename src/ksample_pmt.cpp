@@ -1,6 +1,5 @@
 #include "utils.h"
 
-using namespace Rcpp;
 
 // [[Rcpp::export]]
 NumericVector ksample_pmt(
@@ -9,15 +8,15 @@ NumericVector ksample_pmt(
     const Function statistic_func,
     const R_xlen_t n_permu)
 {
-    auto ksample_statistic = [&]() -> double {
-        return as<double>(statistic_func(data, group));
+    auto ksample_update = [&](PermuBar& bar) -> bool {
+        return bar.update(as<double>(statistic_func(data, group)));
     };
 
     if (n_permu == 0) {
         PermuBar bar(n_permutation(group), true);
 
         do {
-            bar.update(ksample_statistic());
+            ksample_update(bar);
         } while (std::next_permutation(group.begin(), group.end()));
 
         return bar.statistic_permu;
@@ -26,7 +25,7 @@ NumericVector ksample_pmt(
 
         do {
             random_shuffle(group);
-        } while (bar.update(ksample_statistic()));
+        } while (ksample_update(bar));
 
         return bar.statistic_permu;
     }

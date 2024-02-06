@@ -1,6 +1,5 @@
 #include "utils.h"
 
-using namespace Rcpp;
 
 // [[Rcpp::export]]
 NumericVector multicomp_pmt(
@@ -14,19 +13,20 @@ NumericVector multicomp_pmt(
     R_len_t n_group = group[group.size() - 1];
     R_len_t n_pair = n_group * (n_group - 1) / 2;
 
-    R_len_t k;
-
-    auto multicomp_statistic = [&]() -> double {
-        return as<double>(statistic_func(group_i[k], group_j[k], data, group));
+    auto multicomp_update = [&](PermuBar& bar) -> bool {
+        Function statistic_func_ij = statistic_func(data, group);
+        R_len_t k;
+        for (k = 0; k < n_pair - 1; k++) {
+            bar.update(as<double>(statistic_func_ij(group_i[k], group_j[k])));
+        };
+        return bar.update(as<double>(statistic_func_ij(group_i[k], group_j[k])));
     };
 
     if (n_permu == 0) {
         PermuBar bar(n_permutation(group), true, n_pair);
 
         do {
-            for (k = 0; k < n_pair; k++) {
-                bar.update(multicomp_statistic());
-            };
+            multicomp_update(bar);
         } while (std::next_permutation(group.begin(), group.end()));
 
         return bar.statistic_permu;
@@ -35,10 +35,7 @@ NumericVector multicomp_pmt(
 
         do {
             random_shuffle(group);
-            for (k = 0; k < n_pair - 1; k++) {
-                bar.update(multicomp_statistic());
-            };
-        } while (bar.update(multicomp_statistic()));
+        } while (multicomp_update(bar));
 
         return bar.statistic_permu;
     }
