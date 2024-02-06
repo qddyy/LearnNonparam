@@ -50,10 +50,6 @@ MultipleComparison <- R6Class(
             )
         },
 
-        .calculate_n_permu = function() {
-            ncol(private$.statistic_permu)
-        },
-
         .calculate_p_permu = function() {
             private$.p_value <- .rowMeans(
                 abs(private$.statistic_permu) >= abs(private$.statistic),
@@ -73,7 +69,7 @@ MultipleComparison <- R6Class(
                 paste(
                     "type:",
                     if ((type <- private$.type) == "permu") {
-                        n_permu <- as.numeric(private$.calculate_n_permu())
+                        n_permu <- as.numeric(ncol(private$.statistic_permu))
                         paste0(type, "(", format(n_permu, digits = digits), ")")
                     } else type
                 ),
@@ -84,9 +80,7 @@ MultipleComparison <- R6Class(
 
             cat(
                 "family-wise confidence level:",
-                paste0(
-                    format(private$.conf_level * 100, digits = digits), "%"
-                )
+                paste0(format(private$.conf_level * 100, digits = digits), "%")
             )
             cat("\n\n")
 
@@ -94,13 +88,13 @@ MultipleComparison <- R6Class(
             print(
                 data.frame(
                     statistic = private$.statistic,
-                    p_value = private$.p_value,
+                    `p-value` = private$.p_value,
                     ifelse(private$.differ, "*", ""),
                     row.names = paste(
                         data_names[private$.group_ij$i],
                         data_names[private$.group_ij$j],
                         sep = " ~ "
-                    ), fix.empty.names = FALSE
+                    ), check.names = FALSE, fix.empty.names = FALSE
                 ), digits = digits
             )
         },

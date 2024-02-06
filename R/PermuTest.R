@@ -145,10 +145,6 @@ PermuTest <- R6Class(
             # private$.statistic_permu <- ...
         },
 
-        .calculate_n_permu = function() {
-            length(private$.statistic_permu)
-        },
-
         .calculate_side = function() {
             private$.side <- switch(private$.trend,
                 "+" = switch(private$.alternative,
@@ -176,7 +172,7 @@ PermuTest <- R6Class(
                 paste(
                     "type:",
                     if ((type <- private$.type) == "permu") {
-                        n_permu <- as.numeric(private$.calculate_n_permu())
+                        n_permu <- as.numeric(length(private$.statistic_permu))
                         paste0(type, "(", format(n_permu, digits = digits), ")")
                     } else type
                 ),
