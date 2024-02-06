@@ -1,6 +1,5 @@
 #include "utils.h"
 
-
 // [[Rcpp::export]]
 NumericVector multicomp_pmt(
     const IntegerVector group_i,
@@ -15,10 +14,12 @@ NumericVector multicomp_pmt(
 
     auto multicomp_update = [&](PermuBar& bar) -> bool {
         Function statistic_func_ij = statistic_func(data, group);
+
         R_len_t k;
         for (k = 0; k < n_pair - 1; k++) {
             bar.update(as<double>(statistic_func_ij(group_i[k], group_j[k])));
         };
+
         return bar.update(as<double>(statistic_func_ij(group_i[k], group_j[k])));
     };
 

@@ -1,6 +1,5 @@
 #include "utils.h"
 
-
 // [[Rcpp::export]]
 NumericVector ksample_pmt(
     const NumericVector data,

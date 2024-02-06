@@ -1,6 +1,5 @@
 #include "utils.h"
 
-
 // [[Rcpp::export]]
 NumericVector paired_pmt(
     const R_len_t n,
@@ -16,6 +15,7 @@ NumericVector paired_pmt(
         for (R_len_t j = 0; j < n; j++) {
             swapped[j] = ((i & (1 << j)) != 0);
         }
+
         return bar.update(as<double>(statistic_func(swapped)));
     };
 

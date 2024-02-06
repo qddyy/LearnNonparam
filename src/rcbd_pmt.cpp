@@ -1,6 +1,5 @@
 #include "utils.h"
 
-
 // [[Rcpp::export]]
 NumericVector rcbd_pmt(
     NumericMatrix data,

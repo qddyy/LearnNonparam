@@ -1,6 +1,5 @@
 #include "utils.h"
 
-
 // [[Rcpp::export]]
 NumericVector association_pmt(
     const NumericVector x,

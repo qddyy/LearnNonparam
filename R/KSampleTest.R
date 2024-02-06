@@ -19,8 +19,7 @@ KSampleTest <- R6Class(
             }
 
             private$.data <- unlist(
-                private$.raw_data,
-                recursive = FALSE, use.names = FALSE
+                private$.raw_data, recursive = FALSE, use.names = FALSE
             )
             names(private$.data) <- rep.int(
                 seq_along(private$.raw_data),

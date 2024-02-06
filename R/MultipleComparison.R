@@ -114,8 +114,7 @@ MultipleComparison <- R6Class(
 
             par(oma = c(0, 0, 3, 0))
             .mapply(
-                dots = dots, MoreArgs = NULL,
-                FUN = {
+                dots = dots, MoreArgs = NULL, FUN = {
                     data_names <- names(private$.raw_data)
                     function(i, j, k) {
                         do_call(

@@ -1,6 +1,5 @@
 #include "utils.h"
 
-
 // [[Rcpp::export]]
 NumericVector table_pmt(
     IntegerVector row_loc,
@@ -17,6 +16,7 @@ NumericVector table_pmt(
         for (R_len_t i = 0; i < n; i++) {
             data(row_loc[i], col_loc[i])++;
         }
+
         return bar.update(as<double>(statistic_func(data)));
     };
 
