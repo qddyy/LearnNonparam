@@ -5,7 +5,7 @@
 \alias{onesample.quantile}
 \title{Quantile Test}
 \description{
-Performs one sample quantile test on data vectors. In addition, a confidence interval will be calculated.
+Performs quantile test on a single data vector. In addition, an estimation and a confidence interval for the desired quantile will be calculated.
 }
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:OneSampleTest]{LearnNonparam::OneSampleTest}} -> \code{Quantile}
@@ -13,7 +13,7 @@ Performs one sample quantile test on data vectors. In addition, a confidence int
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{prob}}{The probability.}
+\item{\code{quantile}}{The desired quantile.}
 
 \item{\code{correct}}{Whether to apply continuity correction.}
 }
@@ -45,7 +45,7 @@ Create a new \code{Quantile} object.
   alternative = c("two_sided", "less", "greater"),
   null_value = 0,
   conf_level = 0.95,
-  prob = 0.5,
+  quantile = 0.5,
   correct = TRUE
 )}\if{html}{\out{</div>}}
 }
@@ -57,11 +57,11 @@ Create a new \code{Quantile} object.
 
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 
-\item{\code{null_value}}{a number specifying the value of the parameter in the null hypothesis.}
+\item{\code{null_value}}{a number indicating the value of the parameter in the null hypothesis.}
 
-\item{\code{conf_level}}{a number specifying confidence level of the interval.}
+\item{\code{conf_level}}{a number indicating confidence level of the interval.}
 
-\item{\code{prob}}{a numeric between 0 and 1 indicating the probability.}
+\item{\code{quantile}}{a numeric between 0 and 1 indicating the desired quantile.}
 
 \item{\code{correct}}{a logical indicating whether to apply continuity correction in the normal approximation for the p-value.}
 }

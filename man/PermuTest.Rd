@@ -107,7 +107,7 @@ Plot histogram(s) of the permutation distribution. Note that it works only if th
 \describe{
 \item{\code{style}}{a character string specifying which package to be used.}
 
-\item{\code{...}}{extra parameters passed to \code{graphics::hist} or \code{ggplot2::stat_bin}.}
+\item{\code{...}}{extra parameters passed to \code{graphics::hist()} or \code{ggplot2::stat_bin()}.}
 }
 \if{html}{\out{</div>}}
 }

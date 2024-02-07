@@ -5,7 +5,7 @@
 \alias{twosample.difference}
 \title{Two Sample Test Based on Mean or Median}
 \description{
-Performs mean based two sample permutation test on data vectors.
+Performs mean/median based two sample test on data vectors.
 }
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{Difference}
@@ -45,7 +45,7 @@ Create a new \code{Difference} object.
 
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 
-\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer indicating how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
 }
 \if{html}{\out{</div>}}
 }

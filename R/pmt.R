@@ -1,13 +1,13 @@
 #' @title Syntactic Sugar for Object Construction
 #' 
-#' @description construct a test object in a unified way.
+#' @description Construct test objects in a unified way.
 #' 
 #' @name pmt
 
 
 #' @rdname pmt
 #' 
-#' @param key a character string corresponding to the desired test. Check `pmts` for valid keys.
+#' @param key a character string corresponding to the desired test. Check `pmts()` for valid keys.
 #' @param ... extra parameters passed to the constructor.
 #' 
 #' @export
@@ -18,7 +18,7 @@ pmt <- function(key, ...) {
         stop(
             "The key '", key,
             "' is not valid. ",
-            "Check 'pmts' for valid keys."
+            "Check `pmts()` for valid keys."
         )
     }
 }
@@ -26,14 +26,17 @@ pmt <- function(key, ...) {
 
 #' @rdname pmt
 #' 
-#' @param which a character string specifying which tests to show.
+#' @param which a character string specifying the desired tests.
 #' 
 #' @export
 pmts <- function(
     which = c(
-        "all",
-        "onesample", "twosample", "ksample", "multicomp",
-        "paired", "rcbd", "association", "table"
+        "onesample", "twosample",
+        "ksample", "multicomp",
+        "paired", "rcbd",
+        "association",
+        "table",
+        "all"
     )
 ) {
     which <- match.arg(which)
@@ -68,7 +71,7 @@ implemented <- list(
     twosample.rmd = RatioMeanDeviance,
     twosample.ks = KolmogorovSmirnov,
 
-    ksample.anova = ANOVA,
+    ksample.f = KSampleF,
     ksample.kw = KruskalWallis,
     ksample.jt = JonckheereTerpstra,
 
@@ -77,7 +80,7 @@ implemented <- list(
     paired.sign = Sign,
     paired.difference = PairedDifference,
 
-    rcbd.anova = RCBDANOVA,
+    rcbd.f = RCBDF,
     rcbd.friedman = Friedman,
     rcbd.page = Page,
 

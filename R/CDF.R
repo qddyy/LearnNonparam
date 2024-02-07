@@ -1,6 +1,6 @@
 #' @title `r CDF$private_fields$.name`
 #' 
-#' @description Performs statistical inference on population cdf.
+#' @description Performs statistical inference on population CDF.
 #' 
 #' @aliases onesample.cdf
 #' 
@@ -26,7 +26,7 @@ CDF <- R6Class(
             self$conf_level <- conf_level
         },
 
-        #' @description Plot the estimate and confidence bounds for population cdf of the data.
+        #' @description Plot the estimate and confidence bounds for population CDF.
         #' 
         #' @template plot_params
         #' 

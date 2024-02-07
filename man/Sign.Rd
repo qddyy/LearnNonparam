@@ -3,7 +3,7 @@
 \name{Sign}
 \alias{Sign}
 \alias{paired.sign}
-\title{Sign Test}
+\title{Two Sample Sign Test}
 \description{
 Performs two sample sign test on data vectors.
 }
@@ -53,7 +53,7 @@ Create a new \code{Sign} object.
 
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 
-\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer indicating how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
 
 \item{\code{correct}}{a logical indicating whether to apply continuity correction in the normal approximation for the p-value.}
 }

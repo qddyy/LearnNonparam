@@ -1,6 +1,6 @@
 #' @title `r KruskalWallis$private_fields$.name`
 #' 
-#' @description Performs k sample Kruskal-Wallis Test on data vectors.
+#' @description Performs Kruskal-Wallis test on data vectors.
 #' 
 #' @aliases ksample.kw
 #' 

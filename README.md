@@ -16,6 +16,10 @@ check](https://github.com/qddyy/LearnNonparam/workflows/R-CMD-check/badge.svg)](
 This package implements some of the non-parametric tests in chapters 1-5
 of [Higgins (2003)](#references).
 
+It depends on [R6](https://CRAN.R-project.org/package=R6) for object
+oriented design and [Rcpp](https://CRAN.R-project.org/package=Rcpp) for
+integration of R and C++.
+
 Examples in the book can be found
 [here](https://qddyy.github.io/LearnNonparam/articles/examples).
 
@@ -28,14 +32,15 @@ pak::pkg_install("qddyy/LearnNonparam")
 
 ## Usage
 
-- Create a test object (for example, a `Wilcoxon` object)
+- Construct a test object
+
+  - from some R6 class directly
 
   ``` r
   t <- Wilcoxon$new(alternative = "two_sided", type = "permu", n_permu = 1e6)
   ```
 
-  or you can use `pmt` (**p**er**m**utation **t**est) function
-  (*Recommended*):
+  - using `pmt` (**p**er**m**utation **t**est) function (*recommended*)
 
   ``` r
   t <- pmt("twosample.wilcoxon", alternative = "two_sided", type = "permu", n_permu = 1e6)
@@ -50,18 +55,20 @@ pak::pkg_install("qddyy/LearnNonparam")
 - Check the results
 
   ``` r
+  t$statistic
+  #> [1] 495
   t$p_value
-  #> [1] 0.000103
+  #> [1] 0.010332
 
   t$print(digits = 2)
   #> 
   #>       Two Sample Wilcoxon Test 
   #> 
   #> scoring: rank    type: permu(1e+06)    method: default
-  #> statistic = 542, p-value = 1e-04
+  #> statistic = 495, p-value = 0.01
   #> alternative hypothesis: true location shift is not equal to 0
-  #> estimate: 1.1
-  #> 95% confidence interval: (0.56, 1.7)
+  #> estimate: 0.99
+  #> 95% confidence interval: (0.097, 1.6)
 
   t$plot(style = "ggplot2", binwidth = 1)
   #> Loading required namespace: ggplot2
@@ -69,16 +76,16 @@ pak::pkg_install("qddyy/LearnNonparam")
 
   <img src="man/figures/README-results-1.svg" width="100%" />
 
-- Modify some attributes and see how the results change
+- Modify some active bindings and see how the results change
 
   ``` r
   t$type <- "asymp"
 
   t$p_value
-  #> [1] 0.0003749904
+  #> [1] 0.02226991
   ```
 
-implemented:
+Tests implemented in this package:
 
 ``` r
 pmts()
@@ -86,28 +93,10 @@ pmts()
 
 <div class="kable-table">
 
-| key                   | class              | test                                                 |
-|:----------------------|:-------------------|:-----------------------------------------------------|
-| onesample.quantile    | Quantile           | Quantile Test                                        |
-| onesample.cdf         | CDF                | Cumulative Distribution Function                     |
-| twosample.difference  | Difference         | Two Sample Test Based on Mean or Median              |
-| twosample.wilcoxon    | Wilcoxon           | Two Sample Wilcoxon Test                             |
-| twosample.scoresum    | ScoreSum           | Score Sum Test                                       |
-| twosample.ansari      | AnsariBradley      | Ansari-Bradley Test                                  |
-| twosample.siegel      | SiegelTukey        | Siegel-Tukey Test                                    |
-| twosample.rmd         | RatioMeanDeviance  | Ratio Mean Deviance Test                             |
-| twosample.ks          | KolmogorovSmirnov  | Two Sample Kolmogorov-Smirnov Test                   |
-| ksample.anova         | ANOVA              | K Sample Test Based on F Statistic                   |
-| ksample.kw            | KruskalWallis      | Kruskal-Wallis Test                                  |
-| ksample.jt            | JonckheereTerpstra | Jonckheere-Terpstra Test                             |
-| multicomp.studentized | Studentized        | Multiple Comparison Based on Studentized Statistic   |
-| paired.sign           | Sign               | Sign Test                                            |
-| paired.difference     | PairedDifference   | Paired Comparison Based on Differences               |
-| rcbd.anova            | RCBDANOVA          | ANOVA for Randomized Complete Block Design           |
-| rcbd.friedman         | Friedman           | Friedman Test                                        |
-| rcbd.page             | Page               | Page Test                                            |
-| association.corr      | Correlation        | Two Sample Test Based on Correlation Coefficient     |
-| table.chisq           | ChiSquare          | Contingency Table Test Based on Chi-square Statistic |
+| key                | class    | test                             |
+|:-------------------|:---------|:---------------------------------|
+| onesample.quantile | Quantile | Quantile Test                    |
+| onesample.cdf      | CDF      | Cumulative Distribution Function |
 
 </div>
 

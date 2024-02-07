@@ -1,6 +1,6 @@
 #' @title `r ScoreSum$private_fields$.name`
 #' 
-#' @description Performs two sample score sum test on data vectors, which is almost the same as wilcoxon rank sum test but uses not only rank but also scoring systems other than it.
+#' @description Performs sum of scores based two sample test on data vectors. It is almost the same as two sample wilcoxon rank sum test but uses more scoring systems.
 #' 
 #' @aliases twosample.scoresum
 #' 
@@ -30,7 +30,7 @@ ScoreSum <- R6Class(
         }
     ),
     private = list(
-        .name = "Score Sum Test",
+        .name = "Two Sample Test Based on Sum of Scores",
 
         .define = function() {
             private$.statistic_func <- function(x, y) sum(x)

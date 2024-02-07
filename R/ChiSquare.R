@@ -1,6 +1,6 @@
 #' @title `r ChiSquare$private_fields$.name`
 #' 
-#' @description Performs chi-square statistic based permutation test on contingency tables.
+#' @description Performs chi-square statistic based test on a contingency table.
 #' 
 #' @aliases table.chisq
 #' 

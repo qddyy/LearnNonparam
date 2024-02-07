@@ -29,6 +29,8 @@ library(LearnNonparam)
 
 This package implements some of the non-parametric tests in chapters 1-5 of [@Higgins2003](#references).
 
+It depends on [R6](https://CRAN.R-project.org/package=R6) for object oriented design and [Rcpp](https://CRAN.R-project.org/package=Rcpp) for integration of R and C++.
+
 Examples in the book can be found [here](https://qddyy.github.io/LearnNonparam/articles/examples). 
 
 ## Installation
@@ -40,12 +42,13 @@ pak::pkg_install("qddyy/LearnNonparam")
 
 ## Usage
 
-- Create a test object (for example, a `Wilcoxon` object)
+- Construct a test object
+    - from some R6 class directly
     ```{r, eval = FALSE}
     t <- Wilcoxon$new(alternative = "two_sided", type = "permu", n_permu = 1e6)
     ```
 
-    or you can use `pmt` (**p**er**m**utation **t**est) function (*Recommended*):
+    - using `pmt` (**p**er**m**utation **t**est) function (*recommended*)
     ```{r, create}
     t <- pmt("twosample.wilcoxon", alternative = "two_sided", type = "permu", n_permu = 1e6)
     ```
@@ -57,6 +60,7 @@ pak::pkg_install("qddyy/LearnNonparam")
 
 - Check the results
     ```{r, results}
+    t$statistic
     t$p_value
 
     t$print(digits = 2)
@@ -64,14 +68,14 @@ pak::pkg_install("qddyy/LearnNonparam")
     t$plot(style = "ggplot2", binwidth = 1)
     ```
 
-- Modify some attributes and see how the results change
+- Modify some active bindings and see how the results change
     ```{r, modify}
     t$type <- "asymp"
 
     t$p_value
     ```
 
-implemented:
+Tests implemented in this package:
 
 ```{r}
 pmts()

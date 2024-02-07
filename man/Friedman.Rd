@@ -5,7 +5,7 @@
 \alias{rcbd.friedman}
 \title{Friedman Test}
 \description{
-Performs Friedman test on data for a randomized complete block design.
+Performs Friedman test on data collected in a randomized complete block design.
 }
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:RCBDTest]{LearnNonparam::RCBDTest}} -> \code{Friedman}
@@ -39,7 +39,7 @@ Create a new \code{Friedman} object.
 \describe{
 \item{\code{type}}{a character string specifying the way to calculate the p-value.}
 
-\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer indicating how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
 }
 \if{html}{\out{</div>}}
 }

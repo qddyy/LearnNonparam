@@ -34,7 +34,7 @@ set.seed(2023)
 # See ?Quantile or ?onesample.quantile
 t <- pmt(
     "onesample.quantile", alternative = "greater",
-    prob = 0.5, null_value = 75,
+    quantile = 0.5, null_value = 75,
     type = "asymp", correct = FALSE
 )
 
@@ -64,7 +64,7 @@ t$plot(style = "ggplot2")
 # See ?Quantile or ?onesample.quantile
 t <- pmt(
     "onesample.quantile",
-    p = 0.25, null_value = 0, conf_level = 0.90
+    quantile = 0.25, null_value = 0, conf_level = 0.90
 )
 
 # See ?Table1.2.1
@@ -219,9 +219,9 @@ t$p_value
 ## Example 3.1.1
 
 ```{r}
-# See ?ANOVA or ?ksample.anova
+# See ?KSampleF or ?ksample.f
 t <- pmt(
-    "ksample.anova", type = "asymp"
+    "ksample.f", type = "asymp"
 )
 
 # See ?Table3.1.2
@@ -410,9 +410,9 @@ t$p_value
 ## Example 4.4.1
 
 ```{r}
-# See ?RCBDANOVA or ?rcbd.anova
+# See ?RCBDF or ?rcbd.f
 t <- pmt(
-    "rcbd.anova", n_permu = 5000
+    "rcbd.f", n_permu = 5000
 )
 
 # See ?Table4.4.3

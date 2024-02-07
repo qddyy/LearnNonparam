@@ -1,6 +1,6 @@
 #' @title `r PairedDifference$private_fields$.name`
 #' 
-#' @description Performs two sample signed score test on data vectors.
+#' @description Performs differences based paired comparison on data vectors.
 #' 
 #' @aliases paired.difference
 #' 

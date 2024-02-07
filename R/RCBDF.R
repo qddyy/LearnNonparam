@@ -1,8 +1,8 @@
-#' @title `r RCBDANOVA$private_fields$.name`
+#' @title `r RCBDF$private_fields$.name`
 #' 
-#' @description Performs F-statistic based permutation test on data for a randomized complete block design.
+#' @description Performs F statistic based test on data collected in a randomized complete block design.
 #' 
-#' @aliases rcbd.anova
+#' @aliases rcbd.f
 #' 
 #' @export
 #' 
@@ -10,16 +10,16 @@
 #' @importFrom stats pf
 
 
-RCBDANOVA <- R6Class(
-    classname = "RCBDANOVA",
+RCBDF <- R6Class(
+    classname = "RCBDF",
     inherit = RCBDTest,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `RCBDANOVA` object.
+        #' @description Create a new `RCBDF` object.
         #' 
         #' @template init_params
         #' 
-        #' @return A `RCBDANOVA` object.
+        #' @return A `RCBDF` object.
         initialize = function(
             type = c("permu", "asymp"),
             n_permu = 0L
@@ -29,7 +29,7 @@ RCBDANOVA <- R6Class(
         }
     ),
     private = list(
-        .name = "ANOVA for Randomized Complete Block Design",
+        .name = "Test for Randomized Complete Block Design Based on F Statistic",
 
         .define = function() {
             m <- nrow(private$.data)

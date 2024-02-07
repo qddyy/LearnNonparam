@@ -1,6 +1,6 @@
 #' @title RCBDTest Class
 #' 
-#' @description Abstract class for tests for randomized complete block design.
+#' @description Abstract class for tests on data collected in randomized complete block designs.
 #' 
 #' 
 #' @export

@@ -8,17 +8,17 @@
 pmt(key, ...)
 
 pmts(
-  which = c("all", "onesample", "twosample", "ksample", "multicomp", "paired", "rcbd",
-    "association", "table")
+  which = c("onesample", "twosample", "ksample", "multicomp", "paired", "rcbd",
+    "association", "table", "all")
 )
 }
 \arguments{
-\item{key}{a character string corresponding to the desired test. Check \code{pmts} for valid keys.}
+\item{key}{a character string corresponding to the desired test. Check \code{pmts()} for valid keys.}
 
 \item{...}{extra parameters passed to the constructor.}
 
-\item{which}{a character string specifying which tests to show.}
+\item{which}{a character string specifying the desired tests.}
 }
 \description{
-construct a test object in a unified way.
+Construct test objects in a unified way.
 }

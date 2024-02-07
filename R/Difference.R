@@ -1,6 +1,6 @@
 #' @title `r Difference$private_fields$.name`
 #' 
-#' @description Performs mean based two sample permutation test on data vectors.
+#' @description Performs mean/median based two sample test on data vectors.
 #' 
 #' @aliases twosample.difference
 #' 

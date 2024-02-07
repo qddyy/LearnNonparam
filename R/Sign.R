@@ -32,7 +32,7 @@ Sign <- R6Class(
         }
     ),
     private = list(
-        .name = "Sign Test",
+        .name = "Two Sample Sign Test",
 
         .correct = NULL,
 

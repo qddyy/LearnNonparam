@@ -35,9 +35,9 @@ get_data <- function(call, env) {
 
             data_i <- eval(data_exprs[[i]], envir = env)
             if (!is.numeric(data_i)) {
-                stop("Sample ", i, " is not numeric")
+                stop("Data vector ", i, " is not numeric")
             } else if (anyNA(data_i)) {
-                stop("Sample ", i, " contains NA")
+                stop("Data vector ", i, " contains NA")
             } else data_i
         }
     ), data_names)

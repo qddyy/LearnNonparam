@@ -1,6 +1,6 @@
 #' @title TwoSampleAssociationTest Class
 #' 
-#' @description Abstract class for two sample tests for association.
+#' @description Abstract class for two sample association tests.
 #' 
 #' 
 #' @export

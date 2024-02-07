@@ -1,6 +1,6 @@
 #' @title `r Correlation$private_fields$.name`
 #' 
-#' @description Performs correlation coefficient based two sample permutation test on data vectors.
+#' @description Performs correlation coefficient based two sample association test on data vectors.
 #' 
 #' @aliases association.corr
 #' 
@@ -34,7 +34,7 @@ Correlation <- R6Class(
         }
     ),
     private = list(
-        .name = "Two Sample Test Based on Correlation Coefficient",
+        .name = "Test for Association Based on Correlation Coefficients",
 
         .null_value = 0,
 

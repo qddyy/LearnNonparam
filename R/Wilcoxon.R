@@ -1,6 +1,6 @@
 #' @title `r Wilcoxon$private_fields$.name`
 #' 
-#' @description Performs two sample Wilcoxon test, which is equivalant to the Mann-Whitney test, on data vectors. In addition, an estimation and a confidence interval of the location parameter will be calculated.
+#' @description Performs two sample wilcoxon test on data vectors. In addition, an estimation and a confidence interval for the location shift will be calculated.
 #' 
 #' @aliases twosample.wilcoxon
 #' 

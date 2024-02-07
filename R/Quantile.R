@@ -1,13 +1,13 @@
 #' @title `r Quantile$private_fields$.name`
 #' 
-#' @description Performs one sample quantile test on data vectors. In addition, a confidence interval will be calculated.
+#' @description Performs quantile test on a single data vector. In addition, an estimation and a confidence interval for the desired quantile will be calculated.
 #' 
 #' @aliases onesample.quantile
 #' 
 #' @export
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom stats pnorm qnorm
+#' @importFrom stats pnorm qnorm quantile
 
 
 Quantile <- R6Class(
@@ -18,31 +18,31 @@ Quantile <- R6Class(
         #' @description Create a new `Quantile` object.
         #' 
         #' @template init_params
-        #' @param prob a numeric between 0 and 1 indicating the probability.
+        #' @param quantile a numeric between 0 and 1 indicating the desired quantile.
         #' 
         #' @return A `Quantile` object.
         initialize = function(
             type = c("asymp", "exact"),
             alternative = c("two_sided", "less", "greater"),
             null_value = 0, conf_level = 0.95,
-            prob = 0.5, correct = TRUE
+            quantile = 0.5, correct = TRUE
         ) {
             self$type <- type
             self$alternative <- alternative
             self$null_value <- null_value
             self$conf_level <- conf_level
-            self$prob <- prob
+            self$quantile <- quantile
             self$correct <- correct
         }
     ),
     private = list(
         .name = "Quantile Test",
 
-        .prob = NULL,
+        .quantile = NULL,
         .correct = NULL,
 
         .define = function() {
-            private$.param_name <- paste(private$.prob, "quantile")
+            private$.param_name <- paste(private$.quantile, "quantile")
         },
 
         .calculate_statistic = function() {
@@ -51,7 +51,9 @@ Quantile <- R6Class(
 
         .calculate_p = function() {
             n <- length(private$.data)
-            p <- private$.prob
+            p <- private$.quantile
+
+            private$.estimate <- quantile(private$.data, p, names = FALSE)
 
             if (private$.type == "exact") {
                 private$.p_value <- get_p_binom(
@@ -73,7 +75,7 @@ Quantile <- R6Class(
         .calculate_extra = function() {
             n <- length(private$.data)
             beta <- 1 - (1 - private$.conf_level) / 2
-            p <- private$.prob
+            p <- private$.quantile
 
             d <- qnorm(beta) * sqrt(n * p * (1 - p))
             a <- round(p * n - d)
@@ -93,21 +95,21 @@ Quantile <- R6Class(
         }
     ),
     active = list(
-        #' @field prob The probability.
-        prob = function(value) {
+        #' @field quantile The desired quantile.
+        quantile = function(value) {
             if (missing(value)) {
-                private$.prob
+                private$.quantile
             } else if (
                 length(value) == 1 & is.finite(value) & value >= 0 & value <= 1
             ) {
-                private$.prob <- value
+                private$.quantile <- value
                 if (!is.null(private$.raw_data)) {
                     private$.define()
                     private$.calculate_p()
                     private$.calculate_extra()
                 }
             } else {
-                stop("'prob' must be a single number between 0 and 1")
+                stop("'quantile' must be a single number between 0 and 1")
             }
         },
         #' @template active_params

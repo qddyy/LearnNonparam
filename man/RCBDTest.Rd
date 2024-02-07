@@ -4,7 +4,7 @@
 \alias{RCBDTest}
 \title{RCBDTest Class}
 \description{
-Abstract class for tests for randomized complete block design.
+Abstract class for tests on data collected in randomized complete block designs.
 }
 \section{Super class}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{RCBDTest}

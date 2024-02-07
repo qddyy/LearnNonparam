@@ -5,7 +5,7 @@
 \alias{ksample.kw}
 \title{Kruskal-Wallis Test}
 \description{
-Performs k sample Kruskal-Wallis Test on data vectors.
+Performs Kruskal-Wallis test on data vectors.
 }
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:KSampleTest]{LearnNonparam::KSampleTest}} -> \code{KruskalWallis}
@@ -45,7 +45,7 @@ Create a new \code{KruskalWallis} object.
 
 \item{\code{scoring}}{a character string specifying which scoring system to be used.}
 
-\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer indicating how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
 }
 \if{html}{\out{</div>}}
 }

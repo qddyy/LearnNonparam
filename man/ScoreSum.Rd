@@ -3,9 +3,9 @@
 \name{ScoreSum}
 \alias{ScoreSum}
 \alias{twosample.scoresum}
-\title{Score Sum Test}
+\title{Two Sample Test Based on Sum of Scores}
 \description{
-Performs two sample score sum test on data vectors, which is almost the same as wilcoxon rank sum test but uses not only rank but also scoring systems other than it.
+Performs sum of scores based two sample test on data vectors. It is almost the same as two sample wilcoxon rank sum test but uses more scoring systems.
 }
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{ScoreSum}
@@ -45,7 +45,7 @@ Create a new \code{ScoreSum} object.
 
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 
-\item{\code{n_permu}}{an integer specifying how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer indicating how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
 }
 \if{html}{\out{</div>}}
 }
