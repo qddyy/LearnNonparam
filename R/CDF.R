@@ -32,14 +32,9 @@ CDF <- R6Class(
         #' 
         #' @return The object itself (invisibly).
         plot = function(style = c("graphics", "ggplot2")) {
-            if (!is.null(private$.raw_data)) {
-                if (match.arg(style) == "graphics") {
-                    private$.plot()
-                } else {
-                    requireNamespace("ggplot2")
-                    print(private$.autoplot())
-                }
-            }
+            private$.type <- "permu"
+            super$plot(style = style)
+            private$.type <- "asymp"
 
             invisible(self)
         }
@@ -76,7 +71,9 @@ CDF <- R6Class(
             )
         },
 
-        .print = function(...) {},
+        .print = function(...) {
+            str(self)
+        },
 
         .plot = function() {
             plot.stepfun(

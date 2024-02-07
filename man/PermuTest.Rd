@@ -97,7 +97,7 @@ The object itself (invisibly).
 \if{html}{\out{<a id="method-PermuTest-plot"></a>}}
 \if{latex}{\out{\hypertarget{method-PermuTest-plot}{}}}
 \subsection{Method \code{plot()}}{
-Plot histogram(s) of the permutation distribution. Note that it works only if the test's type is \code{"permu"}.
+Plot histogram(s) of the permutation distribution. Note that this method only works if \code{type} is set to \code{"permu"}.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PermuTest$plot(style = c("graphics", "ggplot2"), ...)}\if{html}{\out{</div>}}
 }

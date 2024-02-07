@@ -35,27 +35,31 @@ PermuTest <- R6Class(
         #' 
         #' @return The object itself (invisibly).
         print = function(digits = getOption("digits")) {
-            if (!is.null(private$.raw_data)) {
+            if (is.null(private$.raw_data)) {
+                str(self)
+            } else {
                 private$.print(digits = digits)
             }
 
             invisible(self)
         },
 
-        #' @description Plot histogram(s) of the permutation distribution. Note that it works only if the test's type is `"permu"`.
+        #' @description Plot histogram(s) of the permutation distribution. Note that this method only works if `type` is set to `"permu"`.
         #' 
         #' @template plot_params
         #' @param ... extra parameters passed to `graphics::hist()` or `ggplot2::stat_bin()`.
         #' 
         #' @return The object itself (invisibly).
         plot = function(style = c("graphics", "ggplot2"), ...) {
-            if (!is.null(private$.raw_data) & private$.type == "permu") {
-                if (match.arg(style) == "graphics") {
-                    private$.plot(...)
-                } else {
-                    requireNamespace("ggplot2")
-                    print(private$.autoplot(...))
-                }
+            if (is.null(private$.raw_data)) {
+                warning("Please test some data before calling the plot method")
+            } else if (private$.type != "permu") {
+                warning("The plot method only works if type is set to 'permu'")
+            } else if (match.arg(style) == "graphics") {
+                private$.plot(...)
+            } else {
+                requireNamespace("ggplot2")
+                print(private$.autoplot(...))
             }
 
             invisible(self)
