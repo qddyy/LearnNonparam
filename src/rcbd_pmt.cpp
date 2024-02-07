@@ -36,9 +36,10 @@ NumericVector rcbd_pmt(
     } else {
         PermuBar bar(n_permu, false);
 
+        R_len_t size = data.nrow();
         do {
             for (i = 0; i < n_col; i++) {
-                random_shuffle(data.column(i));
+                random_shuffle(data.column(i), size);
             }
         } while (rcbd_update(bar));
 

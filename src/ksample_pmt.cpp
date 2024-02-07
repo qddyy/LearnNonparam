@@ -22,8 +22,9 @@ NumericVector ksample_pmt(
     } else {
         PermuBar bar(n_permu, false);
 
+        R_len_t size = group.size();
         do {
-            random_shuffle(group);
+            random_shuffle(group, size);
         } while (ksample_update(bar));
 
         return bar.statistic_permu;

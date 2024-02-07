@@ -22,8 +22,9 @@ NumericVector twosample_pmt(
     } else {
         PermuBar bar(n_permu, false);
 
+        R_len_t size = where_y.size();
         do {
-            random_shuffle(where_y);
+            random_shuffle(where_y, size);
         } while (twosample_update(bar));
 
         return bar.statistic_permu;

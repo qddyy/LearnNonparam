@@ -22,8 +22,9 @@ NumericVector association_pmt(
     } else {
         PermuBar bar(n_permu, false);
 
+        R_len_t size = y.size();
         do {
-            random_shuffle(y);
+            random_shuffle(y, size);
         } while (association_update(bar));
 
         return bar.statistic_permu;

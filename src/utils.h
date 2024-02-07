@@ -19,12 +19,11 @@ T rand_int(T n)
 // random shuffle
 
 template <typename T>
-void random_shuffle(T&& v)
+void random_shuffle(T&& v, R_len_t v_size)
 {
     R_len_t j;
-    R_len_t n = v.size();
-    for (R_len_t i = 0; i < n - 1; i++) {
-        j = i + rand_int(n - i);
+    for (R_len_t i = 0; i < v_size - 1; i++) {
+        j = i + rand_int(v_size - i);
         std::swap(v[i], v[j]);
     }
 }
