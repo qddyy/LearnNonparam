@@ -15,7 +15,7 @@ RCBDTest <- R6Class(
     private = list(
         .preprocess = function() {
             if (length(unique(lengths(private$.raw_data))) > 1) {
-                stop_without_call("All samples must be of equal length")
+                stop("All samples must be of equal length")
             }
 
             private$.data <- unname(do_call(cbind, private$.raw_data))

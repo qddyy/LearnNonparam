@@ -15,7 +15,7 @@ OneSampleTest <- R6Class(
     private = list(
         .preprocess = function() {
             if (length(private$.raw_data) != 1) {
-                stop_without_call("Must provide only one sample")
+                stop("Must provide only one sample")
             }
 
             private$.data <- private$.raw_data[[1]]

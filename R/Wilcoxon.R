@@ -53,7 +53,7 @@ Wilcoxon <- R6Class(
 
             ties <- tabulate(c(private$.data$x, private$.data$y))
             if (any(ties > 1)) {
-                warn_without_call("There exist ties, setting 'type' to 'asymp'")
+                warning("There exist ties, setting 'type' to 'asymp'")
                 private$.type <- "asymp"
             }
 
@@ -113,7 +113,7 @@ Wilcoxon <- R6Class(
                     private$.calculate_p()
                 }
             } else {
-                stop_without_call("'correct' must be a single logical value")
+                stop("'correct' must be a single logical value")
             }
         }
     )

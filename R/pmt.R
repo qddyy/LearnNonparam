@@ -15,7 +15,7 @@ pmt <- function(key, ...) {
     if (key %in% names(implemented)) {
         implemented[[key]]$new(...)
     } else {
-        stop_without_call(
+        stop(
             "The key '", key,
             "' is not valid. ",
             "Check 'pmts' for valid keys."

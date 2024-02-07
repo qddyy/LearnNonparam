@@ -1,8 +1,3 @@
-stop_without_call <- function(...) stop(..., call. = FALSE)
-warn_without_call <- function(...) warning(..., call. = FALSE)
-
-deparse_1 <- function(x) paste(deparse(x, width.cutoff = 500), collapse = " ")
-
 do_call <- function(func, default = NULL, fixed = NULL, ...) {
     env_args <- list2env(as.list(default))
     env_args <- list2env(list(...), envir = env_args)
@@ -20,10 +15,7 @@ get_data <- function(call, env) {
     data_exprs <- as.list(call)[-1]
     n_data <- length(data_exprs)
 
-    if (
-        (n_data == 1) &
-        is.list(data_1 <- eval(data_exprs[[1]], envir = env))
-    ) {
+    if (n_data == 1 & is.list(data_1 <- eval(data_exprs[[1]], envir = env))) {
         data_exprs <- data_1
         n_data <- length(data_1)
     }
@@ -36,16 +28,16 @@ get_data <- function(call, env) {
     `names<-`(lapply(
         seq_len(n_data), function(i) {
             if (data_names[[i]] == "") {
-                data_names[[i]] <<- deparse_1(data_exprs[[i]])
+                data_names[[i]] <<- paste(
+                    deparse(data_exprs[[i]], width.cutoff = 500), collapse = " "
+                )
             }
 
             data_i <- eval(data_exprs[[i]], envir = env)
             if (!is.numeric(data_i)) {
-                stop_without_call("The ", i, "-th sample is not numeric")
-            }
-            if (anyNA(data_i)) {
-                warn_without_call("The ", i, "-th sample contains NA, removed")
-                data_i[!is.na(data_i)]
+                stop("Sample ", i, " is not numeric")
+            } else if (anyNA(data_i)) {
+                stop("Sample ", i, " contains NA")
             } else data_i
         }
     ), data_names)

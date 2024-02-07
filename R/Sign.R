@@ -74,7 +74,7 @@ Sign <- R6Class(
                     private$.calculate_p()
                 }
             } else {
-                stop_without_call("'correct' must be a single logical value")
+                stop("'correct' must be a single logical value")
             }
         }
     )

@@ -107,7 +107,7 @@ Quantile <- R6Class(
                     private$.calculate_extra()
                 }
             } else {
-                stop_without_call("'prob' must be a single number between 0 and 1")
+                stop("'prob' must be a single number between 0 and 1")
             }
         },
         #' @template active_params
@@ -120,7 +120,7 @@ Quantile <- R6Class(
                     private$.calculate_p()
                 }
             } else {
-                stop_without_call("'correct' must be a single logical value")
+                stop("'correct' must be a single logical value")
             }
         }
     )

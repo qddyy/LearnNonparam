@@ -15,7 +15,7 @@ KSampleTest <- R6Class(
     private = list(
         .preprocess = function() {
             if (length(private$.raw_data) < 3) {
-                stop_without_call("Must provide at least three samples")
+                stop("Must provide at least three samples")
             }
 
             private$.data <- unlist(

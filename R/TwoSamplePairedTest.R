@@ -17,7 +17,7 @@ TwoSamplePairedTest <- R6Class(
             super$.preprocess()
 
             if (length(private$.data$x) != length(private$.data$y)) {
-                stop_without_call("Both samples must be of equal length")
+                stop("Both samples must be of equal length")
             }
 
             private$.data <- do_call(data.frame, private$.data)

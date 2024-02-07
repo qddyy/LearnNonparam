@@ -15,7 +15,7 @@ TwoSampleTest <- R6Class(
     private = list(
         .preprocess = function() {
             if (length(private$.raw_data) != 2) {
-                stop_without_call("Must provide two samples")
+                stop("Must provide two samples")
             }
 
             private$.data <- `names<-`(private$.raw_data, c("x", "y"))

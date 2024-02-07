@@ -14,7 +14,7 @@ PermuTest <- R6Class(
     cloneable = FALSE,
     public = list(
         initialize = function(...) {
-            stop_without_call("Can't construct an object from abstract class")
+            stop("Can't construct an object from abstract class")
         },
 
         #' @description Perform test on data.
@@ -296,7 +296,7 @@ PermuTest <- R6Class(
             if (missing(value)) {
                 private$.type
             } else if (is.null(choices <- formals(self$initialize)$type)) {
-                stop_without_call(
+                stop(
                     "Can't specify 'type' of a ",
                     "<", class(self)[1], ">", " object"
                 )
@@ -312,7 +312,7 @@ PermuTest <- R6Class(
             if (missing(value)) {
                 private$.method
             } else if (is.null(choices <- formals(self$initialize)$method)) {
-                stop_without_call(
+                stop(
                     "Can't specify 'method' of a ",
                     "<", class(self)[1], ">", " object"
                 )
@@ -328,7 +328,7 @@ PermuTest <- R6Class(
             if (missing(value)) {
                 private$.scoring
             } else if (is.null(choices <- formals(self$initialize)$scoring)) {
-                stop_without_call(
+                stop(
                     "Can't specify 'scoring' of a ",
                     "<", class(self)[1], ">", " object"
                 )
@@ -344,7 +344,7 @@ PermuTest <- R6Class(
             if (missing(value)) {
                 private$.alternative
             } else if (is.null(choices <- formals(self$initialize)$alternative)) {
-                stop_without_call(
+                stop(
                     "Can't specify 'alternative' of a ",
                     "<", class(self)[1], ">", " object"
                 )
@@ -360,7 +360,7 @@ PermuTest <- R6Class(
             if (missing(value)) {
                 private$.null_value
             } else if (is.null(formals(self$initialize)$null_value)) {
-                stop_without_call(
+                stop(
                     "Can't specify 'null_value' of a ",
                     "<", class(self)[1], ">", " object"
                 )
@@ -370,7 +370,7 @@ PermuTest <- R6Class(
                     private$.on_null_value_change()
                 }
             } else {
-                stop_without_call("'null_value' must be a single number")
+                stop("'null_value' must be a single number")
             }
         },
         #' @field conf_level The confidence level of the interval.
@@ -378,7 +378,7 @@ PermuTest <- R6Class(
             if (missing(value)) {
                 private$.conf_level
             } else if (is.null(formals(self$initialize)$conf_level)) {
-                stop_without_call(
+                stop(
                     "Can't specify 'conf_level' of a ",
                     "<", class(self)[1], ">", " object"
                 )
@@ -390,7 +390,7 @@ PermuTest <- R6Class(
                     private$.on_conf_level_change()
                 }
             } else {
-                stop_without_call("'conf_level' must be a single number between 0 and 1")
+                stop("'conf_level' must be a single number between 0 and 1")
             }
         },
         #' @field n_permu The number of permutations used.
@@ -398,7 +398,7 @@ PermuTest <- R6Class(
             if (missing(value)) {
                 private$.n_permu
             } else if (is.null(formals(self$initialize)$n_permu)) {
-                stop_without_call(
+                stop(
                     "Can't specify 'n_permu' of a ",
                     "<", class(self)[1], ">", " object"
                 )
@@ -408,7 +408,7 @@ PermuTest <- R6Class(
                     private$.on_n_permu_change()
                 }
             } else {
-                stop_without_call("'n_permu' must be a non-negative integer")
+                stop("'n_permu' must be a non-negative integer")
             }
         },
 

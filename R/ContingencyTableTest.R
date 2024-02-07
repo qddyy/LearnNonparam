@@ -15,7 +15,7 @@ ContingencyTableTest <- R6Class(
     private = list(
         .preprocess = function() {
             if (length(unique(lengths(private$.raw_data))) > 1) {
-                stop_without_call("All samples must be of equal length")
+                stop("All samples must be of equal length")
             }
 
             private$.data <- unname(
@@ -24,7 +24,7 @@ ContingencyTableTest <- R6Class(
 
             if (any(private$.data < 0)) {
                 private$.data <- NULL
-                stop_without_call("All samples must be non-negative")
+                stop("All samples must be non-negative")
             }
         },
 
