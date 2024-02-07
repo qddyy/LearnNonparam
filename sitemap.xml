@@ -19,9 +19,6 @@
     <loc>/index.html</loc>
   </url>
   <url>
-    <loc>/reference/ANOVA.html</loc>
-  </url>
-  <url>
     <loc>/reference/AnsariBradley.html</loc>
   </url>
   <url>
@@ -44,6 +41,9 @@
   </url>
   <url>
     <loc>/reference/JonckheereTerpstra.html</loc>
+  </url>
+  <url>
+    <loc>/reference/KSampleF.html</loc>
   </url>
   <url>
     <loc>/reference/KSampleTest.html</loc>
@@ -73,7 +73,7 @@
     <loc>/reference/Quantile.html</loc>
   </url>
   <url>
-    <loc>/reference/RCBDANOVA.html</loc>
+    <loc>/reference/RCBDF.html</loc>
   </url>
   <url>
     <loc>/reference/RCBDTest.html</loc>
