@@ -18,7 +18,7 @@ RCBDTest <- R6Class(
                 stop("All samples must be of equal length")
             }
 
-            private$.data <- unname(do_call(cbind, private$.raw_data))
+            private$.data <- unname(do.call(cbind, private$.raw_data))
         },
 
         .calculate_score = function() {

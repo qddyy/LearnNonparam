@@ -20,7 +20,7 @@ TwoSampleAssociationTest <- R6Class(
                 stop("Both samples must be of equal length")
             }
 
-            private$.data <- do_call(data.frame, private$.data)
+            private$.data <- do.call(data.frame, private$.data)
         },
 
         .calculate_score = function() {},

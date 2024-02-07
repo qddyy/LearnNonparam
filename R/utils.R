@@ -1,14 +1,3 @@
-do_call <- function(func, default = NULL, fixed = NULL, ...) {
-    env_args <- list2env(as.list(default))
-    env_args <- list2env(list(...), envir = env_args)
-    env_args <- list2env(as.list(fixed), envir = env_args)
-
-    eval(
-        as.call(c(func, sapply(names(env_args), as.name, simplify = FALSE))),
-        envir = env_args, enclos = parent.frame()
-    )
-}
-
 # for test()
 
 get_data <- function(call, env) {
@@ -41,6 +30,19 @@ get_data <- function(call, env) {
             } else data_i
         }
     ), data_names)
+}
+
+# for plot()
+
+do_call <- function(func, default = NULL, fixed = NULL, ...) {
+    env_args <- list2env(as.list(default))
+    env_args <- list2env(list(...), envir = env_args)
+    env_args <- list2env(as.list(fixed), envir = env_args)
+
+    eval(
+        as.call(c(func, sapply(names(env_args), as.name, simplify = FALSE))),
+        envir = env_args, enclos = parent.frame()
+    )
 }
 
 # for .calculate_score()

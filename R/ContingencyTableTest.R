@@ -19,7 +19,7 @@ ContingencyTableTest <- R6Class(
             }
 
             private$.data <- unname(
-                do_call(cbind, lapply(private$.raw_data, as.integer))
+                do.call(cbind, lapply(private$.raw_data, as.integer))
             )
 
             if (any(private$.data < 0)) {
