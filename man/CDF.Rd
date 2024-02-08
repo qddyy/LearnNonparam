@@ -3,9 +3,9 @@
 \name{CDF}
 \alias{CDF}
 \alias{onesample.cdf}
-\title{Cumulative Distribution Function}
+\title{Inference on Cumulative Distribution Function}
 \description{
-Performs statistical inference on population CDF.
+Performs statistical inference on population cumulative distribution function.
 }
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:OneSampleTest]{LearnNonparam::OneSampleTest}} -> \code{CDF}
@@ -49,7 +49,7 @@ A \code{CDF} object.
 \if{html}{\out{<a id="method-CDF-plot"></a>}}
 \if{latex}{\out{\hypertarget{method-CDF-plot}{}}}
 \subsection{Method \code{plot()}}{
-Plot the estimate and confidence bounds for population CDF.
+Plot the estimate and confidence bounds for population cumulative distribution function.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{CDF$plot(style = c("graphics", "ggplot2"))}\if{html}{\out{</div>}}
 }

@@ -88,7 +88,7 @@ PermuTest <- R6Class(
         .statistic_permu = NULL,
 
         .alternative = "two_sided",
-        .trend = "+",
+        .link = "+",
         .side = NULL,
 
         .p_value = NULL,
@@ -150,7 +150,7 @@ PermuTest <- R6Class(
         },
 
         .calculate_side = function() {
-            private$.side <- switch(private$.trend,
+            private$.side <- switch(private$.link,
                 "+" = switch(private$.alternative,
                     greater = "r", less = "l", two_sided = "lr"
                 ),
@@ -166,6 +166,26 @@ PermuTest <- R6Class(
                 r = private$.statistic_permu >= private$.statistic,
                 lr = abs(private$.statistic_permu) >= abs(private$.statistic)
             ))
+        },
+
+        .on_type_change = function() private$.calculate(),
+        .on_method_change = function() private$.calculate(),
+        .on_scoring_change = function() private$.calculate(),
+        .on_null_value_change = function() private$.calculate(),
+        .on_conf_level_change = function() private$.calculate_extra(),
+        .on_alternative_change = function() {
+            private$.calculate_side()
+            if (private$.type == "permu") {
+                private$.calculate_p_permu()
+            } else {
+                private$.calculate_p()
+            }
+        },
+        .on_n_permu_change = function() {
+            if (private$.type == "permu") {
+                private$.calculate_statistic_permu()
+                private$.calculate_p_permu()
+            }
         },
 
         .print = function(digits) {
@@ -273,25 +293,6 @@ PermuTest <- R6Class(
                         face = "bold", hjust = 0.5
                     )
                 )
-        },
-
-        .on_type_change = function() private$.calculate(),
-        .on_method_change = function() private$.calculate(),
-        .on_scoring_change = function() private$.calculate(),
-        .on_null_value_change = function() private$.calculate(),
-        .on_conf_level_change = function() private$.calculate_extra(),
-        .on_alternative_change = function() {
-            private$.calculate_side()
-            if (private$.type == "permu") {
-                private$.calculate_p_permu()
-            } else {
-                private$.calculate_p()
-            }
-        },
-        .on_n_permu_change = function() {
-            if (private$.type == "permu") {
-                private$.calculate()
-            }
         }
     ),
     active = list(
@@ -369,7 +370,7 @@ PermuTest <- R6Class(
                     "<", class(self)[1], ">", " object"
                 )
             } else if (length(value) == 1 & !is.na(value)) {
-                private$.null_value <- value
+                private$.null_value <- as.numeric(value)
                 if (!is.null(private$.raw_data)) {
                     private$.on_null_value_change()
                 }
@@ -389,7 +390,7 @@ PermuTest <- R6Class(
             } else if (
                 length(value) == 1 & is.finite(value) & value > 0 & value < 1
             ) {
-                private$.conf_level <- value
+                private$.conf_level <- as.numeric(value)
                 if (!is.null(private$.raw_data)) {
                     private$.on_conf_level_change()
                 }

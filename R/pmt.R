@@ -31,12 +31,15 @@ pmt <- function(key, ...) {
 #' @export
 pmts <- function(
     which = c(
-        "onesample", "twosample",
-        "ksample", "multicomp",
-        "paired", "rcbd",
+        "all",
+        "onesample",
+        "twosample",
+        "ksample",
+        "multicomp",
+        "paired",
+        "rcbd",
         "association",
-        "table",
-        "all"
+        "table"
     )
 ) {
     which <- match.arg(which)

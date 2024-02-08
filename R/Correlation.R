@@ -34,7 +34,7 @@ Correlation <- R6Class(
         }
     ),
     private = list(
-        .name = "Test for Association Based on Correlation Coefficients",
+        .name = "Test for Association Between Paired Samples",
 
         .null_value = 0,
 

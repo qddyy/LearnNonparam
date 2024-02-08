@@ -1,6 +1,6 @@
 #' @title `r CDF$private_fields$.name`
 #' 
-#' @description Performs statistical inference on population CDF.
+#' @description Performs statistical inference on population cumulative distribution function.
 #' 
 #' @aliases onesample.cdf
 #' 
@@ -26,7 +26,7 @@ CDF <- R6Class(
             self$conf_level <- conf_level
         },
 
-        #' @description Plot the estimate and confidence bounds for population CDF.
+        #' @description Plot the estimate and confidence bounds for population cumulative distribution function.
         #' 
         #' @template plot_params
         #' 
@@ -40,7 +40,7 @@ CDF <- R6Class(
         }
     ),
     private = list(
-        .name = "Cumulative Distribution Function",
+        .name = "Inference on Cumulative Distribution Function",
 
         .type = "asymp",
 

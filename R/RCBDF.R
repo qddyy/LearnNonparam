@@ -29,7 +29,7 @@ RCBDF <- R6Class(
         }
     ),
     private = list(
-        .name = "Test for Randomized Complete Block Design Based on F Statistic",
+        .name = "Test for RCBD Based on F Statistic",
 
         .define = function() {
             m <- nrow(private$.data)

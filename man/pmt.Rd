@@ -8,8 +8,8 @@
 pmt(key, ...)
 
 pmts(
-  which = c("onesample", "twosample", "ksample", "multicomp", "paired", "rcbd",
-    "association", "table", "all")
+  which = c("all", "onesample", "twosample", "ksample", "multicomp", "paired", "rcbd",
+    "association", "table")
 )
 }
 \arguments{

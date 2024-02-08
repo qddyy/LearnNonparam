@@ -3,7 +3,7 @@
 \name{Correlation}
 \alias{Correlation}
 \alias{association.corr}
-\title{Test for Association Based on Correlation Coefficients}
+\title{Test for Association Between Paired Samples}
 \description{
 Performs correlation coefficient based two sample association test on data vectors.
 }

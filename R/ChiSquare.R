@@ -1,6 +1,6 @@
 #' @title `r ChiSquare$private_fields$.name`
 #' 
-#' @description Performs chi-square statistic based test on a contingency table.
+#' @description Performs chi-square test on a contingency table.
 #' 
 #' @aliases table.chisq
 #' 
@@ -29,7 +29,7 @@ ChiSquare <- R6Class(
         }
     ),
     private = list(
-        .name = "Contingency Table Test Based on Chi-square Statistic",
+        .name = "Chi-Square Test on Contingency Table",
 
         .define = function() {
             m <- nrow(private$.data)

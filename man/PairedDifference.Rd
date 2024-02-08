@@ -13,7 +13,7 @@ Performs differences based paired comparison on data vectors.
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{correct}}{Whether to apply continuity correction.}
+\item{\code{correct}}{Whether to apply continuity correction when \code{scoring} is set to \code{"rank"}.}
 }
 \if{html}{\out{</div>}}
 }

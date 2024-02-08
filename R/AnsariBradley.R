@@ -36,7 +36,7 @@ AnsariBradley <- R6Class(
 
         .scoring = "Ansari-Bradley rank",
         .null_value = 1,
-        .trend = "-",
+        .link = "-",
 
         .calculate_score = function() {
             rank <- rank(c(private$.data$x, private$.data$y))

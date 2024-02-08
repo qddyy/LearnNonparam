@@ -57,7 +57,17 @@ MultipleComparison <- R6Class(
         },
 
         .calculate_extra = function() {
-            private$.differ <- (private$.p_value < 1 - private$.conf_level)
+            private$.differ <- (
+                private$.p_value < 1 - private$.conf_level
+            )
+        },
+
+        .on_n_permu_change = function() {
+            if (private$.type == "permu") {
+                private$.calculate_statistic_permu()
+                private$.calculate_p_permu()
+                private$.calculate_extra()
+            }
         },
 
         .print = function(digits) {

@@ -3,7 +3,7 @@
 \name{RCBDF}
 \alias{RCBDF}
 \alias{rcbd.f}
-\title{Test for Randomized Complete Block Design Based on F Statistic}
+\title{Test for RCBD Based on F Statistic}
 \description{
 Performs F statistic based test on data collected in a randomized complete block design.
 }

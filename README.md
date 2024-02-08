@@ -56,19 +56,19 @@ pak::pkg_install("qddyy/LearnNonparam")
 
   ``` r
   t$statistic
-  #> [1] 495
+  #> [1] 539
   t$p_value
-  #> [1] 0.010332
+  #> [1] 0.000148
 
   t$print(digits = 2)
   #> 
   #>       Two Sample Wilcoxon Test 
   #> 
   #> scoring: rank    type: permu(1e+06)    method: default
-  #> statistic = 495, p-value = 0.01
+  #> statistic = 539, p-value = 0.00015
   #> alternative hypothesis: true location shift is not equal to 0
-  #> estimate: 0.99
-  #> 95% confidence interval: (0.097, 1.6)
+  #> estimate: 1.5
+  #> 95% confidence interval: (0.67, 2.1)
 
   t$plot(style = "ggplot2", binwidth = 1)
   #> Loading required namespace: ggplot2
@@ -82,7 +82,7 @@ pak::pkg_install("qddyy/LearnNonparam")
   t$type <- "asymp"
 
   t$p_value
-  #> [1] 0.02226991
+  #> [1] 0.0005090729
   ```
 
 Tests implemented in this package:
@@ -93,10 +93,28 @@ pmts()
 
 <div class="kable-table">
 
-| key                | class    | test                             |
-|:-------------------|:---------|:---------------------------------|
-| onesample.quantile | Quantile | Quantile Test                    |
-| onesample.cdf      | CDF      | Cumulative Distribution Function |
+| key                   | class              | test                                               |
+|:----------------------|:-------------------|:---------------------------------------------------|
+| onesample.quantile    | Quantile           | Quantile Test                                      |
+| onesample.cdf         | CDF                | Inference on Cumulative Distribution Function      |
+| twosample.difference  | Difference         | Two Sample Test Based on Mean or Median            |
+| twosample.wilcoxon    | Wilcoxon           | Two Sample Wilcoxon Test                           |
+| twosample.scoresum    | ScoreSum           | Two Sample Test Based on Sum of Scores             |
+| twosample.ansari      | AnsariBradley      | Ansari-Bradley Test                                |
+| twosample.siegel      | SiegelTukey        | Siegel-Tukey Test                                  |
+| twosample.rmd         | RatioMeanDeviance  | Ratio Mean Deviance Test                           |
+| twosample.ks          | KolmogorovSmirnov  | Two Sample Kolmogorov-Smirnov Test                 |
+| ksample.f             | KSampleF           | K Sample Test Based on F Statistic                 |
+| ksample.kw            | KruskalWallis      | Kruskal-Wallis Test                                |
+| ksample.jt            | JonckheereTerpstra | Jonckheere-Terpstra Test                           |
+| multicomp.studentized | Studentized        | Multiple Comparison Based on Studentized Statistic |
+| paired.sign           | Sign               | Two Sample Sign Test                               |
+| paired.difference     | PairedDifference   | Paired Comparison Based on Differences             |
+| rcbd.f                | RCBDF              | Test for RCBD Based on F Statistic                 |
+| rcbd.friedman         | Friedman           | Friedman Test                                      |
+| rcbd.page             | Page               | Page Test                                          |
+| association.corr      | Correlation        | Test for Association Between Paired Samples        |
+| table.chisq           | ChiSquare          | Chi-Square Test on Contingency Table               |
 
 </div>
 

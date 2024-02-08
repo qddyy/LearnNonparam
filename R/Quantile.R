@@ -38,6 +38,8 @@ Quantile <- R6Class(
     private = list(
         .name = "Quantile Test",
 
+        .link = "-",
+
         .quantile = NULL,
         .correct = NULL,
 
@@ -50,8 +52,8 @@ Quantile <- R6Class(
         },
 
         .calculate_p = function() {
-            n <- length(private$.data)
             p <- private$.quantile
+            n <- length(private$.data)
 
             private$.estimate <- quantile(private$.data, p, names = FALSE)
 
@@ -73,13 +75,12 @@ Quantile <- R6Class(
         },
 
         .calculate_extra = function() {
-            n <- length(private$.data)
-            beta <- 1 - (1 - private$.conf_level) / 2
             p <- private$.quantile
+            n <- length(private$.data)
 
-            d <- qnorm(beta) * sqrt(n * p * (1 - p))
-            a <- round(p * n - d)
-            b <- round(p * n + 1 + d)
+            d <- qnorm(1 - (1 - private$.conf_level) / 2) * sqrt(n * p * (1 - p))
+            a <- round(n * p - d)
+            b <- round(n * p + 1 + d)
 
             y <- sort(private$.data)
 
@@ -100,9 +101,9 @@ Quantile <- R6Class(
             if (missing(value)) {
                 private$.quantile
             } else if (
-                length(value) == 1 & is.finite(value) & value >= 0 & value <= 1
+                length(value) == 1 & is.finite(value) & value > 0 & value < 1
             ) {
-                private$.quantile <- value
+                private$.quantile <- as.numeric(value)
                 if (!is.null(private$.raw_data)) {
                     private$.define()
                     private$.calculate_p()
@@ -117,7 +118,7 @@ Quantile <- R6Class(
             if (missing(value)) {
                 private$.correct
             } else if (length(value) == 1 & is.logical(value)) {
-                private$.correct <- value
+                private$.correct <- as.logical(value)
                 if (!is.null(private$.raw_data) & private$.type == "asymp") {
                     private$.calculate_p()
                 }

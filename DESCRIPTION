@@ -1,9 +1,9 @@
 Package: LearnNonparam
-Title: Non-parametric Tests
+Title: Nonparametric Tests
 Version: 1.2.1
 Authors@R: 
     person("Yan", "Du", , "isduyan@outlook.com", role = c("aut", "cre"))
-Description: Implements various non-parametric tests in chapters 1-5 of the book "An introduction to modern nonparametric statistics" by James J. Higgins. 
+Description: Implements various nonparametric tests in chapters 1-5 of the book "An introduction to modern nonparametric statistics" by James J. Higgins. 
 License: GPL (>= 2)
 Encoding: UTF-8
 Roxygen: list(markdown = TRUE)

@@ -80,12 +80,12 @@ PairedDifference <- R6Class(
         }
     ),
     active = list(
-        #' @template active_params
+        #' @field correct Whether to apply continuity correction when `scoring` is set to `"rank"`.
         correct = function(value) {
             if (missing(value)) {
                 private$.correct
             } else if (length(value) == 1 & is.logical(value)) {
-                private$.correct <- value
+                private$.correct <- as.logical(value)
                 if (
                     !is.null(private$.raw_data) &
                     private$.type == "asymp" & private$.scoring == "rank"

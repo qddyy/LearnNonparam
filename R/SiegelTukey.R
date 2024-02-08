@@ -36,7 +36,7 @@ SiegelTukey <- R6Class(
 
         .scoring = "Siegel-Tukey rank",
         .null_value = 1,
-        .trend = "-",
+        .link = "-",
 
         .calculate_score = function() {
             c_xy <- c(private$.data$x, private$.data$y)

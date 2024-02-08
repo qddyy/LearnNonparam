@@ -3,9 +3,9 @@
 \name{ChiSquare}
 \alias{ChiSquare}
 \alias{table.chisq}
-\title{Contingency Table Test Based on Chi-square Statistic}
+\title{Chi-Square Test on Contingency Table}
 \description{
-Performs chi-square statistic based test on a contingency table.
+Performs chi-square test on a contingency table.
 }
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:ContingencyTableTest]{LearnNonparam::ContingencyTableTest}} -> \code{ChiSquare}

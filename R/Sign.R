@@ -69,7 +69,7 @@ Sign <- R6Class(
             if (missing(value)) {
                 private$.correct
             } else if (length(value) == 1 & is.logical(value)) {
-                private$.correct <- value
+                private$.correct <- as.logical(value)
                 if (!is.null(private$.raw_data) & private$.type == "asymp") {
                     private$.calculate_p()
                 }
