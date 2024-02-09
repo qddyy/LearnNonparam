@@ -100,7 +100,5 @@ get_p_binom <- function(x, n, p, side) {
                 pbinom(y - 1, n, p) + pbinom(x - 1, n, p, lower.tail = FALSE)
             } else 1
         }
-    } else {
-        get_p_decrete(x, "binom", side, size = n, prob = p)
-    }
+    } else get_p_decrete(x, "binom", side, size = n, prob = p)
 }

@@ -34,7 +34,7 @@ set.seed(2023)
 # See ?Quantile or ?onesample.quantile
 t <- pmt(
     "onesample.quantile", alternative = "greater",
-    quantile = 0.5, null_value = 75,
+    prob = 0.5, null_value = 75,
     type = "asymp", correct = FALSE
 )
 
@@ -64,7 +64,7 @@ t$plot(style = "ggplot2")
 # See ?Quantile or ?onesample.quantile
 t <- pmt(
     "onesample.quantile",
-    quantile = 0.25, null_value = 0, conf_level = 0.90
+    prob = 0.25, null_value = 0, conf_level = 0.90
 )
 
 # See ?Table1.2.1
