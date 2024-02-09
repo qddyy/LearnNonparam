@@ -3,8 +3,6 @@
 #' @description Abstract class for one sample tests.
 #' 
 #' 
-#' @export
-#' 
 #' @importFrom R6 R6Class
 
 
@@ -19,9 +17,6 @@ OneSampleTest <- R6Class(
             }
 
             private$.data <- private$.raw_data[[1]]
-        },
-
-        .plot = function(...) {},
-        .autoplot = function(...) {}
+        }
     )
 )
