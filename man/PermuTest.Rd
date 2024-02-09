@@ -17,7 +17,7 @@ Abstract class for permutation tests.
 
 \item{\code{alternative}}{The alternative hypothesis.}
 
-\item{\code{null_value}}{The true value of the parameter in the null hypothesis.}
+\item{\code{null_value}}{The hypothesized value of the parameter in the null hypothesis.}
 
 \item{\code{conf_level}}{The confidence level of the interval.}
 

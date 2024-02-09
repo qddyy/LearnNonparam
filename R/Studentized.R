@@ -19,7 +19,7 @@ Studentized <- R6Class(
         #' 
         #' @template init_params
         #' @param method a character string specifying whether to use Bonferroni's method or Tukey's HSD method.
-        #' @param conf_level a numeric value between zero and one giving the family-wise confidence level to use.
+        #' @param conf_level a number between zero and one indicating the family-wise confidence level to use.
         #' 
         #' @return A `Studentized` object.
         initialize = function(

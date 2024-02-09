@@ -13,7 +13,7 @@ Performs quantile test on a single data vector. In addition, an estimation and a
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{quantile}}{The desired quantile.}
+\item{\code{prob}}{The probability associated with the quantile.}
 
 \item{\code{correct}}{Whether to apply continuity correction.}
 }
@@ -45,7 +45,7 @@ Create a new \code{Quantile} object.
   alternative = c("two_sided", "less", "greater"),
   null_value = 0,
   conf_level = 0.95,
-  quantile = 0.5,
+  prob = 0.5,
   correct = TRUE
 )}\if{html}{\out{</div>}}
 }
@@ -57,11 +57,11 @@ Create a new \code{Quantile} object.
 
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 
-\item{\code{null_value}}{a number indicating the value of the parameter in the null hypothesis.}
+\item{\code{null_value}}{a number indicating the hypothesized value of the quantile.}
 
-\item{\code{conf_level}}{a number indicating confidence level of the interval.}
+\item{\code{conf_level}}{a number between zero and one indicating the confidence level to use.}
 
-\item{\code{quantile}}{a numeric between 0 and 1 indicating the desired quantile.}
+\item{\code{prob}}{a number between zero and one indicating the probability associated with the quantile.}
 
 \item{\code{correct}}{a logical indicating whether to apply continuity correction in the normal approximation for the p-value.}
 }

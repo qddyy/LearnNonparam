@@ -18,7 +18,8 @@ Quantile <- R6Class(
         #' @description Create a new `Quantile` object.
         #' 
         #' @template init_params
-        #' @param prob a number between 0 and 1 indicating the probability associated with the quantile.
+        #' @param null_value a number indicating the hypothesized value of the quantile.
+        #' @param prob a number between zero and one indicating the probability associated with the quantile.
         #' 
         #' @return A `Quantile` object.
         initialize = function(

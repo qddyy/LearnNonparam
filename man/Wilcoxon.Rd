@@ -54,7 +54,7 @@ Create a new \code{Wilcoxon} object.
 
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 
-\item{\code{conf_level}}{a number indicating confidence level of the interval.}
+\item{\code{conf_level}}{a number between zero and one indicating the confidence level to use.}
 
 \item{\code{n_permu}}{an integer indicating how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
 

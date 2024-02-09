@@ -49,7 +49,7 @@ Create a new \code{Studentized} object.
 
 \item{\code{scoring}}{a character string specifying which scoring system to be used.}
 
-\item{\code{conf_level}}{a numeric value between zero and one giving the family-wise confidence level to use.}
+\item{\code{conf_level}}{a number between zero and one indicating the family-wise confidence level to use.}
 
 \item{\code{n_permu}}{an integer indicating how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
 }

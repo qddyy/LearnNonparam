@@ -360,7 +360,7 @@ PermuTest <- R6Class(
                 }
             }
         },
-        #' @field null_value The true value of the parameter in the null hypothesis.
+        #' @field null_value The hypothesized value of the parameter in the null hypothesis.
         null_value = function(value) {
             if (missing(value)) {
                 private$.null_value
