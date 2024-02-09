@@ -60,8 +60,8 @@
     </div>
     <div id="active-bindings">
     <h2>Active bindings</h2>
-    <p></p><div class="r6-active-bindings"><dl><dt><code>quantile</code></dt>
-<dd><p>The desired quantile.</p></dd>
+    <p></p><div class="r6-active-bindings"><dl><dt><code>prob</code></dt>
+<dd><p>The probability associated with the quantile.</p></dd>
 
 
 <dt><code>correct</code></dt>
@@ -89,7 +89,7 @@
 <span>  alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two_sided"</span>, <span class="st">"less"</span>, <span class="st">"greater"</span><span class="op">)</span>,</span>
 <span>  null_value <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  conf_level <span class="op">=</span> <span class="fl">0.95</span>,</span>
-<span>  quantile <span class="op">=</span> <span class="fl">0.5</span>,</span>
+<span>  prob <span class="op">=</span> <span class="fl">0.5</span>,</span>
 <span>  correct <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
@@ -105,15 +105,15 @@
 
 
 <dt><code>null_value</code></dt>
-<dd><p>a number indicating the value of the parameter in the null hypothesis.</p></dd>
+<dd><p>a number indicating the hypothesized value of the parameter in the null hypothesis.</p></dd>
 
 
 <dt><code>conf_level</code></dt>
-<dd><p>a number indicating confidence level of the interval.</p></dd>
+<dd><p>a number between zero and one indicating the confidence level to use.</p></dd>
 
 
-<dt><code>quantile</code></dt>
-<dd><p>a numeric between 0 and 1 indicating the desired quantile.</p></dd>
+<dt><code>prob</code></dt>
+<dd><p>a number between zero and one indicating the probability associated with the quantile.</p></dd>
 
 
 <dt><code>correct</code></dt>
