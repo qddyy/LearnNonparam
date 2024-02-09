@@ -18,12 +18,15 @@ KSampleTest <- R6Class(
                 stop("Must provide at least three samples")
             }
 
-            private$.data <- unlist(
-                private$.raw_data, recursive = FALSE, use.names = FALSE
-            )
-            names(private$.data) <- rep.int(
-                seq_along(private$.raw_data),
-                lengths(private$.raw_data, use.names = FALSE)
+            private$.data <- `names<-`(
+                unlist(
+                    private$.raw_data,
+                    recursive = FALSE, use.names = FALSE
+                ),
+                rep.int(
+                    seq_along(private$.raw_data),
+                    lengths(private$.raw_data, use.names = FALSE)
+                )
             )
         },
 

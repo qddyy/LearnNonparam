@@ -80,11 +80,10 @@ Quantile <- R6Class(
             a <- round(n * p - d)
             b <- round(n * p + 1 + d)
 
-            y <- sort(private$.data)
-
+            sorted <- sort(private$.data)
             private$.ci <- c(
-                if (a >= 1) y[a] else -Inf,
-                if (b <= n) y[b] else Inf
+                if (a >= 1) sorted[a] else -Inf,
+                if (b <= n) sorted[b] else Inf
             )
         },
 

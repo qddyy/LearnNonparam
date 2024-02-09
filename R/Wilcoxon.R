@@ -79,12 +79,11 @@ Wilcoxon <- R6Class(
         },
 
         .calculate_extra = function() {
-            x <- private$.raw_data[[1]]
-            y <- private$.raw_data[[2]]
+            sorted_diff <- sort(
+                outer(private$.raw_data[[1]], private$.raw_data[[2]], "-")
+            )
 
-            diff <- sort(as.vector(outer(x, y, "-")))
-
-            private$.estimate <- median(diff)
+            private$.estimate <- median(sorted_diff)
 
             m <- length(private$.data$x)
             n <- length(private$.data$y)
@@ -92,13 +91,12 @@ Wilcoxon <- R6Class(
             mu <- m * n / 2
             sigma2 <- mu * (m + n + 1) / 6
             z <- qnorm(1 - (1 - private$.conf_level) / 2)
-
             k_a <- round(mu - z * sqrt(sigma2))
             k_b <- round(mu + z * sqrt(sigma2)) + 1
 
             private$.ci <- c(
-                if (k_a >= 1) diff[k_a] else -Inf,
-                if (k_b <= m * n) diff[k_b] else Inf
+                if (k_a >= 1) sorted_diff[k_a] else -Inf,
+                if (k_b <= m * n) sorted_diff[k_b] else Inf
             )
         }
     ),
