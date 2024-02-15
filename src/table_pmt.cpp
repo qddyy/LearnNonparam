@@ -31,9 +31,8 @@ NumericVector table_pmt(
     } else {
         PermuBar bar(n_permu, false);
 
-        R_len_t size = row_loc.size();
         do {
-            random_shuffle(row_loc, size);
+            random_shuffle(row_loc);
         } while (table_update(bar));
 
         return bar.statistic_permu;

@@ -1,10 +1,8 @@
-#ifndef UTILS_H
-#define UTILS_H
+#pragma once
 
 #include <Rcpp.h>
 #include <algorithm>
 #include <sstream>
-#include <string>
 
 using namespace Rcpp;
 
@@ -19,11 +17,11 @@ T rand_int(T n)
 // random shuffle
 
 template <typename T>
-void random_shuffle(T&& v, R_len_t v_size)
+void random_shuffle(T&& v)
 {
-    R_len_t j;
-    for (R_len_t i = 0; i < v_size - 1; i++) {
-        j = i + rand_int(v_size - i);
+    R_len_t n = v.size();
+    for (R_len_t i = 0; i < n - 1; i++) {
+        R_len_t j = i + rand_int(n - i);
         std::swap(v[i], v[j]);
     }
 }
@@ -35,8 +33,8 @@ R_xlen_t n_permutation(T&& v)
 {
     double A = 1;
 
-    R_len_t n_i = 0;
     R_len_t n = v.size();
+    R_len_t n_i = 0;
     double current = v[0];
     for (R_len_t i = 0; i < n; i++) {
         A *= (i + 1);
@@ -49,7 +47,7 @@ R_xlen_t n_permutation(T&& v)
         current = v[i];
     }
 
-    return (R_xlen_t)A;
+    return static_cast<R_xlen_t>(A);
 }
 
 // progress bar
@@ -74,7 +72,7 @@ private:
 
         buffer << "\015";
 
-        unsigned percent = 100 - (unsigned)(100 * (_end - _iter) / _total);
+        unsigned percent = 100 - static_cast<unsigned>(100 * (_end - _iter) / _total);
 
         buffer << "\033[31m" << percent << "%";
 
@@ -161,5 +159,3 @@ public:
         return _iter != _end;
     }
 };
-
-#endif

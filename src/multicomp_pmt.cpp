@@ -34,9 +34,8 @@ NumericVector multicomp_pmt(
     } else {
         PermuBar bar(n_permu, false, n_pair);
 
-        R_len_t size = group.size();
         do {
-            random_shuffle(group, size);
+            random_shuffle(group);
         } while (multicomp_update(bar));
 
         return bar.statistic_permu;
