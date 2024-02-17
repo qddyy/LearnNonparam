@@ -6,6 +6,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
+#' @importFrom compiler cmpfun
 
 
 ContingencyTableTest <- R6Class(
@@ -42,7 +43,7 @@ ContingencyTableTest <- R6Class(
             private$.statistic_permu <- table_pmt(
                 row_loc = rep.int(seq_len(r), row_sum) - 1,
                 col_loc = rep.int(seq_len(c), col_sum) - 1,
-                statistic_func = private$.statistic_func,
+                statistic_func = cmpfun(private$.statistic_func),
                 n_permu = private$.n_permu
             )
         }

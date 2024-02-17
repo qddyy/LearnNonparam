@@ -6,6 +6,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
+#' @importFrom compiler cmpfun
 #' @importFrom graphics par layout mtext hist abline
 
 
@@ -44,7 +45,7 @@ MultipleComparison <- R6Class(
                 group_j = private$.group_ij$j,
                 data = unname(private$.data),
                 group = as.integer(names(private$.data)),
-                statistic_func = private$.statistic_func,
+                statistic_func = cmpfun(private$.statistic_func),
                 n_permu = private$.n_permu
             )
         },

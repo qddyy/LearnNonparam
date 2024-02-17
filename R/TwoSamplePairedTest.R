@@ -6,6 +6,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
+#' @importFrom compiler cmpfun
 
 
 TwoSamplePairedTest <- R6Class(
@@ -34,7 +35,7 @@ TwoSamplePairedTest <- R6Class(
         .calculate_statistic_permu = function() {
             private$.statistic_permu <- paired_pmt(
                 n = nrow(private$.data),
-                statistic_func = private$.statistic_func,
+                statistic_func = cmpfun(private$.statistic_func),
                 n_permu = private$.n_permu
             )
         }

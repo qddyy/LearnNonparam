@@ -6,6 +6,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
+#' @importFrom compiler cmpfun
 
 
 TwoSampleAssociationTest <- R6Class(
@@ -30,7 +31,7 @@ TwoSampleAssociationTest <- R6Class(
             private$.statistic_permu <- association_pmt(
                 x = data_y_order$x,
                 y = data_y_order$y,
-                statistic_func = private$.statistic_func,
+                statistic_func = cmpfun(private$.statistic_func),
                 n_permu = private$.n_permu
             )
         }
