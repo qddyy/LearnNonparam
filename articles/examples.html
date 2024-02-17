@@ -350,7 +350,7 @@
 <span><span class="co">#&gt; [1] 0.0006605027</span></span></code></pre></div>
 </div>
 <div class="section level3">
-<h3 id="example-3-2-2-3-2-3">Example 3.2.2 &amp; 3.2.3<a class="anchor" aria-label="anchor" href="#example-3-2-2-3-2-3"></a>
+<h3 id="example-3-2-2">Example 3.2.2<a class="anchor" aria-label="anchor" href="#example-3-2-2"></a>
 </h3>
 <div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># See ?KruskalWallis or ?ksample.kw</span></span>
@@ -369,19 +369,7 @@
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"asymp"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.01619109</span></span>
-<span></span>
-<span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="va">scoring</span> <span class="op">&lt;-</span> <span class="st">"expon"</span></span>
-<span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">4000</span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"permu"</span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.0155</span></span>
-<span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"asymp"</span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.02152193</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.01619109</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-3-3-1">Example 3.3.1<a class="anchor" aria-label="anchor" href="#example-3-3-1"></a>
@@ -404,12 +392,12 @@
 <span><span class="co">#&gt; family-wise confidence level: 95%</span></span>
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;                           statistic p-value  </span></span>
-<span><span class="co">#&gt; location_1 ~ location_2  0.02737145  0.9784  </span></span>
-<span><span class="co">#&gt; location_1 ~ location_3 -1.77914406  0.0932  </span></span>
-<span><span class="co">#&gt; location_1 ~ location_4 -3.41048230  0.0028 *</span></span>
-<span><span class="co">#&gt; location_2 ~ location_3 -1.80651550  0.0786  </span></span>
-<span><span class="co">#&gt; location_2 ~ location_4 -3.43785375  0.0026 *</span></span>
-<span><span class="co">#&gt; location_3 ~ location_4 -1.63133824  0.1196</span></span>
+<span><span class="co">#&gt; location_1 ~ location_2  0.02737145  0.9744  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_3 -1.77914406  0.0888  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_4 -3.41048230  0.0034 *</span></span>
+<span><span class="co">#&gt; location_2 ~ location_3 -1.80651550  0.0900  </span></span>
+<span><span class="co">#&gt; location_2 ~ location_4 -3.43785375  0.0030 *</span></span>
+<span><span class="co">#&gt; location_3 ~ location_4 -1.63133824  0.1254</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"asymp"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span>
@@ -491,11 +479,11 @@
 <span><span class="co">#&gt; </span></span>
 <span><span class="co">#&gt;                          statistic p-value  </span></span>
 <span><span class="co">#&gt; location_1 ~ location_2 0.03870907  1.0000  </span></span>
-<span><span class="co">#&gt; location_1 ~ location_3 2.51608965  0.3134  </span></span>
-<span><span class="co">#&gt; location_1 ~ location_4 4.82315032  0.0150 *</span></span>
-<span><span class="co">#&gt; location_2 ~ location_3 2.55479873  0.3006  </span></span>
-<span><span class="co">#&gt; location_2 ~ location_4 4.86185939  0.0144 *</span></span>
-<span><span class="co">#&gt; location_3 ~ location_4 2.30706067  0.3792</span></span></code></pre></div>
+<span><span class="co">#&gt; location_1 ~ location_3 2.51608965  0.3004  </span></span>
+<span><span class="co">#&gt; location_1 ~ location_4 4.82315032  0.0152 *</span></span>
+<span><span class="co">#&gt; location_2 ~ location_3 2.55479873  0.2876  </span></span>
+<span><span class="co">#&gt; location_2 ~ location_4 4.86185939  0.0142 *</span></span>
+<span><span class="co">#&gt; location_3 ~ location_4 2.30706067  0.3700</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-3-4-1">Example 3.4.1<a class="anchor" aria-label="anchor" href="#example-3-4-1"></a>
@@ -512,7 +500,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 145</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.03325</span></span>
+<span><span class="co">#&gt; [1] 0.03225</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"asymp"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
@@ -560,7 +548,7 @@
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">4000</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.024</span></span>
+<span><span class="co">#&gt; [1] 0.0245</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"asymp"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
@@ -626,7 +614,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 110241.8</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.108</span></span>
+<span><span class="co">#&gt; [1] 0.104</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"asymp"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
@@ -649,7 +637,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 28.33333</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.0428</span></span>
+<span><span class="co">#&gt; [1] 0.0426</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"asymp"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
@@ -672,7 +660,7 @@
 <span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
 <span><span class="co">#&gt; [1] 134</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 0.0136</span></span>
+<span><span class="co">#&gt; [1] 0.0148</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"asymp"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
@@ -707,7 +695,7 @@
 <code class="sourceCode R"><span><span class="co"># See ?Correlation or ?association.corr</span></span>
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="../reference/pmt.html">pmt</a></span><span class="op">(</span></span>
 <span>    <span class="st">"association.corr"</span>, method <span class="op">=</span> <span class="st">"spearman"</span>,</span>
-<span>    alternative <span class="op">=</span> <span class="st">"greater"</span>, n_permu <span class="op">=</span> <span class="fl">5000</span></span>
+<span>    alternative <span class="op">=</span> <span class="st">"two_sided"</span>, n_permu <span class="op">=</span> <span class="fl">5000</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="co"># See ?Table5.1.2</span></span>
@@ -720,7 +708,7 @@
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"asymp"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span>
-<span><span class="co">#&gt; [1] 2.329431e-07</span></span></code></pre></div>
+<span><span class="co">#&gt; [1] 0.0002176436</span></span></code></pre></div>
 </div>
 <div class="section level3">
 <h3 id="example-5-3-2">Example 5.3.2<a class="anchor" aria-label="anchor" href="#example-5-3-2"></a>
