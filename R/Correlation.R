@@ -78,7 +78,7 @@ Correlation <- R6Class(
             } else {
                 private$.statistic_func <- switch(private$.type,
                     permu = function(x, y) sum(x * y),
-                    asymp = cor
+                    asymp = function(x, y) cor(x, y, method = private$.method)
                 )
             }
         },
@@ -97,15 +97,11 @@ Correlation <- R6Class(
                 z <- r / sqrt(
                     (4 * n + 10) / (9 * n * (n - 1)) - 4 / (n^2 * (n - 1)^2) * (a - b - c)
                 )
-
-                private$.p_value <- get_p_continous(z, "norm", private$.side)
             } else {
-                t <- r * sqrt((n - 2) / (1 - r^2))
-
-                private$.p_value <- get_p_continous(
-                    t, "t", private$.side, df = n - 2
-                )
+                z <- r * sqrt(n - 1)
             }
+
+            private$.p_value <- get_p_continous(z, "norm", private$.side)
         }
     )
 )

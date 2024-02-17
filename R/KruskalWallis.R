@@ -34,14 +34,17 @@ KruskalWallis <- R6Class(
         .name = "Kruskal-Wallis Test",
 
         .define = function() {
+            lengths <- vapply(
+                X = split(private$.data, names(private$.data)),
+                FUN = length, FUN.VALUE = numeric(1)
+            )
             mean <- mean(private$.data)
             var <- var(private$.data)
             private$.statistic_func <- function(data, group) {
-                sum(vapply(
-                    X = split(data, group),
-                    FUN = function(x) length(x) * (mean(x) - mean)^2,
+                sum(lengths * (vapply(
+                    X = split(data, group), FUN = mean,
                     FUN.VALUE = numeric(1), USE.NAMES = FALSE
-                )) / var
+                ) - mean)^2) / var
             }
         },
 

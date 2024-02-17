@@ -33,12 +33,17 @@ KSampleF <- R6Class(
 
         .define = function() {
             private$.statistic_func <- switch(private$.type,
-                permu = function(data, group) {
-                    sum(vapply(
-                        X = split(data, group),
-                        FUN = function(x) sum(x)^2 / length(x),
-                        FUN.VALUE = numeric(1), USE.NAMES = FALSE
-                    ))
+                permu = {
+                    lengths <- vapply(
+                        X = split(private$.data, names(private$.data)),
+                        FUN = length, FUN.VALUE = numeric(1)
+                    )
+                    function(data, group) {
+                        sum(vapply(
+                            X = split(data, group), FUN = sum,
+                            FUN.VALUE = numeric(1), USE.NAMES = FALSE
+                        )^2 / lengths)
+                    }
                 },
                 asymp = function(data, group) {
                     N <- length(data)

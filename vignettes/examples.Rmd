@@ -251,7 +251,7 @@ t$statistic
 t$p_value
 ```
 
-## Example 3.2.2 & 3.2.3
+## Example 3.2.2
 
 ```{r}
 # See ?KruskalWallis or ?ksample.kw
@@ -265,16 +265,6 @@ t$test(Table3.2.3)
 t$statistic
 t$p_value
 
-
-t$type <- "asymp"
-t$p_value
-
-
-t$scoring <- "expon"
-
-t$n_permu <- 4000
-t$type <- "permu"
-t$p_value
 
 t$type <- "asymp"
 t$p_value
@@ -487,7 +477,7 @@ t$p_value
 # See ?Correlation or ?association.corr
 t <- pmt(
     "association.corr", method = "spearman",
-    alternative = "greater", n_permu = 5000
+    alternative = "two_sided", n_permu = 5000
 )
 
 # See ?Table5.1.2
