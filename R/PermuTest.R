@@ -161,11 +161,17 @@ PermuTest <- R6Class(
         },
 
         .calculate_p_permu = function() {
-            private$.p_value <- mean(switch(private$.side,
-                l = private$.statistic_permu <= private$.statistic,
-                r = private$.statistic_permu >= private$.statistic,
-                lr = abs(private$.statistic_permu) >= abs(private$.statistic)
-            ))
+            delayedAssign(
+                "l", mean(private$.statistic_permu <= private$.statistic)
+            )
+            delayedAssign(
+                "r", mean(private$.statistic_permu >= private$.statistic)
+            )
+            delayedAssign(
+                "lr", 2 * min(l, r, 0.5)
+            )
+
+            private$.p_value <- eval(as.name(private$.side))
         },
 
         .on_type_change = function() private$.calculate(),

@@ -64,9 +64,9 @@ get_score <- function(x, method, n = length(x)) {
 get_p_continous <- function(x, dist, side, ...) {
     F <- match.fun(paste0("p", dist))
 
-    l <- F(x, ...)
-    r <- 1 - l
-    lr <- 2 * pmin(l, r)
+    delayedAssign("l", F(x, ...))
+    delayedAssign("r", 1 - l)
+    delayedAssign("lr", 2 * pmin(l, r))
 
     eval(as.name(side))
 }
@@ -75,9 +75,9 @@ get_p_decrete <- function(x, dist, side, ...) {
     F <- match.fun(paste0("p", dist))
     p <- match.fun(paste0("d", dist))
 
-    l <- F(x, ...)
-    r <- 1 - l + p(x, ...)
-    lr <- 2 * pmin(l, r, 0.5)
+    delayedAssign("l", F(x, ...))
+    delayedAssign("r", 1 - l + p(x, ...))
+    delayedAssign("lr", 2 * pmin(l, r, 0.5))
 
     eval(as.name(side))
 }
