@@ -25,7 +25,7 @@ RCBDTest <- R6Class(
         .calculate_score = function() {
             private$.data <- apply(
                 X = private$.data, MARGIN = 2, FUN = get_score,
-                method = private$.scoring, n = nrow(private$.data)
+                scoring = private$.scoring, n = nrow(private$.data)
             )
         },
 

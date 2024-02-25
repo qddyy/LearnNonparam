@@ -18,7 +18,7 @@ PairedDifference <- R6Class(
         #' @description Create a new `PairedDifference` object.
         #' 
         #' @template init_params
-        #' @param method a character string specifying the method of ranking data in computing adjusted signed ranks for tied data, must be one of `"with_zeros"` (default) or `"ignore"`. Note that the data will be modified when this parameter is set to `"ignore"`.
+        #' @param method a character string specifying the method of ranking data in computing adjusted signed scores for tied data, must be one of `"with_zeros"` (default) or `"without_zeros"`.
         #' @param correct a logical indicating whether to apply continuity correction in the normal approximation for the p-value when `scoring` is set to `"rank"`.
         #' 
         #' @return A `PairedDifference` object.
@@ -44,27 +44,28 @@ PairedDifference <- R6Class(
 
         .abs_diff = NULL,
 
-        .define = function() {
-            diff <- private$.data$x - private$.data$y
+        .preprocess = function() {
+            super$.preprocess()
 
-            where_zero <- (diff == 0)
+            private$.data$x <- private$.data$x - private$.data$y
+            private$.data$y <- 0
 
             if (private$.method == "without_zeros") {
-                diff <- diff[!where_zero]
-                private$.data <- private$.data[!where_zero, ]
+                private$.data <- private$.data[private$.data$x != 0, ]
             }
+        },
+
+        .define = function() {
+            abs_diff <- abs(private$.data$x)
 
             private$.abs_diff <- abs_diff <- if (private$.scoring != "none") {
-                score <- get_score(abs(diff), method = private$.scoring)
+                score <- get_score(abs(private$.data$x), private$.scoring)
                 if (private$.method == "with_zeros") {
-                    `[<-`(score, where_zero, 0)
+                    `[<-`(score, private$.data$x == 0, 0)
                 } else score
-            } else abs(diff)
+            } else abs(private$.data$x)
 
-            positive <- (diff > 0)
-            private$.statistic_func <- function(swapped) {
-                sum(abs_diff[positive != swapped])
-            }
+            private$.statistic_func <- function(x, y) sum(abs_diff[x > y])
         },
 
         .calculate_p = function() {

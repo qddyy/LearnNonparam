@@ -7,5 +7,5 @@
 Abstract class for two sample association tests.
 }
 \section{Super classes}{
-\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{TwoSampleAssociationTest}
+\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{\link[LearnNonparam:TwoSamplePairedTest]{LearnNonparam::TwoSamplePairedTest}} -> \code{TwoSampleAssociationTest}
 }

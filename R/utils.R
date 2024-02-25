@@ -47,10 +47,10 @@ do_call <- function(func, default = NULL, fixed = NULL, ...) {
 
 # for .calculate_score()
 
-get_score <- function(x, method, n = length(x)) {
+get_score <- function(x, scoring, n = length(x)) {
     rank <- rank(x)
 
-    switch(method,
+    switch(scoring,
         rank = rank, vw = qnorm(rank / (n + 1)), expon = {
             expon <- cumsum(1 / n:1)
             remainder <- rank - floor(rank)

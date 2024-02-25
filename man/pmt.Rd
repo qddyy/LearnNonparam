@@ -3,6 +3,7 @@
 \name{pmt}
 \alias{pmt}
 \alias{pmts}
+\alias{define_pmt}
 \title{Syntactic Sugar for Object Construction}
 \usage{
 pmt(key, ...)
@@ -11,6 +12,17 @@ pmts(
   which = c("all", "onesample", "twosample", "ksample", "multicomp", "paired", "rcbd",
     "association", "table")
 )
+
+define_pmt(
+  inherit = c("twosample", "ksample", "multicomp", "paired", "rcbd", "association",
+    "table"),
+  statistic = NULL,
+  side = c("lr", "l", "r"),
+  scoring = c("none", "rank", "vw", "expon"),
+  n_permu = 0L,
+  name = "User-Defined Permutation Test",
+  alternative = "not specified"
+)
 }
 \arguments{
 \item{key}{a character string corresponding to the desired test. Check \code{pmts()} for valid keys.}
@@ -18,6 +30,20 @@ pmts(
 \item{...}{extra parameters passed to the constructor.}
 
 \item{which}{a character string specifying the desired tests.}
+
+\item{inherit}{a character string specifying the desired permutation test.}
+
+\item{statistic}{a function defining the test statistic.}
+
+\item{side}{a character string specifying where the rejection region is.}
+
+\item{scoring}{a character string specifying which scoring system to be used.}
+
+\item{n_permu}{an integer indicating how many permutations should be used to construct the permutation distribution.}
+
+\item{name}{a character string specifying the name of the test.}
+
+\item{alternative}{a character string specifying the alternative of the test.}
 }
 \description{
 Construct test objects in a unified way.

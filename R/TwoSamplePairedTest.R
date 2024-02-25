@@ -24,17 +24,12 @@ TwoSamplePairedTest <- R6Class(
             private$.data <- do.call(data.frame, private$.data)
         },
 
-        .calculate_score = function() {},
-
-        .calculate_statistic = function() {
-            private$.statistic <- private$.statistic_func(
-                swapped = rep.int(FALSE, nrow(private$.data))
-            )
-        },
+        .calculate_score = function() NULL,
 
         .calculate_statistic_permu = function() {
             private$.statistic_permu <- paired_pmt(
-                n = nrow(private$.data),
+                x = private$.data$x,
+                y = private$.data$y,
                 statistic_func = cmpfun(private$.statistic_func),
                 n_permu = private$.n_permu
             )

@@ -55,15 +55,16 @@ BEGIN_RCPP
 END_RCPP
 }
 // paired_pmt
-NumericVector paired_pmt(const R_len_t n, const Function statistic_func, const R_xlen_t n_permu);
-RcppExport SEXP _LearnNonparam_paired_pmt(SEXP nSEXP, SEXP statistic_funcSEXP, SEXP n_permuSEXP) {
+NumericVector paired_pmt(NumericVector x, NumericVector y, const Function statistic_func, const R_xlen_t n_permu);
+RcppExport SEXP _LearnNonparam_paired_pmt(SEXP xSEXP, SEXP ySEXP, SEXP statistic_funcSEXP, SEXP n_permuSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const R_len_t >::type n(nSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< NumericVector >::type y(ySEXP);
     Rcpp::traits::input_parameter< const Function >::type statistic_func(statistic_funcSEXP);
     Rcpp::traits::input_parameter< const R_xlen_t >::type n_permu(n_permuSEXP);
-    rcpp_result_gen = Rcpp::wrap(paired_pmt(n, statistic_func, n_permu));
+    rcpp_result_gen = Rcpp::wrap(paired_pmt(x, y, statistic_func, n_permu));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -113,7 +114,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_LearnNonparam_association_pmt", (DL_FUNC) &_LearnNonparam_association_pmt, 4},
     {"_LearnNonparam_ksample_pmt", (DL_FUNC) &_LearnNonparam_ksample_pmt, 4},
     {"_LearnNonparam_multicomp_pmt", (DL_FUNC) &_LearnNonparam_multicomp_pmt, 6},
-    {"_LearnNonparam_paired_pmt", (DL_FUNC) &_LearnNonparam_paired_pmt, 3},
+    {"_LearnNonparam_paired_pmt", (DL_FUNC) &_LearnNonparam_paired_pmt, 4},
     {"_LearnNonparam_rcbd_pmt", (DL_FUNC) &_LearnNonparam_rcbd_pmt, 3},
     {"_LearnNonparam_table_pmt", (DL_FUNC) &_LearnNonparam_table_pmt, 4},
     {"_LearnNonparam_twosample_pmt", (DL_FUNC) &_LearnNonparam_twosample_pmt, 4},

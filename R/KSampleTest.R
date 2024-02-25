@@ -32,7 +32,7 @@ KSampleTest <- R6Class(
         },
 
         .calculate_score = function() {
-            private$.data <- get_score(private$.data, method = private$.scoring)
+            private$.data <- get_score(private$.data, private$.scoring)
         },
 
         .calculate_statistic = function() {

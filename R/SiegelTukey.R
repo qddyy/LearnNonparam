@@ -65,6 +65,6 @@ SiegelTukey <- R6Class(
             private$.data <- list(x = st_rank[x_index], y = st_rank[-x_index])
         },
 
-        .calculate_extra = function() {}
+        .calculate_extra = function() NULL
     )
 )

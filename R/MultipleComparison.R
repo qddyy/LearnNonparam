@@ -33,8 +33,7 @@ MultipleComparison <- R6Class(
         .calculate_statistic = function() {
             private$.statistic <- as.numeric(.mapply(
                 FUN = private$.statistic_func(
-                    data = unname(private$.data),
-                    group = as.integer(names(private$.data))
+                    unname(private$.data), as.integer(names(private$.data))
                 ), dots = private$.group_ij, MoreArgs = NULL
             ))
         },

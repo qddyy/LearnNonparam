@@ -8,7 +8,7 @@
 Performs correlation coefficient based two sample association test on data vectors.
 }
 \section{Super classes}{
-\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{\link[LearnNonparam:TwoSampleAssociationTest]{LearnNonparam::TwoSampleAssociationTest}} -> \code{Correlation}
+\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{\link[LearnNonparam:TwoSamplePairedTest]{LearnNonparam::TwoSamplePairedTest}} -> \code{\link[LearnNonparam:TwoSampleAssociationTest]{LearnNonparam::TwoSampleAssociationTest}} -> \code{Correlation}
 }
 \section{Methods}{
 \subsection{Public methods}{

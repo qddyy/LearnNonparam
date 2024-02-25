@@ -11,21 +11,9 @@
 
 TwoSampleAssociationTest <- R6Class(
     classname = "TwoSampleAssociationTest",
-    inherit = TwoSampleTest,
+    inherit = TwoSamplePairedTest,
     cloneable = FALSE,
     private = list(
-        .preprocess = function() {
-            super$.preprocess()
-
-            if (length(private$.data$x) != length(private$.data$y)) {
-                stop("Both samples must be of equal length")
-            }
-
-            private$.data <- do.call(data.frame, private$.data)
-        },
-
-        .calculate_score = function() {},
-
         .calculate_statistic_permu = function() {
             data_y_order <- private$.data[order(private$.data$y), ]
             private$.statistic_permu <- association_pmt(

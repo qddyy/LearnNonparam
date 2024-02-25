@@ -24,7 +24,7 @@ TwoSampleTest <- R6Class(
 
         .calculate_score = function() {
             score <- get_score(
-                c(private$.data$x, private$.data$y), method = private$.scoring
+                c(private$.data$x, private$.data$y), private$.scoring
             )
 
             x_index <- seq_along(private$.data$x)
