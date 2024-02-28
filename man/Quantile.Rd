@@ -28,9 +28,9 @@ Performs quantile test on a single data vector. In addition, an estimation and a
 \if{html}{\out{
 <details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="plot"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-plot'><code>LearnNonparam::PermuTest$plot()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="print"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-print'><code>LearnNonparam::PermuTest$print()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="test"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-test'><code>LearnNonparam::PermuTest$test()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="OneSampleTest" data-id="plot"><a href='../../LearnNonparam/html/OneSampleTest.html#method-OneSampleTest-plot'><code>LearnNonparam::OneSampleTest$plot()</code></a></span></li>
 </ul>
 </details>
 }}

@@ -9,3 +9,28 @@ Abstract class for one sample tests.
 \section{Super class}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{OneSampleTest}
 }
+\section{Methods}{
+\subsection{Public methods}{
+\itemize{
+\item \href{#method-OneSampleTest-plot}{\code{OneSampleTest$plot()}}
+}
+}
+\if{html}{\out{
+<details open><summary>Inherited methods</summary>
+<ul>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="initialize"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-initialize'><code>LearnNonparam::PermuTest$initialize()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="print"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-print'><code>LearnNonparam::PermuTest$print()</code></a></span></li>
+<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="test"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-test'><code>LearnNonparam::PermuTest$test()</code></a></span></li>
+</ul>
+</details>
+}}
+\if{html}{\out{<hr>}}
+\if{html}{\out{<a id="method-OneSampleTest-plot"></a>}}
+\if{latex}{\out{\hypertarget{method-OneSampleTest-plot}{}}}
+\subsection{Method \code{plot()}}{
+\subsection{Usage}{
+\if{html}{\out{<div class="r">}}\preformatted{OneSampleTest$plot(...)}\if{html}{\out{</div>}}
+}
+
+}
+}

@@ -63,9 +63,8 @@ pmts <- function(
 #' 
 #' @param inherit a character string specifying the desired permutation test.
 #' @param statistic a function defining the test statistic.
-#' @param side a character string specifying where the rejection region is.
-#' @param scoring a character string specifying which scoring system to be used.
-#' @param n_permu an integer indicating how many permutations should be used to construct the permutation distribution.
+#' @param rejection a character string specifying where the rejection region is.
+#' @param scoring,n_permu passed to the constructor.
 #' @param name a character string specifying the name of the test.
 #' @param alternative a character string specifying the alternative of the test.
 #' 
@@ -79,25 +78,23 @@ define_pmt <- function(
         "paired", "rcbd",
         "association", "table"
     ),
-    statistic = NULL, side = c("lr", "l", "r"),
+    statistic = NULL, rejection = c("lr", "l", "r"),
     scoring = c("none", "rank", "vw", "expon"), n_permu = 0L,
-    name = "User-Defined Permutation Test", alternative = "not specified"
+    name = "User-Defined Permutation Test", alternative = NULL
 ) {
-    inherit <- match.arg(inherit)
-
-    class <- switch(inherit,
-        twosample = TwoSampleTest,
-        ksample = KSampleTest,
-        multicomp = MultipleComparison,
-        paired = TwoSamplePairedTest,
-        rcbd = RCBDTest,
-        association = TwoSampleAssociationTest,
-        table = ContingencyTableTest
-    )
+    self <- super <- private <- NULL
 
     R6Class(
         classname = "UserDefined",
-        inherit = class,
+        inherit = switch(match.arg(inherit),
+            twosample = TwoSampleTest,
+            ksample = KSampleTest,
+            multicomp = MultipleComparison,
+            paired = TwoSamplePairedTest,
+            rcbd = RCBDTest,
+            association = TwoSampleAssociationTest,
+            table = ContingencyTableTest
+        ),
         cloneable = FALSE,
         public = list(
             initialize = function(n_permu) {
@@ -106,12 +103,20 @@ define_pmt <- function(
             }
         ),
         private = list(
-            .name = as.character(name),
-            .alternative = as.character(alternative),
+            .name = if (!missing(name)) as.character(name) else name,
+            .alternative = if (!missing(alternative)) as.character(alternative),
             .scoring = match.arg(scoring),
-            .side = match.arg(side),
+            .side = match.arg(rejection),
 
-            .calculate_side = function() NULL
+            .calculate_side = function() NULL,
+
+            .print = function(...) {
+                super$.print(...)
+
+                if (is.null(private$.alternative)) {
+                    cat("\33[1A                       ")
+                }
+            }
         )
     )$new(n_permu = n_permu)
 }

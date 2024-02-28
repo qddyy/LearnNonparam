@@ -36,7 +36,7 @@ PermuTest <- R6Class(
         #' @return The object itself (invisibly).
         print = function(digits = getOption("digits")) {
             if (is.null(private$.raw_data)) {
-                str(self)
+                cat(format(self), sep = "\n")
             } else {
                 private$.print(digits = digits)
             }
@@ -52,7 +52,7 @@ PermuTest <- R6Class(
         #' @return The object itself (invisibly).
         plot = function(style = c("graphics", "ggplot2"), ...) {
             if (is.null(private$.raw_data)) {
-                warning("Please test some data before calling the plot method")
+                warning("Must provide sample(s) before calling the plot method")
             } else if (private$.type != "permu") {
                 warning("The plot method only works if type is set to 'permu'")
             } else if (match.arg(style) == "graphics") {

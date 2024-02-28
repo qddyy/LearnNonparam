@@ -10,6 +10,11 @@ OneSampleTest <- R6Class(
     classname = "OneSampleTest",
     inherit = PermuTest,
     cloneable = FALSE,
+    public = list(
+        plot = function(...) {
+            stop("Can't plot a ", "<", class(self)[1], ">", " object")
+        }
+    ),
     private = list(
         .preprocess = function() {
             if (length(private$.raw_data) != 1) {

@@ -17,11 +17,11 @@ define_pmt(
   inherit = c("twosample", "ksample", "multicomp", "paired", "rcbd", "association",
     "table"),
   statistic = NULL,
-  side = c("lr", "l", "r"),
+  rejection = c("lr", "l", "r"),
   scoring = c("none", "rank", "vw", "expon"),
   n_permu = 0L,
   name = "User-Defined Permutation Test",
-  alternative = "not specified"
+  alternative = NULL
 )
 }
 \arguments{
@@ -35,11 +35,9 @@ define_pmt(
 
 \item{statistic}{a function defining the test statistic.}
 
-\item{side}{a character string specifying where the rejection region is.}
+\item{rejection}{a character string specifying where the rejection region is.}
 
-\item{scoring}{a character string specifying which scoring system to be used.}
-
-\item{n_permu}{an integer indicating how many permutations should be used to construct the permutation distribution.}
+\item{scoring, n_permu}{passed to the constructor.}
 
 \item{name}{a character string specifying the name of the test.}
 
