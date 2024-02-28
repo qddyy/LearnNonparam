@@ -50,10 +50,24 @@ MultipleComparison <- R6Class(
         },
 
         .calculate_p_permu = function() {
-            private$.p_value <- .rowMeans(
-                abs(private$.statistic_permu) >= abs(private$.statistic),
-                nrow(private$.statistic_permu), ncol(private$.statistic_permu)
+            m <- nrow(private$.statistic_permu)
+            n <- ncol(private$.statistic_permu)
+
+            delayedAssign(
+                "l", .rowMeans(
+                    private$.statistic_permu <= private$.statistic, m, n
+                )
             )
+            delayedAssign(
+                "r", .rowMeans(
+                    private$.statistic_permu >= private$.statistic, m, n
+                )
+            )
+            delayedAssign(
+                "lr", 2 * pmin(l, r, 0.5)
+            )
+
+            private$.p_value <- eval(as.name(private$.side))
         },
 
         .calculate_extra = function() {

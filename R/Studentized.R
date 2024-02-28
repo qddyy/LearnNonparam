@@ -100,6 +100,12 @@ Studentized <- R6Class(
             }
         },
 
+        .calculate_side = function() {
+            private$.side <- switch(private$.method,
+                bonferroni = "lr", tukey = "r"
+            )
+        },
+
         .calculate_p = function() {
             N <- length(private$.data)
             k <- as.integer(names(private$.data)[N])
