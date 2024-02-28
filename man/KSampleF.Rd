@@ -5,7 +5,7 @@
 \alias{ksample.f}
 \title{K Sample Test Based on F Statistic}
 \description{
-Performs F statistic based k sample test on data vectors.
+Performs F statistic based k-sample test on samples.
 }
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:KSampleTest]{LearnNonparam::KSampleTest}} -> \code{KSampleF}
@@ -39,7 +39,7 @@ Create a new \code{KSampleF} object.
 \describe{
 \item{\code{type}}{a character string specifying the way to calculate the p-value.}
 
-\item{\code{n_permu}}{an integer indicating how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer indicating number of permutations for the permutation distribution. If set to zero (default) then all permutations are used.}
 }
 \if{html}{\out{</div>}}
 }

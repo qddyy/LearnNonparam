@@ -1,6 +1,6 @@
 #' @title `r PairedDifference$private_fields$.name`
 #' 
-#' @description Performs differences based paired comparison on data vectors.
+#' @description Performs differences based paired comparison on samples.
 #' 
 #' @aliases paired.difference
 #' 

@@ -1,6 +1,6 @@
 #' @title `r SiegelTukey$private_fields$.name`
 #' 
-#' @description Performs Siegel-Tukey test on data vectors.
+#' @description Performs Siegel-Tukey test on samples.
 #' 
 #' @aliases twosample.siegel
 #' 

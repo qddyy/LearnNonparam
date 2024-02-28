@@ -65,7 +65,7 @@ CDF <- R6Class(
 
             A <- 1 / sqrt(n) * qnorm(1 - (1 - private$.conf_level) / 2)
             delta_n <- A * sqrt(F_n * (1 - F_n))
-            private$.ci <- list(
+            private$.conf_int <- list(
                 lower = stepfun(private$.data, F_n - delta_n),
                 upper = stepfun(private$.data, F_n + delta_n)
             )
@@ -93,10 +93,12 @@ CDF <- R6Class(
                 ), xlab = expression(x), ylab = expression(F[n](x))
             )
             plot.stepfun(
-                private$.ci$lower, lty = "dashed", do.points = FALSE, add = TRUE
+                private$.conf_int$lower,
+                lty = "dashed", do.points = FALSE, add = TRUE
             )
             plot.stepfun(
-                private$.ci$upper, lty = "dashed", do.points = FALSE, add = TRUE
+                private$.conf_int$upper,
+                lty = "dashed", do.points = FALSE, add = TRUE
             )
         },
 
@@ -119,8 +121,8 @@ CDF <- R6Class(
                         data.frame(
                             xmin = private$.data[-n],
                             xmax = private$.data[-1],
-                            ymin = private$.ci$lower(private$.data[-n]),
-                            ymax = private$.ci$upper(private$.data[-n])
+                            ymin = private$.conf_int$lower(private$.data[-n]),
+                            ymax = private$.conf_int$upper(private$.data[-n])
                         )
                     }, alpha = 0.25
                 ) +

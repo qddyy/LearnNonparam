@@ -9,11 +9,11 @@ output:
 ---
 
 ```{r, setup, include = FALSE}
+library(LearnNonparam)
 knitr::opts_chunk$set(
     collapse = TRUE, comment = "#>",
     fig.path = "man/figures/README-", out.width = "100%"
 )
-library(LearnNonparam)
 ```
 
 # LearnNonparam <img src="man/figures/logo.svg" alt="logo" width="14%" align="right"/>
@@ -30,7 +30,7 @@ This package implements some of the non-parametric tests in chapters 1-5 of [@Hi
 
 It depends on [R6](https://CRAN.R-project.org/package=R6) for object oriented design and [Rcpp](https://CRAN.R-project.org/package=Rcpp) for integration of R and C++.
 
-Examples in the book can be found [here](https://qddyy.github.io/LearnNonparam/articles/examples). 
+A few examples in the book can be found [here](https://qddyy.github.io/LearnNonparam/articles/examples). 
 
 ## Installation
 
@@ -39,7 +39,7 @@ Examples in the book can be found [here](https://qddyy.github.io/LearnNonparam/a
 pak::pkg_install("qddyy/LearnNonparam")
 ```
 
-## Usage
+## Basic Usage
 
 - Construct a test object
     - from some R6 class directly
@@ -52,7 +52,7 @@ pak::pkg_install("qddyy/LearnNonparam")
     t <- pmt("twosample.wilcoxon", alternative = "two_sided", type = "permu", n_permu = 1e6)
     ```
 
-- Test some data
+- Provide it with samples
     ```{r, test}
     t$test(rnorm(20, 1), rnorm(20, 0))
     ```
@@ -78,6 +78,32 @@ Tests implemented in this package:
 
 ```{r}
 pmts()
+```
+
+## Experimental Features
+
+The `define_pmt` function allows users to define new permutation tests. Take Cramér-von Mises's test as an example:
+
+```{r}
+t <- define_pmt(
+    # this is a two-sample permutation test
+    inherit = "twosample",
+    # provide a function to calculate the test statistic
+    statistic = function(x, y) {
+        F_n <- ecdf(x)
+        G_n <- ecdf(y)
+
+        sum(c(F_n(x) - G_n(x), F_n(y) - G_n(y))^2)
+    },
+    # reject the null hypothesis when the test statistic is large
+    rejection = "r",
+    # use 10000 permutations
+    n_permu = 1e4,
+    name = "Cramér-von Mises's Test",
+    alternative = "samples are from different distributions"
+)
+
+t$test(rnorm(20, 1), rnorm(20, 0))$print()
 ```
 
 ## References

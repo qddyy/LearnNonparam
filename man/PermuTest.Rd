@@ -29,9 +29,9 @@ Abstract class for permutation tests.
 
 \item{\code{p_value}}{The p-value.}
 
-\item{\code{estimate}}{The estimated parameter.}
+\item{\code{estimate}}{The estimated value of the parameter.}
 
-\item{\code{ci}}{The confidence interval.}
+\item{\code{conf_int}}{The confidence interval of the parameter.}
 }
 \if{html}{\out{</div>}}
 }
@@ -57,7 +57,7 @@ Abstract class for permutation tests.
 \if{html}{\out{<a id="method-PermuTest-test"></a>}}
 \if{latex}{\out{\hypertarget{method-PermuTest-test}{}}}
 \subsection{Method \code{test()}}{
-Perform test on data.
+Perform test on sample(s).
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{PermuTest$test(...)}\if{html}{\out{</div>}}
 }
@@ -65,7 +65,7 @@ Perform test on data.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{...}}{data to be tested. Can be a \code{data.frame}, a \code{list} or numeric vector(s).}
+\item{\code{...}}{sample(s). Can be numeric vector(s) or a \code{data.frame} or \code{list} containing them.}
 }
 \if{html}{\out{</div>}}
 }
@@ -105,7 +105,7 @@ Plot histogram(s) of the permutation distribution. Note that this method only wo
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{style}}{a character string specifying which package to be used.}
+\item{\code{style}}{a character string specifying which package to use.}
 
 \item{\code{...}}{extra parameters passed to \code{graphics::hist()} or \code{ggplot2::stat_bin()}.}
 }

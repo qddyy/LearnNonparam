@@ -1,6 +1,6 @@
 #' @title `r KolmogorovSmirnov$private_fields$.name`
 #' 
-#' @description Performs two sample Kolmogorov-Smirnov test on data vectors.
+#' @description Performs two-sample Kolmogorov-Smirnov test on samples.
 #' 
 #' @aliases twosample.ks
 #' 

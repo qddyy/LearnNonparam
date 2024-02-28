@@ -1,6 +1,6 @@
 #' @title `r Sign$private_fields$.name`
 #' 
-#' @description Performs two sample sign test on data vectors.
+#' @description Performs two-sample sign test on samples.
 #' 
 #' @aliases paired.sign
 #' 

@@ -5,7 +5,7 @@
 \alias{twosample.siegel}
 \title{Siegel-Tukey Test}
 \description{
-Performs Siegel-Tukey test on data vectors.
+Performs Siegel-Tukey test on samples.
 }
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{\link[LearnNonparam:Wilcoxon]{LearnNonparam::Wilcoxon}} -> \code{SiegelTukey}
@@ -46,7 +46,7 @@ Create a new \code{SiegelTukey} object.
 
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 
-\item{\code{n_permu}}{an integer indicating how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer indicating number of permutations for the permutation distribution. If set to zero (default) then all permutations are used.}
 
 \item{\code{correct}}{a logical indicating whether to apply continuity correction in the normal approximation for the p-value.}
 }

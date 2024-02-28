@@ -1,6 +1,6 @@
 #' @title `r Correlation$private_fields$.name`
 #' 
-#' @description Performs correlation coefficient based two sample association test on data vectors.
+#' @description Performs correlation coefficient based two-sample association test on samples.
 #' 
 #' @aliases association.corr
 #' 

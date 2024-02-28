@@ -5,7 +5,7 @@
 \alias{multicomp.t}
 \title{Multiple Comparison Based on Studentized Statistic}
 \description{
-Performs studentized statistic based multiple comparison on data vectors.
+Performs studentized statistic based multiple comparison on samples.
 }
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:KSampleTest]{LearnNonparam::KSampleTest}} -> \code{\link[LearnNonparam:MultipleComparison]{LearnNonparam::MultipleComparison}} -> \code{Studentized}
@@ -47,11 +47,11 @@ Create a new \code{Studentized} object.
 
 \item{\code{method}}{a character string specifying whether to use Bonferroni's method or Tukey's HSD method.}
 
-\item{\code{scoring}}{a character string specifying which scoring system to be used.}
+\item{\code{scoring}}{a character string specifying which scoring system to use.}
 
 \item{\code{conf_level}}{a number between zero and one indicating the family-wise confidence level to use.}
 
-\item{\code{n_permu}}{an integer indicating how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer indicating number of permutations for the permutation distribution. If set to zero (default) then all permutations are used.}
 }
 \if{html}{\out{</div>}}
 }

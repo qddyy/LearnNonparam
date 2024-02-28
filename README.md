@@ -20,7 +20,7 @@ It depends on [R6](https://CRAN.R-project.org/package=R6) for object
 oriented design and [Rcpp](https://CRAN.R-project.org/package=Rcpp) for
 integration of R and C++.
 
-Examples in the book can be found
+A few examples in the book can be found
 [here](https://qddyy.github.io/LearnNonparam/articles/examples).
 
 ## Installation
@@ -30,7 +30,7 @@ Examples in the book can be found
 pak::pkg_install("qddyy/LearnNonparam")
 ```
 
-## Usage
+## Basic Usage
 
 - Construct a test object
 
@@ -46,7 +46,7 @@ pak::pkg_install("qddyy/LearnNonparam")
   t <- pmt("twosample.wilcoxon", alternative = "two_sided", type = "permu", n_permu = 1e6)
   ```
 
-- Test some data
+- Provide it with samples
 
   ``` r
   t$test(rnorm(20, 1), rnorm(20, 0))
@@ -56,19 +56,19 @@ pak::pkg_install("qddyy/LearnNonparam")
 
   ``` r
   t$statistic
-  #> [1] 539
+  #> [1] 472
   t$p_value
-  #> [1] 0.000148
+  #> [1] 0.096778
 
   t$print(digits = 2)
   #> 
   #>       Two Sample Wilcoxon Test 
   #> 
   #> scoring: rank    type: permu(1e+06)    method: default
-  #> statistic = 539, p-value = 0.00015
+  #> statistic = 472, p-value = 0.097
   #> alternative hypothesis: true location shift is not equal to 0
-  #> estimate: 1.5
-  #> 95% confidence interval: (0.67, 2.1)
+  #> estimate: 0.7
+  #> 95% confidence interval: (-0.13, 1.4)
 
   t$plot(style = "ggplot2", binwidth = 1)
   #> Loading required namespace: ggplot2
@@ -82,7 +82,7 @@ pak::pkg_install("qddyy/LearnNonparam")
   t$type <- "asymp"
 
   t$p_value
-  #> [1] 0.0005090729
+  #> [1] 0.0961963
   ```
 
 Tests implemented in this package:
@@ -117,6 +117,39 @@ pmts()
 | table.chisq           | ChiSquare          | Chi-Square Test on Contingency Table               |
 
 </div>
+
+## Experimental Features
+
+The `define_pmt` function allows users to define new permutation tests.
+Take Cramér-von Mises’s test as an example:
+
+``` r
+t <- define_pmt(
+    # this is a two-sample permutation test
+    inherit = "twosample",
+    # provide a function to calculate the test statistic
+    statistic = function(x, y) {
+        F_n <- ecdf(x)
+        G_n <- ecdf(y)
+
+        sum(c(F_n(x) - G_n(x), F_n(y) - G_n(y))^2)
+    },
+    # reject the null hypothesis when the test statistic is large
+    rejection = "r",
+    # use 10000 permutations
+    n_permu = 1e4,
+    name = "Cramér-von Mises's Test",
+    alternative = "samples are from different distributions"
+)
+
+t$test(rnorm(20, 1), rnorm(20, 0))$print()
+#> 
+#>       Cramér-von Mises's Test 
+#> 
+#> scoring: none    type: permu(10000)    method: default
+#> statistic = 5.48, p-value = 1e-04
+#> alternative hypothesis: samples are from different distributions
+```
 
 ## References
 

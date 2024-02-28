@@ -5,7 +5,7 @@
 \alias{twosample.ansari}
 \title{Ansari-Bradley Test}
 \description{
-Performs two sample Ansari-Bradley test on data vectors.
+Performs Ansari-Bradley test on samples.
 }
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{AnsariBradley}
@@ -45,7 +45,7 @@ Create a new \code{AnsariBradley} object.
 
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 
-\item{\code{n_permu}}{an integer indicating how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer indicating number of permutations for the permutation distribution. If set to zero (default) then all permutations are used.}
 }
 \if{html}{\out{</div>}}
 }

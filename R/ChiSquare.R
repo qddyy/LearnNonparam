@@ -1,6 +1,6 @@
 #' @title `r ChiSquare$private_fields$.name`
 #' 
-#' @description Performs chi-square test on a contingency table.
+#' @description Performs chi-square test on contingency tables.
 #' 
 #' @aliases table.chisq
 #' 

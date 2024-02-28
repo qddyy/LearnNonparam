@@ -1,6 +1,6 @@
 #' @title `r KSampleF$private_fields$.name`
 #' 
-#' @description Performs F statistic based k sample test on data vectors.
+#' @description Performs F statistic based k-sample test on samples.
 #' 
 #' @aliases ksample.f
 #' 

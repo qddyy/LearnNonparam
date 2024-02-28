@@ -1,6 +1,6 @@
 #' @title `r Quantile$private_fields$.name`
 #' 
-#' @description Performs quantile test on a single data vector. In addition, an estimation and a confidence interval for the desired quantile will be calculated.
+#' @description Performs quantile test on a single sample. In addition, an estimation and a confidence interval for the desired quantile will be calculated.
 #' 
 #' @aliases onesample.quantile
 #' 
@@ -82,7 +82,7 @@ Quantile <- R6Class(
             b <- round(n * p + 1 + d)
 
             sorted <- sort(private$.data)
-            private$.ci <- c(
+            private$.conf_int <- c(
                 if (a >= 1) sorted[a] else -Inf,
                 if (b <= n) sorted[b] else Inf
             )

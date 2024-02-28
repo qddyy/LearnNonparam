@@ -5,7 +5,7 @@
 \alias{rcbd.f}
 \title{Test for RCBD Based on F Statistic}
 \description{
-Performs F statistic based test on data collected in a randomized complete block design.
+Performs F statistic based test on samples collected in a randomized complete block design.
 }
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:RCBDTest]{LearnNonparam::RCBDTest}} -> \code{RCBDF}
@@ -39,7 +39,7 @@ Create a new \code{RCBDF} object.
 \describe{
 \item{\code{type}}{a character string specifying the way to calculate the p-value.}
 
-\item{\code{n_permu}}{an integer indicating how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer indicating number of permutations for the permutation distribution. If set to zero (default) then all permutations are used.}
 }
 \if{html}{\out{</div>}}
 }

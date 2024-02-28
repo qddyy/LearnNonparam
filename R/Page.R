@@ -1,6 +1,6 @@
 #' @title `r Page$private_fields$.name`
 #' 
-#' @description Performs Page test on data collected in a randomized complete block design.
+#' @description Performs Page test on samples collected in a randomized complete block design.
 #' 
 #' @aliases rcbd.page
 #' 

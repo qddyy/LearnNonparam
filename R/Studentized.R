@@ -1,6 +1,6 @@
 #' @title `r Studentized$private_fields$.name`
 #' 
-#' @description Performs studentized statistic based multiple comparison on data vectors.
+#' @description Performs studentized statistic based multiple comparison on samples.
 #' 
 #' @aliases multicomp.t
 #' 

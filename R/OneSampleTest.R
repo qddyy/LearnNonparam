@@ -1,6 +1,6 @@
 #' @title OneSampleTest Class
 #' 
-#' @description Abstract class for one sample tests.
+#' @description Abstract class for one-sample tests.
 #' 
 #' 
 #' @importFrom R6 R6Class

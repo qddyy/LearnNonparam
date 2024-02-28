@@ -17,9 +17,9 @@ PermuTest <- R6Class(
             stop("Can't construct an object from abstract class")
         },
 
-        #' @description Perform test on data.
+        #' @description Perform test on sample(s).
         #' 
-        #' @param ... data to be tested. Can be a `data.frame`, a `list` or numeric vector(s).
+        #' @param ... sample(s). Can be numeric vector(s) or a `data.frame` or `list` containing them.
         #' 
         #' @return The object itself (invisibly).
         test = function(...) {
@@ -94,7 +94,7 @@ PermuTest <- R6Class(
         .p_value = NULL,
 
         .estimate = NULL,
-        .ci = NULL,
+        .conf_int = NULL,
         .conf_level = NULL,
 
         .calculate = function() {
@@ -142,7 +142,7 @@ PermuTest <- R6Class(
 
         .calculate_extra = function() {
             # private$.estimate <- ...
-            # private$.ci <- ...
+            # private$.conf_int <- ...
         },
 
         .calculate_statistic_permu = function() {
@@ -249,13 +249,13 @@ PermuTest <- R6Class(
                 cat("\n")
             }
 
-            if (!is.null(private$.ci)) {
+            if (!is.null(private$.conf_int)) {
                 cat(
                     paste0(
                         format(private$.conf_level * 100, digits = digits), "%",
                         " confidence interval: ",
-                        "(", format(private$.ci[1], digits = digits), ",",
-                        " ", format(private$.ci[2], digits = digits), ")"
+                        "(", format(private$.conf_int[1], digits = digits), ",",
+                        " ", format(private$.conf_int[2], digits = digits), ")"
                     )
                 )
                 cat("\n")
@@ -429,9 +429,9 @@ PermuTest <- R6Class(
         statistic = function() private$.statistic,
         #' @field p_value The p-value.
         p_value = function() private$.p_value,
-        #' @field estimate The estimated parameter.
+        #' @field estimate The estimated value of the parameter.
         estimate = function() private$.estimate,
-        #' @field ci The confidence interval.
-        ci = function() private$.ci
+        #' @field conf_int The confidence interval of the parameter.
+        conf_int = function() private$.conf_int
     )
 )

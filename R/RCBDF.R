@@ -1,6 +1,6 @@
 #' @title `r RCBDF$private_fields$.name`
 #' 
-#' @description Performs F statistic based test on data collected in a randomized complete block design.
+#' @description Performs F statistic based test on samples collected in a randomized complete block design.
 #' 
 #' @aliases rcbd.f
 #' 

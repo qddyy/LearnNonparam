@@ -1,6 +1,6 @@
 #' @title `r ScoreSum$private_fields$.name`
 #' 
-#' @description Performs sum of scores based two sample test on data vectors. It is almost the same as two sample wilcoxon rank sum test but uses more scoring systems.
+#' @description Performs sum of scores based two-sample test on samples. It is almost the same as two-sample wilcoxon rank sum test but uses more scoring systems.
 #' 
 #' @aliases twosample.scoresum
 #' 

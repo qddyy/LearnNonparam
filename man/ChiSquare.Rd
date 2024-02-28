@@ -5,7 +5,7 @@
 \alias{table.chisq}
 \title{Chi-Square Test on Contingency Table}
 \description{
-Performs chi-square test on a contingency table.
+Performs chi-square test on contingency tables.
 }
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:ContingencyTableTest]{LearnNonparam::ContingencyTableTest}} -> \code{ChiSquare}
@@ -39,7 +39,7 @@ Create a new \code{ChiSquare} object.
 \describe{
 \item{\code{type}}{a character string specifying the way to calculate the p-value.}
 
-\item{\code{n_permu}}{an integer indicating how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer indicating number of permutations for the permutation distribution. If set to zero (default) then all permutations are used.}
 }
 \if{html}{\out{</div>}}
 }

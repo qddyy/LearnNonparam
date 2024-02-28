@@ -5,7 +5,7 @@
 \alias{onesample.quantile}
 \title{Quantile Test}
 \description{
-Performs quantile test on a single data vector. In addition, an estimation and a confidence interval for the desired quantile will be calculated.
+Performs quantile test on a single sample. In addition, an estimation and a confidence interval for the desired quantile will be calculated.
 }
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:OneSampleTest]{LearnNonparam::OneSampleTest}} -> \code{Quantile}

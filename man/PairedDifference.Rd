@@ -5,7 +5,7 @@
 \alias{paired.difference}
 \title{Paired Comparison Based on Differences}
 \description{
-Performs differences based paired comparison on data vectors.
+Performs differences based paired comparison on samples.
 }
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{\link[LearnNonparam:TwoSamplePairedTest]{LearnNonparam::TwoSamplePairedTest}} -> \code{PairedDifference}
@@ -55,11 +55,11 @@ Create a new \code{PairedDifference} object.
 
 \item{\code{method}}{a character string specifying the method of ranking data in computing adjusted signed scores for tied data, must be one of \code{"with_zeros"} (default) or \code{"without_zeros"}.}
 
-\item{\code{scoring}}{a character string specifying which scoring system to be used.}
+\item{\code{scoring}}{a character string specifying which scoring system to use.}
 
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 
-\item{\code{n_permu}}{an integer indicating how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer indicating number of permutations for the permutation distribution. If set to zero (default) then all permutations are used.}
 
 \item{\code{correct}}{a logical indicating whether to apply continuity correction in the normal approximation for the p-value when \code{scoring} is set to \code{"rank"}.}
 }

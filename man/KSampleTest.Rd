@@ -4,7 +4,7 @@
 \alias{KSampleTest}
 \title{KSampleTest Class}
 \description{
-Abstract class for k sample tests.
+Abstract class for k-sample tests.
 }
 \section{Super class}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{KSampleTest}

@@ -57,7 +57,7 @@ Plot the estimate and confidence bounds for population cumulative distribution f
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{style}}{a character string specifying which package to be used.}
+\item{\code{style}}{a character string specifying which package to use.}
 }
 \if{html}{\out{</div>}}
 }

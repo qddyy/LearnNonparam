@@ -5,7 +5,7 @@
 \alias{twosample.wilcoxon}
 \title{Two Sample Wilcoxon Test}
 \description{
-Performs two sample wilcoxon test on data vectors. In addition, an estimation and a confidence interval for the location shift will be calculated.
+Performs two-sample wilcoxon test on samples. In addition, an estimation and a confidence interval for the location shift will be calculated.
 }
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{Wilcoxon}
@@ -56,7 +56,7 @@ Create a new \code{Wilcoxon} object.
 
 \item{\code{conf_level}}{a number between zero and one indicating the confidence level to use.}
 
-\item{\code{n_permu}}{an integer indicating how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer indicating number of permutations for the permutation distribution. If set to zero (default) then all permutations are used.}
 
 \item{\code{correct}}{a logical indicating whether to apply continuity correction in the normal approximation for the p-value.}
 }

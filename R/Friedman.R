@@ -1,6 +1,6 @@
 #' @title `r Friedman$private_fields$.name`
 #' 
-#' @description Performs Friedman test on data collected in a randomized complete block design.
+#' @description Performs Friedman test on samples collected in a randomized complete block design.
 #' 
 #' @aliases rcbd.friedman
 #' 

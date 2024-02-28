@@ -1,6 +1,6 @@
 #' @title TwoSampleTest Class
 #' 
-#' @description Abstract class for two sample tests.
+#' @description Abstract class for two-sample tests.
 #' 
 #' 
 #' @export

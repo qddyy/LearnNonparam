@@ -1,6 +1,6 @@
 #' @title `r RatioMeanDeviance$private_fields$.name`
 #' 
-#' @description Performs ratio mean deviance test on data vectors.
+#' @description Performs ratio mean deviance test on samples.
 #' 
 #' @aliases twosample.rmd
 #' 

@@ -1,6 +1,6 @@
 #' @title `r JonckheereTerpstra$private_fields$.name`
 #' 
-#' @description Performs k sample Jonckheere-Terpstra test on data vectors.
+#' @description Performs Jonckheere-Terpstra test on samples.
 #' 
 #' @aliases ksample.jt
 #' 

@@ -5,7 +5,7 @@
 \alias{rcbd.page}
 \title{Page Test}
 \description{
-Performs Page test on data collected in a randomized complete block design.
+Performs Page test on samples collected in a randomized complete block design.
 }
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:RCBDTest]{LearnNonparam::RCBDTest}} -> \code{Page}
@@ -45,7 +45,7 @@ Create a new \code{Page} object.
 
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 
-\item{\code{n_permu}}{an integer indicating how many permutations should be used to construct the permutation distribution. If set to zero (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer indicating number of permutations for the permutation distribution. If set to zero (default) then all permutations are used.}
 }
 \if{html}{\out{</div>}}
 }

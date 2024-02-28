@@ -1,6 +1,6 @@
 #' @title `r AnsariBradley$private_fields$.name`
 #' 
-#' @description Performs two sample Ansari-Bradley test on data vectors.
+#' @description Performs Ansari-Bradley test on samples.
 #' 
 #' @aliases twosample.ansari
 #' 

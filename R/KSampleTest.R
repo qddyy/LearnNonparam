@@ -1,6 +1,6 @@
 #' @title KSampleTest Class
 #' 
-#' @description Abstract class for k sample tests.
+#' @description Abstract class for k-sample tests.
 #' 
 #' 
 #' @export

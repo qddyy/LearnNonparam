@@ -1,6 +1,6 @@
 #' @title TwoSamplePairedTest Class
 #' 
-#' @description Abstract class for paired two sample tests.
+#' @description Abstract class for paired two-sample tests.
 #' 
 #' 
 #' @export

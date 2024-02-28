@@ -1,6 +1,6 @@
 #' @title `r Wilcoxon$private_fields$.name`
 #' 
-#' @description Performs two sample wilcoxon test on data vectors. In addition, an estimation and a confidence interval for the location shift will be calculated.
+#' @description Performs two-sample wilcoxon test on samples. In addition, an estimation and a confidence interval for the location shift will be calculated.
 #' 
 #' @aliases twosample.wilcoxon
 #' 
@@ -94,7 +94,7 @@ Wilcoxon <- R6Class(
             k_a <- round(mu - z * sqrt(sigma2))
             k_b <- round(mu + z * sqrt(sigma2)) + 1
 
-            private$.ci <- c(
+            private$.conf_int <- c(
                 if (k_a >= 1) sorted_diff[k_a] else -Inf,
                 if (k_b <= m * n) sorted_diff[k_b] else Inf
             )
