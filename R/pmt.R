@@ -82,11 +82,17 @@ define_pmt <- function(
     scoring = c("none", "rank", "vw", "expon"), n_permu = 0L,
     name = "User-Defined Permutation Test", alternative = NULL
 ) {
-    self <- super <- private <- NULL
+    inherit <- match.arg(inherit)
 
+    if (!missing(scoring) & inherit %in% c("paired", "association", "table")) {
+        warning("'scoring' is ignored because 'inherit' is '", inherit, "'")
+        scoring <- "none"
+    }
+
+    self <- super <- private <- NULL
     R6Class(
         classname = "UserDefined",
-        inherit = switch(match.arg(inherit),
+        inherit = switch(inherit,
             twosample = TwoSampleTest,
             ksample = KSampleTest,
             multicomp = MultipleComparison,
