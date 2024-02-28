@@ -97,11 +97,11 @@
 
 
 <dt><code>estimate</code></dt>
-<dd><p>The estimated parameter.</p></dd>
+<dd><p>The estimated value of the parameter.</p></dd>
 
 
-<dt><code>ci</code></dt>
-<dd><p>The confidence interval.</p></dd>
+<dt><code>conf_int</code></dt>
+<dd><p>The confidence interval of the parameter.</p></dd>
 
 
 </dl><p></p></div>
@@ -127,7 +127,7 @@
 
 </div><p></p><hr><a id="method-PermuTest-test"></a><div class="section">
 <h3 id="method-test-">Method <code>test()</code><a class="anchor" aria-label="anchor" href="#method-test-"></a></h3>
-<p>Perform test on data.</p><div class="section">
+<p>Perform test on sample(s).</p><div class="section">
 <h4 id="usage-1">Usage<a class="anchor" aria-label="anchor" href="#usage-1"></a></h4>
 <p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va">PermuTest</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">...</span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
@@ -135,7 +135,7 @@
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>...</code></dt>
-<dd><p>data to be tested. Can be a <code>data.frame</code>, a <code>list</code> or numeric vector(s).</p></dd>
+<dd><p>sample(s). Can be numeric vector(s) or a <code>data.frame</code> or <code>list</code> containing them.</p></dd>
 
 
 </dl><p></p></div>
@@ -175,7 +175,7 @@
 <div class="section">
 <h4 id="arguments-2">Arguments<a class="anchor" aria-label="anchor" href="#arguments-2"></a></h4>
 <p></p><div class="arguments"><dl><dt><code>style</code></dt>
-<dd><p>a character string specifying which package to be used.</p></dd>
+<dd><p>a character string specifying which package to use.</p></dd>
 
 
 <dt><code>...</code></dt>
