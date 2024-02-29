@@ -3,7 +3,7 @@
 \name{KSampleF}
 \alias{KSampleF}
 \alias{ksample.f}
-\title{K Sample Test Based on F Statistic}
+\title{K-Sample Test Based on F Statistic}
 \description{
 Performs F statistic based k-sample test on samples.
 }

@@ -33,7 +33,7 @@ Wilcoxon <- R6Class(
         }
     ),
     private = list(
-        .name = "Two Sample Wilcoxon Test",
+        .name = "Two-Sample Wilcoxon Test",
         .param_name = "location shift",
 
         .scoring = "rank",

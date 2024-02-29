@@ -3,7 +3,7 @@
 \name{ScoreSum}
 \alias{ScoreSum}
 \alias{twosample.scoresum}
-\title{Two Sample Test Based on Sum of Scores}
+\title{Two-Sample Test Based on Sum of Scores}
 \description{
 Performs sum of scores based two-sample test on samples. It is almost the same as two-sample wilcoxon rank sum test but uses more scoring systems.
 }

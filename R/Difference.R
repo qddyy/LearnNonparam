@@ -31,7 +31,7 @@ Difference <- R6Class(
         }
     ),
     private = list(
-        .name = "Two Sample Test Based on Mean or Median",
+        .name = "Two-Sample Test Based on Mean or Median",
 
         .define = function() {
             private$.statistic_func <- switch(private$.method,

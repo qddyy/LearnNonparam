@@ -29,7 +29,7 @@ KSampleF <- R6Class(
         }
     ),
     private = list(
-        .name = "K Sample Test Based on F Statistic",
+        .name = "K-Sample Test Based on F Statistic",
 
         .define = function() {
             private$.statistic_func <- switch(private$.type,

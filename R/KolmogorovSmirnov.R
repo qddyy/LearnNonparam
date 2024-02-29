@@ -26,7 +26,7 @@ KolmogorovSmirnov <- R6Class(
         }
     ),
     private = list(
-        .name = "Two Sample Kolmogorov-Smirnov Test",
+        .name = "Two-Sample Kolmogorov-Smirnov Test",
 
         .define = function() {
             m <- length(private$.data$x)

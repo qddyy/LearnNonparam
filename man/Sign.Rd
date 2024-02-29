@@ -3,7 +3,7 @@
 \name{Sign}
 \alias{Sign}
 \alias{paired.sign}
-\title{Two Sample Sign Test}
+\title{Two-Sample Sign Test}
 \description{
 Performs two-sample sign test on samples.
 }

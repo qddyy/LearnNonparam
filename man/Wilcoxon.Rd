@@ -3,7 +3,7 @@
 \name{Wilcoxon}
 \alias{Wilcoxon}
 \alias{twosample.wilcoxon}
-\title{Two Sample Wilcoxon Test}
+\title{Two-Sample Wilcoxon Test}
 \description{
 Performs two-sample wilcoxon test on samples. In addition, an estimation and a confidence interval for the location shift will be calculated.
 }

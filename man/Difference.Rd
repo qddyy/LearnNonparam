@@ -3,7 +3,7 @@
 \name{Difference}
 \alias{Difference}
 \alias{twosample.difference}
-\title{Two Sample Test Based on Mean or Median}
+\title{Two-Sample Test Based on Mean or Median}
 \description{
 Performs mean/median based two-sample test on samples.
 }

@@ -40,7 +40,8 @@ pak::pkg_install("qddyy/LearnNonparam")
   t <- Wilcoxon$new(alternative = "two_sided", type = "permu", n_permu = 1e6)
   ```
 
-  - using `pmt` (**p**er**m**utation **t**est) function (*recommended*)
+  - using the `pmt` (**p**er**m**utation **t**est) function
+    (*recommended*)
 
   ``` r
   t <- pmt("twosample.wilcoxon", alternative = "two_sided", type = "permu", n_permu = 1e6)
@@ -56,19 +57,19 @@ pak::pkg_install("qddyy/LearnNonparam")
 
   ``` r
   t$statistic
-  #> [1] 472
+  #> [1] 494
   t$p_value
-  #> [1] 0.096778
+  #> [1] 0.022888
 
-  t$print(digits = 2)
+  t$print()
   #> 
-  #>       Two Sample Wilcoxon Test 
+  #>       Two-Sample Wilcoxon Test 
   #> 
   #> scoring: rank    type: permu(1e+06)    method: default
-  #> statistic = 472, p-value = 0.097
+  #> statistic = 494, p-value = 0.022888
   #> alternative hypothesis: true location shift is not equal to 0
-  #> estimate: 0.7
-  #> 95% confidence interval: (-0.13, 1.4)
+  #> estimate: 0.9104679
+  #> 95% confidence interval: (0.1180643, 1.572125)
 
   t$plot(style = "ggplot2", binwidth = 1)
   #> Loading required namespace: ggplot2
@@ -81,11 +82,18 @@ pak::pkg_install("qddyy/LearnNonparam")
   ``` r
   t$type <- "asymp"
 
-  t$p_value
-  #> [1] 0.0961963
+  t$print()
+  #> 
+  #>       Two-Sample Wilcoxon Test 
+  #> 
+  #> scoring: rank    type: asymp    method: default
+  #> statistic = 494, p-value = 0.02390315
+  #> alternative hypothesis: true location shift is not equal to 0
+  #> estimate: 0.9104679
+  #> 95% confidence interval: (0.1180643, 1.572125)
   ```
 
-Tests implemented in this package:
+See `pmts()` for tests implemented in this package:
 
 ``` r
 pmts()
@@ -97,18 +105,18 @@ pmts()
 |:----------------------|:-------------------|:---------------------------------------------------|
 | onesample.quantile    | Quantile           | Quantile Test                                      |
 | onesample.cdf         | CDF                | Inference on Cumulative Distribution Function      |
-| twosample.difference  | Difference         | Two Sample Test Based on Mean or Median            |
-| twosample.wilcoxon    | Wilcoxon           | Two Sample Wilcoxon Test                           |
-| twosample.scoresum    | ScoreSum           | Two Sample Test Based on Sum of Scores             |
+| twosample.difference  | Difference         | Two-Sample Test Based on Mean or Median            |
+| twosample.wilcoxon    | Wilcoxon           | Two-Sample Wilcoxon Test                           |
+| twosample.scoresum    | ScoreSum           | Two-Sample Test Based on Sum of Scores             |
 | twosample.ansari      | AnsariBradley      | Ansari-Bradley Test                                |
 | twosample.siegel      | SiegelTukey        | Siegel-Tukey Test                                  |
 | twosample.rmd         | RatioMeanDeviance  | Ratio Mean Deviance Test                           |
-| twosample.ks          | KolmogorovSmirnov  | Two Sample Kolmogorov-Smirnov Test                 |
-| ksample.f             | KSampleF           | K Sample Test Based on F Statistic                 |
+| twosample.ks          | KolmogorovSmirnov  | Two-Sample Kolmogorov-Smirnov Test                 |
+| ksample.f             | KSampleF           | K-Sample Test Based on F Statistic                 |
 | ksample.kw            | KruskalWallis      | Kruskal-Wallis Test                                |
 | ksample.jt            | JonckheereTerpstra | Jonckheere-Terpstra Test                           |
 | multicomp.studentized | Studentized        | Multiple Comparison Based on Studentized Statistic |
-| paired.sign           | Sign               | Two Sample Sign Test                               |
+| paired.sign           | Sign               | Two-Sample Sign Test                               |
 | paired.difference     | PairedDifference   | Paired Comparison Based on Differences             |
 | rcbd.f                | RCBDF              | Test for RCBD Based on F Statistic                 |
 | rcbd.friedman         | Friedman           | Friedman Test                                      |
@@ -121,7 +129,7 @@ pmts()
 ## Experimental Features
 
 The `define_pmt` function allows users to define new permutation tests.
-Take Cramér-von Mises’s test as an example:
+Take Cramér-von Mises test as an example:
 
 ``` r
 t <- define_pmt(
@@ -131,23 +139,21 @@ t <- define_pmt(
     statistic = function(x, y) {
         F_n <- ecdf(x)
         G_n <- ecdf(y)
-
         sum(c(F_n(x) - G_n(x), F_n(y) - G_n(y))^2)
     },
     # reject the null hypothesis when the test statistic is large
     rejection = "r",
-    # use 10000 permutations
-    n_permu = 1e4,
-    name = "Cramér-von Mises's Test",
+    scoring = "none", n_permu = 1e4,
+    name = "Cramér-von Mises Test",
     alternative = "samples are from different distributions"
 )
 
 t$test(rnorm(20, 1), rnorm(20, 0))$print()
 #> 
-#>       Cramér-von Mises's Test 
+#>       Cramér-von Mises Test 
 #> 
 #> scoring: none    type: permu(10000)    method: default
-#> statistic = 5.48, p-value = 1e-04
+#> statistic = 2.36, p-value = 0.0253
 #> alternative hypothesis: samples are from different distributions
 ```
 

@@ -3,7 +3,7 @@
 \name{KolmogorovSmirnov}
 \alias{KolmogorovSmirnov}
 \alias{twosample.ks}
-\title{Two Sample Kolmogorov-Smirnov Test}
+\title{Two-Sample Kolmogorov-Smirnov Test}
 \description{
 Performs two-sample Kolmogorov-Smirnov test on samples.
 }

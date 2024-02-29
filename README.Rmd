@@ -47,7 +47,7 @@ pak::pkg_install("qddyy/LearnNonparam")
     t <- Wilcoxon$new(alternative = "two_sided", type = "permu", n_permu = 1e6)
     ```
 
-    - using `pmt` (**p**er**m**utation **t**est) function (*recommended*)
+    - using the `pmt` (**p**er**m**utation **t**est) function (*recommended*)
     ```{r, create}
     t <- pmt("twosample.wilcoxon", alternative = "two_sided", type = "permu", n_permu = 1e6)
     ```
@@ -62,7 +62,7 @@ pak::pkg_install("qddyy/LearnNonparam")
     t$statistic
     t$p_value
 
-    t$print(digits = 2)
+    t$print()
 
     t$plot(style = "ggplot2", binwidth = 1)
     ```
@@ -71,10 +71,10 @@ pak::pkg_install("qddyy/LearnNonparam")
     ```{r, modify}
     t$type <- "asymp"
 
-    t$p_value
+    t$print()
     ```
 
-Tests implemented in this package:
+See `pmts()` for tests implemented in this package:
 
 ```{r}
 pmts()
@@ -82,7 +82,7 @@ pmts()
 
 ## Experimental Features
 
-The `define_pmt` function allows users to define new permutation tests. Take Cramér-von Mises's test as an example:
+The `define_pmt` function allows users to define new permutation tests. Take Cramér-von Mises test as an example:
 
 ```{r}
 t <- define_pmt(
@@ -92,14 +92,12 @@ t <- define_pmt(
     statistic = function(x, y) {
         F_n <- ecdf(x)
         G_n <- ecdf(y)
-
         sum(c(F_n(x) - G_n(x), F_n(y) - G_n(y))^2)
     },
     # reject the null hypothesis when the test statistic is large
     rejection = "r",
-    # use 10000 permutations
-    n_permu = 1e4,
-    name = "Cramér-von Mises's Test",
+    scoring = "none", n_permu = 1e4,
+    name = "Cramér-von Mises Test",
     alternative = "samples are from different distributions"
 )
 
