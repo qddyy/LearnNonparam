@@ -414,7 +414,7 @@ PermuTest <- R6Class(
                     "<", class(self)[1], ">", " object"
                 )
             } else if (length(value) == 1 & is.finite(value) & value >= 0) {
-                private$.n_permu <- as.integer(value)
+                private$.n_permu <- ceiling(value)
                 if (!is.null(private$.raw_data)) {
                     private$.on_n_permu_change()
                 }
