@@ -14,6 +14,6 @@ Table 4.1.1
 Table4.1.1
 }
 \description{
-The eatimated daily caloric intake from dietary information provided using 2 methods by a group of college women.
+The estimated daily caloric intake from dietary information provided using 2 methods by a group of college women.
 }
 \keyword{datasets}

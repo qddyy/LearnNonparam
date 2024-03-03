@@ -85,7 +85,7 @@
 
 #' @title Caloric Intake
 #' 
-#' @description The eatimated daily caloric intake from dietary information provided using 2 methods by a group of college women.
+#' @description The estimated daily caloric intake from dietary information provided using 2 methods by a group of college women.
 #' 
 #' @source Table 4.1.1
 "Table4.1.1"
