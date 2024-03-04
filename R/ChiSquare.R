@@ -32,12 +32,12 @@ ChiSquare <- R6Class(
         .name = "Chi-Square Test on Contingency Table",
 
         .define = function() {
-            m <- nrow(private$.data)
-            n <- ncol(private$.data)
+            r <- nrow(private$.data)
+            c <- ncol(private$.data)
             sum <- sum(private$.data)
             private$.statistic_func <- function(data) {
-                row_sum <- .rowSums(data, m, n)
-                col_sum <- .colSums(data, m, n)
+                row_sum <- .rowSums(data, r, c)
+                col_sum <- .colSums(data, r, c)
 
                 expect <- row_sum %*% matrix(col_sum, nrow = 1) / sum
 

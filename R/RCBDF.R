@@ -32,18 +32,18 @@ RCBDF <- R6Class(
         .name = "Test for RCBD Based on F Statistic",
 
         .define = function() {
-            m <- nrow(private$.data)
-            n <- ncol(private$.data)
+            k <- nrow(private$.data)
+            b <- ncol(private$.data)
             private$.statistic_func <- switch(private$.type,
-                permu = function(data) sum(.rowMeans(data, m, n)^2),
+                permu = function(data) sum(.rowMeans(data, k, b)^2),
                 asymp = function(data) {
-                    bar_i. <- .rowMeans(data, m, n)
-                    bar_.j <- .colMeans(data, m, n)
+                    bar_i. <- .rowMeans(data, k, b)
+                    bar_.j <- .colMeans(data, k, b)
                     bar_.. <- mean(bar_i.)
 
-                    sst <- n * sum((bar_i. - bar_..)^2)
+                    sst <- b * sum((bar_i. - bar_..)^2)
                     sse <- sum((data - outer(bar_i., bar_.j, `+`) + bar_..)^2)
-                    (n - 1) * sst / sse
+                    (b - 1) * sst / sse
                 }
             )
         },

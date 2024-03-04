@@ -36,11 +36,12 @@ Page <- R6Class(
         .scoring = "rank",
 
         .define = function() {
-            m <- nrow(private$.data)
-            n <- ncol(private$.data)
-            seq_row <- seq_len(nrow(private$.data))
+            k <- nrow(private$.data)
+            b <- ncol(private$.data)
+
+            seq_row <- seq_len(k)
             private$.statistic_func <- function(data) {
-                sum(seq_row * .rowSums(data, m, n))
+                sum(seq_row * .rowSums(data, k, b))
             }
         },
 

@@ -34,13 +34,13 @@ Friedman <- R6Class(
         .scoring = "rank",
 
         .define = function() {
-            m <- nrow(private$.data)
-            n <- ncol(private$.data)
+            k <- nrow(private$.data)
+            b <- ncol(private$.data)
             private$.statistic_func <- switch(private$.type,
-                permu = function(data) sum(.rowMeans(data, m, n)^2),
+                permu = function(data) sum(.rowMeans(data, k, b)^2),
                 asymp = function(data) {
-                    n^2 / sum(apply(data, 2, var)) *
-                    sum((.rowMeans(data, m, n) - (m + 1) / 2)^2)
+                    b^2 / sum(apply(data, 2, var)) *
+                    sum((.rowMeans(data, k, b) - (k + 1) / 2)^2)
                 }
             )
         },
