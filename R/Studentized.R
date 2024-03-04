@@ -43,7 +43,7 @@ Studentized <- R6Class(
                 split(private$.data, names(private$.data))
             )
             inverse_length_sums <- outer(
-                inverse_lengths, inverse_lengths, "+"
+                inverse_lengths, inverse_lengths, `+`
             )
 
             if (private$.scoring == "none") {

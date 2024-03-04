@@ -42,8 +42,8 @@ SiegelTukey <- R6Class(
             c_xy <- c(private$.data$x, private$.data$y)
             N <- length(c_xy)
 
-            rank_l <- outer(c(1, 4), seq.int(0, N - 1, by = 4), "+")
-            rank_r <- outer(c(0, 1), seq.int(2, N, by = 4), "+")
+            rank_l <- outer(c(1, 4), seq.int(0, N - 1, by = 4), `+`)
+            rank_r <- outer(c(0, 1), seq.int(2, N, by = 4), `+`)
 
             index_floor <- seq_len(floor(N / 2))
             index_ceiling <- seq_len(ceiling(N / 2))

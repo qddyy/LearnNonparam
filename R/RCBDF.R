@@ -42,7 +42,7 @@ RCBDF <- R6Class(
                     bar_.. <- mean(bar_i.)
 
                     sst <- n * sum((bar_i. - bar_..)^2)
-                    sse <- sum((data - outer(bar_i., bar_.j, "+") + bar_..)^2)
+                    sse <- sum((data - outer(bar_i., bar_.j, `+`) + bar_..)^2)
                     (n - 1) * sst / sse
                 }
             )

@@ -80,7 +80,7 @@ Wilcoxon <- R6Class(
 
         .calculate_extra = function() {
             sorted_diff <- sort(
-                outer(private$.raw_data[[1]], private$.raw_data[[2]], "-")
+                outer(private$.raw_data[[1]], private$.raw_data[[2]], `-`)
             )
 
             private$.estimate <- median(sorted_diff)
