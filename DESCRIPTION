@@ -6,21 +6,22 @@ Authors@R:
 Description: Implements various nonparametric tests in chapters 1-5 of the book "An introduction to modern nonparametric statistics" by James J. Higgins. 
 License: GPL (>= 2)
 Encoding: UTF-8
-Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.2.3
-Imports: 
-    R6,
-    Rcpp,
-    stats,
-    graphics,
-    compiler
+LazyData: true
+SystemRequirements: C++11
 Depends: 
     R (>= 2.13.0)
 LinkingTo: 
     Rcpp
-LazyData: true
+Imports: 
+    R6,
+    Rcpp,
+    stats,
+    compiler,
+    graphics
 Suggests: 
-    ggplot2,
     knitr,
-    rmarkdown
+    rmarkdown,
+    ggplot2
+Roxygen: list(markdown = TRUE)
+RoxygenNote: 7.2.3
 VignetteBuilder: knitr

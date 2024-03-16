@@ -43,7 +43,8 @@ TwoSampleTest <- R6Class(
                 data = unname(data),
                 where_y = startsWith(names(data), "y"),
                 statistic_func = cmpfun(private$.statistic_func),
-                n_permu = private$.n_permu
+                n_permu = private$.n_permu,
+                progress = isTRUE(getOption("LearnNonparam.pmt_progress"))
             )
         }
     )

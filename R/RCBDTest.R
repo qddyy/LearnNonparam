@@ -37,7 +37,8 @@ RCBDTest <- R6Class(
             private$.statistic_permu <- rcbd_pmt(
                 data = apply(private$.data, 2, sort),
                 statistic_func = cmpfun(private$.statistic_func),
-                n_permu = private$.n_permu
+                n_permu = private$.n_permu,
+                progress = isTRUE(getOption("LearnNonparam.pmt_progress"))
             )
         }
     )

@@ -20,7 +20,8 @@ TwoSampleAssociationTest <- R6Class(
                 x = data_y_order$x,
                 y = data_y_order$y,
                 statistic_func = cmpfun(private$.statistic_func),
-                n_permu = private$.n_permu
+                n_permu = private$.n_permu,
+                progress = isTRUE(getOption("LearnNonparam.pmt_progress"))
             )
         }
     )

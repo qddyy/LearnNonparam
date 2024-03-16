@@ -1,18 +1,19 @@
+#include "progress.h"
 #include "utils.h"
 
-// [[Rcpp::export]]
-NumericVector association_pmt(
-    const NumericVector x,
+template <typename T>
+NumericVector association_pmt_impl(
+    const NumericVector& x,
     NumericVector y,
-    const Function statistic_func,
+    const Function& statistic_func,
     const R_xlen_t n_permu)
 {
-    auto association_update = [&](PermuBar& bar) -> bool {
+    auto association_update = [&](T& bar) -> bool {
         return bar.update(as<double>(statistic_func(x, y)));
     };
 
     if (n_permu == 0) {
-        PermuBar bar(n_permutation(y), true);
+        T bar(n_permutation(y), true);
 
         do {
             association_update(bar);
@@ -20,12 +21,27 @@ NumericVector association_pmt(
 
         return bar.statistic_permu;
     } else {
-        PermuBar bar(n_permu, false);
+        T bar(n_permu, false);
 
         do {
             random_shuffle(y);
         } while (association_update(bar));
 
         return bar.statistic_permu;
+    }
+}
+
+// [[Rcpp::export]]
+NumericVector association_pmt(
+    const NumericVector x,
+    const NumericVector y,
+    const Function statistic_func,
+    const R_xlen_t n_permu,
+    const bool progress)
+{
+    if (progress) {
+        return association_pmt_impl<PermuBarAppear>(x, y, statistic_func, n_permu);
+    } else {
+        return association_pmt_impl<PermuBarDisappear>(x, y, statistic_func, n_permu);
     }
 }

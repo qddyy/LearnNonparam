@@ -1,12 +1,13 @@
+#include "progress.h"
 #include "utils.h"
 
-// [[Rcpp::export]]
-NumericVector rcbd_pmt(
+template <typename T>
+NumericVector rcbd_pmt_impl(
     NumericMatrix data,
-    const Function statistic_func,
+    const Function& statistic_func,
     const R_xlen_t n_permu)
 {
-    auto rcbd_update = [&](PermuBar& bar) -> bool {
+    auto rcbd_update = [&](T& bar) -> bool {
         return bar.update(as<double>(statistic_func(data)));
     };
 
@@ -18,7 +19,7 @@ NumericVector rcbd_pmt(
             total *= n_permutation(data.column(j));
         }
 
-        PermuBar bar(total, true);
+        T bar(total, true);
 
         while (i < n_col) {
             if (i == 0) {
@@ -34,7 +35,7 @@ NumericVector rcbd_pmt(
 
         return bar.statistic_permu;
     } else {
-        PermuBar bar(n_permu, false);
+        T bar(n_permu, false);
 
         do {
             for (i = 0; i < n_col; i++) {
@@ -43,5 +44,19 @@ NumericVector rcbd_pmt(
         } while (rcbd_update(bar));
 
         return bar.statistic_permu;
+    }
+}
+
+// [[Rcpp::export]]
+NumericVector rcbd_pmt(
+    const NumericMatrix data,
+    const Function statistic_func,
+    const R_xlen_t n_permu,
+    const bool progress)
+{
+    if (progress) {
+        return rcbd_pmt_impl<PermuBarAppear>(data, statistic_func, n_permu);
+    } else {
+        return rcbd_pmt_impl<PermuBarDisappear>(data, statistic_func, n_permu);
     }
 }
