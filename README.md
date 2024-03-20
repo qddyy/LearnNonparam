@@ -32,19 +32,24 @@ pak::pkg_install("qddyy/LearnNonparam")
 
 ## Basic Usage
 
+``` r
+library(LearnNonparam)
+options(LearnNonparam.pmt_progress = TRUE)
+```
+
 - Construct a test object
 
   - from some R6 class directly
 
   ``` r
-  t <- Wilcoxon$new(alternative = "two_sided", type = "permu", n_permu = 1e6)
+  t <- Wilcoxon$new(n_permu = 1e6)
   ```
 
   - using the `pmt` (**p**er**m**utation **t**est) function
     (*recommended*)
 
   ``` r
-  t <- pmt("twosample.wilcoxon", alternative = "two_sided", type = "permu", n_permu = 1e6)
+  t <- pmt("twosample.wilcoxon", n_permu = 1e6)
   ```
 
 - Provide it with samples
@@ -53,51 +58,58 @@ pak::pkg_install("qddyy/LearnNonparam")
   t$test(rnorm(20, 1), rnorm(20, 0))
   ```
 
+  <picture>
+  <source media="(prefers-color-scheme: dark)" srcset="man/figures/README/test-dark.svg">
+  <img src="man/figures/README/test.svg" /> </picture>
+
 - Check the results
 
   ``` r
   t$statistic
-  #> [1] 494
-  t$p_value
-  #> [1] 0.022888
-
-  t$print()
-  #> 
-  #>       Two-Sample Wilcoxon Test 
-  #> 
-  #> scoring: rank    type: permu(1e+06)    method: default
-  #> statistic = 494, p-value = 0.022888
-  #> alternative hypothesis: true location shift is not equal to 0
-  #> estimate: 0.9104679
-  #> 95% confidence interval: (0.1180643, 1.572125)
-
-  t$plot(style = "ggplot2", binwidth = 1)
-  #> Loading required namespace: ggplot2
   ```
 
-  <img src="man/figures/README-results-1.svg" width="100%" />
+  <picture>
+  <source media="(prefers-color-scheme: dark)" srcset="man/figures/README/statistic-dark.svg">
+  <img src="man/figures/README/statistic.svg" /> </picture>
+
+  ``` r
+  t$p_value
+  ```
+
+  <picture>
+  <source media="(prefers-color-scheme: dark)" srcset="man/figures/README/p_value-dark.svg">
+  <img src="man/figures/README/p_value.svg" /> </picture>
+
+  ``` r
+  t$print()
+  ```
+
+  <picture>
+  <source media="(prefers-color-scheme: dark)" srcset="man/figures/README/print-dark.svg">
+  <img src="man/figures/README/print.svg" /> </picture>
+
+  ``` r
+  t$plot(style = "ggplot2", binwidth = 1)
+  ```
+
+  <picture>
+  <source media="(prefers-color-scheme: dark)" srcset="man/figures/README/plot-dark.svg">
+  <img src="man/figures/README/plot.svg" /> </picture>
+
+  <img src="./man/figures/README/ggplot.svg" width="100%" />
 
 - Modify some active bindings and see how the results change
 
   ``` r
   t$type <- "asymp"
-
-  t$print()
-  #> 
-  #>       Two-Sample Wilcoxon Test 
-  #> 
-  #> scoring: rank    type: asymp    method: default
-  #> statistic = 494, p-value = 0.02390315
-  #> alternative hypothesis: true location shift is not equal to 0
-  #> estimate: 0.9104679
-  #> 95% confidence interval: (0.1180643, 1.572125)
+  t$p_value
   ```
 
-See `pmts()` for tests implemented in this package:
+  <picture>
+  <source media="(prefers-color-scheme: dark)" srcset="man/figures/README/modify-dark.svg">
+  <img src="man/figures/README/modify.svg" /> </picture>
 
-``` r
-pmts()
-```
+See `pmts()` for tests implemented in this package:
 
 <div class="kable-table">
 
@@ -149,13 +161,11 @@ t <- define_pmt(
 )
 
 t$test(rnorm(20, 1), rnorm(20, 0))$print()
-#> 
-#>       Cramér-von Mises Test 
-#> 
-#> scoring: none    type: permu(10000)    method: default
-#> statistic = 2.36, p-value = 0.0253
-#> alternative hypothesis: samples are from different distributions
 ```
+
+<picture>
+<source media="(prefers-color-scheme: dark)" srcset="man/figures/README/define-dark.svg">
+<img src="man/figures/README/define.svg" /> </picture>
 
 ## References
 

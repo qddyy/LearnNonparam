@@ -201,7 +201,7 @@ t$statistic
 t$p_value
 ```
 
-## Example 2.8.3
+## Example 2.8.4
 
 ```{r}
 # See ?KolmogorovSmirnov or ?twosample.ks
