@@ -70,7 +70,7 @@ PairedDifference <- R6Class(
 
         .calculate_p = function() {
             z <- private$.statistic - sum(private$.abs_diff) / 2
-            correction <- if (private$.scoring == "rank" & private$.correct) {
+            correction <- if (private$.scoring == "rank" && private$.correct) {
                 switch(private$.side, lr = sign(z) * 0.5, r = 0.5, l = -0.5)
             } else 0
             z <- (z - correction) / sqrt(
@@ -85,11 +85,11 @@ PairedDifference <- R6Class(
         correct = function(value) {
             if (missing(value)) {
                 private$.correct
-            } else if (length(value) == 1 & is.logical(value)) {
+            } else if (length(value) == 1 && is.logical(value)) {
                 private$.correct <- as.logical(value)
                 if (
-                    !is.null(private$.raw_data) &
-                    private$.type == "asymp" & private$.scoring == "rank"
+                    !is.null(private$.raw_data) &&
+                    private$.type == "asymp" && private$.scoring == "rank"
                 ) {
                     private$.calculate_p()
                 }

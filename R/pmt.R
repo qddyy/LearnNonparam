@@ -84,7 +84,7 @@ define_pmt <- function(
 ) {
     inherit <- match.arg(inherit)
 
-    if (!missing(scoring) & inherit %in% c("paired", "association", "table")) {
+    if (!missing(scoring) && inherit %in% c("paired", "association", "table")) {
         warning("'scoring' is ignored because 'inherit' is '", inherit, "'")
         scoring <- "none"
     }

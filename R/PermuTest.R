@@ -375,7 +375,7 @@ PermuTest <- R6Class(
                     "Can't specify 'null_value' of a ",
                     "<", class(self)[1], ">", " object"
                 )
-            } else if (length(value) == 1 & !is.na(value)) {
+            } else if (length(value) == 1 && !is.na(value)) {
                 private$.null_value <- as.numeric(value)
                 if (!is.null(private$.raw_data)) {
                     private$.on_null_value_change()
@@ -394,7 +394,7 @@ PermuTest <- R6Class(
                     "<", class(self)[1], ">", " object"
                 )
             } else if (
-                length(value) == 1 & is.finite(value) & value > 0 & value < 1
+                length(value) == 1 && is.finite(value) && value > 0 && value < 1
             ) {
                 private$.conf_level <- as.numeric(value)
                 if (!is.null(private$.raw_data)) {
@@ -413,7 +413,7 @@ PermuTest <- R6Class(
                     "Can't specify 'n_permu' of a ",
                     "<", class(self)[1], ">", " object"
                 )
-            } else if (length(value) == 1 & is.finite(value) & value >= 0) {
+            } else if (length(value) == 1 && is.finite(value) && value >= 0) {
                 private$.n_permu <- ceiling(value)
                 if (!is.null(private$.raw_data)) {
                     private$.on_n_permu_change()

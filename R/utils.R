@@ -4,7 +4,7 @@ get_data <- function(call, env) {
     data_exprs <- as.list(call)[-1]
     n_data <- length(data_exprs)
 
-    if (n_data == 1 & is.list(data_1 <- eval(data_exprs[[1]], envir = env))) {
+    if (n_data == 1 && is.list(data_1 <- eval(data_exprs[[1]], envir = env))) {
         data_exprs <- data_1
         n_data <- length(data_1)
     }
