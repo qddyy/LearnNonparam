@@ -1,4 +1,3 @@
-#include "progress.h"
 #include "utils.h"
 
 template <typename T>
@@ -8,19 +7,21 @@ NumericVector paired_pmt_impl(
     const Function& statistic_func,
     const R_xlen_t n_permu)
 {
-    auto paired_update = [&](T& bar) -> bool {
+    T bar;
+
+    auto paired_update = [&]() -> bool {
         return bar.update(as<double>(statistic_func(x, y)));
     };
 
     R_len_t i = 0;
     R_len_t n = x.size();
     if (n_permu == 0) {
-        T bar(1 << n, true);
+        bar.init(1 << n, true);
 
         IntegerVector swapped(n, 0);
         while (i < n) {
             if (i == 0) {
-                paired_update(bar);
+                paired_update();
             }
 
             std::swap(x[i], y[i]);
@@ -33,10 +34,8 @@ NumericVector paired_pmt_impl(
                 i++;
             }
         }
-
-        return bar.statistic_permu;
     } else {
-        T bar(n_permu, false);
+        bar.init(n_permu, false);
 
         do {
             for (i = 0; i < n; i++) {
@@ -44,23 +43,19 @@ NumericVector paired_pmt_impl(
                     std::swap(x[i], y[i]);
                 }
             }
-        } while (paired_update(bar));
-
-        return bar.statistic_permu;
+        } while (paired_update());
     }
+
+    return bar.close();
 }
 
 // [[Rcpp::export]]
 NumericVector paired_pmt(
-    const NumericVector x,
-    const NumericVector y,
-    const Function statistic_func,
+    const SEXP x,
+    const SEXP y,
+    const SEXP statistic_func,
     const R_xlen_t n_permu,
     const bool progress)
 {
-    if (progress) {
-        return paired_pmt_impl<PermuBarAppear>(x, y, statistic_func, n_permu);
-    } else {
-        return paired_pmt_impl<PermuBarDisappear>(x, y, statistic_func, n_permu);
-    }
+    GENERATE_PMT_BODY(paired_pmt, x, y)
 }

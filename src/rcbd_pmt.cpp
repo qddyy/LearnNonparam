@@ -1,4 +1,3 @@
-#include "progress.h"
 #include "utils.h"
 
 template <typename T>
@@ -7,7 +6,9 @@ NumericVector rcbd_pmt_impl(
     const Function& statistic_func,
     const R_xlen_t n_permu)
 {
-    auto rcbd_update = [&](T& bar) -> bool {
+    T bar;
+
+    auto rcbd_update = [&]() -> bool {
         return bar.update(as<double>(statistic_func(data)));
     };
 
@@ -19,44 +20,38 @@ NumericVector rcbd_pmt_impl(
             total *= n_permutation(data.column(j));
         }
 
-        T bar(total, true);
+        bar.init(total, true);
 
         while (i < n_col) {
             if (i == 0) {
-                rcbd_update(bar);
+                rcbd_update();
             }
 
-            if (std::next_permutation(data.column(i).begin(), data.column(i).end())) {
+            if (next_permutation(data.column(i))) {
                 i = 0;
             } else {
                 i++;
             }
         }
-
-        return bar.statistic_permu;
     } else {
-        T bar(n_permu, false);
+        bar.init(n_permu, false);
 
         do {
             for (i = 0; i < n_col; i++) {
                 random_shuffle(data.column(i));
             }
-        } while (rcbd_update(bar));
-
-        return bar.statistic_permu;
+        } while (rcbd_update());
     }
+
+    return bar.close();
 }
 
 // [[Rcpp::export]]
 NumericVector rcbd_pmt(
-    const NumericMatrix data,
-    const Function statistic_func,
+    const SEXP data,
+    const SEXP statistic_func,
     const R_xlen_t n_permu,
     const bool progress)
 {
-    if (progress) {
-        return rcbd_pmt_impl<PermuBarAppear>(data, statistic_func, n_permu);
-    } else {
-        return rcbd_pmt_impl<PermuBarDisappear>(data, statistic_func, n_permu);
-    }
+    GENERATE_PMT_BODY(rcbd_pmt, data)
 }
