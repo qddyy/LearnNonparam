@@ -89,12 +89,14 @@ Studentized <- R6Class(
             super$.calculate_statistic_permu()
 
             if (private$.method == "tukey") {
-                private$.statistic_permu <- apply(
-                    X = private$.statistic_permu, MARGIN = 2,
+                private$.statistic <- abs(private$.statistic)
+
+                statistic_permu <- attr(private$.statistic, "permu")
+                attr(private$.statistic, "permu") <- apply(
+                    X = statistic_permu, MARGIN = 2,
                     FUN = {
-                        sqrt_2 <- sqrt(2)
-                        length_x <- nrow(private$.statistic_permu)
-                        function(x) rep.int(max(abs(x)) * sqrt_2, length_x)
+                        length_x <- nrow(statistic_permu)
+                        function(x) rep.int(max(abs(x)), length_x)
                     }
                 )
             }

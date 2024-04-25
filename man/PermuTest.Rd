@@ -52,6 +52,13 @@ Abstract class for permutation tests.
 \if{html}{\out{<div class="r">}}\preformatted{PermuTest$new(...)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{ignored.}
+}
+\if{html}{\out{</div>}}
+}
 }
 \if{html}{\out{<hr>}}
 \if{html}{\out{<a id="method-PermuTest-test"></a>}}

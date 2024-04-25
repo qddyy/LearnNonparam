@@ -1,17 +1,12 @@
 #pragma once
 
-#include <Rcpp.h>
 #include <algorithm>
 
-#include "progress.h"
-
-using namespace Rcpp;
-
-#define GENERATE_PMT_BODY(interface, ...)                                     \
-    Function statistic_r(statistic_func);                                     \
-    return (progress) ?                                                       \
-        interface##_impl<PermuBarAppear>(__VA_ARGS__, statistic_r, n_permu) : \
-        interface##_impl<PermuBarDisappear>(__VA_ARGS__, statistic_r, n_permu);
+template <typename T, typename... Args>
+void sort(T&& v, Args... compare)
+{
+    std::sort(v.begin(), v.end(), compare...);
+}
 
 template <typename T>
 T rand_int(T n)
@@ -36,7 +31,7 @@ bool next_permutation(T&& v)
 }
 
 template <typename T>
-R_xlen_t n_permutation(const T& v)
+R_xlen_t n_permutation(T&& v)
 {
     double A = 1;
 

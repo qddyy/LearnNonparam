@@ -14,8 +14,7 @@ pmts(
 )
 
 define_pmt(
-  inherit = c("twosample", "ksample", "multicomp", "paired", "rcbd", "association",
-    "table"),
+  inherit = c("twosample", "ksample", "paired", "rcbd", "association", "table"),
   statistic = NULL,
   rejection = c("lr", "l", "r"),
   scoring = c("none", "rank", "vw", "expon"),
@@ -33,7 +32,7 @@ define_pmt(
 
 \item{inherit}{a character string specifying the desired permutation test.}
 
-\item{statistic}{a function defining the test statistic.}
+\item{statistic}{a function defining the test statistic. Can be a closure or a character string defining a \code{Rcpp} function (excluding its return type and name).}
 
 \item{rejection}{a character string specifying where the rejection region is.}
 

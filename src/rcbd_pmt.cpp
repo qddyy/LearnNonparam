@@ -1,15 +1,16 @@
-#include "utils.h"
+#include "utils.hpp"
 
-template <typename T>
+template <typename T, typename U, typename V>
 NumericVector rcbd_pmt_impl(
     NumericMatrix data,
-    const Function& statistic_func,
+    const U& statistic_func,
     const R_xlen_t n_permu)
 {
     T bar;
 
+    V statistic_closure = statistic_func(data);
     auto rcbd_update = [&]() -> bool {
-        return bar.update(as<double>(statistic_func(data)));
+        return bar << statistic_closure(data);
     };
 
     R_len_t i = 0;
@@ -20,7 +21,11 @@ NumericVector rcbd_pmt_impl(
             total *= n_permutation(data.column(j));
         }
 
-        bar.init(total, true);
+        bar.init(total, rcbd_update);
+
+        for (R_len_t k = 0; k < n_col; k++) {
+            sort(data.column(k));
+        }
 
         while (i < n_col) {
             if (i == 0) {
@@ -34,7 +39,7 @@ NumericVector rcbd_pmt_impl(
             }
         }
     } else {
-        bar.init(n_permu, false);
+        bar.init(n_permu, rcbd_update);
 
         do {
             for (i = 0; i < n_col; i++) {
@@ -53,5 +58,5 @@ NumericVector rcbd_pmt(
     const R_xlen_t n_permu,
     const bool progress)
 {
-    GENERATE_PMT_BODY(rcbd_pmt, data)
+    GENERATE_PMT_BODY(rcbd, data)
 }

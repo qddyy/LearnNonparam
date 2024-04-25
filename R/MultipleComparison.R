@@ -3,8 +3,6 @@
 #' @description Abstract class for multiple comparisons.
 #' 
 #' 
-#' @export
-#' 
 #' @importFrom R6 R6Class
 #' @importFrom compiler cmpfun
 #' @importFrom graphics par layout mtext hist abline
@@ -38,30 +36,39 @@ MultipleComparison <- R6Class(
             ))
         },
 
+        .compile_statistic_closure = function() {
+            private$.statistic_func <- cmpfun(private$.statistic_func)
+        },
+
         .calculate_statistic_permu = function() {
-            private$.statistic_permu <- multicomp_pmt(
+            private$.statistic <- multicomp_pmt(
                 group_i = private$.group_ij$i,
                 group_j = private$.group_ij$j,
                 data = unname(private$.data),
                 group = as.integer(names(private$.data)),
-                statistic_func = cmpfun(private$.statistic_func),
+                statistic_func = private$.statistic_func,
                 n_permu = private$.n_permu,
                 progress = isTRUE(getOption("LearnNonparam.pmt_progress"))
             )
         },
 
+        .calculate_n_permu = function() {
+            private$.n_permu <- ncol(attr(private$.statistic, "permu"))
+        },
+
         .calculate_p_permu = function() {
-            m <- nrow(private$.statistic_permu)
-            n <- ncol(private$.statistic_permu)
+            statistic_permu <- attr(private$.statistic, "permu")
+            m <- nrow(statistic_permu)
+            n <- ncol(statistic_permu)
 
             delayedAssign(
                 "l", .rowMeans(
-                    private$.statistic_permu <= private$.statistic, m, n
+                    statistic_permu <= private$.statistic, m, n
                 )
             )
             delayedAssign(
                 "r", .rowMeans(
-                    private$.statistic_permu >= private$.statistic, m, n
+                    statistic_permu >= private$.statistic, m, n
                 )
             )
             delayedAssign(
@@ -80,6 +87,7 @@ MultipleComparison <- R6Class(
         .on_n_permu_change = function() {
             if (private$.type == "permu") {
                 private$.calculate_statistic_permu()
+                private$.calculate_n_permu()
                 private$.calculate_p_permu()
                 private$.calculate_extra()
             }
@@ -93,7 +101,7 @@ MultipleComparison <- R6Class(
                 paste(
                     "type:",
                     if ((type <- private$.type) == "permu") {
-                        n_permu <- as.numeric(ncol(private$.statistic_permu))
+                        n_permu <- as.numeric(private$.n_permu)
                         paste0(type, "(", format(n_permu, digits = digits), ")")
                     } else type
                 ),
@@ -141,12 +149,13 @@ MultipleComparison <- R6Class(
             .mapply(
                 dots = dots, MoreArgs = NULL, FUN = {
                     data_names <- names(private$.raw_data)
+                    statistic_permu <- attr(private$.statistic, "permu")
                     function(i, j, k) {
                         do_call(
                             func = hist,
                             default = list(border = "white"),
                             fixed = list(
-                                x = private$.statistic_permu[k, ],
+                                x = statistic_permu[k, ],
                                 plot = TRUE,
                                 xlab = "Statistic",
                                 main = paste(data_names[i], "~", data_names[j])
@@ -173,7 +182,7 @@ MultipleComparison <- R6Class(
                         data = data.frame(
                             i = rep.int(private$.group_ij$i, private$.n_permu),
                             j = rep.int(private$.group_ij$j, private$.n_permu),
-                            statistic = as.vector(private$.statistic_permu)
+                            statistic = as.vector(attr(private$.statistic, "permu"))
                         )
                     ), ...
                 ) +

@@ -11,6 +11,7 @@
 #' @param ... extra parameters passed to the constructor.
 #' 
 #' @export
+
 pmt <- function(key, ...) {
     if (key %in% names(implemented)) {
         implemented[[key]]$new(...)
@@ -29,6 +30,7 @@ pmt <- function(key, ...) {
 #' @param which a character string specifying the desired tests.
 #' 
 #' @export
+
 pmts <- function(
     which = c(
         "all",
@@ -62,7 +64,7 @@ pmts <- function(
 #' @rdname pmt
 #' 
 #' @param inherit a character string specifying the desired permutation test.
-#' @param statistic a function defining the test statistic.
+#' @param statistic a function defining the test statistic. Can be a closure or a character string defining a `Rcpp` function (excluding its return type and name).
 #' @param rejection a character string specifying where the rejection region is.
 #' @param scoring,n_permu passed to the constructor.
 #' @param name a character string specifying the name of the test.
@@ -71,10 +73,12 @@ pmts <- function(
 #' @export
 #' 
 #' @importFrom R6 R6Class
+#' @importFrom Rcpp sourceCpp
+#' @importFrom compiler cmpfun
+
 define_pmt <- function(
     inherit = c(
-        "twosample",
-        "ksample", "multicomp",
+        "twosample", "ksample",
         "paired", "rcbd",
         "association", "table"
     ),
@@ -85,23 +89,48 @@ define_pmt <- function(
     inherit <- match.arg(inherit)
 
     if (!missing(scoring) && inherit %in% c("paired", "association", "table")) {
-        warning("'scoring' is ignored because 'inherit' is '", inherit, "'")
+        warning("Ignoring 'scoring' since 'type' is set to '", inherit, "'")
         scoring <- "none"
+    }
+
+    if (is.character(statistic)) {
+        xptr_code <- paste(
+            "#include <Rcpp.h>",
+            "using namespace Rcpp;",
+            "// [[Rcpp::depends(LearnNonparam)]]",
+            "#include <alias.hpp>",
+            paste0(inherit, "_closure", " user_defined", statistic),
+            "// [[Rcpp::export]]",
+            {
+                T <- paste0(inherit, "_func")
+                paste0(
+                    "XPtr<", T, "> get_xptr()",
+                    "{ return XPtr<", T, ">(new ", T, "(&user_defined)); }"
+                )
+            },
+            sep = "\n"
+        )
+        xptr_env <- new.env()
+        sourceCpp(code = xptr_code, env = xptr_env, embeddedR = FALSE)
+        statistic <- xptr_env$get_xptr()
+    } else if (typeof(statistic) == "closure") {
+        statistic <- cmpfun(statistic)
+    } else {
+        stop("'statistic' must be a closure or a character string")
     }
 
     self <- super <- private <- NULL
     R6Class(
         classname = "UserDefined",
+        cloneable = FALSE,
         inherit = switch(inherit,
             twosample = TwoSampleTest,
             ksample = KSampleTest,
-            multicomp = MultipleComparison,
             paired = TwoSamplePairedTest,
             rcbd = RCBDTest,
             association = TwoSampleAssociationTest,
             table = ContingencyTableTest
         ),
-        cloneable = FALSE,
         public = list(
             initialize = function(n_permu) {
                 self$n_permu <- n_permu
@@ -114,7 +143,17 @@ define_pmt <- function(
             .scoring = match.arg(scoring),
             .side = match.arg(rejection),
 
-            .calculate_side = function() NULL,
+            .calculate = function() {
+                private$.preprocess()
+
+                if (private$.scoring != "none") {
+                    private$.calculate_score()
+                }
+
+                private$.calculate_statistic_permu()
+                private$.calculate_n_permu()
+                private$.calculate_p_permu()
+            },
 
             .print = function(...) {
                 super$.print(...)

@@ -1,10 +1,10 @@
-#include "utils.h"
+#include "utils.hpp"
 
-template <typename T>
+template <typename T, typename U, typename V>
 NumericVector table_pmt_impl(
     IntegerVector row_loc,
     const IntegerVector& col_loc,
-    const Function& statistic_func,
+    const U& statistic_func,
     const R_xlen_t n_permu)
 {
     T bar;
@@ -13,23 +13,27 @@ NumericVector table_pmt_impl(
 
     IntegerMatrix data(no_init(row_loc[n - 1] + 1, col_loc[n - 1] + 1));
 
-    auto table_update = [&]() -> bool {
+    auto data_filled = [&]() -> IntegerMatrix {
         data.fill(0);
         for (R_len_t i = 0; i < n; i++) {
             data(row_loc[i], col_loc[i])++;
         }
+        return data;
+    };
 
-        return bar.update(as<double>(statistic_func(data)));
+    V statistic_closure = statistic_func(data_filled());
+    auto table_update = [&]() -> bool {
+        return bar << statistic_closure(data_filled());
     };
 
     if (n_permu == 0) {
-        bar.init(n_permutation(row_loc), true);
+        bar.init(n_permutation(row_loc), table_update);
 
         do {
             table_update();
         } while (next_permutation(row_loc));
     } else {
-        bar.init(n_permu, false);
+        bar.init(n_permu, table_update);
 
         do {
             random_shuffle(row_loc);
@@ -47,5 +51,5 @@ NumericVector table_pmt(
     const R_xlen_t n_permu,
     const bool progress)
 {
-    GENERATE_PMT_BODY(table_pmt, row_loc, col_loc)
+    GENERATE_PMT_BODY(table, row_loc, col_loc)
 }

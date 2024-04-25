@@ -6,6 +6,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
+#' @importFrom compiler cmpfun
 #' @importFrom graphics hist abline
 
 
@@ -13,6 +14,7 @@ PermuTest <- R6Class(
     classname = "PermuTest",
     cloneable = FALSE,
     public = list(
+        #' @param ... ignored.
         initialize = function(...) {
             stop("Can't construct an object from abstract class")
         },
@@ -80,16 +82,14 @@ PermuTest <- R6Class(
         .raw_data = NULL,
         .data = NULL,
 
-        .null_value = NULL,
-
-        .statistic_func = NULL,
-
-        .statistic = NULL,
-        .statistic_permu = NULL,
-
         .alternative = "two_sided",
         .link = "+",
         .side = NULL,
+
+        .null_value = NULL,
+
+        .statistic = NULL,
+        .statistic_func = NULL,
 
         .p_value = NULL,
 
@@ -99,19 +99,21 @@ PermuTest <- R6Class(
 
         .calculate = function() {
             private$.preprocess()
+
             if (private$.scoring != "none") {
                 private$.calculate_score()
             }
 
             private$.define()
 
-            private$.calculate_statistic()
-
             private$.calculate_side()
             if (private$.type == "permu") {
+                private$.compile_statistic_closure()
                 private$.calculate_statistic_permu()
+                private$.calculate_n_permu()
                 private$.calculate_p_permu()
             } else {
+                private$.calculate_statistic()
                 private$.calculate_p()
             }
 
@@ -135,18 +137,17 @@ PermuTest <- R6Class(
             # private$.statistic <- ...
         },
 
-        .calculate_p = function() {
-            # private$.p_value <- ...
-            # when private$.type != "permu"
-        },
-
-        .calculate_extra = function() {
-            # private$.estimate <- ...
-            # private$.conf_int <- ...
+        .compile_statistic_closure = function() {
+            statistic_closure <- cmpfun(private$.statistic_func)
+            private$.statistic_func <- function(...) statistic_closure
         },
 
         .calculate_statistic_permu = function() {
-            # private$.statistic_permu <- ...
+            # private$.statistic <- ... (with attr "permu")
+        },
+
+        .calculate_n_permu = function() {
+            private$.n_permu <- length(attr(private$.statistic, "permu"))
         },
 
         .calculate_side = function() {
@@ -160,18 +161,29 @@ PermuTest <- R6Class(
             )
         },
 
+        .calculate_p = function() {
+            # private$.p_value <- ...
+        },
+
         .calculate_p_permu = function() {
+            statistic_permu <- attr(private$.statistic, "permu")
+
             delayedAssign(
-                "l", mean(private$.statistic_permu <= private$.statistic)
+                "l", mean(statistic_permu <= private$.statistic)
             )
             delayedAssign(
-                "r", mean(private$.statistic_permu >= private$.statistic)
+                "r", mean(statistic_permu >= private$.statistic)
             )
             delayedAssign(
                 "lr", 2 * min(l, r, 0.5)
             )
 
             private$.p_value <- eval(as.name(private$.side))
+        },
+
+        .calculate_extra = function() {
+            # private$.estimate <- ...
+            # private$.conf_int <- ...
         },
 
         .on_type_change = function() private$.calculate(),
@@ -190,6 +202,7 @@ PermuTest <- R6Class(
         .on_n_permu_change = function() {
             if (private$.type == "permu") {
                 private$.calculate_statistic_permu()
+                private$.calculate_n_permu()
                 private$.calculate_p_permu()
             }
         },
@@ -202,7 +215,7 @@ PermuTest <- R6Class(
                 paste(
                     "type:",
                     if ((type <- private$.type) == "permu") {
-                        n_permu <- as.numeric(length(private$.statistic_permu))
+                        n_permu <- as.numeric(private$.n_permu)
                         paste0(type, "(", format(n_permu, digits = digits), ")")
                     } else type
                 ),
@@ -267,7 +280,7 @@ PermuTest <- R6Class(
                 func = hist,
                 default = list(border = "white"),
                 fixed = list(
-                    x = private$.statistic_permu,
+                    x = attr(private$.statistic, "permu"),
                     plot = TRUE,
                     xlab = "Statistic",
                     main = "Permutation Distribution"
@@ -284,7 +297,7 @@ PermuTest <- R6Class(
                     fixed = list(
                         geom = "bar",
                         mapping = ggplot2::aes(x = .data$statistic),
-                        data = data.frame(statistic = private$.statistic_permu)
+                        data = data.frame(statistic = attr(private$.statistic, "permu"))
                     ), ...
                 ) +
                 ggplot2::geom_vline(
@@ -426,7 +439,7 @@ PermuTest <- R6Class(
         #' @field data The data.
         data = function() private$.raw_data,
         #' @field statistic The test statistic.
-        statistic = function() private$.statistic,
+        statistic = function() `attr<-`(private$.statistic, "permu", NULL),
         #' @field p_value The p-value.
         p_value = function() private$.p_value,
         #' @field estimate The estimated value of the parameter.

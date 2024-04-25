@@ -3,10 +3,7 @@
 #' @description Abstract class for k-sample tests.
 #' 
 #' 
-#' @export
-#' 
 #' @importFrom R6 R6Class
-#' @importFrom compiler cmpfun
 
 
 KSampleTest <- R6Class(
@@ -42,10 +39,10 @@ KSampleTest <- R6Class(
         },
 
         .calculate_statistic_permu = function() {
-            private$.statistic_permu <- ksample_pmt(
+            private$.statistic <- ksample_pmt(
                 data = unname(private$.data),
                 group = as.integer(names(private$.data)),
-                statistic_func = cmpfun(private$.statistic_func),
+                statistic_func = private$.statistic_func,
                 n_permu = private$.n_permu,
                 progress = isTRUE(getOption("LearnNonparam.pmt_progress"))
             )

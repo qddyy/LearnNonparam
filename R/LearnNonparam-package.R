@@ -1,4 +1,3 @@
-#' @importFrom Rcpp cppFunction
 #' @useDynLib LearnNonparam, .registration = TRUE
 NULL
 

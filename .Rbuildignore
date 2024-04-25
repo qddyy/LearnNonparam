@@ -1,6 +1,7 @@
-^LearnNonparam\.Rproj$
+^.*\.Rproj$
 ^\.Rproj\.user$
 ^LICENSE\.md$
 ^README\.Rmd$
-^ref\.bib$
 ^\.github$
+^doc$
+^Meta$

@@ -3,10 +3,7 @@
 #' @description Abstract class for two-sample tests.
 #' 
 #' 
-#' @export
-#' 
 #' @importFrom R6 R6Class
-#' @importFrom compiler cmpfun
 
 
 TwoSampleTest <- R6Class(
@@ -39,11 +36,11 @@ TwoSampleTest <- R6Class(
 
         .calculate_statistic_permu = function() {
             data <- unlist(private$.data, recursive = FALSE, use.names = TRUE)
-            private$.statistic_permu <- twosample_pmt(
+            private$.statistic <- twosample_pmt(
                 data = unname(data),
                 where_y = startsWith(names(data), "y"),
-                statistic_func = cmpfun(private$.statistic_func),
-                n_permu = private$.n_permu,
+                statistic_func = private$.statistic_func,
+                n_permu = as.integer(private$.n_permu),
                 progress = isTRUE(getOption("LearnNonparam.pmt_progress"))
             )
         }

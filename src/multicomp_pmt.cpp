@@ -1,12 +1,12 @@
-#include "utils.h"
+#include "utils.hpp"
 
-template <typename T>
+template <typename T, typename U, typename V>
 NumericVector multicomp_pmt_impl(
     const IntegerVector& group_i,
     const IntegerVector& group_j,
     const NumericVector& data,
     IntegerVector group,
-    const Function& statistic_func,
+    const U& statistic_func,
     const R_xlen_t n_permu)
 {
     T bar;
@@ -15,24 +15,24 @@ NumericVector multicomp_pmt_impl(
     R_len_t n_pair = n_group * (n_group - 1) / 2;
 
     auto multicomp_update = [&]() -> bool {
-        Function statistic_func_ij = statistic_func(data, group);
+        V statistic_closure = statistic_func(data, group);
 
-        R_len_t k;
-        for (k = 0; k < n_pair - 1; k++) {
-            bar.update(as<double>(statistic_func_ij(group_i[k], group_j[k])));
+        bool flag = false;
+        for (R_len_t k = 0; k < n_pair; k++) {
+            flag = bar << statistic_closure(group_i[k], group_j[k]);
         };
 
-        return bar.update(as<double>(statistic_func_ij(group_i[k], group_j[k])));
+        return flag;
     };
 
     if (n_permu == 0) {
-        bar.init(n_permutation(group), true, n_pair);
+        bar.init(n_permutation(group), multicomp_update, n_pair);
 
         do {
             multicomp_update();
         } while (next_permutation(group));
     } else {
-        bar.init(n_permu, false, n_pair);
+        bar.init(n_permu, multicomp_update, n_pair);
 
         do {
             random_shuffle(group);
@@ -52,5 +52,6 @@ NumericVector multicomp_pmt(
     const R_xlen_t n_permu,
     const bool progress)
 {
-    GENERATE_PMT_BODY(multicomp_pmt, group_i, group_j, data, group)
+    Function statistic(statistic_func);
+    PMT_PROGRESS_RETURN(multicomp_pmt_impl, Function, Function, group_i, group_j, data, group)
 }

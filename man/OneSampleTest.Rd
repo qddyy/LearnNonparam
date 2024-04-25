@@ -32,5 +32,12 @@ Abstract class for one-sample tests.
 \if{html}{\out{<div class="r">}}\preformatted{OneSampleTest$plot(...)}\if{html}{\out{</div>}}
 }
 
+\subsection{Arguments}{
+\if{html}{\out{<div class="arguments">}}
+\describe{
+\item{\code{...}}{ignored.}
+}
+\if{html}{\out{</div>}}
+}
 }
 }

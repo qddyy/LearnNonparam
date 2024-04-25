@@ -8,8 +8,7 @@ version](https://img.shields.io/github/r-package/v/qddyy/LearnNonparam)](https:/
 [![Code
 size](https://img.shields.io/github/languages/code-size/qddyy/LearnNonparam.svg)](https://github.com/qddyy/LearnNonparam)
 [![CodeFactor](https://www.codefactor.io/repository/github/qddyy/LearnNonparam/badge)](https://www.codefactor.io/repository/github/qddyy/LearnNonparam)
-[![R CMD
-check](https://github.com/qddyy/LearnNonparam/workflows/R-CMD-check/badge.svg)](https://github.com/qddyy/LearnNonparam/actions)
+[![R-CMD-check](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml)
 
 ## Overview
 
@@ -148,10 +147,12 @@ t <- define_pmt(
     # this is a two-sample permutation test
     inherit = "twosample",
     # provide a function to calculate the test statistic
-    statistic = function(x, y) {
-        F_n <- ecdf(x)
-        G_n <- ecdf(y)
-        sum(c(F_n(x) - G_n(x), F_n(y) - G_n(y))^2)
+    statistic = function(...) {
+        function(x, y) {
+            F_n <- ecdf(x)
+            G_n <- ecdf(y)
+            sum(c(F_n(x) - G_n(x), F_n(y) - G_n(y))^2)
+        }
     },
     # reject the null hypothesis when the test statistic is large
     rejection = "r",

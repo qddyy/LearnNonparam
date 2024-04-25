@@ -3,10 +3,7 @@
 #' @description Abstract class for tests on samples collected in randomized complete block designs.
 #' 
 #' 
-#' @export
-#' 
 #' @importFrom R6 R6Class
-#' @importFrom compiler cmpfun
 
 
 RCBDTest <- R6Class(
@@ -34,9 +31,9 @@ RCBDTest <- R6Class(
         },
 
         .calculate_statistic_permu = function() {
-            private$.statistic_permu <- rcbd_pmt(
-                data = apply(private$.data, 2, sort),
-                statistic_func = cmpfun(private$.statistic_func),
+            private$.statistic <- rcbd_pmt(
+                data = private$.data,
+                statistic_func = private$.statistic_func,
                 n_permu = private$.n_permu,
                 progress = isTRUE(getOption("LearnNonparam.pmt_progress"))
             )

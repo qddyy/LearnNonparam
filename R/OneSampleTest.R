@@ -11,6 +11,7 @@ OneSampleTest <- R6Class(
     inherit = PermuTest,
     cloneable = FALSE,
     public = list(
+        #' @param ... ignored.
         plot = function(...) {
             stop("Can't plot a ", "<", class(self)[1], ">", " object")
         }

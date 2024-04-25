@@ -1,26 +1,27 @@
-#include "utils.h"
+#include "utils.hpp"
 
-template <typename T>
+template <typename T, typename U, typename V>
 NumericVector ksample_pmt_impl(
     const NumericVector& data,
     IntegerVector group,
-    const Function& statistic_func,
+    const U& statistic_func,
     const R_xlen_t n_permu)
 {
     T bar;
 
+    V statistic_closure = statistic_func(data, group);
     auto ksample_update = [&]() -> bool {
-        return bar.update(as<double>(statistic_func(data, group)));
+        return bar << statistic_closure(data, group);
     };
 
     if (n_permu == 0) {
-        bar.init(n_permutation(group), true);
+        bar.init(n_permutation(group), ksample_update);
 
         do {
             ksample_update();
         } while (next_permutation(group));
     } else {
-        bar.init(n_permu, false);
+        bar.init(n_permu, ksample_update);
 
         do {
             random_shuffle(group);
@@ -38,5 +39,5 @@ NumericVector ksample_pmt(
     const R_xlen_t n_permu,
     const bool progress)
 {
-    GENERATE_PMT_BODY(ksample_pmt, data, group)
+    GENERATE_PMT_BODY(ksample, data, group)
 }
