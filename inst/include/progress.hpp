@@ -107,9 +107,9 @@ protected:
 
 class PermuBarHide : public PermuBarBase<PermuBarHide> {
 public:
-    void init_impl(R_xlen_t n_statistic, R_len_t statistic_size)
+    void init_impl(R_xlen_t n_permu, R_len_t statistic_size)
     {
-        _init_statistic_buffer(n_statistic, statistic_size);
+        _init_statistic_buffer(n_permu, statistic_size);
     }
 
     bool update_impl(double statistic)
@@ -125,9 +125,9 @@ public:
 
 class PermuBarShow : public PermuBarBase<PermuBarShow> {
 public:
-    void init_impl(R_xlen_t n_statistic, R_len_t statistic_size)
+    void init_impl(R_xlen_t n_permu, R_len_t statistic_size)
     {
-        _init_statistic_buffer(n_statistic, statistic_size);
+        _init_statistic_buffer(n_permu, statistic_size);
 
         _total = _statistic_buffer.size();
 

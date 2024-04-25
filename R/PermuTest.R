@@ -200,11 +200,9 @@ PermuTest <- R6Class(
             }
         },
         .on_n_permu_change = function() {
-            if (private$.type == "permu") {
-                private$.calculate_statistic_permu()
-                private$.calculate_n_permu()
-                private$.calculate_p_permu()
-            }
+            private$.calculate_statistic_permu()
+            private$.calculate_n_permu()
+            private$.calculate_p_permu()
         },
 
         .print = function(digits) {
@@ -428,7 +426,7 @@ PermuTest <- R6Class(
                 )
             } else if (length(value) == 1 && is.finite(value) && value >= 0) {
                 private$.n_permu <- ceiling(value)
-                if (!is.null(private$.raw_data)) {
+                if (!is.null(private$.raw_data) && private$.type == "permu") {
                     private$.on_n_permu_change()
                 }
             } else {

@@ -1,6 +1,6 @@
 Package: LearnNonparam
 Title: Nonparametric Tests
-Version: 1.2.1
+Version: 1.2.2
 Authors@R: 
     person("Yan", "Du", , "isduyan@outlook.com", role = c("aut", "cre"))
 Description: Implements various nonparametric tests in chapters 1-5 of the book "An introduction to modern nonparametric statistics" by James J. Higgins. 
@@ -10,10 +10,10 @@ LazyData: true
 Depends: 
     R (>= 3.5.0)
 LinkingTo: 
-    Rcpp
+    Rcpp (>= 1.0.10)
 Imports: 
-    R6,
-    Rcpp,
+    R6 (>= 2.5.0),
+    Rcpp (>= 1.0.10),
     stats,
     compiler,
     graphics
