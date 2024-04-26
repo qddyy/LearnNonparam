@@ -91,14 +91,15 @@
 
 
 <dt>statistic</dt>
-<dd><p>definition of the test statistic: either a r closure returning another r closure or a character string defining a captureless C++ lambda returning another lambda that may capture, accepts const reference arguments of the same type and returns a double. For different <code>inherit</code>, the parameters vary as follows:</p><ul><li><p><code>"twosample"</code>: <code>(NumericVector x, NumericVector y)</code></p></li>
-<li><p><code>"ksample"</code>: <code>(NumericVector data, IntegerVector one_based_group)</code></p></li>
-<li><p><code>"paired"</code>: <code>(NumericVector x, NumericVector y)</code></p></li>
-<li><p><code>"rcbd"</code>: <code>(NumericMatrix block_as_column_data)</code></p></li>
-<li><p><code>"association"</code>: <code>(NumericVector x, NumericVector y)</code></p></li>
-<li><p><code>"table"</code>: <code>(IntegerMatrix contingency_table)</code>
-The parameter names above are indicative and can be altered. Defining statistics with r closures follows a similar approach.</p></li>
-</ul></dd>
+<dd><p>definition of the test statistic. Can be specified using</p><ul><li><p><code>R</code>: a closure returning another closure.</p></li>
+<li><p><code>Rcpp</code>: a character string defining a captureless lambda (introduced in C++11) returning another lambda that may capture, accepts const reference arguments of the same type and returns a double.</p></li>
+</ul><p>When using <code>Rcpp</code>, the parameters for different <code>inherit</code> are listed as follows. Note that the parameter names are illustrative and may be modified.</p><ul><li><p><code>"twosample"</code>: <code>(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)</code></p></li>
+<li><p><code>"ksample"</code>: <code>(Rcpp::NumericVector combined_sample, Rcpp::IntegerVector one_based_group_index)</code></p></li>
+<li><p><code>"paired"</code>: <code>(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)</code></p></li>
+<li><p><code>"rcbd"</code>: <code>(Rcpp::NumericMatrix block_as_column_data)</code></p></li>
+<li><p><code>"association"</code>: <code>(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)</code></p></li>
+<li><p><code>"table"</code>: <code>(Rcpp::IntegerMatrix contingency_table)</code></p></li>
+</ul><p>Defining the test statistic with <code>R</code> closures follows a similar approach.</p></dd>
 
 
 <dt>rejection</dt>
