@@ -32,7 +32,23 @@ define_pmt(
 
 \item{inherit}{a character string specifying the desired permutation test.}
 
-\item{statistic}{a function defining the test statistic. Can be a closure or a character string defining a \code{Rcpp} function (excluding its return type and name).}
+\item{statistic}{definition of the test statistic. Can be specified using
+\itemize{
+\item \code{R}: a closure returning another closure.
+\item \code{Rcpp}: a character string defining a captureless lambda (introduced in C++11) returning another lambda that may capture by value, accepts const reference arguments of the same type and returns a double.
+}
+
+When using \code{Rcpp}, the parameters for different \code{inherit} are listed as follows. Note that the parameter names are illustrative and may be modified.
+\itemize{
+\item \code{"twosample"}: \verb{(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)}
+\item \code{"ksample"}: \verb{(Rcpp::NumericVector combined_sample, Rcpp::IntegerVector one_based_group_index)}
+\item \code{"paired"}: \verb{(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)}
+\item \code{"rcbd"}: \verb{(Rcpp::NumericMatrix block_as_column_data)}
+\item \code{"association"}: \verb{(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)}
+\item \code{"table"}: \verb{(Rcpp::IntegerMatrix contingency_table)}
+}
+
+Defining the test statistic with \code{R} closures follows a similar approach.}
 
 \item{rejection}{a character string specifying where the rejection region is.}
 

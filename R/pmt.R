@@ -4,7 +4,6 @@
 #' 
 #' @name pmt
 
-
 #' @rdname pmt
 #' 
 #' @param key a character string corresponding to the desired test. Check `pmts()` for valid keys.
@@ -61,10 +60,55 @@ pmts <- function(
     )
 }
 
+implemented <- list(
+    onesample.quantile = Quantile,
+    onesample.cdf = CDF,
+
+    twosample.difference = Difference,
+    twosample.wilcoxon = Wilcoxon,
+    twosample.scoresum = ScoreSum,
+    twosample.ansari = AnsariBradley,
+    twosample.siegel = SiegelTukey,
+    twosample.rmd = RatioMeanDeviance,
+    twosample.ks = KolmogorovSmirnov,
+
+    ksample.f = KSampleF,
+    ksample.kw = KruskalWallis,
+    ksample.jt = JonckheereTerpstra,
+
+    multicomp.studentized = Studentized,
+
+    paired.sign = Sign,
+    paired.difference = PairedDifference,
+
+    rcbd.f = RCBDF,
+    rcbd.friedman = Friedman,
+    rcbd.page = Page,
+
+    association.corr = Correlation,
+
+    table.chisq = ChiSquare
+)
+
 #' @rdname pmt
 #' 
 #' @param inherit a character string specifying the desired permutation test.
-#' @param statistic a function defining the test statistic. Can be a closure or a character string defining a `Rcpp` function (excluding its return type and name).
+#' @param statistic definition of the test statistic. Can be specified using
+#' 
+#' - `R`: a closure returning another closure.
+#' - `Rcpp`: a character string defining a captureless lambda (introduced in C++11) returning another lambda that may capture by value, accepts const reference arguments of the same type and returns a double.
+#' 
+#' When using `Rcpp`, the parameters for different `inherit` are listed as follows. Note that the parameter names are illustrative and may be modified.
+#' 
+#' - `"twosample"`: `(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)`
+#' - `"ksample"`: `(Rcpp::NumericVector combined_sample, Rcpp::IntegerVector one_based_group_index)`
+#' - `"paired"`: `(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)`
+#' - `"rcbd"`: `(Rcpp::NumericMatrix block_as_column_data)`
+#' - `"association"`: `(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)`
+#' - `"table"`: `(Rcpp::IntegerMatrix contingency_table)`
+#' 
+#' Defining the test statistic with `R` closures follows a similar approach.
+#' 
 #' @param rejection a character string specifying where the rejection region is.
 #' @param scoring,n_permu passed to the constructor.
 #' @param name a character string specifying the name of the test.
@@ -73,7 +117,7 @@ pmts <- function(
 #' @export
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom Rcpp sourceCpp
+#' @importFrom Rcpp cppFunction
 #' @importFrom compiler cmpfun
 
 define_pmt <- function(
@@ -89,30 +133,24 @@ define_pmt <- function(
     inherit <- match.arg(inherit)
 
     if (!missing(scoring) && inherit %in% c("paired", "association", "table")) {
-        warning("Ignoring 'scoring' since 'type' is set to '", inherit, "'")
+        warning("Ignoring 'scoring' since 'inherit' is set to '", inherit, "'")
         scoring <- "none"
     }
 
     if (is.character(statistic)) {
-        xptr_code <- paste(
-            "#include <Rcpp.h>",
-            "using namespace Rcpp;",
-            "// [[Rcpp::depends(LearnNonparam)]]",
-            "#include <alias.hpp>",
-            paste0(inherit, "_closure", " user_defined", statistic),
-            "// [[Rcpp::export]]",
-            {
+        statistic_xptr <- cppFunction(
+            depends = "LearnNonparam",
+            includes = "#include <alias.hpp>",
+            code = {
                 T <- paste0(inherit, "_func")
                 paste0(
-                    "XPtr<", T, "> get_xptr()",
-                    "{ return XPtr<", T, ">(new ", T, "(&user_defined)); }"
+                    "XPtr<", T, "> statistic_xptr() {",
+                    T, " user_defined(", statistic, ");",
+                    "return XPtr<", T, ">(new ", T, "(user_defined)); }"
                 )
-            },
-            sep = "\n"
+            }
         )
-        xptr_env <- new.env()
-        sourceCpp(code = xptr_code, env = xptr_env, embeddedR = FALSE)
-        statistic <- xptr_env$get_xptr()
+        statistic <- statistic_xptr()
     } else if (typeof(statistic) == "closure") {
         statistic <- cmpfun(statistic)
     } else {
@@ -165,34 +203,3 @@ define_pmt <- function(
         )
     )$new(n_permu = n_permu)
 }
-
-
-implemented <- list(
-    onesample.quantile = Quantile,
-    onesample.cdf = CDF,
-
-    twosample.difference = Difference,
-    twosample.wilcoxon = Wilcoxon,
-    twosample.scoresum = ScoreSum,
-    twosample.ansari = AnsariBradley,
-    twosample.siegel = SiegelTukey,
-    twosample.rmd = RatioMeanDeviance,
-    twosample.ks = KolmogorovSmirnov,
-
-    ksample.f = KSampleF,
-    ksample.kw = KruskalWallis,
-    ksample.jt = JonckheereTerpstra,
-
-    multicomp.studentized = Studentized,
-
-    paired.sign = Sign,
-    paired.difference = PairedDifference,
-
-    rcbd.f = RCBDF,
-    rcbd.friedman = Friedman,
-    rcbd.page = Page,
-
-    association.corr = Correlation,
-
-    table.chisq = ChiSquare
-)

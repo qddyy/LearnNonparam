@@ -26,7 +26,7 @@
         }                                                                                  \
         case EXTPTRSXP: {                                                                  \
             XPtr<type##_func> statistic_ptr(statistic_func);                               \
-            auto statistic = *statistic_ptr;                                               \
+            type##_func statistic = *statistic_ptr;                                        \
             PMT_PROGRESS_RETURN(type##_pmt_impl, type##_func, type##_closure, __VA_ARGS__) \
         }                                                                                  \
         default:                                                                           \
