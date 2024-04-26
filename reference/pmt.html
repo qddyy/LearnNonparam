@@ -92,7 +92,7 @@
 
 <dt>statistic</dt>
 <dd><p>definition of the test statistic. Can be specified using</p><ul><li><p><code>R</code>: a closure returning another closure.</p></li>
-<li><p><code>Rcpp</code>: a character string defining a captureless lambda (introduced in C++11) returning another lambda that may capture, accepts const reference arguments of the same type and returns a double.</p></li>
+<li><p><code>Rcpp</code>: a character string defining a captureless lambda (introduced in C++11) returning another lambda that may capture by value, accepts const reference arguments of the same type and returns a double.</p></li>
 </ul><p>When using <code>Rcpp</code>, the parameters for different <code>inherit</code> are listed as follows. Note that the parameter names are illustrative and may be modified.</p><ul><li><p><code>"twosample"</code>: <code>(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)</code></p></li>
 <li><p><code>"ksample"</code>: <code>(Rcpp::NumericVector combined_sample, Rcpp::IntegerVector one_based_group_index)</code></p></li>
 <li><p><code>"paired"</code>: <code>(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)</code></p></li>
