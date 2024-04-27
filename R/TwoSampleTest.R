@@ -35,10 +35,9 @@ TwoSampleTest <- R6Class(
         },
 
         .calculate_statistic_permu = function() {
-            data <- unlist(private$.data, recursive = FALSE, use.names = TRUE)
             private$.statistic <- twosample_pmt(
-                data = unname(data),
-                where_y = startsWith(names(data), "y"),
+                x = private$.data$x,
+                y = private$.data$y,
                 statistic_func = private$.statistic_func,
                 n_permu = as.integer(private$.n_permu),
                 progress = isTRUE(getOption("LearnNonparam.pmt_progress"))

@@ -25,7 +25,7 @@ table_pmt <- function(row_loc, col_loc, statistic_func, n_permu, progress) {
     .Call(`_LearnNonparam_table_pmt`, row_loc, col_loc, statistic_func, n_permu, progress)
 }
 
-twosample_pmt <- function(data, where_y, statistic_func, n_permu, progress) {
-    .Call(`_LearnNonparam_twosample_pmt`, data, where_y, statistic_func, n_permu, progress)
+twosample_pmt <- function(x, y, statistic_func, n_permu, progress) {
+    .Call(`_LearnNonparam_twosample_pmt`, x, y, statistic_func, n_permu, progress)
 }
 

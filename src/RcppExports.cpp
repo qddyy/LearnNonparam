@@ -102,17 +102,17 @@ BEGIN_RCPP
 END_RCPP
 }
 // twosample_pmt
-NumericVector twosample_pmt(const NumericVector data, const LogicalVector where_y, const RObject statistic_func, const R_xlen_t n_permu, const bool progress);
-RcppExport SEXP _LearnNonparam_twosample_pmt(SEXP dataSEXP, SEXP where_ySEXP, SEXP statistic_funcSEXP, SEXP n_permuSEXP, SEXP progressSEXP) {
+NumericVector twosample_pmt(const NumericVector x, const NumericVector y, const RObject statistic_func, const R_xlen_t n_permu, const bool progress);
+RcppExport SEXP _LearnNonparam_twosample_pmt(SEXP xSEXP, SEXP ySEXP, SEXP statistic_funcSEXP, SEXP n_permuSEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const NumericVector >::type data(dataSEXP);
-    Rcpp::traits::input_parameter< const LogicalVector >::type where_y(where_ySEXP);
+    Rcpp::traits::input_parameter< const NumericVector >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const NumericVector >::type y(ySEXP);
     Rcpp::traits::input_parameter< const RObject >::type statistic_func(statistic_funcSEXP);
     Rcpp::traits::input_parameter< const R_xlen_t >::type n_permu(n_permuSEXP);
     Rcpp::traits::input_parameter< const bool >::type progress(progressSEXP);
-    rcpp_result_gen = Rcpp::wrap(twosample_pmt(data, where_y, statistic_func, n_permu, progress));
+    rcpp_result_gen = Rcpp::wrap(twosample_pmt(x, y, statistic_func, n_permu, progress));
     return rcpp_result_gen;
 END_RCPP
 }

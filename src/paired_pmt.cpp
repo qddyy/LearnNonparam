@@ -31,8 +31,7 @@ NumericVector paired_pmt_impl(
             if (swapped[i] < 2) {
                 i = 0;
             } else {
-                swapped[i] = 0;
-                i++;
+                swapped[i++] = 0;
             }
         }
     } else {

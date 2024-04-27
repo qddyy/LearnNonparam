@@ -2,16 +2,37 @@
 
 template <typename T, typename U, typename V>
 NumericVector twosample_pmt_impl(
-    const NumericVector data,
-    LogicalVector where_y,
+    NumericVector x,
+    NumericVector y,
     const U& statistic_func,
     const R_xlen_t n_permu)
 {
     T bar;
 
-    V statistic_closure = statistic_func(data[!where_y], data[where_y]);
-    auto twosample_update = [data, where_y, &bar, &statistic_closure]() {
-        return bar << statistic_closure(data[!where_y], data[where_y]);
+    R_len_t m = x.size();
+    R_len_t n = m + y.size();
+
+    NumericVector data(no_init(n));
+    std::copy(x.begin(), x.end(), data.begin());
+    std::copy(y.begin(), y.end(), data.begin() + m);
+
+    LogicalVector where_y(no_init(n));
+    std::fill(where_y.begin(), where_y.begin() + m, false);
+    std::fill(where_y.begin() + m, where_y.end(), true);
+
+    V statistic_closure = statistic_func(x, y);
+    auto twosample_update = [x, y, n, data, where_y, &bar, &statistic_closure]() mutable {
+        R_len_t i = 0;
+        R_len_t j = 0;
+        for (R_len_t k = 0; k < n; k++) {
+            if (where_y[k]) {
+                y[i++] = data[k];
+            } else {
+                x[j++] = data[k];
+            }
+        }
+
+        return bar << statistic_closure(x, y);
     };
 
     if (n_permu == 0) {
@@ -33,11 +54,11 @@ NumericVector twosample_pmt_impl(
 
 // [[Rcpp::export]]
 NumericVector twosample_pmt(
-    const NumericVector data,
-    const LogicalVector where_y,
+    const NumericVector x,
+    const NumericVector y,
     const RObject statistic_func,
     const R_xlen_t n_permu,
     const bool progress)
 {
-    GENERATE_PMT_BODY(twosample, data, where_y)
+    GENERATE_PMT_BODY(twosample, x, y)
 }

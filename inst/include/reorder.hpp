@@ -41,8 +41,7 @@ R_xlen_t n_permutation(T v)
     for (R_len_t i = 0; i < n; i++) {
         A *= (i + 1);
         if (v[i] == current) {
-            n_i++;
-            A /= n_i;
+            A /= ++n_i;
         } else {
             n_i = 1;
         }
