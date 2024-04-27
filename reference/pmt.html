@@ -91,15 +91,7 @@
 
 
 <dt>statistic</dt>
-<dd><p>definition of the test statistic. Can be specified using</p><ul><li><p><code>R</code>: a closure returning another closure.</p></li>
-<li><p><code>Rcpp</code>: a character string defining a captureless lambda (introduced in C++11) returning another lambda that may capture by value, accepts const reference arguments of the same type and returns a double.</p></li>
-</ul><p>When using <code>Rcpp</code>, the parameters for different <code>inherit</code> are listed as follows. Note that the parameter names are illustrative and may be modified.</p><ul><li><p><code>"twosample"</code>: <code>(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)</code></p></li>
-<li><p><code>"ksample"</code>: <code>(Rcpp::NumericVector combined_sample, Rcpp::IntegerVector one_based_group_index)</code></p></li>
-<li><p><code>"paired"</code>: <code>(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)</code></p></li>
-<li><p><code>"rcbd"</code>: <code>(Rcpp::NumericMatrix block_as_column_data)</code></p></li>
-<li><p><code>"association"</code>: <code>(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)</code></p></li>
-<li><p><code>"table"</code>: <code>(Rcpp::IntegerMatrix contingency_table)</code></p></li>
-</ul><p>Defining the test statistic with <code>R</code> closures follows a similar approach.</p></dd>
+<dd><p>definition of the test statistic. See <code>Details</code>.</p></dd>
 
 
 <dt>rejection</dt>
@@ -118,6 +110,18 @@
 <dd><p>a character string specifying the alternative of the test.</p></dd>
 
 </dl></div>
+    <div id="details">
+    <h2>Details</h2>
+    <p>The test statistic in <code>define_pmt</code> can be defined using either <code>R</code> or <code>Rcpp</code>, with the <code>statistic</code> parameter specified as:</p><ul><li><p><code>R</code>: a closure returning another closure.</p></li>
+<li><p><code>Rcpp</code>: a character string defining a captureless lambda (introduced in C++11) returning another lambda that may capture by value, accepts const arguments of the same type, and returns a double.</p></li>
+</ul><p>When using <code>Rcpp</code>, the parameters for different <code>inherit</code> are listed as follows. Note that the parameter names are illustrative and may be modified.</p><ul><li><p><code>"twosample"</code>: <code>(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)</code></p></li>
+<li><p><code>"ksample"</code>: <code>(Rcpp::NumericVector combined_sample, Rcpp::IntegerVector one_based_group_index)</code></p></li>
+<li><p><code>"paired"</code>: <code>(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)</code></p></li>
+<li><p><code>"rcbd"</code>: <code>(Rcpp::NumericMatrix block_as_column_data)</code></p></li>
+<li><p><code>"association"</code>: <code>(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)</code></p></li>
+<li><p><code>"table"</code>: <code>(Rcpp::IntegerMatrix contingency_table)</code></p></li>
+</ul><p>Defining the test statistic using <code>R</code> follows a similar approach. The purpose of this design is to pre-calculate certain constants that remain invariant during permutation.</p>
+    </div>
 
   </div>
   <div class="col-md-3 hidden-xs hidden-sm" id="pkgdown-sidebar">
