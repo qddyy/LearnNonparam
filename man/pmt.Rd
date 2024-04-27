@@ -32,10 +32,24 @@ define_pmt(
 
 \item{inherit}{a character string specifying the desired permutation test.}
 
-\item{statistic}{definition of the test statistic. Can be specified using
+\item{statistic}{definition of the test statistic. See \code{Details}.}
+
+\item{rejection}{a character string specifying where the rejection region is.}
+
+\item{scoring, n_permu}{passed to the constructor.}
+
+\item{name}{a character string specifying the name of the test.}
+
+\item{alternative}{a character string specifying the alternative of the test.}
+}
+\description{
+Construct test objects in a unified way.
+}
+\details{
+The test statistic in \code{define_pmt} can be defined using either \code{R} or \code{Rcpp}, with the \code{statistic} parameter specified as:
 \itemize{
 \item \code{R}: a closure returning another closure.
-\item \code{Rcpp}: a character string defining a captureless lambda (introduced in C++11) returning another lambda that may capture by value, accepts const reference arguments of the same type and returns a double.
+\item \code{Rcpp}: a character string defining a captureless lambda (introduced in C++11) returning another lambda that may capture by value, accepts const arguments of the same type, and returns a double.
 }
 
 When using \code{Rcpp}, the parameters for different \code{inherit} are listed as follows. Note that the parameter names are illustrative and may be modified.
@@ -48,16 +62,5 @@ When using \code{Rcpp}, the parameters for different \code{inherit} are listed a
 \item \code{"table"}: \verb{(Rcpp::IntegerMatrix contingency_table)}
 }
 
-Defining the test statistic with \code{R} closures follows a similar approach.}
-
-\item{rejection}{a character string specifying where the rejection region is.}
-
-\item{scoring, n_permu}{passed to the constructor.}
-
-\item{name}{a character string specifying the name of the test.}
-
-\item{alternative}{a character string specifying the alternative of the test.}
-}
-\description{
-Construct test objects in a unified way.
+Defining the test statistic using \code{R} follows a similar approach. The purpose of this design is to pre-calculate certain constants that remain invariant during permutation.
 }

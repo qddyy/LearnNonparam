@@ -93,10 +93,16 @@ implemented <- list(
 #' @rdname pmt
 #' 
 #' @param inherit a character string specifying the desired permutation test.
-#' @param statistic definition of the test statistic. Can be specified using
+#' @param statistic definition of the test statistic. See `Details`.
+#' @param rejection a character string specifying where the rejection region is.
+#' @param scoring,n_permu passed to the constructor.
+#' @param name a character string specifying the name of the test.
+#' @param alternative a character string specifying the alternative of the test.
+#' 
+#' @details The test statistic in `define_pmt` can be defined using either `R` or `Rcpp`, with the `statistic` parameter specified as:
 #' 
 #' - `R`: a closure returning another closure.
-#' - `Rcpp`: a character string defining a captureless lambda (introduced in C++11) returning another lambda that may capture by value, accepts const reference arguments of the same type and returns a double.
+#' - `Rcpp`: a character string defining a captureless lambda (introduced in C++11) returning another lambda that may capture by value, accepts const arguments of the same type, and returns a double.
 #' 
 #' When using `Rcpp`, the parameters for different `inherit` are listed as follows. Note that the parameter names are illustrative and may be modified.
 #' 
@@ -107,12 +113,8 @@ implemented <- list(
 #' - `"association"`: `(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)`
 #' - `"table"`: `(Rcpp::IntegerMatrix contingency_table)`
 #' 
-#' Defining the test statistic with `R` closures follows a similar approach.
+#' Defining the test statistic using `R` follows a similar approach. The purpose of this design is to pre-calculate certain constants that remain invariant during permutation.
 #' 
-#' @param rejection a character string specifying where the rejection region is.
-#' @param scoring,n_permu passed to the constructor.
-#' @param name a character string specifying the name of the test.
-#' @param alternative a character string specifying the alternative of the test.
 #' 
 #' @export
 #' 
