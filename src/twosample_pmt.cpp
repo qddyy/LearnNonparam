@@ -2,7 +2,7 @@
 
 template <typename T, typename U, typename V>
 NumericVector twosample_pmt_impl(
-    const NumericVector& data,
+    const NumericVector data,
     LogicalVector where_y,
     const U& statistic_func,
     const R_xlen_t n_permu)
@@ -10,7 +10,7 @@ NumericVector twosample_pmt_impl(
     T bar;
 
     V statistic_closure = statistic_func(data[!where_y], data[where_y]);
-    auto twosample_update = [&]() -> bool {
+    auto twosample_update = [data, where_y, &bar, &statistic_closure]() {
         return bar << statistic_closure(data[!where_y], data[where_y]);
     };
 
@@ -33,9 +33,9 @@ NumericVector twosample_pmt_impl(
 
 // [[Rcpp::export]]
 NumericVector twosample_pmt(
-    const SEXP data,
-    const SEXP where_y,
-    const SEXP statistic_func,
+    const NumericVector data,
+    const LogicalVector where_y,
+    const RObject statistic_func,
     const R_xlen_t n_permu,
     const bool progress)
 {

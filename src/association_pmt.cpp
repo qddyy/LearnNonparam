@@ -10,7 +10,7 @@ NumericVector association_pmt_impl(
     T bar;
 
     V statistic_closure = statistic_func(x, y);
-    auto association_update = [&]() -> bool {
+    auto association_update = [x, y, &bar, &statistic_closure]() {
         return bar << statistic_closure(x, y);
     };
 
@@ -39,9 +39,9 @@ NumericVector association_pmt_impl(
 
 // [[Rcpp::export]]
 NumericVector association_pmt(
-    const SEXP x,
-    const SEXP y,
-    const SEXP statistic_func,
+    const NumericVector x,
+    const NumericVector y,
+    const RObject statistic_func,
     const R_xlen_t n_permu,
     const bool progress)
 {

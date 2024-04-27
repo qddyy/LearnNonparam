@@ -9,7 +9,7 @@ NumericVector rcbd_pmt_impl(
     T bar;
 
     V statistic_closure = statistic_func(data);
-    auto rcbd_update = [&]() -> bool {
+    auto rcbd_update = [data, &bar, &statistic_closure]() {
         return bar << statistic_closure(data);
     };
 
@@ -53,8 +53,8 @@ NumericVector rcbd_pmt_impl(
 
 // [[Rcpp::export]]
 NumericVector rcbd_pmt(
-    const SEXP data,
-    const SEXP statistic_func,
+    const NumericMatrix data,
+    const RObject statistic_func,
     const R_xlen_t n_permu,
     const bool progress)
 {

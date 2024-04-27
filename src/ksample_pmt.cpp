@@ -2,7 +2,7 @@
 
 template <typename T, typename U, typename V>
 NumericVector ksample_pmt_impl(
-    const NumericVector& data,
+    const NumericVector data,
     IntegerVector group,
     const U& statistic_func,
     const R_xlen_t n_permu)
@@ -10,7 +10,7 @@ NumericVector ksample_pmt_impl(
     T bar;
 
     V statistic_closure = statistic_func(data, group);
-    auto ksample_update = [&]() -> bool {
+    auto ksample_update = [data, group, &bar, &statistic_closure]() {
         return bar << statistic_closure(data, group);
     };
 
@@ -33,9 +33,9 @@ NumericVector ksample_pmt_impl(
 
 // [[Rcpp::export]]
 NumericVector ksample_pmt(
-    const SEXP data,
-    const SEXP group,
-    const SEXP statistic_func,
+    const NumericVector data,
+    const IntegerVector group,
+    const RObject statistic_func,
     const R_xlen_t n_permu,
     const bool progress)
 {

@@ -3,7 +3,7 @@
 template <typename T, typename U, typename V>
 NumericVector table_pmt_impl(
     IntegerVector row_loc,
-    const IntegerVector& col_loc,
+    const IntegerVector col_loc,
     const U& statistic_func,
     const R_xlen_t n_permu)
 {
@@ -13,7 +13,7 @@ NumericVector table_pmt_impl(
 
     IntegerMatrix data(no_init(row_loc[n - 1] + 1, col_loc[n - 1] + 1));
 
-    auto data_filled = [&]() -> IntegerMatrix {
+    auto data_filled = [data, row_loc, col_loc, n]() mutable {
         data.fill(0);
         for (R_len_t i = 0; i < n; i++) {
             data(row_loc[i], col_loc[i])++;
@@ -22,7 +22,7 @@ NumericVector table_pmt_impl(
     };
 
     V statistic_closure = statistic_func(data_filled());
-    auto table_update = [&]() -> bool {
+    auto table_update = [&data_filled, &bar, &statistic_closure]() {
         return bar << statistic_closure(data_filled());
     };
 
@@ -45,9 +45,9 @@ NumericVector table_pmt_impl(
 
 // [[Rcpp::export]]
 NumericVector table_pmt(
-    const SEXP row_loc,
-    const SEXP col_loc,
-    const SEXP statistic_func,
+    const IntegerVector row_loc,
+    const IntegerVector col_loc,
+    const RObject statistic_func,
     const R_xlen_t n_permu,
     const bool progress)
 {

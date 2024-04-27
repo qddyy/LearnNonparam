@@ -2,11 +2,11 @@
 
 template <typename T, typename U, typename V>
 NumericVector multicomp_pmt_impl(
-    const IntegerVector& group_i,
-    const IntegerVector& group_j,
-    const NumericVector& data,
+    const IntegerVector group_i,
+    const IntegerVector group_j,
+    const NumericVector data,
     IntegerVector group,
-    const U& statistic_func,
+    const U statistic_func,
     const R_xlen_t n_permu)
 {
     T bar;
@@ -14,7 +14,7 @@ NumericVector multicomp_pmt_impl(
     R_len_t n_group = group[group.size() - 1];
     R_len_t n_pair = n_group * (n_group - 1) / 2;
 
-    auto multicomp_update = [&]() -> bool {
+    auto multicomp_update = [group_i, group_j, data, group, statistic_func, n_pair, &bar]() {
         V statistic_closure = statistic_func(data, group);
 
         bool flag = false;
@@ -44,11 +44,11 @@ NumericVector multicomp_pmt_impl(
 
 // [[Rcpp::export]]
 NumericVector multicomp_pmt(
-    const SEXP group_i,
-    const SEXP group_j,
-    const SEXP data,
-    const SEXP group,
-    const SEXP statistic_func,
+    const IntegerVector group_i,
+    const IntegerVector group_j,
+    const NumericVector data,
+    const IntegerVector group,
+    const RObject statistic_func,
     const R_xlen_t n_permu,
     const bool progress)
 {
