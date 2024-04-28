@@ -1,14 +1,18 @@
 
 # LearnNonparam <img src="man/figures/logo.svg" alt="logo" width="14%" align="right"/>
 
-[![GPL
-license](https://img.shields.io/github/license/qddyy/LearnNonparam)](https://cran.r-project.org/web/licenses/GPL-2)
-[![GitHub R package
-version](https://img.shields.io/github/r-package/v/qddyy/LearnNonparam)](https://github.com/qddyy/LearnNonparam)
-[![Code
-size](https://img.shields.io/github/languages/code-size/qddyy/LearnNonparam.svg)](https://github.com/qddyy/LearnNonparam)
-[![CodeFactor](https://www.codefactor.io/repository/github/qddyy/LearnNonparam/badge)](https://www.codefactor.io/repository/github/qddyy/LearnNonparam)
-[![R-CMD-check](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml/badge.svg)](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml)
+![GitHub
+License](https://img.shields.io/github/license/qddyy/LearnNonparam)
+![GitHub R package
+version](https://img.shields.io/github/r-package/v/qddyy/LearnNonparam)
+![GitHub code size in
+bytes](https://img.shields.io/github/languages/code-size/qddyy/LearnNonparam.svg)
+![CodeFactor
+Grade](https://img.shields.io/codefactor/grade/github/qddyy/LearnNonparam)
+![GitHub last
+commit](https://img.shields.io/github/last-commit/qddyy/LearnNonparam)
+![R CMD
+check](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml/badge.svg)
 
 ## Overview
 
@@ -25,8 +29,8 @@ A few examples in the book can be found
 ## Installation
 
 ``` r
-# install.packages("pak")
-pak::pkg_install("qddyy/LearnNonparam")
+# install.packages("remotes")
+remotes::install_github("qddyy/LearnNonparam")
 ```
 
 ## Basic Usage
@@ -108,7 +112,10 @@ options(LearnNonparam.pmt_progress = TRUE)
   <source media="(prefers-color-scheme: dark)" srcset="man/figures/README/modify-dark.svg">
   <img src="man/figures/README/modify.svg" /> </picture>
 
-See `pmts()` for tests implemented in this package:
+<details>
+<summary>
+See <code>pmts()</code> for tests implemented in this package.
+</summary>
 
 <div class="kable-table">
 
@@ -137,6 +144,8 @@ See `pmts()` for tests implemented in this package:
 
 </div>
 
+</details>
+
 ## Experimental Features
 
 The `define_pmt` function allows users to define new permutation tests.
@@ -146,12 +155,19 @@ Take Cramér-von Mises test as an example:
 t <- define_pmt(
     # this is a two-sample permutation test
     inherit = "twosample",
-    # provide a function to calculate the test statistic
-    statistic = function(...) {
+    statistic = function(x, y) {
+        # pre-calculate certain constants that remain invariant during permutation
+        n_x <- length(x)
+        n_y <- length(y)
+        F_x <- seq_len(n_x) / n_x
+        G_y <- seq_len(n_y) / n_y
+        # return another function to calculate the test statistic
         function(x, y) {
-            F_n <- ecdf(x)
-            G_n <- ecdf(y)
-            sum(c(F_n(x) - G_n(x), F_n(y) - G_n(y))^2)
+            x <- sort(x)
+            y <- sort(y)
+            F <- approxfun(x, F_x, "constant", 0, 1, ties = "ordered")
+            G <- approxfun(y, G_y, "constant", 0, 1, ties = "ordered")
+            sum(c(F_x - G(x), G_y - F(y))^2)
         }
     },
     # reject the null hypothesis when the test statistic is large
