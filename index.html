@@ -271,7 +271,7 @@ See <code>pmts()</code> for tests implemented in this package.
 <span>    <span class="co"># this is a two-sample permutation test</span></span>
 <span>    inherit <span class="op">=</span> <span class="st">"twosample"</span>,</span>
 <span>    statistic <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span>
-<span>        <span class="co"># pre-calculate some invariants during permutation</span></span>
+<span>        <span class="co"># pre-calculate certain constants that remain invariant during permutation</span></span>
 <span>        <span class="va">n_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span>        <span class="va">n_y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span>
 <span>        <span class="va">F_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">n_x</span><span class="op">)</span> <span class="op">/</span> <span class="va">n_x</span></span>
