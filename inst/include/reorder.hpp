@@ -2,10 +2,10 @@
 
 #include <algorithm>
 
-template <typename T, typename... Args>
-void sort(T&& v, Args... compare)
+template <typename T, typename U = std::less<>>
+void sort(T v, U compare = U())
 {
-    std::sort(v.begin(), v.end(), compare...);
+    std::sort(v.begin(), v.end(), compare);
 }
 
 template <typename T>
@@ -18,8 +18,10 @@ template <typename T>
 void random_shuffle(T v)
 {
     R_len_t n = v.size();
+
+    R_len_t j;
     for (R_len_t i = 0; i < n - 1; i++) {
-        R_len_t j = i + rand_int(n - i);
+        j = i + rand_int(n - i);
         std::swap(v[i], v[j]);
     }
 }

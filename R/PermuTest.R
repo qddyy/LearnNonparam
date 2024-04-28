@@ -3,8 +3,6 @@
 #' @description Abstract class for permutation tests.
 #' 
 #' 
-#' @export
-#' 
 #' @importFrom R6 R6Class
 #' @importFrom compiler cmpfun
 #' @importFrom graphics hist abline
@@ -295,7 +293,9 @@ PermuTest <- R6Class(
                     fixed = list(
                         geom = "bar",
                         mapping = ggplot2::aes(x = .data$statistic),
-                        data = data.frame(statistic = attr(private$.statistic, "permu"))
+                        data = data.frame(
+                            statistic = attr(private$.statistic, "permu")
+                        )
                     ), ...
                 ) +
                 ggplot2::geom_vline(

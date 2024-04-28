@@ -78,17 +78,17 @@ public:
 protected:
     NumericVector _statistic;
 
-    NumericVector _statistic_buffer;
+    R_xlen_t _buffer_i;
+    R_xlen_t _buffer_size;
 
-    NumericVector::iterator _iter;
-    NumericVector::iterator _end;
+    NumericVector _statistic_buffer;
 
     void _init_statistic_buffer(R_xlen_t n_statistic, R_len_t statistic_size)
     {
         _statistic_buffer = NumericVector(no_init(n_statistic * statistic_size));
 
-        _iter = _statistic_buffer.begin();
-        _end = _statistic_buffer.end();
+        _buffer_i = 0;
+        _buffer_size = _statistic_buffer.size();
 
         if (statistic_size > 1) {
             _statistic_buffer.attr("dim") = IntegerVector::create(statistic_size, n_statistic);
@@ -97,11 +97,9 @@ protected:
 
     bool _update_double(double statistic)
     {
-        *_iter = statistic;
+        _statistic_buffer[_buffer_i++] = statistic;
 
-        _iter++;
-
-        return _iter != _end;
+        return _buffer_i != _buffer_size;
     }
 };
 
@@ -129,10 +127,8 @@ public:
     {
         _init_statistic_buffer(n_permu, statistic_size);
 
-        _total = _statistic_buffer.size();
-
         _update_i = 0;
-        _update_every = (_total < 100) ? 1 : _total / 100;
+        _update_every = (_buffer_size < 100) ? 1 : _buffer_size / 100;
 
         _print();
     }
@@ -156,14 +152,12 @@ public:
     }
 
 private:
-    R_xlen_t _total;
-
     R_xlen_t _update_i = 0;
     R_xlen_t _update_every = 2;
 
     void _print()
     {
-        unsigned percent = 100 - static_cast<unsigned>(100 * (_end - _iter) / _total);
+        unsigned percent = static_cast<unsigned>(100 * _buffer_i / _buffer_size);
 
         Rcout << generated_bars[percent].data();
     }
