@@ -1,7 +1,7 @@
 #include "utils.hpp"
 
 template <typename T, typename U, typename V>
-NumericVector multicomp_pmt_impl(
+NumericVector multcomp_pmt_impl(
     const IntegerVector group_i,
     const IntegerVector group_j,
     const NumericVector data,
@@ -14,7 +14,7 @@ NumericVector multicomp_pmt_impl(
     R_len_t n_group = group[group.size() - 1];
     R_len_t n_pair = n_group * (n_group - 1) / 2;
 
-    auto multicomp_update = [group_i, group_j, data, group, statistic_func, n_pair, &bar]() {
+    auto multcomp_update = [group_i, group_j, data, group, statistic_func, n_pair, &bar]() {
         V statistic_closure = statistic_func(data, group);
 
         bool flag = false;
@@ -26,24 +26,24 @@ NumericVector multicomp_pmt_impl(
     };
 
     if (n_permu == 0) {
-        bar.init(n_permutation(group), multicomp_update, n_pair);
+        bar.init(n_permutation(group), multcomp_update, n_pair);
 
         do {
-            multicomp_update();
+            multcomp_update();
         } while (next_permutation(group));
     } else {
-        bar.init(n_permu, multicomp_update, n_pair);
+        bar.init(n_permu, multcomp_update, n_pair);
 
         do {
             random_shuffle(group);
-        } while (multicomp_update());
+        } while (multcomp_update());
     }
 
     return bar.close();
 }
 
 // [[Rcpp::export]]
-NumericVector multicomp_pmt(
+NumericVector multcomp_pmt(
     const IntegerVector group_i,
     const IntegerVector group_j,
     const NumericVector data,
@@ -53,5 +53,5 @@ NumericVector multicomp_pmt(
     const bool progress)
 {
     Function statistic(statistic_func);
-    PMT_PROGRESS_RETURN(multicomp_pmt_impl, Function, Function, group_i, group_j, data, group)
+    PMT_PROGRESS_RETURN(multcomp_pmt_impl, Function, Function, group_i, group_j, data, group)
 }

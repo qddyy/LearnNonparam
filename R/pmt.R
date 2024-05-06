@@ -35,7 +35,7 @@ pmts <- function(
         "all",
         "onesample",
         "twosample",
-        "ksample", "multicomp",
+        "ksample", "multcomp",
         "paired", "rcbd",
         "association", "table"
     )
@@ -76,7 +76,7 @@ implemented <- list(
     ksample.kw = KruskalWallis,
     ksample.jt = JonckheereTerpstra,
 
-    multicomp.studentized = Studentized,
+    multcomp.studentized = Studentized,
 
     paired.sign = Sign,
     paired.difference = PairedDifference,

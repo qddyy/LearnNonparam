@@ -2,7 +2,7 @@
 % Please edit documentation in R/Studentized.R
 \name{Studentized}
 \alias{Studentized}
-\alias{multicomp.t}
+\alias{multcomp.studentized}
 \title{Multiple Comparison Based on Studentized Statistic}
 \description{
 Performs studentized statistic based multiple comparison on samples.

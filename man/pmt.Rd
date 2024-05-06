@@ -9,7 +9,7 @@
 pmt(key, ...)
 
 pmts(
-  which = c("all", "onesample", "twosample", "ksample", "multicomp", "paired", "rcbd",
+  which = c("all", "onesample", "twosample", "ksample", "multcomp", "paired", "rcbd",
     "association", "table")
 )
 

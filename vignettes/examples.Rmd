@@ -273,9 +273,9 @@ t$p_value
 ## Example 3.3.1
 
 ```{r}
-# See ?Studentized or ?multicomp.studentized
+# See ?Studentized or ?multcomp.studentized
 t <- pmt(
-    "multicomp.studentized", n_permu = 5000, method = "bonferroni"
+    "multcomp.studentized", n_permu = 5000, method = "bonferroni"
 )
 
 # See ?Table3.3.1
