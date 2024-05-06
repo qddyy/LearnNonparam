@@ -2,6 +2,7 @@
 % Please edit documentation in R/ContingencyTableTest.R
 \name{ContingencyTableTest}
 \alias{ContingencyTableTest}
+\alias{class.table}
 \title{ContingencyTableTest Class}
 \description{
 Abstract class for tests on contingency tables.

@@ -2,6 +2,7 @@
 % Please edit documentation in R/PermuTest.R
 \name{PermuTest}
 \alias{PermuTest}
+\alias{class.pmt}
 \title{PermuTest Class}
 \description{
 Abstract class for permutation tests.

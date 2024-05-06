@@ -2,6 +2,7 @@
 #' 
 #' @description Abstract class for two-sample association tests.
 #' 
+#' @aliases class.association
 #' 
 #' @importFrom R6 R6Class
 

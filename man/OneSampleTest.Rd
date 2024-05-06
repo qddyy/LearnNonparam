@@ -2,6 +2,7 @@
 % Please edit documentation in R/OneSampleTest.R
 \name{OneSampleTest}
 \alias{OneSampleTest}
+\alias{class.onesample}
 \title{OneSampleTest Class}
 \description{
 Abstract class for one-sample tests.

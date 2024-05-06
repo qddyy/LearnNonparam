@@ -2,6 +2,7 @@
 #' 
 #' @description Abstract class for tests on samples collected in randomized complete block designs.
 #' 
+#' @aliases class.rcbd
 #' 
 #' @importFrom R6 R6Class
 

@@ -2,6 +2,7 @@
 #' 
 #' @description Abstract class for two-sample tests.
 #' 
+#' @aliases class.twosample
 #' 
 #' @importFrom R6 R6Class
 
@@ -21,7 +22,7 @@ TwoSampleTest <- R6Class(
 
         .calculate_score = function() {
             score <- get_score(
-                c(private$.data$x, private$.data$y), private$.scoring
+                c(private$.data$x, private$.data$y), scoring = private$.scoring
             )
 
             x_index <- seq_along(private$.data$x)

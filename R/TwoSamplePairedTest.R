@@ -2,6 +2,7 @@
 #' 
 #' @description Abstract class for paired two-sample tests.
 #' 
+#' @aliases class.paired
 #' 
 #' @importFrom R6 R6Class
 

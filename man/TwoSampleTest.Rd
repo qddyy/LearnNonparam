@@ -2,6 +2,7 @@
 % Please edit documentation in R/TwoSampleTest.R
 \name{TwoSampleTest}
 \alias{TwoSampleTest}
+\alias{class.twosample}
 \title{TwoSampleTest Class}
 \description{
 Abstract class for two-sample tests.

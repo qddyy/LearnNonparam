@@ -2,6 +2,7 @@
 #' 
 #' @description Abstract class for permutation tests.
 #' 
+#' @aliases class.pmt
 #' 
 #' @importFrom R6 R6Class
 #' @importFrom compiler cmpfun

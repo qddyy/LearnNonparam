@@ -2,6 +2,7 @@
 % Please edit documentation in R/RCBDTest.R
 \name{RCBDTest}
 \alias{RCBDTest}
+\alias{class.rcbd}
 \title{RCBDTest Class}
 \description{
 Abstract class for tests on samples collected in randomized complete block designs.

@@ -2,6 +2,7 @@
 #' 
 #' @description Abstract class for one-sample tests.
 #' 
+#' @aliases class.onesample
 #' 
 #' @importFrom R6 R6Class
 

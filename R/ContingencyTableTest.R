@@ -2,6 +2,7 @@
 #' 
 #' @description Abstract class for tests on contingency tables.
 #' 
+#' @aliases class.table
 #' 
 #' @export
 #' 

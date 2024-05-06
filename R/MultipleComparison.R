@@ -2,6 +2,7 @@
 #' 
 #' @description Abstract class for multiple comparisons.
 #' 
+#' @aliases class.multcomp
 #' 
 #' @importFrom R6 R6Class
 #' @importFrom compiler cmpfun
@@ -41,7 +42,7 @@ MultipleComparison <- R6Class(
         },
 
         .calculate_statistic_permu = function() {
-            private$.statistic <- multicomp_pmt(
+            private$.statistic <- multcomp_pmt(
                 group_i = private$.group_ij$i,
                 group_j = private$.group_ij$j,
                 data = unname(private$.data),

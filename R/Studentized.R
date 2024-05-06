@@ -2,7 +2,7 @@
 #' 
 #' @description Performs studentized statistic based multiple comparison on samples.
 #' 
-#' @aliases multcomp.t
+#' @aliases multcomp.studentized
 #' 
 #' @export
 #' 

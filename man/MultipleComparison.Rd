@@ -2,6 +2,7 @@
 % Please edit documentation in R/MultipleComparison.R
 \name{MultipleComparison}
 \alias{MultipleComparison}
+\alias{class.multcomp}
 \title{MultipleComparison Class}
 \description{
 Abstract class for multiple comparisons.

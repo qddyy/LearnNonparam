@@ -18,7 +18,7 @@ NumericVector association_pmt_impl(
         bar.init(n_permutation(y), association_update);
 
         IntegerVector y_order = seq_along(x) - 1;
-        sort(y_order, [&y](int i, int j) { return y[i] < y[j]; });
+        sort(y_order, [y](int i, int j) { return y[i] < y[j]; });
 
         x = x[y_order];
         y = y[y_order];

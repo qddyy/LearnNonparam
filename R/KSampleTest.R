@@ -2,6 +2,7 @@
 #' 
 #' @description Abstract class for k-sample tests.
 #' 
+#' @aliases class.ksample
 #' 
 #' @importFrom R6 R6Class
 
