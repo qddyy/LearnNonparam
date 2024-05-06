@@ -38,23 +38,22 @@ Correlation <- R6Class(
 
         .null_value = 0,
 
-        .preprocess = function() {
-            super$.preprocess()
-
-            if (private$.method != "pearson") {
-                private$.data <- data.frame(
-                    x = rank(private$.data$x),
-                    y = rank(private$.data$y)
-                )
-            }
-        },
-
         .define = function() {
             private$.param_name <- switch(private$.method,
                 pearson = "correlation", kendall = "tau", spearman = "rho"
             )
 
-            if (private$.method == "kendall") {
+            if (private$.method != "pearson") {
+                private$.scoring <- "rank"
+                private$.calculate_score()
+            }
+
+            if (private$.method != "kendall") {
+                private$.statistic_func <- switch(private$.type,
+                    permu = function(x, y) sum(x * y),
+                    asymp = function(x, y) cor(x, y, method = private$.method)
+                )
+            } else {
                 x <- private$.data$x
                 n <- length(x)
 
@@ -75,11 +74,6 @@ Correlation <- R6Class(
 
                     2 * mean(`[<-`(y_i < y_j, x_equal | y_i == y_j, 0.5)) - 1
                 }
-            } else {
-                private$.statistic_func <- switch(private$.type,
-                    permu = function(x, y) sum(x * y),
-                    asymp = function(x, y) cor(x, y, method = private$.method)
-                )
             }
         },
 
