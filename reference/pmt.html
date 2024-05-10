@@ -65,8 +65,11 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">define_pmt</span><span class="op">(</span></span>
+<span>  <span class="va">statistic</span>,</span>
+<span>  depends <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  plugins <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>,</span>
+<span>  includes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  inherit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"twosample"</span>, <span class="st">"ksample"</span>, <span class="st">"paired"</span>, <span class="st">"rcbd"</span>, <span class="st">"association"</span>, <span class="st">"table"</span><span class="op">)</span>,</span>
-<span>  statistic <span class="op">=</span> <span class="cn">NULL</span>,</span>
 <span>  rejection <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lr"</span>, <span class="st">"l"</span>, <span class="st">"r"</span><span class="op">)</span>,</span>
 <span>  scoring <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"none"</span>, <span class="st">"rank"</span>, <span class="st">"vw"</span>, <span class="st">"expon"</span><span class="op">)</span>,</span>
 <span>  n_permu <span class="op">=</span> <span class="fl">0L</span>,</span>
@@ -89,12 +92,16 @@
 <dd><p>a character string specifying the desired tests.</p></dd>
 
 
-<dt>inherit</dt>
-<dd><p>a character string specifying the desired permutation test.</p></dd>
-
-
 <dt>statistic</dt>
 <dd><p>definition of the test statistic. See <code>Details</code>.</p></dd>
+
+
+<dt>depends, plugins, includes</dt>
+<dd><p>passed to <code><a href="https://rdrr.io/pkg/Rcpp/man/cppFunction.html" class="external-link">Rcpp::cppFunction</a></code>.</p></dd>
+
+
+<dt>inherit</dt>
+<dd><p>a character string specifying the desired permutation test.</p></dd>
 
 
 <dt>rejection</dt>
