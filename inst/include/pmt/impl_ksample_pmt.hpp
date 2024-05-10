@@ -1,16 +1,14 @@
-#include "utils.hpp"
-
 template <typename T, typename U, typename V>
-NumericVector ksample_pmt_impl(
+NumericVector impl_ksample_pmt(
     const NumericVector data,
     IntegerVector group,
-    const U& statistic_func,
+    const U statistic_func,
     const R_xlen_t n_permu)
 {
     T bar;
 
     V statistic_closure = statistic_func(data, group);
-    auto ksample_update = [data, group, &bar, &statistic_closure]() {
+    auto ksample_update = [data, group, statistic_closure, &bar]() {
         return bar << statistic_closure(data, group);
     };
 
@@ -29,15 +27,4 @@ NumericVector ksample_pmt_impl(
     }
 
     return bar.close();
-}
-
-// [[Rcpp::export]]
-NumericVector ksample_pmt(
-    const NumericVector data,
-    const IntegerVector group,
-    const RObject statistic_func,
-    const R_xlen_t n_permu,
-    const bool progress)
-{
-    GENERATE_PMT_BODY(ksample, data, group)
 }

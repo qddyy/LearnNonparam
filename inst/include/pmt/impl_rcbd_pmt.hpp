@@ -1,15 +1,13 @@
-#include "utils.hpp"
-
 template <typename T, typename U, typename V>
-NumericVector rcbd_pmt_impl(
+NumericVector impl_rcbd_pmt(
     NumericMatrix data,
-    const U& statistic_func,
+    const U statistic_func,
     const R_xlen_t n_permu)
 {
     T bar;
 
     V statistic_closure = statistic_func(data);
-    auto rcbd_update = [data, &bar, &statistic_closure]() {
+    auto rcbd_update = [data, statistic_closure, &bar]() {
         return bar << statistic_closure(data);
     };
 
@@ -49,14 +47,4 @@ NumericVector rcbd_pmt_impl(
     }
 
     return bar.close();
-}
-
-// [[Rcpp::export]]
-NumericVector rcbd_pmt(
-    const NumericMatrix data,
-    const RObject statistic_func,
-    const R_xlen_t n_permu,
-    const bool progress)
-{
-    GENERATE_PMT_BODY(rcbd, data)
 }

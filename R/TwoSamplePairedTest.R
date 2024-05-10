@@ -26,11 +26,11 @@ TwoSamplePairedTest <- R6Class(
 
         .calculate_statistic_permu = function() {
             private$.statistic <- paired_pmt(
-                x = private$.data$x,
-                y = private$.data$y,
-                statistic_func = private$.statistic_func,
-                n_permu = private$.n_permu,
-                progress = isTRUE(getOption("LearnNonparam.pmt_progress"))
+                private$.data$x,
+                private$.data$y,
+                private$.statistic_func,
+                private$.n_permu,
+                isTRUE(getOption("LearnNonparam.pmt_progress"))
             )
         }
     )

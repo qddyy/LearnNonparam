@@ -14,8 +14,11 @@ pmts(
 )
 
 define_pmt(
+  statistic,
+  depends = character(),
+  plugins = character(),
+  includes = character(),
   inherit = c("twosample", "ksample", "paired", "rcbd", "association", "table"),
-  statistic = NULL,
   rejection = c("lr", "l", "r"),
   scoring = c("none", "rank", "vw", "expon"),
   n_permu = 0L,
@@ -30,9 +33,11 @@ define_pmt(
 
 \item{which}{a character string specifying the desired tests.}
 
-\item{inherit}{a character string specifying the desired permutation test.}
-
 \item{statistic}{definition of the test statistic. See \code{Details}.}
+
+\item{depends, plugins, includes}{passed to \code{Rcpp::cppFunction}.}
+
+\item{inherit}{a character string specifying the desired permutation test.}
 
 \item{rejection}{a character string specifying where the rejection region is.}
 

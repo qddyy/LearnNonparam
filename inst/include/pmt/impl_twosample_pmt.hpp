@@ -1,10 +1,8 @@
-#include "utils.hpp"
-
 template <typename T, typename U, typename V>
-NumericVector twosample_pmt_impl(
+NumericVector impl_twosample_pmt(
     NumericVector x,
     NumericVector y,
-    const U& statistic_func,
+    const U statistic_func,
     const R_xlen_t n_permu)
 {
     T bar;
@@ -21,7 +19,7 @@ NumericVector twosample_pmt_impl(
     std::fill(where_y.begin() + m, where_y.end(), true);
 
     V statistic_closure = statistic_func(x, y);
-    auto twosample_update = [x, y, n, data, where_y, &bar, &statistic_closure]() mutable {
+    auto twosample_update = [x, y, n, data, where_y, statistic_closure, &bar]() mutable {
         R_len_t i = 0;
         R_len_t j = 0;
         for (R_len_t k = 0; k < n; k++) {
@@ -45,20 +43,9 @@ NumericVector twosample_pmt_impl(
         bar.init(n_permu, twosample_update);
 
         do {
-            random_shuffle(where_y);
+            random_shuffle(data);
         } while (twosample_update());
     }
 
     return bar.close();
-}
-
-// [[Rcpp::export]]
-NumericVector twosample_pmt(
-    const NumericVector x,
-    const NumericVector y,
-    const RObject statistic_func,
-    const R_xlen_t n_permu,
-    const bool progress)
-{
-    GENERATE_PMT_BODY(twosample, x, y)
 }

@@ -92,8 +92,9 @@ implemented <- list(
 
 #' @rdname pmt
 #' 
-#' @param inherit a character string specifying the desired permutation test.
 #' @param statistic definition of the test statistic. See `Details`.
+#' @param depends,plugins,includes passed to `Rcpp::cppFunction`.
+#' @param inherit a character string specifying the desired permutation test.
 #' @param rejection a character string specifying where the rejection region is.
 #' @param scoring,n_permu passed to the constructor.
 #' @param name a character string specifying the name of the test.
@@ -123,12 +124,14 @@ implemented <- list(
 #' @importFrom compiler cmpfun
 
 define_pmt <- function(
+    statistic,
+    depends = character(), plugins = character(), includes = character(),
     inherit = c(
         "twosample", "ksample",
         "paired", "rcbd",
         "association", "table"
     ),
-    statistic = NULL, rejection = c("lr", "l", "r"),
+    rejection = c("lr", "l", "r"),
     scoring = c("none", "rank", "vw", "expon"), n_permu = 0L,
     name = "User-Defined Permutation Test", alternative = NULL
 ) {
@@ -137,26 +140,6 @@ define_pmt <- function(
     if (!missing(scoring) && inherit %in% c("paired", "table")) {
         warning("Ignoring 'scoring' since 'inherit' is set to '", inherit, "'")
         scoring <- "none"
-    }
-
-    if (is.character(statistic)) {
-        statistic_xptr <- cppFunction(
-            depends = "LearnNonparam",
-            includes = "#include <alias.hpp>",
-            code = {
-                T <- paste0(inherit, "_func")
-                paste0(
-                    "XPtr<", T, "> statistic_xptr() {",
-                    T, " user_defined(", statistic, ");",
-                    "return XPtr<", T, ">(new ", T, "(user_defined)); }"
-                )
-            }
-        )
-        statistic <- statistic_xptr()
-    } else if (typeof(statistic) == "closure") {
-        statistic <- cmpfun(statistic)
-    } else {
-        stop("'statistic' must be a closure or a character string")
     }
 
     self <- super <- private <- NULL
@@ -174,7 +157,41 @@ define_pmt <- function(
         public = list(
             initialize = function(n_permu) {
                 self$n_permu <- n_permu
-                private$.statistic_func <- statistic
+
+                if (typeof(statistic) == "closure") {
+                    private$.statistic_func <- cmpfun(statistic)
+                } else if (!is.character(statistic)) {
+                    stop("'statistic' must be a closure or a character string")
+                } else {
+                    user_pmt <- cppFunction(
+                        depends = c(depends, "LearnNonparam"),
+                        plugins = unique(c(plugins, "cpp14")),
+                        includes = c(
+                            includes,
+                            "#include <pmt/pmt_alias.hpp>",
+                            "#include <pmt/pmt_macros.hpp>",
+                            "#include <pmt/pmt_progress.hpp>",
+                            "#include <pmt/pmt_reorder.hpp>",
+                            paste0("#include <pmt/impl_", inherit, "_pmt.hpp>")
+                        ),
+                        code = {
+                            n_x <- if (inherit %in% c("rcbd", "table")) 2 else 3
+                            paste0(
+                                "SEXP user_pmt(",
+                                paste0("SEXP x", seq_len(n_x), collapse = ","),
+                                ",R_xlen_t n_permu,bool progress){",
+                                "auto statistic_func=", statistic, ";",
+                                "PMT_PROGRESS_RETURN(impl_", inherit, "_pmt,",
+                                inherit, "_func,", inherit, "_closure,",
+                                paste0("x", seq_len(n_x - 1), collapse = ","), ")}"
+                            )
+                        }
+                    )
+                    assign(
+                        paste0(inherit, "_pmt"), user_pmt,
+                        envir = environment(super$.calculate_statistic_permu)
+                    )
+                }
             }
         ),
         private = list(
@@ -203,5 +220,5 @@ define_pmt <- function(
                 }
             }
         )
-    )$new(n_permu = n_permu)
+    )$new(n_permu)
 }

@@ -1,10 +1,8 @@
-#include "utils.hpp"
-
 template <typename T, typename U, typename V>
-NumericVector table_pmt_impl(
+NumericVector impl_table_pmt(
     IntegerVector row_loc,
     const IntegerVector col_loc,
-    const U& statistic_func,
+    const U statistic_func,
     const R_xlen_t n_permu)
 {
     T bar;
@@ -22,7 +20,7 @@ NumericVector table_pmt_impl(
     };
 
     V statistic_closure = statistic_func(data_filled());
-    auto table_update = [&data_filled, &bar, &statistic_closure]() {
+    auto table_update = [&data_filled, statistic_closure, &bar]() {
         return bar << statistic_closure(data_filled());
     };
 
@@ -41,15 +39,4 @@ NumericVector table_pmt_impl(
     }
 
     return bar.close();
-}
-
-// [[Rcpp::export]]
-NumericVector table_pmt(
-    const IntegerVector row_loc,
-    const IntegerVector col_loc,
-    const RObject statistic_func,
-    const R_xlen_t n_permu,
-    const bool progress)
-{
-    GENERATE_PMT_BODY(table, row_loc, col_loc)
 }

@@ -1,7 +1,5 @@
-#include "utils.hpp"
-
 template <typename T, typename U, typename V>
-NumericVector multcomp_pmt_impl(
+NumericVector impl_multcomp_pmt(
     const IntegerVector group_i,
     const IntegerVector group_j,
     const NumericVector data,
@@ -40,18 +38,4 @@ NumericVector multcomp_pmt_impl(
     }
 
     return bar.close();
-}
-
-// [[Rcpp::export]]
-NumericVector multcomp_pmt(
-    const IntegerVector group_i,
-    const IntegerVector group_j,
-    const NumericVector data,
-    const IntegerVector group,
-    const RObject statistic_func,
-    const R_xlen_t n_permu,
-    const bool progress)
-{
-    Function statistic(statistic_func);
-    PMT_PROGRESS_RETURN(multcomp_pmt_impl, Function, Function, group_i, group_j, data, group)
 }

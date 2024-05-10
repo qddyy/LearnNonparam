@@ -41,11 +41,11 @@ ContingencyTableTest <- R6Class(
             col_sum <- .colSums(private$.data, r, c)
 
             private$.statistic <- table_pmt(
-                row_loc = rep.int(seq_len(r), row_sum) - 1,
-                col_loc = rep.int(seq_len(c), col_sum) - 1,
-                statistic_func = private$.statistic_func,
-                n_permu = private$.n_permu,
-                progress = isTRUE(getOption("LearnNonparam.pmt_progress"))
+                rep.int(seq_len(r), row_sum) - 1,
+                rep.int(seq_len(c), col_sum) - 1,
+                private$.statistic_func,
+                private$.n_permu,
+                isTRUE(getOption("LearnNonparam.pmt_progress"))
             )
         }
     )

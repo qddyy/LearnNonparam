@@ -43,13 +43,13 @@ MultipleComparison <- R6Class(
 
         .calculate_statistic_permu = function() {
             private$.statistic <- multcomp_pmt(
-                group_i = private$.group_ij$i,
-                group_j = private$.group_ij$j,
-                data = unname(private$.data),
-                group = as.integer(names(private$.data)),
-                statistic_func = private$.statistic_func,
-                n_permu = private$.n_permu,
-                progress = isTRUE(getOption("LearnNonparam.pmt_progress"))
+                private$.group_ij$i,
+                private$.group_ij$j,
+                unname(private$.data),
+                as.integer(names(private$.data)),
+                private$.statistic_func,
+                private$.n_permu,
+                isTRUE(getOption("LearnNonparam.pmt_progress"))
             )
         },
 

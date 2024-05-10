@@ -1,16 +1,14 @@
-#include "utils.hpp"
-
 template <typename T, typename U, typename V>
-NumericVector association_pmt_impl(
+NumericVector impl_association_pmt(
     NumericVector x,
     NumericVector y,
-    const U& statistic_func,
+    const U statistic_func,
     const R_xlen_t n_permu)
 {
     T bar;
 
     V statistic_closure = statistic_func(x, y);
-    auto association_update = [x, y, &bar, &statistic_closure]() {
+    auto association_update = [x, y, statistic_closure, &bar]() {
         return bar << statistic_closure(x, y);
     };
 
@@ -35,15 +33,4 @@ NumericVector association_pmt_impl(
     }
 
     return bar.close();
-}
-
-// [[Rcpp::export]]
-NumericVector association_pmt(
-    const NumericVector x,
-    const NumericVector y,
-    const RObject statistic_func,
-    const R_xlen_t n_permu,
-    const bool progress)
-{
-    GENERATE_PMT_BODY(association, x, y)
 }
