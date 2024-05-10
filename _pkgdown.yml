@@ -1,0 +1,82 @@
+url: https://qddyy.github.io/LearnNonparam
+
+template:
+  bootstrap: 5
+  bootswatch: minty
+  bslib:
+    base_font: {google: "Roboto"}
+    heading_font: {google: "Roboto Serif"}
+    code_font: {google: "Inconsolata"}
+
+navbar:
+  structure:
+    left:  [reference, articles, news]
+    right: [search, github]
+
+home:
+  sidebar:
+    structure: [links, license, citation]
+
+reference:
+  - contents:
+    - pmt
+
+  - title: One-Sample Test
+  - contents:
+    - Quantile
+    - CDF
+  
+  - title: Two-Sample Test
+  - contents:
+    - Difference
+    - Wilcoxon
+    - ScoreSum
+    - AnsariBradley
+    - SiegelTukey
+    - RatioMeanDeviance
+    - KolmogorovSmirnov
+  
+  - title: K-Sample Test
+  - contents:
+    - KSampleF
+    - KruskalWallis
+    - JonckheereTerpstra
+  
+  - title: Multiple Comparison
+  - contents:
+    - Studentized
+  
+  - title: Paired Two-Sample Test
+  - contents:
+    - Sign
+    - PairedDifference
+  
+  - title: Test for Randomized Complete Block Design
+  - contents:
+    - RCBDF
+    - Friedman
+    - Page
+  
+  - title:  Two-Sample Association Test
+  - contents:
+    - Correlation
+  
+  - title:  Test for Contingency Table
+  - contents:
+    - ChiSquare
+  
+  - title: Abstract Class
+  - contents:
+    - PermuTest
+    - OneSampleTest
+    - TwoSampleTest
+    - KSampleTest
+    - MultipleComparison
+    - TwoSamplePairedTest
+    - RCBDTest
+    - TwoSampleAssociationTest
+    - ContingencyTableTest
+  
+  - title: Data
+  - contents:
+    - starts_with("Table")

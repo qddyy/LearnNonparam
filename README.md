@@ -9,8 +9,6 @@ version](https://img.shields.io/github/r-package/v/qddyy/LearnNonparam)
 bytes](https://img.shields.io/github/languages/code-size/qddyy/LearnNonparam.svg)
 ![CodeFactor
 Grade](https://img.shields.io/codefactor/grade/github/qddyy/LearnNonparam)
-![GitHub last
-commit](https://img.shields.io/github/last-commit/qddyy/LearnNonparam)
 ![R CMD
 check](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml/badge.svg)
 
@@ -29,8 +27,8 @@ A few examples in the book can be found
 ## Installation
 
 ``` r
-# install.packages("remotes")
-remotes::install_github("qddyy/LearnNonparam")
+# install.packages("pak")
+pak::pkg_install("qddyy/LearnNonparam")
 ```
 
 ## Basic Usage
@@ -119,28 +117,28 @@ See <code>pmts()</code> for tests implemented in this package.
 
 <div class="kable-table">
 
-| key                   | class              | test                                               |
-|:----------------------|:-------------------|:---------------------------------------------------|
-| onesample.quantile    | Quantile           | Quantile Test                                      |
-| onesample.cdf         | CDF                | Inference on Cumulative Distribution Function      |
-| twosample.difference  | Difference         | Two-Sample Test Based on Mean or Median            |
-| twosample.wilcoxon    | Wilcoxon           | Two-Sample Wilcoxon Test                           |
-| twosample.scoresum    | ScoreSum           | Two-Sample Test Based on Sum of Scores             |
-| twosample.ansari      | AnsariBradley      | Ansari-Bradley Test                                |
-| twosample.siegel      | SiegelTukey        | Siegel-Tukey Test                                  |
-| twosample.rmd         | RatioMeanDeviance  | Ratio Mean Deviance Test                           |
-| twosample.ks          | KolmogorovSmirnov  | Two-Sample Kolmogorov-Smirnov Test                 |
-| ksample.f             | KSampleF           | K-Sample Test Based on F Statistic                 |
-| ksample.kw            | KruskalWallis      | Kruskal-Wallis Test                                |
-| ksample.jt            | JonckheereTerpstra | Jonckheere-Terpstra Test                           |
-| multicomp.studentized | Studentized        | Multiple Comparison Based on Studentized Statistic |
-| paired.sign           | Sign               | Two-Sample Sign Test                               |
-| paired.difference     | PairedDifference   | Paired Comparison Based on Differences             |
-| rcbd.f                | RCBDF              | Test for RCBD Based on F Statistic                 |
-| rcbd.friedman         | Friedman           | Friedman Test                                      |
-| rcbd.page             | Page               | Page Test                                          |
-| association.corr      | Correlation        | Test for Association Between Paired Samples        |
-| table.chisq           | ChiSquare          | Chi-Square Test on Contingency Table               |
+| key                  | class              | test                                               |
+|:---------------------|:-------------------|:---------------------------------------------------|
+| onesample.quantile   | Quantile           | Quantile Test                                      |
+| onesample.cdf        | CDF                | Inference on Cumulative Distribution Function      |
+| twosample.difference | Difference         | Two-Sample Test Based on Mean or Median            |
+| twosample.wilcoxon   | Wilcoxon           | Two-Sample Wilcoxon Test                           |
+| twosample.scoresum   | ScoreSum           | Two-Sample Test Based on Sum of Scores             |
+| twosample.ansari     | AnsariBradley      | Ansari-Bradley Test                                |
+| twosample.siegel     | SiegelTukey        | Siegel-Tukey Test                                  |
+| twosample.rmd        | RatioMeanDeviance  | Ratio Mean Deviance Test                           |
+| twosample.ks         | KolmogorovSmirnov  | Two-Sample Kolmogorov-Smirnov Test                 |
+| ksample.f            | KSampleF           | K-Sample Test Based on F Statistic                 |
+| ksample.kw           | KruskalWallis      | Kruskal-Wallis Test                                |
+| ksample.jt           | JonckheereTerpstra | Jonckheere-Terpstra Test                           |
+| multcomp.studentized | Studentized        | Multiple Comparison Based on Studentized Statistic |
+| paired.sign          | Sign               | Two-Sample Sign Test                               |
+| paired.difference    | PairedDifference   | Paired Comparison Based on Differences             |
+| rcbd.f               | RCBDF              | Test for RCBD Based on F Statistic                 |
+| rcbd.friedman        | Friedman           | Friedman Test                                      |
+| rcbd.page            | Page               | Page Test                                          |
+| association.corr     | Correlation        | Test for Association Between Paired Samples        |
+| table.chisq          | ChiSquare          | Chi-Square Test on Contingency Table               |
 
 </div>
 

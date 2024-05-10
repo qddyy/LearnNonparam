@@ -32,7 +32,6 @@ options(
 ![GitHub R package version](https://img.shields.io/github/r-package/v/qddyy/LearnNonparam)
 ![GitHub code size in bytes](https://img.shields.io/github/languages/code-size/qddyy/LearnNonparam.svg)
 ![CodeFactor Grade](https://img.shields.io/codefactor/grade/github/qddyy/LearnNonparam)
-![GitHub last commit](https://img.shields.io/github/last-commit/qddyy/LearnNonparam)
 ![R CMD check](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml/badge.svg)
 
 ## Overview
@@ -46,8 +45,8 @@ A few examples in the book can be found [here](https://qddyy.github.io/LearnNonp
 ## Installation
 
 ```{r, install, eval = FALSE}
-# install.packages("remotes")
-remotes::install_github("qddyy/LearnNonparam")
+# install.packages("pak")
+pak::pkg_install("qddyy/LearnNonparam")
 ```
 
 ## Basic Usage
