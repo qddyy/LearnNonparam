@@ -21,7 +21,7 @@ RatioMeanDeviance <- R6Class(
         #' @return A `RatioMeanDeviance` object.
         initialize = function(
             alternative = c("two_sided", "less", "greater"),
-            n_permu = 0L
+            n_permu = 1e4
         ) {
             self$alternative <- alternative
             self$n_permu <- n_permu

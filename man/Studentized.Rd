@@ -36,7 +36,7 @@ Create a new \code{Studentized} object.
   method = c("bonferroni", "tukey"),
   scoring = c("none", "rank", "vw", "expon"),
   conf_level = 0.95,
-  n_permu = 0L
+  n_permu = 10000
 )}\if{html}{\out{</div>}}
 }
 

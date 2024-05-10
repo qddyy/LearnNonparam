@@ -31,7 +31,7 @@ Performs two-sample Kolmogorov-Smirnov test on samples.
 \subsection{Method \code{new()}}{
 Create a new \code{KolmogorovSmirnov} object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{KolmogorovSmirnov$new(n_permu = 0L)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{KolmogorovSmirnov$new(n_permu = 10000)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

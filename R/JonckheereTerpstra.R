@@ -23,7 +23,7 @@ JonckheereTerpstra <- R6Class(
         initialize = function(
             type = c("permu", "asymp"),
             alternative = c("two_sided", "less", "greater"),
-            n_permu = 0L
+            n_permu = 1e4
         ) {
             self$type <- type
             self$alternative <- alternative

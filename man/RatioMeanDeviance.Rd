@@ -33,7 +33,7 @@ Create a new \code{RatioMeanDeviance} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{RatioMeanDeviance$new(
   alternative = c("two_sided", "less", "greater"),
-  n_permu = 0L
+  n_permu = 10000
 )}\if{html}{\out{</div>}}
 }
 

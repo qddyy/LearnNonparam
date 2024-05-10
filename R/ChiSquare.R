@@ -22,7 +22,7 @@ ChiSquare <- R6Class(
         #' @return A `ChiSquare` object.
         initialize = function(
             type = c("permu", "asymp"),
-            n_permu = 0L
+            n_permu = 1e4
         ) {
             self$type <- type
             self$n_permu <- n_permu

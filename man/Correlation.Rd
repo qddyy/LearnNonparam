@@ -35,7 +35,7 @@ Create a new \code{Correlation} object.
   type = c("permu", "asymp"),
   method = c("pearson", "kendall", "spearman"),
   alternative = c("two_sided", "less", "greater"),
-  n_permu = 0L
+  n_permu = 10000
 )}\if{html}{\out{</div>}}
 }
 

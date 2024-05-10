@@ -23,7 +23,7 @@ Sign <- R6Class(
         initialize = function(
             type = c("permu", "asymp", "exact"),
             alternative = c("two_sided", "less", "greater"),
-            n_permu = 0L, correct = TRUE
+            n_permu = 1e4, correct = TRUE
         ) {
             self$type <- type
             self$alternative <- alternative

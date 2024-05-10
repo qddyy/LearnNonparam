@@ -20,7 +20,7 @@ KolmogorovSmirnov <- R6Class(
         #' 
         #' @return A `KolmogorovSmirnov` object.
         initialize = function(
-            n_permu = 0L
+            n_permu = 1e4
         ) {
             self$n_permu <- n_permu
         }

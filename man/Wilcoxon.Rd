@@ -42,7 +42,7 @@ Create a new \code{Wilcoxon} object.
   type = c("permu", "asymp", "exact"),
   alternative = c("two_sided", "less", "greater"),
   conf_level = 0.95,
-  n_permu = 0L,
+  n_permu = 10000,
   correct = TRUE
 )}\if{html}{\out{</div>}}
 }

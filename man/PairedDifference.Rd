@@ -43,7 +43,7 @@ Create a new \code{PairedDifference} object.
   method = c("with_zeros", "without_zeros"),
   scoring = c("none", "rank", "vw", "expon"),
   alternative = c("two_sided", "less", "greater"),
-  n_permu = 0L,
+  n_permu = 10000,
   correct = TRUE
 )}\if{html}{\out{</div>}}
 }

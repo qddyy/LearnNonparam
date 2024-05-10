@@ -23,7 +23,7 @@ KruskalWallis <- R6Class(
         initialize = function(
             type = c("permu", "asymp"),
             scoring = c("rank", "vw", "expon"),
-            n_permu = 0L
+            n_permu = 1e4
         ) {
             self$type <- type
             self$scoring <- scoring

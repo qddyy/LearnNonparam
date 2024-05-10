@@ -23,7 +23,7 @@ Wilcoxon <- R6Class(
         initialize = function(
             type = c("permu", "asymp", "exact"),
             alternative = c("two_sided", "less", "greater"),
-            conf_level = 0.95, n_permu = 0L, correct = TRUE
+            conf_level = 0.95, n_permu = 1e4, correct = TRUE
         ) {
             self$type <- type
             self$alternative <- alternative

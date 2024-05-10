@@ -31,7 +31,7 @@ Performs F statistic based test on samples collected in a randomized complete bl
 \subsection{Method \code{new()}}{
 Create a new \code{RCBDF} object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{RCBDF$new(type = c("permu", "asymp"), n_permu = 0L)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{RCBDF$new(type = c("permu", "asymp"), n_permu = 10000)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

@@ -34,7 +34,7 @@ Create a new \code{JonckheereTerpstra} object.
 \if{html}{\out{<div class="r">}}\preformatted{JonckheereTerpstra$new(
   type = c("permu", "asymp"),
   alternative = c("two_sided", "less", "greater"),
-  n_permu = 0L
+  n_permu = 10000
 )}\if{html}{\out{</div>}}
 }
 

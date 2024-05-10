@@ -34,7 +34,7 @@ Create a new \code{Difference} object.
 \if{html}{\out{<div class="r">}}\preformatted{Difference$new(
   method = c("mean", "median"),
   alternative = c("two_sided", "less", "greater"),
-  n_permu = 0L
+  n_permu = 10000
 )}\if{html}{\out{</div>}}
 }
 

@@ -23,7 +23,7 @@ Difference <- R6Class(
         initialize = function(
             method = c("mean", "median"),
             alternative = c("two_sided", "less", "greater"),
-            n_permu = 0L
+            n_permu = 1e4
         ) {
             self$method <- method
             self$alternative <- alternative

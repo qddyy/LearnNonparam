@@ -22,7 +22,7 @@ ScoreSum <- R6Class(
         initialize = function(
             scoring = c("rank", "vw", "expon"),
             alternative = c("two_sided", "less", "greater"),
-            n_permu = 0L
+            n_permu = 1e4
         ) {
             self$scoring <- scoring
             self$alternative <- alternative

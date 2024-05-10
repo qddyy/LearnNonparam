@@ -31,7 +31,7 @@ Performs chi-square test on contingency tables.
 \subsection{Method \code{new()}}{
 Create a new \code{ChiSquare} object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{ChiSquare$new(type = c("permu", "asymp"), n_permu = 0L)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{ChiSquare$new(type = c("permu", "asymp"), n_permu = 10000)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{

@@ -132,7 +132,7 @@ define_pmt <- function(
         "association", "table"
     ),
     rejection = c("lr", "l", "r"),
-    scoring = c("none", "rank", "vw", "expon"), n_permu = 0L,
+    scoring = c("none", "rank", "vw", "expon"), n_permu = 1e4,
     name = "User-Defined Permutation Test", alternative = NULL
 ) {
     inherit <- match.arg(inherit)

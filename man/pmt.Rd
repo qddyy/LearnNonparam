@@ -21,7 +21,7 @@ define_pmt(
   inherit = c("twosample", "ksample", "paired", "rcbd", "association", "table"),
   rejection = c("lr", "l", "r"),
   scoring = c("none", "rank", "vw", "expon"),
-  n_permu = 0L,
+  n_permu = 10000,
   name = "User-Defined Permutation Test",
   alternative = NULL
 )

@@ -27,7 +27,7 @@ PairedDifference <- R6Class(
             method = c("with_zeros", "without_zeros"),
             scoring = c("none", "rank", "vw", "expon"),
             alternative = c("two_sided", "less", "greater"),
-            n_permu = 0L, correct = TRUE
+            n_permu = 1e4, correct = TRUE
         ) {
             self$type <- type
             self$method <- method

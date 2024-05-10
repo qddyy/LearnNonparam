@@ -34,7 +34,7 @@ Create a new \code{KruskalWallis} object.
 \if{html}{\out{<div class="r">}}\preformatted{KruskalWallis$new(
   type = c("permu", "asymp"),
   scoring = c("rank", "vw", "expon"),
-  n_permu = 0L
+  n_permu = 10000
 )}\if{html}{\out{</div>}}
 }
 

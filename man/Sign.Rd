@@ -41,7 +41,7 @@ Create a new \code{Sign} object.
 \if{html}{\out{<div class="r">}}\preformatted{Sign$new(
   type = c("permu", "asymp", "exact"),
   alternative = c("two_sided", "less", "greater"),
-  n_permu = 0L,
+  n_permu = 10000,
   correct = TRUE
 )}\if{html}{\out{</div>}}
 }

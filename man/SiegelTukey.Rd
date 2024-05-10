@@ -34,7 +34,7 @@ Create a new \code{SiegelTukey} object.
 \if{html}{\out{<div class="r">}}\preformatted{SiegelTukey$new(
   type = c("permu", "asymp", "exact"),
   alternative = c("two_sided", "less", "greater"),
-  n_permu = 0L,
+  n_permu = 10000,
   correct = TRUE
 )}\if{html}{\out{</div>}}
 }

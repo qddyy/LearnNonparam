@@ -26,7 +26,7 @@ Studentized <- R6Class(
             type = c("permu", "asymp"),
             method = c("bonferroni", "tukey"),
             scoring = c("none", "rank", "vw", "expon"),
-            conf_level = 0.95, n_permu = 0L
+            conf_level = 0.95, n_permu = 1e4
         ) {
             self$type <- type
             self$method <- method

@@ -31,7 +31,7 @@ Performs F statistic based k-sample test on samples.
 \subsection{Method \code{new()}}{
 Create a new \code{KSampleF} object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{KSampleF$new(type = c("permu", "asymp"), n_permu = 0L)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{KSampleF$new(type = c("permu", "asymp"), n_permu = 10000)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
