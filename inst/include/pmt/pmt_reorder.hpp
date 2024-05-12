@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <functional>
 
 template <typename T, typename U = std::less<>>
 void sort(T v, U compare = U())

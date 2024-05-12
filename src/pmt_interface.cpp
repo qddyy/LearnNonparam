@@ -6,17 +6,34 @@ using namespace Rcpp;
 #include "pmt/pmt_progress.hpp"
 #include "pmt/pmt_reorder.hpp"
 
+class ClosFunc {
+private:
+    Function _func;
+
+public:
+    ClosFunc(Function func) :
+        _func(func) { }
+
+    template <typename... Args>
+    Function operator()(Args&&... args) const
+    {
+        Function closure = _func(std::forward<Args>(args)...);
+        return closure;
+    }
+};
+
 #include "pmt/impl_twosample_pmt.hpp"
 
 // [[Rcpp::export]]
 NumericVector twosample_pmt(
     const NumericVector x,
     const NumericVector y,
-    const Function statistic_func,
+    const Function statistic,
     const R_xlen_t n_permu,
     const bool progress)
 {
-    PMT_PROGRESS_RETURN(impl_twosample_pmt, Function, Function, x, y)
+    ClosFunc statistic_func(statistic);
+    PMT_PROGRESS_RETURN(impl_twosample_pmt, x, y)
 }
 
 #include "pmt/impl_ksample_pmt.hpp"
@@ -25,11 +42,12 @@ NumericVector twosample_pmt(
 NumericVector ksample_pmt(
     const NumericVector data,
     const IntegerVector group,
-    const Function statistic_func,
+    const Function statistic,
     const R_xlen_t n_permu,
     const bool progress)
 {
-    PMT_PROGRESS_RETURN(impl_ksample_pmt, Function, Function, data, group)
+    ClosFunc statistic_func(statistic);
+    PMT_PROGRESS_RETURN(impl_ksample_pmt, data, group)
 }
 
 #include "pmt/impl_multcomp_pmt.hpp"
@@ -40,11 +58,12 @@ NumericVector multcomp_pmt(
     const IntegerVector group_j,
     const NumericVector data,
     const IntegerVector group,
-    const Function statistic_func,
+    const Function statistic,
     const R_xlen_t n_permu,
     const bool progress)
 {
-    PMT_PROGRESS_RETURN(impl_multcomp_pmt, Function, Function, group_i, group_j, data, group)
+    ClosFunc statistic_func(statistic);
+    PMT_PROGRESS_RETURN(impl_multcomp_pmt, group_i, group_j, data, group)
 }
 
 #include "pmt/impl_paired_pmt.hpp"
@@ -53,11 +72,12 @@ NumericVector multcomp_pmt(
 NumericVector paired_pmt(
     const NumericVector x,
     const NumericVector y,
-    const Function statistic_func,
+    const Function statistic,
     const R_xlen_t n_permu,
     const bool progress)
 {
-    PMT_PROGRESS_RETURN(impl_paired_pmt, Function, Function, x, y)
+    ClosFunc statistic_func(statistic);
+    PMT_PROGRESS_RETURN(impl_paired_pmt, x, y)
 }
 
 #include "pmt/impl_rcbd_pmt.hpp"
@@ -65,11 +85,12 @@ NumericVector paired_pmt(
 // [[Rcpp::export]]
 NumericVector rcbd_pmt(
     const NumericMatrix data,
-    const Function statistic_func,
+    const Function statistic,
     const R_xlen_t n_permu,
     const bool progress)
 {
-    PMT_PROGRESS_RETURN(impl_rcbd_pmt, Function, Function, data)
+    ClosFunc statistic_func(statistic);
+    PMT_PROGRESS_RETURN(impl_rcbd_pmt, data)
 }
 
 #include "pmt/impl_association_pmt.hpp"
@@ -78,10 +99,12 @@ NumericVector rcbd_pmt(
 NumericVector association_pmt(
     const NumericVector x,
     const NumericVector y,
-    const Function statistic_func,
+    const Function statistic,
     const R_xlen_t n_permu,
-    const bool progress) {
-    PMT_PROGRESS_RETURN(impl_association_pmt, Function, Function, x, y)
+    const bool progress)
+{
+    ClosFunc statistic_func(statistic);
+    PMT_PROGRESS_RETURN(impl_association_pmt, x, y)
 }
 
 #include "pmt/impl_table_pmt.hpp"
@@ -90,9 +113,10 @@ NumericVector association_pmt(
 NumericVector table_pmt(
     const IntegerVector row_loc,
     const IntegerVector col_loc,
-    const Function statistic_func,
+    const Function statistic,
     const R_xlen_t n_permu,
     const bool progress)
 {
-    PMT_PROGRESS_RETURN(impl_table_pmt, Function, Function, row_loc, col_loc)
+    ClosFunc statistic_func(statistic);
+    PMT_PROGRESS_RETURN(impl_table_pmt, row_loc, col_loc)
 }

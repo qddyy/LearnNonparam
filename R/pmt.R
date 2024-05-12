@@ -168,7 +168,6 @@ define_pmt <- function(
                         plugins = unique(c(plugins, "cpp14")),
                         includes = c(
                             includes,
-                            "#include <pmt/pmt_alias.hpp>",
                             "#include <pmt/pmt_macros.hpp>",
                             "#include <pmt/pmt_progress.hpp>",
                             "#include <pmt/pmt_reorder.hpp>",
@@ -182,7 +181,6 @@ define_pmt <- function(
                                 ",R_xlen_t n_permu,bool progress){",
                                 "auto statistic_func=", statistic, ";",
                                 "PMT_PROGRESS_RETURN(impl_", inherit, "_pmt,",
-                                inherit, "_func,", inherit, "_closure,",
                                 paste0("x", seq_len(n_x - 1), collapse = ","), ")}"
                             )
                         }

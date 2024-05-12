@@ -1,4 +1,4 @@
-template <typename T, typename U, typename V>
+template <typename T, typename U>
 NumericVector impl_twosample_pmt(
     NumericVector x,
     NumericVector y,
@@ -18,7 +18,7 @@ NumericVector impl_twosample_pmt(
     std::fill(where_y.begin(), where_y.begin() + m, false);
     std::fill(where_y.begin() + m, where_y.end(), true);
 
-    V statistic_closure = statistic_func(x, y);
+    auto statistic_closure = statistic_func(x, y);
     auto twosample_update = [x, y, n, data, where_y, statistic_closure, &bar]() mutable {
         R_len_t i = 0;
         R_len_t j = 0;

@@ -1,4 +1,4 @@
-template <typename T, typename U, typename V>
+template <typename T, typename U>
 NumericVector impl_multcomp_pmt(
     const IntegerVector group_i,
     const IntegerVector group_j,
@@ -13,7 +13,7 @@ NumericVector impl_multcomp_pmt(
     R_len_t n_pair = n_group * (n_group - 1) / 2;
 
     auto multcomp_update = [group_i, group_j, data, group, statistic_func, n_pair, &bar]() {
-        V statistic_closure = statistic_func(data, group);
+        auto statistic_closure = statistic_func(data, group);
 
         bool flag = false;
         for (R_len_t k = 0; k < n_pair; k++) {

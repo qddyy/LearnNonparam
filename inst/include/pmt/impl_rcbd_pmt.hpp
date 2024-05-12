@@ -1,4 +1,4 @@
-template <typename T, typename U, typename V>
+template <typename T, typename U>
 NumericVector impl_rcbd_pmt(
     NumericMatrix data,
     const U statistic_func,
@@ -6,7 +6,7 @@ NumericVector impl_rcbd_pmt(
 {
     T bar;
 
-    V statistic_closure = statistic_func(data);
+    auto statistic_closure = statistic_func(data);
     auto rcbd_update = [data, statistic_closure, &bar]() {
         return bar << statistic_closure(data);
     };

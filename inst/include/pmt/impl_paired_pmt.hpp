@@ -1,4 +1,4 @@
-template <typename T, typename U, typename V>
+template <typename T, typename U>
 NumericVector impl_paired_pmt(
     NumericVector x,
     NumericVector y,
@@ -7,7 +7,7 @@ NumericVector impl_paired_pmt(
 {
     T bar;
 
-    V statistic_closure = statistic_func(x, y);
+    auto statistic_closure = statistic_func(x, y);
     auto paired_update = [x, y, statistic_closure, &bar]() {
         return bar << statistic_closure(x, y);
     };

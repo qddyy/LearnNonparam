@@ -1,4 +1,4 @@
-template <typename T, typename U, typename V>
+template <typename T, typename U>
 NumericVector impl_ksample_pmt(
     const NumericVector data,
     IntegerVector group,
@@ -7,7 +7,7 @@ NumericVector impl_ksample_pmt(
 {
     T bar;
 
-    V statistic_closure = statistic_func(data, group);
+    auto statistic_closure = statistic_func(data, group);
     auto ksample_update = [data, group, statistic_closure, &bar]() {
         return bar << statistic_closure(data, group);
     };

@@ -1,4 +1,4 @@
-template <typename T, typename U, typename V>
+template <typename T, typename U>
 NumericVector impl_table_pmt(
     IntegerVector row_loc,
     const IntegerVector col_loc,
@@ -19,7 +19,7 @@ NumericVector impl_table_pmt(
         return data;
     };
 
-    V statistic_closure = statistic_func(data_filled());
+    auto statistic_closure = statistic_func(data_filled());
     auto table_update = [&data_filled, statistic_closure, &bar]() {
         return bar << statistic_closure(data_filled());
     };
