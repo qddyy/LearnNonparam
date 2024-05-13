@@ -15,15 +15,15 @@ pmts(
 
 define_pmt(
   statistic,
-  depends = character(),
-  plugins = character(),
-  includes = character(),
   inherit = c("twosample", "ksample", "paired", "rcbd", "association", "table"),
   rejection = c("lr", "l", "r"),
   scoring = c("none", "rank", "vw", "expon"),
   n_permu = 10000,
   name = "User-Defined Permutation Test",
-  alternative = NULL
+  alternative = NULL,
+  depends = character(),
+  plugins = character(),
+  includes = character()
 )
 }
 \arguments{
@@ -35,8 +35,6 @@ define_pmt(
 
 \item{statistic}{definition of the test statistic. See \code{Details}.}
 
-\item{depends, plugins, includes}{passed to \code{Rcpp::cppFunction}.}
-
 \item{inherit}{a character string specifying the desired permutation test.}
 
 \item{rejection}{a character string specifying where the rejection region is.}
@@ -46,6 +44,8 @@ define_pmt(
 \item{name}{a character string specifying the name of the test.}
 
 \item{alternative}{a character string specifying the alternative of the test.}
+
+\item{depends, plugins, includes}{passed to \code{Rcpp::cppFunction}.}
 }
 \description{
 Construct test objects in a unified way.

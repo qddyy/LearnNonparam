@@ -2,9 +2,9 @@
 
 using namespace Rcpp;
 
-#include "pmt/pmt_macros.hpp"
-#include "pmt/pmt_progress.hpp"
-#include "pmt/pmt_reorder.hpp"
+#include "pmt/macros.hpp"
+#include "pmt/progress.hpp"
+#include "pmt/reorder.hpp"
 
 class ClosFunc {
 private:

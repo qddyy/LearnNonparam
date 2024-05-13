@@ -93,12 +93,12 @@ implemented <- list(
 #' @rdname pmt
 #' 
 #' @param statistic definition of the test statistic. See `Details`.
-#' @param depends,plugins,includes passed to `Rcpp::cppFunction`.
 #' @param inherit a character string specifying the desired permutation test.
 #' @param rejection a character string specifying where the rejection region is.
 #' @param scoring,n_permu passed to the constructor.
 #' @param name a character string specifying the name of the test.
 #' @param alternative a character string specifying the alternative of the test.
+#' @param depends,plugins,includes passed to `Rcpp::cppFunction`.
 #' 
 #' @details The test statistic in `define_pmt` can be defined using either `R` or `Rcpp`, with the `statistic` parameter specified as:
 #' 
@@ -125,7 +125,6 @@ implemented <- list(
 
 define_pmt <- function(
     statistic,
-    depends = character(), plugins = character(), includes = character(),
     inherit = c(
         "twosample", "ksample",
         "paired", "rcbd",
@@ -133,7 +132,8 @@ define_pmt <- function(
     ),
     rejection = c("lr", "l", "r"),
     scoring = c("none", "rank", "vw", "expon"), n_permu = 1e4,
-    name = "User-Defined Permutation Test", alternative = NULL
+    name = "User-Defined Permutation Test", alternative = NULL,
+    depends = character(), plugins = character(), includes = character()
 ) {
     inherit <- match.arg(inherit)
 
@@ -163,31 +163,28 @@ define_pmt <- function(
                 } else if (!is.character(statistic)) {
                     stop("'statistic' must be a closure or a character string")
                 } else {
-                    user_pmt <- cppFunction(
+                    cppFunction(
+                        env = environment(super$.calculate_statistic_permu),
                         depends = c(depends, "LearnNonparam"),
                         plugins = unique(c(plugins, "cpp14")),
-                        includes = c(
-                            includes,
-                            "#include <pmt/pmt_macros.hpp>",
-                            "#include <pmt/pmt_progress.hpp>",
-                            "#include <pmt/pmt_reorder.hpp>",
-                            paste0("#include <pmt/impl_", inherit, "_pmt.hpp>")
-                        ),
+                        includes = {
+                            hpps <- c(
+                                "macros", "progress", "reorder",
+                                paste0("impl_", inherit, "_pmt")
+                            )
+                            c(includes, paste0("#include <pmt/", hpps, ".hpp>"))
+                        },
                         code = {
-                            n_x <- if (inherit %in% c("rcbd", "table")) 2 else 3
+                            n <- if (inherit %in% c("rcbd", "table")) 2 else 3
                             paste0(
-                                "SEXP user_pmt(",
-                                paste0("SEXP x", seq_len(n_x), collapse = ","),
-                                ",R_xlen_t n_permu,bool progress){",
+                                "SEXP ", inherit, "_pmt(",
+                                paste0("SEXP ", letters[1:n], collapse = ","),
+                                ", R_xlen_t n_permu, bool progress) {",
                                 "auto statistic_func=", statistic, ";",
                                 "PMT_PROGRESS_RETURN(impl_", inherit, "_pmt,",
-                                paste0("x", seq_len(n_x - 1), collapse = ","), ")}"
+                                paste(letters[1:n - 1], collapse = ","), ") }"
                             )
                         }
-                    )
-                    assign(
-                        paste0(inherit, "_pmt"), user_pmt,
-                        envir = environment(super$.calculate_statistic_permu)
                     )
                 }
             }

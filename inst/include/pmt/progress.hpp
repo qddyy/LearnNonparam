@@ -12,21 +12,12 @@ constexpr std::array<char, 10> num_char_map = { '0', '1', '2', '3', '4', '5', '6
 template <unsigned n, unsigned... Is>
 constexpr auto generate_bar(std::integer_sequence<unsigned, Is...>)
 {
-#define SET_RED '\033', '[', '3', '1', 'm'
-#define SET_GREEN '\033', '[', '3', '2', 'm'
-#define BAR_WITHOUT_PERCENT ' ', '[', (Is < n * bar_width / 100 ? '=' : ' ')..., ']', ' ', '\0'
-
+#define RED '\033', '[', '3', '1', 'm'
+#define GREEN '\033', '[', '3', '2', 'm'
+#define BAR ' ', '[', (Is < n * bar_width / 100 ? '=' : ' ')..., ']', ' ', '\0'
     return (n < 10) ?
-        ProgressBar {
-            '\015',
-            SET_RED, ' ', num_char_map[n], '%',
-            SET_GREEN, BAR_WITHOUT_PERCENT
-        } :
-        ProgressBar {
-            '\015',
-            SET_RED, num_char_map[n / 10], num_char_map[n % 10], '%',
-            SET_GREEN, BAR_WITHOUT_PERCENT
-        };
+        ProgressBar { '\015', RED, ' ', num_char_map[n], '%', GREEN, BAR } :
+        ProgressBar { '\015', RED, num_char_map[n / 10], num_char_map[n % 10], '%', GREEN, BAR };
 }
 
 template <unsigned... Is>
