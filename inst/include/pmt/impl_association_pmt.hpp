@@ -8,7 +8,7 @@ NumericVector impl_association_pmt(
     T bar;
 
     auto statistic_closure = statistic_func(x, y);
-    auto association_update = [x, y, statistic_closure, &bar]() {
+    auto association_update = [x, y, &statistic_closure, &bar]() {
         return bar << statistic_closure(x, y);
     };
 

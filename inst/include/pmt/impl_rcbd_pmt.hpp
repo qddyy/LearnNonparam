@@ -7,7 +7,7 @@ NumericVector impl_rcbd_pmt(
     T bar;
 
     auto statistic_closure = statistic_func(data);
-    auto rcbd_update = [data, statistic_closure, &bar]() {
+    auto rcbd_update = [data, &statistic_closure, &bar]() {
         return bar << statistic_closure(data);
     };
 

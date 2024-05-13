@@ -11,7 +11,7 @@ NumericVector impl_twosample_pmt(
     R_len_t n = m + y.size();
 
     auto statistic_closure = statistic_func(x, y);
-    auto twosample_update = [x, y, statistic_closure, &bar]() {
+    auto twosample_update = [x, y, &statistic_closure, &bar]() {
         return bar << statistic_closure(x, y);
     };
 

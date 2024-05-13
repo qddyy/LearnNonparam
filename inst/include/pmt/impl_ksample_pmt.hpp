@@ -8,7 +8,7 @@ NumericVector impl_ksample_pmt(
     T bar;
 
     auto statistic_closure = statistic_func(data, group);
-    auto ksample_update = [data, group, statistic_closure, &bar]() {
+    auto ksample_update = [data, group, &statistic_closure, &bar]() {
         return bar << statistic_closure(data, group);
     };
 

@@ -20,7 +20,7 @@ NumericVector impl_table_pmt(
     };
 
     auto statistic_closure = statistic_func(data_filled());
-    auto table_update = [&data_filled, statistic_closure, &bar]() {
+    auto table_update = [&data_filled, &statistic_closure, &bar]() {
         return bar << statistic_closure(data_filled());
     };
 
