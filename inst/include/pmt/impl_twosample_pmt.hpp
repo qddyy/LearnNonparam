@@ -10,40 +10,45 @@ NumericVector impl_twosample_pmt(
     R_len_t m = x.size();
     R_len_t n = m + y.size();
 
-    NumericVector data(no_init(n));
-    std::copy(x.begin(), x.end(), data.begin());
-    std::copy(y.begin(), y.end(), data.begin() + m);
-
-    LogicalVector where_y(no_init(n));
-    std::fill(where_y.begin(), where_y.begin() + m, false);
-    std::fill(where_y.begin() + m, where_y.end(), true);
-
     auto statistic_closure = statistic_func(x, y);
-    auto twosample_update = [x, y, n, data, where_y, statistic_closure, &bar]() mutable {
-        R_len_t i = 0;
-        R_len_t j = 0;
-        for (R_len_t k = 0; k < n; k++) {
-            if (where_y[k]) {
-                y[i++] = data[k];
-            } else {
-                x[j++] = data[k];
-            }
-        }
-
+    auto twosample_update = [x, y, statistic_closure, &bar]() {
         return bar << statistic_closure(x, y);
     };
 
     if (n_permu == 0) {
+        NumericVector data(no_init(n));
+        std::copy(x.begin(), x.end(), data.begin());
+        std::copy(y.begin(), y.end(), data.begin() + m);
+
+        LogicalVector where_y(no_init(n));
+        std::fill(where_y.begin(), where_y.begin() + m, false);
+        std::fill(where_y.begin() + m, where_y.end(), true);
+
         bar.init(n_permutation(where_y), twosample_update);
 
+        R_len_t i, j, k;
         do {
+            i = j = k = 0;
+            do {
+                if (where_y[k]) {
+                    y[i++] = data[k++];
+                } else {
+                    x[j++] = data[k++];
+                }
+            } while (k < n);
             twosample_update();
         } while (next_permutation(where_y));
     } else {
         bar.init(n_permu, twosample_update);
 
+        R_len_t i, j;
         do {
-            random_shuffle(data);
+            for (i = 0; i < m; i++) {
+                j = i + rand_int(n - i);
+                if (j >= m) {
+                    std::swap(x[i], y[j - m]);
+                }
+            }
         } while (twosample_update());
     }
 
