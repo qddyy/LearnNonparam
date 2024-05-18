@@ -12,12 +12,16 @@ constexpr std::array<char, 10> num_char_map = { '0', '1', '2', '3', '4', '5', '6
 template <unsigned n, unsigned... Is>
 constexpr auto generate_bar(std::integer_sequence<unsigned, Is...>)
 {
-#define RED '\033', '[', '3', '1', 'm'
-#define GREEN '\033', '[', '3', '2', 'm'
-#define BAR ' ', '[', (Is < n * bar_width / 100 ? '=' : ' ')..., ']', ' ', '\0'
-    return (n < 10) ?
-        ProgressBar { '\015', RED, ' ', num_char_map[n], '%', GREEN, BAR } :
-        ProgressBar { '\015', RED, num_char_map[n / 10], num_char_map[n % 10], '%', GREEN, BAR };
+    unsigned fill = n * bar_width / 100;
+    return ProgressBar {
+        '\015',
+        '\033', '[', '3', '1', 'm',
+        (n < 10) ? ' ' : num_char_map[n / 10],
+        (n < 10) ? num_char_map[n] : num_char_map[n % 10], '%',
+        '\033', '[', '3', '6', 'm',
+        ' ', '|', (Is + 1 < fill ? '-' : (Is + 1 == fill ? '>' : ' '))..., '|', ' ',
+        '\0'
+    };
 }
 
 template <unsigned... Is>
@@ -126,8 +130,7 @@ public:
 
     bool update_impl(double statistic)
     {
-        _update_i++;
-        if (_update_i == _update_every) {
+        if (++_update_i == _update_every) {
             _update_i = 0;
             _print();
         }

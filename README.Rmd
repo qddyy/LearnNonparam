@@ -49,7 +49,7 @@ A few examples in the book can be found [here](https://qddyy.github.io/LearnNonp
 pak::pkg_install("qddyy/LearnNonparam")
 ```
 
-## Basic Usage
+## Usage
 
 ```{r, library, eval = FALSE}
 library(LearnNonparam)
@@ -97,7 +97,7 @@ options(LearnNonparam.pmt_progress = TRUE)
     ggplot2::ggsave("./man/figures/README/ggplot.svg", device = "svg")
     ```
 
-    ```{r, include_plot, echo = FALSE, out.width = "100%"}
+    ```{r, include_plot, echo = FALSE, out.width = "100%", out.height = "75%"}
     knitr::include_graphics("./man/figures/README/ggplot.svg")
     ```
 
@@ -113,8 +113,6 @@ See <code>pmts()</code> for tests implemented in this package.</summary>
 LearnNonparam::pmts()
 ```
 </details>
-
-## Experimental Features
 
 The `define_pmt` function allows users to define new permutation tests. Take Cramér-von Mises test as an example:
 
