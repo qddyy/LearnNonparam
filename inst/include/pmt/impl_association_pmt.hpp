@@ -13,22 +13,22 @@ NumericVector impl_association_pmt(
     };
 
     if (n_permu == 0) {
-        bar.init(n_permutation(y), association_update);
+        IntegerVector x_order = seq_along(x) - 1;
+        sort(x_order, [x](int i, int j) { return x[i] < x[j]; });
 
-        IntegerVector y_order = seq_along(x) - 1;
-        sort(y_order, [y](int i, int j) { return y[i] < y[j]; });
+        x = x[x_order];
+        y = y[x_order];
 
-        x = x[y_order];
-        y = y[y_order];
+        bar.init(n_permutation(x), association_update);
 
         do {
             association_update();
-        } while (next_permutation(y));
+        } while (next_permutation(x));
     } else {
         bar.init(n_permu, association_update);
 
         do {
-            random_shuffle(y);
+            random_shuffle(x);
         } while (association_update());
     }
 

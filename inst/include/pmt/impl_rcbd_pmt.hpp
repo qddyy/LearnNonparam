@@ -16,14 +16,11 @@ NumericVector impl_rcbd_pmt(
     if (n_permu == 0) {
         R_xlen_t total = 1;
         for (R_len_t j = 0; j < n_col; j++) {
+            sort(data.column(j));
             total *= n_permutation(data.column(j));
         }
 
         bar.init(total, rcbd_update);
-
-        for (R_len_t k = 0; k < n_col; k++) {
-            sort(data.column(k));
-        }
 
         while (i < n_col) {
             if (i == 0) {
