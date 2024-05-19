@@ -54,7 +54,9 @@ MultipleComparison <- R6Class(
         },
 
         .calculate_n_permu = function() {
-            private$.n_permu <- ncol(attr(private$.statistic, "permu"))
+            attr(private$.n_permu, "n_used") <- ncol(
+                attr(private$.statistic, "permu")
+            )
         },
 
         .calculate_p_permu = function() {
@@ -99,8 +101,8 @@ MultipleComparison <- R6Class(
                 paste(
                     "type:",
                     if ((type <- private$.type) == "permu") {
-                        n_permu <- as.numeric(private$.n_permu)
-                        paste0(type, "(", format(n_permu, digits = digits), ")")
+                        n_used <- as.numeric(attr(private$.n_permu, "n_used"))
+                        paste0(type, "(", format(n_used, digits = digits), ")")
                     } else type
                 ),
                 paste("method:", private$.method),
