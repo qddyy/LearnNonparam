@@ -15,10 +15,13 @@ public:
         _func(func) { }
 
     template <typename... Args>
-    Function operator()(Args&&... args) const
+    auto operator()(Args... args) const
     {
-        Function closure = _func(std::forward<Args>(args)...);
-        return closure;
+        Function closure = _func(args...);
+
+        return [closure](auto... args_) {
+            return as<double>(closure(args_...));
+        };
     }
 };
 

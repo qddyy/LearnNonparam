@@ -34,47 +34,38 @@ constexpr auto generate_bars(std::integer_sequence<unsigned, Is...>)
 
 constexpr auto generated_bars = generate_bars(std::make_integer_sequence<unsigned, 100>());
 
-template <typename T>
-class PermuBarBase {
-private:
-    T& _Derived()
-    {
-        return static_cast<T&>(*this);
-    }
-
+class PermuBarHide {
 public:
-    template <typename U>
-    void init(R_xlen_t n_permu, U update_lambda, R_len_t statistic_size = 1)
+    template <typename T>
+    void init(R_xlen_t n_permu, T update, R_len_t statistic_size = 1)
     {
         _init_statistic_buffer(statistic_size, 1);
-        update_lambda();
+        update();
         _statistic = _statistic_buffer;
 
-        _Derived().init_impl(n_permu, statistic_size);
+        _init_statistic_buffer(n_permu, statistic_size);
     }
 
     bool operator<<(double statistic)
     {
-        return _Derived().update_impl(statistic);
-    }
+        _statistic_buffer[_buffer_i++] = statistic;
 
-    bool operator<<(SEXP statistic)
-    {
-        return _Derived().update_impl(as<double>(statistic));
+        return _buffer_i != _buffer_size;
     }
 
     NumericVector close()
     {
         _statistic.attr("permu") = _statistic_buffer;
 
-        return _Derived().close_impl();
+        return _statistic;
     }
 
 protected:
-    NumericVector _statistic;
-
     R_xlen_t _buffer_i;
     R_xlen_t _buffer_size;
+
+private:
+    NumericVector _statistic;
 
     NumericVector _statistic_buffer;
 
@@ -89,67 +80,44 @@ protected:
             _statistic_buffer.attr("dim") = IntegerVector::create(statistic_size, n_statistic);
         }
     }
-
-    bool _update_double(double statistic)
-    {
-        _statistic_buffer[_buffer_i++] = statistic;
-
-        return _buffer_i != _buffer_size;
-    }
 };
 
-class PermuBarHide : public PermuBarBase<PermuBarHide> {
+class PermuBarShow : public PermuBarHide {
 public:
-    void init_impl(R_xlen_t n_permu, R_len_t statistic_size)
+    template <typename... Args>
+    auto init(Args&&... args)
     {
-        _init_statistic_buffer(n_permu, statistic_size);
+        PermuBarHide::init(std::forward<Args>(args)...);
+
+        _show_i = 0;
+        _show_every = (_buffer_size < 100) ? 1 : _buffer_size / 100;
+
+        _show();
     }
 
-    bool update_impl(double statistic)
+    template <typename... Args>
+    auto operator<<(Args&&... args)
     {
-        return _update_double(statistic);
-    }
-
-    NumericVector close_impl()
-    {
-        return _statistic;
-    }
-};
-
-class PermuBarShow : public PermuBarBase<PermuBarShow> {
-public:
-    void init_impl(R_xlen_t n_permu, R_len_t statistic_size)
-    {
-        _init_statistic_buffer(n_permu, statistic_size);
-
-        _update_i = 0;
-        _update_every = (_buffer_size < 100) ? 1 : _buffer_size / 100;
-
-        _print();
-    }
-
-    bool update_impl(double statistic)
-    {
-        if (++_update_i == _update_every) {
-            _update_i = 0;
-            _print();
+        if (++_show_i == _show_every) {
+            _show_i = 0;
+            _show();
         }
 
-        return _update_double(statistic);
+        return PermuBarHide::operator<<(std::forward<Args>(args)...);
     }
 
-    NumericVector close_impl()
+    auto close()
     {
         Rcout << "\015\033[K\033[0m";
 
-        return _statistic;
+        return PermuBarHide::close();
     }
 
 private:
-    R_xlen_t _update_i = 0;
-    R_xlen_t _update_every = 2;
+    R_xlen_t _show_i = 0;
+    R_xlen_t _show_every = 2;
 
-    void _print()
+    void _show()
     {
         unsigned percent = static_cast<unsigned>(100 * _buffer_i / _buffer_size);
 
