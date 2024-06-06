@@ -14,8 +14,8 @@ check](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml
 
 ## Overview
 
-This package implements some of the non-parametric tests in chapters 1-5
-of [Higgins (2003)](#references).
+This R package implements some of the non-parametric tests in chapters
+1-5 of [Higgins (2003)](#references).
 
 It depends on [R6](https://CRAN.R-project.org/package=R6) for object
 oriented design and [Rcpp](https://CRAN.R-project.org/package=Rcpp) for
@@ -26,10 +26,16 @@ A few examples in the book can be found
 
 ## Installation
 
+For the latest bug fixes and improvements, please install the
+development version of this R package using
+
 ``` r
-# install.packages("pak")
-pak::pkg_install("qddyy/LearnNonparam")
+# install.packages("remotes")
+remotes::install_github("qddyy/LearnNonparam")
 ```
+
+Feedback and contributions are welcome. Please feel free to report bugs
+or request new features by opening an issue.
 
 ## Usage
 
