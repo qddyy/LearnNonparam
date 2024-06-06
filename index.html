@@ -207,9 +207,9 @@ See <code>pmts()</code> for tests implemented in this package.
 <td align="left">Two-Sample Kolmogorov-Smirnov Test</td>
 </tr>
 <tr class="even">
-<td align="left">ksample.f</td>
-<td align="left">KSampleF</td>
-<td align="left">K-Sample Test Based on F Statistic</td>
+<td align="left">ksample.oneway</td>
+<td align="left">OneWay</td>
+<td align="left">One-Way Test for Equal Means</td>
 </tr>
 <tr class="odd">
 <td align="left">ksample.kw</td>
@@ -237,9 +237,9 @@ See <code>pmts()</code> for tests implemented in this package.
 <td align="left">Paired Comparison Based on Differences</td>
 </tr>
 <tr class="even">
-<td align="left">rcbd.f</td>
-<td align="left">RCBDF</td>
-<td align="left">Test for RCBD Based on F Statistic</td>
+<td align="left">rcbd.oneway</td>
+<td align="left">RCBDOneWay</td>
+<td align="left">One-Way Test for Equal Means in RCBD</td>
 </tr>
 <tr class="odd">
 <td align="left">rcbd.friedman</td>
@@ -275,7 +275,7 @@ See <code>pmts()</code> for tests implemented in this package.
 <span>        <span class="va">n_y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span>
 <span>        <span class="va">F_x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">n_x</span><span class="op">)</span> <span class="op">/</span> <span class="va">n_x</span></span>
 <span>        <span class="va">G_y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">n_y</span><span class="op">)</span> <span class="op">/</span> <span class="va">n_y</span></span>
-<span>        <span class="co"># return another function to calculate the test statistic</span></span>
+<span>        <span class="co"># return a closure to calculate the test statistic</span></span>
 <span>        <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span>
 <span>            <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span>            <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span>
