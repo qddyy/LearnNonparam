@@ -175,7 +175,7 @@ define_pmt <- function(
                             c(includes, paste0("#include <pmt/", hpps, ".hpp>"))
                         },
                         code = {
-                            n <- if (inherit %in% c("rcbd", "table")) 2 else 3
+                            n <- if (inherit == "rcbd") 2 else 3
                             paste0(
                                 "SEXP ", inherit, "_pmt(",
                                 paste0("SEXP ", LETTERS[1:n], collapse = ","),
