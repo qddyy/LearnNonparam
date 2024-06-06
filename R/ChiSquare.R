@@ -34,13 +34,13 @@ ChiSquare <- R6Class(
         .define = function() {
             r <- nrow(private$.data)
             c <- ncol(private$.data)
-            sum <- sum(private$.data)
+
+            expect <- tcrossprod(
+                .rowSums(private$.data, r, c),
+                .colSums(private$.data, r, c)
+            ) / sum(private$.data)
+
             private$.statistic_func <- function(data) {
-                row_sum <- .rowSums(data, r, c)
-                col_sum <- .colSums(data, r, c)
-
-                expect <- row_sum %*% matrix(col_sum, nrow = 1) / sum
-
                 sum((data - expect)^2 / expect)
             }
         },

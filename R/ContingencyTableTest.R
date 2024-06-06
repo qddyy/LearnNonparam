@@ -15,6 +15,10 @@ ContingencyTableTest <- R6Class(
     cloneable = FALSE,
     private = list(
         .preprocess = function() {
+            if (length(private$.raw_data) < 2) {
+                stop("Must provide at least two samples")
+            }
+
             if (length(unique(lengths(private$.raw_data))) > 1) {
                 stop("All samples must be of equal length")
             }
@@ -37,12 +41,9 @@ ContingencyTableTest <- R6Class(
             r <- nrow(private$.data)
             c <- ncol(private$.data)
 
-            row_sum <- .rowSums(private$.data, r, c)
-            col_sum <- .colSums(private$.data, r, c)
-
             private$.statistic <- table_pmt(
-                rep.int(seq_len(r), row_sum) - 1,
-                rep.int(seq_len(c), col_sum) - 1,
+                rep.int(rep.int(seq_len(r) - 1, c), private$.data),
+                rep.int(seq_len(c) - 1, .colSums(private$.data, r, c)),
                 private$.statistic_func,
                 private$.n_permu,
                 isTRUE(getOption("LearnNonparam.pmt_progress"))
