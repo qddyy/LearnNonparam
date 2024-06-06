@@ -48,7 +48,7 @@ PermuTest <- R6Class(
         #' @description Plot histogram(s) of the permutation distribution. Note that this method only works if `type` is set to `"permu"`.
         #' 
         #' @template plot_params
-        #' @param ... passed to `graphics::hist()` or `ggplot2::stat_bin()`.
+        #' @param ... passed to [graphics::hist()] or [ggplot2::stat_bin()].
         #' 
         #' @return The object itself (invisibly).
         plot = function(style = c("graphics", "ggplot2"), ...) {

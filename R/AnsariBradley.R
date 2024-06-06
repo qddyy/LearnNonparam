@@ -68,9 +68,13 @@ AnsariBradley <- R6Class(
             } else {
                 r <- rle(sort(c(private$.data$x, private$.data$y)))
                 sigma2 <- if (even) {
-                    m * n * (16 * sum(r$lengths * r$values^2) - N * (N + 2)^2) / (16 * N * (N - 1))
+                    m * n * (
+                        16 * sum(r$lengths * r$values^2) - N * (N + 2)^2
+                    ) / (16 * N * (N - 1))
                 } else {
-                    m * n * (16 * N * sum(r$lengths * r$values^2) - (N + 1)^4) / (16 * N^2 * (N - 1))
+                    m * n * (
+                        16 * N * sum(r$lengths * r$values^2) - (N + 1)^4
+                    ) / (16 * N^2 * (N - 1))
                 }
             }
 

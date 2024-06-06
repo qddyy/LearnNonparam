@@ -92,17 +92,17 @@ implemented <- list(
 
 #' @rdname pmt
 #' 
-#' @param statistic definition of the test statistic. See `Details`.
+#' @param statistic definition of the test statistic. See Details.
 #' @param inherit a character string specifying the desired permutation test.
 #' @param rejection a character string specifying where the rejection region is.
 #' @param scoring,n_permu passed to the constructor.
 #' @param name a character string specifying the name of the test.
 #' @param alternative a character string specifying the alternative of the test.
-#' @param depends,plugins,includes passed to `Rcpp::cppFunction`.
+#' @param depends,plugins,includes passed to [Rcpp::cppFunction()].
 #' 
 #' @details The test statistic in `define_pmt` can be defined using either `R` or `Rcpp`, with the `statistic` parameter specified as:
 #' 
-#' - `R`: a closure returning another closure.
+#' - `R`: a function returning a closure that returns a double.
 #' - `Rcpp`: a character string defining a captureless lambda (introduced in C++11) returning another lambda that may capture by value, accepts const arguments of the same type, and returns a double.
 #' 
 #' When using `Rcpp`, the parameters for different `inherit` are listed as follows. Note that the parameter names are illustrative and may be modified.
@@ -178,11 +178,11 @@ define_pmt <- function(
                             n <- if (inherit %in% c("rcbd", "table")) 2 else 3
                             paste0(
                                 "SEXP ", inherit, "_pmt(",
-                                paste0("SEXP ", letters[1:n], collapse = ","),
+                                paste0("SEXP ", LETTERS[1:n], collapse = ","),
                                 ", R_xlen_t n_permu, bool progress) {",
                                 "auto statistic_func=", statistic, ";",
                                 "PMT_PROGRESS_RETURN(impl_", inherit, "_pmt,",
-                                paste(letters[1:n - 1], collapse = ","), ") }"
+                                paste(LETTERS[1:n - 1], collapse = ","), ") }"
                             )
                         }
                     )

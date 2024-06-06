@@ -182,7 +182,7 @@ MultipleComparison <- R6Class(
                         data = data.frame(
                             i = rep.int(private$.group_ij$i, private$.n_permu),
                             j = rep.int(private$.group_ij$j, private$.n_permu),
-                            statistic = as.vector(attr(private$.statistic, "permu"))
+                            statistic = c(attr(private$.statistic, "permu"))
                         )
                     ), ...
                 ) +

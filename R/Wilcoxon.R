@@ -71,7 +71,9 @@ Wilcoxon <- R6Class(
                     switch(private$.side, lr = sign(z) * 0.5, r = 0.5, l = -0.5)
                 } else 0
                 z <- (z - correction) / sqrt(
-                    (m * n / 12) * ((N + 1) - sum(ties^3 - ties) / (N * (N - 1)))
+                    m * n / 12 * (
+                        N + 1 - sum(ties^3 - ties) / (N * (N - 1))
+                    )
                 )
 
                 private$.p_value <- get_p_continous(z, "norm", private$.side)

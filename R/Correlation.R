@@ -84,12 +84,22 @@ Correlation <- R6Class(
             if (private$.method == "kendall") {
                 s <- tabulate(private$.data$x)
                 t <- tabulate(private$.data$y)
-                a <- (sum(s * (s - 1) * (2 * s + 5)) + sum(t * (t - 1) * (2 * t + 5))) / 18
-                b <- sum(s * (s - 1) * (s - 2)) * sum(t * (t - 1) * (t - 2)) / (9 * n * (n - 1) * (n - 2))
-                c <- sum(s * (s - 1)) * sum(t * (t - 1)) / (2 * n * (n - 1))
+                a <- `+`(
+                    sum(s * (s - 1) * (2 * s + 5)),
+                    sum(t * (t - 1) * (2 * t + 5))
+                ) / 18
+                b <- `*`(
+                    sum(s * (s - 1) * (s - 2)),
+                    sum(t * (t - 1) * (t - 2))
+                ) / (9 * n * (n - 1) * (n - 2))
+                c <- `*`(
+                    sum(s * (s - 1)),
+                    sum(t * (t - 1))
+                ) / (2 * n * (n - 1))
 
                 z <- r / sqrt(
-                    (4 * n + 10) / (9 * n * (n - 1)) - 4 / (n^2 * (n - 1)^2) * (a - b - c)
+                    (4 * n + 10) / (9 * n * (n - 1)) -
+                        4 / (n^2 * (n - 1)^2) * (a - b - c)
                 )
             } else {
                 z <- r * sqrt(n - 1)

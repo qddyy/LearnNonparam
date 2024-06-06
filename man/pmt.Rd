@@ -33,7 +33,7 @@ define_pmt(
 
 \item{which}{a character string specifying the desired tests.}
 
-\item{statistic}{definition of the test statistic. See \code{Details}.}
+\item{statistic}{definition of the test statistic. See Details.}
 
 \item{inherit}{a character string specifying the desired permutation test.}
 
@@ -45,7 +45,7 @@ define_pmt(
 
 \item{alternative}{a character string specifying the alternative of the test.}
 
-\item{depends, plugins, includes}{passed to \code{Rcpp::cppFunction}.}
+\item{depends, plugins, includes}{passed to \code{\link[Rcpp:cppFunction]{Rcpp::cppFunction()}}.}
 }
 \description{
 Construct test objects in a unified way.
@@ -53,7 +53,7 @@ Construct test objects in a unified way.
 \details{
 The test statistic in \code{define_pmt} can be defined using either \code{R} or \code{Rcpp}, with the \code{statistic} parameter specified as:
 \itemize{
-\item \code{R}: a closure returning another closure.
+\item \code{R}: a function returning a closure that returns a double.
 \item \code{Rcpp}: a character string defining a captureless lambda (introduced in C++11) returning another lambda that may capture by value, accepts const arguments of the same type, and returns a double.
 }
 

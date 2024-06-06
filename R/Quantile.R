@@ -77,7 +77,9 @@ Quantile <- R6Class(
             p <- private$.prob
             n <- length(private$.data)
 
-            d <- qnorm(1 - (1 - private$.conf_level) / 2) * sqrt(n * p * (1 - p))
+            d <- qnorm(1 - (1 - private$.conf_level) / 2) * sqrt(
+                n * p * (1 - p)
+            )
             a <- round(n * p - d)
             b <- round(n * p + 1 + d)
 
