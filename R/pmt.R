@@ -205,14 +205,6 @@ define_pmt <- function(
                 private$.calculate_statistic_permu()
                 private$.calculate_n_permu()
                 private$.calculate_p_permu()
-            },
-
-            .print = function(...) {
-                super$.print(...)
-
-                if (is.null(private$.alternative)) {
-                    cat("\33[1A                       ")
-                }
             }
         )
     )$new(n_permu)

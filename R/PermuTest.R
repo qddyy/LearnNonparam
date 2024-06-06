@@ -81,7 +81,7 @@ PermuTest <- R6Class(
         .raw_data = NULL,
         .data = NULL,
 
-        .alternative = "two_sided",
+        .alternative = NULL,
         .link = "+",
         .side = NULL,
 
@@ -239,22 +239,24 @@ PermuTest <- R6Class(
             )
             cat("\n")
 
-            cat(
-                "alternative hypothesis:",
-                if (
-                    is.null(private$.param_name) |
-                    is.null(private$.null_value)
-                ) private$.alternative else {
-                    paste(
-                        "true", private$.param_name, "is",
-                        switch(private$.alternative,
-                            two_sided = "not equal to",
-                            less = "less than", greater = "greater than"
-                        ), private$.null_value
-                    )
-                }
-            )
-            cat("\n")
+            if (!is.null(private$.alternative)) {
+                cat(
+                    "alternative hypothesis:",
+                    if (
+                        !is.null(private$.param_name) &&
+                        !is.null(private$.null_value)
+                    ) {
+                        paste(
+                            "true", private$.param_name, "is",
+                            switch(private$.alternative,
+                                two_sided = "not equal to",
+                                less = "less than", greater = "greater than"
+                            ), private$.null_value
+                        )
+                    } else private$.alternative
+                )
+                cat("\n")
+            }
 
             if (!is.null(private$.estimate)) {
                 cat("estimate:", format(private$.estimate, digits = digits))

@@ -48,6 +48,10 @@ RCBDOneWay <- R6Class(
             )
         },
 
+        .calculate_side = function() {
+            private$.side <- "r"
+        },
+
         .calculate_p = function() {
             k <- nrow(private$.data)
             b <- ncol(private$.data)
