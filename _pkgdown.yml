@@ -38,7 +38,7 @@ reference:
   
   - title: K-Sample Test
   - contents:
-    - KSampleF
+    - OneWay
     - KruskalWallis
     - JonckheereTerpstra
   
@@ -53,7 +53,7 @@ reference:
   
   - title: Test for Randomized Complete Block Design
   - contents:
-    - RCBDF
+    - RCBDOneWay
     - Friedman
     - Page
   

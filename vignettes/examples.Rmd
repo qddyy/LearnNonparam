@@ -224,9 +224,9 @@ t$p_value
 ## Example 3.1.1
 
 ```{r}
-# See ?KSampleF or ?ksample.f
+# See ?OneWay or ?ksample.oneway
 t <- pmt(
-    "ksample.f", type = "asymp"
+    "ksample.oneway", type = "asymp"
 )
 
 # See ?Table3.1.2
@@ -405,9 +405,9 @@ t$p_value
 ## Example 4.4.1
 
 ```{r}
-# See ?RCBDF or ?rcbd.f
+# See ?RCBDOneWay or ?rcbd.oneway
 t <- pmt(
-    "rcbd.f", n_permu = 5000
+    "rcbd.oneway", n_permu = 5000
 )
 
 # See ?Table4.4.3

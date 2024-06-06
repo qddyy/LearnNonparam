@@ -72,7 +72,7 @@ implemented <- list(
     twosample.rmd = RatioMeanDeviance,
     twosample.ks = KolmogorovSmirnov,
 
-    ksample.f = KSampleF,
+    ksample.oneway = OneWay,
     ksample.kw = KruskalWallis,
     ksample.jt = JonckheereTerpstra,
 
@@ -81,7 +81,7 @@ implemented <- list(
     paired.sign = Sign,
     paired.difference = PairedDifference,
 
-    rcbd.f = RCBDF,
+    rcbd.oneway = RCBDOneWay,
     rcbd.friedman = Friedman,
     rcbd.page = Page,
 

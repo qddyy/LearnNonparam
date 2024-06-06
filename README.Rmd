@@ -126,7 +126,7 @@ t <- define_pmt(
         n_y <- length(y)
         F_x <- seq_len(n_x) / n_x
         G_y <- seq_len(n_y) / n_y
-        # return another function to calculate the test statistic
+        # return a closure to calculate the test statistic
         function(x, y) {
             x <- sort(x)
             y <- sort(y)

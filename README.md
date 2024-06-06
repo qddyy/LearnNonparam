@@ -128,13 +128,13 @@ See <code>pmts()</code> for tests implemented in this package.
 | twosample.siegel     | SiegelTukey        | Siegel-Tukey Test                                  |
 | twosample.rmd        | RatioMeanDeviance  | Ratio Mean Deviance Test                           |
 | twosample.ks         | KolmogorovSmirnov  | Two-Sample Kolmogorov-Smirnov Test                 |
-| ksample.f            | KSampleF           | K-Sample Test Based on F Statistic                 |
+| ksample.oneway       | OneWay             | One-Way Test for Equal Means                       |
 | ksample.kw           | KruskalWallis      | Kruskal-Wallis Test                                |
 | ksample.jt           | JonckheereTerpstra | Jonckheere-Terpstra Test                           |
 | multcomp.studentized | Studentized        | Multiple Comparison Based on Studentized Statistic |
 | paired.sign          | Sign               | Two-Sample Sign Test                               |
 | paired.difference    | PairedDifference   | Paired Comparison Based on Differences             |
-| rcbd.f               | RCBDF              | Test for RCBD Based on F Statistic                 |
+| rcbd.oneway          | RCBDOneWay         | One-Way Test for Equal Means in RCBD               |
 | rcbd.friedman        | Friedman           | Friedman Test                                      |
 | rcbd.page            | Page               | Page Test                                          |
 | association.corr     | Correlation        | Test for Association Between Paired Samples        |
@@ -157,7 +157,7 @@ t <- define_pmt(
         n_y <- length(y)
         F_x <- seq_len(n_x) / n_x
         G_y <- seq_len(n_y) / n_y
-        # return another function to calculate the test statistic
+        # return a closure to calculate the test statistic
         function(x, y) {
             x <- sort(x)
             y <- sort(y)

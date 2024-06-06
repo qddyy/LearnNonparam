@@ -1,8 +1,8 @@
-#' @title `r RCBDF$private_fields$.name`
+#' @title `r RCBDOneWay$private_fields$.name`
 #' 
-#' @description Performs F statistic based test on samples collected in a randomized complete block design.
+#' @description Performs F statistic based one-way test on samples collected in a randomized complete block design.
 #' 
-#' @aliases rcbd.f
+#' @aliases rcbd.oneway
 #' 
 #' @export
 #' 
@@ -10,16 +10,16 @@
 #' @importFrom stats pf
 
 
-RCBDF <- R6Class(
-    classname = "RCBDF",
+RCBDOneWay <- R6Class(
+    classname = "RCBDOneWay",
     inherit = RCBDTest,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `RCBDF` object.
+        #' @description Create a new `RCBDOneWay` object.
         #' 
         #' @template init_params
         #' 
-        #' @return A `RCBDF` object.
+        #' @return A `RCBDOneWay` object.
         initialize = function(
             type = c("permu", "asymp"),
             n_permu = 1e4
@@ -29,7 +29,7 @@ RCBDF <- R6Class(
         }
     ),
     private = list(
-        .name = "Test for RCBD Based on F Statistic",
+        .name = "One-Way Test for Equal Means in RCBD",
 
         .define = function() {
             k <- nrow(private$.data)

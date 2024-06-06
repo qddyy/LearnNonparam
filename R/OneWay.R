@@ -1,8 +1,8 @@
-#' @title `r KSampleF$private_fields$.name`
+#' @title `r OneWay$private_fields$.name`
 #' 
-#' @description Performs F statistic based k-sample test on samples.
+#' @description Performs F statistic based one-way test on samples.
 #' 
-#' @aliases ksample.f
+#' @aliases ksample.oneway
 #' 
 #' @export
 #' 
@@ -10,16 +10,16 @@
 #' @importFrom stats pf
 
 
-KSampleF <- R6Class(
-    classname = "KSampleF",
+OneWay <- R6Class(
+    classname = "OneWay",
     inherit = KSampleTest,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `KSampleF` object.
+        #' @description Create a new `OneWay` object.
         #' 
         #' @template init_params
         #' 
-        #' @return A `KSampleF` object.
+        #' @return A `OneWay` object.
         initialize = function(
             type = c("permu", "asymp"),
             n_permu = 1e4
@@ -29,7 +29,7 @@ KSampleF <- R6Class(
         }
     ),
     private = list(
-        .name = "K-Sample Test Based on F Statistic",
+        .name = "One-Way Test for Equal Means",
 
         .define = function() {
             private$.statistic_func <- switch(private$.type,
