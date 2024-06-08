@@ -1,8 +1,40 @@
+implemented <- list(
+    onesample.quantile = Quantile,
+    onesample.cdf = CDF,
+
+    twosample.difference = Difference,
+    twosample.wilcoxon = Wilcoxon,
+    twosample.scoresum = ScoreSum,
+    twosample.ansari = AnsariBradley,
+    twosample.siegel = SiegelTukey,
+    twosample.rmd = RatioMeanDeviance,
+    twosample.ks = KolmogorovSmirnov,
+
+    ksample.oneway = OneWay,
+    ksample.kw = KruskalWallis,
+    ksample.jt = JonckheereTerpstra,
+
+    multcomp.studentized = Studentized,
+
+    paired.sign = Sign,
+    paired.difference = PairedDifference,
+
+    rcbd.oneway = RCBDOneWay,
+    rcbd.friedman = Friedman,
+    rcbd.page = Page,
+
+    association.corr = Correlation,
+
+    table.chisq = ChiSquare
+)
+
+
 #' @title Syntactic Sugar for Object Construction
 #' 
 #' @description Construct test objects in a unified way.
 #' 
 #' @name pmt
+
 
 #' @rdname pmt
 #' 
@@ -60,35 +92,6 @@ pmts <- function(
     )
 }
 
-implemented <- list(
-    onesample.quantile = Quantile,
-    onesample.cdf = CDF,
-
-    twosample.difference = Difference,
-    twosample.wilcoxon = Wilcoxon,
-    twosample.scoresum = ScoreSum,
-    twosample.ansari = AnsariBradley,
-    twosample.siegel = SiegelTukey,
-    twosample.rmd = RatioMeanDeviance,
-    twosample.ks = KolmogorovSmirnov,
-
-    ksample.oneway = OneWay,
-    ksample.kw = KruskalWallis,
-    ksample.jt = JonckheereTerpstra,
-
-    multcomp.studentized = Studentized,
-
-    paired.sign = Sign,
-    paired.difference = PairedDifference,
-
-    rcbd.oneway = RCBDOneWay,
-    rcbd.friedman = Friedman,
-    rcbd.page = Page,
-
-    association.corr = Correlation,
-
-    table.chisq = ChiSquare
-)
 
 #' @rdname pmt
 #' 
@@ -115,7 +118,6 @@ implemented <- list(
 #' - `"table"`: `(Rcpp::IntegerMatrix contingency_table)`
 #' 
 #' Defining the test statistic using `R` follows a similar approach. The purpose of this design is to pre-calculate certain constants that remain invariant during permutation.
-#' 
 #' 
 #' @export
 #' 

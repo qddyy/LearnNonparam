@@ -57,7 +57,7 @@ CDF <- R6Class(
             private$.data <- sort(private$.data)
         },
 
-        .calculate_side = function() {},
+        .calculate_side = function() NULL,
 
         .calculate_extra = function() {
             n <- length(private$.data)
