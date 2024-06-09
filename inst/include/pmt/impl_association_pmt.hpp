@@ -13,22 +13,21 @@ NumericVector impl_association_pmt(
     };
 
     if (n_permu == 0) {
-        IntegerVector x_order = seq_along(x) - 1;
-        sort(x_order, [x](int i, int j) { return x[i] < x[j]; });
+        NumericVector y_sorted = clone(y);
+        std::sort(y_sorted.begin(), y_sorted.end());
 
-        x = x[x_order];
-        y = y[x_order];
+        bar.init(n_permutation(y_sorted), association_update);
 
-        bar.init(n_permutation(x), association_update);
+        std::copy(y_sorted.begin(), y_sorted.end(), y.begin());
 
         do {
             association_update();
-        } while (next_permutation(x));
+        } while (next_permutation(y));
     } else {
         bar.init(n_permu, association_update);
 
         do {
-            random_shuffle(x);
+            random_shuffle(y);
         } while (association_update());
     }
 

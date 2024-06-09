@@ -16,7 +16,7 @@ NumericVector impl_rcbd_pmt(
     if (n_permu == 0) {
         R_xlen_t total = 1;
         for (R_len_t j = 0; j < n_col; j++) {
-            sort(data.column(j));
+            std::sort(data.column(j).begin(), data.column(j).end());
             total *= n_permutation(data.column(j));
         }
 

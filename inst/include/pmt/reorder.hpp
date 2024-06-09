@@ -1,13 +1,6 @@
 #pragma once
 
 #include <algorithm>
-#include <functional>
-
-template <typename T, typename U = std::less<>>
-void sort(T v, U compare = U())
-{
-    std::sort(v.begin(), v.end(), compare);
-}
 
 template <typename T>
 T rand_int(T n)
