@@ -14,8 +14,9 @@ NumericVector impl_paired_pmt(
 
     R_len_t i = 0;
     R_len_t n = x.size();
+    bar.init_statistic(paired_update);
     if (n_permu == 0) {
-        bar.init(1 << n, paired_update);
+        bar.init_statistic_permu(1 << n);
 
         IntegerVector swapped(n, 0);
         while (i < n) {
@@ -33,7 +34,7 @@ NumericVector impl_paired_pmt(
             }
         }
     } else {
-        bar.init(n_permu, paired_update);
+        bar.init_statistic_permu(n_permu);
 
         do {
             for (i = 0; i < n; i++) {

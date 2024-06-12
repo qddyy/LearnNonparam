@@ -12,14 +12,15 @@ NumericVector impl_ksample_pmt(
         return bar << statistic_closure(data, group);
     };
 
+    bar.init_statistic(ksample_update);
     if (n_permu == 0) {
-        bar.init(n_permutation(group), ksample_update);
+        bar.init_statistic_permu(n_permutation(group));
 
         do {
             ksample_update();
         } while (next_permutation(group));
     } else {
-        bar.init(n_permu, ksample_update);
+        bar.init_statistic_permu(n_permu);
 
         do {
             random_shuffle(group);

@@ -12,19 +12,17 @@ NumericVector impl_association_pmt(
         return bar << statistic_closure(x, y);
     };
 
+    bar.init_statistic(association_update);
     if (n_permu == 0) {
-        NumericVector y_sorted = clone(y);
-        std::sort(y_sorted.begin(), y_sorted.end());
+        std::sort(y.begin(), y.end());
 
-        bar.init(n_permutation(y_sorted), association_update);
-
-        std::copy(y_sorted.begin(), y_sorted.end(), y.begin());
+        bar.init_statistic_permu(n_permutation(y));
 
         do {
             association_update();
         } while (next_permutation(y));
     } else {
-        bar.init(n_permu, association_update);
+        bar.init_statistic_permu(n_permu);
 
         do {
             random_shuffle(y);

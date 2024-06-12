@@ -23,14 +23,15 @@ NumericVector impl_multcomp_pmt(
         return flag;
     };
 
+    bar.init_statistic(multcomp_update, n_pair);
     if (n_permu == 0) {
-        bar.init(n_permutation(group), multcomp_update, n_pair);
+        bar.init_statistic_permu(n_permutation(group));
 
         do {
             multcomp_update();
         } while (next_permutation(group));
     } else {
-        bar.init(n_permu, multcomp_update, n_pair);
+        bar.init_statistic_permu(n_permu);
 
         do {
             random_shuffle(group);

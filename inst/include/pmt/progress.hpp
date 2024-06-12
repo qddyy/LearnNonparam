@@ -37,13 +37,18 @@ constexpr auto generated_bars = generate_bars(std::make_integer_sequence<unsigne
 class PermuBarHide {
 public:
     template <typename T>
-    void init(R_xlen_t n_permu, T update, R_len_t statistic_size = 1)
+    void init_statistic(T update, R_len_t statistic_size = 1)
     {
-        _init_statistic_buffer(statistic_size, 1);
+        _statistic_size = statistic_size;
+
+        _init_statistic_buffer(_statistic_size, 1);
         update();
         _statistic = _statistic_buffer;
+    }
 
-        _init_statistic_buffer(n_permu, statistic_size);
+    void init_statistic_permu(R_xlen_t n_permu)
+    {
+        _init_statistic_buffer(n_permu, _statistic_size);
     }
 
     bool operator<<(double statistic)
@@ -65,19 +70,20 @@ protected:
     R_xlen_t _buffer_size;
 
 private:
-    NumericVector _statistic;
+    R_len_t _statistic_size;
 
+    NumericVector _statistic;
     NumericVector _statistic_buffer;
 
-    void _init_statistic_buffer(R_xlen_t n_statistic, R_len_t statistic_size)
+    void _init_statistic_buffer(R_xlen_t n, R_len_t size)
     {
-        _statistic_buffer = NumericVector(no_init(n_statistic * statistic_size));
+        _statistic_buffer = NumericVector(no_init(n * size));
 
         _buffer_i = 0;
         _buffer_size = _statistic_buffer.size();
 
-        if (statistic_size > 1) {
-            _statistic_buffer.attr("dim") = IntegerVector::create(statistic_size, n_statistic);
+        if (size > 1) {
+            _statistic_buffer.attr("dim") = IntegerVector::create(size, n);
         }
     }
 };
@@ -85,9 +91,9 @@ private:
 class PermuBarShow : public PermuBarHide {
 public:
     template <typename... Args>
-    auto init(Args&&... args)
+    auto init_statistic_permu(Args&&... args)
     {
-        PermuBarHide::init(std::forward<Args>(args)...);
+        PermuBarHide::init_statistic_permu(std::forward<Args>(args)...);
 
         _show_i = 0;
         _show_every = (_buffer_size < 100) ? 1 : _buffer_size / 100;

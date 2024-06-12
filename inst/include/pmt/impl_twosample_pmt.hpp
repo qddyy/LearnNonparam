@@ -15,6 +15,7 @@ NumericVector impl_twosample_pmt(
         return bar << statistic_closure(x, y);
     };
 
+    bar.init_statistic(twosample_update);
     if (n_permu == 0) {
         NumericVector data(no_init(n));
         std::copy(x.begin(), x.end(), data.begin());
@@ -24,7 +25,7 @@ NumericVector impl_twosample_pmt(
         std::fill(where_y.begin(), where_y.begin() + m, false);
         std::fill(where_y.begin() + m, where_y.end(), true);
 
-        bar.init(n_permutation(where_y), twosample_update);
+        bar.init_statistic_permu(n_permutation(where_y));
 
         R_len_t i, j, k;
         do {
@@ -39,7 +40,7 @@ NumericVector impl_twosample_pmt(
             twosample_update();
         } while (next_permutation(where_y));
     } else {
-        bar.init(n_permu, twosample_update);
+        bar.init_statistic_permu(n_permu);
 
         R_len_t i, j;
         do {

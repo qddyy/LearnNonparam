@@ -24,14 +24,15 @@ NumericVector impl_table_pmt(
         return bar << statistic_closure(data_filled());
     };
 
+    bar.init_statistic(table_update);
     if (n_permu == 0) {
-        bar.init(n_permutation(row_loc), table_update);
+        bar.init_statistic_permu(n_permutation(row_loc));
 
         do {
             table_update();
         } while (next_permutation(row_loc));
     } else {
-        bar.init(n_permu, table_update);
+        bar.init_statistic_permu(n_permu);
 
         do {
             random_shuffle(row_loc);

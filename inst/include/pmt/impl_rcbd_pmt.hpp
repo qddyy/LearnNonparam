@@ -12,17 +12,18 @@ NumericVector impl_rcbd_pmt(
     };
 
     R_len_t i = 0;
-    R_len_t n_col = data.ncol();
+    R_len_t n_block = data.ncol();
+    bar.init_statistic(rcbd_update);
     if (n_permu == 0) {
         R_xlen_t total = 1;
-        for (R_len_t j = 0; j < n_col; j++) {
+        for (R_len_t j = 0; j < n_block; j++) {
             std::sort(data.column(j).begin(), data.column(j).end());
             total *= n_permutation(data.column(j));
         }
 
-        bar.init(total, rcbd_update);
+        bar.init_statistic_permu(total);
 
-        while (i < n_col) {
+        while (i < n_block) {
             if (i == 0) {
                 rcbd_update();
             }
@@ -34,10 +35,10 @@ NumericVector impl_rcbd_pmt(
             }
         }
     } else {
-        bar.init(n_permu, rcbd_update);
+        bar.init_statistic_permu(n_permu);
 
         do {
-            for (i = 0; i < n_col; i++) {
+            for (i = 0; i < n_block; i++) {
                 random_shuffle(data.column(i));
             }
         } while (rcbd_update());
