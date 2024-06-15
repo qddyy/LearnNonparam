@@ -4,13 +4,13 @@ NumericVector impl_multcomp_pmt(
     const IntegerVector group_j,
     const NumericVector data,
     IntegerVector group,
-    const U statistic_func,
+    const U& statistic_func,
     const R_xlen_t n_permu)
 {
-    T bar;
-
     R_len_t n_group = group[group.size() - 1];
     R_len_t n_pair = n_group * (n_group - 1) / 2;
+
+    T bar(n_pair);
 
     auto multcomp_update = [group_i, group_j, data, group, statistic_func, n_pair, &bar]() {
         auto statistic_closure = statistic_func(data, group);
@@ -23,7 +23,7 @@ NumericVector impl_multcomp_pmt(
         return flag;
     };
 
-    bar.init_statistic(multcomp_update, n_pair);
+    bar.init_statistic(multcomp_update);
     if (n_permu == 0) {
         bar.init_statistic_permu(n_permutation(group));
 

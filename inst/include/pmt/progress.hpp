@@ -36,22 +36,25 @@ constexpr auto generated_bars = generate_bars(std::make_integer_sequence<unsigne
 
 class PermuBarHide {
 public:
-    template <typename T>
-    void init_statistic(T update, R_len_t statistic_size = 1)
-    {
-        _statistic_size = statistic_size;
+    PermuBarHide(const R_len_t statistic_size = 1) :
+        _statistic_size(statistic_size) { }
 
+    template <typename T>
+    void init_statistic(const T& update_bar)
+    {
         _init_statistic_buffer(_statistic_size, 1);
-        update();
+
+        update_bar();
+
         _statistic = _statistic_buffer;
     }
 
-    void init_statistic_permu(R_xlen_t n_permu)
+    void init_statistic_permu(const R_xlen_t n_permu)
     {
         _init_statistic_buffer(n_permu, _statistic_size);
     }
 
-    bool operator<<(double statistic)
+    bool operator<<(const double statistic)
     {
         _statistic_buffer[_buffer_i++] = statistic;
 
@@ -70,12 +73,13 @@ protected:
     R_xlen_t _buffer_size;
 
 private:
-    R_len_t _statistic_size;
+    const R_len_t _statistic_size;
 
     NumericVector _statistic;
+
     NumericVector _statistic_buffer;
 
-    void _init_statistic_buffer(R_xlen_t n, R_len_t size)
+    void _init_statistic_buffer(const R_xlen_t n, const R_len_t size)
     {
         _statistic_buffer = NumericVector(no_init(n * size));
 
@@ -90,6 +94,11 @@ private:
 
 class PermuBarShow : public PermuBarHide {
 public:
+    // WARNING: will prevent the automatic generation of move constructors and move assignment operators, breaking move semantics
+    template <typename... Args>
+    PermuBarShow(Args&&... args) :
+        PermuBarHide(std::forward<Args>(args)...) { }
+
     template <typename... Args>
     auto init_statistic_permu(Args&&... args)
     {
@@ -112,20 +121,21 @@ public:
         return PermuBarHide::operator<<(std::forward<Args>(args)...);
     }
 
-    auto close()
+    template <typename... Args>
+    auto close(Args&&... args)
     {
         Rcout << "\015\033[K\033[0m";
 
-        return PermuBarHide::close();
+        return PermuBarHide::close(std::forward<Args>(args)...);
     }
 
 private:
     R_xlen_t _show_i = 0;
     R_xlen_t _show_every = 2;
 
-    void _show()
+    void _show() const
     {
-        unsigned percent = static_cast<unsigned>(100 * _buffer_i / _buffer_size);
+        int percent = static_cast<int>(100 * _buffer_i / _buffer_size);
 
         Rcout << generated_bars[percent].data();
     }

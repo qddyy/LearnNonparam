@@ -1,7 +1,7 @@
 template <typename T, typename U>
 NumericVector impl_rcbd_pmt(
     NumericMatrix data,
-    const U statistic_func,
+    const U& statistic_func,
     const R_xlen_t n_permu)
 {
     T bar;

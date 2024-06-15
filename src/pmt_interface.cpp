@@ -8,19 +8,17 @@ using namespace Rcpp;
 
 class ClosFunc {
 private:
-    Function _func;
+    const Function _func;
 
 public:
     ClosFunc(Function func) :
-        _func(func) { }
+        _func(std::move(func)) { }
 
     template <typename... Args>
-    auto operator()(Args... args) const
+    auto operator()(Args&&... func_args) const
     {
-        Function closure = _func(args...);
-
-        return [closure](auto... args_) {
-            return as<double>(closure(args_...));
+        return [closure = Function(std::move(_func(std::forward<Args>(func_args)...)))](auto&&... closure_args) {
+            return as<double>(closure(std::forward<decltype(closure_args)>(closure_args)...));
         };
     }
 };

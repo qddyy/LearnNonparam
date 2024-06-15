@@ -2,7 +2,7 @@ template <typename T, typename U>
 NumericVector impl_ksample_pmt(
     const NumericVector data,
     IntegerVector group,
-    const U statistic_func,
+    const U& statistic_func,
     const R_xlen_t n_permu)
 {
     T bar;

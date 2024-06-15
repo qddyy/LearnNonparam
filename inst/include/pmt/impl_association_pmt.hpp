@@ -2,7 +2,7 @@ template <typename T, typename U>
 NumericVector impl_association_pmt(
     NumericVector x,
     NumericVector y,
-    const U statistic_func,
+    const U& statistic_func,
     const R_xlen_t n_permu)
 {
     T bar;

@@ -2,7 +2,7 @@ template <typename T, typename U>
 NumericVector impl_table_pmt(
     IntegerVector row_loc,
     const IntegerVector col_loc,
-    const U statistic_func,
+    const U& statistic_func,
     const R_xlen_t n_permu)
 {
     T bar;
