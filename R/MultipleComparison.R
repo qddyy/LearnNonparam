@@ -20,7 +20,7 @@ MultipleComparison <- R6Class(
         .preprocess = function() {
             super$.preprocess()
 
-            k <- as.integer(names(private$.data)[length(private$.data)])
+            k <- attr(private$.data, "group")[length(private$.data)]
             private$.group_ij <- list(
                 i = rep.int(seq_len(k - 1), seq.int(k - 1, 1)),
                 j = unlist(lapply(
@@ -32,7 +32,7 @@ MultipleComparison <- R6Class(
         .calculate_statistic = function() {
             private$.statistic <- as.numeric(.mapply(
                 FUN = private$.statistic_func(
-                    unname(private$.data), as.integer(names(private$.data))
+                    private$.data, attr(private$.data, "group")
                 ), dots = private$.group_ij, MoreArgs = NULL
             ))
         },
@@ -45,8 +45,8 @@ MultipleComparison <- R6Class(
             private$.statistic <- multcomp_pmt(
                 private$.group_ij$i,
                 private$.group_ij$j,
-                unname(private$.data),
-                as.integer(names(private$.data)),
+                private$.data,
+                attr(private$.data, "group"),
                 private$.statistic_func,
                 private$.n_permu,
                 isTRUE(getOption("LearnNonparam.pmt_progress"))
@@ -135,7 +135,7 @@ MultipleComparison <- R6Class(
             original_par <- par(no.readonly = TRUE)
             on.exit(par(original_par))
 
-            n <- as.integer(names(private$.data)[length(private$.data)])
+            n <- attr(private$.data, "group")[length(private$.data)]
             dots <- c(private$.group_ij, list(seq_len(n * (n - 1) / 2)))
 
             layout_matrix <- matrix(0, n - 1, n - 1)

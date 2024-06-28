@@ -34,7 +34,7 @@ OneWay <- R6Class(
         .define = function() {
             private$.statistic_func <- switch(private$.type,
                 permu = {
-                    lengths <- tabulate(as.integer(names(private$.data)))
+                    lengths <- tabulate(attr(private$.data, "group"))
                     function(data, group) {
                         sum(vapply(
                             X = split.default(data, group), FUN = sum,
@@ -65,7 +65,7 @@ OneWay <- R6Class(
 
         .calculate_p = function() {
             N <- length(private$.data)
-            k <- as.integer(names(private$.data)[N])
+            k <- attr(private$.data, "group")[N]
 
             private$.p_value <- get_p_continous(
                 private$.statistic, "f", "r", df1 = k - 1, df2 = N - k

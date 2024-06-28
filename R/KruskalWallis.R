@@ -34,7 +34,7 @@ KruskalWallis <- R6Class(
         .name = "Kruskal-Wallis Test",
 
         .define = function() {
-            lengths <- tabulate(as.integer(names(private$.data)))
+            lengths <- tabulate(attr(private$.data, "group"))
 
             mean <- mean(private$.data)
             var <- var(private$.data)
@@ -52,7 +52,7 @@ KruskalWallis <- R6Class(
         },
 
         .calculate_p = function() {
-            k <- as.integer(names(private$.data)[length(private$.data)])
+            k <- attr(private$.data, "group")[length(private$.data)]
 
             private$.p_value <- get_p_continous(
                 private$.statistic, "chisq", "r", df = k - 1

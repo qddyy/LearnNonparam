@@ -34,14 +34,14 @@ JonckheereTerpstra <- R6Class(
         .name = "Jonckheere-Terpstra Test",
 
         .define = function() {
-            k <- as.integer(names(private$.data)[length(private$.data)])
+            k <- attr(private$.data, "group")[length(private$.data)]
 
             I <- unlist(lapply(
                 seq_len(k - 1), seq_len
             ), recursive = FALSE, use.names = FALSE)
             J <- rep.int(seq_len(k)[-1], seq_len(k - 1))
 
-            lengths <- tabulate(as.integer(names(private$.data)))
+            lengths <- tabulate(attr(private$.data, "group"))
             lengths_I <- lengths[I]
             lengths_J <- lengths[J]
             lengths_IJ <- rep.int(lengths_I, lengths_J)
@@ -64,7 +64,7 @@ JonckheereTerpstra <- R6Class(
 
         .calculate_p = function() {
             N <- length(private$.data)
-            n <- tabulate(as.integer(names(private$.data)))
+            n <- tabulate(attr(private$.data, "group"))
 
             z <- (private$.statistic - 1 / 4 * (N^2 - sum(n^2))) / sqrt(
                 1 / 72 * (N^2 * (2 * N + 3) - sum(n^2 * (2 * n + 3)))

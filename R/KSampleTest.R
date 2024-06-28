@@ -17,32 +17,32 @@ KSampleTest <- R6Class(
                 stop("Must provide at least three samples")
             }
 
-            private$.data <- `names<-`(
-                unlist(
-                    private$.raw_data,
-                    recursive = FALSE, use.names = FALSE
-                ),
-                rep.int(
-                    seq_along(private$.raw_data),
-                    lengths(private$.raw_data, use.names = FALSE)
-                )
+            private$.data <- unlist(
+                private$.raw_data, recursive = FALSE, use.names = FALSE
+            )
+            attr(private$.data, "group") <- rep.int(
+                seq_along(private$.raw_data),
+                lengths(private$.raw_data, use.names = FALSE)
             )
         },
 
         .calculate_score = function() {
-            private$.data <- get_score(private$.data, private$.scoring)
+            private$.data <- `attr<-`(
+                get_score(private$.data, private$.scoring),
+                "group", attr(private$.data, "group")
+            )
         },
 
         .calculate_statistic = function() {
             private$.statistic <- private$.statistic_func(
-                unname(private$.data), as.integer(names(private$.data))
+                private$.data, attr(private$.data, "group")
             )
         },
 
         .calculate_statistic_permu = function() {
             private$.statistic <- ksample_pmt(
-                unname(private$.data),
-                as.integer(names(private$.data)),
+                private$.data,
+                attr(private$.data, "group"),
                 private$.statistic_func,
                 private$.n_permu,
                 isTRUE(getOption("LearnNonparam.pmt_progress"))
