@@ -7,7 +7,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom stats pt pnorm
+#' @importFrom stats pnorm
 
 
 Correlation <- R6Class(
@@ -46,6 +46,8 @@ Correlation <- R6Class(
             if (private$.method != "pearson") {
                 private$.scoring <- "rank"
                 private$.calculate_score()
+            } else {
+                private$.scoring <- "none"
             }
 
             if (private$.method != "kendall") {
@@ -54,25 +56,28 @@ Correlation <- R6Class(
                     asymp = function(x, y) cor(x, y, method = private$.method)
                 )
             } else {
-                x <- private$.data$x
-                n <- length(x)
+                n <- nrow(private$.data)
 
-                order_x <- order(x)
-                x_reorder <- x[order_x]
+                sorted <- sort.int(private$.data$x, index.return = TRUE)
 
                 i_index <- unlist(lapply(
                     seq_len(n - 1), seq_len
                 ), recursive = FALSE, use.names = FALSE)
                 j_index <- rep.int(seq_len(n)[-1], seq_len(n - 1))
-                x_equal <- (x_reorder[i_index] == x_reorder[j_index])
 
-                i_index <- order_x[i_index]
-                j_index <- order_x[j_index]
+                x_equal <- (sorted$x[i_index] == sorted$x[j_index])
+
+                i_index <- sorted$ix[i_index]
+                j_index <- sorted$ix[j_index]
+
+                frac_2_length <- 4 / (n * (n - 1))
                 private$.statistic_func <- function(x, y) {
                     y_i <- y[i_index]
                     y_j <- y[j_index]
 
-                    2 * mean(`[<-`(y_i < y_j, x_equal | y_i == y_j, 0.5)) - 1
+                    frac_2_length * sum(
+                        `[<-`(y_i < y_j, x_equal | y_i == y_j, 0.5)
+                    ) - 1
                 }
             }
         },
