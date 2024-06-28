@@ -39,9 +39,7 @@ Studentized <- R6Class(
         .name = "Multiple Comparison Based on Studentized Statistic",
 
         .define = function() {
-            inverse_lengths <- 1 / lengths(
-                split(private$.data, names(private$.data))
-            )
+            inverse_lengths <- 1 / tabulate(as.integer(names(private$.data)))
             inverse_length_sums <- outer(
                 inverse_lengths, inverse_lengths, `+`
             )
@@ -51,9 +49,9 @@ Studentized <- R6Class(
                 k <- as.integer(names(private$.data)[N])
                 private$.statistic_func <- function(data, group) {
                     means <- vapply(
-                        X = split(data, group), FUN = mean,
+                        X = split.default(data, group), FUN = sum,
                         FUN.VALUE = numeric(1), USE.NAMES = FALSE
-                    )
+                    ) * inverse_lengths
                     mse <- sum((data - means[group])^2) / (N - k)
                     function(i, j) {
                         (means[i] - means[j]) / sqrt(
@@ -65,9 +63,9 @@ Studentized <- R6Class(
                 var <- var(private$.data)
                 private$.statistic_func <- function(data, group) {
                     means <- vapply(
-                        X = split(data, group), FUN = mean,
+                        X = split.default(data, group), FUN = sum,
                         FUN.VALUE = numeric(1), USE.NAMES = FALSE
-                    )
+                    ) * inverse_lengths
                     function(i, j) {
                         (means[i] - means[j]) / sqrt(
                             var * inverse_length_sums[i, j]

@@ -54,7 +54,7 @@ CDF <- R6Class(
         .preprocess = function() {
             super$.preprocess()
 
-            private$.data <- sort(private$.data)
+            private$.data <- sort.int(private$.data)
         },
 
         .calculate_side = function() NULL,

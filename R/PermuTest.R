@@ -170,10 +170,14 @@ PermuTest <- R6Class(
             statistic_permu <- attr(private$.statistic, "permu")
 
             delayedAssign(
-                "l", mean(statistic_permu <= private$.statistic)
+                "l", sum(
+                    statistic_permu <= private$.statistic
+                ) / length(statistic_permu)
             )
             delayedAssign(
-                "r", mean(statistic_permu >= private$.statistic)
+                "r", sum(
+                    statistic_permu >= private$.statistic
+                ) / length(statistic_permu)
             )
             delayedAssign(
                 "lr", 2 * min(l, r, 0.5)

@@ -34,10 +34,32 @@ Difference <- R6Class(
         .name = "Two-Sample Test Based on Mean or Median",
 
         .define = function() {
+            m <- length(private$.data$x)
+            n <- length(private$.data$y)
+
             private$.statistic_func <- switch(private$.method,
-                mean = function(x, y) mean(x) - mean(y),
-                median = function(x, y) median(x) - median(y)
+                mean = function(x, y) sum(x) / m - sum(y) / n,
+                median = {
+                    median_x <- make_median(m)
+                    median_y <- make_median(n)
+                    function(x, y) median_x(x) - median_y(y)
+                }
             )
         }
     )
 )
+
+make_median <- function(length) {
+    half <- (length + 1L) %/% 2L
+    if (length %% 2L == 1L) {
+        function(v) {
+            sorted <- sort.int(v, partial = half)
+            sorted[half]
+        }
+    } else {
+        function(v) {
+            sorted <- sort.int(v, partial = half + 0L:1L)
+            (sorted[half] + sorted[half + 1L]) / 2
+        }
+    }
+}

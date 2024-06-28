@@ -81,7 +81,7 @@ Wilcoxon <- R6Class(
         },
 
         .calculate_extra = function() {
-            sorted_diff <- sort(
+            sorted_diff <- sort.int(
                 outer(private$.raw_data[[1]], private$.raw_data[[2]], `-`)
             )
 

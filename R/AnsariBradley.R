@@ -66,7 +66,7 @@ AnsariBradley <- R6Class(
                     (m * n * (N + 1) * (3 + N^2)) / (48 * N^2)
                 }
             } else {
-                r <- rle(sort(c(private$.data$x, private$.data$y)))
+                r <- rle(sort.int(c(private$.data$x, private$.data$y)))
                 sigma2 <- if (even) {
                     m * n * (
                         16 * sum(r$lengths * r$values^2) - N * (N + 2)^2

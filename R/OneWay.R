@@ -34,25 +34,22 @@ OneWay <- R6Class(
         .define = function() {
             private$.statistic_func <- switch(private$.type,
                 permu = {
-                    lengths <- vapply(
-                        X = split(private$.data, names(private$.data)),
-                        FUN = length, FUN.VALUE = numeric(1)
-                    )
+                    lengths <- tabulate(as.integer(names(private$.data)))
                     function(data, group) {
                         sum(vapply(
-                            X = split(data, group), FUN = sum,
+                            X = split.default(data, group), FUN = sum,
                             FUN.VALUE = numeric(1), USE.NAMES = FALSE
                         )^2 / lengths)
                     }
                 },
                 asymp = function(data, group) {
                     N <- length(data)
-                    splited <- split(data, group)
-                    k <- length(splited)
+                    split <- split(data, group)
+                    k <- length(split)
 
                     bar_.. <- mean(data)
                     bar_i. <- unlist(lapply(
-                        splited, function(x) rep.int(mean(x), length(x))
+                        split, function(x) rep.int(mean(x), length(x))
                     ), recursive = FALSE, use.names = FALSE)
 
                     mst <- sum((bar_i. - bar_..)^2) / (k - 1)

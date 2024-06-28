@@ -39,9 +39,9 @@ Page <- R6Class(
             k <- nrow(private$.data)
             b <- ncol(private$.data)
 
-            seq_row <- seq_len(k)
+            row <- seq_len(k)
             private$.statistic_func <- function(data) {
-                sum(seq_row * .rowSums(data, k, b))
+                sum(row * .rowSums(data, k, b))
             }
         },
 
