@@ -36,28 +36,18 @@ JonckheereTerpstra <- R6Class(
         .define = function() {
             k <- attr(private$.data, "group")[length(private$.data)]
 
-            I <- unlist(lapply(
-                seq_len(k - 1), seq_len
-            ), recursive = FALSE, use.names = FALSE)
+            I <- unlist(lapply(seq_len(k - 1), seq_len), FALSE, FALSE)
             J <- rep.int(seq_len(k)[-1], seq_len(k - 1))
 
             lengths <- tabulate(attr(private$.data, "group"))
-            lengths_I <- lengths[I]
             lengths_J <- lengths[J]
-            lengths_IJ <- rep.int(lengths_I, lengths_J)
+            lengths_IJ <- rep.int(lengths[I], lengths_J)
 
             private$.statistic_func <- function(data, group) {
                 split <- split.default(data, group)
-
                 sum(`<`(
-                    unlist(
-                        rep.int(split[I], lengths_J),
-                        recursive = FALSE, use.names = FALSE
-                    ),
-                    rep.int(
-                        unlist(split[J], recursive = FALSE, use.names = FALSE),
-                        lengths_IJ
-                    )
+                    unlist(rep.int(split[I], lengths_J), FALSE, FALSE),
+                    rep.int(unlist(split[J], FALSE, FALSE), lengths_IJ)
                 ))
             }
         },

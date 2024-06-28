@@ -23,9 +23,7 @@ MultipleComparison <- R6Class(
             k <- attr(private$.data, "group")[length(private$.data)]
             private$.group_ij <- list(
                 i = rep.int(seq_len(k - 1), seq.int(k - 1, 1)),
-                j = unlist(lapply(
-                    seq.int(2, k), seq.int, to = k
-                ), recursive = FALSE, use.names = FALSE)
+                j = unlist(lapply(seq.int(2, k), seq.int, to = k), FALSE, FALSE)
             )
         },
 

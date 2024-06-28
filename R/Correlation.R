@@ -60,9 +60,7 @@ Correlation <- R6Class(
 
                 sorted <- sort.int(private$.data$x, index.return = TRUE)
 
-                i_index <- unlist(lapply(
-                    seq_len(n - 1), seq_len
-                ), recursive = FALSE, use.names = FALSE)
+                i_index <- unlist(lapply(seq_len(n - 1), seq_len), FALSE, FALSE)
                 j_index <- rep.int(seq_len(n)[-1], seq_len(n - 1))
 
                 x_equal <- (sorted$x[i_index] == sorted$x[j_index])
