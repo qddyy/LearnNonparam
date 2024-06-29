@@ -12,7 +12,7 @@
 
 #define CLONE_EACH(...) FOR_EACH(clone, __VA_ARGS__)
 
-#define PMT_PROGRESS_RETURN(impl, ...)                                         \
-    return (progress) ?                                                        \
-        impl<PermuBarShow>(CLONE_EACH(__VA_ARGS__), statistic_func, n_permu) : \
-        impl<PermuBarHide>(CLONE_EACH(__VA_ARGS__), statistic_func, n_permu);
+#define PMT_PROGRESS_RETURN(impl, ...)                                               \
+    return (progress) ?                                                              \
+        impl<PermuBarShow>(CLONE_EACH(__VA_ARGS__), statistic_func, type, n_permu) : \
+        impl<PermuBarHide>(CLONE_EACH(__VA_ARGS__), statistic_func, type, n_permu);

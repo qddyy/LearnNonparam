@@ -47,6 +47,7 @@ public:
         update_bar();
 
         _statistic = _statistic_buffer;
+        _statistic_buffer = NumericVector(0);
     }
 
     void init_statistic_permu(const R_xlen_t n_permu)
@@ -81,7 +82,7 @@ private:
 
     void _init_statistic_buffer(const R_xlen_t n, const R_len_t size)
     {
-        _statistic_buffer = NumericVector(no_init(n * size));
+        _statistic_buffer = std::move(NumericVector(no_init(n * size)));
 
         _buffer_i = 0;
         _buffer_size = _statistic_buffer.size();

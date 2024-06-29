@@ -3,6 +3,7 @@ NumericVector impl_association_pmt(
     NumericVector x,
     NumericVector y,
     const U& statistic_func,
+    const std::string type,
     const R_xlen_t n_permu)
 {
     T bar;
@@ -13,6 +14,11 @@ NumericVector impl_association_pmt(
     };
 
     bar.init_statistic(association_update);
+
+    if (type != "permu") {
+        return bar.close();
+    }
+
     if (n_permu == 0) {
         std::sort(y.begin(), y.end());
 

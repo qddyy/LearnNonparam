@@ -31,16 +31,11 @@ KSampleTest <- R6Class(
         },
 
         .calculate_statistic = function() {
-            private$.statistic <- private$.statistic_func(
-                private$.data, attr(private$.data, "group")
-            )
-        },
-
-        .calculate_statistic_permu = function() {
             private$.statistic <- ksample_pmt(
                 private$.data,
                 attr(private$.data, "group"),
                 private$.statistic_func,
+                private$.type,
                 private$.n_permu,
                 isTRUE(getOption("LearnNonparam.pmt_progress"))
             )

@@ -3,6 +3,7 @@ NumericVector impl_table_pmt(
     IntegerVector row_loc,
     const IntegerVector col_loc,
     const U& statistic_func,
+    const std::string type,
     const R_xlen_t n_permu)
 {
     T bar;
@@ -25,6 +26,11 @@ NumericVector impl_table_pmt(
     };
 
     bar.init_statistic(table_update);
+
+    if (type != "permu") {
+        return bar.close();
+    }
+
     if (n_permu == 0) {
         bar.init_statistic_permu(n_permutation(row_loc));
 

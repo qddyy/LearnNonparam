@@ -166,7 +166,7 @@ define_pmt <- function(
                     stop("'statistic' must be a closure or a character string")
                 } else {
                     cppFunction(
-                        env = environment(super$.calculate_statistic_permu),
+                        env = environment(super$.calculate_statistic),
                         depends = c(depends, "LearnNonparam"),
                         plugins = unique(c(plugins, "cpp14")),
                         includes = {
@@ -181,8 +181,10 @@ define_pmt <- function(
                             paste0(
                                 "SEXP ", inherit, "_pmt(",
                                 paste0("SEXP ", LETTERS[1:n], collapse = ","),
-                                ", R_xlen_t n_permu, bool progress) {",
-                                "auto statistic_func=", statistic, ";",
+                                ", std::string type",
+                                ", R_xlen_t n_permu",
+                                ", bool progress) {",
+                                "auto statistic_func =", statistic, ";",
                                 "PMT_PROGRESS_RETURN(impl_", inherit, "_pmt,",
                                 paste(LETTERS[1:n - 1], collapse = ","), ") }"
                             )
@@ -204,7 +206,7 @@ define_pmt <- function(
                     private$.calculate_score()
                 }
 
-                private$.calculate_statistic_permu()
+                private$.calculate_statistic()
                 private$.calculate_n_permu()
                 private$.calculate_p_permu()
             }

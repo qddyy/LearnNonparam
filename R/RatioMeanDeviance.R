@@ -48,6 +48,8 @@ RatioMeanDeviance <- R6Class(
             private$.statistic_func <- function(x, y) {
                 sum(x) / sum(y) * yx_length_ratio
             }
-        }
+        },
+
+        .on_alternative_change = function() private$.calculate()
     )
 )

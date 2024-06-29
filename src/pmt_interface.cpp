@@ -30,6 +30,7 @@ NumericVector twosample_pmt(
     const NumericVector x,
     const NumericVector y,
     const Function statistic,
+    const std::string type,
     const R_xlen_t n_permu,
     const bool progress)
 {
@@ -44,6 +45,7 @@ NumericVector ksample_pmt(
     const NumericVector data,
     const IntegerVector group,
     const Function statistic,
+    const std::string type,
     const R_xlen_t n_permu,
     const bool progress)
 {
@@ -60,6 +62,7 @@ NumericVector multcomp_pmt(
     const NumericVector data,
     const IntegerVector group,
     const Function statistic,
+    const std::string type,
     const R_xlen_t n_permu,
     const bool progress)
 {
@@ -74,6 +77,7 @@ NumericVector paired_pmt(
     const NumericVector x,
     const NumericVector y,
     const Function statistic,
+    const std::string type,
     const R_xlen_t n_permu,
     const bool progress)
 {
@@ -87,6 +91,7 @@ NumericVector paired_pmt(
 NumericVector rcbd_pmt(
     const NumericMatrix data,
     const Function statistic,
+    const std::string type,
     const R_xlen_t n_permu,
     const bool progress)
 {
@@ -101,6 +106,7 @@ NumericVector association_pmt(
     const NumericVector x,
     const NumericVector y,
     const Function statistic,
+    const std::string type,
     const R_xlen_t n_permu,
     const bool progress)
 {
@@ -115,6 +121,7 @@ NumericVector table_pmt(
     const IntegerVector row_loc,
     const IntegerVector col_loc,
     const Function statistic,
+    const std::string type,
     const R_xlen_t n_permu,
     const bool progress)
 {

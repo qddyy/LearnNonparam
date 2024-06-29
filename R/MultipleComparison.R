@@ -27,25 +27,18 @@ MultipleComparison <- R6Class(
             )
         },
 
-        .calculate_statistic = function() {
-            private$.statistic <- as.numeric(.mapply(
-                FUN = private$.statistic_func(
-                    private$.data, attr(private$.data, "group")
-                ), dots = private$.group_ij, MoreArgs = NULL
-            ))
-        },
-
         .compile_statistic_closure = function() {
             private$.statistic_func <- cmpfun(private$.statistic_func)
         },
 
-        .calculate_statistic_permu = function() {
+        .calculate_statistic = function() {
             private$.statistic <- multcomp_pmt(
                 private$.group_ij$i,
                 private$.group_ij$j,
                 private$.data,
                 attr(private$.data, "group"),
                 private$.statistic_func,
+                private$.type,
                 private$.n_permu,
                 isTRUE(getOption("LearnNonparam.pmt_progress"))
             )

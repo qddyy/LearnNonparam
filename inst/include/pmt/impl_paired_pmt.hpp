@@ -3,6 +3,7 @@ NumericVector impl_paired_pmt(
     NumericVector x,
     NumericVector y,
     const U& statistic_func,
+    const std::string type,
     const R_xlen_t n_permu)
 {
     T bar;
@@ -12,9 +13,14 @@ NumericVector impl_paired_pmt(
         return bar << statistic_closure(x, y);
     };
 
+    bar.init_statistic(paired_update);
+
+    if (type != "permu") {
+        return bar.close();
+    }
+
     R_len_t i = 0;
     R_len_t n = x.size();
-    bar.init_statistic(paired_update);
     if (n_permu == 0) {
         bar.init_statistic_permu(1 << n);
 

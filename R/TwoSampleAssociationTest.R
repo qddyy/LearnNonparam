@@ -19,11 +19,12 @@ TwoSampleAssociationTest <- R6Class(
             )
         },
 
-        .calculate_statistic_permu = function() {
+        .calculate_statistic = function() {
             private$.statistic <- association_pmt(
                 private$.data$x,
                 private$.data$y,
                 private$.statistic_func,
+                private$.type,
                 private$.n_permu,
                 isTRUE(getOption("LearnNonparam.pmt_progress"))
             )

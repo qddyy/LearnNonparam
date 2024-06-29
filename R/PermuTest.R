@@ -104,15 +104,15 @@ PermuTest <- R6Class(
             }
 
             private$.define()
+            private$.compile_statistic_closure()
+
+            private$.calculate_statistic()
 
             private$.calculate_side()
             if (private$.type == "permu") {
-                private$.compile_statistic_closure()
-                private$.calculate_statistic_permu()
                 private$.calculate_n_permu()
                 private$.calculate_p_permu()
             } else {
-                private$.calculate_statistic()
                 private$.calculate_p()
             }
 
@@ -132,16 +132,12 @@ PermuTest <- R6Class(
             # private$.statistic_func <- ...
         },
 
-        .calculate_statistic = function() {
-            # private$.statistic <- ...
-        },
-
         .compile_statistic_closure = function() {
             statistic_closure <- cmpfun(private$.statistic_func)
             private$.statistic_func <- function(...) statistic_closure
         },
 
-        .calculate_statistic_permu = function() {
+        .calculate_statistic = function() {
             # private$.statistic <- ... (with attr "permu")
         },
 
@@ -205,7 +201,7 @@ PermuTest <- R6Class(
             }
         },
         .on_n_permu_change = function() {
-            private$.calculate_statistic_permu()
+            private$.calculate_statistic()
             private$.calculate_n_permu()
             private$.calculate_p_permu()
         },
@@ -446,12 +442,12 @@ PermuTest <- R6Class(
         #' @field data The data.
         data = function() private$.raw_data,
         #' @field statistic The test statistic.
-        statistic = function() `attr<-`(private$.statistic, "permu", NULL),
+        statistic = function() c(private$.statistic),
         #' @field p_value The p-value.
-        p_value = function() private$.p_value,
+        p_value = function() c(private$.p_value),
         #' @field estimate The estimated value of the parameter.
-        estimate = function() private$.estimate,
+        estimate = function() c(private$.estimate),
         #' @field conf_int The confidence interval of the parameter.
-        conf_int = function() private$.conf_int
+        conf_int = function() c(private$.conf_int)
     )
 )

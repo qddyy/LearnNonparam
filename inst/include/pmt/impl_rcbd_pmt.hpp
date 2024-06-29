@@ -2,6 +2,7 @@ template <typename T, typename U>
 NumericVector impl_rcbd_pmt(
     NumericMatrix data,
     const U& statistic_func,
+    const std::string type,
     const R_xlen_t n_permu)
 {
     T bar;
@@ -11,9 +12,14 @@ NumericVector impl_rcbd_pmt(
         return bar << statistic_closure(data);
     };
 
+    bar.init_statistic(rcbd_update);
+
+    if (type != "permu") {
+        return bar.close();
+    }
+
     R_len_t i = 0;
     R_len_t n_block = data.ncol();
-    bar.init_statistic(rcbd_update);
     if (n_permu == 0) {
         R_xlen_t total = 1;
         for (R_len_t j = 0; j < n_block; j++) {

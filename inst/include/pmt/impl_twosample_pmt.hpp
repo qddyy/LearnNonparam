@@ -3,6 +3,7 @@ NumericVector impl_twosample_pmt(
     NumericVector x,
     NumericVector y,
     const U& statistic_func,
+    const std::string type,
     const R_xlen_t n_permu)
 {
     T bar;
@@ -16,6 +17,11 @@ NumericVector impl_twosample_pmt(
     };
 
     bar.init_statistic(twosample_update);
+
+    if (type != "permu") {
+        return bar.close();
+    }
+
     if (n_permu == 0) {
         NumericVector data(no_init(n));
         std::copy(x.begin(), x.end(), data.begin());

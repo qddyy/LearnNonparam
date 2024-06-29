@@ -3,6 +3,7 @@ NumericVector impl_ksample_pmt(
     const NumericVector data,
     IntegerVector group,
     const U& statistic_func,
+    const std::string type,
     const R_xlen_t n_permu)
 {
     T bar;
@@ -13,6 +14,11 @@ NumericVector impl_ksample_pmt(
     };
 
     bar.init_statistic(ksample_update);
+
+    if (type != "permu") {
+        return bar.close();
+    }
+
     if (n_permu == 0) {
         bar.init_statistic_permu(n_permutation(group));
 
