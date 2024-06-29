@@ -50,6 +50,23 @@ RatioMeanDeviance <- R6Class(
             }
         },
 
+        .calculate_statistic = function() {
+            super$.calculate_statistic()
+
+            if (private$.alternative == "two_sided") {
+                private$.statistic <- `attr<-`(
+                    max_min_ratio(private$.statistic), "permu",
+                    max_min_ratio(attr(private$.statistic, "permu"))
+                )
+            }
+        },
+
+        .calculate_side = function() {
+            private$.side <- if (private$.alternative == "less") "l" else "r"
+        },
+
         .on_alternative_change = function() private$.calculate()
     )
 )
+
+max_min_ratio <- function(ratio) ratio^(2 * (ratio >= 1) - 1)
