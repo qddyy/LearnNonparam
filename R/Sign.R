@@ -17,7 +17,7 @@ Sign <- R6Class(
     public = list(
         #' @description Create a new `Sign` object.
         #' 
-        #' @template init_params
+        #' @template pmt_init_params
         #' 
         #' @return A `Sign` object.
         initialize = function(

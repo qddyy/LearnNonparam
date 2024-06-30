@@ -39,26 +39,9 @@ Abstract class for permutation tests.
 \section{Methods}{
 \subsection{Public methods}{
 \itemize{
-\item \href{#method-PermuTest-new}{\code{PermuTest$new()}}
 \item \href{#method-PermuTest-test}{\code{PermuTest$test()}}
 \item \href{#method-PermuTest-print}{\code{PermuTest$print()}}
 \item \href{#method-PermuTest-plot}{\code{PermuTest$plot()}}
-}
-}
-\if{html}{\out{<hr>}}
-\if{html}{\out{<a id="method-PermuTest-new"></a>}}
-\if{latex}{\out{\hypertarget{method-PermuTest-new}{}}}
-\subsection{Method \code{new()}}{
-\subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PermuTest$new(...)}\if{html}{\out{</div>}}
-}
-
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{...}}{ignored.}
-}
-\if{html}{\out{</div>}}
 }
 }
 \if{html}{\out{<hr>}}

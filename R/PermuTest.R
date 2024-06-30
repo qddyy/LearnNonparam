@@ -13,11 +13,6 @@ PermuTest <- R6Class(
     classname = "PermuTest",
     cloneable = FALSE,
     public = list(
-        #' @param ... ignored.
-        initialize = function(...) {
-            stop("Can't construct an object from abstract class")
-        },
-
         #' @description Perform test on sample(s).
         #' 
         #' @param ... sample(s). Can be numeric vector(s) or a `data.frame` or `list` containing them.

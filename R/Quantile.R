@@ -17,7 +17,7 @@ Quantile <- R6Class(
     public = list(
         #' @description Create a new `Quantile` object.
         #' 
-        #' @template init_params
+        #' @template pmt_init_params
         #' @param null_value a number indicating the hypothesized value of the quantile.
         #' @param prob a number between zero and one indicating the probability associated with the quantile.
         #' 

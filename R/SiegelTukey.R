@@ -16,7 +16,7 @@ SiegelTukey <- R6Class(
     public = list(
         #' @description Create a new `SiegelTukey` object.
         #' 
-        #' @template init_params
+        #' @template pmt_init_params
         #' 
         #' @return A `SiegelTukey` object.
         initialize = function(

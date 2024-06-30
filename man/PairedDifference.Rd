@@ -43,6 +43,7 @@ Create a new \code{PairedDifference} object.
   method = c("with_zeros", "without_zeros"),
   scoring = c("none", "rank", "vw", "expon"),
   alternative = c("two_sided", "less", "greater"),
+  null_value = 0,
   n_permu = 10000,
   correct = TRUE
 )}\if{html}{\out{</div>}}
@@ -58,6 +59,8 @@ Create a new \code{PairedDifference} object.
 \item{\code{scoring}}{a character string specifying which scoring system to use.}
 
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
+
+\item{\code{null_value}}{a number indicating the true value of the location shift.}
 
 \item{\code{n_permu}}{an integer indicating number of permutations for the permutation distribution. If set to zero (default) then all permutations are used.}
 

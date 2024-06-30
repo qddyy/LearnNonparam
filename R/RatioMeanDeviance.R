@@ -16,7 +16,7 @@ RatioMeanDeviance <- R6Class(
     public = list(
         #' @description Create a new `RatioMeanDeviance` object.
         #' 
-        #' @template init_params
+        #' @template pmt_init_params
         #' 
         #' @return A `RatioMeanDeviance` object.
         initialize = function(

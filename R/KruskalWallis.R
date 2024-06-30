@@ -17,7 +17,7 @@ KruskalWallis <- R6Class(
     public = list(
         #' @description Create a new `KruskalWallis` object.
         #' 
-        #' @template init_params
+        #' @template pmt_init_params
         #' 
         #' @return A `KruskalWallis` object.
         initialize = function(

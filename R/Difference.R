@@ -11,22 +11,24 @@
 
 Difference <- R6Class(
     classname = "Difference",
-    inherit = TwoSampleTest,
+    inherit = TwoSampleLocationTest,
     cloneable = FALSE,
     public = list(
         #' @description Create a new `Difference` object.
         #' 
-        #' @template init_params
+        #' @template pmt_init_params
+        #' @template location_init_params
         #' @param method a character string specifying whether to use the mean or the median.
         #' 
         #' @return A `Difference` object.
         initialize = function(
             method = c("mean", "median"),
             alternative = c("two_sided", "less", "greater"),
-            n_permu = 1e4
+            null_value = 0, n_permu = 1e4
         ) {
             self$method <- method
             self$alternative <- alternative
+            self$null_value <- null_value
             self$n_permu <- n_permu
         }
     ),

@@ -8,7 +8,7 @@
 Performs Siegel-Tukey test on samples.
 }
 \section{Super classes}{
-\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{\link[LearnNonparam:Wilcoxon]{LearnNonparam::Wilcoxon}} -> \code{SiegelTukey}
+\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{\link[LearnNonparam:TwoSampleLocationTest]{LearnNonparam::TwoSampleLocationTest}} -> \code{\link[LearnNonparam:Wilcoxon]{LearnNonparam::Wilcoxon}} -> \code{SiegelTukey}
 }
 \section{Methods}{
 \subsection{Public methods}{

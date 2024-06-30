@@ -17,7 +17,7 @@ RCBDOneWay <- R6Class(
     public = list(
         #' @description Create a new `RCBDOneWay` object.
         #' 
-        #' @template init_params
+        #' @template pmt_init_params
         #' 
         #' @return A `RCBDOneWay` object.
         initialize = function(

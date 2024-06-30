@@ -17,7 +17,8 @@ PairedDifference <- R6Class(
     public = list(
         #' @description Create a new `PairedDifference` object.
         #' 
-        #' @template init_params
+        #' @template pmt_init_params
+        #' @template location_init_params
         #' @param method a character string specifying the method of ranking data in computing adjusted signed scores for tied data, must be one of `"with_zeros"` (default) or `"without_zeros"`.
         #' @param correct a logical indicating whether to apply continuity correction in the normal approximation for the p-value when `scoring` is set to `"rank"`.
         #' 
@@ -27,12 +28,13 @@ PairedDifference <- R6Class(
             method = c("with_zeros", "without_zeros"),
             scoring = c("none", "rank", "vw", "expon"),
             alternative = c("two_sided", "less", "greater"),
-            n_permu = 1e4, correct = TRUE
+            null_value = 0, n_permu = 1e4, correct = TRUE
         ) {
             self$type <- type
             self$method <- method
             self$scoring <- scoring
             self$alternative <- alternative
+            self$null_value <- null_value
             self$n_permu <- n_permu
             self$correct <- correct
         }
@@ -47,6 +49,7 @@ PairedDifference <- R6Class(
         .preprocess = function() {
             super$.preprocess()
 
+            private$.data$x <- private$.data$x - private$.null_value
             private$.data$x <- private$.data$x - private$.data$y
             private$.data$y <- 0
 

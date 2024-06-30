@@ -12,21 +12,24 @@
 
 Wilcoxon <- R6Class(
     classname = "Wilcoxon",
-    inherit = TwoSampleTest,
+    inherit = TwoSampleLocationTest,
     cloneable = FALSE,
     public = list(
         #' @description Create a new `Wilcoxon` object.
         #' 
-        #' @template init_params
+        #' @template pmt_init_params
+        #' @template location_init_params
         #' 
         #' @return A `Wilcoxon` object.
         initialize = function(
             type = c("permu", "asymp", "exact"),
             alternative = c("two_sided", "less", "greater"),
-            conf_level = 0.95, n_permu = 1e4, correct = TRUE
+            null_value = 0, conf_level = 0.95,
+            n_permu = 1e4, correct = TRUE
         ) {
             self$type <- type
             self$alternative <- alternative
+            self$null_value <- null_value
             self$conf_level <- conf_level
             self$n_permu <- n_permu
             self$correct <- correct
@@ -37,7 +40,6 @@ Wilcoxon <- R6Class(
         .param_name = "location shift",
 
         .scoring = "rank",
-        .null_value = 0,
 
         .correct = NULL,
 

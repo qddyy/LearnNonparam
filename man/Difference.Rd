@@ -8,7 +8,7 @@
 Performs mean/median based two-sample test on samples.
 }
 \section{Super classes}{
-\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{Difference}
+\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{\link[LearnNonparam:TwoSampleLocationTest]{LearnNonparam::TwoSampleLocationTest}} -> \code{Difference}
 }
 \section{Methods}{
 \subsection{Public methods}{
@@ -34,6 +34,7 @@ Create a new \code{Difference} object.
 \if{html}{\out{<div class="r">}}\preformatted{Difference$new(
   method = c("mean", "median"),
   alternative = c("two_sided", "less", "greater"),
+  null_value = 0,
   n_permu = 10000
 )}\if{html}{\out{</div>}}
 }
@@ -44,6 +45,8 @@ Create a new \code{Difference} object.
 \item{\code{method}}{a character string specifying whether to use the mean or the median.}
 
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
+
+\item{\code{null_value}}{a number indicating the true value of the location shift.}
 
 \item{\code{n_permu}}{an integer indicating number of permutations for the permutation distribution. If set to zero (default) then all permutations are used.}
 }

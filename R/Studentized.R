@@ -17,7 +17,7 @@ Studentized <- R6Class(
     public = list(
         #' @description Create a new `Studentized` object.
         #' 
-        #' @template init_params
+        #' @template pmt_init_params
         #' @param method a character string specifying whether to use Bonferroni's method or Tukey's HSD method.
         #' @param conf_level a number between zero and one indicating the family-wise confidence level to use.
         #' 

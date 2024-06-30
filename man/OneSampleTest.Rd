@@ -19,7 +19,6 @@ Abstract class for one-sample tests.
 \if{html}{\out{
 <details open><summary>Inherited methods</summary>
 <ul>
-<li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="initialize"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-initialize'><code>LearnNonparam::PermuTest$initialize()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="print"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-print'><code>LearnNonparam::PermuTest$print()</code></a></span></li>
 <li><span class="pkg-link" data-pkg="LearnNonparam" data-topic="PermuTest" data-id="test"><a href='../../LearnNonparam/html/PermuTest.html#method-PermuTest-test'><code>LearnNonparam::PermuTest$test()</code></a></span></li>
 </ul>

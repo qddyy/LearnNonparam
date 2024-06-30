@@ -8,7 +8,7 @@
 Performs two-sample wilcoxon test on samples. In addition, an estimation and a confidence interval for the location shift will be calculated.
 }
 \section{Super classes}{
-\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{Wilcoxon}
+\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{\link[LearnNonparam:TwoSampleLocationTest]{LearnNonparam::TwoSampleLocationTest}} -> \code{Wilcoxon}
 }
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
@@ -41,6 +41,7 @@ Create a new \code{Wilcoxon} object.
 \if{html}{\out{<div class="r">}}\preformatted{Wilcoxon$new(
   type = c("permu", "asymp", "exact"),
   alternative = c("two_sided", "less", "greater"),
+  null_value = 0,
   conf_level = 0.95,
   n_permu = 10000,
   correct = TRUE
@@ -53,6 +54,8 @@ Create a new \code{Wilcoxon} object.
 \item{\code{type}}{a character string specifying the way to calculate the p-value.}
 
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
+
+\item{\code{null_value}}{a number indicating the true value of the location shift.}
 
 \item{\code{conf_level}}{a number between zero and one indicating the confidence level to use.}
 

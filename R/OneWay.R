@@ -17,7 +17,7 @@ OneWay <- R6Class(
     public = list(
         #' @description Create a new `OneWay` object.
         #' 
-        #' @template init_params
+        #' @template pmt_init_params
         #' 
         #' @return A `OneWay` object.
         initialize = function(

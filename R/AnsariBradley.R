@@ -17,7 +17,7 @@ AnsariBradley <- R6Class(
     public = list(
         #' @description Create a new `AnsariBradley` object.
         #' 
-        #' @template init_params
+        #' @template pmt_init_params
         #' 
         #' @return A `AnsariBradley` object.
         initialize = function(

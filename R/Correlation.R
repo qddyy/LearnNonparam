@@ -17,7 +17,7 @@ Correlation <- R6Class(
     public = list(
         #' @description Create a new `Correlation` object.
         #' 
-        #' @template init_params
+        #' @template pmt_init_params
         #' @param method a character string specifying the correlation coefficient to be used.
         #' 
         #' @return A `Correlation` object.

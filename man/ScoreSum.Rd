@@ -8,7 +8,7 @@
 Performs sum of scores based two-sample test on samples. It is almost the same as two-sample wilcoxon rank sum test but uses more scoring systems.
 }
 \section{Super classes}{
-\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{ScoreSum}
+\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{\link[LearnNonparam:TwoSampleLocationTest]{LearnNonparam::TwoSampleLocationTest}} -> \code{ScoreSum}
 }
 \section{Methods}{
 \subsection{Public methods}{
@@ -34,6 +34,7 @@ Create a new \code{ScoreSum} object.
 \if{html}{\out{<div class="r">}}\preformatted{ScoreSum$new(
   scoring = c("rank", "vw", "expon"),
   alternative = c("two_sided", "less", "greater"),
+  null_value = 0,
   n_permu = 10000
 )}\if{html}{\out{</div>}}
 }
@@ -44,6 +45,8 @@ Create a new \code{ScoreSum} object.
 \item{\code{scoring}}{a character string specifying which scoring system to use.}
 
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
+
+\item{\code{null_value}}{a number indicating the true value of the location shift.}
 
 \item{\code{n_permu}}{an integer indicating number of permutations for the permutation distribution. If set to zero (default) then all permutations are used.}
 }
