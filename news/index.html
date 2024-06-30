@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">LearnNonparam</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.1.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -51,7 +51,23 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.2.1" id="learnnonparam-v121">LearnNonparam v1.2.1<a class="anchor" aria-label="anchor" href="#learnnonparam-v121"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.2.2" id="learnnonparam-122">LearnNonparam 1.2.2<a class="anchor" aria-label="anchor" href="#learnnonparam-122"></a></h2>
+<ul><li>R side
+<ul><li>Changed the default value of <code>n_permu</code> to <code>1e4</code>.</li>
+<li>Added support for test statistics defined using Rcpp in <code>define_pmt</code>.</li>
+<li>Added support for <code>null_value</code> other than zero in two-sample location tests.</li>
+<li>Added the <code>LearnNonparam.pmt_progress</code> option.</li>
+<li>Replaced <code>KSampleF</code> and <code>RCBDF</code> with <code>OneWay</code> and <code>RCBDOneWay</code>.</li>
+<li>Stopped exporting abstract classes (<code>TwoSampleTest</code>, <code>KSampleTest</code>, etc.).</li>
+<li>Improved the efficiency of <code>ChiSquare</code>, <code>Difference</code>, <code>JonckheereTerpstra</code>, <code>KruskalWallis</code>, <code>RatioMeanDeviance</code> and <code>Studentized</code>.</li>
+<li>Fixed many bugs.</li>
+</ul></li>
+<li>C++ side:
+<ul><li>Introduced a new progress bar, which is built at compile time to minimize runtime overhead.</li>
+</ul></li>
+</ul></div>
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.2.1" id="learnnonparam-121">LearnNonparam 1.2.1<a class="anchor" aria-label="anchor" href="#learnnonparam-121"></a></h2>
 <ul><li>R side
 <ul><li>Added <code>define_pmt</code>
 </li>
@@ -79,7 +95,7 @@
 </ul></li>
 </ul></div>
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.2.0" id="learnnonparam-v120">LearnNonparam v1.2.0<a class="anchor" aria-label="anchor" href="#learnnonparam-v120"></a></h2>
+<h2 class="pkg-version" data-toc-text="1.2.0" id="learnnonparam-120">LearnNonparam 1.2.0<a class="anchor" aria-label="anchor" href="#learnnonparam-120"></a></h2>
 <ul><li>Added logo</li>
 <li>Introduced <a href="https://CRAN.R-project.org/package=Rcpp" class="external-link">Rcpp</a>
 </li>

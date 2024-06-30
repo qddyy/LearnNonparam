@@ -10,7 +10,7 @@
     
     <a class="navbar-brand me-2" href="../index.html">LearnNonparam</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.1.9000</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.2</small>
 
     
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -87,6 +87,7 @@
 <span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"with_zeros"</span>, <span class="st">"without_zeros"</span><span class="op">)</span>,</span>
 <span>  scoring <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"none"</span>, <span class="st">"rank"</span>, <span class="st">"vw"</span>, <span class="st">"expon"</span><span class="op">)</span>,</span>
 <span>  alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two_sided"</span>, <span class="st">"less"</span>, <span class="st">"greater"</span><span class="op">)</span>,</span>
+<span>  null_value <span class="op">=</span> <span class="fl">0</span>,</span>
 <span>  n_permu <span class="op">=</span> <span class="fl">10000</span>,</span>
 <span>  correct <span class="op">=</span> <span class="cn">TRUE</span></span>
 <span><span class="op">)</span></span></code></pre></div><p></p></div>
@@ -108,6 +109,10 @@
 
 <dt><code>alternative</code></dt>
 <dd><p>a character string specifying the alternative hypothesis.</p></dd>
+
+
+<dt><code>null_value</code></dt>
+<dd><p>a number indicating the true value of the location shift.</p></dd>
 
 
 <dt><code>n_permu</code></dt>
