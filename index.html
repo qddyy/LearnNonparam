@@ -122,30 +122,30 @@
 <p>Provide it with samples</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
-<p><picture><source media="(prefers-color-scheme: dark)" srcset="man/figures/README/test-dark.svg"><img src="reference/figures/README/test.svg"></source></picture></p>
+<p><picture><source media="(prefers-color-scheme: dark)" srcset="man/figures/README/test-dark.svg"><img src="reference/figures/README/test.svg" style="display: block; margin: auto;"></source></picture></p>
 </li>
 <li>
 <p>Check the results</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span></code></pre></div>
-<p><picture><source media="(prefers-color-scheme: dark)" srcset="man/figures/README/statistic-dark.svg"><img src="reference/figures/README/statistic.svg"></source></picture></p>
+<p><picture><source media="(prefers-color-scheme: dark)" srcset="man/figures/README/statistic-dark.svg"><img src="reference/figures/README/statistic.svg" style="display: block; margin: auto;"></source></picture></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span></code></pre></div>
-<p><picture><source media="(prefers-color-scheme: dark)" srcset="man/figures/README/p_value-dark.svg"><img src="reference/figures/README/p_value.svg"></source></picture></p>
+<p><picture><source media="(prefers-color-scheme: dark)" srcset="man/figures/README/p_value-dark.svg"><img src="reference/figures/README/p_value.svg" style="display: block; margin: auto;"></source></picture></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><picture><source media="(prefers-color-scheme: dark)" srcset="man/figures/README/print-dark.svg"><img src="reference/figures/README/print.svg"></source></picture></p>
+<p><picture><source media="(prefers-color-scheme: dark)" srcset="man/figures/README/print-dark.svg"><img src="reference/figures/README/print.svg" style="display: block; margin: auto;"></source></picture></p>
 <div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="fu">plot</span><span class="op">(</span>style <span class="op">=</span> <span class="st">"ggplot2"</span>, binwidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
-<p><picture><source media="(prefers-color-scheme: dark)" srcset="man/figures/README/plot-dark.svg"><img src="reference/figures/README/plot.svg"></source></picture></p>
-<p><img src="./reference/figures/README/ggplot.svg" width="100%" height="75%"></p>
+<p><picture><source media="(prefers-color-scheme: dark)" srcset="man/figures/README/plot-dark.svg"><img src="reference/figures/README/plot.svg" style="display: block; margin: auto;"></source></picture></p>
+<p><img src="./reference/figures/README/histogram.svg" width="100%" style="display: block; margin: auto;"></p>
 </li>
 <li>
 <p>Modify some active bindings and see how the results change</p>
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"asymp"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span></code></pre></div>
-<p><picture><source media="(prefers-color-scheme: dark)" srcset="man/figures/README/modify-dark.svg"><img src="reference/figures/README/modify.svg"></source></picture></p>
+<p><picture><source media="(prefers-color-scheme: dark)" srcset="man/figures/README/modify-dark.svg"><img src="reference/figures/README/modify.svg" style="display: block; margin: auto;"></source></picture></p>
 </li>
 </ul>
 <details><summary>
@@ -266,7 +266,7 @@ See <code>pmts()</code> for tests implemented in this package.
 </tbody>
 </table>
 </div>
-</details><p>The <code>define_pmt</code> function allows users to define new permutation tests. Take Cramér-von Mises test as an example:</p>
+</details><p>The <code>define_pmt</code> function allows users to define new permutation tests. Take Cramér-Von Mises test as an example:</p>
 <div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pmt.html">define_pmt</a></span><span class="op">(</span></span>
 <span>    <span class="co"># this is a two-sample permutation test</span></span>
@@ -279,8 +279,8 @@ See <code>pmts()</code> for tests implemented in this package.
 <span>        <span class="va">G_y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/seq.html" class="external-link">seq_len</a></span><span class="op">(</span><span class="va">n_y</span><span class="op">)</span> <span class="op">/</span> <span class="va">n_y</span></span>
 <span>        <span class="co"># return a closure to calculate the test statistic</span></span>
 <span>        <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span>
-<span>            <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
-<span>            <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span>
+<span>            <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort.int</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
+<span>            <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort.int</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span>
 <span>            <span class="cn">F</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/approxfun.html" class="external-link">approxfun</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">F_x</span>, <span class="st">"constant"</span>, <span class="fl">0</span>, <span class="fl">1</span>, ties <span class="op">=</span> <span class="st">"ordered"</span><span class="op">)</span></span>
 <span>            <span class="va">G</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/approxfun.html" class="external-link">approxfun</a></span><span class="op">(</span><span class="va">y</span>, <span class="va">G_y</span>, <span class="st">"constant"</span>, <span class="fl">0</span>, <span class="fl">1</span>, ties <span class="op">=</span> <span class="st">"ordered"</span><span class="op">)</span></span>
 <span>            <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">F_x</span> <span class="op">-</span> <span class="fu">G</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="va">G_y</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/logical.html" class="external-link">F</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
@@ -289,12 +289,12 @@ See <code>pmts()</code> for tests implemented in this package.
 <span>    <span class="co"># reject the null hypothesis when the test statistic is large</span></span>
 <span>    rejection <span class="op">=</span> <span class="st">"r"</span>,</span>
 <span>    scoring <span class="op">=</span> <span class="st">"none"</span>, n_permu <span class="op">=</span> <span class="fl">1e4</span>,</span>
-<span>    name <span class="op">=</span> <span class="st">"Cramér-von Mises Test"</span>,</span>
+<span>    name <span class="op">=</span> <span class="st">"Two-Sample Cramér-Von Mises Test"</span>,</span>
 <span>    alternative <span class="op">=</span> <span class="st">"samples are from different distributions"</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">20</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
-<p><picture><source media="(prefers-color-scheme: dark)" srcset="man/figures/README/define-dark.svg"><img src="reference/figures/README/define.svg"></source></picture></p>
+<p><picture><source media="(prefers-color-scheme: dark)" srcset="man/figures/README/define-dark.svg"><img src="reference/figures/README/define.svg" style="display: block; margin: auto;"></source></picture></p>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
