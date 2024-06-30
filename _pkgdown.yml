@@ -70,6 +70,7 @@ reference:
     - PermuTest
     - OneSampleTest
     - TwoSampleTest
+    - TwoSampleLocationTest
     - KSampleTest
     - MultipleComparison
     - TwoSamplePairedTest
