@@ -10,6 +10,7 @@ output:
 knitr::opts_chunk$set(
     collapse = TRUE, comment = "#>",
     fig.path = "man/figures/README",
+    fig.align = "center", out.width = "100%",
     asciicast_theme = if (Sys.getenv("IN_PKGDOWN") == "true") "pkgdown" else "readme"
 )
 asciicast::init_knitr_engine(
@@ -76,8 +77,12 @@ options(LearnNonparam.pmt_progress = TRUE)
     ```
 
 - Provide it with samples
+    ```{asciicast, set_seed, include = FALSE}
+    set.seed(3)
+    ```
+
     ```{asciicast, test}
-    t$test(rnorm(20, 1), rnorm(20, 0))
+    t$test(rnorm(10, 1), rnorm(10, 0))
     ```
 
 - Check the results
@@ -94,15 +99,19 @@ options(LearnNonparam.pmt_progress = TRUE)
     ```
 
     ```{asciicast, plot}
+    ggplot2::theme_set(ggplot2::theme_minimal())
     t$plot(style = "ggplot2", binwidth = 1)
     ```
 
     ```{asciicast, save_plot, include = FALSE}
-    ggplot2::ggsave("./man/figures/README/ggplot.svg", device = "svg")
+    ggplot2::ggsave(
+        "./man/figures/README/histogram.svg",
+        width = 12, height = 9, device = "svg"
+    )
     ```
 
-    ```{r, include_plot, echo = FALSE, out.width = "100%", out.height = "75%"}
-    knitr::include_graphics("./man/figures/README/ggplot.svg")
+    ```{r, include_plot, echo = FALSE}
+    knitr::include_graphics("./man/figures/README/histogram.svg")
     ```
 
 - Modify some active bindings and see how the results change
@@ -118,7 +127,7 @@ LearnNonparam::pmts()
 ```
 </details>
 
-The `define_pmt` function allows users to define new permutation tests. Take Cramér-von Mises test as an example:
+The `define_pmt` function allows users to define new permutation tests. Take Cramér-Von Mises test as an example:
 
 ```{asciicast, define}
 t <- define_pmt(
@@ -132,8 +141,8 @@ t <- define_pmt(
         G_y <- seq_len(n_y) / n_y
         # return a closure to calculate the test statistic
         function(x, y) {
-            x <- sort(x)
-            y <- sort(y)
+            x <- sort.int(x)
+            y <- sort.int(y)
             F <- approxfun(x, F_x, "constant", 0, 1, ties = "ordered")
             G <- approxfun(y, G_y, "constant", 0, 1, ties = "ordered")
             sum(c(F_x - G(x), G_y - F(y))^2)
@@ -142,11 +151,11 @@ t <- define_pmt(
     # reject the null hypothesis when the test statistic is large
     rejection = "r",
     scoring = "none", n_permu = 1e4,
-    name = "Cramér-von Mises Test",
-    alternative = "samples are from different distributions"
+    name = "Two-Sample Cramér-Von Mises Test",
+    alternative = "samples are from different continuous distributions"
 )
 
-t$test(rnorm(20, 1), rnorm(20, 0))$print()
+t$test(rnorm(10), runif(10))$print()
 ```
 
 ## References
