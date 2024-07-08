@@ -3,7 +3,7 @@ pkgdown: 2.1.0
 pkgdown_sha: ~
 articles:
   examples: examples.html
-last_built: 2024-07-08T14:29Z
+last_built: 2024-07-08T14:33Z
 urls:
   reference: https://qddyy.github.io/LearnNonparam/reference
   article: https://qddyy.github.io/LearnNonparam/articles
