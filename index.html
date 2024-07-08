@@ -102,7 +102,9 @@
 <li>
 <p>Provide it with samples</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/test-dark.svg"><img src="reference/figures/README/test.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
 </li>
 <li>
@@ -114,7 +116,7 @@
 <code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span></code></pre></div>
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/p_value-dark.svg"><img src="reference/figures/README/p_value.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
 <div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">2</span><span class="op">)</span></span>
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/print-dark.svg"><img src="reference/figures/README/print.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
