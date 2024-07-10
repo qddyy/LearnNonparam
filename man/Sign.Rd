@@ -39,7 +39,7 @@ Performs two-sample sign test on samples.
 Create a new \code{Sign} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Sign$new(
-  type = c("permu", "asymp", "exact"),
+  type = c("permu", "asymp"),
   alternative = c("two_sided", "less", "greater"),
   n_permu = 10000,
   correct = TRUE

@@ -7,7 +7,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom stats pnorm qnorm pwilcox dwilcox
+#' @importFrom stats pnorm qnorm
 
 
 Wilcoxon <- R6Class(
@@ -22,7 +22,7 @@ Wilcoxon <- R6Class(
         #' 
         #' @return A `Wilcoxon` object.
         initialize = function(
-            type = c("permu", "asymp", "exact"),
+            type = c("permu", "asymp"),
             alternative = c("two_sided", "less", "greater"),
             null_value = 0, conf_level = 0.95,
             n_permu = 1e4, correct = TRUE
@@ -50,6 +50,7 @@ Wilcoxon <- R6Class(
         .calculate_p = function() {
             m <- length(private$.data$x)
             n <- length(private$.data$y)
+            N <- m + n
 
             statistic <- private$.statistic - m * (m + 1) / 2
 
@@ -59,27 +60,15 @@ Wilcoxon <- R6Class(
                 private$.type <- "asymp"
             }
 
-            if (private$.type == "exact") {
-                private$.p_value <- get_p_decrete(
-                    statistic, "wilcox", private$.side, m = m, n = n
-                )
-            }
+            z <- statistic - m * n / 2
+            correction <- if (private$.correct) {
+                switch(private$.side, lr = sign(z) * 0.5, r = 0.5, l = -0.5)
+            } else 0
+            z <- (z - correction) / sqrt(
+                m * n / 12 * (N + 1 - sum(ties^3 - ties) / (N * (N - 1)))
+            )
 
-            if (private$.type == "asymp") {
-                N <- m + n
-
-                z <- statistic - m * n / 2
-                correction <- if (private$.correct) {
-                    switch(private$.side, lr = sign(z) * 0.5, r = 0.5, l = -0.5)
-                } else 0
-                z <- (z - correction) / sqrt(
-                    m * n / 12 * (
-                        N + 1 - sum(ties^3 - ties) / (N * (N - 1))
-                    )
-                )
-
-                private$.p_value <- get_p_continous(z, "norm", private$.side)
-            }
+            private$.p_value <- get_p_continous(z, "norm", private$.side)
         },
 
         .calculate_extra = function() {

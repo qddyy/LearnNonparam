@@ -39,7 +39,7 @@ Performs two-sample wilcoxon test on samples. In addition, an estimation and a c
 Create a new \code{Wilcoxon} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{Wilcoxon$new(
-  type = c("permu", "asymp", "exact"),
+  type = c("permu", "asymp"),
   alternative = c("two_sided", "less", "greater"),
   null_value = 0,
   conf_level = 0.95,

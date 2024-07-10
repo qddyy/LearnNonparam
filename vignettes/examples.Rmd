@@ -387,7 +387,7 @@ t$p_value
 ```{r}
 # See ?Sign or ?paired.sign
 t <- pmt(
-    "paired.sign", alternative = "greater", type = "exact"
+    "paired.sign", alternative = "greater", n_permu = 0
 )
 
 t$test(

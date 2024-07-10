@@ -32,7 +32,7 @@ Performs Siegel-Tukey test on samples.
 Create a new \code{SiegelTukey} object.
 \subsection{Usage}{
 \if{html}{\out{<div class="r">}}\preformatted{SiegelTukey$new(
-  type = c("permu", "asymp", "exact"),
+  type = c("permu", "asymp"),
   alternative = c("two_sided", "less", "greater"),
   n_permu = 10000,
   correct = TRUE

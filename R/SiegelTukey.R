@@ -20,7 +20,7 @@ SiegelTukey <- R6Class(
         #' 
         #' @return A `SiegelTukey` object.
         initialize = function(
-            type = c("permu", "asymp", "exact"),
+            type = c("permu", "asymp"),
             alternative = c("two_sided", "less", "greater"),
             n_permu = 1e4, correct = TRUE
         ) {

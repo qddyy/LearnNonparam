@@ -21,7 +21,7 @@ Sign <- R6Class(
         #' 
         #' @return A `Sign` object.
         initialize = function(
-            type = c("permu", "asymp", "exact"),
+            type = c("permu", "asymp"),
             alternative = c("two_sided", "less", "greater"),
             n_permu = 1e4, correct = TRUE
         ) {
@@ -43,21 +43,13 @@ Sign <- R6Class(
         .calculate_p = function() {
             n <- nrow(private$.data)
 
-            if (private$.type == "exact") {
-                private$.p_value <- get_p_binom(
-                    private$.statistic, n, 0.5, private$.side
-                )
-            }
+            z <- private$.statistic - n / 2
+            correction <- if (private$.correct) {
+                switch(private$.side, lr = sign(z) * 0.5, r = 0.5, l = -0.5)
+            } else 0
+            z <- (z - correction) / sqrt(n / 4)
 
-            if (private$.type == "asymp") {
-                z <- private$.statistic - n / 2
-                correction <- if (private$.correct) {
-                    switch(private$.side, lr = sign(z) * 0.5, r = 0.5, l = -0.5)
-                } else 0
-                z <- (z - correction) / sqrt(n / 4)
-
-                private$.p_value <- get_p_continous(z, "norm", private$.side)
-            }
+            private$.p_value <- get_p_continous(z, "norm", private$.side)
         }
     ),
     active = list(
