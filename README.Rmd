@@ -10,6 +10,7 @@ output:
 knitr::opts_chunk$set(
     collapse = TRUE, comment = "#>",
     fig.path = "man/figures/README",
+    fig.align = "center", out.width = "100%",
     asciicast_theme = if (Sys.getenv("IN_PKGDOWN") == "true") "pkgdown" else "readme"
 )
 asciicast::init_knitr_engine(
@@ -36,7 +37,7 @@ options(
 
 ## Overview
 
-This R package implements some of the non-parametric tests in chapters 1-5 of [@Higgins2003](#references).
+This R package implements several non-parametric tests in chapters 1-5 of [@Higgins2003](#references).
 
 It depends on [R6](https://CRAN.R-project.org/package=R6) for object oriented design and [Rcpp](https://CRAN.R-project.org/package=Rcpp) for integration of R and C++.
 
@@ -66,8 +67,9 @@ options(LearnNonparam.pmt_progress = TRUE)
     t <- Wilcoxon$new(n_permu = 1e6)
     ```
 
-    - using the `pmt` (**p**er**m**utation **t**est) function (*recommended*)
+    - using the `pmt` (**p**er**m**u**t**ation test) wrapper
     ```{r, create_pmt, eval = FALSE}
+    # recommended for a unified API
     t <- pmt("twosample.wilcoxon", n_permu = 1e6)
     ```
 
@@ -76,8 +78,14 @@ options(LearnNonparam.pmt_progress = TRUE)
     ```
 
 - Provide it with samples
+    ```{asciicast, set_seed, include = FALSE}
+    set.seed(3)
+    ```
+
     ```{asciicast, test}
-    t$test(rnorm(20, 1), rnorm(20, 0))
+    set.seed(-1)
+
+    t$test(rnorm(10, 1), rnorm(10, 0))
     ```
 
 - Check the results
@@ -90,22 +98,29 @@ options(LearnNonparam.pmt_progress = TRUE)
     ```
 
     ```{asciicast, print}
+    options(digits = 3)
+
     t$print()
     ```
 
     ```{asciicast, plot}
+    ggplot2::theme_set(ggplot2::theme_minimal())
+
     t$plot(style = "ggplot2", binwidth = 1)
     ```
 
     ```{asciicast, save_plot, include = FALSE}
-    ggplot2::ggsave("./man/figures/README/ggplot.svg", device = "svg")
+    ggplot2::ggsave(
+        "./man/figures/README/histogram.svg",
+        width = 12, height = 9, device = "svg"
+    )
     ```
 
-    ```{r, include_plot, echo = FALSE, out.width = "100%", out.height = "75%"}
-    knitr::include_graphics("./man/figures/README/ggplot.svg")
+    ```{r, include_plot, echo = FALSE}
+    knitr::include_graphics("./man/figures/README/histogram.svg")
     ```
 
-- Modify some active bindings and see how the results change
+- Modify some settings and observe the change
     ```{asciicast, modify}
     t$type <- "asymp"
     t$p_value
@@ -118,22 +133,22 @@ LearnNonparam::pmts()
 ```
 </details>
 
-The `define_pmt` function allows users to define new permutation tests. Take Cramér-von Mises test as an example:
+`define_pmt` allows users to define new permutation tests. Take the two-sample Cramér-Von Mises test as an example:
 
 ```{asciicast, define}
 t <- define_pmt(
     # this is a two-sample permutation test
     inherit = "twosample",
     statistic = function(x, y) {
-        # pre-calculate certain constants that remain invariant during permutation
+        # (optional) pre-calculate certain constants that remain invariant during permutation
         n_x <- length(x)
         n_y <- length(y)
         F_x <- seq_len(n_x) / n_x
         G_y <- seq_len(n_y) / n_y
         # return a closure to calculate the test statistic
         function(x, y) {
-            x <- sort(x)
-            y <- sort(y)
+            x <- sort.int(x)
+            y <- sort.int(y)
             F <- approxfun(x, F_x, "constant", 0, 1, ties = "ordered")
             G <- approxfun(y, G_y, "constant", 0, 1, ties = "ordered")
             sum(c(F_x - G(x), G_y - F(y))^2)
@@ -142,11 +157,11 @@ t <- define_pmt(
     # reject the null hypothesis when the test statistic is large
     rejection = "r",
     scoring = "none", n_permu = 1e4,
-    name = "Cramér-von Mises Test",
-    alternative = "samples are from different distributions"
+    name = "Two-Sample Cramér-Von Mises Test",
+    alternative = "samples are from different continuous distributions"
 )
 
-t$test(rnorm(20, 1), rnorm(20, 0))$print()
+t$test(rnorm(10), runif(10))$print()
 ```
 
 ## References

@@ -14,8 +14,8 @@ check](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml
 
 ## Overview
 
-This R package implements some of the non-parametric tests in chapters
-1-5 of [Higgins (2003)](#references).
+This R package implements several non-parametric tests in chapters 1-5
+of [Higgins (2003)](#references).
 
 It depends on [R6](https://CRAN.R-project.org/package=R6) for object
 oriented design and [Rcpp](https://CRAN.R-project.org/package=Rcpp) for
@@ -52,22 +52,25 @@ options(LearnNonparam.pmt_progress = TRUE)
   t <- Wilcoxon$new(n_permu = 1e6)
   ```
 
-  - using the `pmt` (**p**er**m**utation **t**est) function
-    (*recommended*)
+  - using the `pmt` (**p**er**m**u**t**ation test) wrapper
 
   ``` r
+  # recommended for a unified API
   t <- pmt("twosample.wilcoxon", n_permu = 1e6)
   ```
 
 - Provide it with samples
 
   ``` r
-  t$test(rnorm(20, 1), rnorm(20, 0))
+  set.seed(-1)
+
+  t$test(rnorm(10, 1), rnorm(10, 0))
   ```
 
   <picture>
   <source media="(prefers-color-scheme: dark)" srcset="man/figures/README/test-dark.svg">
-  <img src="man/figures/README/test.svg" /> </picture>
+  <img src="man/figures/README/test.svg" width="100%" style="display: block; margin: auto;" />
+  </picture>
 
 - Check the results
 
@@ -77,7 +80,8 @@ options(LearnNonparam.pmt_progress = TRUE)
 
   <picture>
   <source media="(prefers-color-scheme: dark)" srcset="man/figures/README/statistic-dark.svg">
-  <img src="man/figures/README/statistic.svg" /> </picture>
+  <img src="man/figures/README/statistic.svg" width="100%" style="display: block; margin: auto;" />
+  </picture>
 
   ``` r
   t$p_value
@@ -85,27 +89,34 @@ options(LearnNonparam.pmt_progress = TRUE)
 
   <picture>
   <source media="(prefers-color-scheme: dark)" srcset="man/figures/README/p_value-dark.svg">
-  <img src="man/figures/README/p_value.svg" /> </picture>
+  <img src="man/figures/README/p_value.svg" width="100%" style="display: block; margin: auto;" />
+  </picture>
 
   ``` r
+  options(digits = 3)
+
   t$print()
   ```
 
   <picture>
   <source media="(prefers-color-scheme: dark)" srcset="man/figures/README/print-dark.svg">
-  <img src="man/figures/README/print.svg" /> </picture>
+  <img src="man/figures/README/print.svg" width="100%" style="display: block; margin: auto;" />
+  </picture>
 
   ``` r
+  ggplot2::theme_set(ggplot2::theme_minimal())
+
   t$plot(style = "ggplot2", binwidth = 1)
   ```
 
   <picture>
   <source media="(prefers-color-scheme: dark)" srcset="man/figures/README/plot-dark.svg">
-  <img src="man/figures/README/plot.svg" /> </picture>
+  <img src="man/figures/README/plot.svg" width="100%" style="display: block; margin: auto;" />
+  </picture>
 
-  <img src="./man/figures/README/ggplot.svg" width="100%" height="75%" />
+  <img src="./man/figures/README/histogram.svg" width="100%" style="display: block; margin: auto;" />
 
-- Modify some active bindings and see how the results change
+- Modify some settings and observe the change
 
   ``` r
   t$type <- "asymp"
@@ -114,7 +125,8 @@ options(LearnNonparam.pmt_progress = TRUE)
 
   <picture>
   <source media="(prefers-color-scheme: dark)" srcset="man/figures/README/modify-dark.svg">
-  <img src="man/figures/README/modify.svg" /> </picture>
+  <img src="man/figures/README/modify.svg" width="100%" style="display: block; margin: auto;" />
+  </picture>
 
 <details>
 <summary>
@@ -150,23 +162,23 @@ See <code>pmts()</code> for tests implemented in this package.
 
 </details>
 
-The `define_pmt` function allows users to define new permutation tests.
-Take Cramér-von Mises test as an example:
+`define_pmt` allows users to define new permutation tests. Take the
+two-sample Cramér-Von Mises test as an example:
 
 ``` r
 t <- define_pmt(
     # this is a two-sample permutation test
     inherit = "twosample",
     statistic = function(x, y) {
-        # pre-calculate certain constants that remain invariant during permutation
+        # (optional) pre-calculate certain constants that remain invariant during permutation
         n_x <- length(x)
         n_y <- length(y)
         F_x <- seq_len(n_x) / n_x
         G_y <- seq_len(n_y) / n_y
         # return a closure to calculate the test statistic
         function(x, y) {
-            x <- sort(x)
-            y <- sort(y)
+            x <- sort.int(x)
+            y <- sort.int(y)
             F <- approxfun(x, F_x, "constant", 0, 1, ties = "ordered")
             G <- approxfun(y, G_y, "constant", 0, 1, ties = "ordered")
             sum(c(F_x - G(x), G_y - F(y))^2)
@@ -175,16 +187,17 @@ t <- define_pmt(
     # reject the null hypothesis when the test statistic is large
     rejection = "r",
     scoring = "none", n_permu = 1e4,
-    name = "Cramér-von Mises Test",
-    alternative = "samples are from different distributions"
+    name = "Two-Sample Cramér-Von Mises Test",
+    alternative = "samples are from different continuous distributions"
 )
 
-t$test(rnorm(20, 1), rnorm(20, 0))$print()
+t$test(rnorm(10), runif(10))$print()
 ```
 
 <picture>
 <source media="(prefers-color-scheme: dark)" srcset="man/figures/README/define-dark.svg">
-<img src="man/figures/README/define.svg" /> </picture>
+<img src="man/figures/README/define.svg" width="100%" style="display: block; margin: auto;" />
+</picture>
 
 ## References
 
