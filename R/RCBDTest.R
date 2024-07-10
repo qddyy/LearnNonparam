@@ -13,7 +13,7 @@ RCBDTest <- R6Class(
     cloneable = FALSE,
     private = list(
         .preprocess = function() {
-            if (length(unique(lengths(private$.raw_data))) > 1) {
+            if (length(unique(lengths(private$.raw_data, FALSE))) > 1) {
                 stop("All samples must be of equal length")
             }
 

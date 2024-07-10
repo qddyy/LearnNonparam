@@ -17,9 +17,12 @@ KSampleTest <- R6Class(
                 stop("Must provide at least three samples")
             }
 
-            private$.data <- unlist(private$.raw_data, FALSE, FALSE)
-            attr(private$.data, "group") <- rep.int(
-                seq_along(private$.raw_data), lengths(private$.raw_data, FALSE)
+            private$.data <- `attr<-`(
+                unlist(private$.raw_data, FALSE, FALSE),
+                "group", rep.int(
+                    seq_along(private$.raw_data),
+                    lengths(private$.raw_data, FALSE)
+                )
             )
         },
 
