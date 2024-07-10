@@ -27,14 +27,12 @@ PermuTest <- R6Class(
 
         #' @description Print the results of the test.
         #' 
-        #' @param digits an integer specifying the minimum number of significant digits to be printed in values.
-        #' 
         #' @return The object itself (invisibly).
-        print = function(digits = getOption("digits")) {
+        print = function() {
             if (is.null(private$.raw_data)) {
                 cat(format(self), sep = "\n")
             } else {
-                private$.print(digits = digits)
+                private$.print()
             }
 
             invisible(self)
@@ -201,7 +199,7 @@ PermuTest <- R6Class(
             private$.calculate_p_permu()
         },
 
-        .print = function(digits) {
+        .print = function() {
             cat("\n", "\t", private$.name, "\n\n")
 
             cat(
@@ -210,7 +208,7 @@ PermuTest <- R6Class(
                     "type:",
                     if ((type <- private$.type) == "permu") {
                         n_used <- as.numeric(attr(private$.n_permu, "n_used"))
-                        paste0(type, "(", format(n_used, digits = digits), ")")
+                        paste0(type, "(", format(n_used), ")")
                     } else type
                 ),
                 paste("method:", private$.method),
@@ -219,15 +217,18 @@ PermuTest <- R6Class(
             cat("\n")
 
             cat(
-                paste(
-                    "statistic", "=",
-                    format(private$.statistic, digits = digits)
-                ),
+                paste("statistic", "=", format(private$.statistic)),
                 {
-                    p <- format.pval(private$.p_value, digits = digits)
+                    p <- private$.p_value
+                    eps <- .Machine$double.eps
                     paste(
                         "p-value",
-                        if (!startsWith(p, "<")) paste("=", p) else p
+                        if (p < eps) "<" else "=",
+                        if (p < eps) format(eps) else format(p),
+                        if (private$.type == "permu" && private$.n_permu != 0) {
+                            q <- qnorm(0.975) * sqrt(p * (1 - p) / n_used)
+                            paste("(\u00B1", format(q), "at 95% confidence)")
+                        }
                     )
                 },
                 sep = ", "
@@ -254,17 +255,17 @@ PermuTest <- R6Class(
             }
 
             if (!is.null(private$.estimate)) {
-                cat("estimate:", format(private$.estimate, digits = digits))
+                cat("estimate:", format(private$.estimate))
                 cat("\n")
             }
 
             if (!is.null(private$.conf_int)) {
                 cat(
                     paste0(
-                        format(private$.conf_level * 100, digits = digits), "%",
+                        format(private$.conf_level * 100), "%",
                         " confidence interval: ",
-                        "(", format(private$.conf_int[1], digits = digits), ",",
-                        " ", format(private$.conf_int[2], digits = digits), ")"
+                        "(", format(private$.conf_int[1]), ",",
+                        " ", format(private$.conf_int[2]), ")"
                     )
                 )
                 cat("\n")

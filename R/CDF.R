@@ -78,7 +78,7 @@ CDF <- R6Class(
             )
         },
 
-        .print = function(...) {
+        .print = function() {
             cat(format(self), sep = "\n")
         },
 

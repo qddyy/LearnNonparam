@@ -84,7 +84,7 @@ MultipleComparison <- R6Class(
             private$.calculate_extra()
         },
 
-        .print = function(digits) {
+        .print = function() {
             cat("\n\t", private$.name, "\n\n")
 
             cat(
@@ -93,7 +93,7 @@ MultipleComparison <- R6Class(
                     "type:",
                     if ((type <- private$.type) == "permu") {
                         n_used <- as.numeric(attr(private$.n_permu, "n_used"))
-                        paste0(type, "(", format(n_used, digits = digits), ")")
+                        paste0(type, "(", format(n_used), ")")
                     } else type
                 ),
                 paste("method:", private$.method),
@@ -103,7 +103,7 @@ MultipleComparison <- R6Class(
 
             cat(
                 "family-wise confidence level:",
-                paste0(format(private$.conf_level * 100, digits = digits), "%")
+                paste0(format(private$.conf_level * 100), "%")
             )
             cat("\n\n")
 
@@ -117,8 +117,9 @@ MultipleComparison <- R6Class(
                         data_names[private$.group_ij$i],
                         data_names[private$.group_ij$j],
                         sep = " ~ "
-                    ), check.names = FALSE, fix.empty.names = FALSE
-                ), digits = digits
+                    ),
+                    check.names = FALSE, fix.empty.names = FALSE
+                )
             )
         },
 

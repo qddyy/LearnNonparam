@@ -70,16 +70,9 @@ The object itself (invisibly).
 \subsection{Method \code{print()}}{
 Print the results of the test.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{PermuTest$print(digits = getOption("digits"))}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{PermuTest$print()}\if{html}{\out{</div>}}
 }
 
-\subsection{Arguments}{
-\if{html}{\out{<div class="arguments">}}
-\describe{
-\item{\code{digits}}{an integer specifying the minimum number of significant digits to be printed in values.}
-}
-\if{html}{\out{</div>}}
-}
 \subsection{Returns}{
 The object itself (invisibly).
 }
