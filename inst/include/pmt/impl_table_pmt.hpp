@@ -32,16 +32,16 @@ NumericVector impl_table_pmt(
     }
 
     if (n_permu == 0) {
-        bar.init_statistic_permu(n_permutation(row_loc));
+        bar.init_statistic_permu(n_permutation(col_loc));
 
         do {
             table_update();
-        } while (next_permutation(row_loc));
+        } while (next_permutation(col_loc));
     } else {
         bar.init_statistic_permu(n_permu);
 
         do {
-            random_shuffle(row_loc);
+            random_shuffle(col_loc);
         } while (table_update());
     }
 
