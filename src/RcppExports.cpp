@@ -108,18 +108,18 @@ BEGIN_RCPP
 END_RCPP
 }
 // table_pmt
-NumericVector table_pmt(const IntegerVector row_loc, const IntegerVector col_loc, const Function statistic, const std::string type, const R_xlen_t n_permu, const bool progress);
-RcppExport SEXP _LearnNonparam_table_pmt(SEXP row_locSEXP, SEXP col_locSEXP, SEXP statisticSEXP, SEXP typeSEXP, SEXP n_permuSEXP, SEXP progressSEXP) {
+NumericVector table_pmt(const IntegerVector row, const IntegerVector col, const Function statistic, const std::string type, const R_xlen_t n_permu, const bool progress);
+RcppExport SEXP _LearnNonparam_table_pmt(SEXP rowSEXP, SEXP colSEXP, SEXP statisticSEXP, SEXP typeSEXP, SEXP n_permuSEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const IntegerVector >::type row_loc(row_locSEXP);
-    Rcpp::traits::input_parameter< const IntegerVector >::type col_loc(col_locSEXP);
+    Rcpp::traits::input_parameter< const IntegerVector >::type row(rowSEXP);
+    Rcpp::traits::input_parameter< const IntegerVector >::type col(colSEXP);
     Rcpp::traits::input_parameter< const Function >::type statistic(statisticSEXP);
     Rcpp::traits::input_parameter< const std::string >::type type(typeSEXP);
     Rcpp::traits::input_parameter< const R_xlen_t >::type n_permu(n_permuSEXP);
     Rcpp::traits::input_parameter< const bool >::type progress(progressSEXP);
-    rcpp_result_gen = Rcpp::wrap(table_pmt(row_loc, col_loc, statistic, type, n_permu, progress));
+    rcpp_result_gen = Rcpp::wrap(table_pmt(row, col, statistic, type, n_permu, progress));
     return rcpp_result_gen;
 END_RCPP
 }

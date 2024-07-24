@@ -118,13 +118,13 @@ NumericVector association_pmt(
 
 // [[Rcpp::export]]
 NumericVector table_pmt(
-    const IntegerVector row_loc,
-    const IntegerVector col_loc,
+    const IntegerVector row,
+    const IntegerVector col,
     const Function statistic,
     const std::string type,
     const R_xlen_t n_permu,
     const bool progress)
 {
     ClosFunc statistic_func(statistic);
-    PMT_PROGRESS_RETURN(impl_table_pmt, row_loc, col_loc)
+    PMT_PROGRESS_RETURN(impl_table_pmt, row, col)
 }

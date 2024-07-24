@@ -25,7 +25,7 @@ association_pmt <- function(x, y, statistic, type, n_permu, progress) {
     .Call(`_LearnNonparam_association_pmt`, x, y, statistic, type, n_permu, progress)
 }
 
-table_pmt <- function(row_loc, col_loc, statistic, type, n_permu, progress) {
-    .Call(`_LearnNonparam_table_pmt`, row_loc, col_loc, statistic, type, n_permu, progress)
+table_pmt <- function(row, col, statistic, type, n_permu, progress) {
+    .Call(`_LearnNonparam_table_pmt`, row, col, statistic, type, n_permu, progress)
 }
 

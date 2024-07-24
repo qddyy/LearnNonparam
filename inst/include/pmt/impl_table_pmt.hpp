@@ -1,21 +1,21 @@
 template <typename T, typename U>
 NumericVector impl_table_pmt(
-    IntegerVector row_loc,
-    const IntegerVector col_loc,
+    const IntegerVector row,
+    IntegerVector col,
     const U& statistic_func,
     const std::string type,
     const R_xlen_t n_permu)
 {
     T bar;
 
-    R_len_t n = row_loc.size();
+    R_len_t n = row.size();
 
-    IntegerMatrix data(no_init(row_loc[n - 1] + 1, col_loc[n - 1] + 1));
+    IntegerMatrix data(no_init(row[n - 1] + 1, col[n - 1] + 1));
 
-    auto data_filled = [data, row_loc, col_loc, n]() mutable {
+    auto data_filled = [data, row, col, n]() mutable {
         data.fill(0);
         for (R_len_t i = 0; i < n; i++) {
-            data(row_loc[i], col_loc[i])++;
+            data(row[i], col[i])++;
         }
         return data;
     };
@@ -32,16 +32,16 @@ NumericVector impl_table_pmt(
     }
 
     if (n_permu == 0) {
-        bar.init_statistic_permu(n_permutation(col_loc));
+        bar.init_statistic_permu(n_permutation(col));
 
         do {
             table_update();
-        } while (next_permutation(col_loc));
+        } while (next_permutation(col));
     } else {
         bar.init_statistic_permu(n_permu);
 
         do {
-            random_shuffle(col_loc);
+            random_shuffle(col);
         } while (table_update());
     }
 
