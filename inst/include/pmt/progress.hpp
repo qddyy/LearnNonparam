@@ -69,10 +69,6 @@ public:
         return _statistic;
     }
 
-protected:
-    R_xlen_t _buffer_i;
-    R_xlen_t _buffer_size;
-
 private:
     const R_len_t _statistic_size;
 
@@ -91,6 +87,10 @@ private:
             _statistic_buffer.attr("dim") = IntegerVector::create(size, n);
         }
     }
+
+protected:
+    R_xlen_t _buffer_i;
+    R_xlen_t _buffer_size;
 };
 
 class PermuBarShow : public PermuBarHide {
@@ -98,7 +98,9 @@ public:
     // WARNING: will prevent the automatic generation of move constructors and move assignment operators, breaking move semantics
     template <typename... Args>
     PermuBarShow(Args&&... args) :
-        PermuBarHide(std::forward<Args>(args)...) { }
+        PermuBarHide(std::forward<Args>(args)...),
+        _show_i(0),
+        _show_every(2) { }
 
     template <typename... Args>
     auto init_statistic_permu(Args&&... args)
@@ -131,8 +133,8 @@ public:
     }
 
 private:
-    R_xlen_t _show_i = 0;
-    R_xlen_t _show_every = 2;
+    R_xlen_t _show_i;
+    R_xlen_t _show_every;
 
     void _show() const
     {
