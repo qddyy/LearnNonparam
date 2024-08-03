@@ -27,7 +27,7 @@ bool next_permutation(T v)
 }
 
 template <typename T>
-R_xlen_t n_permutation(T v)
+double n_permutation(T v)
 {
     double A = 1;
 
@@ -44,5 +44,5 @@ R_xlen_t n_permutation(T v)
         current = v[i];
     }
 
-    return static_cast<R_xlen_t>(A);
+    return A;
 }

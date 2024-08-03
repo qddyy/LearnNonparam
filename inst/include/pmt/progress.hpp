@@ -50,7 +50,7 @@ public:
         _statistic_buffer = NumericVector(0);
     }
 
-    void init_statistic_permu(const R_xlen_t n_permu)
+    void init_statistic_permu(const double n_permu)
     {
         _init_statistic_buffer(n_permu, _statistic_size);
     }
@@ -76,9 +76,14 @@ private:
 
     NumericVector _statistic_buffer;
 
-    void _init_statistic_buffer(const R_xlen_t n, const R_len_t size)
+    void _init_statistic_buffer(const double n, const R_len_t size)
     {
-        _statistic_buffer = std::move(NumericVector(no_init(n * size)));
+        double total = n * size;
+        if (total <= 0 || total > R_XLEN_T_MAX) {
+            stop("Too many permutations");
+        }
+
+        _statistic_buffer = std::move(NumericVector(no_init(static_cast<R_xlen_t>(total))));
 
         _buffer_i = 0;
         _buffer_size = _statistic_buffer.size();
