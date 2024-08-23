@@ -22,33 +22,84 @@ NumericVector impl_twosample_pmt(
         return bar.close();
     }
 
+    R_len_t i, j;
     if (n_permu == 0) {
-        NumericVector data(no_init(n));
-        std::copy(x.begin(), x.end(), data.begin());
-        std::copy(y.begin(), y.end(), data.begin() + m);
+        IntegerVector p(n, 0);
 
-        LogicalVector where_y(no_init(n));
-        std::fill(where_y.begin(), where_y.begin() + m, false);
-        std::fill(where_y.begin() + m, where_y.end(), true);
+        for (i = m; i < n; i++) {
+            p[i] = 1;
+        }
+        bar.init_statistic_permu(n_permutation(p));
 
-        bar.init_statistic_permu(n_permutation(where_y));
-
-        R_len_t i, j, k;
-        do {
-            i = j = k = 0;
-            do {
-                if (where_y[k]) {
-                    y[i++] = data[k++];
-                } else {
-                    x[j++] = data[k++];
-                }
-            } while (k < n);
+        for (i = 0; i < n; i++) {
+            p[i] = i;
+        }
+        auto swap_update = [x, y, p, m, &twosample_update](const R_len_t x_out, const R_len_t x_in) mutable {
+            std::swap(x[p[x_out]], y[p[x_in] - m]);
+            std::swap(p[x_out], p[x_in]);
             twosample_update();
-        } while (next_permutation(where_y));
+        };
+
+        // Algorithm R, "revolving-door combinations", TAOCP 4A/1
+        IntegerVector c(no_init(m + 1));
+        for (i = 0; i < m; i++) {
+            c[i] = i;
+        }
+        c[m] = n;
+
+        twosample_update();
+
+        auto R4 = [c, &j, &swap_update]() mutable {
+            if (c[j] > j) {
+                swap_update(c[j], j - 1);
+                c[j] = std::exchange(c[j - 1], j - 1);
+                return true;
+            } else {
+                j++;
+                return false;
+            }
+        };
+        auto R5 = [c, &j, &swap_update]() mutable {
+            if (c[j] + 1 < c[j + 1]) {
+                swap_update(c[j - 1], c[j] + 1);
+                c[j - 1] = c[j]++;
+                return true;
+            } else {
+                j++;
+                return false;
+            }
+        };
+
+        j = 0;
+        if (m & 1) {
+            while (j < m) {
+                if (c[0] + 1 < c[1]) {
+                    swap_update(c[0], c[0] + 1);
+                    c[0]++;
+                    continue;
+                }
+
+                j = 1;
+                while (j < m && !R4() && !R5()) { }
+            }
+        } else {
+            while (j < m) {
+                if (c[0] > 0) {
+                    swap_update(c[0], c[0] - 1);
+                    c[0]--;
+                    continue;
+                }
+
+                j = 1;
+                if (R5()) {
+                    continue;
+                }
+                while (j < m && !R4() && !R5()) { }
+            }
+        }
     } else {
         bar.init_statistic_permu(n_permu);
 
-        R_len_t i, j;
         do {
             for (i = 0; i < m; i++) {
                 j = i + rand_int(n - i);
