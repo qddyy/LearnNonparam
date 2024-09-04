@@ -165,28 +165,33 @@ define_pmt <- function(
                 } else if (!is.character(statistic)) {
                     stop("'statistic' must be a closure or a character string")
                 } else {
+                    impl <- paste0("impl_", inherit, "_pmt")
                     cppFunction(
                         env = environment(super$.calculate_statistic),
                         depends = c(depends, "LearnNonparam"),
                         plugins = unique(c(plugins, "cpp14")),
                         includes = {
-                            hpps <- c(
-                                "macros", "progress", "reorder",
-                                paste0("impl_", inherit, "_pmt")
-                            )
+                            hpps <- c("progress", "reorder", impl)
                             c(includes, paste0("#include <pmt/", hpps, ".hpp>"))
                         },
                         code = {
                             n <- if (inherit == "rcbd") 2 else 3
+                            args <- paste0("arg_", 1:n)
                             paste0(
                                 "SEXP ", inherit, "_pmt(",
-                                paste0("SEXP ", LETTERS[1:n], collapse = ","),
-                                ", std::string type",
-                                ", R_xlen_t n_permu",
-                                ", bool progress) {",
-                                "auto statistic_func =", statistic, ";",
-                                "PMT_PROGRESS_RETURN(impl_", inherit, "_pmt,",
-                                paste(LETTERS[1:n - 1], collapse = ","), ") }"
+                                paste0("SEXP ", args, collapse = ","),
+                                ",std::string type",
+                                ",R_xlen_t n_permu",
+                                ",bool progress) {",
+                                "auto statistic = ", statistic, ";",
+                                "return progress ?",
+                                paste0(
+                                    impl, "<PermuBar", c("Show", "Hide"), ">(",
+                                    paste0(
+                                        "clone(", args[-n], "),", collapse = ""
+                                    ),
+                                    "statistic, type, n_permu)", collapse = ":"
+                                ), ";", "}"
                             )
                         }
                     )

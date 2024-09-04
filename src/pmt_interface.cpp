@@ -2,23 +2,22 @@
 
 using namespace Rcpp;
 
-#include "pmt/macros.hpp"
 #include "pmt/progress.hpp"
 #include "pmt/reorder.hpp"
 
-class ClosFunc {
-private:
-    const Function _func;
-
+class ClosFunc : public Function {
 public:
-    ClosFunc(Function func) :
-        _func(std::move(func)) { }
+    template <typename... Args>
+    ClosFunc(Args&&... args) :
+        Function(std::forward<Args>(args)...) { }
 
     template <typename... Args>
-    auto operator()(Args&&... func_args) const
+    auto operator()(Args&&... args) const
     {
-        return [closure = Function(std::move(_func(std::forward<Args>(func_args)...)))](auto&&... closure_args) {
-            return as<double>(closure(std::forward<decltype(closure_args)>(closure_args)...));
+        Function closure = Function::operator()(std::forward<Args>(args)...);
+
+        return [closure](auto&&... args) {
+            return as<double>(closure(std::forward<decltype(args)>(args)...));
         };
     }
 };
@@ -29,13 +28,14 @@ public:
 NumericVector twosample_pmt(
     const NumericVector x,
     const NumericVector y,
-    const Function statistic,
+    const Function statistic_func,
     const std::string type,
     const R_xlen_t n_permu,
     const bool progress)
 {
-    ClosFunc statistic_func(statistic);
-    PMT_PROGRESS_RETURN(impl_twosample_pmt, x, y)
+    return progress ?
+        impl_twosample_pmt<PermuBarShow>(clone(x), clone(y), ClosFunc(statistic_func), type, n_permu) :
+        impl_twosample_pmt<PermuBarHide>(clone(x), clone(y), ClosFunc(statistic_func), type, n_permu);
 }
 
 #include "pmt/impl_ksample_pmt.hpp"
@@ -44,13 +44,14 @@ NumericVector twosample_pmt(
 NumericVector ksample_pmt(
     const NumericVector data,
     const IntegerVector group,
-    const Function statistic,
+    const Function statistic_func,
     const std::string type,
     const R_xlen_t n_permu,
     const bool progress)
 {
-    ClosFunc statistic_func(statistic);
-    PMT_PROGRESS_RETURN(impl_ksample_pmt, data, group)
+    return progress ?
+        impl_ksample_pmt<PermuBarShow>(data, clone(group), ClosFunc(statistic_func), type, n_permu) :
+        impl_ksample_pmt<PermuBarHide>(data, clone(group), ClosFunc(statistic_func), type, n_permu);
 }
 
 #include "pmt/impl_multcomp_pmt.hpp"
@@ -61,13 +62,14 @@ NumericVector multcomp_pmt(
     const IntegerVector group_j,
     const NumericVector data,
     const IntegerVector group,
-    const Function statistic,
+    const Function statistic_func,
     const std::string type,
     const R_xlen_t n_permu,
     const bool progress)
 {
-    ClosFunc statistic_func(statistic);
-    PMT_PROGRESS_RETURN(impl_multcomp_pmt, group_i, group_j, data, group)
+    return progress ?
+        impl_multcomp_pmt<PermuBarShow>(group_i, group_j, data, clone(group), ClosFunc(statistic_func), type, n_permu) :
+        impl_multcomp_pmt<PermuBarHide>(group_i, group_j, data, clone(group), ClosFunc(statistic_func), type, n_permu);
 }
 
 #include "pmt/impl_paired_pmt.hpp"
@@ -76,13 +78,14 @@ NumericVector multcomp_pmt(
 NumericVector paired_pmt(
     const NumericVector x,
     const NumericVector y,
-    const Function statistic,
+    const Function statistic_func,
     const std::string type,
     const R_xlen_t n_permu,
     const bool progress)
 {
-    ClosFunc statistic_func(statistic);
-    PMT_PROGRESS_RETURN(impl_paired_pmt, x, y)
+    return progress ?
+        impl_paired_pmt<PermuBarShow>(clone(x), clone(y), ClosFunc(statistic_func), type, n_permu) :
+        impl_paired_pmt<PermuBarHide>(clone(x), clone(y), ClosFunc(statistic_func), type, n_permu);
 }
 
 #include "pmt/impl_rcbd_pmt.hpp"
@@ -90,13 +93,14 @@ NumericVector paired_pmt(
 // [[Rcpp::export]]
 NumericVector rcbd_pmt(
     const NumericMatrix data,
-    const Function statistic,
+    const Function statistic_func,
     const std::string type,
     const R_xlen_t n_permu,
     const bool progress)
 {
-    ClosFunc statistic_func(statistic);
-    PMT_PROGRESS_RETURN(impl_rcbd_pmt, data)
+    return progress ?
+        impl_rcbd_pmt<PermuBarShow>(clone(data), ClosFunc(statistic_func), type, n_permu) :
+        impl_rcbd_pmt<PermuBarHide>(clone(data), ClosFunc(statistic_func), type, n_permu);
 }
 
 #include "pmt/impl_association_pmt.hpp"
@@ -105,13 +109,14 @@ NumericVector rcbd_pmt(
 NumericVector association_pmt(
     const NumericVector x,
     const NumericVector y,
-    const Function statistic,
+    const Function statistic_func,
     const std::string type,
     const R_xlen_t n_permu,
     const bool progress)
 {
-    ClosFunc statistic_func(statistic);
-    PMT_PROGRESS_RETURN(impl_association_pmt, x, y)
+    return progress ?
+        impl_association_pmt<PermuBarShow>(x, clone(y), ClosFunc(statistic_func), type, n_permu) :
+        impl_association_pmt<PermuBarHide>(x, clone(y), ClosFunc(statistic_func), type, n_permu);
 }
 
 #include "pmt/impl_table_pmt.hpp"
@@ -120,11 +125,12 @@ NumericVector association_pmt(
 NumericVector table_pmt(
     const IntegerVector row,
     const IntegerVector col,
-    const Function statistic,
+    const Function statistic_func,
     const std::string type,
     const R_xlen_t n_permu,
     const bool progress)
 {
-    ClosFunc statistic_func(statistic);
-    PMT_PROGRESS_RETURN(impl_table_pmt, row, col)
+    return progress ?
+        impl_table_pmt<PermuBarShow>(row, clone(col), ClosFunc(statistic_func), type, n_permu) :
+        impl_table_pmt<PermuBarHide>(row, clone(col), ClosFunc(statistic_func), type, n_permu);
 }

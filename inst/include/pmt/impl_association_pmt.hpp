@@ -1,6 +1,6 @@
 template <typename T, typename U>
 NumericVector impl_association_pmt(
-    NumericVector x,
+    const NumericVector x,
     NumericVector y,
     const U& statistic_func,
     const std::string type,

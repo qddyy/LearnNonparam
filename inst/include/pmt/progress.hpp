@@ -100,7 +100,6 @@ protected:
 
 class PermuBarShow : public PermuBarHide {
 public:
-    // WARNING: will prevent the automatic generation of move constructors and move assignment operators, breaking move semantics
     template <typename... Args>
     PermuBarShow(Args&&... args) :
         PermuBarHide(std::forward<Args>(args)...),

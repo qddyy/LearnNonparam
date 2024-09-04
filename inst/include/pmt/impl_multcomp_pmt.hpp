@@ -13,7 +13,7 @@ NumericVector impl_multcomp_pmt(
 
     T bar(n_pair);
 
-    auto multcomp_update = [group_i, group_j, data, group, statistic_func, n_pair, &bar]() {
+    auto multcomp_update = [group_i, group_j, data, group, n_pair, &statistic_func, &bar]() {
         auto statistic_closure = statistic_func(data, group);
 
         bool flag = false;
