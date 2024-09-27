@@ -3,8 +3,7 @@ NumericVector impl_table_pmt(
     const IntegerVector row,
     IntegerVector col,
     const U& statistic_func,
-    const std::string type,
-    const R_xlen_t n_permu)
+    const double n_permu)
 {
     T bar;
 
@@ -27,22 +26,20 @@ NumericVector impl_table_pmt(
 
     bar.init_statistic(table_update);
 
-    if (type != "permu") {
-        return bar.close();
-    }
+    if (!std::isnan(n_permu)) {
+        if (n_permu == 0) {
+            bar.init_statistic_permu(n_permutation(col));
 
-    if (n_permu == 0) {
-        bar.init_statistic_permu(n_permutation(col));
+            do {
+                table_update();
+            } while (next_permutation(col));
+        } else {
+            bar.init_statistic_permu(n_permu);
 
-        do {
-            table_update();
-        } while (next_permutation(col));
-    } else {
-        bar.init_statistic_permu(n_permu);
-
-        do {
-            random_shuffle(col);
-        } while (table_update());
+            do {
+                random_shuffle(col);
+            } while (table_update());
+        }
     }
 
     return bar.close();

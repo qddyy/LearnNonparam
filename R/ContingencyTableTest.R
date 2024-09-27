@@ -41,8 +41,7 @@ ContingencyTableTest <- R6Class(
                 rep.int(rep.int(seq_len(r) - 1, c), private$.data),
                 rep.int(seq_len(c) - 1, .colSums(private$.data, r, c)),
                 private$.statistic_func,
-                private$.type,
-                private$.n_permu,
+                if (private$.type == "permu") private$.n_permu else NA_real_,
                 isTRUE(getOption("LearnNonparam.pmt_progress"))
             )
         }

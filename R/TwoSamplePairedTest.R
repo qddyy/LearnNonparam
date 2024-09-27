@@ -29,8 +29,7 @@ TwoSamplePairedTest <- R6Class(
                 private$.data$x,
                 private$.data$y,
                 private$.statistic_func,
-                private$.type,
-                private$.n_permu,
+                if (private$.type == "permu") private$.n_permu else NA_real_,
                 isTRUE(getOption("LearnNonparam.pmt_progress"))
             )
         }

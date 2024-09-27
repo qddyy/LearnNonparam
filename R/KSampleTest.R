@@ -38,8 +38,7 @@ KSampleTest <- R6Class(
                 private$.data,
                 attr(private$.data, "group"),
                 private$.statistic_func,
-                private$.type,
-                private$.n_permu,
+                if (private$.type == "permu") private$.n_permu else NA_real_,
                 isTRUE(getOption("LearnNonparam.pmt_progress"))
             )
         }

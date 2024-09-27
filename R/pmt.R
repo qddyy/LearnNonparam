@@ -179,19 +179,16 @@ define_pmt <- function(
                             args <- paste0("arg_", 1:n)
                             paste0(
                                 "SEXP ", inherit, "_pmt(",
-                                paste0("SEXP ", args, collapse = ","),
-                                ",std::string type",
-                                ",R_xlen_t n_permu",
-                                ",bool progress) {",
+                                paste("SEXP", args, collapse = ","),
+                                ", double n_permu, bool progress){",
                                 "auto statistic = ", statistic, ";",
-                                "return progress ?",
-                                paste0(
-                                    impl, "<PermuBar", c("Show", "Hide"), ">(",
+                                "return progress ?", paste0(
+                                    impl, "<PermuBar",
+                                    c("Show", "Hide"), ">(",
                                     paste0(
-                                        "clone(", args[-n], "),", collapse = ""
-                                    ),
-                                    "statistic, type, n_permu)", collapse = ":"
-                                ), ";", "}"
+                                        "clone(", args[-n], ")", collapse = ", "
+                                    ), ", statistic, n_permu)", collapse = " : "
+                                ), ";}"
                             )
                         }
                     )

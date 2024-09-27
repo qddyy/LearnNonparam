@@ -5,8 +5,7 @@ NumericVector impl_multcomp_pmt(
     const NumericVector data,
     IntegerVector group,
     const U& statistic_func,
-    const std::string type,
-    const R_xlen_t n_permu)
+    const double n_permu)
 {
     R_len_t n_group = group[group.size() - 1];
     R_len_t n_pair = n_group * (n_group - 1) / 2;
@@ -26,22 +25,20 @@ NumericVector impl_multcomp_pmt(
 
     bar.init_statistic(multcomp_update);
 
-    if (type != "permu") {
-        return bar.close();
-    }
+    if (!std::isnan(n_permu)) {
+        if (n_permu == 0) {
+            bar.init_statistic_permu(n_permutation(group));
 
-    if (n_permu == 0) {
-        bar.init_statistic_permu(n_permutation(group));
+            do {
+                multcomp_update();
+            } while (next_permutation(group));
+        } else {
+            bar.init_statistic_permu(n_permu);
 
-        do {
-            multcomp_update();
-        } while (next_permutation(group));
-    } else {
-        bar.init_statistic_permu(n_permu);
-
-        do {
-            random_shuffle(group);
-        } while (multcomp_update());
+            do {
+                random_shuffle(group);
+            } while (multcomp_update());
+        }
     }
 
     return bar.close();
