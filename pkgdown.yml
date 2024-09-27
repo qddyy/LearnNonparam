@@ -1,9 +1,9 @@
 pandoc: 3.1.11
-pkgdown: 2.1.0
+pkgdown: 2.1.1
 pkgdown_sha: ~
 articles:
   examples: examples.html
-last_built: 2024-09-04T07:14Z
+last_built: 2024-09-27T08:25Z
 urls:
   reference: https://qddyy.github.io/LearnNonparam/reference
   article: https://qddyy.github.io/LearnNonparam/articles
