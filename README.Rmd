@@ -27,7 +27,7 @@ options(
 )
 ```
 
-# LearnNonparam <img src="man/figures/logo.svg" alt="logo" width="14%" align="right"/>
+# LearnNonparam <img src="man/figures/logo.svg" alt="logo" width="15%" align="right"/>
 
 ![GitHub License](https://img.shields.io/github/license/qddyy/LearnNonparam)
 ![GitHub R package version](https://img.shields.io/github/r-package/v/qddyy/LearnNonparam)

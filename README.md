@@ -1,5 +1,5 @@
 
-# LearnNonparam <img src="man/figures/logo.svg" alt="logo" width="14%" align="right"/>
+# LearnNonparam <img src="man/figures/logo.svg" alt="logo" width="15%" align="right"/>
 
 ![GitHub
 License](https://img.shields.io/github/license/qddyy/LearnNonparam)

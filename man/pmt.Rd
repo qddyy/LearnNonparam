@@ -27,7 +27,7 @@ define_pmt(
 )
 }
 \arguments{
-\item{key}{a character string corresponding to the desired test. Check \code{pmts()} for valid keys.}
+\item{key}{a character string specifying the test. Check \code{pmts()} for valid keys.}
 
 \item{...}{extra parameters passed to the constructor.}
 
@@ -46,6 +46,11 @@ define_pmt(
 \item{alternative}{a character string specifying the alternative of the test.}
 
 \item{depends, plugins, includes}{passed to \code{\link[Rcpp:cppFunction]{Rcpp::cppFunction()}}.}
+}
+\value{
+a test object corresponding to the specified key.
+
+a data frame containing keys and corresponding tests implemented in this package.
 }
 \description{
 Construct test objects in a unified way.

@@ -38,10 +38,10 @@ implemented <- list(
 
 #' @rdname pmt
 #' 
-#' @param key a character string corresponding to the desired test. Check `pmts()` for valid keys.
+#' @param key a character string specifying the test. Check `pmts()` for valid keys.
 #' @param ... extra parameters passed to the constructor.
 #' 
-#' @return a test object corresponding to the key.
+#' @return a test object corresponding to the specified key.
 #' 
 #' @export
 
