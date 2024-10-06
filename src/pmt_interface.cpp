@@ -7,9 +7,7 @@ using namespace Rcpp;
 
 class ClosFunc : public Function {
 public:
-    template <typename... Args>
-    ClosFunc(Args&&... args) :
-        Function(std::forward<Args>(args)...) { }
+    using Function::Function;
 
     template <typename... Args>
     auto operator()(Args&&... args) const
