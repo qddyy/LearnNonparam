@@ -41,24 +41,20 @@ implemented <- list(
 #' @param key a character string corresponding to the desired test. Check `pmts()` for valid keys.
 #' @param ... extra parameters passed to the constructor.
 #' 
+#' @return a test object corresponding to the key.
+#' 
 #' @export
 
 pmt <- function(key, ...) {
-    if (key %in% names(implemented)) {
-        implemented[[key]]$new(...)
-    } else {
-        stop(
-            "The key '", key,
-            "' is not valid. ",
-            "Check `pmts()` for valid keys."
-        )
-    }
+    implemented[[match.arg(key, choices = names(implemented))]]$new(...)
 }
 
 
 #' @rdname pmt
 #' 
 #' @param which a character string specifying the desired tests.
+#' 
+#' @return a data frame containing keys and corresponding tests implemented in this package.
 #' 
 #' @export
 
