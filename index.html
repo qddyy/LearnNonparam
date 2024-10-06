@@ -100,19 +100,27 @@
 <span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pmt.html">pmt</a></span><span class="op">(</span><span class="st">"twosample.wilcoxon"</span>, n_permu <span class="op">=</span> <span class="fl">1e6</span><span class="op">)</span></span></code></pre></div>
 </li>
 <li>
-<p>Provide it with samples and check the results</p>
+<p>Provide it with samples</p>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="op">-</span><span class="fl">1</span><span class="op">)</span></span>
 <span></span>
-<span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
-<span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">1</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, <span class="fl">0</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/test-dark.svg"><img src="reference/figures/README/test.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
+</li>
+<li>
+<p>Check the results</p>
 <div class="sourceCode" id="cb6"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span></code></pre></div>
-<p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/results-dark.svg"><img src="reference/figures/README/results.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
+<code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="va">statistic</span></span></code></pre></div>
+<p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/statistic-dark.svg"><img src="reference/figures/README/statistic.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
 <div class="sourceCode" id="cb7"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span></code></pre></div>
+<p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/p_value-dark.svg"><img src="reference/figures/README/p_value.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
+<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>digits <span class="op">=</span> <span class="fl">3</span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/print-dark.svg"><img src="reference/figures/README/print.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
+<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/theme_get.html" class="external-link">theme_set</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="fu">plot</span><span class="op">(</span>style <span class="op">=</span> <span class="st">"ggplot2"</span>, binwidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
@@ -121,7 +129,7 @@
 </li>
 <li>
 <p>Modify some settings and observe the change</p>
-<div class="sourceCode" id="cb8"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"asymp"</span></span>
 <span><span class="va">t</span><span class="op">$</span><span class="va">p_value</span></span></code></pre></div>
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/modify-dark.svg"><img src="reference/figures/README/modify.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
@@ -246,8 +254,8 @@ See <code>pmts()</code> for tests implemented in this package.
 </table>
 </div>
 </details><p><code>define_pmt</code> allows users to define new permutation tests. Take the two-sample Cramér-Von Mises test as an example:</p>
-<div class="sourceCode" id="cb9"><pre class="downlit sourceCode r">
-<code class="sourceCode R"><span><span class="fu"><a href="reference/pmt.html">define_pmt</a></span><span class="op">(</span></span>
+<div class="sourceCode" id="cb11"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pmt.html">define_pmt</a></span><span class="op">(</span></span>
 <span>    <span class="co"># this is a two-sample permutation test</span></span>
 <span>    inherit <span class="op">=</span> <span class="st">"twosample"</span>,</span>
 <span>    statistic <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span>
@@ -270,7 +278,9 @@ See <code>pmts()</code> for tests implemented in this package.
 <span>    scoring <span class="op">=</span> <span class="st">"none"</span>, n_permu <span class="op">=</span> <span class="fl">1e4</span>,</span>
 <span>    name <span class="op">=</span> <span class="st">"Two-Sample Cramér-Von Mises Test"</span>,</span>
 <span>    alternative <span class="op">=</span> <span class="st">"samples are from different continuous distributions"</span></span>
-<span><span class="op">)</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span></span></code></pre></div>
+<span><span class="op">)</span></span>
+<span></span>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/stats/Uniform.html" class="external-link">runif</a></span><span class="op">(</span><span class="fl">10</span><span class="op">)</span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/define-dark.svg"><img src="reference/figures/README/define.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
 </div>
 <div class="section level2">
