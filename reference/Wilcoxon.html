@@ -16,10 +16,6 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/examples.html">Examples</a></li>
-  </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -114,6 +110,41 @@
 
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="pmt.html">pmt</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"twosample.wilcoxon"</span>,</span></span>
+<span class="r-in"><span>    alternative <span class="op">=</span> <span class="st">"greater"</span>, n_permu <span class="op">=</span> <span class="fl">0</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table2.1.1</span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	 Two-Sample Wilcoxon Test </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> scoring: rank    type: permu(35)    method: default</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> statistic = 21, p-value = 0.05714286</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: true location shift is greater than 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> estimate: 16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95% confidence interval: (-Inf, Inf)</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="pmt.html">pmt</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"twosample.wilcoxon"</span>,</span></span>
+<span class="r-in"><span>    alternative <span class="op">=</span> <span class="st">"less"</span>, n_permu <span class="op">=</span> <span class="fl">0</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table2.6.1</span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	 Two-Sample Wilcoxon Test </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> scoring: rank    type: permu(70)    method: default</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> statistic = 14, p-value = 0.1714286</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: true location shift is less than 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> estimate: -0.35</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 95% confidence interval: (-1.2, 0.5)</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu"><a href="pmt.html">pmt</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"twosample.wilcoxon"</span>, conf_level <span class="op">=</span> <span class="fl">0.90</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table2.6.2</span><span class="op">)</span><span class="op">$</span><span class="va">conf_int</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> [1] 13.84 47.96</span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 

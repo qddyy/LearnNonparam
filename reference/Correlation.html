@@ -16,10 +16,6 @@
 
     <div id="navbar" class="collapse navbar-collapse ms-3">
       <ul class="navbar-nav me-auto"><li class="active nav-item"><a class="nav-link" href="../reference/index.html">Reference</a></li>
-<li class="nav-item dropdown">
-  <button class="nav-link dropdown-toggle" type="button" id="dropdown-articles" data-bs-toggle="dropdown" aria-expanded="false" aria-haspopup="true">Articles</button>
-  <ul class="dropdown-menu" aria-labelledby="dropdown-articles"><li><a class="dropdown-item" href="../articles/examples.html">Examples</a></li>
-  </ul></li>
 <li class="nav-item"><a class="nav-link" href="../news/index.html">Changelog</a></li>
       </ul><ul class="navbar-nav"><li class="nav-item"><form class="form-inline" role="search">
  <input class="form-control" type="search" name="search-input" id="search-input" autocomplete="off" aria-label="Search site" placeholder="Search for" data-search-index="../search.json"></form></li>
@@ -96,6 +92,61 @@
 
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="pmt.html">pmt</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"association.corr"</span>, method <span class="op">=</span> <span class="st">"pearson"</span>,</span></span>
+<span class="r-in"><span>    alternative <span class="op">=</span> <span class="st">"greater"</span>, n_permu <span class="op">=</span> <span class="fl">10000</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table5.1.2</span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	 Test for Association Between Paired Samples </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> scoring: none    type: permu(10000)    method: pearson</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> statistic = 198766597, p-value &lt; 2.220446e-16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: true correlation is greater than 0</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="pmt.html">pmt</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"association.corr"</span>, method <span class="op">=</span> <span class="st">"spearman"</span>,</span></span>
+<span class="r-in"><span>    alternative <span class="op">=</span> <span class="st">"two_sided"</span>, n_permu <span class="op">=</span> <span class="fl">10000</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table5.1.2</span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	 Test for Association Between Paired Samples </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> scoring: rank    type: permu(10000)    method: spearman</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> statistic = 2059, p-value &lt; 2.220446e-16</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: true rho is not equal to 0</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"asymp"</span></span></span>
+<span class="r-in"><span><span class="va">t</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	 Test for Association Between Paired Samples </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> scoring: rank    type: asymp    method: spearman</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> statistic = 0.8968008, p-value = 0.0002176436</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: true rho is not equal to 0</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="pmt.html">pmt</a></span><span class="op">(</span></span></span>
+<span class="r-in"><span>    <span class="st">"association.corr"</span>, method <span class="op">=</span> <span class="st">"kendall"</span>,</span></span>
+<span class="r-in"><span>    alternative <span class="op">=</span> <span class="st">"greater"</span>, n_permu <span class="op">=</span> <span class="fl">0</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table5.2.2</span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	 Test for Association Between Paired Samples </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> scoring: rank    type: permu(151200)    method: kendall</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> statistic = 0.2222222, p-value = 0.187672</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: true tau is greater than 0</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"asymp"</span></span></span>
+<span class="r-in"><span><span class="va">t</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	 Test for Association Between Paired Samples </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> scoring: rank    type: asymp    method: kendall</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> statistic = 0.2222222, p-value = 0.1697136</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: true tau is greater than 0</span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
