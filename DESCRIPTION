@@ -1,6 +1,6 @@
 Package: LearnNonparam
-Title: Nonparametric Tests
-Version: 1.2.2
+Title: R6-Based Flexible Framework for Permutation Tests
+Version: 1.2.3
 Authors@R: 
     person("Yan", "Du", , "isduyan@outlook.com", role = c("aut", "cre"))
 Description: Implements various nonparametric tests in chapters 1-5 of the book "An introduction to modern nonparametric statistics" by James J. Higgins.

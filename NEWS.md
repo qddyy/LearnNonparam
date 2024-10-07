@@ -1,3 +1,9 @@
+# LearnNonparam 1.2.3
+
+- Improved `twosample_pmt`
+- Added examples
+- Fixed `SiegelTukey` and `ContingencyTableTest`
+
 # LearnNonparam 1.2.2
 
 - R side
