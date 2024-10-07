@@ -4,6 +4,14 @@
 #' 
 #' @aliases rcbd.friedman
 #' 
+#' @examples
+#' t <- pmt(
+#'     "rcbd.friedman", n_permu = 0
+#' )$test(Table4.5.3)$print()
+#' 
+#' t$type <- "asymp"
+#' t
+#' 
 #' @export
 #' 
 #' @importFrom R6 R6Class

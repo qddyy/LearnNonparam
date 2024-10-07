@@ -4,6 +4,28 @@
 #' 
 #' @aliases association.corr
 #' 
+#' @examples
+#' pmt(
+#'     "association.corr", method = "pearson",
+#'     alternative = "greater", n_permu = 10000
+#' )$test(Table5.1.2)$print()
+#' 
+#' t <- pmt(
+#'     "association.corr", method = "spearman",
+#'     alternative = "two_sided", n_permu = 10000
+#' )$test(Table5.1.2)$print()
+#' 
+#' t$type <- "asymp"
+#' t
+#' 
+#' t <- pmt(
+#'     "association.corr", method = "kendall",
+#'     alternative = "greater", n_permu = 0
+#' )$test(Table5.2.2)$print()
+#' 
+#' t$type <- "asymp"
+#' t
+#' 
 #' @export
 #' 
 #' @importFrom R6 R6Class

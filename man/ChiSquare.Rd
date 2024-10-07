@@ -7,6 +7,15 @@
 \description{
 Performs chi-square test on contingency tables.
 }
+\examples{
+t <- pmt(
+    "table.chisq", n_permu = 0
+)$test(Table5.4.2)$print()
+
+t$type <- "asymp"
+t
+
+}
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:ContingencyTableTest]{LearnNonparam::ContingencyTableTest}} -> \code{ChiSquare}
 }

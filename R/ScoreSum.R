@@ -4,6 +4,12 @@
 #' 
 #' @aliases twosample.scoresum
 #' 
+#' @examples
+#' pmt(
+#'     "twosample.scoresum", scoring = "expon",
+#'     alternative = "greater", n_permu = 0
+#' )$test(Table2.6.2)$print()
+#' 
 #' @export
 #' 
 #' @importFrom R6 R6Class

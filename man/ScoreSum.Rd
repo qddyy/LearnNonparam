@@ -7,6 +7,13 @@
 \description{
 Performs sum of scores based two-sample test on samples. It is almost the same as two-sample wilcoxon rank sum test but uses more scoring systems.
 }
+\examples{
+pmt(
+    "twosample.scoresum", scoring = "expon",
+    alternative = "greater", n_permu = 0
+)$test(Table2.6.2)$print()
+
+}
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{\link[LearnNonparam:TwoSampleLocationTest]{LearnNonparam::TwoSampleLocationTest}} -> \code{ScoreSum}
 }

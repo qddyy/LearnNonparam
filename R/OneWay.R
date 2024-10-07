@@ -4,6 +4,16 @@
 #' 
 #' @aliases ksample.oneway
 #' 
+#' @examples
+#' \donttest{
+#' t <- pmt(
+#'     "ksample.oneway", n_permu = 0
+#' )$test(Table3.1.2)$print()
+#' 
+#' t$type <- "asymp"
+#' t
+#' }
+#' 
 #' @export
 #' 
 #' @importFrom R6 R6Class

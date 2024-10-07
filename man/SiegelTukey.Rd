@@ -7,6 +7,13 @@
 \description{
 Performs Siegel-Tukey test on samples.
 }
+\examples{
+pmt(
+    "twosample.siegel",
+    alternative = "greater", n_permu = 0
+)$test(Table2.8.1)$print()
+
+}
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{\link[LearnNonparam:TwoSampleLocationTest]{LearnNonparam::TwoSampleLocationTest}} -> \code{\link[LearnNonparam:Wilcoxon]{LearnNonparam::Wilcoxon}} -> \code{SiegelTukey}
 }

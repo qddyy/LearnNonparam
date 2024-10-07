@@ -4,6 +4,9 @@
 #' 
 #' @aliases onesample.cdf
 #' 
+#' @examples
+#' pmt("onesample.cdf")$test(Table1.2.1)$plot(style = "graphic")
+#' 
 #' @export
 #' 
 #' @importFrom R6 R6Class

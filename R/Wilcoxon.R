@@ -4,6 +4,21 @@
 #' 
 #' @aliases twosample.wilcoxon
 #' 
+#' @examples
+#' pmt(
+#'     "twosample.wilcoxon",
+#'     alternative = "greater", n_permu = 0
+#' )$test(Table2.1.1)$print()
+#' 
+#' pmt(
+#'     "twosample.wilcoxon",
+#'     alternative = "less", n_permu = 0
+#' )$test(Table2.6.1)$print()
+#' 
+#' pmt(
+#'     "twosample.wilcoxon", conf_level = 0.90
+#' )$test(Table2.6.2)$conf_int
+#' 
 #' @export
 #' 
 #' @importFrom R6 R6Class

@@ -7,6 +7,19 @@
 \description{
 Performs quantile test on a single sample. In addition, an estimation and a confidence interval for the desired quantile will be calculated.
 }
+\examples{
+pmt(
+    "onesample.quantile", prob = 0.5,
+    null_value = 75, alternative = "greater",
+    type = "asymp", correct = FALSE
+)$test(Table1.1.1)$print()
+
+pmt(
+    "onesample.quantile",
+    prob = 0.25, conf_level = 0.90
+)$test(Table1.2.1)$conf_int
+
+}
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:OneSampleTest]{LearnNonparam::OneSampleTest}} -> \code{Quantile}
 }

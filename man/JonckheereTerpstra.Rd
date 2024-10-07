@@ -7,6 +7,15 @@
 \description{
 Performs Jonckheere-Terpstra test on samples.
 }
+\examples{
+t <- pmt(
+    "ksample.jt", alternative = "greater"
+)$test(Table3.4.1)$print()
+
+t$type <- "asymp"
+t
+
+}
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:KSampleTest]{LearnNonparam::KSampleTest}} -> \code{JonckheereTerpstra}
 }

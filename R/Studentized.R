@@ -4,6 +4,26 @@
 #' 
 #' @aliases multcomp.studentized
 #' 
+#' @examples
+#' t <- pmt(
+#'     "multcomp.studentized", method = "bonferroni"
+#' )$test(Table3.3.1)$print()
+#' 
+#' t$type <- "asymp"
+#' t
+#' 
+#' t$scoring <- "rank"
+#' t
+#' 
+#' t$method <- "tukey"
+#' t
+#' 
+#' t$scoring <- "none"
+#' t
+#' 
+#' t$type <- "permu"
+#' t
+#' 
 #' @export
 #' 
 #' @importFrom R6 R6Class

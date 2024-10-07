@@ -4,6 +4,24 @@
 #' 
 #' @aliases paired.difference
 #' 
+#' @examples
+#' pmt(
+#'     "paired.difference",
+#'     alternative = "greater", scoring = "none", n_permu = 0
+#' )$test(Table4.1.1)$print()
+#' 
+#' pmt(
+#'     "paired.difference", n_permu = 0
+#' )$test(Table4.1.3)$print()
+#' 
+#' t <- pmt(
+#'     "paired.difference", scoring = "rank",
+#'     alternative = "greater", n_permu = 0
+#' )$test(Table4.1.1)$print()
+#' 
+#' t$type <- "asymp"
+#' t
+#' 
 #' @export
 #' 
 #' @importFrom R6 R6Class

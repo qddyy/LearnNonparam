@@ -4,7 +4,13 @@
 #' 
 #' @aliases twosample.siegel
 #' 
-#' @export SiegelTukey
+#' @examples
+#' pmt(
+#'     "twosample.siegel",
+#'     alternative = "greater", n_permu = 0
+#' )$test(Table2.8.1)$print()
+#' 
+#' @export
 #' 
 #' @importFrom R6 R6Class
 

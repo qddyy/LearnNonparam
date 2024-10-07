@@ -7,6 +7,13 @@
 \description{
 Performs Ansari-Bradley test on samples.
 }
+\examples{
+pmt(
+    "twosample.ansari",
+    alternative = "greater", n_permu = 0
+)$test(Table2.8.1)$print()
+
+}
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{AnsariBradley}
 }

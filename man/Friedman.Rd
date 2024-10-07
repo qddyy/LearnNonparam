@@ -7,6 +7,15 @@
 \description{
 Performs Friedman test on samples collected in a randomized complete block design.
 }
+\examples{
+t <- pmt(
+    "rcbd.friedman", n_permu = 0
+)$test(Table4.5.3)$print()
+
+t$type <- "asymp"
+t
+
+}
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:RCBDTest]{LearnNonparam::RCBDTest}} -> \code{Friedman}
 }

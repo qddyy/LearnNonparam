@@ -4,6 +4,14 @@
 #' 
 #' @aliases rcbd.page
 #' 
+#' @examples
+#' t <- pmt(
+#'     "rcbd.page", alternative = "less"
+#' )$test(Table4.4.3)
+#' 
+#' t$type <- "asymp"
+#' t
+#' 
 #' @export
 #' 
 #' @importFrom R6 R6Class

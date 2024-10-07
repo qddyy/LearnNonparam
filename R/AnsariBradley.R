@@ -4,7 +4,13 @@
 #' 
 #' @aliases twosample.ansari
 #' 
-#' @export AnsariBradley
+#' @examples
+#' pmt(
+#'     "twosample.ansari",
+#'     alternative = "greater", n_permu = 0
+#' )$test(Table2.8.1)$print()
+#' 
+#' @export
 #' 
 #' @importFrom R6 R6Class
 #' @importFrom stats pnorm

@@ -7,6 +7,19 @@
 \description{
 Performs Kruskal-Wallis test on samples.
 }
+\examples{
+pmt(
+    "ksample.kw", type = "asymp"
+)$test(Table3.2.2)$print()
+
+t <- pmt(
+    "ksample.kw", type = "permu"
+)$test(Table3.2.3)$print()
+
+t$type <- "asymp"
+t
+
+}
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:KSampleTest]{LearnNonparam::KSampleTest}} -> \code{KruskalWallis}
 }

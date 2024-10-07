@@ -7,6 +7,29 @@
 \description{
 Performs correlation coefficient based two-sample association test on samples.
 }
+\examples{
+pmt(
+    "association.corr", method = "pearson",
+    alternative = "greater", n_permu = 10000
+)$test(Table5.1.2)$print()
+
+t <- pmt(
+    "association.corr", method = "spearman",
+    alternative = "two_sided", n_permu = 10000
+)$test(Table5.1.2)$print()
+
+t$type <- "asymp"
+t
+
+t <- pmt(
+    "association.corr", method = "kendall",
+    alternative = "greater", n_permu = 0
+)$test(Table5.2.2)$print()
+
+t$type <- "asymp"
+t
+
+}
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{\link[LearnNonparam:TwoSamplePairedTest]{LearnNonparam::TwoSamplePairedTest}} -> \code{\link[LearnNonparam:TwoSampleAssociationTest]{LearnNonparam::TwoSampleAssociationTest}} -> \code{Correlation}
 }

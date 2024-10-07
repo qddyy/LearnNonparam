@@ -4,6 +4,14 @@
 #' 
 #' @aliases rcbd.oneway
 #' 
+#' @examples
+#' t <- pmt(
+#'     "rcbd.oneway", n_permu = 5000
+#' )$test(Table4.4.3)$print()
+#' 
+#' t$type <- "asymp"
+#' t
+#' 
 #' @export
 #' 
 #' @importFrom R6 R6Class

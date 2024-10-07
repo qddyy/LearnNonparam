@@ -4,6 +4,14 @@
 #' 
 #' @aliases ksample.jt
 #' 
+#' @examples
+#' t <- pmt(
+#'     "ksample.jt", alternative = "greater"
+#' )$test(Table3.4.1)$print()
+#' 
+#' t$type <- "asymp"
+#' t
+#' 
 #' @export
 #' 
 #' @importFrom R6 R6Class

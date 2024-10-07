@@ -7,6 +7,17 @@
 \description{
 Performs F statistic based one-way test on samples.
 }
+\examples{
+\donttest{
+t <- pmt(
+    "ksample.oneway", n_permu = 0
+)$test(Table3.1.2)$print()
+
+t$type <- "asymp"
+t
+}
+
+}
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:KSampleTest]{LearnNonparam::KSampleTest}} -> \code{OneWay}
 }

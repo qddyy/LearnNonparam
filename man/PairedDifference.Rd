@@ -7,6 +7,25 @@
 \description{
 Performs differences based paired comparison on samples.
 }
+\examples{
+pmt(
+    "paired.difference",
+    alternative = "greater", scoring = "none", n_permu = 0
+)$test(Table4.1.1)$print()
+
+pmt(
+    "paired.difference", n_permu = 0
+)$test(Table4.1.3)$print()
+
+t <- pmt(
+    "paired.difference", scoring = "rank",
+    alternative = "greater", n_permu = 0
+)$test(Table4.1.1)$print()
+
+t$type <- "asymp"
+t
+
+}
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{\link[LearnNonparam:TwoSamplePairedTest]{LearnNonparam::TwoSamplePairedTest}} -> \code{PairedDifference}
 }

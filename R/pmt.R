@@ -43,6 +43,8 @@ implemented <- list(
 #' 
 #' @return a test object corresponding to the specified key.
 #' 
+#' @examples pmt("twosample.wilcoxon")
+#' 
 #' @export
 
 pmt <- function(key, ...) {
@@ -55,6 +57,8 @@ pmt <- function(key, ...) {
 #' @param which a character string specifying the desired tests.
 #' 
 #' @return a data frame containing keys and corresponding tests implemented in this package.
+#' 
+#' @examples pmts()
 #' 
 #' @export
 
@@ -99,7 +103,7 @@ pmts <- function(
 #' @param alternative a character string specifying the alternative of the test.
 #' @param depends,plugins,includes passed to [Rcpp::cppFunction()].
 #' 
-#' @details The test statistic in `define_pmt` can be defined using either `R` or `Rcpp`, with the `statistic` parameter specified as:
+#' @details The test statistic in `define_pmt` can be defined using either `R` or `Rcpp` (C++14 required), with the `statistic` parameter specified as:
 #' 
 #' - `R`: a function returning a closure that returns a double.
 #' - `Rcpp`: a character string defining a captureless lambda (introduced in C++11) returning another lambda that may capture by value, accepts const arguments of the same type, and returns a double.
@@ -114,6 +118,37 @@ pmts <- function(
 #' - `"table"`: `(Rcpp::IntegerMatrix contingency_table)`
 #' 
 #' Defining the test statistic using `R` follows a similar approach. The purpose of this design is to pre-calculate certain constants that remain invariant during permutation.
+#' 
+#' @examples
+#' r <- define_pmt(
+#'     inherit = "twosample", rejection = "lr", n_permu = 1e5,
+#'     statistic = function(x, y) {
+#'         m <- length(x)
+#'         n <- length(y)
+#'         function(x, y) sum(x) / m - sum(y) / n
+#'     }
+#' )
+#' 
+#' cpp <- define_pmt(
+#'     inherit = "twosample", rejection = "lr", n_permu = 1e5,
+#'     statistic = "[](NumericVector x, NumericVector y) {
+#'         R_len_t n_x = x.size();
+#'         R_len_t n_y = y.size();
+#'         return [n_x, n_y](const NumericVector x, const NumericVector y) {
+#'             double sum_x = 0;
+#'             double sum_y = 0;
+#'             for(auto x_i : x) sum_x += x_i;
+#'             for(auto y_i : y) sum_y += y_i;
+#'             return sum_x / n_x - sum_y / n_y;
+#'         };
+#'     }"
+#' )
+#' 
+#' x <- rnorm(100)
+#' y <- rnorm(100, 1)
+#' options(LearnNonparam.pmt_progress = FALSE)
+#' system.time(r$test(x, y))
+#' system.time(cpp$test(x, y))
 #' 
 #' @export
 #' 

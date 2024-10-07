@@ -4,6 +4,19 @@
 #' 
 #' @aliases twosample.difference
 #' 
+#' @examples
+#' pmt(
+#'     "twosample.difference", method = "mean",
+#'     alternative = "greater", n_permu = 0
+#' )$test(Table2.1.1)$print()$plot(
+#'     style = "graphic", breaks = seq(-20, 25, length.out = 9)
+#' )
+#' 
+#' pmt(
+#'     "twosample.difference", method = "mean",
+#'     alternative = "greater", n_permu = 1000
+#' )$test(Table2.3.1)$print()
+#' 
 #' @export
 #' 
 #' @importFrom R6 R6Class

@@ -7,6 +7,22 @@
 \description{
 Performs two-sample wilcoxon test on samples. In addition, an estimation and a confidence interval for the location shift will be calculated.
 }
+\examples{
+pmt(
+    "twosample.wilcoxon",
+    alternative = "greater", n_permu = 0
+)$test(Table2.1.1)$print()
+
+pmt(
+    "twosample.wilcoxon",
+    alternative = "less", n_permu = 0
+)$test(Table2.6.1)$print()
+
+pmt(
+    "twosample.wilcoxon", conf_level = 0.90
+)$test(Table2.6.2)$conf_int
+
+}
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{\link[LearnNonparam:TwoSampleLocationTest]{LearnNonparam::TwoSampleLocationTest}} -> \code{Wilcoxon}
 }

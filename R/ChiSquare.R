@@ -4,6 +4,14 @@
 #' 
 #' @aliases table.chisq
 #' 
+#' @examples
+#' t <- pmt(
+#'     "table.chisq", n_permu = 0
+#' )$test(Table5.4.2)$print()
+#' 
+#' t$type <- "asymp"
+#' t
+#' 
 #' @export
 #' 
 #' @importFrom R6 R6Class

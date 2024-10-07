@@ -7,6 +7,18 @@
 \description{
 Performs two-sample sign test on samples.
 }
+\examples{
+t <- pmt(
+    "paired.sign",
+    alternative = "greater", n_permu = 0
+)$test(
+    rep(c(+1, -1), c(12, 5)), rep(0, 17)
+)$print()
+
+t$type <- "asymp"
+t
+
+}
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{\link[LearnNonparam:TwoSamplePairedTest]{LearnNonparam::TwoSamplePairedTest}} -> \code{Sign}
 }

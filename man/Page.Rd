@@ -7,6 +7,15 @@
 \description{
 Performs Page test on samples collected in a randomized complete block design.
 }
+\examples{
+t <- pmt(
+    "rcbd.page", alternative = "less"
+)$test(Table4.4.3)
+
+t$type <- "asymp"
+t
+
+}
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:RCBDTest]{LearnNonparam::RCBDTest}} -> \code{Page}
 }

@@ -7,6 +7,15 @@
 \description{
 Performs F statistic based one-way test on samples collected in a randomized complete block design.
 }
+\examples{
+t <- pmt(
+    "rcbd.oneway", n_permu = 5000
+)$test(Table4.4.3)$print()
+
+t$type <- "asymp"
+t
+
+}
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:RCBDTest]{LearnNonparam::RCBDTest}} -> \code{RCBDOneWay}
 }

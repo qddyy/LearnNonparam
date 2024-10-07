@@ -4,6 +4,18 @@
 #' 
 #' @aliases ksample.kw
 #' 
+#' @examples
+#' pmt(
+#'     "ksample.kw", type = "asymp"
+#' )$test(Table3.2.2)$print()
+#' 
+#' t <- pmt(
+#'     "ksample.kw", type = "permu"
+#' )$test(Table3.2.3)$print()
+#' 
+#' t$type <- "asymp"
+#' t
+#' 
 #' @export
 #' 
 #' @importFrom R6 R6Class

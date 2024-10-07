@@ -7,6 +7,10 @@
 \description{
 Performs statistical inference on population cumulative distribution function.
 }
+\examples{
+pmt("onesample.cdf")$test(Table1.2.1)$plot(style = "graphic")
+
+}
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:OneSampleTest]{LearnNonparam::OneSampleTest}} -> \code{CDF}
 }

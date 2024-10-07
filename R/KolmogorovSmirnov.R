@@ -4,6 +4,11 @@
 #' 
 #' @aliases twosample.ks
 #' 
+#' @examples
+#' pmt(
+#'     "twosample.ks", n_permu = 0
+#' )$test(Table2.8.1)$print()
+#' 
 #' @export
 #' 
 #' @importFrom R6 R6Class

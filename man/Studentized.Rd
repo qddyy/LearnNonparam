@@ -7,6 +7,27 @@
 \description{
 Performs studentized statistic based multiple comparison on samples.
 }
+\examples{
+t <- pmt(
+    "multcomp.studentized", method = "bonferroni"
+)$test(Table3.3.1)$print()
+
+t$type <- "asymp"
+t
+
+t$scoring <- "rank"
+t
+
+t$method <- "tukey"
+t
+
+t$scoring <- "none"
+t
+
+t$type <- "permu"
+t
+
+}
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:KSampleTest]{LearnNonparam::KSampleTest}} -> \code{\link[LearnNonparam:MultipleComparison]{LearnNonparam::MultipleComparison}} -> \code{Studentized}
 }

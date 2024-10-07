@@ -7,6 +7,20 @@
 \description{
 Performs mean/median based two-sample test on samples.
 }
+\examples{
+pmt(
+    "twosample.difference", method = "mean",
+    alternative = "greater", n_permu = 0
+)$test(Table2.1.1)$print()$plot(
+    style = "graphic", breaks = seq(-20, 25, length.out = 9)
+)
+
+pmt(
+    "twosample.difference", method = "mean",
+    alternative = "greater", n_permu = 1000
+)$test(Table2.3.1)$print()
+
+}
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{\link[LearnNonparam:TwoSampleLocationTest]{LearnNonparam::TwoSampleLocationTest}} -> \code{Difference}
 }

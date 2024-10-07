@@ -7,6 +7,13 @@
 \description{
 Performs ratio mean deviance test on samples.
 }
+\examples{
+pmt(
+    "twosample.rmd",
+    alternative = "greater", n_permu = 0
+)$test(Table2.8.1)$print()
+
+}
 \section{Super classes}{
 \code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{RatioMeanDeviance}
 }
