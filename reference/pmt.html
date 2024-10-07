@@ -110,7 +110,7 @@
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The test statistic in <code>define_pmt</code> can be defined using either <code>R</code> or <code>Rcpp</code>, with the <code>statistic</code> parameter specified as:</p><ul><li><p><code>R</code>: a function returning a closure that returns a double.</p></li>
+    <p>The test statistic in <code>define_pmt</code> can be defined using either <code>R</code> or <code>Rcpp</code> (C++14 required), with the <code>statistic</code> parameter specified as:</p><ul><li><p><code>R</code>: a function returning a closure that returns a double.</p></li>
 <li><p><code>Rcpp</code>: a character string defining a captureless lambda (introduced in C++11) returning another lambda that may capture by value, accepts const arguments of the same type, and returns a double.</p></li>
 </ul><p>When using <code>Rcpp</code>, the parameters for different <code>inherit</code> are listed as follows. Note that the parameter names are illustrative and may be modified.</p><ul><li><p><code>"twosample"</code>: <code>(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)</code></p></li>
 <li><p><code>"ksample"</code>: <code>(Rcpp::NumericVector combined_sample, Rcpp::IntegerVector one_based_group_index)</code></p></li>
@@ -121,6 +121,152 @@
 </ul><p>Defining the test statistic using <code>R</code> follows a similar approach. The purpose of this design is to pre-calculate certain constants that remain invariant during permutation.</p>
     </div>
 
+    <div class="section level2">
+    <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
+    <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu">pmt</span><span class="op">(</span><span class="st">"twosample.wilcoxon"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;Wilcoxon&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Inherits from: &lt;TwoSampleLocationTest&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Public:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     alternative: active binding</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     conf_int: active binding</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     conf_level: active binding</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     correct: active binding</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     data: active binding</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     estimate: active binding</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     initialize: function (type = c("permu", "asymp"), alternative = c("two_sided", </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     method: active binding</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     n_permu: active binding</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     null_value: active binding</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     p_value: active binding</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     plot: function (style = c("graphics", "ggplot2"), ...) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     print: function () </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     scoring: active binding</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     statistic: active binding</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     test: function (...) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     type: active binding</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   Private:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .alternative: two_sided</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .autoplot: function (...) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .calculate: function () </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .calculate_extra: function () </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .calculate_n_permu: function () </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .calculate_p: function () </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .calculate_p_permu: function () </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .calculate_score: function () </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .calculate_side: function () </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .calculate_statistic: function () </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .compile_statistic_closure: function () </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .conf_int: NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .conf_level: 0.95</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .correct: TRUE</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .data: NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .data_name: NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .define: function () </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .estimate: NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .link: +</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .method: default</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .n_permu: 10000</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .name: Two-Sample Wilcoxon Test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .null_value: 0</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .on_alternative_change: function () </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .on_conf_level_change: function () </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .on_method_change: function () </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .on_n_permu_change: function () </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .on_null_value_change: function () </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .on_scoring_change: function () </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .on_type_change: function () </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .p_value: NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .param_name: location shift</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .plot: function (...) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .preprocess: function () </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .print: function () </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .raw_data: NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .scoring: rank</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .side: NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .statistic: NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .statistic_func: NULL</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>     .type: permu</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="fu">pmts</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                     key              class</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1    onesample.quantile           Quantile</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2         onesample.cdf                CDF</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3  twosample.difference         Difference</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4    twosample.wilcoxon           Wilcoxon</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5    twosample.scoresum           ScoreSum</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6      twosample.ansari      AnsariBradley</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7      twosample.siegel        SiegelTukey</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8         twosample.rmd  RatioMeanDeviance</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9          twosample.ks  KolmogorovSmirnov</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10       ksample.oneway             OneWay</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11           ksample.kw      KruskalWallis</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12           ksample.jt JonckheereTerpstra</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13 multcomp.studentized        Studentized</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14          paired.sign               Sign</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15    paired.difference   PairedDifference</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16          rcbd.oneway         RCBDOneWay</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17        rcbd.friedman           Friedman</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18            rcbd.page               Page</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19     association.corr        Correlation</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20          table.chisq          ChiSquare</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>                                                  test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                       Quantile Test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2       Inference on Cumulative Distribution Function</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3             Two-Sample Test Based on Mean or Median</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 4                            Two-Sample Wilcoxon Test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 5              Two-Sample Test Based on Sum of Scores</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 6                                 Ansari-Bradley Test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 7                                   Siegel-Tukey Test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 8                            Ratio Mean Deviance Test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 9                  Two-Sample Kolmogorov-Smirnov Test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 10                       One-Way Test for Equal Means</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 11                                Kruskal-Wallis Test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 12                           Jonckheere-Terpstra Test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 13 Multiple Comparison Based on Studentized Statistic</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 14                               Two-Sample Sign Test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 15             Paired Comparison Based on Differences</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 16               One-Way Test for Equal Means in RCBD</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 17                                      Friedman Test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 18                                          Page Test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 19        Test for Association Between Paired Samples</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 20               Chi-Square Test on Contingency Table</span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">define_pmt</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    inherit <span class="op">=</span> <span class="st">"twosample"</span>, rejection <span class="op">=</span> <span class="st">"lr"</span>, n_permu <span class="op">=</span> <span class="fl">1e5</span>,</span></span>
+<span class="r-in"><span>    statistic <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span></span>
+<span class="r-in"><span>        <span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></span>
+<span class="r-in"><span>        <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">/</span> <span class="va">m</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">/</span> <span class="va">n</span></span></span>
+<span class="r-in"><span>    <span class="op">}</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">cpp</span> <span class="op">&lt;-</span> <span class="fu">define_pmt</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    inherit <span class="op">=</span> <span class="st">"twosample"</span>, rejection <span class="op">=</span> <span class="st">"lr"</span>, n_permu <span class="op">=</span> <span class="fl">1e5</span>,</span></span>
+<span class="r-in"><span>    statistic <span class="op">=</span> <span class="st">"[](NumericVector x, NumericVector y) {</span></span></span>
+<span class="r-in"><span><span class="st">        R_len_t n_x = x.size();</span></span></span>
+<span class="r-in"><span><span class="st">        R_len_t n_y = y.size();</span></span></span>
+<span class="r-in"><span><span class="st">        return [n_x, n_y](const NumericVector x, const NumericVector y) {</span></span></span>
+<span class="r-in"><span><span class="st">            double sum_x = 0;</span></span></span>
+<span class="r-in"><span><span class="st">            double sum_y = 0;</span></span></span>
+<span class="r-in"><span><span class="st">            for(auto x_i : x) sum_x += x_i;</span></span></span>
+<span class="r-in"><span><span class="st">            for(auto y_i : y) sum_y += y_i;</span></span></span>
+<span class="r-in"><span><span class="st">            return sum_x / n_x - sum_y / n_y;</span></span></span>
+<span class="r-in"><span><span class="st">        };</span></span></span>
+<span class="r-in"><span><span class="st">    }"</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>LearnNonparam.pmt_progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">r</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.328   0.000   0.328 </span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">cpp</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    0.21    0.00    0.21 </span>
+<span class="r-in"><span></span></span>
+</code></pre></div>
+    </div>
   </main><aside class="col-md-3"><nav id="toc" aria-label="Table of contents"><h2>On this page</h2>
     </nav></aside></div>
 
