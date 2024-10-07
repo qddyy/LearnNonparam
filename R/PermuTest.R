@@ -218,19 +218,16 @@ PermuTest <- R6Class(
 
             cat(
                 paste("statistic", "=", format(private$.statistic)),
-                {
-                    p <- private$.p_value
-                    eps <- .Machine$double.eps
-                    paste(
-                        "p-value",
-                        if (p < eps) "<" else "=",
-                        if (p < eps) format(eps) else format(p),
+                paste(
+                    "p-value",
+                    if ((p <- private$.p_value) >= .Machine$double.eps) {
+                        P <- paste("=", format(p))
                         if (private$.type == "permu" && private$.n_permu != 0) {
                             q <- qnorm(0.975) * sqrt(p * (1 - p) / n_used)
-                            paste("(\u00B1", format(q), "at 95% confidence)")
-                        }
-                    )
-                },
+                            paste(P, "(\u00B1", format(q), "at 95% confidence)")
+                        } else P
+                    } else paste("<", format(.Machine$double.eps))
+                ),
                 sep = ", "
             )
             cat("\n")
