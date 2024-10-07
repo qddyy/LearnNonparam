@@ -35,8 +35,15 @@ SiegelTukey <- R6Class(
         .param_name = "ratio of scales",
 
         .scoring = "Siegel-Tukey rank",
-        .null_value = 1,
         .link = "-",
+
+        .preprocess = function() {
+            private$.null_value <- 0
+
+            super$.preprocess()
+
+            private$.null_value <- 1
+        },
 
         .calculate_score = function() {
             c_xy <- c(private$.data$x, private$.data$y)
