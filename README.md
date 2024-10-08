@@ -21,9 +21,6 @@ It depends on [R6](https://CRAN.R-project.org/package=R6) for object
 oriented design and [Rcpp](https://CRAN.R-project.org/package=Rcpp) for
 integration of R and C++.
 
-A few examples in the book can be found
-[here](https://qddyy.github.io/LearnNonparam/articles/examples).
-
 ## Installation
 
 For the latest bug fixes and improvements, please install the

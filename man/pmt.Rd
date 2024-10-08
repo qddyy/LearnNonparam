@@ -56,7 +56,7 @@ a data frame containing keys and corresponding tests implemented in this package
 Construct test objects in a unified way.
 }
 \details{
-The test statistic in \code{define_pmt} can be defined using either \code{R} or \code{Rcpp} (C++14 required), with the \code{statistic} parameter specified as:
+The test statistic in \code{define_pmt} can be defined using either \code{R} or \code{Rcpp}, with the \code{statistic} parameter specified as:
 \itemize{
 \item \code{R}: a function returning a closure that returns a double.
 \item \code{Rcpp}: a character string defining a captureless lambda (introduced in C++11) returning another lambda that may capture by value, accepts const arguments of the same type, and returns a double.
@@ -79,6 +79,7 @@ pmt("twosample.wilcoxon")
 
 pmts()
 
+\donttest{
 r <- define_pmt(
     inherit = "twosample", rejection = "lr", n_permu = 1e5,
     statistic = function(x, y) {
@@ -108,5 +109,6 @@ y <- rnorm(100, 1)
 options(LearnNonparam.pmt_progress = FALSE)
 system.time(r$test(x, y))
 system.time(cpp$test(x, y))
+}
 
 }

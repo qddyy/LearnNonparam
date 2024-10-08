@@ -103,7 +103,7 @@ pmts <- function(
 #' @param alternative a character string specifying the alternative of the test.
 #' @param depends,plugins,includes passed to [Rcpp::cppFunction()].
 #' 
-#' @details The test statistic in `define_pmt` can be defined using either `R` or `Rcpp` (C++14 required), with the `statistic` parameter specified as:
+#' @details The test statistic in `define_pmt` can be defined using either `R` or `Rcpp`, with the `statistic` parameter specified as:
 #' 
 #' - `R`: a function returning a closure that returns a double.
 #' - `Rcpp`: a character string defining a captureless lambda (introduced in C++11) returning another lambda that may capture by value, accepts const arguments of the same type, and returns a double.
@@ -120,6 +120,7 @@ pmts <- function(
 #' Defining the test statistic using `R` follows a similar approach. The purpose of this design is to pre-calculate certain constants that remain invariant during permutation.
 #' 
 #' @examples
+#' \donttest{
 #' r <- define_pmt(
 #'     inherit = "twosample", rejection = "lr", n_permu = 1e5,
 #'     statistic = function(x, y) {
@@ -149,6 +150,7 @@ pmts <- function(
 #' options(LearnNonparam.pmt_progress = FALSE)
 #' system.time(r$test(x, y))
 #' system.time(cpp$test(x, y))
+#' }
 #' 
 #' @export
 #' 
