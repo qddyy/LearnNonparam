@@ -2,10 +2,10 @@ Package: LearnNonparam
 Title: R6-Based Flexible Framework for Permutation Tests
 Version: 1.2.3
 Authors@R: 
-    person("Yan", "Du", , "isduyan@outlook.com", role = c("aut", "cre"))
-Description: Implements various nonparametric tests in chapters 1-5 of the book "An introduction to modern nonparametric statistics" by James J. Higgins.
+    person(given = "Yan", family = "Du", role = c("aut", "cre"), email = "isduyan@outlook.com", comment = c(ORCID = "0009-0009-1169-921X"))
+Description: Implements non-parametric tests from Higgins (2004, ISBN:0534387756), including tests for one-sample, two-sample, k-sample, paired, randomized complete block design, correlation and contingency tables. Built with 'Rcpp' for efficiency and 'R6' for flexible, object-oriented design, the package provides a unified framework for performing or creating custom permutation tests.
 BugReports: https://github.com/qddyy/LearnNonparam/issues
-URL: https://github.com/qddyy/LearnNonparam, https://qddyy.github.io/LearnNonparam
+URL: https://github.com/qddyy/LearnNonparam, https://qddyy.github.io/LearnNonparam/
 License: GPL (>= 2)
 Depends: 
     R (>= 3.5.0)
@@ -18,11 +18,8 @@ Imports:
     graphics,
     compiler
 Suggests: 
-    knitr,
-    rmarkdown,
     ggplot2
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
 RoxygenNote: 7.3.1
-VignetteBuilder: knitr

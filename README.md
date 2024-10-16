@@ -15,27 +15,27 @@ check](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml
 ## Overview
 
 This R package implements several non-parametric tests in chapters 1-5
-of [Higgins (2003)](#references).
+of [Higgins (2004)](#references).
 
 It depends on [R6](https://CRAN.R-project.org/package=R6) for object
 oriented design and [Rcpp](https://CRAN.R-project.org/package=Rcpp) for
 integration of R and C++.
 
-A few examples in the book can be found
-[here](https://qddyy.github.io/LearnNonparam/articles/examples).
-
 ## Installation
 
-For the latest bug fixes and improvements, please install the
-development version of this R package using
+Install the stable version:
+
+``` r
+install.packages("LearnNonparam")
+```
+
+Install the development version for the latest bug fixes and
+improvements:
 
 ``` r
 # install.packages("remotes")
 remotes::install_github("qddyy/LearnNonparam")
 ```
-
-Feedback and contributions are welcome. Please feel free to report bugs
-or request new features by opening an issue.
 
 ## Usage
 
@@ -203,10 +203,10 @@ t$test(rnorm(10), runif(10))$print()
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 
-<div id="ref-Higgins2003" class="csl-entry">
+<div id="ref-higgins2004introduction" class="csl-entry">
 
-Higgins, James J. 2003. *An Introduction to Modern Nonparametric
-Statistics*. Florence, KY: Brooks/Cole.
+Higgins, J. J. 2004. *An Introduction to Modern Nonparametric
+Statistics*. Duxbury Advanced Series. Brooks/Cole.
 
 </div>
 
