@@ -58,7 +58,7 @@ pmt <- function(key, ...) {
 #' 
 #' @return a data frame containing keys and corresponding tests implemented in this package.
 #' 
-#' @examples pmts()
+#' @examples pmts("ksample")
 #' 
 #' @export
 
@@ -130,17 +130,13 @@ pmts <- function(
 #'     }
 #' )
 #' 
-#' cpp <- define_pmt(
+#' rcpp <- define_pmt(
 #'     inherit = "twosample", rejection = "lr", n_permu = 1e5,
 #'     statistic = "[](NumericVector x, NumericVector y) {
 #'         R_len_t n_x = x.size();
 #'         R_len_t n_y = y.size();
-#'         return [n_x, n_y](const NumericVector x, const NumericVector y) {
-#'             double sum_x = 0;
-#'             double sum_y = 0;
-#'             for(auto x_i : x) sum_x += x_i;
-#'             for(auto y_i : y) sum_y += y_i;
-#'             return sum_x / n_x - sum_y / n_y;
+#'         return [n_x, n_y](const NumericVector x, const NumericVector y) -> double {
+#'             return sum(x) / n_x - sum(y) / n_y;
 #'         };
 #'     }"
 #' )
@@ -149,7 +145,7 @@ pmts <- function(
 #' y <- rnorm(100, 1)
 #' options(LearnNonparam.pmt_progress = FALSE)
 #' system.time(r$test(x, y))
-#' system.time(cpp$test(x, y))
+#' system.time(rcpp$test(x, y))
 #' }
 #' 
 #' @export
