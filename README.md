@@ -1,36 +1,37 @@
 
 # LearnNonparam <img src="man/figures/logo.svg" alt="logo" width="15%" align="right"/>
 
-![GitHub
-License](https://img.shields.io/github/license/qddyy/LearnNonparam)
-![GitHub R package
-version](https://img.shields.io/github/r-package/v/qddyy/LearnNonparam)
-![GitHub code size in
-bytes](https://img.shields.io/github/languages/code-size/qddyy/LearnNonparam.svg)
-![CodeFactor
-Grade](https://img.shields.io/codefactor/grade/github/qddyy/LearnNonparam)
-![R CMD
-check](https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml/badge.svg)
+[![License](https://img.shields.io/cran/l/LearnNonparam?color=orange)](https://cran.r-project.org/web/licenses/GPL-2)
+[![CRAN
+status](https://www.r-pkg.org/badges/version/LearnNonparam)](https://cran.r-project.org/package=LearnNonparam)
+[![Dependencies](https://tinyverse.netlify.app/badge/LearnNonparam)](https://cran.r-project.org/package=LearnNonparam)
+[![CRAN RStudio mirror
+downloads](https://cranlogs.r-pkg.org/badges/LearnNonparam)](https://r-pkg.org/pkg/LearnNonparam)
+[![CRAN RStudio mirror
+downloads](https://cranlogs.r-pkg.org/badges/grand-total/LearnNonparam)](https://r-pkg.org/pkg/LearnNonparam)
 
 ## Overview
 
 This R package implements several non-parametric tests in chapters 1-5
-of [Higgins (2004)](#references).
-
-It depends on [R6](https://CRAN.R-project.org/package=R6) for object
-oriented design and [Rcpp](https://CRAN.R-project.org/package=Rcpp) for
-integration of R and C++.
+of [Higgins (2004)](#references), including one-sample, two-sample,
+k-sample, paired comparison, randomized complete block design,
+correlation and contingency table tests. Built with
+[Rcpp](https://CRAN.R-project.org/package=Rcpp) for efficiency and
+[R6](https://CRAN.R-project.org/package=R6) for flexible,
+object-oriented design, the package provides a unified framework for
+performing or creating custom permutation tests.
 
 ## Installation
 
-Install the stable version:
+Install the stable version from
+[CRAN](https://CRAN.R-project.org/package=LearnNonparam):
 
 ``` r
 install.packages("LearnNonparam")
 ```
 
-Install the development version for the latest bug fixes and
-improvements:
+Install the development version from
+[Github](https://github.com/qddyy/LearnNonparam):
 
 ``` r
 # install.packages("remotes")
@@ -52,7 +53,7 @@ options(LearnNonparam.pmt_progress = TRUE)
   t <- Wilcoxon$new(n_permu = 1e6)
   ```
 
-  - using the `pmt` (**p**er**m**u**t**ation test) wrapper
+  - using the `pmt` (**p**er**m**utation **t**est) wrapper
 
   ``` r
   # recommended for a unified API
@@ -179,14 +180,13 @@ t <- define_pmt(
         function(x, y) {
             x <- sort.int(x)
             y <- sort.int(y)
-            F <- approxfun(x, F_x, "constant", 0, 1, ties = "ordered")
-            G <- approxfun(y, G_y, "constant", 0, 1, ties = "ordered")
+            F <- approxfun(x, F_x, "constant", 0, 1)
+            G <- approxfun(y, G_y, "constant", 0, 1)
             sum(c(F_x - G(x), G_y - F(y))^2)
         }
     },
     # reject the null hypothesis when the test statistic is large
     rejection = "r",
-    scoring = "none", n_permu = 1e4,
     name = "Two-Sample Cramér-Von Mises Test",
     alternative = "samples are from different continuous distributions"
 )
@@ -203,7 +203,7 @@ t$test(rnorm(10), runif(10))$print()
 
 <div id="refs" class="references csl-bib-body hanging-indent">
 
-<div id="ref-higgins2004introduction" class="csl-entry">
+<div id="ref-higgins2004" class="csl-entry">
 
 Higgins, J. J. 2004. *An Introduction to Modern Nonparametric
 Statistics*. Duxbury Advanced Series. Brooks/Cole.
