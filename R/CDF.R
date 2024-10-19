@@ -36,11 +36,10 @@ CDF <- R6Class(
         #' @return The object itself (invisibly).
         plot = function(style = c("graphics", "ggplot2")) {
             if (is.null(private$.raw_data)) {
-                warning("Must provide a sample before calling the plot method")
+                stop("Must provide a sample before calling the 'plot' method")
             } else if (match.arg(style) == "graphics") {
                 private$.plot()
-            } else {
-                requireNamespace("ggplot2")
+            } else if (requireNamespace("ggplot2", quietly = FALSE)) {
                 print(private$.autoplot())
             }
 

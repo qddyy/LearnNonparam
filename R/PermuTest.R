@@ -46,13 +46,12 @@ PermuTest <- R6Class(
         #' @return The object itself (invisibly).
         plot = function(style = c("graphics", "ggplot2"), ...) {
             if (is.null(private$.raw_data)) {
-                warning("Must provide sample(s) before calling the plot method")
+                stop("Must provide sample(s) before calling the 'plot' method")
             } else if (private$.type != "permu") {
-                warning("The plot method only works if type is set to 'permu'")
+                stop("The 'plot' method only works if 'type' is set to 'permu'")
             } else if (match.arg(style) == "graphics") {
                 private$.plot(...)
-            } else {
-                requireNamespace("ggplot2")
+            } else if (requireNamespace("ggplot2", quietly = FALSE)) {
                 print(private$.autoplot(...))
             }
 

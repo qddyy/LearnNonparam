@@ -70,10 +70,6 @@ Wilcoxon <- R6Class(
             statistic <- private$.statistic - m * (m + 1) / 2
 
             ties <- tabulate(c(private$.data$x, private$.data$y))
-            if (any(ties > 1)) {
-                warning("There exist ties, setting 'type' to 'asymp'")
-                private$.type <- "asymp"
-            }
 
             z <- statistic - m * n / 2
             correction <- if (private$.correct) {
