@@ -14,8 +14,8 @@
 <link href="deps/font-awesome-6.4.2/css/all.min.css" rel="stylesheet">
 <link href="deps/font-awesome-6.4.2/css/v4-shims.min.css" rel="stylesheet">
 <script src="deps/headroom-0.11.0/headroom.min.js"></script><script src="deps/headroom-0.11.0/jQuery.headroom.min.js"></script><script src="deps/bootstrap-toc-1.0.1/bootstrap-toc.min.js"></script><script src="deps/clipboard.js-2.0.11/clipboard.min.js"></script><script src="deps/search-1.0.0/autocomplete.jquery.min.js"></script><script src="deps/search-1.0.0/fuse.min.js"></script><script src="deps/search-1.0.0/mark.min.js"></script><!-- pkgdown --><script src="pkgdown.js"></script><meta property="og:title" content="R6-Based Flexible Framework for Permutation Tests">
-<meta name="description" content="Implements non-parametric tests from Higgins (2004, ISBN:0534387756), including tests for one-sample, two-sample, k-sample, paired, randomized complete block design, correlation and contingency tables. Built with Rcpp for efficiency and R6 for flexible, object-oriented design, the package provides a unified framework for performing or creating custom permutation tests.">
-<meta property="og:description" content="Implements non-parametric tests from Higgins (2004, ISBN:0534387756), including tests for one-sample, two-sample, k-sample, paired, randomized complete block design, correlation and contingency tables. Built with Rcpp for efficiency and R6 for flexible, object-oriented design, the package provides a unified framework for performing or creating custom permutation tests.">
+<meta name="description" content="Implements non-parametric tests from Higgins (2004, ISBN:0534387756), including one-sample, two-sample, k-sample, paired comparison, randomized complete block design, correlation and contingency table tests. Built with Rcpp for efficiency and R6 for flexible, object-oriented design, the package provides a unified framework for performing or creating custom permutation tests.">
+<meta property="og:description" content="Implements non-parametric tests from Higgins (2004, ISBN:0534387756), including one-sample, two-sample, k-sample, paired comparison, randomized complete block design, correlation and contingency table tests. Built with Rcpp for efficiency and R6 for flexible, object-oriented design, the package provides a unified framework for performing or creating custom permutation tests.">
 <meta property="og:image" content="https://qddyy.github.io/LearnNonparam/logo.svg">
 </head>
 <body>
@@ -55,20 +55,19 @@
 <img src="logo.svg" class="logo" alt=""><h1 id="learnnonparam-">LearnNonparam <a class="anchor" aria-label="anchor" href="#learnnonparam-"></a>
 </h1>
 </div>
-<p><img src="https://img.shields.io/github/license/qddyy/LearnNonparam" alt="GitHub License"><img src="https://img.shields.io/github/r-package/v/qddyy/LearnNonparam" alt="GitHub R package version"><img src="https://img.shields.io/github/languages/code-size/qddyy/LearnNonparam.svg" alt="GitHub code size in bytes"><img src="https://img.shields.io/codefactor/grade/github/qddyy/LearnNonparam" alt="CodeFactor Grade"><img src="https://github.com/qddyy/LearnNonparam/actions/workflows/R-CMD-check.yaml/badge.svg" alt="R CMD check"></p>
+<p><a href="https://cran.r-project.org/web/licenses/GPL-2" class="external-link"><img src="https://img.shields.io/cran/l/LearnNonparam?color=orange" alt="License"></a> <a href="https://cran.r-project.org/package=LearnNonparam" class="external-link"><img src="https://www.r-pkg.org/badges/version/LearnNonparam" alt="CRAN status"></a> <a href="https://cran.r-project.org/package=LearnNonparam" class="external-link"><img src="https://tinyverse.netlify.app/badge/LearnNonparam" alt="Dependencies"></a> <a href="https://r-pkg.org/pkg/LearnNonparam" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/LearnNonparam" alt="CRAN RStudio mirror downloads"></a> <a href="https://r-pkg.org/pkg/LearnNonparam" class="external-link"><img src="https://cranlogs.r-pkg.org/badges/grand-total/LearnNonparam" alt="CRAN RStudio mirror downloads"></a></p>
 <div class="section level2">
 <h2 id="overview">Overview<a class="anchor" aria-label="anchor" href="#overview"></a>
 </h2>
-<p>This R package implements several non-parametric tests in chapters 1-5 of <a href="#references">Higgins (2004)</a>.</p>
-<p>It depends on <a href="https://CRAN.R-project.org/package=R6" class="external-link">R6</a> for object oriented design and <a href="https://CRAN.R-project.org/package=Rcpp" class="external-link">Rcpp</a> for integration of R and C++.</p>
+<p>This R package implements several non-parametric tests in chapters 1-5 of <a href="#references">Higgins (2004)</a>, including one-sample, two-sample, k-sample, paired comparison, randomized complete block design, correlation and contingency table tests. Built with <a href="https://CRAN.R-project.org/package=Rcpp" class="external-link">Rcpp</a> for efficiency and <a href="https://CRAN.R-project.org/package=R6" class="external-link">R6</a> for flexible, object-oriented design, the package provides a unified framework for performing or creating custom permutation tests.</p>
 </div>
 <div class="section level2">
 <h2 id="installation">Installation<a class="anchor" aria-label="anchor" href="#installation"></a>
 </h2>
-<p>Install the stable version:</p>
+<p>Install the stable version from <a href="https://CRAN.R-project.org/package=LearnNonparam" class="external-link">CRAN</a>:</p>
 <div class="sourceCode" id="cb1"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/utils/install.packages.html" class="external-link">install.packages</a></span><span class="op">(</span><span class="st">"LearnNonparam"</span><span class="op">)</span></span></code></pre></div>
-<p>Install the development version for the latest bug fixes and improvements:</p>
+<p>Install the development version from <a href="https://github.com/qddyy/LearnNonparam" class="external-link">Github</a>:</p>
 <div class="sourceCode" id="cb2"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># install.packages("remotes")</span></span>
 <span><span class="fu">remotes</span><span class="fu">::</span><span class="fu">install_github</span><span class="op">(</span><span class="st">"qddyy/LearnNonparam"</span><span class="op">)</span></span></code></pre></div>
@@ -88,7 +87,7 @@
 <div class="sourceCode" id="cb4"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="va"><a href="reference/Wilcoxon.html">Wilcoxon</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>n_permu <span class="op">=</span> <span class="fl">1e6</span><span class="op">)</span></span></code></pre></div>
 <ul>
-<li>using the <code>pmt</code> (<strong>p</strong>er<strong>m</strong>u<strong>t</strong>ation test) wrapper</li>
+<li>using the <code>pmt</code> (<strong>p</strong>er<strong>m</strong>utation <strong>t</strong>est) wrapper</li>
 </ul>
 <div class="sourceCode" id="cb5"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="co"># recommended for a unified API</span></span>
@@ -263,14 +262,13 @@ See <code>pmts()</code> for tests implemented in this package.
 <span>        <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span>
 <span>            <span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort.int</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
 <span>            <span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/sort.html" class="external-link">sort.int</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span>
-<span>            <span class="cn">F</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/approxfun.html" class="external-link">approxfun</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">F_x</span>, <span class="st">"constant"</span>, <span class="fl">0</span>, <span class="fl">1</span>, ties <span class="op">=</span> <span class="st">"ordered"</span><span class="op">)</span></span>
-<span>            <span class="va">G</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/approxfun.html" class="external-link">approxfun</a></span><span class="op">(</span><span class="va">y</span>, <span class="va">G_y</span>, <span class="st">"constant"</span>, <span class="fl">0</span>, <span class="fl">1</span>, ties <span class="op">=</span> <span class="st">"ordered"</span><span class="op">)</span></span>
+<span>            <span class="cn">F</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/approxfun.html" class="external-link">approxfun</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">F_x</span>, <span class="st">"constant"</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span>
+<span>            <span class="va">G</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/approxfun.html" class="external-link">approxfun</a></span><span class="op">(</span><span class="va">y</span>, <span class="va">G_y</span>, <span class="st">"constant"</span>, <span class="fl">0</span>, <span class="fl">1</span><span class="op">)</span></span>
 <span>            <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">F_x</span> <span class="op">-</span> <span class="fu">G</span><span class="op">(</span><span class="va">x</span><span class="op">)</span>, <span class="va">G_y</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/logical.html" class="external-link">F</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span><span class="op">^</span><span class="fl">2</span><span class="op">)</span></span>
 <span>        <span class="op">}</span></span>
 <span>    <span class="op">}</span>,</span>
 <span>    <span class="co"># reject the null hypothesis when the test statistic is large</span></span>
 <span>    rejection <span class="op">=</span> <span class="st">"r"</span>,</span>
-<span>    scoring <span class="op">=</span> <span class="st">"none"</span>, n_permu <span class="op">=</span> <span class="fl">1e4</span>,</span>
 <span>    name <span class="op">=</span> <span class="st">"Two-Sample Cramér-Von Mises Test"</span>,</span>
 <span>    alternative <span class="op">=</span> <span class="st">"samples are from different continuous distributions"</span></span>
 <span><span class="op">)</span></span>
@@ -282,7 +280,7 @@ See <code>pmts()</code> for tests implemented in this package.
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
 <div id="refs" class="references csl-bib-body hanging-indent">
-<div id="ref-higgins2004introduction" class="csl-entry">
+<div id="ref-higgins2004" class="csl-entry">
 Higgins, J. J. 2004. <em>An Introduction to Modern Nonparametric Statistics</em>. Duxbury Advanced Series. Brooks/Cole.
 </div>
 </div>
