@@ -187,49 +187,11 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>     .statistic_func: NULL</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>     .type: permu</span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="fu">pmts</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                     key              class</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1    onesample.quantile           Quantile</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2         onesample.cdf                CDF</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3  twosample.difference         Difference</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4    twosample.wilcoxon           Wilcoxon</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5    twosample.scoresum           ScoreSum</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6      twosample.ansari      AnsariBradley</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7      twosample.siegel        SiegelTukey</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8         twosample.rmd  RatioMeanDeviance</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9          twosample.ks  KolmogorovSmirnov</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10       ksample.oneway             OneWay</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11           ksample.kw      KruskalWallis</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12           ksample.jt JonckheereTerpstra</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13 multcomp.studentized        Studentized</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14          paired.sign               Sign</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15    paired.difference   PairedDifference</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16          rcbd.oneway         RCBDOneWay</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17        rcbd.friedman           Friedman</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18            rcbd.page               Page</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19     association.corr        Correlation</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20          table.chisq          ChiSquare</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                                                  test</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 1                                       Quantile Test</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 2       Inference on Cumulative Distribution Function</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 3             Two-Sample Test Based on Mean or Median</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 4                            Two-Sample Wilcoxon Test</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 5              Two-Sample Test Based on Sum of Scores</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 6                                 Ansari-Bradley Test</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 7                                   Siegel-Tukey Test</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 8                            Ratio Mean Deviance Test</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 9                  Two-Sample Kolmogorov-Smirnov Test</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 10                       One-Way Test for Equal Means</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 11                                Kruskal-Wallis Test</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 12                           Jonckheere-Terpstra Test</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 13 Multiple Comparison Based on Studentized Statistic</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 14                               Two-Sample Sign Test</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 15             Paired Comparison Based on Differences</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 16               One-Way Test for Equal Means in RCBD</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 17                                      Friedman Test</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 18                                          Page Test</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 19        Test for Association Between Paired Samples</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 20               Chi-Square Test on Contingency Table</span>
+<span class="r-in"><span><span class="fu">pmts</span><span class="op">(</span><span class="st">"ksample"</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>              key              class                         test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 1 ksample.oneway             OneWay One-Way Test for Equal Means</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 2     ksample.kw      KruskalWallis          Kruskal-Wallis Test</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> 3     ksample.jt JonckheereTerpstra     Jonckheere-Terpstra Test</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">define_pmt</span><span class="op">(</span></span></span>
@@ -241,17 +203,13 @@
 <span class="r-in"><span>    <span class="op">}</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">cpp</span> <span class="op">&lt;-</span> <span class="fu">define_pmt</span><span class="op">(</span></span></span>
+<span class="r-in"><span><span class="va">rcpp</span> <span class="op">&lt;-</span> <span class="fu">define_pmt</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    inherit <span class="op">=</span> <span class="st">"twosample"</span>, rejection <span class="op">=</span> <span class="st">"lr"</span>, n_permu <span class="op">=</span> <span class="fl">1e5</span>,</span></span>
 <span class="r-in"><span>    statistic <span class="op">=</span> <span class="st">"[](NumericVector x, NumericVector y) {</span></span></span>
 <span class="r-in"><span><span class="st">        R_len_t n_x = x.size();</span></span></span>
 <span class="r-in"><span><span class="st">        R_len_t n_y = y.size();</span></span></span>
-<span class="r-in"><span><span class="st">        return [n_x, n_y](const NumericVector x, const NumericVector y) {</span></span></span>
-<span class="r-in"><span><span class="st">            double sum_x = 0;</span></span></span>
-<span class="r-in"><span><span class="st">            double sum_y = 0;</span></span></span>
-<span class="r-in"><span><span class="st">            for(auto x_i : x) sum_x += x_i;</span></span></span>
-<span class="r-in"><span><span class="st">            for(auto y_i : y) sum_y += y_i;</span></span></span>
-<span class="r-in"><span><span class="st">            return sum_x / n_x - sum_y / n_y;</span></span></span>
+<span class="r-in"><span><span class="st">        return [n_x, n_y](const NumericVector x, const NumericVector y) -&gt; double {</span></span></span>
+<span class="r-in"><span><span class="st">            return sum(x) / n_x - sum(y) / n_y;</span></span></span>
 <span class="r-in"><span><span class="st">        };</span></span></span>
 <span class="r-in"><span><span class="st">    }"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
@@ -261,10 +219,10 @@
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>LearnNonparam.pmt_progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">r</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.329   0.000   0.330 </span>
-<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">cpp</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.318   0.000   0.318 </span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">rcpp</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.206   0.000   0.206 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.235   0.000   0.235 </span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
