@@ -5,7 +5,7 @@
 template <typename T>
 T rand_int(T n)
 {
-    return floor(unif_rand() * n);
+    return static_cast<T>(unif_rand() * n);
 }
 
 template <typename T>
@@ -33,7 +33,8 @@ double n_permutation(T v)
 
     R_len_t n = v.size();
     R_len_t n_i = 0;
-    double current = v[0];
+
+    auto current = v[0];
     for (R_len_t i = 0; i < n; i++) {
         A *= (i + 1);
         if (v[i] == current) {

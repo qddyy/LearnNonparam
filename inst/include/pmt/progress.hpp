@@ -142,8 +142,6 @@ private:
 
     void _show() const
     {
-        int percent = static_cast<int>(100 * _buffer_i / _buffer_size);
-
-        Rcout << generated_bars[percent].data();
+        Rcout << generated_bars[static_cast<int>(100 * _buffer_i / _buffer_size)].data();
     }
 };

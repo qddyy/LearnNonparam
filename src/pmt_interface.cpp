@@ -12,9 +12,7 @@ public:
     template <typename... Args>
     auto operator()(Args&&... args) const
     {
-        Function closure = Function::operator()(std::forward<Args>(args)...);
-
-        return [closure](auto&&... args) {
+        return [closure = Function(Function::operator()(std::forward<Args>(args)...))](auto&&... args) {
             return as<double>(closure(std::forward<decltype(args)>(args)...));
         };
     }
