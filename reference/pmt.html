@@ -111,7 +111,7 @@
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
     <p>The test statistic in <code>define_pmt</code> can be defined using either <code>R</code> or <code>Rcpp</code>, with the <code>statistic</code> parameter specified as:</p><ul><li><p><code>R</code>: a function returning a closure that returns a double.</p></li>
-<li><p><code>Rcpp</code>: a character string defining a captureless lambda (introduced in C++11) returning another lambda that may capture by value, accepts parameters of the same type as const references, and returns a double.</p></li>
+<li><p><code>Rcpp</code>: a character string defining a captureless lambda (introduced in C++11) returning another lambda, which captures by value, accepts parameters of the same type as const references, and returns a double.</p></li>
 </ul><p>When using <code>Rcpp</code>, the parameters for different <code>inherit</code> are listed as follows. Note that the parameter names are illustrative and may be modified.</p><ul><li><p><code>"twosample"</code>: <code>(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)</code></p></li>
 <li><p><code>"ksample"</code>: <code>(Rcpp::NumericVector combined_sample, Rcpp::IntegerVector one_based_group_index)</code></p></li>
 <li><p><code>"paired"</code>: <code>(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)</code></p></li>
@@ -206,23 +206,35 @@
 <span class="r-in"><span><span class="va">rcpp</span> <span class="op">&lt;-</span> <span class="fu">define_pmt</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    inherit <span class="op">=</span> <span class="st">"twosample"</span>, rejection <span class="op">=</span> <span class="st">"lr"</span>, n_permu <span class="op">=</span> <span class="fl">1e5</span>,</span></span>
 <span class="r-in"><span>    statistic <span class="op">=</span> <span class="st">"[](NumericVector x, NumericVector y) {</span></span></span>
-<span class="r-in"><span><span class="st">        R_len_t n_x = x.size();</span></span></span>
-<span class="r-in"><span><span class="st">        R_len_t n_y = y.size();</span></span></span>
-<span class="r-in"><span><span class="st">        return [n_x, n_y](const NumericVector&amp; x, const NumericVector&amp; y) -&gt; double {</span></span></span>
+<span class="r-in"><span><span class="st">        R_len_t m = x.size();</span></span></span>
+<span class="r-in"><span><span class="st">        R_len_t n = y.size();</span></span></span>
+<span class="r-in"><span><span class="st">        return [=](const NumericVector&amp; x, const NumericVector&amp; y) -&gt; double {</span></span></span>
 <span class="r-in"><span><span class="st">            return sum(x) / n_x - sum(y) / n_y;</span></span></span>
 <span class="r-in"><span><span class="st">        };</span></span></span>
 <span class="r-in"><span><span class="st">    }"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> using C++ compiler: ‘g++ (Ubuntu 11.4.0-1ubuntu1~22.04) 11.4.0’</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> using C++14</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> g++ -std=gnu++14 -I"/opt/R/4.4.1/lib/R/include" -DNDEBUG   -I"/home/runner/work/_temp/Library/Rcpp/include" -I"/home/runner/work/_temp/Library/LearnNonparam/include" -I"/tmp/Rtmp77vpGO/sourceCpp-x86_64-pc-linux-gnu-1.0.13" -I/usr/local/include    -fpic  -g -O2   -c file167248d576e1.cpp -o file167248d576e1.o</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> file167248d576e1.cpp: In lambda function:</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> file167248d576e1.cpp:16:29: error: ‘n_x’ was not declared in this scope</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    16 |             return sum(x) / n_x - sum(y) / n_y;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       |                             ^~~</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> file167248d576e1.cpp:16:44: error: ‘n_y’ was not declared in this scope</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    16 |             return sum(x) / n_x - sum(y) / n_y;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>       |                                            ^~~</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> make: *** [/opt/R/4.4.1/lib/R/etc/Makeconf:204: file167248d576e1.o] Error 1</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in sourceCpp(code = code, env = env, rebuild = rebuild, cacheDir = cacheDir,     showOutput = showOutput, verbose = verbose, echo = echo):</span> Error 1 occurred building shared library.</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>LearnNonparam.pmt_progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">r</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.295   0.000   0.295 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>    0.29    0.00    0.29 </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">rcpp</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.186   0.000   0.185 </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'rcpp' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Timing stopped at: 0.001 0 0</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
