@@ -3,7 +3,7 @@ Title: 'R6'-Based Flexible Framework for Permutation Tests
 Version: 1.2.3
 Authors@R: 
     person(given = "Yan", family = "Du", role = c("aut", "cre"), email = "isduyan@outlook.com", comment = c(ORCID = "0009-0009-1169-921X"))
-Description: Implements non-parametric tests from Higgins (2004, ISBN:0534387756), including one-sample, two-sample, k-sample, paired comparison, randomized complete block design, correlation and contingency table tests. Built with 'Rcpp' for efficiency and 'R6' for flexible, object-oriented design, the package provides a unified framework for performing or creating custom permutation tests.
+Description: Implements non-parametric tests from Higgins (2004, ISBN:0534387756), including tests for one sample, two samples, k samples, paired comparisons, blocked designs, trends and association. Built with 'Rcpp' for efficiency and 'R6' for flexible, object-oriented design, the package provides a unified framework for performing or creating custom permutation tests.
 BugReports: https://github.com/qddyy/LearnNonparam/issues
 URL: https://github.com/qddyy/LearnNonparam, https://qddyy.github.io/LearnNonparam/
 License: GPL (>= 2)
@@ -22,4 +22,4 @@ Suggests:
 Encoding: UTF-8
 LazyData: true
 Roxygen: list(markdown = TRUE)
-RoxygenNote: 7.3.1
+RoxygenNote: 7.3.2

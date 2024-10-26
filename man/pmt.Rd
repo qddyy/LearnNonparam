@@ -51,6 +51,8 @@ define_pmt(
 a test object corresponding to the specified key.
 
 a data frame containing keys and corresponding tests implemented in this package.
+
+a test object based on the specified statistic.
 }
 \description{
 Construct test objects in a unified way.
@@ -59,7 +61,7 @@ Construct test objects in a unified way.
 The test statistic in \code{define_pmt} can be defined using either \code{R} or \code{Rcpp}, with the \code{statistic} parameter specified as:
 \itemize{
 \item \code{R}: a function returning a closure that returns a double.
-\item \code{Rcpp}: a character string defining a captureless lambda (introduced in C++11) returning another lambda that may capture by value, accepts const arguments of the same type, and returns a double.
+\item \code{Rcpp}: a character string defining a captureless lambda (since C++11) returning another lambda that captures by value, accepts parameters of the same type as const references, and returns a double.
 }
 
 When using \code{Rcpp}, the parameters for different \code{inherit} are listed as follows. Note that the parameter names are illustrative and may be modified.
@@ -77,7 +79,7 @@ Defining the test statistic using \code{R} follows a similar approach. The purpo
 \examples{
 pmt("twosample.wilcoxon")
 
-pmts()
+pmts("ksample")
 
 \donttest{
 r <- define_pmt(
@@ -89,17 +91,13 @@ r <- define_pmt(
     }
 )
 
-cpp <- define_pmt(
+rcpp <- define_pmt(
     inherit = "twosample", rejection = "lr", n_permu = 1e5,
     statistic = "[](NumericVector x, NumericVector y) {
-        R_len_t n_x = x.size();
-        R_len_t n_y = y.size();
-        return [n_x, n_y](const NumericVector x, const NumericVector y) {
-            double sum_x = 0;
-            double sum_y = 0;
-            for(auto x_i : x) sum_x += x_i;
-            for(auto y_i : y) sum_y += y_i;
-            return sum_x / n_x - sum_y / n_y;
+        R_len_t m = x.size();
+        R_len_t n = y.size();
+        return [=](const NumericVector& x, const NumericVector& y) -> double {
+            return sum(x) / m - sum(y) / n;
         };
     }"
 )
@@ -108,7 +106,7 @@ x <- rnorm(100)
 y <- rnorm(100, 1)
 options(LearnNonparam.pmt_progress = FALSE)
 system.time(r$test(x, y))
-system.time(cpp$test(x, y))
+system.time(rcpp$test(x, y))
 }
 
 }

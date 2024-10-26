@@ -103,10 +103,12 @@ pmts <- function(
 #' @param alternative a character string specifying the alternative of the test.
 #' @param depends,plugins,includes passed to [Rcpp::cppFunction()].
 #' 
+#' @return a test object based on the specified statistic.
+#' 
 #' @details The test statistic in `define_pmt` can be defined using either `R` or `Rcpp`, with the `statistic` parameter specified as:
 #' 
 #' - `R`: a function returning a closure that returns a double.
-#' - `Rcpp`: a character string defining a captureless lambda (introduced in C++11) returning another lambda that may capture by value, accepts const arguments of the same type, and returns a double.
+#' - `Rcpp`: a character string defining a captureless lambda (since C++11) returning another lambda that captures by value, accepts parameters of the same type as const references, and returns a double.
 #' 
 #' When using `Rcpp`, the parameters for different `inherit` are listed as follows. Note that the parameter names are illustrative and may be modified.
 #' 
@@ -133,10 +135,10 @@ pmts <- function(
 #' rcpp <- define_pmt(
 #'     inherit = "twosample", rejection = "lr", n_permu = 1e5,
 #'     statistic = "[](NumericVector x, NumericVector y) {
-#'         R_len_t n_x = x.size();
-#'         R_len_t n_y = y.size();
-#'         return [n_x, n_y](const NumericVector x, const NumericVector y) -> double {
-#'             return sum(x) / n_x - sum(y) / n_y;
+#'         R_len_t m = x.size();
+#'         R_len_t n = y.size();
+#'         return [=](const NumericVector& x, const NumericVector& y) -> double {
+#'             return sum(x) / m - sum(y) / n;
 #'         };
 #'     }"
 #' )
@@ -201,7 +203,7 @@ define_pmt <- function(
                         plugins = unique(c(plugins, "cpp14")),
                         includes = {
                             hpps <- c("progress", "reorder", impl)
-                            c(includes, paste0("#include <pmt/", hpps, ".hpp>"))
+                            c(includes, paste0("#include<pmt/", hpps, ".hpp>"))
                         },
                         code = {
                             n <- if (inherit == "rcbd") 2 else 3
@@ -212,11 +214,10 @@ define_pmt <- function(
                                 ", double n_permu, bool progress){",
                                 "auto statistic = ", statistic, ";",
                                 "return progress ?", paste0(
-                                    impl, "<PermuBar",
-                                    c("Show", "Hide"), ">(",
+                                    impl, "<PermuBar", c("Show", "Hide"), ">(",
                                     paste0(
-                                        "clone(", args[-n], ")", collapse = ", "
-                                    ), ", statistic, n_permu)", collapse = " : "
+                                        "clone(", args[-n], ")", collapse = ","
+                                    ), ", statistic, n_permu )", collapse = ":"
                                 ), ";}"
                             )
                         }

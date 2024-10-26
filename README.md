@@ -13,12 +13,11 @@ downloads](https://cranlogs.r-pkg.org/badges/grand-total/LearnNonparam)](https:/
 ## Overview
 
 This R package implements several non-parametric tests in chapters 1-5
-of [Higgins (2004)](#references), including one-sample, two-sample,
-k-sample, paired comparison, randomized complete block design,
-correlation and contingency table tests. Built with
-[Rcpp](https://CRAN.R-project.org/package=Rcpp) for efficiency and
-[R6](https://CRAN.R-project.org/package=R6) for flexible,
-object-oriented design, the package provides a unified framework for
+of [Higgins (2004)](#references), including tests for one sample, two
+samples, k samples, paired comparisons, blocked designs, trends and
+association. Built with [Rcpp](https://CRAN.R-project.org/package=Rcpp)
+for efficiency and [R6](https://CRAN.R-project.org/package=R6) for
+flexible, object-oriented design, it provides a unified framework for
 performing or creating custom permutation tests.
 
 ## Installation
