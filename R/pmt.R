@@ -153,7 +153,7 @@ pmts <- function(
 #' @export
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom Rcpp cppFunction
+#' @importFrom Rcpp cppFunction evalCpp
 #' @importFrom compiler cmpfun
 
 define_pmt <- function(
@@ -200,7 +200,10 @@ define_pmt <- function(
                     cppFunction(
                         env = environment(super$.calculate_statistic),
                         depends = c(depends, "LearnNonparam"),
-                        plugins = unique(c(plugins, "cpp14")),
+                        plugins = {
+                            cpp_standard_ver <- evalCpp("__cplusplus")
+                            c(plugins, if (cpp_standard_ver < 201402L) "cpp14")
+                        },
                         includes = {
                             hpps <- c("progress", "reorder", impl)
                             c(includes, paste0("#include<pmt/", hpps, ".hpp>"))
