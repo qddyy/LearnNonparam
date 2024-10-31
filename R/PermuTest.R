@@ -443,3 +443,35 @@ PermuTest <- R6Class(
         conf_int = function() c(private$.conf_int)
     )
 )
+
+get_data <- function(call, env) {
+    data_exprs <- as.list(call)[-1]
+    n_data <- length(data_exprs)
+
+    if (n_data == 1 && is.list(data_1 <- eval(data_exprs[[1]], envir = env))) {
+        data_exprs <- data_1
+        n_data <- length(data_1)
+    }
+
+    data_names <- names(data_exprs)
+    if (is.null(data_names)) {
+        data_names <- rep.int("", n_data)
+    }
+
+    `names<-`(lapply(
+        seq_len(n_data), function(i) {
+            if (data_names[[i]] == "") {
+                data_names[[i]] <<- paste(
+                    deparse(data_exprs[[i]], width.cutoff = 500), collapse = " "
+                )
+            }
+
+            data_i <- eval(data_exprs[[i]], envir = env)
+            if (!is.numeric(data_i)) {
+                stop("Sample ", i, " is not numeric")
+            } else if (anyNA(data_i)) {
+                stop("Sample ", i, " contains NA")
+            } else data_i
+        }
+    ), data_names)
+}
