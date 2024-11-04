@@ -48,8 +48,7 @@ JonckheereTerpstra <- R6Class(
             J <- rep.int(seq_len(k)[-1], seq_len(k - 1))
 
             lengths <- tabulate(attr(private$.data, "group"))
-            lengths_J <- lengths[J]
-            lengths_IJ <- rep.int(lengths[I], lengths_J)
+            lengths_IJ <- rep.int(lengths[I], lengths_J <- lengths[J])
 
             private$.statistic_func <- function(data, group) {
                 split <- split.default(data, group)

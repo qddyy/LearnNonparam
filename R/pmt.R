@@ -209,8 +209,9 @@ define_pmt <- function(
                             c(includes, paste0("#include<pmt/", hpps, ".hpp>"))
                         },
                         code = {
-                            n <- if (inherit == "rcbd") 2 else 3
-                            args <- paste0("arg_", 1:n)
+                            args <- paste0(
+                                "arg", 1:(n <- if (inherit == "rcbd") 2 else 3)
+                            )
                             paste0(
                                 "SEXP ", inherit, "_pmt(",
                                 paste("SEXP", args, collapse = ","),
