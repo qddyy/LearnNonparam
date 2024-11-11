@@ -81,7 +81,7 @@ Create a new \code{PairedDifference} object.
 
 \item{\code{null_value}}{a number indicating the true value of the location shift.}
 
-\item{\code{n_permu}}{an integer indicating number of permutations for the permutation distribution. If set to zero (default) then all permutations are used.}
+\item{\code{n_permu}}{an integer indicating number of permutations for the permutation distribution. If set to \code{0}, all permutations will be used.}
 
 \item{\code{correct}}{a logical indicating whether to apply continuity correction in the normal approximation for the p-value when \code{scoring} is set to \code{"rank"}.}
 }
