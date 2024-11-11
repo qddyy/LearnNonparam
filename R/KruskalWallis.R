@@ -48,14 +48,12 @@ KruskalWallis <- R6Class(
         .define = function() {
             lengths <- tabulate(attr(private$.data, "group"))
 
-            mean <- mean(private$.data)
+            sums <- lengths * mean(private$.data)
+
             var <- var(private$.data)
 
             private$.statistic_func <- function(data, group) {
-                sum(lengths * (vapply(
-                    X = split.default(data, group), FUN = sum,
-                    FUN.VALUE = numeric(1), USE.NAMES = FALSE
-                ) / lengths - mean)^2) / var
+                sum((rowsum.default(data, group) - sums)^2 / lengths) / var
             }
         },
 

@@ -60,18 +60,13 @@ Studentized <- R6Class(
 
         .define = function() {
             inverse_lengths <- 1 / tabulate(attr(private$.data, "group"))
-            inverse_length_sums <- outer(
-                inverse_lengths, inverse_lengths, `+`
-            )
+            inverse_length_sums <- outer(inverse_lengths, inverse_lengths, `+`)
 
             if (private$.scoring == "none") {
                 N <- length(private$.data)
                 k <- attr(private$.data, "group")[N]
                 private$.statistic_func <- function(data, group) {
-                    means <- vapply(
-                        X = split.default(data, group), FUN = sum,
-                        FUN.VALUE = numeric(1), USE.NAMES = FALSE
-                    ) * inverse_lengths
+                    means <- rowsum.default(data, group) * inverse_lengths
                     mse <- sum((data - means[group])^2) / (N - k)
                     function(i, j) {
                         (means[i] - means[j]) / sqrt(
@@ -82,10 +77,7 @@ Studentized <- R6Class(
             } else {
                 var <- var(private$.data)
                 private$.statistic_func <- function(data, group) {
-                    means <- vapply(
-                        X = split.default(data, group), FUN = sum,
-                        FUN.VALUE = numeric(1), USE.NAMES = FALSE
-                    ) * inverse_lengths
+                    means <- rowsum.default(data, group) * inverse_lengths
                     function(i, j) {
                         (means[i] - means[j]) / sqrt(
                             var * inverse_length_sums[i, j]

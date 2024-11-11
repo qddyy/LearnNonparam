@@ -46,10 +46,7 @@ OneWay <- R6Class(
                 permu = {
                     lengths <- tabulate(attr(private$.data, "group"))
                     function(data, group) {
-                        sum(vapply(
-                            X = split.default(data, group), FUN = sum,
-                            FUN.VALUE = numeric(1), USE.NAMES = FALSE
-                        )^2 / lengths)
+                        sum(rowsum.default(data, group)^2 / lengths)
                     }
                 },
                 asymp = function(data, group) {
