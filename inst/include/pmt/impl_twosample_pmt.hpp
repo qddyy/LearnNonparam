@@ -7,15 +7,19 @@ NumericVector impl_twosample_pmt(
 {
     T bar;
 
-    R_len_t m = x.size();
-    R_len_t n = m + y.size();
-
     auto statistic_closure = statistic_func(x, y);
     auto twosample_update = [x, y, &statistic_closure, &bar]() {
         return bar << statistic_closure(x, y);
     };
 
     bar.init_statistic(twosample_update);
+
+    // permuting based on the shorter
+    NumericVector x_ = x.size() < y.size() ? x : y;
+    NumericVector y_ = x.size() < y.size() ? y : x;
+
+    R_len_t m = x_.size();
+    R_len_t n = x_.size() + y_.size();
 
     if (!std::isnan(n_permu)) {
         R_len_t i, j;
@@ -31,9 +35,9 @@ NumericVector impl_twosample_pmt(
             for (i = 0; i < n; i++) {
                 p[i] = i;
             }
-            auto swap_update = [x, y, p, m, &twosample_update](const R_len_t x_out, const R_len_t x_in) mutable {
-                std::swap(x[p[x_out]], y[p[x_in] - m]);
-                std::swap(p[x_out], p[x_in]);
+            auto swap_update = [x_, y_, p, m, &twosample_update](const R_len_t out, const R_len_t in) mutable {
+                std::swap(x_[p[out]], y_[p[in] - m]);
+                std::swap(p[out], p[in]);
                 twosample_update();
             };
 
@@ -101,7 +105,7 @@ NumericVector impl_twosample_pmt(
                 for (i = 0; i < m; i++) {
                     j = i + rand_int(n - i);
                     if (j >= m) {
-                        std::swap(x[i], y[j - m]);
+                        std::swap(x_[i], y_[j - m]);
                     }
                 }
             } while (twosample_update());
