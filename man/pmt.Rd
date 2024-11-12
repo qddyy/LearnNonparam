@@ -14,10 +14,10 @@ pmts(
 )
 
 define_pmt(
-  statistic,
   inherit = c("twosample", "ksample", "paired", "rcbd", "association", "table"),
+  statistic,
   rejection = c("lr", "l", "r"),
-  scoring = c("none", "rank", "vw", "expon"),
+  scoring = "none",
   n_permu = 10000,
   name = "User-Defined Permutation Test",
   alternative = NULL,
@@ -33,17 +33,21 @@ define_pmt(
 
 \item{which}{a character string specifying the desired tests.}
 
-\item{statistic}{definition of the test statistic. See Details.}
+\item{inherit}{a character string specifying the type of permutation test.}
 
-\item{inherit}{a character string specifying the desired permutation test.}
+\item{statistic}{definition of the test statistic. See Details.}
 
 \item{rejection}{a character string specifying where the rejection region is.}
 
-\item{scoring, n_permu}{passed to the constructor.}
+\item{scoring}{one of:
+- a character string in \code{c("none", "rank", "vw", "expon")} specifying the scoring system
+- a function that takes a numeric vector and returns an equal-length score vector}
+
+\item{n_permu}{an integer indicating number of permutations for the permutation distribution. If set to \code{0}, all permutations will be used.}
 
 \item{name}{a character string specifying the name of the test.}
 
-\item{alternative}{a character string specifying the alternative of the test.}
+\item{alternative}{a character string describing the alternative hypothesis.}
 
 \item{depends, plugins, includes}{passed to \code{\link[Rcpp:cppFunction]{Rcpp::cppFunction()}}.}
 }
@@ -58,13 +62,13 @@ a test object based on the specified statistic.
 Construct test objects in a unified way.
 }
 \details{
-The test statistic in \code{define_pmt} can be defined using either \code{R} or \code{Rcpp}, with the \code{statistic} parameter specified as:
+The test statistic can be defined using either \code{R} or \code{Rcpp}, with the \code{statistic} parameter specified as:
 \itemize{
 \item \code{R}: a function returning a closure that returns a double.
 \item \code{Rcpp}: a character string defining a captureless lambda (since C++11) returning another lambda that captures by value, accepts parameters of the same type as const references, and returns a double.
 }
 
-When using \code{Rcpp}, the parameters for different \code{inherit} are listed as follows. Note that the parameter names are illustrative and may be modified.
+When using \code{Rcpp}, the parameters for different \code{inherit} are listed as follows. Note that the parameter names are for illustration only.
 \itemize{
 \item \code{"twosample"}: \verb{(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)}
 \item \code{"ksample"}: \verb{(Rcpp::NumericVector combined_sample, Rcpp::IntegerVector one_based_group_index)}
@@ -81,9 +85,19 @@ pmt("twosample.wilcoxon")
 
 pmts("ksample")
 
+x <- rnorm(100)
+y <- rnorm(100, 1)
+
+t <- define_pmt(
+    inherit = "twosample",
+    scoring = base::rank, # equivalent to "rank"
+    statistic = function(...) function(x, y) sum(x)
+)$test(x, y)$print()
+
 \donttest{
 r <- define_pmt(
-    inherit = "twosample", rejection = "lr", n_permu = 1e5,
+    inherit = "twosample",
+    n_permu = 1e5,
     statistic = function(x, y) {
         m <- length(x)
         n <- length(y)
@@ -92,7 +106,8 @@ r <- define_pmt(
 )
 
 rcpp <- define_pmt(
-    inherit = "twosample", rejection = "lr", n_permu = 1e5,
+    inherit = "twosample",
+    n_permu = 1e5,
     statistic = "[](NumericVector x, NumericVector y) {
         R_len_t m = x.size();
         R_len_t n = y.size();
@@ -102,8 +117,6 @@ rcpp <- define_pmt(
     }"
 )
 
-x <- rnorm(100)
-y <- rnorm(100, 1)
 options(LearnNonparam.pmt_progress = FALSE)
 system.time(r$test(x, y))
 system.time(rcpp$test(x, y))

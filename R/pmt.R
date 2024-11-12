@@ -95,22 +95,26 @@ pmts <- function(
 
 #' @rdname pmt
 #' 
+#' @param inherit a character string specifying the type of permutation test.
 #' @param statistic definition of the test statistic. See Details.
-#' @param inherit a character string specifying the desired permutation test.
 #' @param rejection a character string specifying where the rejection region is.
-#' @param scoring,n_permu passed to the constructor.
+#' @param scoring one of:
+#'      - a character string in `c("none", "rank", "vw", "expon")` specifying the scoring system
+#'      - a function that takes a numeric vector and returns an equal-length score vector
+#' @param n_permu an integer indicating number of permutations for the permutation distribution. If set to `0`, all permutations will be used.
 #' @param name a character string specifying the name of the test.
-#' @param alternative a character string specifying the alternative of the test.
+#' @param alternative a character string describing the alternative hypothesis.
 #' @param depends,plugins,includes passed to [Rcpp::cppFunction()].
 #' 
 #' @return a test object based on the specified statistic.
 #' 
-#' @details The test statistic in `define_pmt` can be defined using either `R` or `Rcpp`, with the `statistic` parameter specified as:
+#' @details
+#' The test statistic can be defined using either `R` or `Rcpp`, with the `statistic` parameter specified as:
 #' 
 #' - `R`: a function returning a closure that returns a double.
 #' - `Rcpp`: a character string defining a captureless lambda (since C++11) returning another lambda that captures by value, accepts parameters of the same type as const references, and returns a double.
 #' 
-#' When using `Rcpp`, the parameters for different `inherit` are listed as follows. Note that the parameter names are illustrative and may be modified.
+#' When using `Rcpp`, the parameters for different `inherit` are listed as follows. Note that the parameter names are for illustration only.
 #' 
 #' - `"twosample"`: `(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)`
 #' - `"ksample"`: `(Rcpp::NumericVector combined_sample, Rcpp::IntegerVector one_based_group_index)`
@@ -122,9 +126,19 @@ pmts <- function(
 #' Defining the test statistic using `R` follows a similar approach. The purpose of this design is to pre-calculate certain constants that remain invariant during permutation.
 #' 
 #' @examples
+#' x <- rnorm(100)
+#' y <- rnorm(100, 1)
+#' 
+#' t <- define_pmt(
+#'     inherit = "twosample",
+#'     scoring = base::rank, # equivalent to "rank"
+#'     statistic = function(...) function(x, y) sum(x)
+#' )$test(x, y)$print()
+#' 
 #' \donttest{
 #' r <- define_pmt(
-#'     inherit = "twosample", rejection = "lr", n_permu = 1e5,
+#'     inherit = "twosample",
+#'     n_permu = 1e5,
 #'     statistic = function(x, y) {
 #'         m <- length(x)
 #'         n <- length(y)
@@ -133,7 +147,8 @@ pmts <- function(
 #' )
 #' 
 #' rcpp <- define_pmt(
-#'     inherit = "twosample", rejection = "lr", n_permu = 1e5,
+#'     inherit = "twosample",
+#'     n_permu = 1e5,
 #'     statistic = "[](NumericVector x, NumericVector y) {
 #'         R_len_t m = x.size();
 #'         R_len_t n = y.size();
@@ -143,8 +158,6 @@ pmts <- function(
 #'     }"
 #' )
 #' 
-#' x <- rnorm(100)
-#' y <- rnorm(100, 1)
 #' options(LearnNonparam.pmt_progress = FALSE)
 #' system.time(r$test(x, y))
 #' system.time(rcpp$test(x, y))
@@ -157,14 +170,12 @@ pmts <- function(
 #' @importFrom compiler cmpfun
 
 define_pmt <- function(
-    statistic,
     inherit = c(
-        "twosample", "ksample",
-        "paired", "rcbd",
-        "association", "table"
+        "twosample", "ksample", "paired", "rcbd", "association", "table"
     ),
+    statistic,
     rejection = c("lr", "l", "r"),
-    scoring = c("none", "rank", "vw", "expon"), n_permu = 1e4,
+    scoring = "none", n_permu = 1e4,
     name = "User-Defined Permutation Test", alternative = NULL,
     depends = character(), plugins = character(), includes = character()
 ) {
@@ -188,7 +199,8 @@ define_pmt <- function(
             table = ContingencyTableTest
         ),
         public = list(
-            initialize = function(n_permu) {
+            initialize = function(scoring, n_permu) {
+                self$scoring <- scoring
                 self$n_permu <- n_permu
 
                 if (typeof(statistic) == "closure") {
@@ -232,7 +244,7 @@ define_pmt <- function(
         private = list(
             .name = if (!missing(name)) as.character(name) else name,
             .alternative = if (!missing(alternative)) as.character(alternative),
-            .scoring = match.arg(scoring),
+
             .side = match.arg(rejection),
 
             .calculate = function() {
@@ -246,6 +258,34 @@ define_pmt <- function(
                 private$.calculate_n_permu()
                 private$.calculate_p_permu()
             }
+        ),
+        active = list(
+            scoring = function(value) {
+                if (missing(value)) {
+                    return(private$.scoring)
+                } else if (is.character(value)) {
+                    private$.scoring <- match.arg(
+                        value, c("none", "rank", "vw", "expon")
+                    )
+                } else if (is.function(value)) {
+                    private$.scoring <- "custom"
+                    assign(
+                        envir = environment(super$.calculate_score),
+                        "get_score", function(x, ...) {
+                            score <- value(x)
+                            if (
+                                is.numeric(score) && length(score) == length(x)
+                            ) score else stop("Invalid scoring system")
+                        }
+                    )
+                } else {
+                    stop("'scoring' must be a character string or a function")
+                }
+
+                if (!is.null(private$.raw_data)) {
+                    private$.on_scoring_change()
+                }
+            }
         )
-    )$new(n_permu)
+    )$new(scoring, n_permu)
 }
