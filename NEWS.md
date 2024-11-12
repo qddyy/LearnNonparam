@@ -1,3 +1,15 @@
+# LearnNonparam 1.2.4
+
+- R side
+    - Added support for custom scoring systems in `define_pmt`
+    - Enabled compatibility with C++ standard versions beyond C++14 in `define_pmt`
+    - Improved the performance of `KruskalWallis`, `OneWay`, and `Studentized`
+    - Replaced certain `warning()` calls with `stop()`
+    - Refined some text
+
+- C++ side
+    - Enhanced permuting efficiency in `twosample_pmt`
+
 # LearnNonparam 1.2.3
 
 - Improved `twosample_pmt`
