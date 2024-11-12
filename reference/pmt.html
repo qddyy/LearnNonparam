@@ -46,10 +46,10 @@
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">define_pmt</span><span class="op">(</span></span>
-<span>  <span class="va">statistic</span>,</span>
 <span>  inherit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"twosample"</span>, <span class="st">"ksample"</span>, <span class="st">"paired"</span>, <span class="st">"rcbd"</span>, <span class="st">"association"</span>, <span class="st">"table"</span><span class="op">)</span>,</span>
+<span>  <span class="va">statistic</span>,</span>
 <span>  rejection <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lr"</span>, <span class="st">"l"</span>, <span class="st">"r"</span><span class="op">)</span>,</span>
-<span>  scoring <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"none"</span>, <span class="st">"rank"</span>, <span class="st">"vw"</span>, <span class="st">"expon"</span><span class="op">)</span>,</span>
+<span>  scoring <span class="op">=</span> <span class="st">"none"</span>,</span>
 <span>  n_permu <span class="op">=</span> <span class="fl">10000</span>,</span>
 <span>  name <span class="op">=</span> <span class="st">"User-Defined Permutation Test"</span>,</span>
 <span>  alternative <span class="op">=</span> <span class="cn">NULL</span>,</span>
@@ -75,20 +75,26 @@
 <dd><p>a character string specifying the desired tests.</p></dd>
 
 
+<dt id="arg-inherit">inherit<a class="anchor" aria-label="anchor" href="#arg-inherit"></a></dt>
+<dd><p>a character string specifying the type of permutation test.</p></dd>
+
+
 <dt id="arg-statistic">statistic<a class="anchor" aria-label="anchor" href="#arg-statistic"></a></dt>
 <dd><p>definition of the test statistic. See Details.</p></dd>
-
-
-<dt id="arg-inherit">inherit<a class="anchor" aria-label="anchor" href="#arg-inherit"></a></dt>
-<dd><p>a character string specifying the desired permutation test.</p></dd>
 
 
 <dt id="arg-rejection">rejection<a class="anchor" aria-label="anchor" href="#arg-rejection"></a></dt>
 <dd><p>a character string specifying where the rejection region is.</p></dd>
 
 
-<dt id="arg-scoring-n-permu">scoring, n_permu<a class="anchor" aria-label="anchor" href="#arg-scoring-n-permu"></a></dt>
-<dd><p>passed to the constructor.</p></dd>
+<dt id="arg-scoring">scoring<a class="anchor" aria-label="anchor" href="#arg-scoring"></a></dt>
+<dd><p>one of:
+- a character string in <code>c("none", "rank", "vw", "expon")</code> specifying the scoring system
+- a function that takes a numeric vector and returns an equal-length score vector</p></dd>
+
+
+<dt id="arg-n-permu">n_permu<a class="anchor" aria-label="anchor" href="#arg-n-permu"></a></dt>
+<dd><p>an integer indicating number of permutations for the permutation distribution. If set to <code>0</code>, all permutations will be used.</p></dd>
 
 
 <dt id="arg-name">name<a class="anchor" aria-label="anchor" href="#arg-name"></a></dt>
@@ -96,7 +102,7 @@
 
 
 <dt id="arg-alternative">alternative<a class="anchor" aria-label="anchor" href="#arg-alternative"></a></dt>
-<dd><p>a character string specifying the alternative of the test.</p></dd>
+<dd><p>a character string describing the alternative hypothesis.</p></dd>
 
 
 <dt id="arg-depends-plugins-includes">depends, plugins, includes<a class="anchor" aria-label="anchor" href="#arg-depends-plugins-includes"></a></dt>
@@ -111,9 +117,9 @@
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The test statistic in <code>define_pmt</code> can be defined using either <code>R</code> or <code>Rcpp</code>, with the <code>statistic</code> parameter specified as:</p><ul><li><p><code>R</code>: a function returning a closure that returns a double.</p></li>
+    <p>The test statistic can be defined using either <code>R</code> or <code>Rcpp</code>, with the <code>statistic</code> parameter specified as:</p><ul><li><p><code>R</code>: a function returning a closure that returns a double.</p></li>
 <li><p><code>Rcpp</code>: a character string defining a captureless lambda (since C++11) returning another lambda that captures by value, accepts parameters of the same type as const references, and returns a double.</p></li>
-</ul><p>When using <code>Rcpp</code>, the parameters for different <code>inherit</code> are listed as follows. Note that the parameter names are illustrative and may be modified.</p><ul><li><p><code>"twosample"</code>: <code>(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)</code></p></li>
+</ul><p>When using <code>Rcpp</code>, the parameters for different <code>inherit</code> are listed as follows. Note that the parameter names are for illustration only.</p><ul><li><p><code>"twosample"</code>: <code>(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)</code></p></li>
 <li><p><code>"ksample"</code>: <code>(Rcpp::NumericVector combined_sample, Rcpp::IntegerVector one_based_group_index)</code></p></li>
 <li><p><code>"paired"</code>: <code>(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)</code></p></li>
 <li><p><code>"rcbd"</code>: <code>(Rcpp::NumericMatrix block_as_column_data)</code></p></li>
@@ -194,9 +200,24 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> 2     ksample.kw      KruskalWallis          Kruskal-Wallis Test</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> 3     ksample.jt JonckheereTerpstra     Jonckheere-Terpstra Test</span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span><span class="op">)</span></span></span>
+<span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu">define_pmt</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    inherit <span class="op">=</span> <span class="st">"twosample"</span>,</span></span>
+<span class="r-in"><span>    scoring <span class="op">=</span> <span class="fu">base</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/base/rank.html" class="external-link">rank</a></span>, <span class="co"># equivalent to "rank"</span></span></span>
+<span class="r-in"><span>    statistic <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>  	 User-Defined Permutation Test </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> scoring: custom    type: permu(10000)    method: default</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> statistic = 7200, p-value &lt; 2.220446e-16</span>
+<span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">define_pmt</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    inherit <span class="op">=</span> <span class="st">"twosample"</span>, rejection <span class="op">=</span> <span class="st">"lr"</span>, n_permu <span class="op">=</span> <span class="fl">1e5</span>,</span></span>
+<span class="r-in"><span>    inherit <span class="op">=</span> <span class="st">"twosample"</span>,</span></span>
+<span class="r-in"><span>    n_permu <span class="op">=</span> <span class="fl">1e5</span>,</span></span>
 <span class="r-in"><span>    statistic <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>        <span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-in"><span>        <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></span>
@@ -205,7 +226,8 @@
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">rcpp</span> <span class="op">&lt;-</span> <span class="fu">define_pmt</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    inherit <span class="op">=</span> <span class="st">"twosample"</span>, rejection <span class="op">=</span> <span class="st">"lr"</span>, n_permu <span class="op">=</span> <span class="fl">1e5</span>,</span></span>
+<span class="r-in"><span>    inherit <span class="op">=</span> <span class="st">"twosample"</span>,</span></span>
+<span class="r-in"><span>    n_permu <span class="op">=</span> <span class="fl">1e5</span>,</span></span>
 <span class="r-in"><span>    statistic <span class="op">=</span> <span class="st">"[](NumericVector x, NumericVector y) {</span></span></span>
 <span class="r-in"><span><span class="st">        R_len_t m = x.size();</span></span></span>
 <span class="r-in"><span><span class="st">        R_len_t n = y.size();</span></span></span>
@@ -215,12 +237,10 @@
 <span class="r-in"><span><span class="st">    }"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
-<span class="r-in"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span><span class="op">)</span></span></span>
-<span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">100</span>, <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>LearnNonparam.pmt_progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">r</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.285   0.000   0.286 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.285   0.000   0.285 </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">rcpp</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   0.183   0.000   0.183 </span>
