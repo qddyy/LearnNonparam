@@ -49,7 +49,7 @@ Create a new \code{ScoreSum} object.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{scoring}}{a character string specifying which scoring system to use.}
+\item{\code{scoring}}{a character string specifying the scoring system.}
 
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 

@@ -75,7 +75,7 @@ Create a new \code{PairedDifference} object.
 
 \item{\code{method}}{a character string specifying the method of ranking data in computing adjusted signed scores for tied data, must be one of \code{"with_zeros"} (default) or \code{"without_zeros"}.}
 
-\item{\code{scoring}}{a character string specifying which scoring system to use.}
+\item{\code{scoring}}{a character string specifying the scoring system.}
 
 \item{\code{alternative}}{a character string specifying the alternative hypothesis.}
 

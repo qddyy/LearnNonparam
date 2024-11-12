@@ -56,7 +56,7 @@ Create a new \code{KruskalWallis} object.
 \describe{
 \item{\code{type}}{a character string specifying the way to calculate the p-value.}
 
-\item{\code{scoring}}{a character string specifying which scoring system to use.}
+\item{\code{scoring}}{a character string specifying the scoring system.}
 
 \item{\code{n_permu}}{an integer indicating number of permutations for the permutation distribution. If set to \code{0}, all permutations will be used.}
 }

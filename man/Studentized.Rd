@@ -68,7 +68,7 @@ Create a new \code{Studentized} object.
 
 \item{\code{method}}{a character string specifying whether to use Bonferroni's method or Tukey's HSD method.}
 
-\item{\code{scoring}}{a character string specifying which scoring system to use.}
+\item{\code{scoring}}{a character string specifying the scoring system.}
 
 \item{\code{conf_level}}{a number between zero and one indicating the family-wise confidence level to use.}
 
