@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">LearnNonparam</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.3</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.4</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,6 +31,24 @@
       <small>Source: <a href="https://github.com/qddyy/LearnNonparam/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.2.4" id="learnnonparam-124">LearnNonparam 1.2.4<a class="anchor" aria-label="anchor" href="#learnnonparam-124"></a></h2>
+<ul><li>R side
+<ul><li>Added support for custom scoring systems in <code>define_pmt</code>
+</li>
+<li>Enabled compatibility with C++ standard versions beyond C++14 in <code>define_pmt</code>
+</li>
+<li>Improved the performance of <code>KruskalWallis</code>, <code>OneWay</code>, and <code>Studentized</code>
+</li>
+<li>Replaced certain <code><a href="https://rdrr.io/r/base/warning.html" class="external-link">warning()</a></code> calls with <code><a href="https://rdrr.io/r/base/stop.html" class="external-link">stop()</a></code>
+</li>
+<li>Refined some text</li>
+</ul></li>
+<li>C++ side
+<ul><li>Enhanced permuting efficiency in <code>twosample_pmt</code>
+</li>
+</ul></li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.2.3" id="learnnonparam-123">LearnNonparam 1.2.3<a class="anchor" aria-label="anchor" href="#learnnonparam-123"></a></h2><p class="text-muted">CRAN release: 2024-10-15</p>
 <ul><li>Improved <code>twosample_pmt</code>
