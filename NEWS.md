@@ -1,3 +1,9 @@
+# LearnNonparam 1.2.5
+
+- Added support for `scoring` as an active binding in `define_pmt`
+- Corrected x-axis range in `plot()` when `style = "graphics"`
+- Improved the performance of `PairedDifference`
+
 # LearnNonparam 1.2.4
 
 - R side

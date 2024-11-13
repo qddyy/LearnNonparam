@@ -69,7 +69,6 @@ PermuTest <- R6Class(
 
         .n_permu = NULL,
 
-        .data_name = NULL,
         .raw_data = NULL,
         .data = NULL,
 
