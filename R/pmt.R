@@ -265,22 +265,21 @@ define_pmt <- function(
                     return(private$.scoring)
                 } else if (is.character(value)) {
                     private$.scoring <- match.arg(
-                        value, c("none", "rank", "vw", "expon")
+                        value, choices = c("none", "rank", "vw", "expon")
                     )
                 } else if (is.function(value)) {
                     private$.scoring <- "custom"
-                    assign(
-                        envir = environment(super$.calculate_score),
-                        "get_score", function(x, ...) {
-                            score <- value(x)
-                            if (
-                                is.numeric(score) && length(score) == length(x)
-                            ) score else stop("Invalid scoring system")
-                        }
-                    )
+                    get_score <- function(x, ...) {
+                        score <- value(x)
+                        if (!is.numeric(score) || length(score) != length(x)) {
+                            stop("Invalid scoring system")
+                        } else score
+                    }
                 } else {
                     stop("'scoring' must be a character string or a function")
                 }
+
+                environment(super$.calculate_score)$get_score <- get_score
 
                 if (!is.null(private$.raw_data)) {
                     private$.on_scoring_change()
