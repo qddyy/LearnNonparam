@@ -126,14 +126,20 @@ pmts <- function(
 #' Defining the test statistic using `R` follows a similar approach. The purpose of this design is to pre-calculate certain constants that remain invariant during permutation.
 #' 
 #' @examples
-#' x <- rnorm(100)
-#' y <- rnorm(100, 1)
+#' x <- rnorm(5)
+#' y <- rnorm(5, 1)
 #' 
 #' t <- define_pmt(
 #'     inherit = "twosample",
 #'     scoring = base::rank, # equivalent to "rank"
 #'     statistic = function(...) function(x, y) sum(x)
 #' )$test(x, y)$print()
+#' 
+#' t$scoring <- function(x) qnorm(rank(x) / (length(x) + 1)) # equivalent to "vw"
+#' t$print()
+#' 
+#' t$n_permu <- 0
+#' t$print()
 #' 
 #' \donttest{
 #' r <- define_pmt(
