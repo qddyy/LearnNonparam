@@ -86,7 +86,7 @@ PairedDifference <- R6Class(
                 } else score
             } else abs(private$.data$x)
 
-            private$.statistic_func <- function(x, y) sum(abs_diff[x > y])
+            private$.statistic_func <- function(x, y) sum(abs_diff * (x > y))
         },
 
         .calculate_p = function() {
