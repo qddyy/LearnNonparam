@@ -6,7 +6,7 @@
 #' 
 #' @importFrom R6 R6Class
 #' @importFrom compiler cmpfun
-#' @importFrom graphics hist abline
+#' @importFrom graphics hist.default abline
 
 
 PermuTest <- R6Class(
@@ -41,7 +41,7 @@ PermuTest <- R6Class(
         #' @description Plot histogram(s) of the permutation distribution. Note that this method only works if `type` is set to `"permu"`.
         #' 
         #' @template plot_params
-        #' @param ... passed to [graphics::hist()] or [ggplot2::stat_bin()].
+        #' @param ... passed to [graphics::hist.default()] or [ggplot2::stat_bin()].
         #' 
         #' @return The object itself (invisibly).
         plot = function(style = c("graphics", "ggplot2"), ...) {
@@ -270,11 +270,12 @@ PermuTest <- R6Class(
 
         .plot = function(...) {
             do_call(
-                func = hist,
+                func = hist.default,
                 default = list(border = "white"),
                 fixed = list(
-                    x = attr(private$.statistic, "permu"),
                     plot = TRUE,
+                    x = attr(private$.statistic, "permu"),
+                    xlim = bquote(range(breaks, .(private$.statistic))),
                     xlab = "Statistic",
                     main = "Permutation Distribution"
                 ), ...
@@ -289,10 +290,8 @@ PermuTest <- R6Class(
                     default = list(fill = "gray"),
                     fixed = list(
                         geom = "bar",
-                        mapping = ggplot2::aes(x = .data$statistic),
-                        data = data.frame(
-                            statistic = attr(private$.statistic, "permu")
-                        )
+                        mapping = ggplot2::aes(x = .data$x),
+                        data = data.frame(x = attr(private$.statistic, "permu"))
                     ), ...
                 ) +
                 ggplot2::geom_vline(

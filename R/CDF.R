@@ -109,10 +109,10 @@ CDF <- R6Class(
         .autoplot = function() {
             ggplot2::ggplot() +
                 ggplot2::geom_step(
-                    mapping = ggplot2::aes(x = .data$x, y = .data$ecdf),
+                    mapping = ggplot2::aes(x = .data$x, y = .data$y),
                     data = data.frame(
                         x = c(private$.data[1], private$.data),
-                        ecdf = c(0, private$.estimate(private$.data))
+                        y = c(0, private$.estimate(private$.data))
                     ), linetype = "solid"
                 ) +
                 ggplot2::geom_rect(

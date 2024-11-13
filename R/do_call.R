@@ -1,11 +1,19 @@
-do_call <- function(func, default = NULL, fixed = NULL, ...) {
-    env_args <- list2env(as.list(default))
-    env_args <- list2env(list(...), envir = env_args)
-    env_args <- list2env(as.list(fixed), envir = env_args)
+# Updates the formals of a function with specified arguments before calling it.
+# Enables non-standard evaluation by allowing expressions in certain arguments.
+# Example: `do_call(func, list(args = bquote(.(constant_here) + symbol_here)))`
+do_call <- function(func, default = list(), fixed = list(), ...) {
+    # use `as.list()` because `formals()` returns a pairlist
+    formals <- as.environment(as.list(formals(func)))
 
-    args <- names(env_args)
-    eval(
-        as.call(c(func, lapply(`names<-`(args, args), as.name))),
-        envir = env_args, enclos = parent.frame()
-    )
+    formal_names <- names(formals)
+
+    # use `base::list2env()` over `utils::modifyList()` for minimal dependency
+    formals <- list2env(envir = formals, default)
+    formals <- list2env(envir = formals, list(...))
+    formals <- list2env(envir = formals, fixed)
+
+    formals <- as.list.environment(formals, all.names = TRUE)[formal_names]
+
+    # `func` should be non-primitive
+    `formals<-`(func, value = formals)()
 }

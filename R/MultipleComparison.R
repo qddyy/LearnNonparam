@@ -6,7 +6,7 @@
 #' 
 #' @importFrom R6 R6Class
 #' @importFrom compiler cmpfun
-#' @importFrom graphics par layout mtext hist abline
+#' @importFrom graphics par layout mtext hist.default abline
 
 
 MultipleComparison <- R6Class(
@@ -140,19 +140,23 @@ MultipleComparison <- R6Class(
             .mapply(
                 dots = dots, MoreArgs = NULL, FUN = {
                     data_names <- names(private$.raw_data)
-                    statistic_permu <- attr(private$.statistic, "permu")
+
+                    statistic <- private$.statistic
+                    statistic_permu <- attr(statistic, "permu")
+
                     function(i, j, k) {
                         do_call(
-                            func = hist,
+                            func = hist.default,
                             default = list(border = "white"),
                             fixed = list(
-                                x = statistic_permu[k, ],
                                 plot = TRUE,
+                                x = statistic_permu[k, ],
+                                xlim = bquote(range(breaks, .(statistic[k]))),
                                 xlab = "Statistic",
                                 main = paste(data_names[i], "~", data_names[j])
                             ), ...
                         )
-                        abline(v = private$.statistic[k], lty = "dashed")
+                        abline(v = statistic[k], lty = "dashed")
                     }
                 }
             )
@@ -169,13 +173,11 @@ MultipleComparison <- R6Class(
                     default = list(fill = "gray"),
                     fixed = list(
                         geom = "bar",
-                        mapping = ggplot2::aes(x = .data$statistic),
+                        mapping = ggplot2::aes(x = .data$x),
                         data = data.frame(
                             i = rep.int(private$.group_ij$i, private$.n_permu),
                             j = rep.int(private$.group_ij$j, private$.n_permu),
-                            statistic = `attr<-`(
-                                attr(private$.statistic, "permu"), "dim", NULL
-                            )
+                            x = as.vector(attr(private$.statistic, "permu"))
                         )
                     ), ...
                 ) +
