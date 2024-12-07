@@ -5,31 +5,29 @@
 
 constexpr unsigned bar_width = 50;
 
-using ProgressBar = std::array<char, bar_width + 19>;
+using progress_bar = std::array<char, bar_width + 19>;
 
 constexpr std::array<char, 10> num_char_map = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
-template <unsigned n, unsigned... Is>
-constexpr auto generate_bar(std::integer_sequence<unsigned, Is...>)
+template <unsigned n, unsigned... seq>
+constexpr progress_bar generate_bar(std::integer_sequence<unsigned, seq...>)
 {
-    unsigned fill = n * bar_width / 100;
-    return ProgressBar {
+    constexpr unsigned fill = n * bar_width / 100;
+    return {
         '\015',
         '\033', '[', '3', '1', 'm',
         (n < 10) ? ' ' : num_char_map[n / 10],
         (n < 10) ? num_char_map[n] : num_char_map[n % 10], '%',
         '\033', '[', '3', '6', 'm',
-        ' ', '|', (Is + 1 < fill ? '-' : (Is + 1 == fill ? '>' : ' '))..., '|', ' ',
+        ' ', '|', (seq + 1 < fill ? '-' : (seq + 1 == fill ? '>' : ' '))..., '|', ' ',
         '\0'
     };
 }
 
-template <unsigned... Is>
-constexpr auto generate_bars(std::integer_sequence<unsigned, Is...>)
+template <unsigned... seq>
+constexpr std::array<progress_bar, sizeof...(seq)> generate_bars(std::integer_sequence<unsigned, seq...>)
 {
-    return std::array<ProgressBar, sizeof...(Is)> {
-        generate_bar<Is>(std::make_integer_sequence<unsigned, bar_width>())...
-    };
+    return { generate_bar<seq>(std::make_integer_sequence<unsigned, bar_width>())... };
 }
 
 constexpr auto generated_bars = generate_bars(std::make_integer_sequence<unsigned, 100>());

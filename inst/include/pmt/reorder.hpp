@@ -9,7 +9,7 @@ T rand_int(T n)
 }
 
 template <typename T>
-void random_shuffle(T v)
+void random_shuffle(T&& v)
 {
     R_len_t n = v.size();
 
@@ -21,13 +21,13 @@ void random_shuffle(T v)
 }
 
 template <typename T>
-bool next_permutation(T v)
+bool next_permutation(T&& v)
 {
     return std::next_permutation(v.begin(), v.end());
 }
 
 template <typename T>
-double n_permutation(T v)
+double n_permutation(const T& v)
 {
     double A = 1;
 

@@ -14,16 +14,15 @@ NumericVector impl_twosample_pmt(
 
     bar.init_statistic(twosample_update);
 
-    // permuting based on the shorter
-    NumericVector x_ = x.size() < y.size() ? x : y;
-    NumericVector y_ = x.size() < y.size() ? y : x;
-
-    R_len_t m = x_.size();
-    R_len_t n = x_.size() + y_.size();
-
     if (!std::isnan(n_permu)) {
-        R_len_t i, j;
+        // permuting based on the shorter
+        NumericVector x_ = x.size() < y.size() ? x : y;
+        NumericVector y_ = x.size() < y.size() ? y : x;
 
+        R_len_t m = x_.size();
+        R_len_t n = x_.size() + y_.size();
+
+        R_len_t i, j;
         if (n_permu == 0) {
             IntegerVector p(n, 0);
 
