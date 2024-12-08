@@ -5,18 +5,32 @@ using namespace Rcpp;
 #include "pmt/progress.hpp"
 #include "pmt/reorder.hpp"
 
+template <bool sharing_params>
 class StatFunc : public Function {
 public:
     using Function::Function;
 
     template <typename... Args>
-    auto operator()(Args&&... args) const
-    {
-        return [r_closure = Function(Function::operator()(std::forward<Args>(args)...))](auto&&... args) {
-            return as<double>(r_closure(std::forward<decltype(args)>(args)...));
-        };
-    }
+    auto operator()(Args&&... args) const;
 };
+
+template <>
+template <typename... Args>
+auto StatFunc<false>::operator()(Args&&... args) const
+{
+    return [r_closure = Function(Function::operator()(std::forward<Args>(args)...))](auto&&... args) {
+        return as<double>(r_closure(std::forward<decltype(args)>(args)...));
+    };
+}
+
+template <>
+template <typename... Args>
+auto StatFunc<true>::operator()(Args&&... args) const
+{
+    return [r_eval = [](void* expr) { return Rf_eval(*static_cast<SEXP*>(expr), R_GlobalEnv); }, r_call = RObject(Rf_lcons(Function(Function::operator()(std::forward<Args>(args)...)), Pairlist(std::forward<Args>(args)...)))](auto&&...) mutable {
+        return as<double>(unwindProtect(r_eval, static_cast<void*>(&r_call)));
+    };
+}
 
 #include "pmt/impl_twosample_pmt.hpp"
 
@@ -29,8 +43,8 @@ SEXP twosample_pmt(
     const bool progress)
 {
     return progress ?
-        impl_twosample_pmt<PermuBarShow, StatFunc>(clone(x), clone(y), statistic_func, n_permu) :
-        impl_twosample_pmt<PermuBarHide, StatFunc>(clone(x), clone(y), statistic_func, n_permu);
+        impl_twosample_pmt<PermuBarShow, StatFunc<true>>(clone(x), clone(y), statistic_func, n_permu) :
+        impl_twosample_pmt<PermuBarHide, StatFunc<true>>(clone(x), clone(y), statistic_func, n_permu);
 }
 
 #include "pmt/impl_ksample_pmt.hpp"
@@ -44,8 +58,8 @@ SEXP ksample_pmt(
     const bool progress)
 {
     return progress ?
-        impl_ksample_pmt<PermuBarShow, StatFunc>(data, clone(group), statistic_func, n_permu) :
-        impl_ksample_pmt<PermuBarHide, StatFunc>(data, clone(group), statistic_func, n_permu);
+        impl_ksample_pmt<PermuBarShow, StatFunc<true>>(data, clone(group), statistic_func, n_permu) :
+        impl_ksample_pmt<PermuBarHide, StatFunc<true>>(data, clone(group), statistic_func, n_permu);
 }
 
 #include "pmt/impl_multcomp_pmt.hpp"
@@ -61,8 +75,8 @@ SEXP multcomp_pmt(
     const bool progress)
 {
     return progress ?
-        impl_multcomp_pmt<PermuBarShow, StatFunc>(group_i, group_j, data, clone(group), statistic_func, n_permu) :
-        impl_multcomp_pmt<PermuBarHide, StatFunc>(group_i, group_j, data, clone(group), statistic_func, n_permu);
+        impl_multcomp_pmt<PermuBarShow, StatFunc<false>>(group_i, group_j, data, clone(group), statistic_func, n_permu) :
+        impl_multcomp_pmt<PermuBarHide, StatFunc<false>>(group_i, group_j, data, clone(group), statistic_func, n_permu);
 }
 
 #include "pmt/impl_paired_pmt.hpp"
@@ -76,8 +90,8 @@ SEXP paired_pmt(
     const bool progress)
 {
     return progress ?
-        impl_paired_pmt<PermuBarShow, StatFunc>(clone(x), clone(y), statistic_func, n_permu) :
-        impl_paired_pmt<PermuBarHide, StatFunc>(clone(x), clone(y), statistic_func, n_permu);
+        impl_paired_pmt<PermuBarShow, StatFunc<true>>(clone(x), clone(y), statistic_func, n_permu) :
+        impl_paired_pmt<PermuBarHide, StatFunc<true>>(clone(x), clone(y), statistic_func, n_permu);
 }
 
 #include "pmt/impl_rcbd_pmt.hpp"
@@ -90,8 +104,8 @@ SEXP rcbd_pmt(
     const bool progress)
 {
     return progress ?
-        impl_rcbd_pmt<PermuBarShow, StatFunc>(clone(data), statistic_func, n_permu) :
-        impl_rcbd_pmt<PermuBarHide, StatFunc>(clone(data), statistic_func, n_permu);
+        impl_rcbd_pmt<PermuBarShow, StatFunc<true>>(clone(data), statistic_func, n_permu) :
+        impl_rcbd_pmt<PermuBarHide, StatFunc<true>>(clone(data), statistic_func, n_permu);
 }
 
 #include "pmt/impl_association_pmt.hpp"
@@ -105,8 +119,8 @@ SEXP association_pmt(
     const bool progress)
 {
     return progress ?
-        impl_association_pmt<PermuBarShow, StatFunc>(x, clone(y), statistic_func, n_permu) :
-        impl_association_pmt<PermuBarHide, StatFunc>(x, clone(y), statistic_func, n_permu);
+        impl_association_pmt<PermuBarShow, StatFunc<true>>(x, clone(y), statistic_func, n_permu) :
+        impl_association_pmt<PermuBarHide, StatFunc<true>>(x, clone(y), statistic_func, n_permu);
 }
 
 #include "pmt/impl_table_pmt.hpp"
@@ -120,6 +134,6 @@ SEXP table_pmt(
     const bool progress)
 {
     return progress ?
-        impl_table_pmt<PermuBarShow, StatFunc>(row, clone(col), statistic_func, n_permu) :
-        impl_table_pmt<PermuBarHide, StatFunc>(row, clone(col), statistic_func, n_permu);
+        impl_table_pmt<PermuBarShow, StatFunc<true>>(row, clone(col), statistic_func, n_permu) :
+        impl_table_pmt<PermuBarHide, StatFunc<true>>(row, clone(col), statistic_func, n_permu);
 }
