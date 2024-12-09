@@ -1,6 +1,6 @@
 template <typename T, typename U>
 NumericVector impl_table_pmt(
-    const IntegerVector row,
+    IntegerVector row,
     IntegerVector col,
     const U& statistic_func,
     const double n_permu)
@@ -28,11 +28,15 @@ NumericVector impl_table_pmt(
 
     if (!std::isnan(n_permu)) {
         if (n_permu == 0) {
-            bar.init_statistic_permu(n_permutation(col));
+            std::sort(row.begin(), row.end());
+
+            IntegerVector col_ = (n_permutation(row) < n_permutation(col)) ? row : col;
+
+            bar.init_statistic_permu(n_permutation(col_));
 
             do {
                 table_update();
-            } while (next_permutation(col));
+            } while (next_permutation(col_));
         } else {
             bar.init_statistic_permu(n_permu);
 

@@ -1,6 +1,6 @@
 template <typename T, typename U>
 NumericVector impl_association_pmt(
-    const NumericVector x,
+    NumericVector x,
     NumericVector y,
     const U& statistic_func,
     const double n_permu)
@@ -16,13 +16,16 @@ NumericVector impl_association_pmt(
 
     if (!std::isnan(n_permu)) {
         if (n_permu == 0) {
+            std::sort(x.begin(), x.end());
             std::sort(y.begin(), y.end());
 
-            bar.init_statistic_permu(n_permutation(y));
+            NumericVector y_ = (n_permutation(x) < n_permutation(y)) ? x : y;
+
+            bar.init_statistic_permu(n_permutation(y_));
 
             do {
                 association_update();
-            } while (next_permutation(y));
+            } while (next_permutation(y_));
         } else {
             bar.init_statistic_permu(n_permu);
 

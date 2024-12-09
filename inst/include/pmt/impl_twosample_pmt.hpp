@@ -15,7 +15,6 @@ NumericVector impl_twosample_pmt(
     bar.init_statistic(twosample_update);
 
     if (!std::isnan(n_permu)) {
-        // permuting based on the shorter
         NumericVector x_ = x.size() < y.size() ? x : y;
         NumericVector y_ = x.size() < y.size() ? y : x;
 

@@ -123,8 +123,8 @@ SEXP association_pmt(
     const bool progress)
 {
     return progress ?
-        impl_association_pmt<PermuBarShow, StatFunc<true>>(x, clone(y), statistic_func, n_permu) :
-        impl_association_pmt<PermuBarHide, StatFunc<true>>(x, clone(y), statistic_func, n_permu);
+        impl_association_pmt<PermuBarShow, StatFunc<true>>(clone(x), clone(y), statistic_func, n_permu) :
+        impl_association_pmt<PermuBarHide, StatFunc<true>>(clone(x), clone(y), statistic_func, n_permu);
 }
 
 #include "pmt/impl_table_pmt.hpp"
@@ -138,6 +138,6 @@ SEXP table_pmt(
     const bool progress)
 {
     return progress ?
-        impl_table_pmt<PermuBarShow, StatFunc<true>>(row, clone(col), statistic_func, n_permu) :
-        impl_table_pmt<PermuBarHide, StatFunc<true>>(row, clone(col), statistic_func, n_permu);
+        impl_table_pmt<PermuBarShow, StatFunc<true>>(clone(row), clone(col), statistic_func, n_permu) :
+        impl_table_pmt<PermuBarHide, StatFunc<true>>(clone(row), clone(col), statistic_func, n_permu);
 }
