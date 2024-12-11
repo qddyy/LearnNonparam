@@ -30,8 +30,8 @@ private:
     template <typename... Args>
     auto _invoke(std::true_type, Args&&... args) const
     {
-        return [r_eval = [](void* expr) { return Rf_eval(*static_cast<SEXP*>(expr), R_GlobalEnv); }, r_call = RObject(Rf_lcons(Function(Function::operator()(std::forward<Args>(args)...)), Pairlist(std::forward<Args>(args)...)))](auto&&...) mutable {
-            return as<double>(unwindProtect(r_eval, static_cast<void*>(&r_call)));
+        return [r_call = Language(Function(Function::operator()(std::forward<Args>(args)...)), std::forward<Args>(args)...)](auto&&...) {
+            return as<double>(r_call.eval());
         };
     }
 };
