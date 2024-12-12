@@ -2,8 +2,8 @@
 
 using namespace Rcpp;
 
+#include "pmt/permutation.hpp"
 #include "pmt/progress.hpp"
-#include "pmt/reorder.hpp"
 
 #include <type_traits>
 

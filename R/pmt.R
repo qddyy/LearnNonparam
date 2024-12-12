@@ -222,10 +222,11 @@ define_pmt <- function(
                             c(plugins, if (cpp_standard_ver < 201402L) "cpp14")
                         },
                         includes = {
-                            hpps <- c("progress", "reorder", impl)
+                            hpps <- c("permutation", "progress", impl)
                             c(includes, paste0("#include<pmt/", hpps, ".hpp>"))
                         },
-                        env = environment(super$.calculate_statistic), code = {
+                        env = environment(super$.calculate_statistic),
+                        code = {
                             args <- paste0(
                                 "arg", 1:(n <- if (inherit == "rcbd") 2 else 3)
                             )
