@@ -18,6 +18,9 @@ PermuTest <- R6Class(
         #' @param ... sample(s). Can be numeric vector(s) or a `data.frame` or `list` containing them.
         #' 
         #' @return The object itself (invisibly).
+        #' 
+        #' @details
+        #' A progress bar is shown by default. Use `options(LearnNonparam.pmt_progress = FALSE)` to disable it.
         test = function(...) {
             private$.raw_data <- get_data(match.call(), parent.frame())
             private$.calculate()

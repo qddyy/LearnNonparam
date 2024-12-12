@@ -60,6 +60,10 @@ Perform test on sample(s).
 }
 \if{html}{\out{</div>}}
 }
+\subsection{Details}{
+A progress bar is shown by default. Use \code{options(LearnNonparam.pmt_progress = FALSE)} to disable it.
+}
+
 \subsection{Returns}{
 The object itself (invisibly).
 }

@@ -109,21 +109,24 @@ pmts <- function(
 #' @return a test object based on the specified statistic.
 #' 
 #' @details
-#' The test statistic can be defined using either `R` or `Rcpp`, with the `statistic` parameter specified as:
+#' The test statistic can be defined using either R or Rcpp, with the `statistic` parameter specified as:
 #' 
-#' - `R`: a function returning a closure that returns a double.
-#' - `Rcpp`: a character string defining a captureless lambda (since C++11) returning another lambda that captures by value, accepts parameters of the same type as const references, and returns a double.
+#' - R: a function returning a closure that returns a double.
+#' - Rcpp: a character string defining a captureless lambda (since C++11) returning another lambda that captures by value, accepts parameters of the same type, and returns a double.
 #' 
 #' When using `Rcpp`, the parameters for different `inherit` are listed as follows. Note that the parameter names are for illustration only.
 #' 
-#' - `"twosample"`: `(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)`
-#' - `"ksample"`: `(Rcpp::NumericVector combined_sample, Rcpp::IntegerVector one_based_group_index)`
-#' - `"paired"`: `(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)`
-#' - `"rcbd"`: `(Rcpp::NumericMatrix block_as_column_data)`
-#' - `"association"`: `(Rcpp::NumericVector sample_1, Rcpp::NumericVector sample_2)`
-#' - `"table"`: `(Rcpp::IntegerMatrix contingency_table)`
+#' - `"twosample"`: `(const NumericVector& sample_1, const NumericVector& sample_2)`
+#' - `"ksample"`: `(const NumericVector& combined_sample, const IntegerVector& one_based_group_index)`
+#' - `"paired"`: `(const NumericVector& sample_1, const NumericVector& sample_2)`
+#' - `"rcbd"`: `(const NumericMatrix& block_as_column_data)`
+#' - `"association"`: `(const NumericVector& sample_1, const NumericVector& sample_2)`
+#' - `"table"`: `(const IntegerMatrix& contingency_table)`
 #' 
-#' Defining the test statistic using `R` follows a similar approach. The purpose of this design is to pre-calculate certain constants that remain invariant during permutation.
+#' Defining the test statistic using R follows a similar approach. The purpose of this design is to pre-calculate certain constants that remain invariant during permutation.
+#' 
+#' @note
+#' The data is permuted in-place. Therefore, modifications to the data within `statistic` may lead to incorrect results. Since R has copy-on-modify semantics but C++ does not, it is recommended to pass const references when using Rcpp in `define_pmt`.
 #' 
 #' @examples
 #' x <- rnorm(5)
@@ -155,7 +158,7 @@ pmts <- function(
 #' rcpp <- define_pmt(
 #'     inherit = "twosample",
 #'     n_permu = 1e5,
-#'     statistic = "[](NumericVector x, NumericVector y) {
+#'     statistic = "[](const NumericVector& x, const NumericVector& y) {
 #'         R_len_t m = x.size();
 #'         R_len_t n = y.size();
 #'         return [=](const NumericVector& x, const NumericVector& y) -> double {
