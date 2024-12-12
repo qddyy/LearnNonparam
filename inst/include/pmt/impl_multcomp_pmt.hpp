@@ -1,39 +1,39 @@
-template <typename T, typename U>
-NumericVector impl_multcomp_pmt(
+template <bool progress, typename T>
+RObject impl_multcomp_pmt(
     const IntegerVector group_i,
     const IntegerVector group_j,
     const NumericVector data,
     IntegerVector group,
-    const U& statistic_func,
+    const T& statistic_func,
     const double n_permu)
 {
     R_len_t n_group = group[group.size() - 1];
     R_len_t n_pair = n_group * (n_group - 1) / 2;
 
-    T bar(n_pair);
+    Stat<progress> statistic_container(n_pair);
 
-    auto multcomp_update = [group_i, group_j, data, group, n_pair, &statistic_func, &bar]() {
+    auto multcomp_update = [group_i, group_j, data, group, n_pair, &statistic_func, &statistic_container]() {
         auto statistic_closure = statistic_func(data, group);
 
         bool flag = false;
         for (R_len_t k = 0; k < n_pair; k++) {
-            flag = bar << statistic_closure(group_i[k], group_j[k]);
+            flag = statistic_container << statistic_closure(group_i[k], group_j[k]);
         };
 
         return flag;
     };
 
-    bar.init_statistic(multcomp_update);
+    statistic_container.init_statistic(multcomp_update);
 
     if (!std::isnan(n_permu)) {
         if (n_permu == 0) {
-            bar.init_statistic_permu(n_permutation(group));
+            statistic_container.init_statistic_permu(n_permutation(group));
 
             do {
                 multcomp_update();
             } while (next_permutation(group));
         } else {
-            bar.init_statistic_permu(n_permu);
+            statistic_container.init_statistic_permu(n_permu);
 
             do {
                 random_shuffle(group);
@@ -41,5 +41,5 @@ NumericVector impl_multcomp_pmt(
         }
     }
 
-    return bar.close();
+    return statistic_container.close();
 }

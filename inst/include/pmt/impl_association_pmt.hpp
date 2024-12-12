@@ -1,18 +1,18 @@
-template <typename T, typename U>
-NumericVector impl_association_pmt(
+template <bool progress, typename T>
+RObject impl_association_pmt(
     NumericVector x,
     NumericVector y,
-    const U& statistic_func,
+    const T& statistic_func,
     const double n_permu)
 {
-    T bar;
+    Stat<progress> statistic_container;
 
     auto statistic_closure = statistic_func(x, y);
-    auto association_update = [x, y, &statistic_closure, &bar]() {
-        return bar << statistic_closure(x, y);
+    auto association_update = [x, y, &statistic_closure, &statistic_container]() {
+        return statistic_container << statistic_closure(x, y);
     };
 
-    bar.init_statistic(association_update);
+    statistic_container.init_statistic(association_update);
 
     if (!std::isnan(n_permu)) {
         if (n_permu == 0) {
@@ -21,13 +21,13 @@ NumericVector impl_association_pmt(
 
             NumericVector y_ = (n_permutation(x) < n_permutation(y)) ? x : y;
 
-            bar.init_statistic_permu(n_permutation(y_));
+            statistic_container.init_statistic_permu(n_permutation(y_));
 
             do {
                 association_update();
             } while (next_permutation(y_));
         } else {
-            bar.init_statistic_permu(n_permu);
+            statistic_container.init_statistic_permu(n_permu);
 
             do {
                 random_shuffle(y);
@@ -35,5 +35,5 @@ NumericVector impl_association_pmt(
         }
     }
 
-    return bar.close();
+    return statistic_container.close();
 }

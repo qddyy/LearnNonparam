@@ -1,25 +1,25 @@
-template <typename T, typename U>
-NumericVector impl_paired_pmt(
+template <bool progress, typename T>
+RObject impl_paired_pmt(
     NumericVector x,
     NumericVector y,
-    const U& statistic_func,
+    const T& statistic_func,
     const double n_permu)
 {
-    T bar;
+    Stat<progress> statistic_container;
 
     auto statistic_closure = statistic_func(x, y);
-    auto paired_update = [x, y, &statistic_closure, &bar]() {
-        return bar << statistic_closure(x, y);
+    auto paired_update = [x, y, &statistic_closure, &statistic_container]() {
+        return statistic_container << statistic_closure(x, y);
     };
 
-    bar.init_statistic(paired_update);
+    statistic_container.init_statistic(paired_update);
 
     if (!std::isnan(n_permu)) {
         R_len_t i = 0;
         R_len_t n = x.size();
 
         if (n_permu == 0) {
-            bar.init_statistic_permu(1 << n);
+            statistic_container.init_statistic_permu(1 << n);
 
             IntegerVector swapped(n, 0);
             while (i < n) {
@@ -37,7 +37,7 @@ NumericVector impl_paired_pmt(
                 }
             }
         } else {
-            bar.init_statistic_permu(n_permu);
+            statistic_container.init_statistic_permu(n_permu);
 
             do {
                 for (i = 0; i < n; i++) {
@@ -49,5 +49,5 @@ NumericVector impl_paired_pmt(
         }
     }
 
-    return bar.close();
+    return statistic_container.close();
 }

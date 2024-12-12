@@ -216,7 +216,6 @@ define_pmt <- function(
                 } else {
                     impl <- paste0("impl_", inherit, "_pmt")
                     cppFunction(
-                        env = environment(super$.calculate_statistic),
                         depends = c(depends, "LearnNonparam"),
                         plugins = {
                             cpp_standard_ver <- evalCpp("__cplusplus")
@@ -226,7 +225,7 @@ define_pmt <- function(
                             hpps <- c("progress", "reorder", impl)
                             c(includes, paste0("#include<pmt/", hpps, ".hpp>"))
                         },
-                        code = {
+                        env = environment(super$.calculate_statistic), code = {
                             args <- paste0(
                                 "arg", 1:(n <- if (inherit == "rcbd") 2 else 3)
                             )
@@ -236,8 +235,7 @@ define_pmt <- function(
                                 ", double n_permu, bool progress){",
                                 "auto statistic = ", statistic, ";",
                                 "return progress ?", paste0(
-                                    impl, "<PermuBar", c("Show", "Hide"), ">(",
-                                    paste0(
+                                    impl, "<", c("true", "false"), ">(", paste(
                                         "clone(", args[-n], ")", collapse = ","
                                     ), ", statistic, n_permu )", collapse = ":"
                                 ), ";}"
