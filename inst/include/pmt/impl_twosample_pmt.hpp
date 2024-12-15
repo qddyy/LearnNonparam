@@ -18,10 +18,10 @@ RObject impl_twosample_pmt(
         NumericVector x_ = x.size() < y.size() ? x : y;
         NumericVector y_ = x.size() < y.size() ? y : x;
 
-        R_len_t m = x_.size();
-        R_len_t n = x_.size() + y_.size();
+        R_xlen_t m = x_.size();
+        R_xlen_t n = x_.size() + y_.size();
 
-        R_len_t i, j;
+        R_xlen_t i, j;
         if (n_permu == 0) {
             IntegerVector p(n, 0);
 
@@ -33,7 +33,7 @@ RObject impl_twosample_pmt(
             for (i = 0; i < n; i++) {
                 p[i] = i;
             }
-            auto swap_update = [x_, y_, p, m, &twosample_update](const R_len_t out, const R_len_t in) mutable {
+            auto swap_update = [x_, y_, p, m, &twosample_update](const R_xlen_t out, const R_xlen_t in) mutable {
                 std::swap(x_[p[out]], y_[p[in] - m]);
                 std::swap(p[out], p[in]);
                 twosample_update();

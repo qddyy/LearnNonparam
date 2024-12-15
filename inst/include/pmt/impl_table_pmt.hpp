@@ -7,13 +7,13 @@ RObject impl_table_pmt(
 {
     Stat<progress> statistic_container;
 
-    R_len_t n = row.size();
+    R_xlen_t n = row.size();
 
     IntegerMatrix data(no_init(row[n - 1] + 1, col[n - 1] + 1));
 
     auto data_filled = [data, row, col, n]() mutable {
         data.fill(0);
-        for (R_len_t i = 0; i < n; i++) {
+        for (R_xlen_t i = 0; i < n; i++) {
             data(row[i], col[i])++;
         }
         return data;

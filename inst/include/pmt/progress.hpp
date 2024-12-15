@@ -35,7 +35,7 @@ constexpr auto generated_bars = generate_bars(std::make_integer_sequence<unsigne
 template <bool progress>
 class Stat {
 public:
-    Stat(R_len_t statistic_size = 1) :
+    Stat(R_xlen_t statistic_size = 1) :
         _progress_i(0),
         _progress_every(2),
         _statistic_size(statistic_size) { }
@@ -87,9 +87,9 @@ private:
     R_xlen_t _progress_i;
     R_xlen_t _progress_every;
 
-    R_len_t _statistic_size;
+    R_xlen_t _statistic_size;
 
-    void _init_statistic_buffer(double n, R_len_t size)
+    void _init_statistic_buffer(double n, R_xlen_t size)
     {
         double total = n * size;
         if (total <= 0 || total > R_XLEN_T_MAX) {

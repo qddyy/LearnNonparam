@@ -15,13 +15,15 @@ RObject impl_paired_pmt(
     statistic_container.init_statistic(paired_update);
 
     if (!std::isnan(n_permu)) {
-        R_len_t i = 0;
-        R_len_t n = x.size();
+        R_xlen_t n = x.size();
 
+        R_xlen_t i;
         if (n_permu == 0) {
             statistic_container.init_statistic_permu(1 << n);
 
             IntegerVector swapped(n, 0);
+
+            i = 0;
             while (i < n) {
                 if (i == 0) {
                     paired_update();

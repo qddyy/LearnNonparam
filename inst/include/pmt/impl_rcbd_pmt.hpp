@@ -14,7 +14,7 @@ RObject impl_rcbd_pmt(
     statistic_container.init_statistic(rcbd_update);
 
     if (!std::isnan(n_permu)) {
-        R_len_t k = data.nrow();
+        R_xlen_t k = data.nrow();
 
         auto begin = data.begin();
         auto end = data.end() - k;

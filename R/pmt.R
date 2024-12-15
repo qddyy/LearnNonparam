@@ -159,8 +159,8 @@ pmts <- function(
 #'     inherit = "twosample",
 #'     n_permu = 1e5,
 #'     statistic = "[](const NumericVector& x, const NumericVector& y) {
-#'         R_len_t m = x.size();
-#'         R_len_t n = y.size();
+#'         R_xlen_t m = x.size();
+#'         R_xlen_t n = y.size();
 #'         return [=](const NumericVector& x, const NumericVector& y) -> double {
 #'             return sum(x) / m - sum(y) / n;
 #'         };
