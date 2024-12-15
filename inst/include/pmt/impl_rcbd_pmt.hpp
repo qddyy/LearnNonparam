@@ -14,32 +14,35 @@ RObject impl_rcbd_pmt(
     statistic_container.init_statistic(rcbd_update);
 
     if (!std::isnan(n_permu)) {
-        R_len_t i;
-        R_len_t b = data.ncol();
+        R_len_t k = data.nrow();
 
+        auto begin = data.begin();
+        auto end = data.end() - k;
+
+        decltype(end) it;
         if (n_permu == 0) {
-            double total = 1;
-            for (i = 0; i < b; i++) {
-                std::sort(data.column(i).begin(), data.column(i).end());
-                total *= n_permutation(data.column(i));
+            double total = 1.0;
+            for (it = begin; it != end; it += k) {
+                std::sort(it, it + k);
+                total *= n_permutation(it, it + k);
             }
 
             statistic_container.init_statistic_permu(total);
 
-            i = 0;
-            while (i < b) {
-                if (i == 0) {
+            it = begin;
+            while (it != end) {
+                if (it == begin) {
                     rcbd_update();
                 }
 
-                i = next_permutation(data.column(i)) ? 0 : i + 1;
+                it = next_permutation(it, it + k) ? begin : it + k;
             }
         } else {
             statistic_container.init_statistic_permu(n_permu);
 
             do {
-                for (i = 0; i < b; i++) {
-                    random_shuffle(data.column(i));
+                for (it = begin; it != end; it += k) {
+                    random_shuffle(it, it + k);
                 }
             } while (rcbd_update());
         }
