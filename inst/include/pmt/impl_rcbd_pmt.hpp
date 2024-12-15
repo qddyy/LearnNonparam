@@ -17,7 +17,7 @@ RObject impl_rcbd_pmt(
         R_xlen_t k = data.nrow();
 
         auto begin = data.begin();
-        auto end = data.end() - k;
+        auto end = data.end();
 
         decltype(end) it;
         if (n_permu == 0) {
