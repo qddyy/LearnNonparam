@@ -473,9 +473,9 @@ get_data <- function(call, env) {
             if (!is.numeric(data_i)) {
                 stop("Sample ", i, " is not numeric")
             }
-            if (anyNA(data_i)) {
+            if (any(is_na <- is.na(data_i))) {
                 warning("Sample ", i, " contains missing values, removed")
-                data_i <- data_i[!is.na(data_i)]
+                data_i <- data_i[!is_na]
             }
             if (length(data_i) < 1) {
                 stop("Sample ", i, " does not contain enough observations")
