@@ -50,19 +50,19 @@ double n_permutation(T first, T last)
 }
 
 template <typename T>
-auto random_shuffle(T v)
+auto random_shuffle(T& v)
 {
     return random_shuffle(v.begin(), v.end());
 }
 
 template <typename T>
-auto next_permutation(T v)
+auto next_permutation(T& v)
 {
     return next_permutation(v.begin(), v.end());
 }
 
 template <typename T>
-auto n_permutation(T v)
+auto n_permutation(const T& v)
 {
     return n_permutation(v.begin(), v.end());
 }
