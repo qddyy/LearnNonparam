@@ -10,7 +10,7 @@ Performs Page test on samples collected in a randomized complete block design.
 \examples{
 t <- pmt(
     "rcbd.page", alternative = "less"
-)$test(Table4.4.3)
+)$test(Table4.4.3)$print()
 
 t$type <- "asymp"
 t
