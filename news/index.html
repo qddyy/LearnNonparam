@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">LearnNonparam</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.5</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -32,24 +32,6 @@
     </div>
 
     <div class="section level2">
-<h2 class="pkg-version" data-toc-text="1.2.6" id="learnnonparam-126">LearnNonparam 1.2.6<a class="anchor" aria-label="anchor" href="#learnnonparam-126"></a></h2>
-<ul><li>R side
-<ul><li>Added more documentation</li>
-<li>Switched to version 3 serialization format</li>
-<li>Fixed the issue with parameter passing to <code><a href="https://ggplot2.tidyverse.org/reference/geom_histogram.html" class="external-link">ggplot2::stat_bin</a></code> in <code><a href="https://rdrr.io/r/graphics/plot.default.html" class="external-link">plot()</a></code>
-</li>
-<li>Added detection for missing values and zero-length data in <code>test()</code>
-</li>
-</ul></li>
-<li>C++ side
-<ul><li>Improved the efficiency of calling R from C++</li>
-<li>Enhanced the permuting efficiency in <code>rcbd.*</code>, <code>association.*</code>, and <code>table.*</code>
-</li>
-<li>Replaced <code>R_len_t</code> with <code>R_xlen_t</code> to support long vectors</li>
-<li>Replaced <code>Rcpp.h</code> with <code>Rcpp/Lightest</code> to reduce compilation time</li>
-</ul></li>
-</ul></div>
-    <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.2.5" id="learnnonparam-125">LearnNonparam 1.2.5<a class="anchor" aria-label="anchor" href="#learnnonparam-125"></a></h2><p class="text-muted">CRAN release: 2024-11-14</p>
 <ul><li>Added support for <code>scoring</code> as an active binding in <code>define_pmt</code>
 </li>
@@ -72,13 +54,13 @@
 <li>Refined some text</li>
 </ul></li>
 <li>C++ side
-<ul><li>Enhanced the permuting efficiency in <code>twosample.*</code>
+<ul><li>Enhanced permuting efficiency in <code>twosample_pmt</code>
 </li>
 </ul></li>
 </ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.2.3" id="learnnonparam-123">LearnNonparam 1.2.3<a class="anchor" aria-label="anchor" href="#learnnonparam-123"></a></h2><p class="text-muted">CRAN release: 2024-10-15</p>
-<ul><li>Improved <code>twosample.*</code>
+<ul><li>Improved <code>twosample_pmt</code>
 </li>
 <li>Added examples</li>
 <li>Fixed <code>SiegelTukey</code> and <code>ContingencyTableTest</code>
