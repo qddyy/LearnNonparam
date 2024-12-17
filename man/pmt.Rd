@@ -123,8 +123,8 @@ r <- define_pmt(
 rcpp <- define_pmt(
     inherit = "twosample", n_permu = 1e5,
     statistic = "[](const auto& x, const auto& y) {
-        auto m = x.size();
-        auto n = y.size();
+        auto m = x.length();
+        auto n = y.length();
         return [=](const auto& x, const auto& y) {
             return sum(x) / m - sum(y) / n;
         };
@@ -135,9 +135,9 @@ rcpp <- define_pmt(
 # rcpp <- define_pmt(
 #     inherit = "twosample", n_permu = 1e5,
 #     statistic = "[](const NumericVector& x, const NumericVector& y) {
-#         R_xlen_t m = x.size();
-#         R_xlen_t n = y.size();
-#         return [=](const NumericVector& x, const NumericVector& y) -> double {
+#         R_xlen_t m = x.length();
+#         R_xlen_t n = y.length();
+#         return [m, n](const NumericVector& x, const NumericVector& y) -> double {
 #             return sum(x) / m - sum(y) / n;
 #         };
 #     }"

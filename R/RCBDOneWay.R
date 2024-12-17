@@ -70,4 +70,3 @@ RCBDOneWay <- R6Class(
         }
     )
 )
-
