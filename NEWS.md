@@ -1,3 +1,17 @@
+# LearnNonparam 1.2.6
+
+- R side
+  - Fixed the issue with parameter passing to `ggplot2::stat_bin` in `plot()`
+  - Added detection for missing values and zero-length data in `test()`
+  - Switched to version 3 serialization format
+  - Added more documentation
+
+- C++ side
+  - Improved the efficiency of calling R from C++
+  - Enhanced the permuting efficiency in `rcbd.*`, `association.*`, and `table.*`
+  - Replaced `R_len_t` with `R_xlen_t` to support long vectors
+  - Replaced `Rcpp.h` with `Rcpp/Lightest` to reduce compilation time
+
 # LearnNonparam 1.2.5
 
 - Added support for `scoring` as an active binding in `define_pmt`
@@ -7,14 +21,14 @@
 # LearnNonparam 1.2.4
 
 - R side
-    - Added support for custom scoring systems in `define_pmt`
-    - Enabled compatibility with C++ standard versions beyond C++14 in `define_pmt`
-    - Improved the performance of `KruskalWallis`, `OneWay`, and `Studentized`
-    - Replaced certain `warning()` calls with `stop()`
-    - Refined some text
+  - Added support for custom scoring systems in `define_pmt`
+  - Enabled compatibility with C++ standard versions beyond C++14 in `define_pmt`
+  - Improved the performance of `KruskalWallis`, `OneWay`, and `Studentized`
+  - Replaced certain `warning()` calls with `stop()`
+  - Refined some text
 
 - C++ side
-    - Enhanced permuting efficiency in `twosample_pmt`
+  - Enhanced permuting efficiency in `twosample_pmt`
 
 # LearnNonparam 1.2.3
 
@@ -25,21 +39,21 @@
 # LearnNonparam 1.2.2
 
 - R side
-    - Changed the default value of `n_permu` to `1e4`
-    - Added support for test statistics defined using Rcpp in `define_pmt`
-    - Added support for `null_value` other than zero in two-sample location tests
-    - Added support for `scoring` in `TwoSampleAssociationTest`
-    - Added a confidence interval for p-value in `print()`
-    - Added the `LearnNonparam.pmt_progress` option
-    - Added `attr(t$n_permu, "n_used")`
-    - Replaced `multicomp.*` with `multcomp.*`
-    - Replaced `KSampleF` and `RCBDF` with `OneWay` and `RCBDOneWay`
-    - Stopped exporting abstract classes (`TwoSampleTest`, `KSampleTest`, etc.)
-    - Improved the efficiency of `ChiSquare`, `Difference`, `JonckheereTerpstra`, `KruskalWallis`, `RatioMeanDeviance` and `Studentized`
-    - Fixed many bugs
+  - Changed the default value of `n_permu` to `1e4`
+  - Added support for test statistics defined using Rcpp in `define_pmt`
+  - Added support for `null_value` other than zero in two-sample location tests
+  - Added support for `scoring` in `TwoSampleAssociationTest`
+  - Added a confidence interval for p-value in `print()`
+  - Added the `LearnNonparam.pmt_progress` option
+  - Added `attr(t$n_permu, "n_used")`
+  - Replaced `multicomp.*` with `multcomp.*`
+  - Replaced `KSampleF` and `RCBDF` with `OneWay` and `RCBDOneWay`
+  - Stopped exporting abstract classes (`TwoSampleTest`, `KSampleTest`, etc.)
+  - Improved the efficiency of `ChiSquare`, `Difference`, `JonckheereTerpstra`, `KruskalWallis`, `RatioMeanDeviance` and `Studentized`
+  - Fixed many bugs
 
 - C++ side
-    - Introduced a new progress bar, which is built at compile time to minimize runtime overhead
+  - Introduced a new progress bar, which is built at compile time to minimize runtime overhead
 
 # LearnNonparam 1.2.1
 
