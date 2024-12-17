@@ -53,9 +53,9 @@ public:
 
     void init_statistic_permu(double n_permu)
     {
-        _init_progress();
-
         _init_statistic_buffer(n_permu, _statistic_size);
+
+        _init_progress();
     }
 
     bool operator<<(double statistic)
