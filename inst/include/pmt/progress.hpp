@@ -36,9 +36,9 @@ template <bool progress>
 class Stat {
 public:
     Stat(R_xlen_t statistic_size = 1) :
-        _progress_i(0),
-        _progress_every(2),
-        _statistic_size(statistic_size) { }
+        _statistic_size(statistic_size),
+        _progress_every(0),
+        _progress_i(0) { }
 
     template <typename T>
     void init_statistic(T& update)
@@ -79,15 +79,15 @@ public:
 private:
     RObject _statistic;
 
+    R_xlen_t _statistic_size;
+
     NumericVector _statistic_buffer;
 
-    R_xlen_t _buffer_i;
     R_xlen_t _buffer_size;
+    R_xlen_t _buffer_i;
 
-    R_xlen_t _progress_i;
     R_xlen_t _progress_every;
-
-    R_xlen_t _statistic_size;
+    R_xlen_t _progress_i;
 
     void _init_statistic_buffer(double n, R_xlen_t size)
     {
