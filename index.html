@@ -251,7 +251,7 @@ See <code>pmts()</code> for tests implemented in this package.
 <div class="section level2">
 <h2 id="extending">Extending<a class="anchor" aria-label="anchor" href="#extending"></a>
 </h2>
-<p>The <code>define_pmt</code> function allows users to define new permutation tests. Take the two-sample Wilcoxon test as an example:</p>
+<p><code>define_pmt</code> allows users to define new permutation tests. Take the two-sample Wilcoxon test as an example:</p>
 <div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t_custom</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pmt.html">define_pmt</a></span><span class="op">(</span></span>
 <span>    <span class="co"># this is a two-sample permutation test</span></span>
@@ -280,7 +280,7 @@ See <code>pmts()</code> for tests implemented in this package.
 <span><span class="st">    }"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/define_cpp-dark.svg"><img src="reference/figures/README/define_cpp.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
-<p>The following demonstrates that <code>t_custom</code> and <code>t_cpp</code> are equivalent:</p>
+<p>It’s easy to check that <code>t_custom</code> and <code>t_cpp</code> are equivalent:</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, mean <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, mean <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
@@ -297,7 +297,7 @@ See <code>pmts()</code> for tests implemented in this package.
 <div class="section level2">
 <h2 id="performance">Performance<a class="anchor" aria-label="anchor" href="#performance"></a>
 </h2>
-<p>The <code>coin</code> package is a commonly used R package for performing permutation tests. Below is a benchmark comparing the computational efficiency of <code>coin</code> and <code>LearnNonparam</code>:</p>
+<p><a href="https://CRAN.R-project.org/package=coin" class="external-link">coin</a> is a commonly used R package for performing permutation tests. Below is a benchmark:</p>
 <div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://coin.r-forge.r-project.org" class="external-link">coin</a></span><span class="op">)</span></span>
 <span></span>
@@ -314,7 +314,7 @@ See <code>pmts()</code> for tests implemented in this package.
 <div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">benchmark</span></span></code></pre></div>
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/benchmark_res-dark.svg"><img src="reference/figures/README/benchmark_res.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
-<p>It can be seen that C++ brings significantly better performance than pure R, even surpassing the <code>coin</code> package. However, all tests in this package are currently written in R with no plans for migration to C++ in the future. This is because the primary goal of this package is not to maximize performance but to offer a flexible framework for permutation tests.</p>
+<p>It can be seen that C++ brings significantly better performance than pure R, even surpassing the <code>coin</code> package (under sequential execution). However, all tests in this package are currently written in R with no plans for migration to C++ in the future. This is because the primary goal of this package is not to maximize performance but to offer a flexible framework for permutation tests.</p>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
