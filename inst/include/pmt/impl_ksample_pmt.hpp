@@ -7,8 +7,7 @@ RObject impl_ksample_pmt(
 {
     Stat<progress> statistic_container;
 
-    auto statistic_closure = statistic_func(data, group);
-    auto ksample_update = [data, group, &statistic_closure, &statistic_container]() {
+    auto ksample_update = [&statistic_container, statistic_closure = statistic_func(data, group), data, group]() {
         return statistic_container << statistic_closure(data, group);
     };
 

@@ -6,8 +6,7 @@ RObject impl_rcbd_pmt(
 {
     Stat<progress> statistic_container;
 
-    auto statistic_closure = statistic_func(data);
-    auto rcbd_update = [data, &statistic_closure, &statistic_container]() {
+    auto rcbd_update = [&statistic_container, statistic_closure = statistic_func(data), data]() {
         return statistic_container << statistic_closure(data);
     };
 

@@ -7,8 +7,7 @@ RObject impl_association_pmt(
 {
     Stat<progress> statistic_container;
 
-    auto statistic_closure = statistic_func(x, y);
-    auto association_update = [x, y, &statistic_closure, &statistic_container]() {
+    auto association_update = [&statistic_container, statistic_closure = statistic_func(x, y), x, y]() {
         return statistic_container << statistic_closure(x, y);
     };
 

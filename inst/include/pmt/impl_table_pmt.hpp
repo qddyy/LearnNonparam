@@ -7,21 +7,16 @@ RObject impl_table_pmt(
 {
     Stat<progress> statistic_container;
 
-    R_xlen_t n = row.size();
-
-    IntegerMatrix data(no_init(row[n - 1] + 1, col[n - 1] + 1));
-
-    auto data_filled = [data, row, col, n]() mutable {
-        data.fill(0);
+    auto data = [_data = IntegerMatrix(no_init(*(row.end() - 1) + 1, *(col.end() - 1) + 1)), row, col, n = row.size()]() mutable {
+        _data.fill(0);
         for (R_xlen_t i = 0; i < n; i++) {
-            data(row[i], col[i])++;
+            _data(row[i], col[i])++;
         }
-        return data;
+        return _data;
     };
 
-    auto statistic_closure = statistic_func(data_filled());
-    auto table_update = [&data_filled, &statistic_closure, &statistic_container]() {
-        return statistic_container << statistic_closure(data_filled());
+    auto table_update = [&statistic_container, statistic_closure = statistic_func(data()), &data]() {
+        return statistic_container << statistic_closure(data());
     };
 
     statistic_container.init_statistic(table_update);

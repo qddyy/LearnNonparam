@@ -7,16 +7,15 @@ RObject impl_multcomp_pmt(
     const T& statistic_func,
     const double n_permu)
 {
-    R_xlen_t n_group = group[group.size() - 1];
-    R_xlen_t n_pair = n_group * (n_group - 1) / 2;
+    R_xlen_t K = group_i.size();
 
-    Stat<progress> statistic_container(n_pair);
+    Stat<progress> statistic_container(K);
 
-    auto multcomp_update = [group_i, group_j, data, group, n_pair, &statistic_func, &statistic_container]() {
+    auto multcomp_update = [&statistic_container, &statistic_func, group_i, group_j, data, group, K]() {
         auto statistic_closure = statistic_func(data, group);
 
         bool flag = false;
-        for (R_xlen_t k = 0; k < n_pair; k++) {
+        for (R_xlen_t k = 0; k < K; k++) {
             flag = statistic_container << statistic_closure(group_i[k], group_j[k]);
         };
 

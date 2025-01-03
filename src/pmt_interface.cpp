@@ -2,10 +2,8 @@
 
 using namespace Rcpp;
 
-#include "pmt/permutation.hpp"
-#include "pmt/progress.hpp"
-
-#include <type_traits>
+template <bool>
+struct Tag { };
 
 template <unsigned n>
 constexpr auto Rf_lang = nullptr;
@@ -24,26 +22,29 @@ public:
     template <typename... Args>
     auto operator()(Args&&... args) const
     {
-        return _invoke(std::integral_constant<bool, sharing_args>(), std::forward<Args>(args)...);
+        return _invoke(Tag<sharing_args>(), std::forward<Args>(args)...);
     }
 
 private:
     template <typename... Args>
-    auto _invoke(std::false_type, Args&&... args) const
+    auto _invoke(Tag<false>, Args&&... args) const
     {
-        return [r_closure = Function(Function::operator()(std::forward<Args>(args)...))](auto&&... args) {
-            return as<double>(r_closure(std::forward<decltype(args)>(args)...));
+        return [R_closure = Function(Function::operator()(std::forward<Args>(args)...))](auto&&... args) {
+            return as<double>(R_closure(std::forward<decltype(args)>(args)...));
         };
     }
 
     template <typename... Args>
-    auto _invoke(std::true_type, Args&&... args) const
+    auto _invoke(Tag<true>, Args&&... args) const
     {
-        return [r_call = Shield<SEXP>(Rf_lang<sizeof...(args) + 1>(Function::operator()(std::forward<Args>(args)...), std::forward<Args>(args)...))](auto&&...) {
-            return as<double>(Rcpp_fast_eval(r_call, R_GlobalEnv));
+        return [R_call = Shield<SEXP>(Rf_lang<sizeof...(args) + 1>(Function::operator()(std::forward<Args>(args)...), std::forward<Args>(args)...))](auto&&...) {
+            return as<double>(Rcpp_fast_eval(R_call, R_GlobalEnv));
         };
     }
 };
+
+#include "pmt/permutation.hpp"
+#include "pmt/progress.hpp"
 
 #include "pmt/impl_twosample_pmt.hpp"
 
