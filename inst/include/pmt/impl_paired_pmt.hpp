@@ -18,9 +18,17 @@ RObject impl_paired_pmt(
 
         R_xlen_t i;
         if (n_permu == 0) {
-            statistic_container.init_statistic_permu(1 << n);
+            double total = 1.0;
+            for (i = 0; i < n; i++) {
+                if (x[i] != y[i]) {
+                    total *= 2;
+                    if (x[i] > y[i]) {
+                        std::swap(x[i], y[i]);
+                    }
+                }
+            }
 
-            IntegerVector swapped(n, 0);
+            statistic_container.init_statistic_permu(total);
 
             i = 0;
             while (i < n) {
@@ -28,21 +36,22 @@ RObject impl_paired_pmt(
                     paired_update();
                 }
 
-                std::swap(x[i], y[i]);
-                swapped[i]++;
-
-                if (swapped[i] < 2) {
-                    i = 0;
-                } else {
-                    swapped[i++] = 0;
+                if (x[i] != y[i]) {
+                    std::swap(x[i], y[i]);
+                    if (x[i] > y[i]) {
+                        i = 0;
+                        continue;
+                    }
                 }
+
+                i++;
             }
         } else {
             statistic_container.init_statistic_permu(n_permu);
 
             do {
                 for (i = 0; i < n; i++) {
-                    if (rand_int(2) == 1) {
+                    if (x[i] != y[i] && rand_int(2) == 1) {
                         std::swap(x[i], y[i]);
                     }
                 }
