@@ -34,13 +34,16 @@ KolmogorovSmirnov <- R6Class(
         .name = "Two-Sample Kolmogorov-Smirnov Test",
 
         .define = function() {
-            m <- length(private$.data$x)
-            n <- length(private$.data$y)
-
-            geq_m <- -1 / n
-            leq_m <- rep.int(1 / m, m + n)
             private$.statistic_func <- function(x, y) {
-                max(abs(cumsum(`[<-`(leq_m, order(c(x, y)) > m, geq_m))))
+                m <- length(x)
+                n <- length(y)
+
+                geq_m <- -1 / n
+                leq_m <- rep.int(1 / m, m + n)
+
+                function(x, y) {
+                    max(abs(cumsum(`[<-`(leq_m, order(c(x, y)) > m, geq_m))))
+                }
             }
         },
 

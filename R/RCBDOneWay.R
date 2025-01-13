@@ -40,20 +40,24 @@ RCBDOneWay <- R6Class(
         .name = "One-Way Test for Equal Means in RCBD",
 
         .define = function() {
-            k <- nrow(private$.data)
-            b <- ncol(private$.data)
-            private$.statistic_func <- switch(private$.type,
-                permu = function(data) sum(.rowMeans(data, k, b)^2),
-                asymp = function(data) {
-                    bar_i. <- .rowMeans(data, k, b)
-                    bar_.j <- .colMeans(data, k, b)
-                    bar_.. <- mean(bar_i.)
+            private$.statistic_func <- function(data) {
+                k <- nrow(data)
+                b <- ncol(data)
 
-                    sst <- b * sum((bar_i. - bar_..)^2)
-                    sse <- sum((data - outer(bar_i., bar_.j, `+`) + bar_..)^2)
-                    (b - 1) * sst / sse
-                }
-            )
+                switch(private$.type,
+                    permu = function(data) sum(.rowMeans(data, k, b)^2),
+                    asymp = function(data) {
+                        bar_i. <- .rowMeans(data, k, b)
+                        bar_.j <- .colMeans(data, k, b)
+                        bar_.. <- mean(bar_i.)
+
+                        sst <- b * sum((bar_i. - bar_..)^2)
+                        sse <- sum((data - outer(bar_i., bar_.j, `+`) + bar_..)^2)
+
+                        (b - 1) * sst / sse
+                    }
+                )
+            }
         },
 
         .calculate_side = function() {

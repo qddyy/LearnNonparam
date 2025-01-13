@@ -42,28 +42,31 @@ OneWay <- R6Class(
         .name = "One-Way Test for Equal Means",
 
         .define = function() {
-            private$.statistic_func <- switch(private$.type,
-                permu = {
-                    lengths <- tabulate(attr(private$.data, "group"))
-                    function(data, group) {
-                        sum(rowsum.default(data, group)^2 / lengths)
+            private$.statistic_func <- function(data, group) {
+                switch(private$.type,
+                    permu = {
+                        lengths <- tabulate(group)
+                        function(data, group) {
+                            sum(rowsum.default(data, group)^2 / lengths)
+                        }
+                    },
+                    asymp = function(data, group) {
+                        N <- length(data)
+                        split <- split(data, group)
+                        k <- length(split)
+
+                        bar_.. <- mean(data)
+                        bar_i. <- unlist(lapply(
+                            split, function(x) rep.int(mean(x), length(x))
+                        ), recursive = FALSE, use.names = FALSE)
+
+                        mst <- sum((bar_i. - bar_..)^2) / (k - 1)
+                        mse <- sum((data - bar_i.)^2) / (N - k)
+
+                        mst / mse
                     }
-                },
-                asymp = function(data, group) {
-                    N <- length(data)
-                    split <- split(data, group)
-                    k <- length(split)
-
-                    bar_.. <- mean(data)
-                    bar_i. <- unlist(lapply(
-                        split, function(x) rep.int(mean(x), length(x))
-                    ), recursive = FALSE, use.names = FALSE)
-
-                    mst <- sum((bar_i. - bar_..)^2) / (k - 1)
-                    mse <- sum((data - bar_i.)^2) / (N - k)
-                    mst / mse
-                }
-            )
+                )
+            }
         },
 
         .calculate_side = function() {

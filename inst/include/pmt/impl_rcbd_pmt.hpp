@@ -6,14 +6,13 @@ RObject impl_rcbd_pmt(
 {
     Stat<progress> statistic_container;
 
-    auto statistic_closure = statistic_func(data);
-    auto rcbd_update = [data, &statistic_closure, &statistic_container]() {
+    auto rcbd_update = [&statistic_container, statistic_closure = statistic_func(data), data]() {
         return statistic_container << statistic_closure(data);
     };
 
-    statistic_container.init_statistic(rcbd_update);
-
-    if (!std::isnan(n_permu)) {
+    if (std::isnan(n_permu)) {
+        statistic_container.init(rcbd_update, 1);
+    } else {
         R_xlen_t k = data.nrow();
 
         auto begin = data.begin();
@@ -21,13 +20,13 @@ RObject impl_rcbd_pmt(
 
         decltype(end) it;
         if (n_permu == 0) {
-            double total = 1.0;
+            double n_permu_ = 1.0;
             for (it = begin; it != end; it += k) {
                 std::sort(it, it + k);
-                total *= n_permutation(it, it + k);
+                n_permu_ *= n_permutation(it, it + k);
             }
 
-            statistic_container.init_statistic_permu(total);
+            statistic_container.init(rcbd_update, 1, n_permu_);
 
             it = begin;
             while (it != end) {
@@ -38,7 +37,7 @@ RObject impl_rcbd_pmt(
                 it = next_permutation(it, it + k) ? begin : it + k;
             }
         } else {
-            statistic_container.init_statistic_permu(n_permu);
+            statistic_container.init(rcbd_update, 1, n_permu);
 
             do {
                 for (it = begin; it != end; it += k) {
@@ -48,5 +47,5 @@ RObject impl_rcbd_pmt(
         }
     }
 
-    return statistic_container.close();
+    return static_cast<RObject>(statistic_container);
 }

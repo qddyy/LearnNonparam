@@ -26,6 +26,6 @@ OneSampleTest <- R6Class(
             private$.data <- private$.raw_data[[1]]
         },
 
-        .compile_statistic_closure = function() NULL
+        .compile = function() NULL
     )
 )

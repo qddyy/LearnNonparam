@@ -35,25 +35,37 @@ constexpr auto generated_bars = generate_bars(std::make_integer_sequence<unsigne
 template <bool progress>
 class Stat {
 public:
-    Stat(R_xlen_t statistic_size = 1) :
-        _statistic_size(statistic_size),
+    Stat() :
         _progress_every(0),
         _progress_i(0) { }
 
     template <typename T>
-    void init_statistic(T& update)
+    void init(T& update, R_xlen_t size)
     {
-        _init_statistic_buffer(_statistic_size, 1);
+        _init_buffer(size);
 
         update();
-
-        _statistic = _statistic_buffer;
-        _statistic_buffer = NumericVector(0);
+        _statistic = std::exchange(_buffer, NumericVector(0));
     }
 
-    void init_statistic_permu(double n_permu)
+    template <typename T>
+    void init(T& update, R_xlen_t size, double n_permu)
     {
-        _init_statistic_buffer(n_permu, _statistic_size);
+        double n = n_permu * size;
+        if (n > R_XLEN_T_MAX) {
+            stop("Too many permutations");
+        }
+
+        _init_buffer(size);
+
+        update();
+        _statistic = _buffer;
+
+        _init_buffer(static_cast<R_xlen_t>(n));
+
+        if (size > 1) {
+            _buffer.attr("dim") = Dimension(size, n_permu);
+        }
 
         _init_progress();
     }
@@ -62,16 +74,16 @@ public:
     {
         _update_progress();
 
-        _statistic_buffer[_buffer_i++] = statistic;
+        _buffer[_buffer_i++] = statistic;
 
         return _buffer_i != _buffer_size;
     }
 
-    RObject close()
+    explicit operator RObject()
     {
         _clear_progress();
 
-        _statistic.attr("permu") = _statistic_buffer;
+        _statistic.attr("permu") = _buffer;
 
         return _statistic;
     };
@@ -79,9 +91,7 @@ public:
 private:
     RObject _statistic;
 
-    R_xlen_t _statistic_size;
-
-    NumericVector _statistic_buffer;
+    NumericVector _buffer;
 
     R_xlen_t _buffer_size;
     R_xlen_t _buffer_i;
@@ -89,21 +99,12 @@ private:
     R_xlen_t _progress_every;
     R_xlen_t _progress_i;
 
-    void _init_statistic_buffer(double n, R_xlen_t size)
+    void _init_buffer(R_xlen_t size)
     {
-        double total = n * size;
-        if (total <= 0 || total > R_XLEN_T_MAX) {
-            stop("Too many permutations");
-        }
-
-        _statistic_buffer = NumericVector(no_init(static_cast<R_xlen_t>(total)));
+        _buffer = NumericVector(no_init(size));
 
         _buffer_i = 0;
-        _buffer_size = _statistic_buffer.size();
-
-        if (size > 1) {
-            _statistic_buffer.attr("dim") = IntegerVector::create(size, n);
-        }
+        _buffer_size = size;
     }
 
     void _init_progress();
@@ -126,7 +127,7 @@ template <>
 void Stat<true>::_init_progress()
 {
     _progress_i = 0;
-    _progress_every = (_buffer_size < 100) ? 1 : _buffer_size / 100;
+    _progress_every = _buffer_size < 100 ? 1 : _buffer_size / 100;
 
     Rcout << generated_bars[0].data();
 }

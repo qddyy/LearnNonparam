@@ -48,7 +48,7 @@ Sign <- R6Class(
         .correct = NULL,
 
         .define = function() {
-            private$.statistic_func <- function(x, y) sum(x > y)
+            private$.statistic_func <- function(...) function(x, y) sum(x > y)
         },
 
         .calculate_p = function() {

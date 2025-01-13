@@ -49,17 +49,19 @@ Difference <- R6Class(
         .name = "Two-Sample Test Based on Mean or Median",
 
         .define = function() {
-            m <- length(private$.data$x)
-            n <- length(private$.data$y)
+            private$.statistic_func <- function(x, y) {
+                m <- length(x)
+                n <- length(y)
 
-            private$.statistic_func <- switch(private$.method,
-                mean = function(x, y) sum(x) / m - sum(y) / n,
-                median = {
-                    median_x <- make_median(m)
-                    median_y <- make_median(n)
-                    function(x, y) median_x(x) - median_y(y)
-                }
-            )
+                switch(private$.method,
+                    mean = function(x, y) sum(x) / m - sum(y) / n,
+                    median = {
+                        median_x <- make_median(m)
+                        median_y <- make_median(n)
+                        function(x, y) median_x(x) - median_y(y)
+                    }
+                )
+            }
         }
     )
 )

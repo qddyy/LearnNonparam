@@ -42,20 +42,22 @@ JonckheereTerpstra <- R6Class(
         .name = "Jonckheere-Terpstra Test",
 
         .define = function() {
-            k <- attr(private$.data, "group")[length(private$.data)]
-
-            I <- unlist(lapply(seq_len(k - 1), seq_len), FALSE, FALSE)
-            J <- rep.int(seq_len(k)[-1], seq_len(k - 1))
-
-            lengths <- tabulate(attr(private$.data, "group"))
-            lengths_IJ <- rep.int(lengths[I], lengths_J <- lengths[J])
-
             private$.statistic_func <- function(data, group) {
-                split <- split.default(data, group)
-                sum(`<`(
-                    unlist(rep.int(split[I], lengths_J), FALSE, FALSE),
-                    rep.int(unlist(split[J], FALSE, FALSE), lengths_IJ)
-                ))
+                k <- group[length(group)]
+
+                I <- unlist(lapply(seq_len(k - 1), seq_len), FALSE, FALSE)
+                J <- rep.int(seq_len(k)[-1], seq_len(k - 1))
+
+                lengths <- tabulate(group)
+                lengths_IJ <- rep.int(lengths[I], lengths_J <- lengths[J])
+
+                function(data, group) {
+                    split <- split.default(data, group)
+                    sum(`<`(
+                        unlist(rep.int(split[I], lengths_J), FALSE, FALSE),
+                        rep.int(unlist(split[J], FALSE, FALSE), lengths_IJ)
+                    ))
+                }
             }
         },
 

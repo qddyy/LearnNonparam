@@ -7,28 +7,25 @@ RObject impl_ksample_pmt(
 {
     Stat<progress> statistic_container;
 
-    auto statistic_closure = statistic_func(data, group);
-    auto ksample_update = [data, group, &statistic_closure, &statistic_container]() {
+    auto ksample_update = [&statistic_container, statistic_closure = statistic_func(data, group), data, group]() {
         return statistic_container << statistic_closure(data, group);
     };
 
-    statistic_container.init_statistic(ksample_update);
+    if (std::isnan(n_permu)) {
+        statistic_container.init(ksample_update, 1);
+    } else if (n_permu == 0) {
+        statistic_container.init(ksample_update, 1, n_permutation(group));
 
-    if (!std::isnan(n_permu)) {
-        if (n_permu == 0) {
-            statistic_container.init_statistic_permu(n_permutation(group));
+        do {
+            ksample_update();
+        } while (next_permutation(group));
+    } else {
+        statistic_container.init(ksample_update, 1, n_permu);
 
-            do {
-                ksample_update();
-            } while (next_permutation(group));
-        } else {
-            statistic_container.init_statistic_permu(n_permu);
-
-            do {
-                random_shuffle(group);
-            } while (ksample_update());
-        }
+        do {
+            random_shuffle(group);
+        } while (ksample_update());
     }
 
-    return statistic_container.close();
+    return static_cast<RObject>(statistic_container);
 }

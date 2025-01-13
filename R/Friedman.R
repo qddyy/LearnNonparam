@@ -42,15 +42,19 @@ Friedman <- R6Class(
         .scoring = "rank",
 
         .define = function() {
-            k <- nrow(private$.data)
-            b <- ncol(private$.data)
-            private$.statistic_func <- switch(private$.type,
-                permu = function(data) sum(.rowMeans(data, k, b)^2),
-                asymp = function(data) {
-                    b^2 / sum(apply(data, 2, var)) *
-                    sum((.rowMeans(data, k, b) - (k + 1) / 2)^2)
-                }
-            )
+            private$.statistic_func <- function(data) {
+                k <- nrow(data)
+                b <- ncol(data)
+
+                switch(private$.type,
+                    permu = function(data) sum(.rowMeans(data, k, b)^2),
+                    asymp = function(data) {
+                        b^2 / sum(apply(data, 2, var)) * sum(
+                            (.rowMeans(data, k, b) - (k + 1) / 2)^2
+                        )
+                    }
+                )
+            }
         },
 
         .calculate_side = function() {

@@ -193,7 +193,6 @@ pmts <- function(
 #' 
 #' @importFrom R6 R6Class
 #' @importFrom Rcpp cppFunction evalCpp
-#' @importFrom compiler cmpfun
 
 define_pmt <- function(
     inherit = c(
@@ -230,7 +229,8 @@ define_pmt <- function(
                 self$n_permu <- n_permu
 
                 if (typeof(statistic) == "closure") {
-                    private$.statistic_func <- cmpfun(statistic)
+                    private$.statistic_func <- statistic
+                    private$.compile()
                 } else if (!is.character(statistic)) {
                     stop("'statistic' must be a closure or a character string")
                 } else {

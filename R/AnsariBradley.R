@@ -53,7 +53,7 @@ AnsariBradley <- R6Class(
         },
 
         .define = function() {
-            private$.statistic_func <- function(x, y) sum(x)
+            private$.statistic_func <- function(...) function(x, y) sum(x)
         },
 
         .calculate_p = function() {
@@ -69,7 +69,7 @@ AnsariBradley <- R6Class(
                 sigma2 <- if (even) {
                     (m * n * (N + 2) * (N - 2)) / (48 * (N - 1))
                 } else {
-                    (m * n * (N + 1) * (3 + N^2)) / (48 * N^2)
+                    (m * n * (N + 1) * (N^2 + 3)) / (48 * N^2)
                 }
             } else {
                 r <- rle(sort.int(c(private$.data$x, private$.data$y)))

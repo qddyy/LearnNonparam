@@ -72,32 +72,35 @@ Correlation <- R6Class(
                 private$.scoring <- "none"
             }
 
-            if (private$.method != "kendall") {
-                private$.statistic_func <- switch(private$.type,
-                    permu = function(x, y) sum(x * y),
-                    asymp = function(x, y) cor(x, y, method = private$.method)
-                )
-            } else {
-                n <- nrow(private$.data)
+            private$.statistic_func <- function(x, y) {
+                if (private$.method != "kendall") {
+                    switch(private$.type,
+                        permu = function(x, y) sum(x * y),
+                        asymp = function(...) cor(..., method = private$.method)
+                    )
+                } else {
+                    n <- length(x)
 
-                sorted <- sort.int(private$.data$x, index.return = TRUE)
+                    I <- unlist(lapply(seq_len(n - 1), seq_len), FALSE, FALSE)
+                    J <- rep.int(seq_len(n)[-1], seq_len(n - 1))
 
-                i_index <- unlist(lapply(seq_len(n - 1), seq_len), FALSE, FALSE)
-                j_index <- rep.int(seq_len(n)[-1], seq_len(n - 1))
+                    sorted <- sort.int(x, index.return = TRUE)
 
-                x_equal <- (sorted$x[i_index] == sorted$x[j_index])
+                    x_equal <- (sorted$x[I] == sorted$x[J])
 
-                i_index <- sorted$ix[i_index]
-                j_index <- sorted$ix[j_index]
+                    I <- sorted$ix[I]
+                    J <- sorted$ix[J]
 
-                frac_2_length <- 4 / (n * (n - 1))
-                private$.statistic_func <- function(x, y) {
-                    y_i <- y[i_index]
-                    y_j <- y[j_index]
+                    N <- length(I)
 
-                    frac_2_length * sum(
-                        `[<-`(y_i < y_j, x_equal | y_i == y_j, 0.5)
-                    ) - 1
+                    function(x, y) {
+                        y_i <- y[I]
+                        y_j <- y[J]
+
+                        2 / N * sum(
+                            `[<-`(y_i < y_j, x_equal | y_i == y_j, 0.5)
+                        ) - 1
+                    }
                 }
             }
         },

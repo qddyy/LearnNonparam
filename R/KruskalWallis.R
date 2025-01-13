@@ -46,14 +46,16 @@ KruskalWallis <- R6Class(
         .name = "Kruskal-Wallis Test",
 
         .define = function() {
-            lengths <- tabulate(attr(private$.data, "group"))
-
-            sums <- lengths * mean(private$.data)
-
-            var <- var(private$.data)
-
             private$.statistic_func <- function(data, group) {
-                sum((rowsum.default(data, group) - sums)^2 / lengths) / var
+                lengths <- tabulate(group)
+
+                sums <- lengths * mean(data)
+
+                var <- var(data)
+
+                function(data, group) {
+                    sum((rowsum.default(data, group) - sums)^2 / lengths) / var
+                }
             }
         },
 

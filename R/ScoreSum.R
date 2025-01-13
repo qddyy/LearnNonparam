@@ -41,7 +41,7 @@ ScoreSum <- R6Class(
         .name = "Two-Sample Test Based on Sum of Scores",
 
         .define = function() {
-            private$.statistic_func <- function(x, y) sum(x)
+            private$.statistic_func <- function(...) function(x, y) sum(x)
         }
     )
 )

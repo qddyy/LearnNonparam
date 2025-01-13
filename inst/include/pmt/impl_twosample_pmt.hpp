@@ -7,14 +7,13 @@ RObject impl_twosample_pmt(
 {
     Stat<progress> statistic_container;
 
-    auto statistic_closure = statistic_func(x, y);
-    auto twosample_update = [x, y, &statistic_closure, &statistic_container]() {
+    auto twosample_update = [&statistic_container, statistic_closure = statistic_func(x, y), x, y]() {
         return statistic_container << statistic_closure(x, y);
     };
 
-    statistic_container.init_statistic(twosample_update);
-
-    if (!std::isnan(n_permu)) {
+    if (std::isnan(n_permu)) {
+        statistic_container.init(twosample_update, 1);
+    } else {
         NumericVector x_ = x.size() < y.size() ? x : y;
         NumericVector y_ = x.size() < y.size() ? y : x;
 
@@ -28,7 +27,7 @@ RObject impl_twosample_pmt(
             for (i = m; i < n; i++) {
                 p[i] = 1;
             }
-            statistic_container.init_statistic_permu(n_permutation(p));
+            statistic_container.init(twosample_update, 1, n_permutation(p));
 
             for (i = 0; i < n; i++) {
                 p[i] = i;
@@ -97,7 +96,7 @@ RObject impl_twosample_pmt(
                 }
             }
         } else {
-            statistic_container.init_statistic_permu(n_permu);
+            statistic_container.init(twosample_update, 1, n_permu);
 
             do {
                 for (i = 0; i < m; i++) {
@@ -110,5 +109,5 @@ RObject impl_twosample_pmt(
         }
     }
 
-    return statistic_container.close();
+    return static_cast<RObject>(statistic_container);
 }

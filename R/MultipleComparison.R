@@ -27,7 +27,7 @@ MultipleComparison <- R6Class(
             )
         },
 
-        .compile_statistic_closure = function() {
+        .compile = function() {
             private$.statistic_func <- cmpfun(private$.statistic_func)
         },
 

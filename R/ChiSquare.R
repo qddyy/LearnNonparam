@@ -40,16 +40,16 @@ ChiSquare <- R6Class(
         .name = "Chi-Square Test on Contingency Table",
 
         .define = function() {
-            r <- nrow(private$.data)
-            c <- ncol(private$.data)
-
-            expect <- tcrossprod(
-                .rowSums(private$.data, r, c),
-                .colSums(private$.data, r, c)
-            ) / sum(private$.data)
-
             private$.statistic_func <- function(data) {
-                sum((data - expect)^2 / expect)
+                r <- nrow(data)
+                c <- ncol(data)
+
+                expect <- tcrossprod(
+                    .rowSums(data, r, c),
+                    .colSums(data, r, c)
+                ) / sum(data)
+
+                function(data) sum((data - expect)^2 / expect)
             }
         },
 

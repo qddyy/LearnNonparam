@@ -98,7 +98,7 @@ PermuTest <- R6Class(
             }
 
             private$.define()
-            private$.compile_statistic_closure()
+            private$.compile()
 
             private$.calculate_statistic()
 
@@ -126,9 +126,9 @@ PermuTest <- R6Class(
             # private$.statistic_func <- ...
         },
 
-        .compile_statistic_closure = function() {
-            statistic_closure <- cmpfun(private$.statistic_func)
-            private$.statistic_func <- function(...) statistic_closure
+        .compile = function() {
+            statistic_func <- private$.statistic_func
+            private$.statistic_func <- function(...) cmpfun(statistic_func(...))
         },
 
         .calculate_statistic = function() {

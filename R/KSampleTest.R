@@ -35,7 +35,7 @@ KSampleTest <- R6Class(
 
         .calculate_statistic = function() {
             private$.statistic <- ksample_pmt(
-                private$.data,
+                c(private$.data),
                 attr(private$.data, "group"),
                 private$.statistic_func,
                 if (private$.type == "permu") private$.n_permu else NA_real_,

@@ -59,7 +59,7 @@ Wilcoxon <- R6Class(
         .correct = NULL,
 
         .define = function() {
-            private$.statistic_func <- function(x, y) sum(x)
+            private$.statistic_func <- function(...) function(x, y) sum(x)
         },
 
         .calculate_p = function() {
@@ -67,11 +67,9 @@ Wilcoxon <- R6Class(
             n <- length(private$.data$y)
             N <- m + n
 
-            statistic <- private$.statistic - m * (m + 1) / 2
-
             ties <- tabulate(c(private$.data$x, private$.data$y))
 
-            z <- statistic - m * n / 2
+            z <- private$.statistic - m * (N + 1) / 2
             correction <- if (private$.correct) {
                 switch(private$.side, lr = sign(z) * 0.5, r = 0.5, l = -0.5)
             } else 0

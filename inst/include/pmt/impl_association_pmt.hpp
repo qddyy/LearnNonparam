@@ -7,33 +7,30 @@ RObject impl_association_pmt(
 {
     Stat<progress> statistic_container;
 
-    auto statistic_closure = statistic_func(x, y);
-    auto association_update = [x, y, &statistic_closure, &statistic_container]() {
+    auto association_update = [&statistic_container, statistic_closure = statistic_func(x, y), x, y]() {
         return statistic_container << statistic_closure(x, y);
     };
 
-    statistic_container.init_statistic(association_update);
+    if (std::isnan(n_permu)) {
+        statistic_container.init(association_update, 1);
+    } else if (n_permu == 0) {
+        std::sort(x.begin(), x.end());
+        std::sort(y.begin(), y.end());
 
-    if (!std::isnan(n_permu)) {
-        if (n_permu == 0) {
-            std::sort(x.begin(), x.end());
-            std::sort(y.begin(), y.end());
+        NumericVector y_ = n_permutation(x) < n_permutation(y) ? x : y;
 
-            NumericVector y_ = (n_permutation(x) < n_permutation(y)) ? x : y;
+        statistic_container.init(association_update, 1, n_permutation(y_));
 
-            statistic_container.init_statistic_permu(n_permutation(y_));
+        do {
+            association_update();
+        } while (next_permutation(y_));
+    } else {
+        statistic_container.init(association_update, 1, n_permu);
 
-            do {
-                association_update();
-            } while (next_permutation(y_));
-        } else {
-            statistic_container.init_statistic_permu(n_permu);
-
-            do {
-                random_shuffle(y);
-            } while (association_update());
-        }
+        do {
+            random_shuffle(y);
+        } while (association_update());
     }
 
-    return statistic_container.close();
+    return static_cast<RObject>(statistic_container);
 }

@@ -62,13 +62,12 @@ PairedDifference <- R6Class(
 
         .correct = NULL,
 
-        .abs_diff = NULL,
-
         .preprocess = function() {
             super$.preprocess()
 
             private$.data$x <- private$.data$x - private$.null_value
-            private$.data$x <- private$.data$x - private$.data$y
+
+            private$.data$x <- abs(private$.data$x - private$.data$y)
             private$.data$y <- 0
 
             if (private$.method == "without_zeros") {
@@ -76,26 +75,25 @@ PairedDifference <- R6Class(
             }
         },
 
+        .calculate_score = function() {
+            score <- get_score(private$.data$x, private$.scoring)
+
+            private$.data$x <- if (private$.method == "with_zeros") {
+                `[<-`(score, private$.data$x == 0, 0)
+            } else score
+        },
+
         .define = function() {
-            abs_diff <- abs(private$.data$x)
-
-            private$.abs_diff <- abs_diff <- if (private$.scoring != "none") {
-                score <- get_score(abs(private$.data$x), private$.scoring)
-                if (private$.method == "with_zeros") {
-                    `[<-`(score, private$.data$x == 0, 0)
-                } else score
-            } else abs(private$.data$x)
-
-            private$.statistic_func <- function(x, y) sum(abs_diff * (x > y))
+            private$.statistic_func <- function(...) function(x, y) sum(x)
         },
 
         .calculate_p = function() {
-            z <- private$.statistic - sum(private$.abs_diff) / 2
+            z <- private$.statistic - sum(private$.data$x) / 2
             correction <- if (private$.scoring == "rank" && private$.correct) {
                 switch(private$.side, lr = sign(z) * 0.5, r = 0.5, l = -0.5)
             } else 0
             z <- (z - correction) / sqrt(
-                sum(private$.abs_diff^2) / 4
+                sum(private$.data$x^2) / 4
             )
 
             private$.p_value <- get_p_continous(z, "norm", private$.side)
