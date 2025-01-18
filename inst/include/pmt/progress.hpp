@@ -40,7 +40,7 @@ public:
         _progress_i(0) { }
 
     template <typename T>
-    void init(T& update, R_xlen_t size)
+    void init(T&& update, R_xlen_t size)
     {
         _init_buffer(size);
 
@@ -49,7 +49,7 @@ public:
     }
 
     template <typename T>
-    void init(T& update, R_xlen_t size, double n_permu)
+    void init(T&& update, R_xlen_t size, double n_permu)
     {
         double n = n_permu * size;
         if (n > R_XLEN_T_MAX) {
