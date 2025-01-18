@@ -26,7 +26,8 @@ TwoSampleTest <- R6Class(
             )
 
             x_index <- seq_along(private$.data$x)
-            private$.data <- list(x = score[x_index], y = score[-x_index])
+            private$.data$x <- score[x_index]
+            private$.data$y <- score[-x_index]
         },
 
         .calculate_statistic = function() {

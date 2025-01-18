@@ -75,7 +75,8 @@ SiegelTukey <- R6Class(
             ), recursive = FALSE, use.names = FALSE)[rank_xy]
 
             x_index <- seq_along(private$.data$x)
-            private$.data <- list(x = st_rank[x_index], y = st_rank[-x_index])
+            private$.data$x <- st_rank[x_index]
+            private$.data$y <- st_rank[-x_index]
         },
 
         .calculate_extra = function() NULL

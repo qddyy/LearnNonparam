@@ -53,7 +53,8 @@ AnsariBradley <- R6Class(
             ab_rank <- pmin(rank, length(rank) + 1 - rank)
 
             x_index <- seq_along(private$.data$x)
-            private$.data <- list(x = ab_rank[x_index], y = ab_rank[-x_index])
+            private$.data$x <- ab_rank[x_index]
+            private$.data$y <- ab_rank[-x_index]
         },
 
         .calculate_p = function() {

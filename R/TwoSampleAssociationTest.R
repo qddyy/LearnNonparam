@@ -13,10 +13,8 @@ TwoSampleAssociationTest <- R6Class(
     cloneable = FALSE,
     private = list(
         .calculate_score = function() {
-            private$.data <- data.frame(
-                x =  get_score(private$.data$x, private$.scoring),
-                y =  get_score(private$.data$y, private$.scoring)
-            )
+            private$.data$x <- get_score(private$.data$x, private$.scoring)
+            private$.data$y <- get_score(private$.data$y, private$.scoring)
         },
 
         .calculate_statistic = function() {
