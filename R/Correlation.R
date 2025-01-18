@@ -67,7 +67,6 @@ Correlation <- R6Class(
 
             if (private$.method != "pearson") {
                 private$.scoring <- "rank"
-                private$.calculate_score()
             } else {
                 private$.scoring <- "none"
             }

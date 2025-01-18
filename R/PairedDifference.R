@@ -62,9 +62,7 @@ PairedDifference <- R6Class(
 
         .correct = NULL,
 
-        .preprocess = function() {
-            super$.preprocess()
-
+        .define = function() {
             private$.data$x <- private$.data$x - private$.null_value
 
             private$.data$x <- abs(private$.data$x - private$.data$y)
@@ -73,6 +71,8 @@ PairedDifference <- R6Class(
             if (private$.method == "without_zeros") {
                 private$.data <- private$.data[private$.data$x != 0, ]
             }
+
+            private$.statistic_func <- function(...) function(x, y) sum(x)
         },
 
         .calculate_score = function() {
@@ -81,10 +81,6 @@ PairedDifference <- R6Class(
             private$.data$x <- if (private$.method == "with_zeros") {
                 `[<-`(score, private$.data$x == 0, 0)
             } else score
-        },
-
-        .define = function() {
-            private$.statistic_func <- function(...) function(x, y) sum(x)
         },
 
         .calculate_p = function() {

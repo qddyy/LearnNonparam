@@ -44,16 +44,16 @@ AnsariBradley <- R6Class(
         .null_value = 1,
         .link = "-",
 
+        .define = function() {
+            private$.statistic_func <- function(...) function(x, y) sum(x)
+        },
+
         .calculate_score = function() {
             rank <- rank(c(private$.data$x, private$.data$y))
             ab_rank <- pmin(rank, length(rank) + 1 - rank)
 
             x_index <- seq_along(private$.data$x)
             private$.data <- list(x = ab_rank[x_index], y = ab_rank[-x_index])
-        },
-
-        .define = function() {
-            private$.statistic_func <- function(...) function(x, y) sum(x)
         },
 
         .calculate_p = function() {
