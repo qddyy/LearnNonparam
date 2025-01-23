@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <iterator>
+#include <unordered_map>
 
 template <typename T>
 using diff_t = typename std::iterator_traits<T>::difference_type;
@@ -30,21 +31,33 @@ bool next_permutation(T first, T last)
 }
 
 template <typename T>
+double C(T n, T k)
+{
+    T i = 0, j = n - k;
+
+    double C = 1.0;
+    while (i < k) {
+        C *= ++j;
+        C /= ++i;
+    }
+
+    return C;
+}
+
+template <typename T>
 double n_permutation(T first, T last)
 {
+    std::unordered_map<typename std::iterator_traits<T>::value_type, diff_t<T>> freq;
+    freq.reserve(std::distance(first, last));
+    for (auto it = first; it != last; it++) {
+        freq[*it]++;
+    }
+
     double A = 1.0;
-
-    diff_t<T> rep = 0;
-
-    auto val = *first;
-    for (T it = first; it != last; it++) {
-        A *= std::distance(first, it) + 1;
-        if (*it == val) {
-            A /= ++rep;
-        } else {
-            rep = 1;
-            val = *it;
-        }
+    diff_t<T> n = 0;
+    for (auto it = freq.begin(); it != freq.end(); it++) {
+        n += it->second;
+        A *= C(n, it->second);
     }
 
     return A;
