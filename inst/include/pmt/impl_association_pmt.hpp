@@ -7,29 +7,23 @@ RObject impl_association_pmt(
 {
     Stat<progress> statistic_container;
 
-    auto update_factory = [&statistic_container, &statistic_func, &x, &y]() {
-        return [&statistic_container, statistic_closure = statistic_func(x, y), x, y]() {
-            return statistic_container << statistic_closure(x, y);
-        };
+    if (n_permu == 0 && n_permutation(x) < n_permutation(y)) {
+        std::swap(x, y);
+    }
+
+    auto association_update = [&statistic_container, statistic_closure = statistic_func(x, y), x, y]() {
+        return statistic_container << statistic_closure(x, y);
     };
 
     if (std::isnan(n_permu)) {
-        statistic_container.init(update_factory(), 1);
+        statistic_container.init(association_update, 1);
     } else if (n_permu == 0) {
-        if (n_permutation(x) < n_permutation(y)) {
-            std::swap(x, y);
-        }
-
-        auto association_update = update_factory();
-
         statistic_container.init(association_update, 1, n_permutation(y));
 
         while (association_update()) {
             next_permutation(y);
         }
     } else {
-        auto association_update = update_factory();
-
         statistic_container.init(association_update, 1, n_permu);
 
         do {

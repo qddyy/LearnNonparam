@@ -16,9 +16,7 @@ RObject impl_paired_pmt(
     } else {
         R_xlen_t n = x.size();
 
-        R_xlen_t i;
-
-        for (i = 0; i < n; i++) {
+        for (R_xlen_t i = 0; i < n; i++) {
             if (x[i] == y[i]) {
                 while (--n > i && x[n] == y[n]) { }
                 std::swap(x[i], x[n]);
@@ -30,27 +28,19 @@ RObject impl_paired_pmt(
             statistic_container.init(paired_update, 1, 1 << n);
 
             R_xlen_t swapped = 0;
-
-            i = 0;
-            while (i < n) {
+            for (R_xlen_t i = 0; i < n; i = swapped & (1 << i) ? 0 : i + 1) {
                 if (i == 0) {
                     paired_update();
                 }
 
                 std::swap(x[i], y[i]);
                 swapped ^= (1 << i);
-                if (swapped & (1 << i)) {
-                    i = 0;
-                    continue;
-                }
-
-                i++;
             }
         } else {
             statistic_container.init(paired_update, 1, n_permu);
 
             do {
-                for (i = 0; i < n; i++) {
+                for (R_xlen_t i = 0; i < n; i++) {
                     if (rand_int(2) == 1) {
                         std::swap(x[i], y[i]);
                     }

@@ -14,12 +14,13 @@ RObject impl_multcomp_pmt(
     auto multcomp_update = [&statistic_container, &statistic_func, group_i, group_j, data, group, K]() {
         auto statistic_closure = statistic_func(data, group);
 
-        bool flag = false;
         for (R_xlen_t k = 0; k < K; k++) {
-            flag = statistic_container << statistic_closure(group_i[k], group_j[k]);
+            if (!(statistic_container << statistic_closure(group_i[k], group_j[k]))) {
+                return false;
+            }
         };
 
-        return flag;
+        return true;
     };
 
     if (std::isnan(n_permu)) {

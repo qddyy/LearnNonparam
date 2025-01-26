@@ -20,20 +20,19 @@ RObject impl_twosample_pmt(
         R_xlen_t m = x_.size();
         R_xlen_t n = y_.size();
 
-        R_xlen_t i, j;
-
         std::unordered_multimap<double, R_xlen_t> x_map;
         std::vector<decltype(x_map.begin())> inv_map;
         x_map.reserve(m);
         inv_map.reserve(m);
-        for (i = 0; i < m; i++) {
+        for (R_xlen_t i = 0; i < m; i++) {
             inv_map.emplace_back(x_map.emplace(x_[i], i));
         }
 
-        j = 0;
-        while (j < n) {
+        for (R_xlen_t j = 0; j < n;) {
             auto it = x_map.find(y_[j]);
-            if (it != x_map.end()) {
+            if (it == x_map.end()) {
+                j++;
+            } else {
                 std::swap(y_[j], y_[--n]);
                 x_map.erase(inv_map[--m]);
                 if (it->first != x_[m]) {
@@ -41,8 +40,6 @@ RObject impl_twosample_pmt(
                     inv_map[it->second] = x_map.emplace(x_[it->second], it->second);
                     x_map.erase(it);
                 }
-            } else {
-                j++;
             }
         }
 
@@ -52,7 +49,7 @@ RObject impl_twosample_pmt(
 
             std::vector<R_xlen_t> p;
             p.reserve(n);
-            for (i = 0; i < n; i++) {
+            for (R_xlen_t i = 0; i < n; i++) {
                 p.emplace_back(i);
             }
             auto swap_update = [x_, y_, m, &p, &twosample_update](const R_xlen_t out, const R_xlen_t in) mutable {
@@ -64,13 +61,14 @@ RObject impl_twosample_pmt(
             // Algorithm R, "revolving-door combinations", TAOCP 4A/1
             std::vector<R_xlen_t> c;
             c.reserve(m + 1);
-            for (i = 0; i < m; i++) {
+            for (R_xlen_t i = 0; i < m; i++) {
                 c.emplace_back(i);
             }
             c.emplace_back(n);
 
             twosample_update();
 
+            R_xlen_t j;
             auto R4 = [&c, &j, &swap_update]() mutable {
                 if (c[j] > j) {
                     swap_update(c[j], j - 1);
@@ -123,8 +121,8 @@ RObject impl_twosample_pmt(
             statistic_container.init(twosample_update, 1, n_permu);
 
             do {
-                for (i = 0; i < m; i++) {
-                    j = i + rand_int(n - i);
+                for (R_xlen_t i = 0; i < m; i++) {
+                    R_xlen_t j = i + rand_int(n - i);
                     if (j >= m) {
                         std::swap(x_[i], y_[j - m]);
                     }

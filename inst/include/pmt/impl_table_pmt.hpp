@@ -22,15 +22,14 @@ RObject impl_table_pmt(
     if (std::isnan(n_permu)) {
         statistic_container.init(table_update, 1);
     } else if (n_permu == 0) {
-        std::sort(row.begin(), row.end());
-
-        IntegerVector col_ = (n_permutation(row) < n_permutation(col)) ? row : col;
+        IntegerVector col_ = n_permutation(row) < n_permutation(col) ? row : col;
 
         statistic_container.init(table_update, 1, n_permutation(col_));
 
-        do {
-            table_update();
-        } while (next_permutation(col_));
+        while (table_update()) {
+            next_permutation(col_);
+        }
+
     } else {
         statistic_container.init(table_update, 1, n_permu);
 
