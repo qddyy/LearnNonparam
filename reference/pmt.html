@@ -211,7 +211,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  	 User-Defined Permutation Test </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> scoring: custom    type: permu(10000)    method: twosample</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> scoring: custom    type: permu(10000)    method: default</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> statistic = 16, p-value = 1 (± 0 at 95% confidence)</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">t</span><span class="op">$</span><span class="va">scoring</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">qnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rank.html" class="external-link">rank</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="co"># equivalent to "vw"</span></span></span>
@@ -219,7 +219,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  	 User-Defined Permutation Test </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> scoring: custom    type: permu(10000)    method: twosample</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> scoring: custom    type: permu(10000)    method: default</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> statistic = -3.082791, p-value = 1 (± 0 at 95% confidence)</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">0</span></span></span>
@@ -227,7 +227,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  	 User-Defined Permutation Test </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> scoring: custom    type: permu(252)    method: twosample</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> scoring: custom    type: permu(252)    method: default</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> statistic = -3.082791, p-value = 1</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># \donttest{</span></span></span>
@@ -267,7 +267,7 @@
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>LearnNonparam.pmt_progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">r</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.147   0.000   0.147 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.146   0.000   0.146 </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">rcpp</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>   0.009   0.000   0.009 </span>
