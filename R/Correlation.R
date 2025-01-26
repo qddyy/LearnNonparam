@@ -29,7 +29,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom stats pt pnorm
+#' @importFrom stats pt pnorm sd
 
 
 Correlation <- R6Class(
