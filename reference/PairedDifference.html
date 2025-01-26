@@ -125,8 +125,7 @@
 <span class="r-out co"><span class="r-pr">#&gt;</span>  	 Paired Comparison Based on Differences </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> scoring: none    type: permu(32)    method: with_zeros</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> statistic = 1080, p-value = 0.03125</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: greater</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in if ((p &lt;- private$.p_value) &gt;= .Machine$double.eps) {    P &lt;- paste("=", format(p))    if (private$.type == "permu" &amp;&amp; private$.n_permu != 0) {        q &lt;- qnorm(0.975) * sqrt(p * (1 - p)/n_used)        paste(P, "(±", format(q), "at 95% confidence)")    }    else P} else paste("&lt;", format(.Machine$double.eps)):</span> missing value where TRUE/FALSE needed</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="pmt.html">pmt</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="st">"paired.difference"</span>, n_permu <span class="op">=</span> <span class="fl">0</span></span></span>
