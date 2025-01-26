@@ -267,10 +267,12 @@ define_pmt <- function(
             }
         ),
         private = list(
-            .name = if (!missing(name)) as.character(name) else name,
-            .alternative = if (!missing(alternative)) as.character(alternative),
+            .method = inherit,
 
             .side = match.arg(rejection),
+
+            .name = if (!missing(name)) as.character(name) else name,
+            .alternative = if (!missing(alternative)) as.character(alternative),
 
             .calculate = function() {
                 private$.preprocess()
