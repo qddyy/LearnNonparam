@@ -1,3 +1,15 @@
+# LearnNonparam 1.2.7
+
+- R side
+  - Fixed p-value calculation and adopted the correlation coefficient as test statistic in `Correlation`
+  - Added display of test types when printing user-defined tests
+  - Refined the compilation of R functions in `define_pmt`
+  - Improved calculating efficiency in `PairedDifference`
+
+- C++ side
+  - Enhanced the permutation efficiency in `paired.*`
+  - Reduced the number of permutations in `twosample.*` in cases with duplicate elements across samples
+
 # LearnNonparam 1.2.6
 
 - R side
