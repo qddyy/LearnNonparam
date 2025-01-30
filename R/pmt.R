@@ -231,7 +231,7 @@ define_pmt <- function(
                 if (typeof(statistic) == "closure") {
                     private$.statistic_func <- statistic
                     private$.compile()
-                } else if (!is.character(statistic)) {
+                } else if (!is.character(statistic) || length(statistic) > 1) {
                     stop("'statistic' must be a closure or a character string")
                 } else {
                     impl <- paste0("impl_", inherit, "_pmt")
