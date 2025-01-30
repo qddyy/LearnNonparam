@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">LearnNonparam</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.6</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.7</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,6 +31,23 @@
       <small>Source: <a href="https://github.com/qddyy/LearnNonparam/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.2.7" id="learnnonparam-127">LearnNonparam 1.2.7<a class="anchor" aria-label="anchor" href="#learnnonparam-127"></a></h2>
+<ul><li>R side
+<ul><li>Fixed p-value calculation and adopted the correlation coefficient as test statistic in <code>Correlation</code>
+</li>
+<li>Added display of test types when printing user-defined tests</li>
+<li>Refined the compilation of R functions in <code>define_pmt</code>
+</li>
+<li>Improved calculating efficiency in <code>PairedDifference</code>
+</li>
+</ul></li>
+<li>C++ side
+<ul><li>Enhanced the permutation efficiency in <code>paired.*</code>
+</li>
+<li>Reduced the number of permutations in <code>twosample.*</code> in cases with duplicate elements across samples</li>
+</ul></li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.2.6" id="learnnonparam-126">LearnNonparam 1.2.6<a class="anchor" aria-label="anchor" href="#learnnonparam-126"></a></h2><p class="text-muted">CRAN release: 2024-12-17</p>
 <ul><li>R side
