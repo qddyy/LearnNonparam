@@ -126,7 +126,6 @@ pmts <- function(
 #' | `"rcbd"`        | `const NumericMatrix& block_as_column_data` |                                              |
 #' | `"association"` | `const NumericVector& sample_1`             | `const NumericVector& sample_2`              |
 #' | `"table"`       | `const IntegerMatrix& contingency_table`    |                                              |
-
 #' 
 #' When using R, the parameters should be the R equivalents of these.
 #' 
@@ -231,7 +230,7 @@ define_pmt <- function(
                 if (typeof(statistic) == "closure") {
                     private$.statistic_func <- statistic
                     private$.compile()
-                } else if (!is.character(statistic)) {
+                } else if (!is.character(statistic) || length(statistic) > 1) {
                     stop("'statistic' must be a closure or a character string")
                 } else {
                     impl <- paste0("impl_", inherit, "_pmt")
