@@ -1,3 +1,13 @@
+# LearnNonparam 1.2.8
+
+- R side
+  - Refined the calculation of confidence bands in `CDF`
+  - Added DKW inequality-based confidence bands in `CDF`
+  - Enhanced error handling in `define_pmt`
+
+- C++ side
+  - Rolled back `twosample.*` functions
+
 # LearnNonparam 1.2.7
 
 - R side
