@@ -20,12 +20,14 @@ CDF <- R6Class(
     public = list(
         #' @description Create a new `CDF` object.
         #' 
+        #' @param method a character string specifying whether to use a confidence band based on the binomial distribution or the Dvoretzky–Kiefer–Wolfowitz inequality.
         #' @param conf_level a number specifying confidence level of the confidence bounds.
         #' 
         #' @return A `CDF` object.
         initialize = function(
-            conf_level = 0.95
+            method = c("binomial", "dkw"), conf_level = 0.95
         ) {
+            self$method <- method
             self$conf_level <- conf_level
         },
 
@@ -49,8 +51,6 @@ CDF <- R6Class(
     private = list(
         .name = "Inference on Cumulative Distribution Function",
 
-        .type = "asymp",
-
         .lims_for_plot = NULL,
 
         .preprocess = function() {
@@ -59,24 +59,41 @@ CDF <- R6Class(
             private$.data <- sort.int(private$.data)
         },
 
+        .define = function() {
+            private$.type <- switch(private$.method,
+                binomial = "pointwise", dkw = "simultaneous"
+            )
+        },
+
+        .compile = function() NULL,
+        .calculate_statistic = function() NULL,
         .calculate_side = function() NULL,
+        .calculate_p = function() NULL,
 
         .calculate_extra = function() {
             n <- length(private$.data)
 
             F_n <- seq.int(0, n) / n
+
             private$.estimate <- stepfun(private$.data, F_n)
 
-            A <- 1 / sqrt(n) * qnorm(1 - (1 - private$.conf_level) / 2)
-            delta_n <- A * sqrt(F_n * (1 - F_n))
+            alpha <- 1 - private$.conf_level
+            delta_n <- switch(private$.method,
+                binomial = qnorm(1 - alpha / 2) * sqrt(F_n * (1 - F_n) / n),
+                dkw = sqrt(log(2 / alpha) / (2 * n))
+            )
+
+            lower <- F_n - delta_n
+            upper <- F_n + delta_n
+
             private$.conf_int <- list(
-                lower = stepfun(private$.data, F_n - delta_n),
-                upper = stepfun(private$.data, F_n + delta_n)
+                lower = stepfun(private$.data, lower),
+                upper = stepfun(private$.data, upper)
             )
 
             private$.lims_for_plot <- list(
                 x = c(private$.data[1], private$.data[n]),
-                y = c(min(F_n - delta_n), max(F_n + delta_n))
+                y = c(min(lower), max(upper))
             )
         },
 

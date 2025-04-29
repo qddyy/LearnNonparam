@@ -35,12 +35,14 @@ pmt("onesample.cdf")$test(Table1.2.1)$plot(style = "graphic")
 \subsection{Method \code{new()}}{
 Create a new \code{CDF} object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{CDF$new(conf_level = 0.95)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{CDF$new(method = c("binomial", "dkw"), conf_level = 0.95)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
+\item{\code{method}}{a character string specifying whether to use a confidence band based on the binomial distribution or the Dvoretzky–Kiefer–Wolfowitz inequality.}
+
 \item{\code{conf_level}}{a number specifying confidence level of the confidence bounds.}
 }
 \if{html}{\out{</div>}}
