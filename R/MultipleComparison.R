@@ -201,8 +201,8 @@ MultipleComparison <- R6Class(
                     }
                 ) +
                 ggplot2::labs(
-                    title = "Permutation Distribution",
-                    x = "Statistic", y = "Frequency"
+                    x = "Statistic", y = "Frequency",
+                    title = "Permutation Distribution"
                 ) +
                 ggplot2::theme(
                     plot.title = ggplot2::element_text(

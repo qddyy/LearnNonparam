@@ -51,8 +51,6 @@ CDF <- R6Class(
     private = list(
         .name = "Inference on Cumulative Distribution Function",
 
-        .lims_for_plot = NULL,
-
         .preprocess = function() {
             super$.preprocess()
 
@@ -83,17 +81,12 @@ CDF <- R6Class(
                 dkw = sqrt(log(2 / alpha) / (2 * n))
             )
 
-            lower <- F_n - delta_n
-            upper <- F_n + delta_n
+            lower <- pmax(F_n - delta_n, 0)
+            upper <- pmin(F_n + delta_n, 1)
 
             private$.conf_int <- list(
                 lower = stepfun(private$.data, lower),
                 upper = stepfun(private$.data, upper)
-            )
-
-            private$.lims_for_plot <- list(
-                x = c(private$.data[1], private$.data[n]),
-                y = c(min(lower), max(upper))
             )
         },
 
@@ -105,13 +98,15 @@ CDF <- R6Class(
             plot.stepfun(
                 private$.estimate,
                 lty = "solid", do.points = FALSE,
-                xlim = private$.lims_for_plot$x,
-                ylim = private$.lims_for_plot$y,
+                xlim = private$.data[c(1, length(private$.data))],
+                xlab = expression(x),
+                ylim = c(0, 1),
+                ylab = expression(F[n](x)),
                 main = paste(
                     "Empirical CDF with",
                     paste0(private$.conf_level * 100, "%"),
                     "Confidence Bounds"
-                ), xlab = expression(x), ylab = expression(F[n](x))
+                )
             )
             plot.stepfun(
                 private$.conf_int$lower,
@@ -149,14 +144,16 @@ CDF <- R6Class(
                 ) +
                 ggplot2::geom_hline(yintercept = c(0, 1), linetype = "dashed") +
                 ggplot2::lims(
-                    x = private$.lims_for_plot$x, y = private$.lims_for_plot$y
+                    x = private$.data[c(1, length(private$.data))], y = c(0, 1)
                 ) +
                 ggplot2::labs(
+                    x = expression(x),
+                    y = expression(F[n](x)),
                     title = paste(
                         "Empirical CDF with",
                         paste0(private$.conf_level * 100, "%"),
                         "Confidence Bounds"
-                    ), x = expression(x), y = expression(F[n](x))
+                    )
                 ) +
                 ggplot2::theme(
                     plot.title = ggplot2::element_text(
