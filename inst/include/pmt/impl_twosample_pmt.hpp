@@ -18,32 +18,8 @@ RObject impl_twosample_pmt(
         NumericVector y_ = x.size() < y.size() ? y : x;
 
         R_xlen_t m = x_.size();
-        R_xlen_t n = y_.size();
+        R_xlen_t n = y_.size() + m;
 
-        std::unordered_multimap<double, R_xlen_t> x_map;
-        std::vector<decltype(x_map.begin())> inv_map;
-        x_map.reserve(m);
-        inv_map.reserve(m);
-        for (R_xlen_t i = 0; i < m; i++) {
-            inv_map.emplace_back(x_map.emplace(x_[i], i));
-        }
-
-        for (R_xlen_t j = 0; j < n;) {
-            auto it = x_map.find(y_[j]);
-            if (it == x_map.end()) {
-                j++;
-            } else {
-                std::swap(y_[j], y_[--n]);
-                x_map.erase(inv_map[--m]);
-                if (it->first != x_[m]) {
-                    std::swap(x_[it->second], x_[m]);
-                    inv_map[it->second] = x_map.emplace(x_[it->second], it->second);
-                    x_map.erase(it);
-                }
-            }
-        }
-
-        n += m;
         if (n_permu == 0) {
             statistic_container.init(twosample_update, 1, C(n, m));
 
