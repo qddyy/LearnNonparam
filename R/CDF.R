@@ -81,12 +81,9 @@ CDF <- R6Class(
                 dkw = sqrt(log(2 / alpha) / (2 * n))
             )
 
-            lower <- pmax(F_n - delta_n, 0)
-            upper <- pmin(F_n + delta_n, 1)
-
             private$.conf_int <- list(
-                lower = stepfun(private$.data, lower),
-                upper = stepfun(private$.data, upper)
+                lower = stepfun(private$.data, pmax(F_n - delta_n, 0)),
+                upper = stepfun(private$.data, pmin(F_n + delta_n, 1))
             )
         },
 
