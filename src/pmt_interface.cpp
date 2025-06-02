@@ -2,8 +2,14 @@
 
 using namespace Rcpp;
 
-template <bool>
-struct Tag { };
+template <unsigned n>
+constexpr auto Rf_lang = nullptr;
+
+template <>
+constexpr auto Rf_lang<2> = Rf_lang2;
+
+template <>
+constexpr auto Rf_lang<3> = Rf_lang3;
 
 template <bool sharing_args>
 class StatFunc : public Function {
@@ -17,6 +23,9 @@ public:
     }
 
 private:
+    template <bool>
+    struct Tag { };
+
     template <typename... Args>
     auto _invoke(Tag<false>, Args&&... args) const
     {
@@ -28,8 +37,8 @@ private:
     template <typename... Args>
     auto _invoke(Tag<true>, Args&&... args) const
     {
-        return [R_call = Language(Function(Function::operator()(std::forward<Args>(args)...)), std::forward<Args>(args)...)](auto&&...) {
-            return as<double>(R_call.fast_eval());
+        return [R_call = Shield<SEXP>(Rf_lang<sizeof...(args) + 1>(Function::operator()(std::forward<Args>(args)...), std::forward<Args>(args)...))](auto&&...) {
+            return as<double>(Rcpp_fast_eval(R_call, R_GlobalEnv));
         };
     }
 };
