@@ -1,3 +1,7 @@
+# LearnNonparam 1.2.9
+
+- Fixed incorrect permutation statistic computation due to deep copy behavior of `Rcpp::Language`
+
 # LearnNonparam 1.2.8
 
 - R side
