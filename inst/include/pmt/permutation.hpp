@@ -1,6 +1,7 @@
 #pragma once
 
 #include <algorithm>
+#include <cstring>
 #include <iterator>
 #include <unordered_map>
 
@@ -79,4 +80,16 @@ template <typename T>
 auto n_permutation(T&& v)
 {
     return n_permutation(v.begin(), v.end());
+}
+
+template <typename T>
+void swap_if(bool c, T& a, T& b) noexcept
+{
+    struct alignas(T) {
+        unsigned char value[sizeof(T)];
+    } buffer[2];
+    std::memcpy(buffer[1].value, &b, sizeof(T));
+    std::memcpy(buffer[0].value, &a, sizeof(T));
+    std::memcpy(&a, buffer[c].value, sizeof(T));
+    std::memcpy(&b, buffer[1 - c].value, sizeof(T));
 }

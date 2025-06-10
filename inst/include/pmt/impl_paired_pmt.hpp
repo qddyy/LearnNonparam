@@ -41,9 +41,7 @@ RObject impl_paired_pmt(
 
             do {
                 for (R_xlen_t i = 0; i < n; i++) {
-                    if (rand_int(2) == 1) {
-                        std::swap(x[i], y[i]);
-                    }
+                    swap_if(rand_int(2) == 1, x[i], y[i]);
                 }
             } while (paired_update());
         }
