@@ -128,34 +128,36 @@ library(LearnNonparam)
   </picture>
 
 <details>
+
 <summary>
+
 See <code>pmts()</code> for tests implemented in this package.
 </summary>
 
 <div class="kable-table">
 
-| key                  | class              | test                                               |
-|:---------------------|:-------------------|:---------------------------------------------------|
-| onesample.quantile   | Quantile           | Quantile Test                                      |
-| onesample.cdf        | CDF                | Inference on Cumulative Distribution Function      |
-| twosample.difference | Difference         | Two-Sample Test Based on Mean or Median            |
-| twosample.wilcoxon   | Wilcoxon           | Two-Sample Wilcoxon Test                           |
-| twosample.scoresum   | ScoreSum           | Two-Sample Test Based on Sum of Scores             |
-| twosample.ansari     | AnsariBradley      | Ansari-Bradley Test                                |
-| twosample.siegel     | SiegelTukey        | Siegel-Tukey Test                                  |
-| twosample.rmd        | RatioMeanDeviance  | Ratio Mean Deviance Test                           |
-| twosample.ks         | KolmogorovSmirnov  | Two-Sample Kolmogorov-Smirnov Test                 |
-| ksample.oneway       | OneWay             | One-Way Test for Equal Means                       |
-| ksample.kw           | KruskalWallis      | Kruskal-Wallis Test                                |
-| ksample.jt           | JonckheereTerpstra | Jonckheere-Terpstra Test                           |
-| multcomp.studentized | Studentized        | Multiple Comparison Based on Studentized Statistic |
-| paired.sign          | Sign               | Two-Sample Sign Test                               |
-| paired.difference    | PairedDifference   | Paired Comparison Based on Differences             |
-| rcbd.oneway          | RCBDOneWay         | One-Way Test for Equal Means in RCBD               |
-| rcbd.friedman        | Friedman           | Friedman Test                                      |
-| rcbd.page            | Page               | Page Test                                          |
-| association.corr     | Correlation        | Test for Association Between Paired Samples        |
-| table.chisq          | ChiSquare          | Chi-Square Test on Contingency Table               |
+| key | class | test |
+|:---|:---|:---|
+| onesample.quantile | Quantile | Quantile Test |
+| onesample.cdf | CDF | Inference on Cumulative Distribution Function |
+| twosample.difference | Difference | Two-Sample Test Based on Mean or Median |
+| twosample.wilcoxon | Wilcoxon | Two-Sample Wilcoxon Test |
+| twosample.scoresum | ScoreSum | Two-Sample Test Based on Sum of Scores |
+| twosample.ansari | AnsariBradley | Ansari-Bradley Test |
+| twosample.siegel | SiegelTukey | Siegel-Tukey Test |
+| twosample.rmd | RatioMeanDeviance | Ratio Mean Deviance Test |
+| twosample.ks | KolmogorovSmirnov | Two-Sample Kolmogorov-Smirnov Test |
+| ksample.oneway | OneWay | One-Way Test for Equal Means |
+| ksample.kw | KruskalWallis | Kruskal-Wallis Test |
+| ksample.jt | JonckheereTerpstra | Jonckheere-Terpstra Test |
+| multcomp.studentized | Studentized | Multiple Comparison Based on Studentized Statistic |
+| paired.sign | Sign | Two-Sample Sign Test |
+| paired.difference | PairedDifference | Paired Comparison Based on Differences |
+| rcbd.oneway | RCBDOneWay | One-Way Test for Equal Means in RCBD |
+| rcbd.friedman | Friedman | Friedman Test |
+| rcbd.page | Page | Page Test |
+| association.corr | Correlation | Test for Association Between Paired Samples |
+| table.chisq | ChiSquare | Chi-Square Test on Contingency Table |
 
 </div>
 
@@ -283,7 +285,8 @@ flexible framework for permutation tests.
 
 ## References
 
-<div id="refs" class="references csl-bib-body hanging-indent">
+<div id="refs" class="references csl-bib-body hanging-indent"
+entry-spacing="0">
 
 <div id="ref-higgins2004" class="csl-entry">
 
