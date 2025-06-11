@@ -102,105 +102,47 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu"><a href="pmt.html">pmt</a></span><span class="op">(</span></span></span>
 <span class="r-in"><span>    <span class="st">"multcomp.studentized"</span>, method <span class="op">=</span> <span class="st">"bonferroni"</span></span></span>
 <span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table3.3.1</span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	 Multiple Comparison Based on Studentized Statistic </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> scoring: none    type: permu(10000)    method: bonferroni</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> family-wise confidence level: 95%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           statistic p-value  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_1 ~ location_2  0.02737145  0.9754  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_1 ~ location_3 -1.77914406  0.0844  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_1 ~ location_4 -3.41048230  0.0018 *</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_2 ~ location_3 -1.80651550  0.0868  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_2 ~ location_4 -3.43785375  0.0018 *</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_3 ~ location_4 -1.63133824  0.1154  </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in multcomp_pmt(private$.data, attr(private$.data, "group"), private$.statistic_func,     if (private$.type == "permu") private$.n_permu else NA_real_,     isTRUE(getOption("LearnNonparam.pmt_progress"))):</span> argument "n_permu" is missing, with no default</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"asymp"</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in t$type &lt;- "asymp":</span> object of type 'closure' is not subsettable</span>
 <span class="r-in"><span><span class="va">t</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	 Multiple Comparison Based on Studentized Statistic </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> scoring: none    type: asymp    method: bonferroni</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> family-wise confidence level: 95%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                           statistic     p-value  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_1 ~ location_2  0.02737145 0.978434752  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_1 ~ location_3 -1.77914406 0.090419680  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_1 ~ location_4 -3.41048230 0.002773484 *</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_2 ~ location_3 -1.80651550 0.085909110  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_2 ~ location_4 -3.43785375 0.002603664 *</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_3 ~ location_4 -1.63133824 0.118466249  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> function (x) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> UseMethod("t")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5583978f8438&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: namespace:base&gt;</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">t</span><span class="op">$</span><span class="va">scoring</span> <span class="op">&lt;-</span> <span class="st">"rank"</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in t$scoring &lt;- "rank":</span> object of type 'closure' is not subsettable</span>
 <span class="r-in"><span><span class="va">t</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	 Multiple Comparison Based on Studentized Statistic </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> scoring: rank    type: asymp    method: bonferroni</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> family-wise confidence level: 95%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          statistic     p-value  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_1 ~ location_2  0.1307784 0.895950645  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_1 ~ location_3 -1.4821547 0.138299135  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_1 ~ location_4 -2.8335311 0.004603683 *</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_2 ~ location_3 -1.6129331 0.106759051  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_2 ~ location_4 -2.9643094 0.003033631 *</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_3 ~ location_4 -1.3513764 0.176574906  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> function (x) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> UseMethod("t")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5583978f8438&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: namespace:base&gt;</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">t</span><span class="op">$</span><span class="va">method</span> <span class="op">&lt;-</span> <span class="st">"tukey"</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in t$method &lt;- "tukey":</span> object of type 'closure' is not subsettable</span>
 <span class="r-in"><span><span class="va">t</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	 Multiple Comparison Based on Studentized Statistic </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> scoring: rank    type: asymp    method: tukey</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> family-wise confidence level: 95%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                         statistic    p-value  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_1 ~ location_2 0.1849485 0.99920177  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_1 ~ location_3 2.0960833 0.44830284  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_1 ~ location_4 4.0072180 0.02382224 *</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_2 ~ location_3 2.2810318 0.37122411  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_2 ~ location_4 4.1921666 0.01604503 *</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_3 ~ location_4 1.9111348 0.53008595  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> function (x) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> UseMethod("t")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5583978f8438&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: namespace:base&gt;</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">t</span><span class="op">$</span><span class="va">scoring</span> <span class="op">&lt;-</span> <span class="st">"none"</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in t$scoring &lt;- "none":</span> object of type 'closure' is not subsettable</span>
 <span class="r-in"><span><span class="va">t</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	 Multiple Comparison Based on Studentized Statistic </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> scoring: none    type: asymp    method: tukey</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> family-wise confidence level: 95%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          statistic    p-value  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_1 ~ location_2 0.03870907 0.99999236  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_1 ~ location_3 2.51608965 0.31194094  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_1 ~ location_4 4.82315032 0.01356971 *</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_2 ~ location_3 2.55479873 0.29951264  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_2 ~ location_4 4.86185939 0.01277452 *</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_3 ~ location_4 2.30706067 0.38453323  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> function (x) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> UseMethod("t")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5583978f8438&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: namespace:base&gt;</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">t</span><span class="op">$</span><span class="va">type</span> <span class="op">&lt;-</span> <span class="st">"permu"</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in t$type &lt;- "permu":</span> object of type 'closure' is not subsettable</span>
 <span class="r-in"><span><span class="va">t</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> 	 Multiple Comparison Based on Studentized Statistic </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> scoring: none    type: permu(10000)    method: tukey</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> family-wise confidence level: 95%</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>                          statistic p-value  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_1 ~ location_2 0.03870907  1.0000  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_1 ~ location_3 2.51608965  0.3172  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_1 ~ location_4 4.82315032  0.0150 *</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_2 ~ location_3 2.55479873  0.3052  </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_2 ~ location_4 4.86185939  0.0143 *</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> location_3 ~ location_4 2.30706067  0.3921  </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> function (x) </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> UseMethod("t")</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;bytecode: 0x5583978f8438&gt;</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> &lt;environment: namespace:base&gt;</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
