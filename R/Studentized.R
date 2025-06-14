@@ -59,33 +59,35 @@ Studentized <- R6Class(
         .name = "Multiple Comparison Based on Studentized Statistic",
 
         .define = function() {
-            inv_lengths <- 1 / tabulate(attr(private$.data, "group"))
-            sum_inv_lengths <- outer(inv_lengths, inv_lengths, `+`)
+            private$.statistic_func <- function(data, group) {
+                inv_lengths <- 1 / tabulate(group)
+                sum_inv_lengths <- outer(inv_lengths, inv_lengths, `+`)
 
-            if (private$.scoring == "none") {
-                N <- length(private$.data)
-                k <- attr(private$.data, "group")[N]
+                if (private$.scoring == "none") {
+                    N <- length(data)
+                    k <- group[N]
 
-                private$.statistic_func <- function(data, group) {
-                    means <- rowsum.default(data, group) * inv_lengths
-                    mse <- sum((data - means[group])^2) / (N - k)
+                    function(data, group) {
+                        means <- rowsum.default(data, group) * inv_lengths
+                        mse <- sum((data - means[group])^2) / (N - k)
 
-                    function(i, j) {
-                        (means[i] - means[j]) / sqrt(
-                            mse * sum_inv_lengths[i, j]
-                        )
+                        function(i, j) {
+                            (means[i] - means[j]) / sqrt(
+                                mse * sum_inv_lengths[i, j]
+                            )
+                        }
                     }
-                }
-            } else {
-                var <- var(private$.data)
+                } else {
+                    var <- var(data)
 
-                private$.statistic_func <- function(data, group) {
-                    means <- rowsum.default(data, group) * inv_lengths
+                    function(data, group) {
+                        means <- rowsum.default(data, group) * inv_lengths
 
-                    function(i, j) {
-                        (means[i] - means[j]) / sqrt(
-                            var * sum_inv_lengths[i, j]
-                        )
+                        function(i, j) {
+                            (means[i] - means[j]) / sqrt(
+                                var * sum_inv_lengths[i, j]
+                            )
+                        }
                     }
                 }
             }

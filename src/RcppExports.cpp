@@ -41,19 +41,17 @@ BEGIN_RCPP
 END_RCPP
 }
 // multcomp_pmt
-SEXP multcomp_pmt(const SEXP group_i, const SEXP group_j, const SEXP data, const SEXP group, const SEXP statistic_func, const double n_permu, const bool progress);
-RcppExport SEXP _LearnNonparam_multcomp_pmt(SEXP group_iSEXP, SEXP group_jSEXP, SEXP dataSEXP, SEXP groupSEXP, SEXP statistic_funcSEXP, SEXP n_permuSEXP, SEXP progressSEXP) {
+SEXP multcomp_pmt(const SEXP data, const SEXP group, const SEXP statistic_func, const double n_permu, const bool progress);
+RcppExport SEXP _LearnNonparam_multcomp_pmt(SEXP dataSEXP, SEXP groupSEXP, SEXP statistic_funcSEXP, SEXP n_permuSEXP, SEXP progressSEXP) {
 BEGIN_RCPP
     Rcpp::RObject rcpp_result_gen;
     Rcpp::RNGScope rcpp_rngScope_gen;
-    Rcpp::traits::input_parameter< const SEXP >::type group_i(group_iSEXP);
-    Rcpp::traits::input_parameter< const SEXP >::type group_j(group_jSEXP);
     Rcpp::traits::input_parameter< const SEXP >::type data(dataSEXP);
     Rcpp::traits::input_parameter< const SEXP >::type group(groupSEXP);
     Rcpp::traits::input_parameter< const SEXP >::type statistic_func(statistic_funcSEXP);
     Rcpp::traits::input_parameter< const double >::type n_permu(n_permuSEXP);
     Rcpp::traits::input_parameter< const bool >::type progress(progressSEXP);
-    rcpp_result_gen = Rcpp::wrap(multcomp_pmt(group_i, group_j, data, group, statistic_func, n_permu, progress));
+    rcpp_result_gen = Rcpp::wrap(multcomp_pmt(data, group, statistic_func, n_permu, progress));
     return rcpp_result_gen;
 END_RCPP
 }
@@ -120,7 +118,7 @@ END_RCPP
 static const R_CallMethodDef CallEntries[] = {
     {"_LearnNonparam_twosample_pmt", (DL_FUNC) &_LearnNonparam_twosample_pmt, 5},
     {"_LearnNonparam_ksample_pmt", (DL_FUNC) &_LearnNonparam_ksample_pmt, 5},
-    {"_LearnNonparam_multcomp_pmt", (DL_FUNC) &_LearnNonparam_multcomp_pmt, 7},
+    {"_LearnNonparam_multcomp_pmt", (DL_FUNC) &_LearnNonparam_multcomp_pmt, 5},
     {"_LearnNonparam_paired_pmt", (DL_FUNC) &_LearnNonparam_paired_pmt, 5},
     {"_LearnNonparam_rcbd_pmt", (DL_FUNC) &_LearnNonparam_rcbd_pmt, 4},
     {"_LearnNonparam_association_pmt", (DL_FUNC) &_LearnNonparam_association_pmt, 5},
