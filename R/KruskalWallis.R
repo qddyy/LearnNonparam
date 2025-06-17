@@ -19,7 +19,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom stats pchisq
+#' @importFrom stats pchisq var
 
 
 KruskalWallis <- R6Class(

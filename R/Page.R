@@ -15,7 +15,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom stats pnorm
+#' @importFrom stats pnorm var
 
 
 Page <- R6Class(
