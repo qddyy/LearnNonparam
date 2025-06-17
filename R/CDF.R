@@ -63,7 +63,6 @@ CDF <- R6Class(
             )
         },
 
-        .compile = function() NULL,
         .calculate_statistic = function() NULL,
         .calculate_side = function() NULL,
         .calculate_p = function() NULL,

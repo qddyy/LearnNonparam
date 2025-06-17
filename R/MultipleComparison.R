@@ -5,7 +5,6 @@
 #' @aliases class.multcomp
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom compiler cmpfun
 #' @importFrom graphics par layout mtext hist.default abline
 
 
@@ -27,14 +26,8 @@ MultipleComparison <- R6Class(
             )
         },
 
-        .compile = function() {
-            private$.statistic_func <- cmpfun(private$.statistic_func)
-        },
-
         .calculate_statistic = function() {
             private$.statistic <- multcomp_pmt(
-                private$.group_ij$i,
-                private$.group_ij$j,
                 private$.data,
                 attr(private$.data, "group"),
                 private$.statistic_func,
