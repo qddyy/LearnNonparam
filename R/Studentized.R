@@ -27,7 +27,7 @@
 #' @export
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom stats pt ptukey
+#' @importFrom stats pt ptukey sd
 
 
 Studentized <- R6Class(
@@ -61,7 +61,8 @@ Studentized <- R6Class(
         .define = function() {
             private$.statistic_func <- function(data, group) {
                 inv_lengths <- 1 / tabulate(group)
-                sum_inv_lengths <- outer(inv_lengths, inv_lengths, `+`)
+
+                weights <- 1 / sqrt(outer(inv_lengths, inv_lengths, `+`))
 
                 if (private$.scoring == "none") {
                     N <- length(data)
@@ -69,25 +70,20 @@ Studentized <- R6Class(
 
                     function(data, group) {
                         means <- rowsum.default(data, group) * inv_lengths
-                        mse <- sum((data - means[group])^2) / (N - k)
 
-                        function(i, j) {
-                            (means[i] - means[j]) / sqrt(
-                                mse * sum_inv_lengths[i, j]
-                            )
-                        }
+                        weights <- weights / sqrt(
+                            sum((data - means[group])^2) / (N - k)
+                        )
+
+                        function(i, j) (means[i] - means[j]) * weights[i, j]
                     }
                 } else {
-                    var <- var(data)
+                    weights <- weights / sd(data)
 
                     function(data, group) {
                         means <- rowsum.default(data, group) * inv_lengths
 
-                        function(i, j) {
-                            (means[i] - means[j]) / sqrt(
-                                var * sum_inv_lengths[i, j]
-                            )
-                        }
+                        function(i, j) (means[i] - means[j]) * weights[i, j]
                     }
                 }
             }
