@@ -19,7 +19,7 @@ public:
     template <typename... Args>
     auto operator()(Args&&... args) const
     {
-        return [R_call = Shield<SEXP>(Rf_lang<sizeof...(args) + 1>(Function::operator()(std::forward<Args>(args)...), std::forward<Args>(args)...))](auto&&...) {
+        return [R_call = RObject(Rf_lang<sizeof...(args) + 1>(Function::operator()(std::forward<Args>(args)...), std::forward<Args>(args)...))](auto&&...) {
             return as<T>(Rcpp_fast_eval(R_call, R_GlobalEnv));
         };
     }
@@ -71,7 +71,7 @@ public:
         IntegerVector i(no_init(1));
         IntegerVector j(no_init(1));
 
-        return [i_iter = i.begin(), j_iter = j.begin(), R_call = Shield<SEXP>(Rf_lang<3>(R_NilValue, i, j)), statistic_closure = CachedFunc<SEXP>::operator()(std::forward<Args>(args)...)](auto&&...) {
+        return [i_iter = i.begin(), j_iter = j.begin(), R_call = RObject(Rf_lang<3>(R_NilValue, i, j)), statistic_closure = CachedFunc<SEXP>::operator()(std::forward<Args>(args)...)](auto&&...) {
             SETCAR(R_call, statistic_closure());
 
             return [&](int i, int j) {
