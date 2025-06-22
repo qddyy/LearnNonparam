@@ -128,9 +128,13 @@
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/modify-dark.svg"><img src="reference/figures/README/modify.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
 </li>
 </ul>
-<details><summary>
+<details open><summary>
 See <code>pmts()</code> for tests implemented in this package.
-</summary><div class="kable-table">
+</summary><p>
+</p>
+<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="reference/pmt.html">pmts</a></span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<div class="kable-table">
 <table class="table">
 <colgroup>
 <col width="33%">
@@ -246,13 +250,14 @@ See <code>pmts()</code> for tests implemented in this package.
 </tbody>
 </table>
 </div>
+
 </details>
 </div>
 <div class="section level2">
 <h2 id="extending">Extending<a class="anchor" aria-label="anchor" href="#extending"></a>
 </h2>
 <p><code>define_pmt</code> allows users to define new permutation tests. Take the two-sample Wilcoxon test as an example:</p>
-<div class="sourceCode" id="cb12"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t_custom</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pmt.html">define_pmt</a></span><span class="op">(</span></span>
 <span>    <span class="co"># this is a two-sample permutation test</span></span>
 <span>    inherit <span class="op">=</span> <span class="st">"twosample"</span>,</span>
@@ -268,7 +273,7 @@ See <code>pmts()</code> for tests implemented in this package.
 <span><span class="op">)</span></span></code></pre></div>
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/define_r-dark.svg"><img src="reference/figures/README/define_r.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
 <p>Also, the statistic can be written in C++. Leveraging Rcpp sugars and C++14 features, only minor modifications are needed to make it compatible with C++ syntax.</p>
-<div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t_cpp</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pmt.html">define_pmt</a></span><span class="op">(</span></span>
 <span>    inherit <span class="op">=</span> <span class="st">"twosample"</span>, rejection <span class="op">=</span> <span class="st">"lr"</span>, n_permu <span class="op">=</span> <span class="fl">1e5</span>,</span>
 <span>    statistic <span class="op">=</span> <span class="st">"[](const auto&amp; x, const auto&amp; y) {</span></span>
@@ -281,15 +286,15 @@ See <code>pmts()</code> for tests implemented in this package.
 <span><span class="op">)</span></span></code></pre></div>
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/define_cpp-dark.svg"><img src="reference/figures/README/define_cpp.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
 <p>It’s easy to check that <code>t_custom</code> and <code>t_cpp</code> are equivalent:</p>
-<div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, mean <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, mean <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/prepare_data-dark.svg"><img src="reference/figures/README/prepare_data.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">t_custom</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/t_custom_res-dark.svg"><img src="reference/figures/README/t_custom_res.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">t_cpp</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/t_cpp_res-dark.svg"><img src="reference/figures/README/t_cpp_res.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
@@ -298,7 +303,7 @@ See <code>pmts()</code> for tests implemented in this package.
 <h2 id="performance">Performance<a class="anchor" aria-label="anchor" href="#performance"></a>
 </h2>
 <p><a href="https://CRAN.R-project.org/package=coin" class="external-link">coin</a> is a commonly used R package for performing permutation tests. Below is a benchmark:</p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://coin.r-forge.r-project.org" class="external-link">coin</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
@@ -311,7 +316,7 @@ See <code>pmts()</code> for tests implemented in this package.
 <span>    coin <span class="op">=</span> <span class="fu">wilcox_test</span><span class="op">(</span><span class="va">data</span> <span class="op">~</span> <span class="va">group</span>, distribution <span class="op">=</span> <span class="fu">approximate</span><span class="op">(</span>nresample <span class="op">=</span> <span class="fl">1e5</span>, parallel <span class="op">=</span> <span class="st">"no"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/benchmark-dark.svg"><img src="reference/figures/README/benchmark.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">benchmark</span></span></code></pre></div>
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/benchmark_res-dark.svg"><img src="reference/figures/README/benchmark_res.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
 <p>It can be seen that C++ brings significantly better performance than pure R, even surpassing the <code>coin</code> package (under sequential execution). However, all tests in this package are currently written in R with no plans for migration to C++ in the future. This is because the primary goal of this package is not to maximize performance but to offer a flexible framework for permutation tests.</p>
