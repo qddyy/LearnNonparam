@@ -144,13 +144,12 @@ SEXP association_pmt(
 
 // [[Rcpp::export]]
 SEXP table_pmt(
-    const SEXP row,
-    const SEXP col,
+    const SEXP data,
     const SEXP statistic_func,
     const double n_permu,
     const bool progress)
 {
     return progress ?
-        impl_table_pmt<true, CachedFunc<double>>(clone(row), clone(col), statistic_func, n_permu) :
-        impl_table_pmt<false, CachedFunc<double>>(clone(row), clone(col), statistic_func, n_permu);
+        impl_table_pmt<true, CachedFunc<double>>(clone(data), statistic_func, n_permu) :
+        impl_table_pmt<false, CachedFunc<double>>(clone(data), statistic_func, n_permu);
 }

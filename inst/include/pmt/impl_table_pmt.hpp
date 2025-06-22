@@ -1,40 +1,64 @@
 template <bool progress, typename T>
 RObject impl_table_pmt(
-    IntegerVector row,
-    IntegerVector col,
+    IntegerMatrix data,
     const T& statistic_func,
     const double n_permu)
 {
     Stat<progress> statistic_container;
 
-    auto data = [_data = IntegerMatrix(no_init(*(row.end() - 1) + 1, *(col.end() - 1) + 1)), row, col, n = row.size()]() mutable {
-        _data.fill(0);
-        for (R_xlen_t i = 0; i < n; i++) {
-            _data(row[i], col[i])++;
+    R_xlen_t r = data.nrow();
+    R_xlen_t c = data.ncol();
+
+    R_xlen_t n = 0;
+    for (R_xlen_t k = 0; k < data.size(); k++) {
+        n += data[k];
+    }
+
+    std::vector<R_xlen_t> row;
+    std::vector<R_xlen_t> col;
+    row.reserve(n);
+    col.reserve(n);
+    for (R_xlen_t j = 0; j < c; j++) {
+        for (R_xlen_t i = 0; i < r; i++) {
+            for (int k = 0; k < data(i, j); k++) {
+                row.emplace_back(i);
+                col.emplace_back(j);
+            }
         }
-        return _data;
+    }
+
+    auto data_ = [&row, &col, data, n]() mutable {
+        for (R_xlen_t k = 0; k < data.size(); k++) {
+            data[k] = 0;
+        };
+
+        for (R_xlen_t k = 0; k < n; k++) {
+            data(row[k], col[k])++;
+        }
+
+        return data;
     };
 
-    auto table_update = [&statistic_container, statistic_closure = statistic_func(data()), &data]() {
-        return statistic_container << statistic_closure(data());
+    auto table_update = [&statistic_container, statistic_closure = statistic_func(data_()), &data_]() {
+        return statistic_container << statistic_closure(data_());
     };
 
     if (std::isnan(n_permu)) {
         statistic_container.init(table_update, 1);
     } else if (n_permu == 0) {
-        IntegerVector col_ = n_permutation(row) < n_permutation(col) ? row : col;
+        auto& row_ = n_permutation(row) < n_permutation(col) ? row : col;
 
-        statistic_container.init(table_update, 1, n_permutation(col_));
+        statistic_container.init(table_update, 1, n_permutation(row_));
 
         while (table_update()) {
-            next_permutation(col_);
+            next_permutation(row_);
         }
 
     } else {
         statistic_container.init(table_update, 1, n_permu);
 
         do {
-            random_shuffle(col);
+            random_shuffle(row);
         } while (table_update());
     }
 
