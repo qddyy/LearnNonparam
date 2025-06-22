@@ -127,12 +127,18 @@ library(LearnNonparam)
   <img src="man/figures/README/modify.svg" width="100%" style="display: block; margin: auto;" />
   </picture>
 
-<details>
+<details open>
 
 <summary>
 
 See <code>pmts()</code> for tests implemented in this package.
 </summary>
+
+<p>
+
+``` r
+pmts()
+```
 
 <div class="kable-table">
 
@@ -160,6 +166,8 @@ See <code>pmts()</code> for tests implemented in this package.
 | table.chisq | ChiSquare | Chi-Square Test on Contingency Table |
 
 </div>
+
+</p>
 
 </details>
 

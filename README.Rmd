@@ -57,7 +57,7 @@ remotes::install_github("qddyy/LearnNonparam")
 
 ## Usage
 
-```{r, library, eval = FALSE}
+```{r, library}
 library(LearnNonparam)
 ```
 
@@ -123,11 +123,13 @@ library(LearnNonparam)
     t$p_value
     ```
 
-<details><summary>
-See <code>pmts()</code> for tests implemented in this package.</summary>
-```{r, echo = FALSE}
-LearnNonparam::pmts()
+<details open>
+<summary>See <code>pmts()</code> for tests implemented in this package.</summary>
+<p>
+```{r, pmts}
+pmts()
 ```
+</p>
 </details>
 
 ## Extending
