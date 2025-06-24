@@ -20,7 +20,7 @@ CDF <- R6Class(
     public = list(
         #' @description Create a new `CDF` object.
         #' 
-        #' @param method a character string specifying whether to use a confidence band based on the binomial distribution or the Dvoretzky–Kiefer–Wolfowitz inequality.
+        #' @param method a character string specifying whether to use a confidence band based on the binomial distribution or the Dvoretzky-Kiefer-Wolfowitz inequality.
         #' @param conf_level a number specifying confidence level of the confidence bounds.
         #' 
         #' @return A `CDF` object.

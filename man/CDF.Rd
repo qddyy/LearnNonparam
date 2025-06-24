@@ -41,7 +41,7 @@ Create a new \code{CDF} object.
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
-\item{\code{method}}{a character string specifying whether to use a confidence band based on the binomial distribution or the Dvoretzky–Kiefer–Wolfowitz inequality.}
+\item{\code{method}}{a character string specifying whether to use a confidence band based on the binomial distribution or the Dvoretzky-Kiefer-Wolfowitz inequality.}
 
 \item{\code{conf_level}}{a number specifying confidence level of the confidence bounds.}
 }
