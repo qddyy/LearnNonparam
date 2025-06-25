@@ -487,3 +487,5 @@ PermuTest <- R6Class(
         conf_int = function() c(private$.conf_int)
     )
 )
+
+autoplot.PermuTest <- function(t, ...) t$.__enclos_env__$private$.autoplot(...)
