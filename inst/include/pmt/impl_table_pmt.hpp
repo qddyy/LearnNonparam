@@ -9,7 +9,7 @@ RObject impl_table_pmt(
     R_xlen_t r = data.nrow();
     R_xlen_t c = data.ncol();
 
-    R_xlen_t n = 0;
+    std::size_t n = 0;
     for (R_xlen_t k = 0; k < data.size(); k++) {
         n += data[k];
     }
@@ -32,7 +32,7 @@ RObject impl_table_pmt(
             data[k] = 0;
         };
 
-        for (R_xlen_t k = 0; k < n; k++) {
+        for (std::size_t k = 0; k < n; k++) {
             data(row[k], col[k])++;
         }
 

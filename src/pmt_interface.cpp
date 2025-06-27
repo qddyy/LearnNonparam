@@ -3,6 +3,9 @@
 
 using namespace Rcpp;
 
+#include "pmt/permutation.hpp"
+#include "pmt/progress.hpp"
+
 template <unsigned n>
 constexpr auto Rf_lang = nullptr;
 
@@ -25,9 +28,6 @@ public:
         };
     }
 };
-
-#include "pmt/permutation.hpp"
-#include "pmt/progress.hpp"
 
 #include "pmt/impl_twosample_pmt.hpp"
 
