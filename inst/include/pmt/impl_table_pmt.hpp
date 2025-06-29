@@ -27,7 +27,7 @@ RObject impl_table_pmt(
         }
     }
 
-    auto data_ = [&row, &col, data, n]() mutable {
+    auto data_ = [&row, &col, data, n]() mutable -> const IntegerMatrix {
         for (R_xlen_t k = 0; k < data.size(); k++) {
             data[k] = 0;
         };
@@ -39,7 +39,8 @@ RObject impl_table_pmt(
         return data;
     };
 
-    auto table_update = [&statistic_container, statistic_closure = statistic_func(data_()), &data_]() {
+    auto statistic_closure = statistic_func(data);
+    auto table_update = [&statistic_container, &statistic_closure, &data_]() {
         return statistic_container << statistic_closure(data_());
     };
 

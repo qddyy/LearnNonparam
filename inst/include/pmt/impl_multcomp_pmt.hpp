@@ -9,7 +9,8 @@ RObject impl_multcomp_pmt(
 
     int k = *(group.end() - 1);
 
-    auto multcomp_update = [&statistic_container, statistic_closure = statistic_func(data, group), data, group, k]() {
+    auto statistic_closure = statistic_func(data, group);
+    auto multcomp_update = [&statistic_container, &statistic_closure, data, group, k]() {
         auto pairwise_closure = statistic_closure(data, group);
 
         for (int i = 1; i < k - 1; i++) {

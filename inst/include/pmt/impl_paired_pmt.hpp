@@ -7,7 +7,8 @@ RObject impl_paired_pmt(
 {
     Stat<progress> statistic_container;
 
-    auto paired_update = [&statistic_container, statistic_closure = statistic_func(x, y), x, y]() {
+    auto statistic_closure = statistic_func(x, y);
+    auto paired_update = [&statistic_container, &statistic_closure, x, y]() {
         return statistic_container << statistic_closure(x, y);
     };
 

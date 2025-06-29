@@ -11,7 +11,8 @@ RObject impl_association_pmt(
         std::swap(x, y);
     }
 
-    auto association_update = [&statistic_container, statistic_closure = statistic_func(x, y), x, y]() {
+    auto statistic_closure = statistic_func(x, y);
+    auto association_update = [&statistic_container, &statistic_closure, x, y]() {
         return statistic_container << statistic_closure(x, y);
     };
 
