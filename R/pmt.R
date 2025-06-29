@@ -247,7 +247,9 @@ define_pmt <- function(
                         env = environment(super$.calculate_statistic),
                         code = {
                             args <- paste0(
-                                "arg", 1:(n <- if (inherit == "rcbd") 2 else 3)
+                                "arg", seq_len(
+                                    n <- 3L - (inherit %in% c("rcbd", "table"))
+                                )
                             )
                             paste0(
                                 "SEXP ", inherit, "_pmt(",
