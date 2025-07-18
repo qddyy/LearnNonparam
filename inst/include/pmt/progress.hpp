@@ -4,9 +4,9 @@
 #include <chrono>
 #include <utility>
 
-constexpr unsigned bar_width = 50;
+constexpr unsigned bar_width = 32;
 
-using progress_bar = std::array<char, bar_width + 46>;
+using progress_bar = std::array<char, bar_width + 44>;
 
 constexpr std::array<char, 10> num_char_map = { '0', '1', '2', '3', '4', '5', '6', '7', '8', '9' };
 
@@ -21,11 +21,11 @@ constexpr progress_bar generate_bar(std::integer_sequence<unsigned, bar_seq...>)
         (percent < 10) ? ' ' : num_char_map[percent / 10],
         (percent < 10) ? num_char_map[percent] : num_char_map[percent % 10], '%', '%',
         '\033', '[', '3', '6', 'm',
-        ' ', '|', (bar_seq + 1 < fill ? '-' : (bar_seq + 1 == fill ? '>' : ' '))..., '|', ' ',
-        '%', '.', '4', 'g', '/', 's',
+        ' ', (bar_seq + 1 < fill ? '=' : (bar_seq + 1 == fill ? '>' : '-'))..., ' ',
+        '%', '.', '3', 'g', '/', 's',
         '\033', '[', '3', '2', 'm',
         ' ', 'E', 'T', 'A', ':', ' ',
-        '%', '.', '4', 'g', 's', ' ',
+        '%', '.', '3', 'g', 's', ' ',
         '\0'
     };
 }
