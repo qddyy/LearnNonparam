@@ -39,7 +39,7 @@
 
     <div class="section level2">
     <h2 id="super-classes">Super classes<a class="anchor" aria-label="anchor" href="#super-classes"></a></h2>
-    <p><code><a href="PermuTest.html">LearnNonparam::PermuTest</a></code> -&gt; <code><a href="TwoSampleTest.html">LearnNonparam::TwoSampleTest</a></code> -&gt; <code>KolmogorovSmirnov</code></p>
+    <p><code><a href="PermuTest.html">LearnNonparam::PermuTest</a></code> -&gt; <code><a href="TwoSampleTest.html">LearnNonparam::TwoSampleTest</a></code> -&gt; <code><a href="TwoSampleDistributionTest.html">LearnNonparam::TwoSampleDistributionTest</a></code> -&gt; <code>KolmogorovSmirnov</code></p>
     </div>
     <div class="section level2">
     <h2 id="methods">Methods<a class="anchor" aria-label="anchor" href="#methods"></a></h2>
@@ -55,12 +55,19 @@
 <h3 id="method-new-">Method <code>new()</code><a class="anchor" aria-label="anchor" href="#method-new-"></a></h3>
 <p>Create a new <code>KolmogorovSmirnov</code> object.</p><div class="section">
 <h4 id="usage">Usage<a class="anchor" aria-label="anchor" href="#usage"></a></h4>
-<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/KolmogorovSmirnov.html">KolmogorovSmirnov</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span>n_permu <span class="op">=</span> <span class="fl">10000</span><span class="op">)</span></span></code></pre></div><p></p></div>
+<p></p><div class="r"><div class="sourceCode"><pre><code><span><span class="va"><a href="../reference/KolmogorovSmirnov.html">KolmogorovSmirnov</a></span><span class="op">$</span><span class="fu">new</span><span class="op">(</span></span>
+<span>  alternative <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"two_sided"</span>, <span class="st">"less"</span>, <span class="st">"greater"</span><span class="op">)</span>,</span>
+<span>  n_permu <span class="op">=</span> <span class="fl">10000</span></span>
+<span><span class="op">)</span></span></code></pre></div><p></p></div>
 </div>
 
 <div class="section">
 <h4 id="arguments">Arguments<a class="anchor" aria-label="anchor" href="#arguments"></a></h4>
-<p></p><div class="arguments"><dl><dt><code>n_permu</code></dt>
+<p></p><div class="arguments"><dl><dt><code>alternative</code></dt>
+<dd><p>a character string specifying the alternative hypothesis.</p></dd>
+
+
+<dt><code>n_permu</code></dt>
 <dd><p>an integer indicating number of permutations for the permutation distribution. If set to <code>0</code>, all permutations will be used.</p></dd>
 
 
@@ -78,13 +85,14 @@
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
     <div class="sourceCode"><pre class="sourceCode r"><code><span class="r-in"><span><span class="fu"><a href="pmt.html">pmt</a></span><span class="op">(</span></span></span>
-<span class="r-in"><span>    <span class="st">"twosample.ks"</span>, n_permu <span class="op">=</span> <span class="fl">0</span></span></span>
+<span class="r-in"><span>    <span class="st">"distribution.ks"</span>, n_permu <span class="op">=</span> <span class="fl">0</span></span></span>
 <span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">Table2.8.1</span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  	 Two-Sample Kolmogorov-Smirnov Test </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> scoring: none    type: permu(252)    method: default</span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> statistic = 0.4, p-value = 0.8730159</span>
+<span class="r-out co"><span class="r-pr">#&gt;</span> alternative hypothesis: two_sided</span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
     </div>
