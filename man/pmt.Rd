@@ -9,12 +9,13 @@
 pmt(key, ...)
 
 pmts(
-  which = c("all", "onesample", "twosample", "ksample", "multcomp", "paired", "rcbd",
-    "association", "table")
+  which = c("all", "onesample", "twosample", "distribution", "association", "paired",
+    "ksample", "multcomp", "rcbd", "table")
 )
 
 define_pmt(
-  inherit = c("twosample", "ksample", "paired", "rcbd", "association", "table"),
+  method = c("twosample", "distribution", "association", "paired", "ksample", "rcbd",
+    "table"),
   statistic,
   rejection = c("lr", "l", "r"),
   scoring = "none",
@@ -33,7 +34,7 @@ define_pmt(
 
 \item{which}{a character string specifying the desired tests.}
 
-\item{inherit}{a character string specifying the type of permutation test.}
+\item{method}{a character string specifying the permutation scheme.}
 
 \item{statistic}{definition of the test statistic. See details.}
 
@@ -70,13 +71,14 @@ The test statistic can be defined using either R or Rcpp, with the \code{statist
 
 The purpose of this design is to pre-calculate certain constants that remain invariant during permutation.
 
-When using Rcpp, the parameters for different \code{inherit} are listed as follows. Note that the names can be customized, and the types can be replaced with \code{auto} (thanks to the support for generic lambdas in C++14). See examples.\tabular{ccc}{
-   \code{inherit} \tab Parameter 1 \tab Parameter 2 \cr
+When using Rcpp, the parameters for different \code{method} are listed as follows. Note that the names can be customized, and the types can be replaced with \code{auto} (thanks to the support for generic lambdas in C++14). See examples.\tabular{ccc}{
+   \code{method} \tab Parameter 1 \tab Parameter 2 \cr
    \code{"twosample"} \tab \verb{const NumericVector& sample_1} \tab \verb{const NumericVector& sample_2} \cr
-   \code{"ksample"} \tab \verb{const NumericVector& combined_sample} \tab \verb{const IntegerVector& one_based_group_index} \cr
-   \code{"paired"} \tab \verb{const NumericVector& sample_1} \tab \verb{const NumericVector& sample_2} \cr
-   \code{"rcbd"} \tab \verb{const NumericMatrix& block_as_column_data} \tab  \cr
+   \code{"distribution"} \tab \verb{const NumericVector& cumulative_prob_1} \tab \verb{const NumericVector& cumulative_prob_2} \cr
    \code{"association"} \tab \verb{const NumericVector& sample_1} \tab \verb{const NumericVector& sample_2} \cr
+   \code{"paired"} \tab \verb{const NumericVector& sample_1} \tab \verb{const NumericVector& sample_2} \cr
+   \code{"ksample"} \tab \verb{const NumericVector& combined_sample} \tab \verb{const IntegerVector& one_based_group_index} \cr
+   \code{"rcbd"} \tab \verb{const NumericMatrix& block_as_column_data} \tab  \cr
    \code{"table"} \tab \verb{const IntegerMatrix& contingency_table} \tab  \cr
 }
 
@@ -98,7 +100,7 @@ x <- rnorm(5)
 y <- rnorm(5, 1)
 
 t <- define_pmt(
-    inherit = "twosample",
+    method = "twosample",
     scoring = base::rank, # equivalent to "rank"
     statistic = function(...) function(x, y) sum(x)
 )$test(x, y)$print()
@@ -111,7 +113,7 @@ t$print()
 
 \donttest{
 r <- define_pmt(
-    inherit = "twosample", n_permu = 1e5,
+    method = "twosample", n_permu = 1e5,
     statistic = function(x, y) {
         m <- length(x)
         n <- length(y)
@@ -121,7 +123,7 @@ r <- define_pmt(
 
 
 rcpp <- define_pmt(
-    inherit = "twosample", n_permu = 1e5,
+    method = "twosample", n_permu = 1e5,
     statistic = "[](const auto& x, const auto& y) {
         auto m = x.length();
         auto n = y.length();
@@ -133,7 +135,7 @@ rcpp <- define_pmt(
 
 # equivalent
 # rcpp <- define_pmt(
-#     inherit = "twosample", n_permu = 1e5,
+#     method = "twosample", n_permu = 1e5,
 #     statistic = "[](const NumericVector& x, const NumericVector& y) {
 #         R_xlen_t m = x.length();
 #         R_xlen_t n = y.length();

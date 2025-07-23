@@ -36,6 +36,19 @@ reference:
     - RatioMeanDeviance
     - KolmogorovSmirnov
   
+  - title: Two-Sample Distribution Test
+  - contents:
+    - KolmogorovSmirnov
+  
+  - title:  Two-Sample Association Test
+  - contents:
+    - Correlation
+  
+  - title: Paired Two-Sample Test
+  - contents:
+    - Sign
+    - PairedDifference
+  
   - title: K-Sample Test
   - contents:
     - OneWay
@@ -46,20 +59,11 @@ reference:
   - contents:
     - Studentized
   
-  - title: Paired Two-Sample Test
-  - contents:
-    - Sign
-    - PairedDifference
-  
   - title: Test for Randomized Complete Block Design
   - contents:
     - RCBDOneWay
     - Friedman
     - Page
-  
-  - title:  Two-Sample Association Test
-  - contents:
-    - Correlation
   
   - title:  Test for Contingency Table
   - contents:
@@ -71,11 +75,12 @@ reference:
     - OneSampleTest
     - TwoSampleTest
     - TwoSampleLocationTest
+    - TwoSampleDistributionTest
+    - TwoSampleAssociationTest
+    - TwoSamplePairedTest
     - KSampleTest
     - MultipleComparison
-    - TwoSamplePairedTest
     - RCBDTest
-    - TwoSampleAssociationTest
     - ContingencyTableTest
   
   - title: Data

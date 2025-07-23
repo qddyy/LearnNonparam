@@ -29,3 +29,7 @@ table_pmt <- function(data, statistic_func, n_permu, progress) {
     .Call(`_LearnNonparam_table_pmt`, data, statistic_func, n_permu, progress)
 }
 
+distribution_pmt <- function(x, y, statistic_func, n_permu, progress) {
+    .Call(`_LearnNonparam_distribution_pmt`, x, y, statistic_func, n_permu, progress)
+}
+

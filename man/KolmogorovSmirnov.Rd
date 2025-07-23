@@ -2,19 +2,19 @@
 % Please edit documentation in R/KolmogorovSmirnov.R
 \name{KolmogorovSmirnov}
 \alias{KolmogorovSmirnov}
-\alias{twosample.ks}
+\alias{distribution.ks}
 \title{Two-Sample Kolmogorov-Smirnov Test}
 \description{
 Performs two-sample Kolmogorov-Smirnov test on samples.
 }
 \examples{
 pmt(
-    "twosample.ks", n_permu = 0
+    "distribution.ks", n_permu = 0
 )$test(Table2.8.1)$print()
 
 }
 \section{Super classes}{
-\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{KolmogorovSmirnov}
+\code{\link[LearnNonparam:PermuTest]{LearnNonparam::PermuTest}} -> \code{\link[LearnNonparam:TwoSampleTest]{LearnNonparam::TwoSampleTest}} -> \code{\link[LearnNonparam:TwoSampleDistributionTest]{LearnNonparam::TwoSampleDistributionTest}} -> \code{KolmogorovSmirnov}
 }
 \section{Methods}{
 \subsection{Public methods}{
@@ -37,12 +37,17 @@ pmt(
 \subsection{Method \code{new()}}{
 Create a new \code{KolmogorovSmirnov} object.
 \subsection{Usage}{
-\if{html}{\out{<div class="r">}}\preformatted{KolmogorovSmirnov$new(n_permu = 10000)}\if{html}{\out{</div>}}
+\if{html}{\out{<div class="r">}}\preformatted{KolmogorovSmirnov$new(
+  alternative = c("two_sided", "less", "greater"),
+  n_permu = 10000
+)}\if{html}{\out{</div>}}
 }
 
 \subsection{Arguments}{
 \if{html}{\out{<div class="arguments">}}
 \describe{
+\item{\code{alternative}}{a character string specifying the alternative hypothesis.}
+
 \item{\code{n_permu}}{an integer indicating number of permutations for the permutation distribution. If set to \code{0}, all permutations will be used.}
 }
 \if{html}{\out{</div>}}

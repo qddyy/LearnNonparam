@@ -72,7 +72,7 @@ public:
         IntegerVector i(no_init(1));
         IntegerVector j(no_init(1));
 
-        return [i_iter = i.begin(), j_iter = j.begin(), R_call = RObject(Rf_lang<3>(R_NilValue, i, j)), statistic_closure = CachedFunc<SEXP>::operator()(std::forward<Args>(args)...)](auto&&...) {
+        return [statistic_closure = CachedFunc<SEXP>::operator()(std::forward<Args>(args)...), R_call = RObject(Rf_lang<3>(R_NilValue, i, j)), i_iter = i.begin(), j_iter = j.begin()](auto&&...) {
             SETCAR(R_call, statistic_closure());
 
             return [&](int i, int j) {
@@ -153,4 +153,17 @@ SEXP table_pmt(
     return progress ?
         impl_table_pmt<true, CachedFunc<double>>(clone(data), statistic_func, n_permu) :
         impl_table_pmt<false, CachedFunc<double>>(clone(data), statistic_func, n_permu);
+}
+
+// [[Rcpp::export]]
+SEXP distribution_pmt(
+    const SEXP x,
+    const SEXP y,
+    const SEXP statistic_func,
+    const double n_permu,
+    const bool progress)
+{
+    return progress ?
+        impl_distribution_pmt<true, CachedFunc<double>>(x, y, statistic_func, n_permu) :
+        impl_distribution_pmt<false, CachedFunc<double>>(x, y, statistic_func, n_permu);
 }

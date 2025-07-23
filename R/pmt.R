@@ -8,7 +8,13 @@ implemented <- list(
     twosample.ansari = AnsariBradley,
     twosample.siegel = SiegelTukey,
     twosample.rmd = RatioMeanDeviance,
-    twosample.ks = KolmogorovSmirnov,
+
+    distribution.ks = KolmogorovSmirnov,
+
+    association.corr = Correlation,
+
+    paired.sign = Sign,
+    paired.difference = PairedDifference,
 
     ksample.oneway = OneWay,
     ksample.kw = KruskalWallis,
@@ -16,14 +22,9 @@ implemented <- list(
 
     multcomp.studentized = Studentized,
 
-    paired.sign = Sign,
-    paired.difference = PairedDifference,
-
     rcbd.oneway = RCBDOneWay,
     rcbd.friedman = Friedman,
     rcbd.page = Page,
-
-    association.corr = Correlation,
 
     table.chisq = ChiSquare
 )
@@ -66,10 +67,11 @@ pmts <- function(
     which = c(
         "all",
         "onesample",
-        "twosample",
+        "twosample", "distribution", "association",
+        "paired",
         "ksample", "multcomp",
-        "paired", "rcbd",
-        "association", "table"
+        "rcbd",
+        "table"
     )
 ) {
     which <- match.arg(which)
@@ -95,7 +97,7 @@ pmts <- function(
 
 #' @rdname pmt
 #' 
-#' @param inherit a character string specifying the type of permutation test.
+#' @param method a character string specifying the permutation scheme.
 #' @param statistic definition of the test statistic. See details.
 #' @param rejection a character string specifying where the rejection region is.
 #' @param scoring one of:
@@ -116,16 +118,17 @@ pmts <- function(
 #' 
 #' The purpose of this design is to pre-calculate certain constants that remain invariant during permutation.
 #' 
-#' When using Rcpp, the parameters for different `inherit` are listed as follows. Note that the names can be customized, and the types can be replaced with `auto` (thanks to the support for generic lambdas in C++14). See examples.
+#' When using Rcpp, the parameters for different `method` are listed as follows. Note that the names can be customized, and the types can be replaced with `auto` (thanks to the support for generic lambdas in C++14). See examples.
 #' 
-#' | `inherit`       | Parameter 1                                 | Parameter 2                                  |
-#' |:---------------:|:-------------------------------------------:|:--------------------------------------------:|
-#' | `"twosample"`   | `const NumericVector& sample_1`             | `const NumericVector& sample_2`              |
-#' | `"ksample"`     | `const NumericVector& combined_sample`      | `const IntegerVector& one_based_group_index` |
-#' | `"paired"`      | `const NumericVector& sample_1`             | `const NumericVector& sample_2`              |
-#' | `"rcbd"`        | `const NumericMatrix& block_as_column_data` |                                              |
-#' | `"association"` | `const NumericVector& sample_1`             | `const NumericVector& sample_2`              |
-#' | `"table"`       | `const IntegerMatrix& contingency_table`    |                                              |
+#' | `method`         | Parameter 1                                 | Parameter 2                                  |
+#' |:----------------:|:-------------------------------------------:|:--------------------------------------------:|
+#' | `"twosample"`    | `const NumericVector& sample_1`             | `const NumericVector& sample_2`              |
+#' | `"distribution"` | `const NumericVector& cumulative_prob_1`    | `const NumericVector& cumulative_prob_2`     |
+#' | `"association"`  | `const NumericVector& sample_1`             | `const NumericVector& sample_2`              |
+#' | `"paired"`       | `const NumericVector& sample_1`             | `const NumericVector& sample_2`              |
+#' | `"ksample"`      | `const NumericVector& combined_sample`      | `const IntegerVector& one_based_group_index` |
+#' | `"rcbd"`         | `const NumericMatrix& block_as_column_data` |                                              |
+#' | `"table"`        | `const IntegerMatrix& contingency_table`    |                                              |
 #' 
 #' When using R, the parameters should be the R equivalents of these.
 #' 
@@ -138,7 +141,7 @@ pmts <- function(
 #' y <- rnorm(5, 1)
 #' 
 #' t <- define_pmt(
-#'     inherit = "twosample",
+#'     method = "twosample",
 #'     scoring = base::rank, # equivalent to "rank"
 #'     statistic = function(...) function(x, y) sum(x)
 #' )$test(x, y)$print()
@@ -151,7 +154,7 @@ pmts <- function(
 #' 
 #' \donttest{
 #' r <- define_pmt(
-#'     inherit = "twosample", n_permu = 1e5,
+#'     method = "twosample", n_permu = 1e5,
 #'     statistic = function(x, y) {
 #'         m <- length(x)
 #'         n <- length(y)
@@ -161,7 +164,7 @@ pmts <- function(
 #' 
 #' 
 #' rcpp <- define_pmt(
-#'     inherit = "twosample", n_permu = 1e5,
+#'     method = "twosample", n_permu = 1e5,
 #'     statistic = "[](const auto& x, const auto& y) {
 #'         auto m = x.length();
 #'         auto n = y.length();
@@ -173,7 +176,7 @@ pmts <- function(
 #' 
 #' # equivalent
 #' # rcpp <- define_pmt(
-#' #     inherit = "twosample", n_permu = 1e5,
+#' #     method = "twosample", n_permu = 1e5,
 #' #     statistic = "[](const NumericVector& x, const NumericVector& y) {
 #' #         R_xlen_t m = x.length();
 #' #         R_xlen_t n = y.length();
@@ -191,11 +194,15 @@ pmts <- function(
 #' @export
 #' 
 #' @importFrom R6 R6Class
-#' @importFrom Rcpp cppFunction evalCpp
+#' @importFrom Rcpp evalCpp cppFunction
 
 define_pmt <- function(
-    inherit = c(
-        "twosample", "ksample", "paired", "rcbd", "association", "table"
+    method = c(
+        "twosample", "distribution", "association",
+        "paired",
+        "ksample",
+        "rcbd",
+        "table"
     ),
     statistic,
     rejection = c("lr", "l", "r"),
@@ -203,10 +210,10 @@ define_pmt <- function(
     name = "User-Defined Permutation Test", alternative = NULL,
     depends = character(), plugins = character(), includes = character()
 ) {
-    inherit <- match.arg(inherit)
+    method <- match.arg(method)
 
-    if (!missing(scoring) && inherit %in% c("paired", "table")) {
-        warning("Ignoring 'scoring' since 'inherit' is set to '", inherit, "'")
+    if (!missing(scoring) && method %in% c("distribution", "paired", "table")) {
+        warning("Ignoring 'scoring' since 'method' is set to '", method, "'")
         scoring <- "none"
     }
 
@@ -214,12 +221,13 @@ define_pmt <- function(
     R6Class(
         classname = "UserDefined",
         cloneable = FALSE,
-        inherit = switch(inherit,
+        inherit = switch(method,
             twosample = TwoSampleTest,
-            ksample = KSampleTest,
-            paired = TwoSamplePairedTest,
-            rcbd = RCBDTest,
+            distribution = TwoSampleDistributionTest,
             association = TwoSampleAssociationTest,
+            paired = TwoSamplePairedTest,
+            ksample = KSampleTest,
+            rcbd = RCBDTest,
             table = ContingencyTableTest
         ),
         public = list(
@@ -233,7 +241,8 @@ define_pmt <- function(
                 } else if (!is.character(statistic) || length(statistic) > 1) {
                     stop("'statistic' must be a closure or a character string")
                 } else {
-                    impl <- paste0("impl_", inherit, "_pmt")
+                    method <- if (method == "distribution") "table" else method
+                    impl <- paste0("impl_", method, "_pmt")
                     cppFunction(
                         depends = c(depends, "LearnNonparam"),
                         plugins = {
@@ -246,13 +255,10 @@ define_pmt <- function(
                         },
                         env = environment(super$.calculate_statistic),
                         code = {
-                            args <- paste0(
-                                "arg", seq_len(
-                                    n <- 3L - (inherit %in% c("rcbd", "table"))
-                                )
-                            )
+                            n <- if (method %in% c("rcbd", "table")) 2L else 3L
+                            args <- paste0("arg_", seq_len(n))
                             paste0(
-                                "SEXP ", inherit, "_pmt(",
+                                "SEXP ", method, "_pmt(",
                                 paste("SEXP", args, collapse = ","),
                                 ", double n_permu, bool progress){",
                                 "auto statistic = ", statistic, ";",
@@ -268,7 +274,7 @@ define_pmt <- function(
             }
         ),
         private = list(
-            .method = inherit,
+            .method = method,
 
             .side = match.arg(rejection),
 

@@ -113,6 +113,21 @@ BEGIN_RCPP
     return rcpp_result_gen;
 END_RCPP
 }
+// distribution_pmt
+SEXP distribution_pmt(const SEXP x, const SEXP y, const SEXP statistic_func, const double n_permu, const bool progress);
+RcppExport SEXP _LearnNonparam_distribution_pmt(SEXP xSEXP, SEXP ySEXP, SEXP statistic_funcSEXP, SEXP n_permuSEXP, SEXP progressSEXP) {
+BEGIN_RCPP
+    Rcpp::RObject rcpp_result_gen;
+    Rcpp::RNGScope rcpp_rngScope_gen;
+    Rcpp::traits::input_parameter< const SEXP >::type x(xSEXP);
+    Rcpp::traits::input_parameter< const SEXP >::type y(ySEXP);
+    Rcpp::traits::input_parameter< const SEXP >::type statistic_func(statistic_funcSEXP);
+    Rcpp::traits::input_parameter< const double >::type n_permu(n_permuSEXP);
+    Rcpp::traits::input_parameter< const bool >::type progress(progressSEXP);
+    rcpp_result_gen = Rcpp::wrap(distribution_pmt(x, y, statistic_func, n_permu, progress));
+    return rcpp_result_gen;
+END_RCPP
+}
 
 static const R_CallMethodDef CallEntries[] = {
     {"_LearnNonparam_twosample_pmt", (DL_FUNC) &_LearnNonparam_twosample_pmt, 5},
@@ -122,6 +137,7 @@ static const R_CallMethodDef CallEntries[] = {
     {"_LearnNonparam_rcbd_pmt", (DL_FUNC) &_LearnNonparam_rcbd_pmt, 4},
     {"_LearnNonparam_association_pmt", (DL_FUNC) &_LearnNonparam_association_pmt, 5},
     {"_LearnNonparam_table_pmt", (DL_FUNC) &_LearnNonparam_table_pmt, 4},
+    {"_LearnNonparam_distribution_pmt", (DL_FUNC) &_LearnNonparam_distribution_pmt, 5},
     {NULL, NULL, 0}
 };
 
