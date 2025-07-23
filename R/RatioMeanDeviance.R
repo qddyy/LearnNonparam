@@ -44,20 +44,16 @@ RatioMeanDeviance <- R6Class(
             private$.data$y <- abs(private$.data$y - median(private$.data$y))
 
             private$.statistic_func <- function(x, y) {
-                length <- length(x) / length(y)
+                length_r <- length(y) / length(x)
 
-                function(x, y) sum(x) / sum(y) / length
-            }
-        },
-
-        .calculate_statistic = function() {
-            super$.calculate_statistic()
-
-            if (private$.alternative == "two_sided") {
-                private$.statistic <- `attr<-`(
-                    max_min_ratio(private$.statistic), "permu",
-                    max_min_ratio(attr(private$.statistic, "permu"))
-                )
+                if (private$.alternative == "two_sided") {
+                    function(x, y) {
+                        r <- sum(x) / sum(y) * length_r
+                        r^(2 * (r >= 1) - 1)
+                    }
+                } else {
+                    function(x, y) sum(x) / sum(y) * length_r
+                }
             }
         },
 
@@ -68,5 +64,3 @@ RatioMeanDeviance <- R6Class(
         .on_alternative_change = function() private$.calculate()
     )
 )
-
-max_min_ratio <- function(ratio) ratio^(2 * (ratio >= 1) - 1)
