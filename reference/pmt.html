@@ -41,12 +41,13 @@
     <div class="sourceCode"><pre class="sourceCode r"><code><span><span class="fu">pmt</span><span class="op">(</span><span class="va">key</span>, <span class="va">...</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">pmts</span><span class="op">(</span></span>
-<span>  which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"onesample"</span>, <span class="st">"twosample"</span>, <span class="st">"ksample"</span>, <span class="st">"multcomp"</span>, <span class="st">"paired"</span>, <span class="st">"rcbd"</span>,</span>
-<span>    <span class="st">"association"</span>, <span class="st">"table"</span><span class="op">)</span></span>
+<span>  which <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"all"</span>, <span class="st">"onesample"</span>, <span class="st">"twosample"</span>, <span class="st">"distribution"</span>, <span class="st">"association"</span>, <span class="st">"paired"</span>,</span>
+<span>    <span class="st">"ksample"</span>, <span class="st">"multcomp"</span>, <span class="st">"rcbd"</span>, <span class="st">"table"</span><span class="op">)</span></span>
 <span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu">define_pmt</span><span class="op">(</span></span>
-<span>  inherit <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"twosample"</span>, <span class="st">"ksample"</span>, <span class="st">"paired"</span>, <span class="st">"rcbd"</span>, <span class="st">"association"</span>, <span class="st">"table"</span><span class="op">)</span>,</span>
+<span>  method <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"twosample"</span>, <span class="st">"distribution"</span>, <span class="st">"association"</span>, <span class="st">"paired"</span>, , <span class="st">"ksample"</span>, <span class="st">"rcbd"</span>,</span>
+<span>    <span class="st">"table"</span><span class="op">)</span>,</span>
 <span>  <span class="va">statistic</span>,</span>
 <span>  rejection <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="st">"lr"</span>, <span class="st">"l"</span>, <span class="st">"r"</span><span class="op">)</span>,</span>
 <span>  scoring <span class="op">=</span> <span class="st">"none"</span>,</span>
@@ -75,8 +76,8 @@
 <dd><p>a character string specifying the desired tests.</p></dd>
 
 
-<dt id="arg-inherit">inherit<a class="anchor" aria-label="anchor" href="#arg-inherit"></a></dt>
-<dd><p>a character string specifying the type of permutation test.</p></dd>
+<dt id="arg-method">method<a class="anchor" aria-label="anchor" href="#arg-method"></a></dt>
+<dd><p>a character string specifying the permutation scheme.</p></dd>
 
 
 <dt id="arg-statistic">statistic<a class="anchor" aria-label="anchor" href="#arg-statistic"></a></dt>
@@ -120,7 +121,7 @@
     <p>The test statistic can be defined using either R or Rcpp, with the <code>statistic</code> parameter specified as:</p><ul><li><p>R: a function returning a closure that returns a double.</p></li>
 <li><p>Rcpp: a character string defining a captureless lambda (since C++11) returning another lambda that captures by value, accepts parameters of the same type, and returns a double.</p></li>
 </ul><p>The purpose of this design is to pre-calculate certain constants that remain invariant during permutation.</p>
-<p>When using Rcpp, the parameters for different <code>inherit</code> are listed as follows. Note that the names can be customized, and the types can be replaced with <code>auto</code> (thanks to the support for generic lambdas in C++14). See examples.</p><table class="table table"><tr><td><code>inherit</code></td><td>Parameter 1</td><td>Parameter 2</td></tr><tr><td><code>"twosample"</code></td><td><code>const NumericVector&amp; sample_1</code></td><td><code>const NumericVector&amp; sample_2</code></td></tr><tr><td><code>"ksample"</code></td><td><code>const NumericVector&amp; combined_sample</code></td><td><code>const IntegerVector&amp; one_based_group_index</code></td></tr><tr><td><code>"paired"</code></td><td><code>const NumericVector&amp; sample_1</code></td><td><code>const NumericVector&amp; sample_2</code></td></tr><tr><td><code>"rcbd"</code></td><td><code>const NumericMatrix&amp; block_as_column_data</code></td><td></td></tr><tr><td><code>"association"</code></td><td><code>const NumericVector&amp; sample_1</code></td><td><code>const NumericVector&amp; sample_2</code></td></tr><tr><td><code>"table"</code></td><td><code>const IntegerMatrix&amp; contingency_table</code></td><td></td></tr></table><p>When using R, the parameters should be the R equivalents of these.</p>
+<p>When using Rcpp, the parameters for different <code>method</code> are listed as follows. Note that the names can be customized, and the types can be replaced with <code>auto</code> (thanks to the support for generic lambdas in C++14). See examples.</p><table class="table table"><tr><td><code>method</code></td><td>Parameter 1</td><td>Parameter 2</td></tr><tr><td><code>"twosample"</code></td><td><code>const NumericVector&amp; sample_1</code></td><td><code>const NumericVector&amp; sample_2</code></td></tr><tr><td><code>"distribution"</code></td><td><code>const NumericVector&amp; cumulative_prob_1</code></td><td><code>const NumericVector&amp; cumulative_prob_2</code></td></tr><tr><td><code>"association"</code></td><td><code>const NumericVector&amp; sample_1</code></td><td><code>const NumericVector&amp; sample_2</code></td></tr><tr><td><code>"paired"</code></td><td><code>const NumericVector&amp; sample_1</code></td><td><code>const NumericVector&amp; sample_2</code></td></tr><tr><td><code>"ksample"</code></td><td><code>const NumericVector&amp; combined_sample</code></td><td><code>const IntegerVector&amp; one_based_group_index</code></td></tr><tr><td><code>"rcbd"</code></td><td><code>const NumericMatrix&amp; block_as_column_data</code></td><td></td></tr><tr><td><code>"table"</code></td><td><code>const IntegerMatrix&amp; contingency_table</code></td><td></td></tr></table><p>When using R, the parameters should be the R equivalents of these.</p>
     </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
@@ -204,45 +205,36 @@
 <span class="r-in"><span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">5</span>, <span class="fl">1</span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu">define_pmt</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    inherit <span class="op">=</span> <span class="st">"twosample"</span>,</span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"twosample"</span>,</span></span>
 <span class="r-in"><span>    scoring <span class="op">=</span> <span class="fu">base</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/base/rank.html" class="external-link">rank</a></span>, <span class="co"># equivalent to "rank"</span></span></span>
 <span class="r-in"><span>    statistic <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  	 User-Defined Permutation Test </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> scoring: custom    type: permu(10000)    method: twosample</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> statistic = 22, p-value = 0.312 (± 0.009080706 at 95% confidence)</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in c("twosample", "distribution", "association", "paired", , "ksample",     "rcbd", "table"):</span> argument 5 is empty</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">t</span><span class="op">$</span><span class="va">scoring</span> <span class="op">&lt;-</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">qnorm</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rank.html" class="external-link">rank</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">/</span> <span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">+</span> <span class="fl">1</span><span class="op">)</span><span class="op">)</span> <span class="co"># equivalent to "vw"</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in t$scoring &lt;- function(x) qnorm(rank(x)/(length(x) + 1)):</span> object of type 'closure' is not subsettable</span>
 <span class="r-in"><span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  	 User-Defined Permutation Test </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> scoring: custom    type: permu(10000)    method: twosample</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> statistic = -1.398858, p-value = 0.2988 (± 0.008971382 at 95% confidence)</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in t$print:</span> object of type 'closure' is not subsettable</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">t</span><span class="op">$</span><span class="va">n_permu</span> <span class="op">&lt;-</span> <span class="fl">0</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in t$n_permu &lt;- 0:</span> object of type 'closure' is not subsettable</span>
 <span class="r-in"><span><span class="va">t</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>  	 User-Defined Permutation Test </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> scoring: custom    type: permu(252)    method: twosample</span>
-<span class="r-out co"><span class="r-pr">#&gt;</span> statistic = -1.398858, p-value = 0.3015873</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in t$print:</span> object of type 'closure' is not subsettable</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># \donttest{</span></span></span>
 <span class="r-in"><span><span class="va">r</span> <span class="op">&lt;-</span> <span class="fu">define_pmt</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    inherit <span class="op">=</span> <span class="st">"twosample"</span>, n_permu <span class="op">=</span> <span class="fl">1e5</span>,</span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"twosample"</span>, n_permu <span class="op">=</span> <span class="fl">1e5</span>,</span></span>
 <span class="r-in"><span>    statistic <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span></span>
 <span class="r-in"><span>        <span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-in"><span>        <span class="va">n</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></span>
 <span class="r-in"><span>        <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">/</span> <span class="va">m</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">/</span> <span class="va">n</span></span></span>
 <span class="r-in"><span>    <span class="op">}</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in c("twosample", "distribution", "association", "paired", , "ksample",     "rcbd", "table"):</span> argument 5 is empty</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">rcpp</span> <span class="op">&lt;-</span> <span class="fu">define_pmt</span><span class="op">(</span></span></span>
-<span class="r-in"><span>    inherit <span class="op">=</span> <span class="st">"twosample"</span>, n_permu <span class="op">=</span> <span class="fl">1e5</span>,</span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"twosample"</span>, n_permu <span class="op">=</span> <span class="fl">1e5</span>,</span></span>
 <span class="r-in"><span>    statistic <span class="op">=</span> <span class="st">"[](const auto&amp; x, const auto&amp; y) {</span></span></span>
 <span class="r-in"><span><span class="st">        auto m = x.length();</span></span></span>
 <span class="r-in"><span><span class="st">        auto n = y.length();</span></span></span>
@@ -251,10 +243,11 @@
 <span class="r-in"><span><span class="st">        };</span></span></span>
 <span class="r-in"><span><span class="st">    }"</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error in c("twosample", "distribution", "association", "paired", , "ksample",     "rcbd", "table"):</span> argument 5 is empty</span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="co"># equivalent</span></span></span>
 <span class="r-in"><span><span class="co"># rcpp &lt;- define_pmt(</span></span></span>
-<span class="r-in"><span><span class="co">#     inherit = "twosample", n_permu = 1e5,</span></span></span>
+<span class="r-in"><span><span class="co">#     method = "twosample", n_permu = 1e5,</span></span></span>
 <span class="r-in"><span><span class="co">#     statistic = "[](const NumericVector&amp; x, const NumericVector&amp; y) {</span></span></span>
 <span class="r-in"><span><span class="co">#         R_xlen_t m = x.length();</span></span></span>
 <span class="r-in"><span><span class="co">#         R_xlen_t n = y.length();</span></span></span>
@@ -266,11 +259,11 @@
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>LearnNonparam.pmt_progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">r</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.144   0.000   0.148 </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'r' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Timing stopped at: 0.001 0 0.001</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">rcpp</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.008   0.000   0.008 </span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'rcpp' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Timing stopped at: 0.001 0 0</span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
