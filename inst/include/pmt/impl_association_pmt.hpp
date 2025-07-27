@@ -1,3 +1,5 @@
+#pragma once
+
 template <bool progress, typename T>
 RObject impl_association_pmt(
     NumericVector x,

@@ -1,3 +1,5 @@
+#pragma once
+
 template <bool progress, typename T>
 RObject impl_paired_pmt(
     NumericVector x,
@@ -42,7 +44,7 @@ RObject impl_paired_pmt(
 
             do {
                 for (R_xlen_t i = 0; i < n; i++) {
-                    swap_if(rand_int(2) == 1, x[i], y[i]);
+                    swap_if(unif_rand() > 0.5, x[i], y[i]);
                 }
             } while (paired_update());
         }

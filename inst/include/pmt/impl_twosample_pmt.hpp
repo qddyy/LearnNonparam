@@ -1,3 +1,5 @@
+#pragma once
+
 template <bool progress, typename T>
 RObject impl_twosample_pmt(
     NumericVector x,
@@ -99,7 +101,7 @@ RObject impl_twosample_pmt(
 
             do {
                 for (R_xlen_t i = 0; i < m; i++) {
-                    R_xlen_t j = rand_int(n - i) + i - m;
+                    R_xlen_t j = static_cast<R_xlen_t>(unif_rand() * (n - i)) + i - m;
                     bool c = j >= 0;
                     swap_if(c, x_[i], y_[j * c]);
                 }
