@@ -1,19 +1,9 @@
+#include <initializer_list>
+
 #define RCPP_NO_BOUNDS_CHECK
 #include <Rcpp/Lightest>
 
 using namespace Rcpp;
-
-#include "pmt/permutation.hpp"
-#include "pmt/progress.hpp"
-
-template <unsigned n>
-constexpr auto Rf_lang = nullptr;
-
-template <>
-constexpr auto Rf_lang<2> = Rf_lang2;
-
-template <>
-constexpr auto Rf_lang<3> = Rf_lang3;
 
 template <typename T>
 class CachedFunc : public Function {
@@ -23,11 +13,32 @@ public:
     template <typename... Args>
     auto operator()(Args&&... args) const
     {
-        return [R_call = RObject(Rf_lang<sizeof...(args) + 1>(Function::operator()(std::forward<Args>(args)...), std::forward<Args>(args)...))](auto&&...) {
-            return as<T>(Rcpp_fast_eval(R_call, R_GlobalEnv));
+        Shield<SEXP> closure = Function::operator()(std::forward<Args>(args)...);
+
+#if defined(R_VERSION) && R_VERSION >= R_Version(4, 5, 0)
+        Shield<SEXP> closure_formals = R_ClosureFormals(closure), closure_body = R_ClosureBody(closure), closure_envir = R_ClosureEnv(closure);
+#else
+        Shield<SEXP> closure_formals = FORMALS(closure), closure_body = BODY(closure), closure_envir = CLOENV(closure);
+#endif
+
+#if defined(R_VERSION) && R_VERSION >= R_Version(4, 1, 0)
+        Shield<SEXP> exec_envir = R_NewEnv(closure_envir, FALSE, 0);
+#else
+        Shield<SEXP> exec_envir = Rf_allocSExp(ENVSXP);
+        SET_ENCLOS(exec_envir, closure_envir);
+#endif
+
+        SEXP f = closure_formals;
+        (void)std::initializer_list<int> { (Rf_defineVar(TAG(f), std::forward<Args>(args), exec_envir), f = CDR(f), 0)... };
+
+        return [closure_body = RObject(closure_body), exec_envir = RObject(exec_envir)](auto&&...) {
+            return as<T>(Rcpp_fast_eval(closure_body, exec_envir));
         };
     }
 };
+
+#include "pmt/permutation.hpp"
+#include "pmt/progress.hpp"
 
 #include "pmt/impl_twosample_pmt.hpp"
 
@@ -72,7 +83,7 @@ public:
         IntegerVector i(no_init(1));
         IntegerVector j(no_init(1));
 
-        return [statistic_closure = CachedFunc<SEXP>::operator()(std::forward<Args>(args)...), R_call = RObject(Rf_lang<3>(R_NilValue, i, j)), i_iter = i.begin(), j_iter = j.begin()](auto&&...) {
+        return [statistic_closure = CachedFunc<SEXP>::operator()(std::forward<Args>(args)...), R_call = RObject(Rf_lang3(R_NilValue, i, j)), i_iter = i.begin(), j_iter = j.begin()](auto&&...) {
             SETCAR(R_call, statistic_closure());
 
             return [&](int i, int j) {
