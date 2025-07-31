@@ -13,6 +13,10 @@ RCBDTest <- R6Class(
     cloneable = FALSE,
     private = list(
         .preprocess = function() {
+            if (length(private$.raw_data) < 2) {
+                stop("Must provide at least two samples")
+            }
+
             if (length(unique(lengths(private$.raw_data, FALSE))) > 1) {
                 stop("All samples must be of equal length")
             }
@@ -21,10 +25,10 @@ RCBDTest <- R6Class(
         },
 
         .calculate_score = function() {
-            private$.data <- apply(
-                X = private$.data, MARGIN = 2, FUN = get_score,
-                scoring = private$.scoring, n = nrow(private$.data)
-            )
+            private$.data <- `dim<-`(apply(
+                X = private$.data, MARGIN = 2,
+                FUN = get_score, scoring = private$.scoring
+            ), c(nrow(private$.data), ncol(private$.data)))
         },
 
         .calculate_statistic = function() {
