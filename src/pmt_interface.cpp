@@ -20,7 +20,7 @@ public:
     template <typename... Args>
     auto operator()(Args&&... args) const
     {
-        Shield<SEXP> closure = Function::operator()(std::forward<Args>(args)...);
+        Shield<SEXP> closure(Function::operator()(std::forward<Args>(args)...));
 
         return fast_invoker(closure, std::forward<Args>(args)...);
     }
@@ -30,15 +30,15 @@ protected:
     auto fast_invoker(SEXP closure, Args&&... args) const
     {
 #if defined(R_VERSION) && R_VERSION >= R_Version(4, 5, 0)
-        Shield<SEXP> closure_formals = R_ClosureFormals(closure), closure_body = R_ClosureBody(closure), closure_envir = R_ClosureEnv(closure);
+        Shield<SEXP> closure_formals(R_ClosureFormals(closure)), closure_body(R_ClosureBody(closure)), closure_envir(R_ClosureEnv(closure));
 #else
-        Shield<SEXP> closure_formals = FORMALS(closure), closure_body = BODY(closure), closure_envir = CLOENV(closure);
+        Shield<SEXP> closure_formals(FORMALS(closure)), closure_body(BODY(closure)), closure_envir(CLOENV(closure));
 #endif
 
 #if defined(R_VERSION) && R_VERSION >= R_Version(4, 1, 0)
-        Shield<SEXP> exec_envir = R_NewEnv(closure_envir, FALSE, 0);
+        Shield<SEXP> exec_envir(R_NewEnv(closure_envir, FALSE, 0));
 #else
-        Shield<SEXP> exec_envir = Rf_allocSExp(ENVSXP);
+        Shield<SEXP> exec_envir(Rf_allocSExp(ENVSXP));
         SET_ENCLOS(exec_envir, closure_envir);
 #endif
 
