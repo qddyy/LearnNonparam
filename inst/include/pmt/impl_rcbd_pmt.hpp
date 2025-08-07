@@ -3,7 +3,7 @@
 template <bool progress, typename T>
 RObject impl_rcbd_pmt(
     NumericMatrix data,
-    const T& statistic_func,
+    T&& statistic_func,
     const double n_permu)
 {
     Stat<progress> statistic_container;
@@ -13,6 +13,9 @@ RObject impl_rcbd_pmt(
         return statistic_container << statistic_closure(data);
     };
 
+#ifdef SETJMP
+    SETJMP(statistic_func)
+#endif
     if (std::isnan(n_permu)) {
         statistic_container.init(rcbd_update, 1);
     } else {

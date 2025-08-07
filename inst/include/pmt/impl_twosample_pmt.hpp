@@ -4,7 +4,7 @@ template <bool progress, typename T>
 RObject impl_twosample_pmt(
     NumericVector x,
     NumericVector y,
-    const T& statistic_func,
+    T&& statistic_func,
     const double n_permu)
 {
     Stat<progress> statistic_container;
@@ -15,6 +15,9 @@ RObject impl_twosample_pmt(
     };
 
     if (std::isnan(n_permu)) {
+#ifdef SETJMP
+        SETJMP(statistic_func)
+#endif
         statistic_container.init(twosample_update, 1);
     } else {
         NumericVector x_ = x.size() < y.size() ? x : y;
@@ -24,7 +27,6 @@ RObject impl_twosample_pmt(
         R_xlen_t n = y_.size() + m;
 
         if (n_permu == 0) {
-            statistic_container.init(twosample_update, 1, C(n, m));
 
             std::vector<R_xlen_t> p;
             p.reserve(n);
@@ -44,8 +46,6 @@ RObject impl_twosample_pmt(
                 c.emplace_back(i);
             }
             c.emplace_back(n);
-
-            twosample_update();
 
             R_xlen_t j;
             auto R4 = [&c, &j, &swap_update]() mutable {
@@ -68,6 +68,13 @@ RObject impl_twosample_pmt(
                     return false;
                 }
             };
+
+#ifdef SETJMP
+            SETJMP(statistic_func)
+#endif
+            statistic_container.init(twosample_update, 1, C(n, m));
+
+            twosample_update();
 
             j = 0;
             if (m & 1) {
@@ -97,6 +104,9 @@ RObject impl_twosample_pmt(
                 }
             }
         } else {
+#ifdef SETJMP
+            SETJMP(statistic_func)
+#endif
             statistic_container.init(twosample_update, 1, n_permu);
 
             do {

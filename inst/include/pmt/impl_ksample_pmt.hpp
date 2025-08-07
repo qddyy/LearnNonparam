@@ -4,7 +4,7 @@ template <bool progress, typename T>
 RObject impl_ksample_pmt(
     const NumericVector data,
     IntegerVector group,
-    const T& statistic_func,
+    T&& statistic_func,
     const double n_permu)
 {
     Stat<progress> statistic_container;
@@ -14,6 +14,9 @@ RObject impl_ksample_pmt(
         return statistic_container << statistic_closure(data, group);
     };
 
+#ifdef SETJMP
+    SETJMP(statistic_func)
+#endif
     if (std::isnan(n_permu)) {
         statistic_container.init(ksample_update, 1);
     } else if (n_permu == 0) {

@@ -4,7 +4,7 @@ template <bool progress, typename T>
 RObject impl_multcomp_pmt(
     const NumericVector data,
     IntegerVector group,
-    const T& statistic_func,
+    T&& statistic_func,
     const double n_permu)
 {
     Stat<progress> statistic_container;
@@ -24,6 +24,9 @@ RObject impl_multcomp_pmt(
         return statistic_container << pairwise_closure(k - 1, k);
     };
 
+#ifdef SETJMP
+    SETJMP(statistic_func)
+#endif
     if (std::isnan(n_permu)) {
         statistic_container.init(multcomp_update, C(k, 2));
     } else if (n_permu == 0) {

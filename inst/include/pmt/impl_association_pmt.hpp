@@ -4,7 +4,7 @@ template <bool progress, typename T>
 RObject impl_association_pmt(
     NumericVector x,
     NumericVector y,
-    const T& statistic_func,
+    T&& statistic_func,
     const double n_permu)
 {
     Stat<progress> statistic_container;
@@ -18,6 +18,9 @@ RObject impl_association_pmt(
         return statistic_container << statistic_closure(x, y);
     };
 
+#ifdef SETJMP
+    SETJMP(statistic_func)
+#endif
     if (std::isnan(n_permu)) {
         statistic_container.init(association_update, 1);
     } else if (n_permu == 0) {

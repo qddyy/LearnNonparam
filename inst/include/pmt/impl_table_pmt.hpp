@@ -6,7 +6,7 @@ struct table_traits;
 template <bool progress, typename T, typename U>
 RObject __impl_table_pmt(
     T& data,
-    const U& statistic_func,
+    U&& statistic_func,
     const double n_permu)
 {
     Stat<progress> statistic_container;
@@ -35,7 +35,7 @@ RObject __impl_table_pmt(
     auto statistic_closure_ = [statistic_closure = statistic_func(data), &data, &row, &col, n](auto&&... args) mutable {
         for (size_t k = 0; k < data.size(); k++) {
             data[k] = 0;
-        };
+        }
 
         for (std::size_t k = 0; k < n; k++) {
             data(row[k], col[k])++;
@@ -47,6 +47,9 @@ RObject __impl_table_pmt(
         return statistic_container << statistic_closure_(data);
     };
 
+#ifdef SETJMP
+    SETJMP(statistic_func)
+#endif
     if (std::isnan(n_permu)) {
         statistic_container.init(table_update, 1);
     } else if (n_permu == 0) {
@@ -57,7 +60,6 @@ RObject __impl_table_pmt(
         while (table_update()) {
             next_permutation(row_);
         }
-
     } else {
         statistic_container.init(table_update, 1, n_permu);
 
@@ -78,7 +80,7 @@ struct table_traits<IntegerMatrix> {
 template <bool progress, typename T>
 RObject impl_table_pmt(
     IntegerMatrix data,
-    const T& statistic_func,
+    T&& statistic_func,
     const double n_permu)
 {
     return __impl_table_pmt<progress>(data, statistic_func, n_permu);
@@ -86,11 +88,26 @@ RObject impl_table_pmt(
 
 class DistributionTable : public std::vector<double> {
 public:
-    void reserve(std::size_t n)
+    DistributionTable(const NumericVector x, const NumericVector y)
     {
-        _ncol = n;
+        std::map<double, std::pair<double, double>> freq;
+        for (R_xlen_t i = 0; i < x.size(); i++) {
+            freq[x[i]].first++;
+        }
+        for (R_xlen_t i = 0; i < y.size(); i++) {
+            freq[y[i]].second++;
+        }
 
-        std::vector<double>::reserve(n * 2);
+        _ncol = freq.size();
+        if (_ncol >= R_XLEN_T_MAX) {
+            stop("ECDF would be too long a vector");
+        }
+
+        std::vector<double>::reserve(_ncol * 2);
+        for (auto it = freq.begin(); it != freq.end(); it++) {
+            std::vector<double>::push_back(it->second.first);
+            std::vector<double>::push_back(it->second.second);
+        }
     }
 
     std::size_t nrow() const { return 2; }
@@ -106,6 +123,55 @@ private:
     std::size_t _ncol;
 };
 
+template <typename T, typename U>
+class DistributionFunc : public T {
+public:
+    template <typename V, typename = std::enable_if_t<std::is_same<std::remove_cv_t<std::remove_reference_t<V>>, T>::value>>
+    DistributionFunc(V&& func, const U& data, R_xlen_t n_x, R_xlen_t n_y) :
+        T(std::forward<V>(func)),
+        _F(no_init(data.ncol() + 1)),
+        _G(no_init(data.ncol() + 1)),
+        _inv_n_x(1.0 / static_cast<double>(n_x)),
+        _inv_n_y(1.0 / static_cast<double>(n_y)),
+        _data(data)
+    {
+        *_F.begin() = *_G.begin() = 0.0;
+    }
+
+    template <typename... Args>
+    auto operator()(Args&&...)
+    {
+        _build_ecdf();
+        return [closure = T::operator()(_F, _G), this](auto&&...) {
+            this->_build_ecdf();
+            return closure(this->_F, this->_G);
+        };
+    }
+
+private:
+    void _build_ecdf()
+    {
+        double prob_F = 0.0;
+        double prob_G = 0.0;
+
+        std::size_t k = 0;
+        for (R_xlen_t i = 1; i < _G.size(); i++) {
+            prob_F += _data[k++] * _inv_n_x;
+            prob_G += _data[k++] * _inv_n_y;
+            _F[i] = prob_F;
+            _G[i] = prob_G;
+        }
+    }
+
+    NumericVector _F;
+    NumericVector _G;
+
+    double _inv_n_x;
+    double _inv_n_y;
+
+    const U& _data;
+};
+
 template <>
 struct table_traits<DistributionTable> {
     using size_type = std::size_t;
@@ -116,56 +182,12 @@ template <bool progress, typename T>
 RObject impl_distribution_pmt(
     const NumericVector x,
     const NumericVector y,
-    const T& statistic_func,
+    T&& statistic_func,
     const double n_permu)
 {
-    std::map<double, std::pair<double, double>> freq;
-    for (R_xlen_t i = 0; i < x.size(); i++) {
-        freq[x[i]].first++;
-    }
-    for (R_xlen_t i = 0; i < y.size(); i++) {
-        freq[y[i]].second++;
-    }
+    DistributionTable data(x, y);
 
-    double n = freq.size();
-    if (n >= R_XLEN_T_MAX) {
-        stop("ECDF would be too long a vector");
-    }
-
-    DistributionTable data;
-    data.reserve(n++);
-    for (auto it = freq.begin(); it != freq.end(); it++) {
-        data.push_back(it->second.first);
-        data.push_back(it->second.second);
-    }
-
-    NumericVector F(no_init(n));
-    NumericVector G(no_init(n));
-    *F.begin() = *G.begin() = 0.0;
-
-    auto build_ecdf = [&data, F, G, n = static_cast<R_xlen_t>(n), inv_n_x = 1.0 / static_cast<double>(x.size()), inv_n_y = 1.0 / static_cast<double>(y.size())]() mutable {
-        double prob_F = 0.0;
-        double prob_G = 0.0;
-
-        std::size_t k = 0;
-        for (R_xlen_t i = 1; i < n; i++) {
-            prob_F += data[k++] * inv_n_x;
-            prob_G += data[k++] * inv_n_y;
-            F[i] = prob_F;
-            G[i] = prob_G;
-        }
-    };
-
-    auto distribution_decorator = [&build_ecdf, F, G](auto&& func) {
-        return [func = std::forward<decltype(func)>(func), &build_ecdf, F, G](auto&&...) {
-            build_ecdf();
-            return func(F, G);
-        };
-    };
-
-    auto statistic_func_ = [statistic_func = distribution_decorator(statistic_func), &distribution_decorator](auto&&...) {
-        return distribution_decorator(statistic_func());
-    };
+    DistributionFunc<std::remove_cv_t<std::remove_reference_t<T>>, DistributionTable> statistic_func_(std::forward<T>(statistic_func), data, x.size(), y.size());
 
     return __impl_table_pmt<progress>(data, statistic_func_, n_permu);
 }

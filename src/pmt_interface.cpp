@@ -1,3 +1,4 @@
+#include <csetjmp>
 #include <initializer_list>
 
 #define RCPP_NO_BOUNDS_CHECK
@@ -8,13 +9,26 @@ using namespace Rcpp;
 template <typename T>
 class CachedFunc : public Function {
 public:
-    using Function::Function;
+    RObject token;
+
+    std::jmp_buf jmpbuf;
+
+    CachedFunc(SEXP func) :
+        Function(func),
+        token(R_MakeUnwindCont()) { }
 
     template <typename... Args>
     auto operator()(Args&&... args) const
     {
         Shield<SEXP> closure = Function::operator()(std::forward<Args>(args)...);
 
+        return fast_invoker(closure, std::forward<Args>(args)...);
+    }
+
+protected:
+    template <typename... Args>
+    auto fast_invoker(SEXP closure, Args&&... args) const
+    {
 #if defined(R_VERSION) && R_VERSION >= R_Version(4, 5, 0)
         Shield<SEXP> closure_formals = R_ClosureFormals(closure), closure_body = R_ClosureBody(closure), closure_envir = R_ClosureEnv(closure);
 #else
@@ -31,11 +45,25 @@ public:
         SEXP f = closure_formals;
         (void)std::initializer_list<int> { (Rf_defineVar(TAG(f), std::forward<Args>(args), exec_envir), f = CDR(f), 0)... };
 
-        return [closure_body = RObject(closure_body), exec_envir = RObject(exec_envir)](auto&&...) {
-            return as<T>(Rcpp_fast_eval(closure_body, exec_envir));
+        auto closure_ = [closure_body = RObject(closure_body), exec_envir = RObject(exec_envir)](auto&&...) {
+            return Rf_eval(closure_body, exec_envir);
+        };
+
+        auto call = [](void* closure_ptr) { return (*static_cast<decltype(closure_)*>(closure_ptr))(); };
+        auto jump = [](void* jmpbuf, Rboolean jump) { if (jump) longjmp(*static_cast<std::jmp_buf*>(jmpbuf), 1); };
+        return [closure_ = std::move(closure_), call, jump, this](auto&&...) {
+            return as<T>(R_UnwindProtect(
+                call, const_cast<void*>(static_cast<const void*>(&closure_)),
+                jump, const_cast<void*>(static_cast<const void*>(&this->jmpbuf)),
+                this->token));
         };
     }
 };
+
+#define SETJMP(cached_func)                         \
+    if (setjmp(cached_func.jmpbuf)) {               \
+        throw LongjumpException(cached_func.token); \
+    }
 
 #include "pmt/permutation.hpp"
 #include "pmt/progress.hpp"
