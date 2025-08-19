@@ -71,11 +71,11 @@ Studentized <- R6Class(
                     function(data, group) {
                         means <- rowsum.default(data, group) * inv_lengths
 
-                        weights <- weights / sqrt(
+                        weights_ <- weights / sqrt(
                             sum((data - means[group])^2) / (N - k)
                         )
 
-                        function(i, j) (means[i] - means[j]) * weights[i, j]
+                        function(i, j) (means[i] - means[j]) * weights_[i, j]
                     }
                 } else {
                     weights <- weights / sd(data)
