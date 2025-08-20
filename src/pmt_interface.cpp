@@ -2,7 +2,7 @@
 #include <initializer_list>
 
 #define RCPP_NO_BOUNDS_CHECK
-#include <Rcpp/Lightest>
+#include <Rcpp.h>
 
 using namespace Rcpp;
 

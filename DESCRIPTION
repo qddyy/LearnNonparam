@@ -10,10 +10,10 @@ License: GPL (>= 2)
 Depends: 
     R (>= 3.5.0)
 LinkingTo: 
-    Rcpp (>= 1.0.10)
+    Rcpp (>= 0.12.18)
 Imports: 
-    R6 (>= 2.5.0),
-    Rcpp (>= 1.0.10),
+    R6,
+    Rcpp (>= 0.12.18),
     stats,
     graphics,
     compiler
