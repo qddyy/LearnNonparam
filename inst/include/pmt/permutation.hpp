@@ -3,9 +3,10 @@
 #include <algorithm>
 #include <cstring>
 #include <iterator>
+#include <type_traits>
 #include <unordered_map>
 
-template <typename T>
+template <typename T, typename = std::enable_if_t<std::is_trivially_copyable<T>::value>>
 void swap_if(bool c, T& a, T& b) noexcept
 {
     struct alignas(T) {
@@ -33,7 +34,7 @@ bool next_permutation(T first, T last)
     return std::next_permutation(first, last);
 }
 
-template <typename T>
+template <typename T, typename = std::enable_if_t<std::is_integral<T>::value>>
 double C(T n, T k)
 {
     T i = 0, j = n - k;
