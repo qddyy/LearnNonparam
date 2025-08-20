@@ -108,16 +108,11 @@ public:
     template <typename... Args>
     auto operator()(Args&&... args) const
     {
-        IntegerVector i(no_init(1));
-        IntegerVector j(no_init(1));
-
-        return [statistic_closure = CachedFunc<SEXP>::operator()(std::forward<Args>(args)...), R_call = RObject(Rf_lang3(R_NilValue, i, j)), i_iter = i.begin(), j_iter = j.begin()](auto&&...) {
-            SETCAR(R_call, statistic_closure());
-
-            return [&](int i, int j) {
-                *i_iter = i;
-                *j_iter = j;
-                return as<T>(Rcpp_fast_eval(R_call, R_GlobalEnv));
+        return [statistic_closure = CachedFunc<SEXP>::operator()(std::forward<Args>(args)...), i = RObject(Rf_allocVector(INTSXP, 1)), j = RObject(Rf_allocVector(INTSXP, 1)), this](auto&&...) {
+            return [pairwise_closure = this->fast_invoker(statistic_closure(), i, j), i_ptr = INTEGER(i), j_ptr = INTEGER(j)](int i, int j) {
+                *i_ptr = i;
+                *j_ptr = j;
+                return as<T>(pairwise_closure());
             };
         };
     }
