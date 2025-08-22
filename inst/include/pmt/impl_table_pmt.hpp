@@ -32,15 +32,13 @@ RObject __impl_table_pmt(
         }
     }
 
-    auto statistic_closure_ = [statistic_closure = statistic_func(data), &data, &row, &col, n](auto&&... args) mutable {
+    auto statistic_closure_ = [statistic_closure = statistic_func(data), &data, &row, &col, n](auto&&... args) {
         for (size_t k = 0; k < data.size(); k++) {
             data[k] = 0;
         }
-
         for (std::size_t k = 0; k < n; k++) {
             data(row[k], col[k])++;
         }
-
         return statistic_closure(std::forward<decltype(args)>(args)...);
     };
     auto table_update = [&statistic_container, &statistic_closure_, data]() {
@@ -99,9 +97,6 @@ public:
         }
 
         _ncol = freq.size();
-        if (_ncol >= R_XLEN_T_MAX) {
-            stop("ECDF would be too long a vector");
-        }
 
         std::vector<double>::reserve(_ncol * 2);
         for (auto it = freq.begin(); it != freq.end(); it++) {
@@ -154,7 +149,7 @@ private:
         double prob_F = 0.0;
         double prob_G = 0.0;
 
-        std::size_t k = 0;
+        typename table_traits<U>::size_type k = 0;
         for (R_xlen_t i = 1; i < _G.size(); i++) {
             prob_F += _data[k++] * _inv_n_x;
             prob_G += _data[k++] * _inv_n_y;

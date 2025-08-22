@@ -27,7 +27,6 @@ RObject impl_twosample_pmt(
         R_xlen_t n = y_.size() + m;
 
         if (n_permu == 0) {
-
             std::vector<R_xlen_t> p;
             p.reserve(n);
             for (R_xlen_t i = 0; i < n; i++) {
