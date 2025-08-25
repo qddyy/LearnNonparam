@@ -39,6 +39,9 @@ reference:
   - title: Two-Sample Distribution Test
   - contents:
     - KolmogorovSmirnov
+    - Kuiper
+    - CramerVonMises
+    - AndersonDarling
   
   - title:  Two-Sample Association Test
   - contents:

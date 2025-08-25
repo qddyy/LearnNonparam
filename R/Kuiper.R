@@ -1,12 +1,12 @@
-#' @title `r KolmogorovSmirnov$private_fields$.name`
+#' @title `r Kuiper$private_fields$.name`
 #' 
-#' @description Performs two-sample Kolmogorov-Smirnov test on samples.
+#' @description Performs two-sample Kuiper test on samples.
 #' 
-#' @aliases distribution.ks
+#' @aliases distribution.kuiper
 #' 
 #' @examples
 #' pmt(
-#'     "distribution.ks", n_permu = 0
+#'     "distribution.kuiper", n_permu = 0
 #' )$test(Table2.8.1)$print()
 #' 
 #' @export
@@ -14,16 +14,16 @@
 #' @importFrom R6 R6Class
 
 
-KolmogorovSmirnov <- R6Class(
-    classname = "KolmogorovSmirnov",
+Kuiper <- R6Class(
+    classname = "Kuiper",
     inherit = TwoSampleDistributionTest,
     cloneable = FALSE,
     public = list(
-        #' @description Create a new `KolmogorovSmirnov` object.
+        #' @description Create a new `Kuiper` object.
         #' 
         #' @template pmt_init_params
         #' 
-        #' @return A `KolmogorovSmirnov` object.
+        #' @return A `Kuiper` object.
         initialize = function(
             alternative = c("two_sided", "less", "greater"), n_permu = 1e4
         ) {
@@ -32,12 +32,15 @@ KolmogorovSmirnov <- R6Class(
         }
     ),
     private = list(
-        .name = "Two-Sample Kolmogorov-Smirnov Test",
+        .name = "Two-Sample Kuiper Test",
 
         .define = function() {
             private$.statistic_func <- function(...) {
                 switch(private$.alternative,
-                    two_sided = function(f, g) max(abs(f - g)),
+                    two_sided = function(f, g) {
+                        d <- f - g
+                        max(d) - min(d)
+                    },
                     less = function(f, g) max(g - f),
                     greater = function(f, g) max(f - g)
                 )

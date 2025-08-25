@@ -10,6 +10,9 @@ implemented <- list(
     twosample.rmd = RatioMeanDeviance,
 
     distribution.ks = KolmogorovSmirnov,
+    distribution.kuiper = Kuiper,
+    distribution.cvm = CramerVonMises,
+    distribution.ad = AndersonDarling,
 
     association.corr = Correlation,
 
