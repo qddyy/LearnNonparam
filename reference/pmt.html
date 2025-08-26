@@ -98,12 +98,8 @@
 <dd><p>an integer indicating number of permutations for the permutation distribution. If set to <code>0</code>, all permutations will be used.</p></dd>
 
 
-<dt id="arg-name">name<a class="anchor" aria-label="anchor" href="#arg-name"></a></dt>
-<dd><p>a character string specifying the name of the test.</p></dd>
-
-
-<dt id="arg-alternative">alternative<a class="anchor" aria-label="anchor" href="#arg-alternative"></a></dt>
-<dd><p>a character string describing the alternative hypothesis.</p></dd>
+<dt id="arg-name-alternative">name, alternative<a class="anchor" aria-label="anchor" href="#arg-name-alternative"></a></dt>
+<dd><p>character strings specifying the name of the test and the alternative hypothesis, used for printing purposes only.</p></dd>
 
 
 <dt id="arg-depends-plugins-includes">depends, plugins, includes<a class="anchor" aria-label="anchor" href="#arg-depends-plugins-includes"></a></dt>
@@ -125,10 +121,10 @@
     </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-
-<ul><li><p><code>statistic</code> should not cause errors or return missing values.</p></li>
-<li><p>The data is permuted in-place. Therefore, modifications to the data within <code>statistic</code> may lead to incorrect results. Since R has copy-on-modify semantics but C++ does not, it is recommended to pass const references when using Rcpp in <code>define_pmt</code>, as shown in the table above.</p></li>
-</ul></div>
+    <p>To improve performance when calling R functions from C++, this package repeatedly evaluates the function body of the inner closure in the same environment, with formal arguments pre-assigned to the data. This imposes the following restrictions on the inner closure when <code>statistic</code> is written in R:</p><ul><li><p>Do not reassign the inner closure’s formal arguments or any pre-computed symbols in its enclosing environment (i.e., in the outer closure).</p></li>
+<li><p>Do not use default arguments or variadic arguments.</p></li>
+</ul><p>It's also worth noting that the data is permuted in-place. Therefore, modifications to the data within <code>statistic</code> may lead to incorrect results. It is recommended to avoid modifying the data when using R and pass const references as in the table above when using Rcpp.</p>
+    </div>
 
     <div class="section level2">
     <h2 id="ref-examples">Examples<a class="anchor" aria-label="anchor" href="#ref-examples"></a></h2>
@@ -247,7 +243,7 @@
 <span class="r-in"><span>    statistic <span class="op">=</span> <span class="st">"[](const auto&amp; x, const auto&amp; y) {</span></span></span>
 <span class="r-in"><span><span class="st">        auto m = x.length();</span></span></span>
 <span class="r-in"><span><span class="st">        auto n = y.length();</span></span></span>
-<span class="r-in"><span><span class="st">        return [=](const auto&amp; x, const auto&amp; y) {</span></span></span>
+<span class="r-in"><span><span class="st">        return [=](const auto&amp; x, const auto&amp; y) -&gt; double {</span></span></span>
 <span class="r-in"><span><span class="st">            return sum(x) / m - sum(y) / n;</span></span></span>
 <span class="r-in"><span><span class="st">        };</span></span></span>
 <span class="r-in"><span><span class="st">    }"</span></span></span>
@@ -268,10 +264,10 @@
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>LearnNonparam.pmt_progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">r</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.083   0.000   0.083 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.084   0.000   0.084 </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">rcpp</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.008   0.000   0.008 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.009   0.000   0.009 </span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
