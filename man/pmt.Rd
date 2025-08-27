@@ -17,7 +17,7 @@ define_pmt(
   method = c("twosample", "distribution", "association", "paired", "ksample", "rcbd",
     "table"),
   statistic,
-  rejection = c("lr", "l", "r"),
+  rejection = c("<>", "<", ">"),
   scoring = "none",
   n_permu = 10000,
   name = "User-Defined Permutation Test",
@@ -38,7 +38,7 @@ define_pmt(
 
 \item{statistic}{definition of the test statistic. See details.}
 
-\item{rejection}{a character string specifying where the rejection region is.}
+\item{rejection}{a character string specifying the rejection region relative to the test statistic.}
 
 \item{scoring}{one of:
 - a character string in \code{c("none", "rank", "vw", "expon")} specifying the scoring system
@@ -46,9 +46,7 @@ define_pmt(
 
 \item{n_permu}{an integer indicating number of permutations for the permutation distribution. If set to \code{0}, all permutations will be used.}
 
-\item{name}{a character string specifying the name of the test.}
-
-\item{alternative}{a character string describing the alternative hypothesis.}
+\item{name, alternative}{character strings specifying the name of the test and the alternative hypothesis, used for printing purposes only.}
 
 \item{depends, plugins, includes}{passed to \code{\link[Rcpp:cppFunction]{Rcpp::cppFunction()}}.}
 }
@@ -86,10 +84,13 @@ When using Rcpp, the parameters for different \code{method} are listed as follow
 When using R, the parameters should be the R equivalents of these.
 }
 \note{
+To improve performance when calling R functions from C++, this package repeatedly evaluates the function body of the inner closure in the same environment, where formal arguments are pre-assigned to the data and the enclosing environment is that of the closure. This imposes the following restrictions on the inner closure when \code{statistic} is written in R:
 \itemize{
-\item \code{statistic} should not cause errors or return missing values.
-\item The data is permuted in-place. Therefore, modifications to the data within \code{statistic} may lead to incorrect results. Since R has copy-on-modify semantics but C++ does not, it is recommended to pass const references when using Rcpp in \code{define_pmt}, as shown in the table above.
+\item Do not reassign the inner closure’s formal arguments or any pre-computed symbols in the outer closure.
+\item Do not use default arguments or variadic arguments.
 }
+
+It's also worth noting that the data is permuted in-place. Therefore, modifications to the data within \code{statistic} may lead to incorrect results. It is recommended to avoid modifying the data when using R and pass const references as in the table above when using Rcpp.
 }
 \examples{
 pmt("twosample.wilcoxon")
@@ -100,7 +101,7 @@ x <- rnorm(5)
 y <- rnorm(5, 1)
 
 t <- define_pmt(
-    method = "twosample",
+    method = "twosample", rejection = "<",
     scoring = base::rank, # equivalent to "rank"
     statistic = function(...) function(x, y) sum(x)
 )$test(x, y)$print()

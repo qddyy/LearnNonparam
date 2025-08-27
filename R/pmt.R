@@ -102,13 +102,12 @@ pmts <- function(
 #' 
 #' @param method a character string specifying the permutation scheme.
 #' @param statistic definition of the test statistic. See details.
-#' @param rejection a character string specifying where the rejection region is.
+#' @param rejection a character string specifying the rejection region relative to the test statistic.
 #' @param scoring one of:
 #'      - a character string in `c("none", "rank", "vw", "expon")` specifying the scoring system
 #'      - a function that takes a numeric vector and returns an equal-length score vector
 #' @param n_permu an integer indicating number of permutations for the permutation distribution. If set to `0`, all permutations will be used.
-#' @param name a character string specifying the name of the test.
-#' @param alternative a character string describing the alternative hypothesis.
+#' @param name,alternative character strings specifying the name of the test and the alternative hypothesis, used for printing purposes only.
 #' @param depends,plugins,includes passed to [Rcpp::cppFunction()].
 #' 
 #' @return a test object based on the specified statistic.
@@ -136,15 +135,18 @@ pmts <- function(
 #' When using R, the parameters should be the R equivalents of these.
 #' 
 #' @note
-#' - `statistic` should not cause errors or return missing values.
-#' - The data is permuted in-place. Therefore, modifications to the data within `statistic` may lead to incorrect results. Since R has copy-on-modify semantics but C++ does not, it is recommended to pass const references when using Rcpp in `define_pmt`, as shown in the table above.
+#' To improve performance when calling R functions from C++, this package repeatedly evaluates the function body of the inner closure in the same environment, where formal arguments are pre-assigned to the data and the enclosing environment is that of the closure. This imposes the following restrictions on the inner closure when `statistic` is written in R:
+#' - Do not reassign the inner closure’s formal arguments or any pre-computed symbols in the outer closure.
+#' - Do not use default arguments or variadic arguments.
+#' 
+#' It's also worth noting that the data is permuted in-place. Therefore, modifications to the data within `statistic` may lead to incorrect results. It is recommended to avoid modifying the data when using R and pass const references as in the table above when using Rcpp.
 #' 
 #' @examples
 #' x <- rnorm(5)
 #' y <- rnorm(5, 1)
 #' 
 #' t <- define_pmt(
-#'     method = "twosample",
+#'     method = "twosample", rejection = "<",
 #'     scoring = base::rank, # equivalent to "rank"
 #'     statistic = function(...) function(x, y) sum(x)
 #' )$test(x, y)$print()
@@ -208,17 +210,12 @@ define_pmt <- function(
         "table"
     ),
     statistic,
-    rejection = c("lr", "l", "r"),
+    rejection = c("<>", "<", ">"),
     scoring = "none", n_permu = 1e4,
     name = "User-Defined Permutation Test", alternative = NULL,
     depends = character(), plugins = character(), includes = character()
 ) {
     method <- match.arg(method)
-
-    if (!missing(scoring) && method %in% c("distribution", "paired", "table")) {
-        warning("Ignoring 'scoring' since 'method' is set to '", method, "'")
-        scoring <- "none"
-    }
 
     self <- super <- private <- NULL
     R6Class(
@@ -244,18 +241,20 @@ define_pmt <- function(
                 } else if (!is.character(statistic) || length(statistic) > 1) {
                     stop("'statistic' must be a closure or a character string")
                 } else {
-                    method <- if (method == "distribution") "table" else method
-                    impl <- paste0("impl_", method, "_pmt")
                     cppFunction(
                         depends = c(depends, "LearnNonparam"),
                         plugins = {
                             cpp_standard_ver <- evalCpp("__cplusplus")
                             c(plugins, if (cpp_standard_ver < 201402L) "cpp14")
                         },
-                        includes = {
+                        includes = local({
+                            if (method == "distribution") {
+                                method <- "table"
+                            }
+                            impl <- paste0("impl_", method, "_pmt")
                             hpps <- c("permutation", "progress", impl)
                             c(includes, paste0("#include<pmt/", hpps, ".hpp>"))
-                        },
+                        }),
                         env = environment(super$.calculate_statistic),
                         code = {
                             n <- if (method %in% c("rcbd", "table")) 2L else 3L
@@ -265,8 +264,9 @@ define_pmt <- function(
                                 paste("SEXP", args, collapse = ","),
                                 ", double n_permu, bool progress){",
                                 "auto statistic = ", statistic, ";",
-                                "return progress ?", paste0(
-                                    impl, "<", c("true", "false"), ">(", paste(
+                                "return progress ? ", paste0(
+                                    "impl_", method, "_pmt<",
+                                    c("true", "false"), ">(", paste(
                                         "clone(", args[-n], ")", collapse = ","
                                     ), ", statistic, n_permu )", collapse = ":"
                                 ), ";}"
@@ -279,7 +279,9 @@ define_pmt <- function(
         private = list(
             .method = method,
 
-            .side = match.arg(rejection),
+            .side = switch(match.arg(rejection),
+                `<>` = "lr", `<` = "l", `>` = "r"
+            ),
 
             .name = if (!missing(name)) as.character(name) else name,
             .alternative = if (!missing(alternative)) as.character(alternative),
@@ -292,6 +294,13 @@ define_pmt <- function(
                 }
 
                 private$.calculate_statistic()
+                if (
+                    is.na(private$.statistic) ||
+                    anyNA(attr(private$.statistic, "permu"))
+                ) {
+                    warning("NAs produced")
+                }
+
                 private$.calculate_n_permu()
                 private$.calculate_p_permu()
             }
@@ -299,24 +308,38 @@ define_pmt <- function(
         active = list(
             scoring = function(value) {
                 if (missing(value)) {
-                    return(private$.scoring)
-                } else if (is.character(value)) {
+                    if (private$.scoring == "custom") {
+                        return(environment(super$.calculate_score)$get_score)
+                    } else {
+                        return(private$.scoring)
+                    }
+                }
+
+                if (is.character(value)) {
                     private$.scoring <- match.arg(
                         value, choices = c("none", "rank", "vw", "expon")
                     )
-                } else if (is.function(value)) {
-                    private$.scoring <- "custom"
-                    get_score <- function(x, ...) {
+                    if (private$.scoring != "none" && private$.method %in% c(
+                        "distribution", "paired", "table"
+                    )) {
+                        warning(
+                            "'scoring' forced to 'none' since 'method' is ",
+                            "'", private$.method, "'"
+                        )
+                        private$.scoring <- "none"
+                    }
+                } else if (typeof(value) == "closure") {
+                    get_score_ <- function(x, ...) {
                         score <- value(x)
                         if (!is.numeric(score) || length(score) != length(x)) {
                             stop("Invalid scoring system")
                         } else score
                     }
+                    environment(super$.calculate_score)$get_score <- get_score_
+                    private$.scoring <- "custom"
                 } else {
-                    stop("'scoring' must be a character string or a function")
+                    stop("'scoring' must be a character string or a closure")
                 }
-
-                environment(super$.calculate_score)$get_score <- get_score
 
                 if (!is.null(private$.raw_data)) {
                     private$.on_scoring_change()
