@@ -105,7 +105,7 @@ library(LearnNonparam)
   ``` r
   ggplot2::theme_set(ggplot2::theme_minimal())
 
-  t$plot(style = "ggplot2", binwidth = 1)
+  t$plot(style = "ggplot2", binwidth = 1) # or ggplot2::autoplot(t, binwidth = 1)
   ```
 
   <picture>
@@ -152,17 +152,20 @@ pmts()
 | twosample.ansari | AnsariBradley | Ansari-Bradley Test |
 | twosample.siegel | SiegelTukey | Siegel-Tukey Test |
 | twosample.rmd | RatioMeanDeviance | Ratio Mean Deviance Test |
-| twosample.ks | KolmogorovSmirnov | Two-Sample Kolmogorov-Smirnov Test |
+| distribution.ks | KolmogorovSmirnov | Two-Sample Kolmogorov-Smirnov Test |
+| distribution.kuiper | Kuiper | Two-Sample Kuiper Test |
+| distribution.cvm | CramerVonMises | Two-Sample Cramer-Von Mises Test |
+| distribution.ad | AndersonDarling | Two-Sample Anderson-Darling Test |
+| association.corr | Correlation | Test for Association Between Paired Samples |
+| paired.sign | Sign | Two-Sample Sign Test |
+| paired.difference | PairedDifference | Paired Comparison Based on Differences |
 | ksample.oneway | OneWay | One-Way Test for Equal Means |
 | ksample.kw | KruskalWallis | Kruskal-Wallis Test |
 | ksample.jt | JonckheereTerpstra | Jonckheere-Terpstra Test |
 | multcomp.studentized | Studentized | Multiple Comparison Based on Studentized Statistic |
-| paired.sign | Sign | Two-Sample Sign Test |
-| paired.difference | PairedDifference | Paired Comparison Based on Differences |
 | rcbd.oneway | RCBDOneWay | One-Way Test for Equal Means in RCBD |
 | rcbd.friedman | Friedman | Friedman Test |
 | rcbd.page | Page | Page Test |
-| association.corr | Correlation | Test for Association Between Paired Samples |
 | table.chisq | ChiSquare | Chi-Square Test on Contingency Table |
 
 </div>
@@ -179,7 +182,7 @@ two-sample Wilcoxon test as an example:
 ``` r
 t_custom <- define_pmt(
     # this is a two-sample permutation test
-    inherit = "twosample",
+    method = "twosample",
     statistic = function(x, y) {
         # (optional) pre-calculate certain constants that remain invariant during permutation
         m <- length(x)
@@ -188,7 +191,7 @@ t_custom <- define_pmt(
         function(x, y) sum(x) / m - sum(y) / n
     },
     # reject the null hypothesis when the test statistic is too large or too small
-    rejection = "lr", n_permu = 1e5
+    rejection = "<>", n_permu = 1e5
 )
 ```
 
@@ -203,7 +206,7 @@ compatible with C++ syntax.
 
 ``` r
 t_cpp <- define_pmt(
-    inherit = "twosample", rejection = "lr", n_permu = 1e5,
+    method = "twosample", rejection = "<>", n_permu = 1e5,
     statistic = "[](const auto& x, const auto& y) {
         auto m = x.length();
         auto n = y.length();
