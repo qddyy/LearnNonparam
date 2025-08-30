@@ -41,7 +41,7 @@ RObject __impl_table_pmt(
         }
         return statistic_closure(std::forward<decltype(args)>(args)...);
     };
-    auto table_update = [&statistic_container, &statistic_closure_, data]() {
+    auto table_update = [&statistic_container, &statistic_closure_, &data]() {
         return statistic_container << statistic_closure_(data);
     };
 
