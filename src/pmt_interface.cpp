@@ -20,9 +20,7 @@ public:
     template <typename... Args>
     auto operator()(Args&&... args) const
     {
-        Shield<SEXP> closure(Function::operator()(std::forward<Args>(args)...));
-
-        return fast_invoker(closure, std::forward<Args>(args)...);
+        return fast_invoker(Function::operator()(std::forward<Args>(args)...), std::forward<Args>(args)...);
     }
 
 protected:
@@ -45,15 +43,15 @@ protected:
         SEXP f = closure_formals;
         (void)std::initializer_list<int> { (Rf_defineVar(TAG(f), std::forward<Args>(args), exec_envir), f = CDR(f), 0)... };
 
-        auto closure_ = [closure_body = RObject(closure_body), exec_envir = RObject(exec_envir)](auto&&...) {
+        auto cached = [closure_body = RObject(closure_body), exec_envir = RObject(exec_envir)]() {
             return Rf_eval(closure_body, exec_envir);
         };
 
-        auto call = [](void* closure_ptr) { return (*static_cast<decltype(closure_)*>(closure_ptr))(); };
-        auto jump = [](void* jmpbuf, Rboolean jump) { if (jump) longjmp(*static_cast<std::jmp_buf*>(jmpbuf), 1); };
-        return [closure_ = std::move(closure_), call, jump, this](auto&&...) {
+        auto exec = +[](void* cached_ptr) { return (*static_cast<decltype(cached)*>(cached_ptr))(); };
+        auto jump = +[](void* jmpbuf_ptr, Rboolean jump) { if (jump) longjmp(*static_cast<std::jmp_buf*>(jmpbuf_ptr), 1); };
+        return [cached = std::move(cached), exec, jump, this](auto&&...) {
             return as<T>(R_UnwindProtect(
-                call, const_cast<void*>(static_cast<const void*>(&closure_)),
+                exec, const_cast<void*>(static_cast<const void*>(&cached)),
                 jump, const_cast<void*>(static_cast<const void*>(&this->jmpbuf)),
                 this->token));
         };
