@@ -14,14 +14,17 @@ RObject impl_paired_pmt(
         return statistic_container << statistic_closure(x, y);
     };
 
+    R_xlen_t n = x.size();
+
+    statistic_container.allocate(1, n_permu != 0 ? n_permu : 1 << n);
+
 #ifdef SETJMP
     SETJMP(statistic_func)
 #endif
-    if (std::isnan(n_permu)) {
-        statistic_container.init(paired_update, 1);
-    } else {
-        R_xlen_t n = x.size();
 
+    paired_update();
+
+    if (!std::isnan(n_permu)) {
         for (R_xlen_t i = 0; i < n; i++) {
             if (x[i] == y[i]) {
                 while (--n > i && x[n] == y[n]) { }
@@ -30,9 +33,8 @@ RObject impl_paired_pmt(
             }
         }
 
+        statistic_container.switch_ptr();
         if (n_permu == 0) {
-            statistic_container.init(paired_update, 1, 1 << n);
-
             R_xlen_t swapped = 0;
             for (R_xlen_t i = 0; i < n; i = swapped & (1 << i) ? 0 : i + 1) {
                 if (i == 0) {
@@ -43,8 +45,6 @@ RObject impl_paired_pmt(
                 swapped ^= (1 << i);
             }
         } else {
-            statistic_container.init(paired_update, 1, n_permu);
-
             do {
                 for (R_xlen_t i = 0; i < n; i++) {
                     swap_if(unif_rand() > 0.5, x[i], y[i]);

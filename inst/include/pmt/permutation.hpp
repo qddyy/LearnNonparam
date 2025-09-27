@@ -2,6 +2,7 @@
 
 #include <algorithm>
 #include <cstring>
+#include <functional>
 #include <iterator>
 #include <type_traits>
 #include <unordered_map>
@@ -83,4 +84,22 @@ template <typename T>
 auto n_permutation(T&& v)
 {
     return ::n_permutation(v.begin(), v.end());
+}
+
+template <typename T>
+auto random_shuffle(std::reference_wrapper<T> v)
+{
+    return ::random_shuffle(v.get());
+}
+
+template <typename T>
+auto next_permutation(std::reference_wrapper<T> v)
+{
+    return ::next_permutation(v.get());
+}
+
+template <typename T>
+auto n_permutation(std::reference_wrapper<T> v)
+{
+    return ::n_permutation(v.get());
 }

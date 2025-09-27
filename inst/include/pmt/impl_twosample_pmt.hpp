@@ -15,25 +15,31 @@ RObject impl_twosample_pmt(
     };
 
     if (std::isnan(n_permu)) {
+        statistic_container.allocate(1, n_permu);
+
 #ifdef SETJMP
         SETJMP(statistic_func)
 #endif
-        statistic_container.init(twosample_update, 1);
-    } else {
-        NumericVector x_ = x.size() < y.size() ? x : y;
-        NumericVector y_ = x.size() < y.size() ? y : x;
 
-        R_xlen_t m = x_.size();
-        R_xlen_t n = y_.size() + m;
+        twosample_update();
+    } else {
+        if (x.size() > y.size()) {
+            std::swap(x, y);
+        }
+
+        R_xlen_t m = x.size();
+        R_xlen_t n = y.size() + m;
 
         if (n_permu == 0) {
-            std::vector<R_xlen_t> p;
-            p.reserve(n);
-            for (R_xlen_t i = 0; i < n; i++) {
-                p.emplace_back(i);
-            }
-            auto swap_update = [x_, y_, m, &p, &twosample_update](const R_xlen_t out, const R_xlen_t in) mutable {
-                std::swap(x_[p[out]], y_[p[in] - m]);
+            auto swap_update = [&twosample_update, x, y, m, p = [n]() {
+                std::vector<R_xlen_t> p;
+                p.reserve(n);
+                for (R_xlen_t i = 0; i < n; i++) {
+                    p.emplace_back(i);
+                }
+                return p;
+            }()](const R_xlen_t out, const R_xlen_t in) mutable {
+                std::swap(x[p[out]], y[p[in] - m]);
                 std::swap(p[out], p[in]);
                 twosample_update();
             };
@@ -46,8 +52,8 @@ RObject impl_twosample_pmt(
             }
             c.emplace_back(n);
 
-            R_xlen_t j;
-            auto R4 = [&c, &j, &swap_update]() mutable {
+            R_xlen_t j = 0;
+            auto R4 = [&c, &j, &swap_update]() {
                 if (c[j] > j) {
                     swap_update(c[j], j - 1);
                     c[j] = std::exchange(c[j - 1], j - 1);
@@ -57,7 +63,7 @@ RObject impl_twosample_pmt(
                     return false;
                 }
             };
-            auto R5 = [&c, &j, &swap_update]() mutable {
+            auto R5 = [&c, &j, &swap_update]() {
                 if (c[j] + 1 < c[j + 1]) {
                     swap_update(c[j - 1], c[j] + 1);
                     c[j - 1] = c[j]++;
@@ -68,14 +74,16 @@ RObject impl_twosample_pmt(
                 }
             };
 
+            statistic_container.allocate(1, C(n, m));
+
 #ifdef SETJMP
             SETJMP(statistic_func)
 #endif
-            statistic_container.init(twosample_update, 1, C(n, m));
 
             twosample_update();
 
-            j = 0;
+            statistic_container.switch_ptr();
+            twosample_update();
             if (m & 1) {
                 while (j < m) {
                     if (c[0] + 1 < c[1]) {
@@ -103,16 +111,20 @@ RObject impl_twosample_pmt(
                 }
             }
         } else {
+            statistic_container.allocate(1, n_permu);
+
 #ifdef SETJMP
             SETJMP(statistic_func)
 #endif
-            statistic_container.init(twosample_update, 1, n_permu);
 
+            twosample_update();
+
+            statistic_container.switch_ptr();
             do {
                 for (R_xlen_t i = 0; i < m; i++) {
                     R_xlen_t j = static_cast<R_xlen_t>(unif_rand() * (n - i)) + i - m;
                     bool c = j >= 0;
-                    swap_if(c, x_[i], y_[j * c]);
+                    swap_if(c, x[i], y[j * c]);
                 }
             } while (twosample_update());
         }

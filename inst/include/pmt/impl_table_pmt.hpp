@@ -45,25 +45,32 @@ RObject __impl_table_pmt(
         return statistic_container << statistic_closure_(data);
     };
 
+    std::reference_wrapper<std::vector<size_t>> dim = row;
+    statistic_container.allocate(
+        1, n_permu != 0 ? n_permu : [&row, &col, &dim]() {
+            if (n_permutation(col) < n_permutation(row)) {
+                dim = col;
+            }
+            return n_permutation(dim);
+        }());
+
 #ifdef SETJMP
     SETJMP(statistic_func)
 #endif
-    if (std::isnan(n_permu)) {
-        statistic_container.init(table_update, 1);
-    } else if (n_permu == 0) {
-        auto& row_ = n_permutation(row) < n_permutation(col) ? row : col;
 
-        statistic_container.init(table_update, 1, n_permutation(row_));
+    table_update();
 
-        while (table_update()) {
-            next_permutation(row_);
+    if (!std::isnan(n_permu)) {
+        statistic_container.switch_ptr();
+        if (n_permu == 0) {
+            while (table_update()) {
+                next_permutation(dim);
+            }
+        } else {
+            do {
+                random_shuffle(dim);
+            } while (table_update());
         }
-    } else {
-        statistic_container.init(table_update, 1, n_permu);
-
-        do {
-            random_shuffle(row);
-        } while (table_update());
     }
 
     return static_cast<RObject>(statistic_container);
@@ -98,10 +105,10 @@ public:
 
         _ncol = freq.size();
 
-        std::vector<double>::reserve(_ncol * 2);
+        reserve(_ncol * 2);
         for (auto it = freq.begin(); it != freq.end(); it++) {
-            std::vector<double>::push_back(it->second.first);
-            std::vector<double>::push_back(it->second.second);
+            emplace_back(it->second.first);
+            emplace_back(it->second.second);
         }
     }
 
@@ -111,7 +118,7 @@ public:
 
     double& operator()(std::size_t i, std::size_t j)
     {
-        return std::vector<double>::operator[](i + j * 2);
+        return operator[](i + j * 2);
     }
 
 private:

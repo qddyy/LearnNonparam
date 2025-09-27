@@ -18,23 +18,25 @@ RObject impl_association_pmt(
         return statistic_container << statistic_closure(x, y);
     };
 
+    statistic_container.allocate(1, n_permu != 0 ? n_permu : n_permutation(y));
+
 #ifdef SETJMP
     SETJMP(statistic_func)
 #endif
-    if (std::isnan(n_permu)) {
-        statistic_container.init(association_update, 1);
-    } else if (n_permu == 0) {
-        statistic_container.init(association_update, 1, n_permutation(y));
 
-        while (association_update()) {
-            next_permutation(y);
+    association_update();
+
+    if (!std::isnan(n_permu)) {
+        statistic_container.switch_ptr();
+        if (n_permu == 0) {
+            while (association_update()) {
+                next_permutation(y);
+            }
+        } else {
+            do {
+                random_shuffle(y);
+            } while (association_update());
         }
-    } else {
-        statistic_container.init(association_update, 1, n_permu);
-
-        do {
-            random_shuffle(y);
-        } while (association_update());
     }
 
     return static_cast<RObject>(statistic_container);

@@ -14,23 +14,25 @@ RObject impl_ksample_pmt(
         return statistic_container << statistic_closure(data, group);
     };
 
+    statistic_container.allocate(1, n_permu != 0 ? n_permu : n_permutation(group));
+
 #ifdef SETJMP
     SETJMP(statistic_func)
 #endif
-    if (std::isnan(n_permu)) {
-        statistic_container.init(ksample_update, 1);
-    } else if (n_permu == 0) {
-        statistic_container.init(ksample_update, 1, n_permutation(group));
 
-        do {
-            ksample_update();
-        } while (next_permutation(group));
-    } else {
-        statistic_container.init(ksample_update, 1, n_permu);
+    ksample_update();
 
-        do {
-            random_shuffle(group);
-        } while (ksample_update());
+    if (!std::isnan(n_permu)) {
+        statistic_container.switch_ptr();
+        if (n_permu == 0) {
+            do {
+                ksample_update();
+            } while (next_permutation(group));
+        } else {
+            do {
+                random_shuffle(group);
+            } while (ksample_update());
+        }
     }
 
     return static_cast<RObject>(statistic_container);

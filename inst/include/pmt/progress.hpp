@@ -38,6 +38,15 @@ constexpr std::array<progress_bar, sizeof...(percent_seq)> generate_bars(std::in
 
 constexpr auto generated_bars = generate_bars(std::make_integer_sequence<unsigned, 100>());
 
+double elapsed(std::chrono::steady_clock::time_point& time)
+{
+    std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
+    std::chrono::duration<double, typename std::chrono::seconds::period> elapsed = now - time;
+    time = now;
+
+    return elapsed.count();
+}
+
 template <bool progress>
 class Stat {
 public:
@@ -45,45 +54,48 @@ public:
         _progress_every(0),
         _progress_i(0) { }
 
-    template <typename T>
-    void init(const T& update, R_xlen_t size)
+    void allocate(R_xlen_t size, double n_permu)
     {
-        _init_statistic(update, size);
+        _statistic = Rf_allocVector(REALSXP, size);
 
-        _buffer = NumericVector(0);
+        _statistic_ptr = REAL(_statistic);
+        _statistic_end = _statistic_ptr + size;
+
+        if (!std::isnan(n_permu)) {
+            Shield<SEXP> statistic_permu(Rf_allocVector(REALSXP, size * n_permu));
+            if (size > 1) {
+                Rf_setAttrib(statistic_permu, R_DimSymbol, IntegerVector::create(size, n_permu));
+            }
+            _statistic.attr("permu") = statistic_permu;
+        }
+
+        _time = std::chrono::steady_clock::now();
     }
 
-    template <typename T>
-    void init(const T& update, R_xlen_t size, double n_permu)
+    void switch_ptr()
     {
-        double n = n_permu * size;
-        if (n > R_XLEN_T_MAX) {
-            stop("Too many permutations");
-        }
-
-        _init_statistic(update, size);
-
-        _init_buffer(static_cast<R_xlen_t>(n));
-        if (size > 1) {
-            _buffer.attr("dim") = IntegerVector::create(size, n_permu);
-        }
+        _speed = 1 / elapsed(_time);
 
         _init_progress();
+
+        _statistic_begin = REAL(_statistic.attr("permu"));
+        _statistic_end = _statistic_begin + Rf_xlength(_statistic.attr("permu"));
+        _statistic_ptr = _statistic_begin;
+
+        _time = std::chrono::steady_clock::now();
     }
 
     bool operator<<(double statistic)
     {
+        *_statistic_ptr++ = statistic;
+
         _update_progress();
 
-        _buffer[_buffer_i++] = statistic;
-
-        return _buffer_i != _buffer_size;
+        return _statistic_ptr != _statistic_end;
     }
 
     explicit operator RObject()
     {
-        _statistic.attr("permu") = _buffer;
-
         return _statistic;
     }
 
@@ -95,21 +107,9 @@ public:
 private:
     RObject _statistic;
 
-    template <typename T>
-    void _init_statistic(const T& update, R_xlen_t size);
-
-    NumericVector _buffer;
-
-    R_xlen_t _buffer_size;
-    R_xlen_t _buffer_i;
-
-    void _init_buffer(R_xlen_t size)
-    {
-        _buffer = NumericVector(no_init(size));
-
-        _buffer_size = size;
-        _buffer_i = 0;
-    }
+    double* _statistic_begin;
+    double* _statistic_end;
+    double* _statistic_ptr;
 
     R_xlen_t _progress_every;
     R_xlen_t _progress_i;
@@ -126,17 +126,6 @@ private:
 };
 
 template <>
-template <typename T>
-void Stat<false>::_init_statistic(const T& update, R_xlen_t size)
-{
-    _init_buffer(size);
-
-    update();
-
-    _statistic = _buffer;
-}
-
-template <>
 void Stat<false>::_init_progress() { }
 
 template <>
@@ -145,37 +134,15 @@ void Stat<false>::_update_progress() { }
 template <>
 void Stat<false>::_clear_progress() { }
 
-double elapsed(std::chrono::steady_clock::time_point& time)
-{
-    std::chrono::steady_clock::time_point now = std::chrono::steady_clock::now();
-    std::chrono::duration<double, typename std::chrono::seconds::period> elapsed = now - time;
-    time = now;
-
-    return elapsed.count();
-}
-
-template <>
-template <typename T>
-void Stat<true>::_init_statistic(const T& update, R_xlen_t size)
-{
-    _init_buffer(size);
-
-    _time = std::chrono::steady_clock::now();
-    update();
-    _speed = size / elapsed(_time);
-
-    _statistic = _buffer;
-}
-
 template <>
 void Stat<true>::_init_progress()
 {
-    _progress_every = _buffer_size < 100 ? 1 : _buffer_size / 100;
+    _progress_every = _speed * 5;
     _progress_i = 0;
 
-    double eta = _buffer_size / _speed;
+    _time = std::chrono::steady_clock::now();
 
-    Rprintf(generated_bars[0].data(), _speed, eta);
+    Rprintf(generated_bars[0].data(), _speed, (_statistic_end - _statistic_begin) / _speed);
 }
 
 template <>
@@ -186,9 +153,7 @@ void Stat<true>::_update_progress()
 
         _speed = 0.2 * _speed + 0.8 * _progress_every / elapsed(_time);
 
-        double eta = (_buffer_size - _buffer_i) / _speed;
-
-        Rprintf(generated_bars[100 * _buffer_i / _buffer_size].data(), _speed, eta);
+        Rprintf(generated_bars[100 * (_statistic_ptr - _statistic_begin) / (_statistic_end - _statistic_begin)].data(), _speed, (_statistic_end - _statistic_ptr) / _speed);
     }
 }
 
