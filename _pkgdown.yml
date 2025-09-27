@@ -30,7 +30,6 @@ reference:
   - contents:
     - Difference
     - Wilcoxon
-    - ScoreSum
     - AnsariBradley
     - SiegelTukey
     - RatioMeanDeviance

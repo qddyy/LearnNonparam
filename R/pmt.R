@@ -4,7 +4,6 @@ implemented <- list(
 
     twosample.difference = Difference,
     twosample.wilcoxon = Wilcoxon,
-    twosample.scoresum = ScoreSum,
     twosample.ansari = AnsariBradley,
     twosample.siegel = SiegelTukey,
     twosample.rmd = RatioMeanDeviance,
