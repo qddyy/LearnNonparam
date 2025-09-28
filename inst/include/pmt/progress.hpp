@@ -137,7 +137,7 @@ void Stat<false>::_clear_progress() { }
 template <>
 void Stat<true>::_init_progress()
 {
-    _progress_every = _speed * 5;
+    _progress_every = std::max(1.0, _speed * 8);
     _progress_i = 0;
 
     _time = std::chrono::steady_clock::now();
