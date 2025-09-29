@@ -54,6 +54,7 @@
 <span>  n_permu <span class="op">=</span> <span class="fl">10000</span>,</span>
 <span>  name <span class="op">=</span> <span class="st">"User-Defined Permutation Test"</span>,</span>
 <span>  alternative <span class="op">=</span> <span class="cn">NULL</span>,</span>
+<span>  quickr <span class="op">=</span> <span class="cn">FALSE</span>,</span>
 <span>  depends <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  plugins <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span>,</span>
 <span>  includes <span class="op">=</span> <span class="fu"><a href="https://rdrr.io/r/base/character.html" class="external-link">character</a></span><span class="op">(</span><span class="op">)</span></span>
@@ -102,6 +103,10 @@
 <dd><p>character strings specifying the name of the test and the alternative hypothesis, used for printing purposes only.</p></dd>
 
 
+<dt id="arg-quickr">quickr<a class="anchor" aria-label="anchor" href="#arg-quickr"></a></dt>
+<dd><p>a logical indicating whether to use <code><a href="https://rdrr.io/pkg/quickr/man/quick.html" class="external-link">quickr::quick()</a></code> to accelerate <code>statistic</code>. See details.</p></dd>
+
+
 <dt id="arg-depends-plugins-includes">depends, plugins, includes<a class="anchor" aria-label="anchor" href="#arg-depends-plugins-includes"></a></dt>
 <dd><p>passed to <code><a href="https://rdrr.io/pkg/Rcpp/man/cppFunction.html" class="external-link">Rcpp::cppFunction()</a></code>.</p></dd>
 
@@ -114,14 +119,17 @@
     </div>
     <div class="section level2">
     <h2 id="details">Details<a class="anchor" aria-label="anchor" href="#details"></a></h2>
-    <p>The test statistic can be defined using either R or Rcpp, with the <code>statistic</code> parameter specified as:</p><ul><li><p>R: a function returning a closure that returns a double.</p></li>
-<li><p>Rcpp: a character string defining a captureless lambda (since C++11) returning another lambda that captures by value, accepts parameters of the same type, and returns a double.</p></li>
-</ul><p>The purpose of this design is to pre-calculate certain constants that remain invariant during permutation.</p>
-<p>When using Rcpp, the parameters for different <code>method</code> are listed as follows. Note that the names can be customized, and the types can be replaced with <code>auto</code> (thanks to the support for generic lambdas in C++14). See examples.</p><table class="table table"><tr><td><code>method</code></td><td>Parameter 1</td><td>Parameter 2</td></tr><tr><td><code>"twosample"</code></td><td><code>const NumericVector&amp; sample_1</code></td><td><code>const NumericVector&amp; sample_2</code></td></tr><tr><td><code>"distribution"</code></td><td><code>const NumericVector&amp; cumulative_prob_1</code></td><td><code>const NumericVector&amp; cumulative_prob_2</code></td></tr><tr><td><code>"association"</code></td><td><code>const NumericVector&amp; sample_1</code></td><td><code>const NumericVector&amp; sample_2</code></td></tr><tr><td><code>"paired"</code></td><td><code>const NumericVector&amp; sample_1</code></td><td><code>const NumericVector&amp; sample_2</code></td></tr><tr><td><code>"ksample"</code></td><td><code>const NumericVector&amp; combined_sample</code></td><td><code>const IntegerVector&amp; one_based_group_index</code></td></tr><tr><td><code>"rcbd"</code></td><td><code>const NumericMatrix&amp; block_as_column_data</code></td><td></td></tr><tr><td><code>"table"</code></td><td><code>const IntegerMatrix&amp; contingency_table</code></td><td></td></tr></table><p>When using R, the parameters should be the R equivalents of these.</p>
+    <p>The test statistic can be defined using either R or Rcpp, with the <code>statistic</code> parameter specified as:</p><ul><li><p><strong>R</strong>: a closure returning one of</p><ul><li><p>a double (the test statistic).</p></li>
+<li><p>a closure returning a double.</p></li>
+</ul></li>
+<li><p><strong>Rcpp</strong>: a character string defining a captureless lambda (since C++11) returning another lambda that captures by value, accepts parameters of the same type, and returns a double.</p></li>
+</ul><p>This design aims to pre-calculate potential constants that remain invariant during permutation.</p>
+<p>When using Rcpp, the parameters for different <code>method</code> are listed as follows. Note that the names can be customized, and the types can be replaced with <code>auto</code> (thanks to the support for generic lambdas in C++14). See examples.</p><table class="table table"><tr><td><code>method</code></td><td>Parameter 1</td><td>Parameter 2</td></tr><tr><td><code>"twosample"</code></td><td><code>const NumericVector&amp; sample_1</code></td><td><code>const NumericVector&amp; sample_2</code></td></tr><tr><td><code>"distribution"</code></td><td><code>const NumericVector&amp; cumulative_prob_1</code></td><td><code>const NumericVector&amp; cumulative_prob_2</code></td></tr><tr><td><code>"association"</code></td><td><code>const NumericVector&amp; sample_1</code></td><td><code>const NumericVector&amp; sample_2</code></td></tr><tr><td><code>"paired"</code></td><td><code>const NumericVector&amp; sample_1</code></td><td><code>const NumericVector&amp; sample_2</code></td></tr><tr><td><code>"ksample"</code></td><td><code>const NumericVector&amp; combined_sample</code></td><td><code>const IntegerVector&amp; one_based_group_index</code></td></tr><tr><td><code>"rcbd"</code></td><td><code>const NumericMatrix&amp; block_as_column_data</code></td><td></td></tr><tr><td><code>"table"</code></td><td><code>const IntegerMatrix&amp; contingency_table</code></td><td></td></tr></table><p>When using R, <code>statistic</code> and the parameters should be the R equivalents of the above. If no constants exist during permutation, <code>statistic</code> may simply be an R closure returning a double.</p>
+<p>If <code>quickr = TRUE</code> and <code>statistic</code> returns a double, it will be compiled to Fortran via <code><a href="https://rdrr.io/pkg/quickr/man/quick.html" class="external-link">quickr::quick()</a></code> with <code><a href="https://rdrr.io/r/base/declare.html" class="external-link">base::declare()</a></code> calls for all arguments inserted automatically. Otherwise, <code>statistic</code> will be compiled using <code><a href="https://rdrr.io/r/compiler/compile.html" class="external-link">compiler::cmpfun()</a></code>.</p>
     </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-    <p>To improve performance when calling R functions from C++, this package repeatedly evaluates the function body of the inner closure in the same environment, where formal arguments are pre-assigned to the data and the enclosing environment is that of the closure. This imposes the following restrictions on the inner closure when <code>statistic</code> is written in R:</p><ul><li><p>Do not reassign the inner closure’s formal arguments or any pre-computed symbols in the outer closure.</p></li>
+    <p>To improve performance when calling R closures from C++, this package repeatedly evaluates the closure's body in an environment whose enclosing environment is the closure’s own, with its formal arguments pre-assigned to the data. This imposes the following restrictions on the closure returning the test statistic when <code>statistic</code> is written in R:</p><ul><li><p>Do not re-assign its formal arguments or any pre-computed symbols in its environment.</p></li>
 <li><p>Do not use default arguments or variadic arguments.</p></li>
 </ul><p>It's also worth noting that the data is permuted in-place. Therefore, modifications to the data within <code>statistic</code> may lead to incorrect results. It is recommended to avoid modifying the data when using R and pass const references as in the table above when using Rcpp.</p>
     </div>
@@ -203,7 +211,7 @@
 <span class="r-in"><span><span class="va">t</span> <span class="op">&lt;-</span> <span class="fu">define_pmt</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    method <span class="op">=</span> <span class="st">"twosample"</span>, rejection <span class="op">=</span> <span class="st">"&lt;"</span>,</span></span>
 <span class="r-in"><span>    scoring <span class="op">=</span> <span class="fu">base</span><span class="fu">::</span><span class="va"><a href="https://rdrr.io/r/base/rank.html" class="external-link">rank</a></span>, <span class="co"># equivalent to "rank"</span></span></span>
-<span class="r-in"><span>    statistic <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">...</span><span class="op">)</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
+<span class="r-in"><span>    statistic <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="op">)</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span> </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>  	 User-Defined Permutation Test </span>
@@ -237,6 +245,10 @@
 <span class="r-in"><span>    <span class="op">}</span></span></span>
 <span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
+<span class="r-in"><span><span class="va">quickr</span> <span class="op">&lt;-</span> <span class="fu">define_pmt</span><span class="op">(</span></span></span>
+<span class="r-in"><span>    method <span class="op">=</span> <span class="st">"twosample"</span>, n_permu <span class="op">=</span> <span class="fl">1e5</span>, quickr <span class="op">=</span> <span class="cn">TRUE</span>,</span></span>
+<span class="r-in"><span>    statistic <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span></span>
+<span class="r-in"><span><span class="op">)</span></span></span>
 <span class="r-in"><span></span></span>
 <span class="r-in"><span><span class="va">rcpp</span> <span class="op">&lt;-</span> <span class="fu">define_pmt</span><span class="op">(</span></span></span>
 <span class="r-in"><span>    method <span class="op">=</span> <span class="st">"twosample"</span>, n_permu <span class="op">=</span> <span class="fl">1e5</span>,</span></span>
@@ -264,10 +276,14 @@
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>LearnNonparam.pmt_progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">r</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.086   0.000   0.087 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.085   0.000   0.085 </span>
+<span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">quickr</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Loading required namespace: quickr</span>
+<span class="r-err co"><span class="r-pr">#&gt;</span> <span class="error">Error:</span> object 'closure_' not found</span>
+<span class="r-msg co"><span class="r-pr">#&gt;</span> Timing stopped at: 0.026 0.001 0.029</span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">rcpp</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.007   0.000   0.008 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.008   0.001   0.008 </span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
