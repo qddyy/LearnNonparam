@@ -1,3 +1,21 @@
+# LearnNonparam 1.3.0
+
+- R side
+  - Added several two-sample distribution tests: `distribution.ks`, `distribution.kuiper`, `distribution.cvm`, `distribution.ad`
+  - **(Breaking)** Removed `twosample.scoresum` and `twosample.ks`
+  - **(Breaking)** Modified two parameters in `define_pmt`: renamed `inherit` to `method`; updated the `rejection` parameter to accept only `"<>"`, `"<"`, or `">"`
+  - Added `quickr` support in `define_pmt`
+  - Introduced an `autoplot` method for the `PermuTest` class
+  - Fixed an issue where p-value calculations were affected by double-precision floating-point errors
+  - Resolved an edge-case issue in `RCBDTest` that caused errors during score computation
+
+- C++ side
+  - Implemented a new progress bar with additional features: speed and ETA
+  - Significantly improved the efficiency of calling R functions from C++
+  - Enhanced permutation efficiency in two-sample and paired two-sample tests using branchless swap techniques
+  - Removed bounds checking during permutation
+  - Fixed an issue in `define_pmt` where `statistic` could not be a mutable lambda
+
 # LearnNonparam 1.2.9
 
 - Fixed incorrect permutation statistic computation due to deep copy behavior of `Rcpp::Language`

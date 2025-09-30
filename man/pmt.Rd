@@ -93,7 +93,7 @@ When using R, \code{statistic} and the parameters should be the R equivalents of
 If \code{quickr = TRUE} and \code{statistic} returns a double, it will be compiled to Fortran via \code{\link[quickr:quick]{quickr::quick()}} with \code{\link[base:declare]{base::declare()}} calls for all arguments inserted automatically. Otherwise, \code{statistic} will be compiled using \code{\link[compiler:compile]{compiler::cmpfun()}}.
 }
 \note{
-To improve performance when calling R closures from C++, this package repeatedly evaluates the closure's body in an environment whose enclosing environment is the closure’s own, with its formal arguments pre-assigned to the data. This imposes the following restrictions on the closure returning the test statistic when \code{statistic} is written in R:
+To improve performance when calling R closures from C++, this package repeatedly evaluates the closure's body in an environment whose enclosing environment is the closure's own, with its formal arguments pre-assigned to the data. This imposes the following restrictions on the closure returning the test statistic when \code{statistic} is written in R:
 \itemize{
 \item Do not re-assign its formal arguments or any pre-computed symbols in its environment.
 \item Do not use default arguments or variadic arguments.

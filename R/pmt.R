@@ -139,7 +139,7 @@ pmts <- function(
 #' If `quickr = TRUE` and `statistic` returns a double, it will be compiled to Fortran via [quickr::quick()] with [base::declare()] calls for all arguments inserted automatically. Otherwise, `statistic` will be compiled using [compiler::cmpfun()].
 #' 
 #' @note
-#' To improve performance when calling R closures from C++, this package repeatedly evaluates the closure's body in an environment whose enclosing environment is the closure’s own, with its formal arguments pre-assigned to the data. This imposes the following restrictions on the closure returning the test statistic when `statistic` is written in R:
+#' To improve performance when calling R closures from C++, this package repeatedly evaluates the closure's body in an environment whose enclosing environment is the closure's own, with its formal arguments pre-assigned to the data. This imposes the following restrictions on the closure returning the test statistic when `statistic` is written in R:
 #' - Do not re-assign its formal arguments or any pre-computed symbols in its environment.
 #' - Do not use default arguments or variadic arguments.
 #' 
