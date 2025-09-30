@@ -129,7 +129,7 @@
     </div>
     <div class="section level2">
     <h2 id="note">Note<a class="anchor" aria-label="anchor" href="#note"></a></h2>
-    <p>To improve performance when calling R closures from C++, this package repeatedly evaluates the closure's body in an environment whose enclosing environment is the closure’s own, with its formal arguments pre-assigned to the data. This imposes the following restrictions on the closure returning the test statistic when <code>statistic</code> is written in R:</p><ul><li><p>Do not re-assign its formal arguments or any pre-computed symbols in its environment.</p></li>
+    <p>To improve performance when calling R closures from C++, this package repeatedly evaluates the closure's body in an environment whose enclosing environment is the closure's own, with its formal arguments pre-assigned to the data. This imposes the following restrictions on the closure returning the test statistic when <code>statistic</code> is written in R:</p><ul><li><p>Do not re-assign its formal arguments or any pre-computed symbols in its environment.</p></li>
 <li><p>Do not use default arguments or variadic arguments.</p></li>
 </ul><p>It's also worth noting that the data is permuted in-place. Therefore, modifications to the data within <code>statistic</code> may lead to incorrect results. It is recommended to avoid modifying the data when using R and pass const references as in the table above when using Rcpp.</p>
     </div>
@@ -299,13 +299,13 @@
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>LearnNonparam.pmt_progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span></span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">r</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.111   0.000   0.111 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.114   0.000   0.114 </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">quickr</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    0.03    0.00    0.03 </span>
 <span class="r-in"><span><span class="fu"><a href="https://rdrr.io/r/base/system.time.html" class="external-link">system.time</a></span><span class="op">(</span><span class="va">rcpp</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">)</span></span></span>
 <span class="r-out co"><span class="r-pr">#&gt;</span>    user  system elapsed </span>
-<span class="r-out co"><span class="r-pr">#&gt;</span>   0.007   0.000   0.007 </span>
+<span class="r-out co"><span class="r-pr">#&gt;</span>   0.008   0.000   0.008 </span>
 <span class="r-in"><span><span class="co"># }</span></span></span>
 <span class="r-in"><span></span></span>
 </code></pre></div>
