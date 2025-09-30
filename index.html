@@ -26,7 +26,7 @@
 
     <a class="navbar-brand me-2" href="index.html">LearnNonparam</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.9</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -116,7 +116,7 @@
 <div class="sourceCode" id="cb10"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/get_theme.html" class="external-link">theme_set</a></span><span class="op">(</span><span class="fu">ggplot2</span><span class="fu">::</span><span class="fu"><a href="https://ggplot2.tidyverse.org/reference/ggtheme.html" class="external-link">theme_minimal</a></span><span class="op">(</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
-<span><span class="va">t</span><span class="op">$</span><span class="fu">plot</span><span class="op">(</span>style <span class="op">=</span> <span class="st">"ggplot2"</span>, binwidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span></span></code></pre></div>
+<span><span class="va">t</span><span class="op">$</span><span class="fu">plot</span><span class="op">(</span>style <span class="op">=</span> <span class="st">"ggplot2"</span>, binwidth <span class="op">=</span> <span class="fl">1</span><span class="op">)</span> <span class="co"># or ggplot2::autoplot(t, binwidth = 1)</span></span></code></pre></div>
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/plot-dark.svg"><img src="reference/figures/README/plot.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
 <p><img src="./reference/figures/README/histogram.svg" width="100%" style="display: block; margin: auto;"></p>
 </li>
@@ -137,9 +137,9 @@ See <code>pmts()</code> for tests implemented in this package.
 <div class="kable-table">
 <table class="table">
 <colgroup>
-<col width="33%">
-<col width="33%">
-<col width="33%">
+<col width="23%">
+<col width="21%">
+<col width="55%">
 </colgroup>
 <thead><tr class="header">
 <th align="left">key</th>
@@ -168,79 +168,89 @@ See <code>pmts()</code> for tests implemented in this package.
 <td align="left">Two-Sample Wilcoxon Test</td>
 </tr>
 <tr class="odd">
-<td align="left">twosample.scoresum</td>
-<td align="left">ScoreSum</td>
-<td align="left">Two-Sample Test Based on Sum of Scores</td>
-</tr>
-<tr class="even">
 <td align="left">twosample.ansari</td>
 <td align="left">AnsariBradley</td>
 <td align="left">Ansari-Bradley Test</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">twosample.siegel</td>
 <td align="left">SiegelTukey</td>
 <td align="left">Siegel-Tukey Test</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">twosample.rmd</td>
 <td align="left">RatioMeanDeviance</td>
 <td align="left">Ratio Mean Deviance Test</td>
 </tr>
-<tr class="odd">
-<td align="left">twosample.ks</td>
+<tr class="even">
+<td align="left">distribution.ks</td>
 <td align="left">KolmogorovSmirnov</td>
 <td align="left">Two-Sample Kolmogorov-Smirnov Test</td>
 </tr>
+<tr class="odd">
+<td align="left">distribution.kuiper</td>
+<td align="left">Kuiper</td>
+<td align="left">Two-Sample Kuiper Test</td>
+</tr>
 <tr class="even">
-<td align="left">ksample.oneway</td>
-<td align="left">OneWay</td>
-<td align="left">One-Way Test for Equal Means</td>
+<td align="left">distribution.cvm</td>
+<td align="left">CramerVonMises</td>
+<td align="left">Two-Sample Cramer-Von Mises Test</td>
 </tr>
 <tr class="odd">
-<td align="left">ksample.kw</td>
-<td align="left">KruskalWallis</td>
-<td align="left">Kruskal-Wallis Test</td>
+<td align="left">distribution.ad</td>
+<td align="left">AndersonDarling</td>
+<td align="left">Two-Sample Anderson-Darling Test</td>
 </tr>
 <tr class="even">
-<td align="left">ksample.jt</td>
-<td align="left">JonckheereTerpstra</td>
-<td align="left">Jonckheere-Terpstra Test</td>
+<td align="left">association.corr</td>
+<td align="left">Correlation</td>
+<td align="left">Test for Association Between Paired Samples</td>
 </tr>
 <tr class="odd">
-<td align="left">multcomp.studentized</td>
-<td align="left">Studentized</td>
-<td align="left">Multiple Comparison Based on Studentized Statistic</td>
-</tr>
-<tr class="even">
 <td align="left">paired.sign</td>
 <td align="left">Sign</td>
 <td align="left">Two-Sample Sign Test</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">paired.difference</td>
 <td align="left">PairedDifference</td>
 <td align="left">Paired Comparison Based on Differences</td>
 </tr>
+<tr class="odd">
+<td align="left">ksample.oneway</td>
+<td align="left">OneWay</td>
+<td align="left">One-Way Test for Equal Means</td>
+</tr>
 <tr class="even">
+<td align="left">ksample.kw</td>
+<td align="left">KruskalWallis</td>
+<td align="left">Kruskal-Wallis Test</td>
+</tr>
+<tr class="odd">
+<td align="left">ksample.jt</td>
+<td align="left">JonckheereTerpstra</td>
+<td align="left">Jonckheere-Terpstra Test</td>
+</tr>
+<tr class="even">
+<td align="left">multcomp.studentized</td>
+<td align="left">Studentized</td>
+<td align="left">Multiple Comparison Based on Studentized Statistic</td>
+</tr>
+<tr class="odd">
 <td align="left">rcbd.oneway</td>
 <td align="left">RCBDOneWay</td>
 <td align="left">One-Way Test for Equal Means in RCBD</td>
 </tr>
-<tr class="odd">
+<tr class="even">
 <td align="left">rcbd.friedman</td>
 <td align="left">Friedman</td>
 <td align="left">Friedman Test</td>
 </tr>
-<tr class="even">
+<tr class="odd">
 <td align="left">rcbd.page</td>
 <td align="left">Page</td>
 <td align="left">Page Test</td>
-</tr>
-<tr class="odd">
-<td align="left">association.corr</td>
-<td align="left">Correlation</td>
-<td align="left">Test for Association Between Paired Samples</td>
 </tr>
 <tr class="even">
 <td align="left">table.chisq</td>
@@ -260,7 +270,7 @@ See <code>pmts()</code> for tests implemented in this package.
 <div class="sourceCode" id="cb13"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t_custom</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pmt.html">define_pmt</a></span><span class="op">(</span></span>
 <span>    <span class="co"># this is a two-sample permutation test</span></span>
-<span>    inherit <span class="op">=</span> <span class="st">"twosample"</span>,</span>
+<span>    method <span class="op">=</span> <span class="st">"twosample"</span>,</span>
 <span>    statistic <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span>
 <span>        <span class="co"># (optional) pre-calculate certain constants that remain invariant during permutation</span></span>
 <span>        <span class="va">m</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span></span>
@@ -269,13 +279,23 @@ See <code>pmts()</code> for tests implemented in this package.
 <span>        <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">/</span> <span class="va">m</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">/</span> <span class="va">n</span></span>
 <span>    <span class="op">}</span>,</span>
 <span>    <span class="co"># reject the null hypothesis when the test statistic is too large or too small</span></span>
-<span>    rejection <span class="op">=</span> <span class="st">"lr"</span>, n_permu <span class="op">=</span> <span class="fl">1e5</span></span>
+<span>    rejection <span class="op">=</span> <span class="st">"&lt;&gt;"</span>, n_permu <span class="op">=</span> <span class="fl">1e5</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/define_r-dark.svg"><img src="reference/figures/README/define_r.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
-<p>Also, the statistic can be written in C++. Leveraging Rcpp sugars and C++14 features, only minor modifications are needed to make it compatible with C++ syntax.</p>
+<p>For R &gt;= 4.4.0, the <a href="https://CRAN.R-project.org/package=quickr" class="external-link">quickr</a> package can be used to accelerate <code>statistic</code>. However, this results in repeated crossings of the R-Fortran boundary and makes pre-calculation of constants impossible.</p>
 <div class="sourceCode" id="cb14"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="va">t_quickr</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pmt.html">define_pmt</a></span><span class="op">(</span></span>
+<span>    method <span class="op">=</span> <span class="st">"twosample"</span>, rejection <span class="op">=</span> <span class="st">"&lt;&gt;"</span>, n_permu <span class="op">=</span> <span class="fl">1e5</span>,</span>
+<span>    statistic <span class="op">=</span> <span class="kw">function</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span> <span class="op">{</span></span>
+<span>        <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span> <span class="op">-</span> <span class="fu"><a href="https://rdrr.io/r/base/sum.html" class="external-link">sum</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span> <span class="op">/</span> <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span></span>
+<span>    <span class="op">}</span>,</span>
+<span>    quickr <span class="op">=</span> <span class="cn">TRUE</span></span>
+<span><span class="op">)</span></span></code></pre></div>
+<p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/define_quickr-dark.svg"><img src="reference/figures/README/define_quickr.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
+<p>In cases where both pre-calculation and computational efficiency are required, the statistic can be written in C++. Leveraging Rcpp sugars and C++14 features, only minor modifications are needed to make it compatible with C++ syntax.</p>
+<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">t_cpp</span> <span class="op">&lt;-</span> <span class="fu"><a href="reference/pmt.html">define_pmt</a></span><span class="op">(</span></span>
-<span>    inherit <span class="op">=</span> <span class="st">"twosample"</span>, rejection <span class="op">=</span> <span class="st">"lr"</span>, n_permu <span class="op">=</span> <span class="fl">1e5</span>,</span>
+<span>    method <span class="op">=</span> <span class="st">"twosample"</span>, rejection <span class="op">=</span> <span class="st">"&lt;&gt;"</span>, n_permu <span class="op">=</span> <span class="fl">1e5</span>,</span>
 <span>    statistic <span class="op">=</span> <span class="st">"[](const auto&amp; x, const auto&amp; y) {</span></span>
 <span><span class="st">        auto m = x.length();</span></span>
 <span><span class="st">        auto n = y.length();</span></span>
@@ -285,16 +305,20 @@ See <code>pmts()</code> for tests implemented in this package.
 <span><span class="st">    }"</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/define_cpp-dark.svg"><img src="reference/figures/README/define_cpp.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
-<p>It’s easy to check that <code>t_custom</code> and <code>t_cpp</code> are equivalent:</p>
-<div class="sourceCode" id="cb15"><pre class="downlit sourceCode r">
+<p>It’s easy to check that <code>t_custom</code>, <code>t_quickr</code> and <code>t_cpp</code> are equivalent:</p>
+<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">x</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, mean <span class="op">=</span> <span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">y</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/stats/Normal.html" class="external-link">rnorm</a></span><span class="op">(</span><span class="fl">10</span>, mean <span class="op">=</span> <span class="fl">5</span><span class="op">)</span></span></code></pre></div>
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/prepare_data-dark.svg"><img src="reference/figures/README/prepare_data.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
-<div class="sourceCode" id="cb16"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">t_custom</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/t_custom_res-dark.svg"><img src="reference/figures/README/t_custom_res.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
-<div class="sourceCode" id="cb17"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
+<span><span class="va">t_quickr</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
+<p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/t_quickr_res-dark.svg"><img src="reference/figures/README/t_quickr_res.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
+<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="fu"><a href="https://rdrr.io/r/base/Random.html" class="external-link">set.seed</a></span><span class="op">(</span><span class="fl">0</span><span class="op">)</span></span>
 <span><span class="va">t_cpp</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span><span class="op">$</span><span class="fu">print</span><span class="op">(</span><span class="op">)</span></span></code></pre></div>
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/t_cpp_res-dark.svg"><img src="reference/figures/README/t_cpp_res.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
@@ -303,28 +327,29 @@ See <code>pmts()</code> for tests implemented in this package.
 <h2 id="performance">Performance<a class="anchor" aria-label="anchor" href="#performance"></a>
 </h2>
 <p><a href="https://CRAN.R-project.org/package=coin" class="external-link">coin</a> is a commonly used R package for performing permutation tests. Below is a benchmark:</p>
-<div class="sourceCode" id="cb18"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb20"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="kw"><a href="https://rdrr.io/r/base/library.html" class="external-link">library</a></span><span class="op">(</span><span class="va"><a href="http://coin.r-forge.r-project.org" class="external-link">coin</a></span><span class="op">)</span></span>
 <span></span>
 <span><span class="va">data</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span></span>
 <span><span class="va">group</span> <span class="op">&lt;-</span> <span class="fu"><a href="https://rdrr.io/r/base/factor.html" class="external-link">factor</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/c.html" class="external-link">c</a></span><span class="op">(</span><span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"x"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">x</span><span class="op">)</span><span class="op">)</span>, <span class="fu"><a href="https://rdrr.io/r/base/rep.html" class="external-link">rep</a></span><span class="op">(</span><span class="st">"y"</span>, <span class="fu"><a href="https://rdrr.io/r/base/length.html" class="external-link">length</a></span><span class="op">(</span><span class="va">y</span><span class="op">)</span><span class="op">)</span><span class="op">)</span><span class="op">)</span></span>
 <span></span>
 <span><span class="fu"><a href="https://rdrr.io/r/base/options.html" class="external-link">options</a></span><span class="op">(</span>LearnNonparam.pmt_progress <span class="op">=</span> <span class="cn">FALSE</span><span class="op">)</span></span>
-<span><span class="va">benchmark</span> <span class="op">&lt;-</span> <span class="fu">microbenchmark</span><span class="fu">::</span><span class="fu">microbenchmark</span><span class="op">(</span></span>
-<span>    R <span class="op">=</span> <span class="va">t_custom</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>,</span>
+<span><span class="va">benchmark</span> <span class="op">&lt;-</span> <span class="fu">bench</span><span class="fu">::</span><span class="fu">mark</span><span class="op">(</span></span>
+<span>    pure_R <span class="op">=</span> <span class="va">t_custom</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>,</span>
+<span>    quickr <span class="op">=</span> <span class="va">t_quickr</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>,</span>
 <span>    Rcpp <span class="op">=</span> <span class="va">t_cpp</span><span class="op">$</span><span class="fu">test</span><span class="op">(</span><span class="va">x</span>, <span class="va">y</span><span class="op">)</span>,</span>
 <span>    coin <span class="op">=</span> <span class="fu">wilcox_test</span><span class="op">(</span><span class="va">data</span> <span class="op">~</span> <span class="va">group</span>, distribution <span class="op">=</span> <span class="fu">approximate</span><span class="op">(</span>nresample <span class="op">=</span> <span class="fl">1e5</span>, parallel <span class="op">=</span> <span class="st">"no"</span><span class="op">)</span><span class="op">)</span></span>
 <span><span class="op">)</span></span></code></pre></div>
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/benchmark-dark.svg"><img src="reference/figures/README/benchmark.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
-<div class="sourceCode" id="cb19"><pre class="downlit sourceCode r">
+<div class="sourceCode" id="cb21"><pre class="downlit sourceCode r">
 <code class="sourceCode R"><span><span class="va">benchmark</span></span></code></pre></div>
 <p><picture><source media="(prefers-color-scheme: dark)" srcset="reference/figures/README/benchmark_res-dark.svg"><img src="reference/figures/README/benchmark_res.svg" width="100%" style="display: block; margin: auto;"></source></picture></p>
-<p>It can be seen that C++ brings significantly better performance than pure R, even surpassing the <code>coin</code> package (under sequential execution). However, all tests in this package are currently written in R with no plans for migration to C++ in the future. This is because the primary goal of this package is not to maximize performance but to offer a flexible framework for permutation tests.</p>
+<p>It can be seen that C++ brings significantly better performance than pure R, which enables it to even surpass the coin package in its no-parallelization setting. However, all tests in this package are currently written in pure R with no plans for migration to C++ in the future. This is because the primary goal of this package is not to maximize performance but to offer a flexible framework for permutation tests.</p>
 </div>
 <div class="section level2">
 <h2 id="references">References<a class="anchor" aria-label="anchor" href="#references"></a>
 </h2>
-<div id="refs" class="references csl-bib-body hanging-indent" entry-spacing="0">
+<div id="refs" class="references csl-bib-body hanging-indent">
 <div id="ref-higgins2004" class="csl-entry">
 Higgins, J. J. 2004. <em>An Introduction to Modern Nonparametric Statistics</em>. Duxbury Advanced Series. Brooks/Cole.
 </div>

@@ -7,7 +7,7 @@
 
     <a class="navbar-brand me-2" href="../index.html">LearnNonparam</a>
 
-    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.2.9</small>
+    <small class="nav-text text-muted me-auto" data-bs-toggle="tooltip" data-bs-placement="bottom" title="">1.3.0</small>
 
 
     <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbar" aria-controls="navbar" aria-expanded="false" aria-label="Toggle navigation">
@@ -31,6 +31,31 @@
       <small>Source: <a href="https://github.com/qddyy/LearnNonparam/blob/main/NEWS.md" class="external-link"><code>NEWS.md</code></a></small>
     </div>
 
+    <div class="section level2">
+<h2 class="pkg-version" data-toc-text="1.3.0" id="learnnonparam-130">LearnNonparam 1.3.0<a class="anchor" aria-label="anchor" href="#learnnonparam-130"></a></h2>
+<ul><li>R side
+<ul><li>Added several two-sample distribution tests: <code>distribution.ks</code>, <code>distribution.kuiper</code>, <code>distribution.cvm</code>, <code>distribution.ad</code>
+</li>
+<li>
+<strong>(Breaking)</strong> Removed <code>twosample.scoresum</code> and <code>twosample.ks</code>
+</li>
+<li>
+<strong>(Breaking)</strong> Modified two parameters in <code>define_pmt</code>: renamed <code>inherit</code> to <code>method</code>; updated the <code>rejection</code> parameter to accept only <code>"&lt;&gt;"</code>, <code>"&lt;"</code>, or <code>"&gt;"</code>
+</li>
+<li>Added <code>quickr</code> support in <code>define_pmt</code>
+</li>
+<li>Introduced an <code>autoplot</code> method for the <code>PermuTest</code> class</li>
+<li>Fixed an issue where p-value calculations were affected by double-precision floating-point errors</li>
+<li>Resolved an edge-case issue in <code>RCBDTest</code> that caused errors during score computation</li>
+</ul></li>
+<li>C++ side
+<ul><li>Implemented a new progress bar with additional features: speed and ETA</li>
+<li>Significantly improved the efficiency of calling R functions from C++</li>
+<li>Enhanced permutation efficiency in two-sample and paired two-sample tests using branchless swap techniques</li>
+<li>Removed bounds checking during permutation</li>
+<li>Fixed an issue in <code>define_pmt</code> where <code>statistic</code> could not be a mutable lambda</li>
+</ul></li>
+</ul></div>
     <div class="section level2">
 <h2 class="pkg-version" data-toc-text="1.2.9" id="learnnonparam-129">LearnNonparam 1.2.9<a class="anchor" aria-label="anchor" href="#learnnonparam-129"></a></h2><p class="text-muted">CRAN release: 2025-06-02</p>
 <ul><li>Fixed incorrect permutation statistic computation due to deep copy behavior of <code>Rcpp::Language</code>
