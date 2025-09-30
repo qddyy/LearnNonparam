@@ -18,6 +18,7 @@ Imports:
     graphics,
     compiler
 Suggests: 
+    quickr,
     ggplot2
 Encoding: UTF-8
 LazyData: true

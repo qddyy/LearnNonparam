@@ -41,7 +41,7 @@ CDF <- R6Class(
                 stop("Must provide a sample before calling the 'plot' method")
             } else if (match.arg(style) == "graphics") {
                 private$.plot()
-            } else if (requireNamespace("ggplot2", quietly = FALSE)) {
+            } else if (requireNamespace("ggplot2")) {
                 print(private$.autoplot())
             }
 

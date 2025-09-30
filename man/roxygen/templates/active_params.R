@@ -1,1 +1,1 @@
-#' @field correct Whether to apply continuity correction.
+#' @field correct a logical indicating whether to apply continuity correction.

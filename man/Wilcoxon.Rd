@@ -29,7 +29,7 @@ pmt(
 \section{Active bindings}{
 \if{html}{\out{<div class="r6-active-bindings">}}
 \describe{
-\item{\code{correct}}{Whether to apply continuity correction.}
+\item{\code{correct}}{a logical indicating whether to apply continuity correction.}
 }
 \if{html}{\out{</div>}}
 }

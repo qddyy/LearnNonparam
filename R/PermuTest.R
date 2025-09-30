@@ -97,7 +97,7 @@ PermuTest <- R6Class(
                 stop("The 'plot' method only works if 'type' is set to 'permu'")
             } else if (match.arg(style) == "graphics") {
                 private$.plot(...)
-            } else if (requireNamespace("ggplot2", quietly = FALSE)) {
+            } else if (requireNamespace("ggplot2")) {
                 print(private$.autoplot(...))
             }
 

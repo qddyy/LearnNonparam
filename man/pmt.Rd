@@ -22,6 +22,7 @@ define_pmt(
   n_permu = 10000,
   name = "User-Defined Permutation Test",
   alternative = NULL,
+  quickr = FALSE,
   depends = character(),
   plugins = character(),
   includes = character()
@@ -48,6 +49,8 @@ define_pmt(
 
 \item{name, alternative}{character strings specifying the name of the test and the alternative hypothesis, used for printing purposes only.}
 
+\item{quickr}{a logical indicating whether to use \code{\link[quickr:quick]{quickr::quick()}} to accelerate \code{statistic}. See details.}
+
 \item{depends, plugins, includes}{passed to \code{\link[Rcpp:cppFunction]{Rcpp::cppFunction()}}.}
 }
 \value{
@@ -63,11 +66,15 @@ Construct test objects in a unified way.
 \details{
 The test statistic can be defined using either R or Rcpp, with the \code{statistic} parameter specified as:
 \itemize{
-\item R: a function returning a closure that returns a double.
-\item Rcpp: a character string defining a captureless lambda (since C++11) returning another lambda that captures by value, accepts parameters of the same type, and returns a double.
+\item \strong{R}: a closure returning one of
+\itemize{
+\item a double (the test statistic).
+\item a closure returning a double.
+}
+\item \strong{Rcpp}: a character string defining a captureless lambda (since C++11) returning another lambda that captures by value, accepts parameters of the same type, and returns a double.
 }
 
-The purpose of this design is to pre-calculate certain constants that remain invariant during permutation.
+This design aims to pre-calculate potential constants that remain invariant during permutation.
 
 When using Rcpp, the parameters for different \code{method} are listed as follows. Note that the names can be customized, and the types can be replaced with \code{auto} (thanks to the support for generic lambdas in C++14). See examples.\tabular{ccc}{
    \code{method} \tab Parameter 1 \tab Parameter 2 \cr
@@ -81,12 +88,14 @@ When using Rcpp, the parameters for different \code{method} are listed as follow
 }
 
 
-When using R, the parameters should be the R equivalents of these.
+When using R, \code{statistic} and the parameters should be the R equivalents of the above. If no constants exist during permutation, \code{statistic} may simply be an R closure returning a double.
+
+If \code{quickr = TRUE} and \code{statistic} returns a double, it will be compiled to Fortran via \code{\link[quickr:quick]{quickr::quick()}} with \code{\link[base:declare]{base::declare()}} calls for all arguments inserted automatically. Otherwise, \code{statistic} will be compiled using \code{\link[compiler:compile]{compiler::cmpfun()}}.
 }
 \note{
-To improve performance when calling R functions from C++, this package repeatedly evaluates the function body of the inner closure in the same environment, where formal arguments are pre-assigned to the data and the enclosing environment is that of the closure. This imposes the following restrictions on the inner closure when \code{statistic} is written in R:
+To improve performance when calling R closures from C++, this package repeatedly evaluates the closure's body in an environment whose enclosing environment is the closure’s own, with its formal arguments pre-assigned to the data. This imposes the following restrictions on the closure returning the test statistic when \code{statistic} is written in R:
 \itemize{
-\item Do not reassign the inner closure’s formal arguments or any pre-computed symbols in the outer closure.
+\item Do not re-assign its formal arguments or any pre-computed symbols in its environment.
 \item Do not use default arguments or variadic arguments.
 }
 
@@ -103,7 +112,7 @@ y <- rnorm(5, 1)
 t <- define_pmt(
     method = "twosample", rejection = "<",
     scoring = base::rank, # equivalent to "rank"
-    statistic = function(...) function(x, y) sum(x)
+    statistic = function(x, y) sum(x)
 )$test(x, y)$print()
 
 t$scoring <- function(x) qnorm(rank(x) / (length(x) + 1)) # equivalent to "vw"
@@ -122,6 +131,10 @@ r <- define_pmt(
     }
 )
 
+quickr <- define_pmt(
+    method = "twosample", n_permu = 1e5, quickr = TRUE,
+    statistic = function(x, y) sum(x) / length(x) - sum(y) / length(y)
+)
 
 rcpp <- define_pmt(
     method = "twosample", n_permu = 1e5,
@@ -146,8 +159,16 @@ rcpp <- define_pmt(
 #     }"
 # )
 
+set.seed(0)
+r$test(x, y)$print()
+set.seed(0)
+quickr$test(x, y)$print()
+set.seed(0)
+rcpp$test(x, y)$print()
+
 options(LearnNonparam.pmt_progress = FALSE)
 system.time(r$test(x, y))
+system.time(quickr$test(x, y))
 system.time(rcpp$test(x, y))
 }
 
