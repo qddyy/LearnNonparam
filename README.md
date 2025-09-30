@@ -105,7 +105,7 @@ library(LearnNonparam)
   ``` r
   ggplot2::theme_set(ggplot2::theme_minimal())
 
-  t$plot(style = "ggplot2", binwidth = 1)
+  t$plot(style = "ggplot2", binwidth = 1) # or ggplot2::autoplot(t, binwidth = 1)
   ```
 
   <picture>
@@ -148,21 +148,23 @@ pmts()
 | onesample.cdf | CDF | Inference on Cumulative Distribution Function |
 | twosample.difference | Difference | Two-Sample Test Based on Mean or Median |
 | twosample.wilcoxon | Wilcoxon | Two-Sample Wilcoxon Test |
-| twosample.scoresum | ScoreSum | Two-Sample Test Based on Sum of Scores |
 | twosample.ansari | AnsariBradley | Ansari-Bradley Test |
 | twosample.siegel | SiegelTukey | Siegel-Tukey Test |
 | twosample.rmd | RatioMeanDeviance | Ratio Mean Deviance Test |
-| twosample.ks | KolmogorovSmirnov | Two-Sample Kolmogorov-Smirnov Test |
+| distribution.ks | KolmogorovSmirnov | Two-Sample Kolmogorov-Smirnov Test |
+| distribution.kuiper | Kuiper | Two-Sample Kuiper Test |
+| distribution.cvm | CramerVonMises | Two-Sample Cramer-Von Mises Test |
+| distribution.ad | AndersonDarling | Two-Sample Anderson-Darling Test |
+| association.corr | Correlation | Test for Association Between Paired Samples |
+| paired.sign | Sign | Two-Sample Sign Test |
+| paired.difference | PairedDifference | Paired Comparison Based on Differences |
 | ksample.oneway | OneWay | One-Way Test for Equal Means |
 | ksample.kw | KruskalWallis | Kruskal-Wallis Test |
 | ksample.jt | JonckheereTerpstra | Jonckheere-Terpstra Test |
 | multcomp.studentized | Studentized | Multiple Comparison Based on Studentized Statistic |
-| paired.sign | Sign | Two-Sample Sign Test |
-| paired.difference | PairedDifference | Paired Comparison Based on Differences |
 | rcbd.oneway | RCBDOneWay | One-Way Test for Equal Means in RCBD |
 | rcbd.friedman | Friedman | Friedman Test |
 | rcbd.page | Page | Page Test |
-| association.corr | Correlation | Test for Association Between Paired Samples |
 | table.chisq | ChiSquare | Chi-Square Test on Contingency Table |
 
 </div>
@@ -179,7 +181,7 @@ two-sample Wilcoxon test as an example:
 ``` r
 t_custom <- define_pmt(
     # this is a two-sample permutation test
-    inherit = "twosample",
+    method = "twosample",
     statistic = function(x, y) {
         # (optional) pre-calculate certain constants that remain invariant during permutation
         m <- length(x)
@@ -188,7 +190,7 @@ t_custom <- define_pmt(
         function(x, y) sum(x) / m - sum(y) / n
     },
     # reject the null hypothesis when the test statistic is too large or too small
-    rejection = "lr", n_permu = 1e5
+    rejection = "<>", n_permu = 1e5
 )
 ```
 
@@ -197,13 +199,34 @@ t_custom <- define_pmt(
 <img src="man/figures/README/define_r.svg" width="100%" style="display: block; margin: auto;" />
 </picture>
 
-Also, the statistic can be written in C++. Leveraging Rcpp sugars and
-C++14 features, only minor modifications are needed to make it
+For R \>= 4.4.0, the [quickr](https://CRAN.R-project.org/package=quickr)
+package can be used to accelerate `statistic`. However, this results in
+repeated crossings of the R-Fortran boundary and makes pre-calculation
+of constants impossible.
+
+``` r
+t_quickr <- define_pmt(
+    method = "twosample", rejection = "<>", n_permu = 1e5,
+    statistic = function(x, y) {
+        sum(x) / length(x) - sum(y) / length(y)
+    },
+    quickr = TRUE
+)
+```
+
+<picture>
+<source media="(prefers-color-scheme: dark)" srcset="man/figures/README/define_quickr-dark.svg">
+<img src="man/figures/README/define_quickr.svg" width="100%" style="display: block; margin: auto;" />
+</picture>
+
+In cases where both pre-calculation and computational efficiency are
+required, the statistic can be written in C++. Leveraging Rcpp sugars
+and C++14 features, only minor modifications are needed to make it
 compatible with C++ syntax.
 
 ``` r
 t_cpp <- define_pmt(
-    inherit = "twosample", rejection = "lr", n_permu = 1e5,
+    method = "twosample", rejection = "<>", n_permu = 1e5,
     statistic = "[](const auto& x, const auto& y) {
         auto m = x.length();
         auto n = y.length();
@@ -219,7 +242,8 @@ t_cpp <- define_pmt(
 <img src="man/figures/README/define_cpp.svg" width="100%" style="display: block; margin: auto;" />
 </picture>
 
-It’s easy to check that `t_custom` and `t_cpp` are equivalent:
+It’s easy to check that `t_custom`, `t_quickr` and `t_cpp` are
+equivalent:
 
 ``` r
 x <- rnorm(10, mean = 0)
@@ -239,6 +263,16 @@ t_custom$test(x, y)$print()
 <picture>
 <source media="(prefers-color-scheme: dark)" srcset="man/figures/README/t_custom_res-dark.svg">
 <img src="man/figures/README/t_custom_res.svg" width="100%" style="display: block; margin: auto;" />
+</picture>
+
+``` r
+set.seed(0)
+t_quickr$test(x, y)$print()
+```
+
+<picture>
+<source media="(prefers-color-scheme: dark)" srcset="man/figures/README/t_quickr_res-dark.svg">
+<img src="man/figures/README/t_quickr_res.svg" width="100%" style="display: block; margin: auto;" />
 </picture>
 
 ``` r
@@ -264,7 +298,8 @@ group <- factor(c(rep("x", length(x)), rep("y", length(y))))
 
 options(LearnNonparam.pmt_progress = FALSE)
 benchmark <- microbenchmark::microbenchmark(
-    R = t_custom$test(x, y),
+    pure_R = t_custom$test(x, y),
+    quickr = t_quickr$test(x, y),
     Rcpp = t_cpp$test(x, y),
     coin = wilcox_test(data ~ group, distribution = approximate(nresample = 1e5, parallel = "no"))
 )
@@ -285,11 +320,12 @@ benchmark
 </picture>
 
 It can be seen that C++ brings significantly better performance than
-pure R, even surpassing the `coin` package (under sequential execution).
-However, all tests in this package are currently written in R with no
-plans for migration to C++ in the future. This is because the primary
-goal of this package is not to maximize performance but to offer a
-flexible framework for permutation tests.
+pure R, which enables it to even surpass the coin package in its
+no-parallelization setting. However, all tests in this package are
+currently written in pure R with no plans for migration to C++ in the
+future. This is because the primary goal of this package is not to
+maximize performance but to offer a flexible framework for permutation
+tests.
 
 ## References
 

@@ -103,7 +103,7 @@ library(LearnNonparam)
     ```{asciicast, plot}
     ggplot2::theme_set(ggplot2::theme_minimal())
 
-    t$plot(style = "ggplot2", binwidth = 1)
+    t$plot(style = "ggplot2", binwidth = 1) # or ggplot2::autoplot(t, binwidth = 1)
     ```
 
     ```{asciicast, save_plot, include = FALSE}
@@ -139,7 +139,7 @@ pmts()
 ```{asciicast, define_r}
 t_custom <- define_pmt(
     # this is a two-sample permutation test
-    inherit = "twosample",
+    method = "twosample",
     statistic = function(x, y) {
         # (optional) pre-calculate certain constants that remain invariant during permutation
         m <- length(x)
@@ -148,15 +148,27 @@ t_custom <- define_pmt(
         function(x, y) sum(x) / m - sum(y) / n
     },
     # reject the null hypothesis when the test statistic is too large or too small
-    rejection = "lr", n_permu = 1e5
+    rejection = "<>", n_permu = 1e5
 )
 ```
 
-Also, the statistic can be written in C++. Leveraging Rcpp sugars and C++14 features, only minor modifications are needed to make it compatible with C++ syntax.
+For R >= 4.4.0, the [quickr](https://CRAN.R-project.org/package=quickr) package can be used to accelerate `statistic`. However, this results in repeated crossings of the R-Fortran boundary and makes pre-calculation of constants impossible.
+
+```{asciicast, define_quickr}
+t_quickr <- define_pmt(
+    method = "twosample", rejection = "<>", n_permu = 1e5,
+    statistic = function(x, y) {
+        sum(x) / length(x) - sum(y) / length(y)
+    },
+    quickr = TRUE
+)
+```
+
+In cases where both pre-calculation and computational efficiency are required, the statistic can be written in C++. Leveraging Rcpp sugars and C++14 features, only minor modifications are needed to make it compatible with C++ syntax.
 
 ```{asciicast, define_cpp}
 t_cpp <- define_pmt(
-    inherit = "twosample", rejection = "lr", n_permu = 1e5,
+    method = "twosample", rejection = "<>", n_permu = 1e5,
     statistic = "[](const auto& x, const auto& y) {
         auto m = x.length();
         auto n = y.length();
@@ -167,7 +179,7 @@ t_cpp <- define_pmt(
 )
 ```
 
-It's easy to check that `t_custom` and `t_cpp` are equivalent:
+It's easy to check that `t_custom`, `t_quickr` and `t_cpp` are equivalent:
 
 ```{asciicast, prepare_data}
 x <- rnorm(10, mean = 0)
@@ -177,6 +189,11 @@ y <- rnorm(10, mean = 5)
 ```{asciicast, t_custom_res}
 set.seed(0)
 t_custom$test(x, y)$print()
+```
+
+```{asciicast, t_quickr_res}
+set.seed(0)
+t_quickr$test(x, y)$print()
 ```
 
 ```{asciicast, t_cpp_res}
@@ -196,7 +213,8 @@ group <- factor(c(rep("x", length(x)), rep("y", length(y))))
 
 options(LearnNonparam.pmt_progress = FALSE)
 benchmark <- microbenchmark::microbenchmark(
-    R = t_custom$test(x, y),
+    pure_R = t_custom$test(x, y),
+    quickr = t_quickr$test(x, y),
     Rcpp = t_cpp$test(x, y),
     coin = wilcox_test(data ~ group, distribution = approximate(nresample = 1e5, parallel = "no"))
 )
@@ -206,6 +224,6 @@ benchmark <- microbenchmark::microbenchmark(
 benchmark
 ```
 
-It can be seen that C++ brings significantly better performance than pure R, even surpassing the `coin` package (under sequential execution). However, all tests in this package are currently written in R with no plans for migration to C++ in the future. This is because the primary goal of this package is not to maximize performance but to offer a flexible framework for permutation tests.
+It can be seen that C++ brings significantly better performance than pure R, which enables it to even surpass the coin package in its no-parallelization setting. However, all tests in this package are currently written in pure R with no plans for migration to C++ in the future. This is because the primary goal of this package is not to maximize performance but to offer a flexible framework for permutation tests.
 
 ## References
