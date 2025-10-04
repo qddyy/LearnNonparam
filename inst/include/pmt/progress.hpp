@@ -76,13 +76,11 @@ public:
     {
         _speed = 1 / elapsed(_time);
 
-        _init_progress();
-
         _statistic_begin = REAL(_statistic.attr("permu"));
         _statistic_end = _statistic_begin + Rf_xlength(_statistic.attr("permu"));
         _statistic_ptr = _statistic_begin;
 
-        _time = std::chrono::steady_clock::now();
+        _init_progress();
     }
 
     bool operator<<(double statistic)
