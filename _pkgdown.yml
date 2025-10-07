@@ -33,7 +33,6 @@ reference:
     - AnsariBradley
     - SiegelTukey
     - RatioMeanDeviance
-    - KolmogorovSmirnov
   
   - title: Two-Sample Distribution Test
   - contents:
