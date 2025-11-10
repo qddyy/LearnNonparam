@@ -1,0 +1,172 @@
+# Changelog
+
+## LearnNonparam 1.3.0
+
+CRAN release: 2025-09-30
+
+- R side
+  - Added several two-sample distribution tests: `distribution.ks`,
+    `distribution.kuiper`, `distribution.cvm`, `distribution.ad`
+  - **(Breaking)** Removed `twosample.scoresum` and `twosample.ks`
+  - **(Breaking)** Modified two parameters in `define_pmt`: renamed
+    `inherit` to `method`; updated the `rejection` parameter to accept
+    only `"<>"`, `"<"`, or `">"`
+  - Added `quickr` support in `define_pmt`
+  - Introduced an `autoplot` method for the `PermuTest` class
+  - Fixed an issue where p-value calculations were affected by
+    double-precision floating-point errors
+  - Resolved an edge-case issue in `RCBDTest` that caused errors during
+    score computation
+- C++ side
+  - Implemented a new progress bar with additional features: speed and
+    ETA
+  - Significantly improved the efficiency of calling R functions from
+    C++
+  - Enhanced permutation efficiency in two-sample and paired two-sample
+    tests using branchless swap techniques
+  - Removed bounds checking during permutation
+  - Fixed an issue in `define_pmt` where `statistic` could not be a
+    mutable lambda
+
+## LearnNonparam 1.2.9
+
+CRAN release: 2025-06-02
+
+- Fixed incorrect permutation statistic computation due to deep copy
+  behavior of `Rcpp::Language`
+
+## LearnNonparam 1.2.8
+
+CRAN release: 2025-04-29
+
+- R side
+  - Refined the calculation of confidence bands in `CDF`
+  - Added DKW inequality-based confidence bands in `CDF`
+  - Enhanced error handling in `define_pmt`
+- C++ side
+  - Rolled back `twosample.*` functions
+
+## LearnNonparam 1.2.7
+
+CRAN release: 2025-01-30
+
+- R side
+  - Fixed p-value calculation and adopted the correlation coefficient as
+    test statistic in `Correlation`
+  - Added display of test types when printing user-defined tests
+  - Refined the compilation of R functions in `define_pmt`
+  - Improved calculating efficiency in `PairedDifference`
+- C++ side
+  - Enhanced the permutation efficiency in `paired.*`
+  - Reduced the number of permutations in `twosample.*` in cases with
+    duplicate elements across samples
+
+## LearnNonparam 1.2.6
+
+CRAN release: 2024-12-17
+
+- R side
+  - Fixed the issue with parameter passing to
+    [`ggplot2::stat_bin`](https://ggplot2.tidyverse.org/reference/geom_histogram.html)
+    in [`plot()`](https://rdrr.io/r/graphics/plot.default.html)
+  - Added detection for missing values and zero-length data in `test()`
+  - Switched to version 3 serialization format
+  - Added more documentation
+- C++ side
+  - Improved the efficiency of calling R from C++
+  - Enhanced the permuting efficiency in `rcbd.*`, `association.*`, and
+    `table.*`
+  - Replaced `R_len_t` with `R_xlen_t` to support long vectors
+  - Replaced `Rcpp.h` with `Rcpp/Lightest` to reduce compilation time
+
+## LearnNonparam 1.2.5
+
+CRAN release: 2024-11-14
+
+- Added support for `scoring` as an active binding in `define_pmt`
+- Corrected x-axis range in
+  [`plot()`](https://rdrr.io/r/graphics/plot.default.html) when
+  `style = "graphics"`
+- Improved the performance of `PairedDifference`
+
+## LearnNonparam 1.2.4
+
+CRAN release: 2024-11-12
+
+- R side
+  - Added support for custom scoring systems in `define_pmt`
+  - Enabled compatibility with C++ standard versions beyond C++14 in
+    `define_pmt`
+  - Improved the performance of `KruskalWallis`, `OneWay`, and
+    `Studentized`
+  - Replaced certain [`warning()`](https://rdrr.io/r/base/warning.html)
+    calls with [`stop()`](https://rdrr.io/r/base/stop.html)
+  - Refined some text
+- C++ side
+  - Enhanced permuting efficiency in `twosample_pmt`
+
+## LearnNonparam 1.2.3
+
+CRAN release: 2024-10-15
+
+- Improved `twosample_pmt`
+- Added examples
+- Fixed `SiegelTukey` and `ContingencyTableTest`
+
+## LearnNonparam 1.2.2
+
+- R side
+  - Changed the default value of `n_permu` to `1e4`
+  - Added support for test statistics defined using Rcpp in `define_pmt`
+  - Added support for `null_value` other than zero in two-sample
+    location tests
+  - Added support for `scoring` in `TwoSampleAssociationTest`
+  - Added a confidence interval for p-value in
+    [`print()`](https://rdrr.io/r/base/print.html)
+  - Added the `LearnNonparam.pmt_progress` option
+  - Added `attr(t$n_permu, "n_used")`
+  - Replaced `multicomp.*` with `multcomp.*`
+  - Replaced `KSampleF` and `RCBDF` with `OneWay` and `RCBDOneWay`
+  - Stopped exporting abstract classes (`TwoSampleTest`, `KSampleTest`,
+    etc.)
+  - Improved the efficiency of `ChiSquare`, `Difference`,
+    `JonckheereTerpstra`, `KruskalWallis`, `RatioMeanDeviance` and
+    `Studentized`
+  - Fixed many bugs
+- C++ side
+  - Introduced a new progress bar, which is built at compile time to
+    minimize runtime overhead
+
+## LearnNonparam 1.2.1
+
+- R side
+  - Added `define_pmt`
+  - Added some error messages
+  - Added some active bindings
+  - Introduced `graphics` as an alternative to `ggplot2`
+  - Introduced
+    [`compiler::cmpfun`](https://rdrr.io/r/compiler/compile.html) for
+    better performance
+  - Renamed `ANOVA`, `RCBD`, `RCBDANOVA` and `SignedDiff`
+  - Replaced `MultiCompT` and `TukeyHSD` with `Studentized`
+  - Replaced `"approx"` with `"asymp"`
+  - Improved `MultipleComparison`
+  - Improved `CDF$plot()`
+  - Fixed many bugs
+- C++ side
+  - A new progress bar
+  - Support for larger `n_permu`
+
+## LearnNonparam 1.2.0
+
+- Added logo
+- Introduced [Rcpp](https://CRAN.R-project.org/package=Rcpp)
+- Replaced `Mean` with `Difference`
+- Replaced `SignedScore` with `SignedDiff`
+- Replaced `PermuTest$feed()` with `PermuTest$test()`
+- Accelerated `RCBD` and `TwoSamplePairedTest`
+- Improved [`print()`](https://rdrr.io/r/base/print.html) and
+  [`plot()`](https://rdrr.io/r/graphics/plot.default.html) method of
+  `CDF`, `MultipleComparison` and `PermuTest`
+- Added `"approx"` option for the `Quantile$type`
+- Fixed many bugs
