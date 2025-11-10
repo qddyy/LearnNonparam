@@ -20,13 +20,8 @@ public:
     template <typename... Args>
     auto operator()(Args&&... args) const
     {
-        return fast_invoker(Function::operator()(std::forward<Args>(args)...), std::forward<Args>(args)...);
-    }
+        Shield<SEXP> closure(Function::operator()(std::forward<Args>(args)...));
 
-protected:
-    template <typename... Args>
-    auto fast_invoker(SEXP closure, Args&&... args) const
-    {
 #if defined(R_VERSION) && R_VERSION >= R_Version(4, 5, 0)
         Shield<SEXP> closure_formals(R_ClosureFormals(closure)), closure_body(R_ClosureBody(closure)), closure_envir(R_ClosureEnv(closure));
 #else
@@ -96,9 +91,6 @@ SEXP ksample_pmt(
         impl_ksample_pmt<false, CachedFunc<double>>(data, clone(group), statistic_func, n_permu);
 }
 
-#include "pmt/impl_multcomp_pmt.hpp"
-
-template <typename T>
 class MultcompFunc : public CachedFunc<SEXP> {
 public:
     using CachedFunc<SEXP>::CachedFunc;
@@ -106,12 +98,8 @@ public:
     template <typename... Args>
     auto operator()(Args&&... args) const
     {
-        return [statistic_closure = CachedFunc<SEXP>::operator()(std::forward<Args>(args)...), i = RObject(Rf_allocVector(INTSXP, 1)), j = RObject(Rf_allocVector(INTSXP, 1)), this](auto&&...) {
-            return [pairwise_closure = this->fast_invoker(statistic_closure(), i, j), i_ptr = INTEGER(i), j_ptr = INTEGER(j)](int i, int j) {
-                *i_ptr = i;
-                *j_ptr = j;
-                return as<T>(pairwise_closure());
-            };
+        return [statistic_closure = CachedFunc<SEXP>::operator()(std::forward<Args>(args)...)](auto&&... args) {
+            return REAL(statistic_closure(std::forward<decltype(args)>(args)...));
         };
     }
 };
@@ -125,8 +113,8 @@ SEXP multcomp_pmt(
     const bool progress)
 {
     return progress ?
-        impl_multcomp_pmt<true, MultcompFunc<double>>(data, clone(group), statistic_func, n_permu) :
-        impl_multcomp_pmt<false, MultcompFunc<double>>(data, clone(group), statistic_func, n_permu);
+        impl_multcomp_pmt<true, MultcompFunc>(data, clone(group), statistic_func, n_permu) :
+        impl_multcomp_pmt<false, MultcompFunc>(data, clone(group), statistic_func, n_permu);
 }
 
 #include "pmt/impl_paired_pmt.hpp"

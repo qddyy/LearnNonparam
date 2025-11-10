@@ -60,22 +60,24 @@ Studentized <- R6Class(
 
         .define = function() {
             private$.statistic_func <- function(data, group) {
+                i <- private$.group_ij$i
+                j <- private$.group_ij$j
+
                 inv_lengths <- 1 / tabulate(group)
 
-                weights <- 1 / sqrt(outer(inv_lengths, inv_lengths, `+`))
+                weights <- 1 / sqrt(inv_lengths[i] + inv_lengths[j])
 
                 if (private$.scoring == "none") {
-                    N <- length(data)
-                    k <- group[N]
+                    weights <- weights * sqrt(
+                        length(data) - length(inv_lengths)
+                    )
 
                     function(data, group) {
                         means <- rowsum.default(data, group) * inv_lengths
 
-                        weights_ <- weights / sqrt(
-                            sum((data - means[group])^2) / (N - k)
+                        (means[i] - means[j]) * weights / sqrt(
+                            sum((data - means[group])^2)
                         )
-
-                        function(i, j) (means[i] - means[j]) * weights_[i, j]
                     }
                 } else {
                     weights <- weights / sd(data)
@@ -83,7 +85,7 @@ Studentized <- R6Class(
                     function(data, group) {
                         means <- rowsum.default(data, group) * inv_lengths
 
-                        function(i, j) (means[i] - means[j]) * weights[i, j]
+                        (means[i] - means[j]) * weights
                     }
                 }
             }
