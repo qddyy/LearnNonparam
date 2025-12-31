@@ -48,14 +48,14 @@ library(LearnNonparam)
   - from some R6 class directly
 
   ``` r
-  t <- Wilcoxon$new(n_permu = 1e6)
+  t <- Wilcoxon$new(n_permu = 1e7)
   ```
 
   - using the `pmt` (**p**er**m**utation **t**est) wrapper
 
   ``` r
   # recommended for a unified API
-  t <- pmt("twosample.wilcoxon", n_permu = 1e6)
+  t <- pmt("twosample.wilcoxon", n_permu = 1e7)
   ```
 
 - Provide it with samples
