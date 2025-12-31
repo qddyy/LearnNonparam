@@ -7,10 +7,9 @@ template <bool progress, typename T, typename U>
 RObject __impl_table_pmt(
     T& data,
     U&& statistic_func,
-    const double n_permu)
+    const double n_permu
+)
 {
-    Stat<progress> statistic_container;
-
     using size_t = typename table_traits<T>::size_type;
     using value_t = typename table_traits<T>::value_type;
 
@@ -32,6 +31,8 @@ RObject __impl_table_pmt(
         }
     }
 
+    Stat<progress> statistic_container;
+
     auto statistic_closure_ = [statistic_closure = statistic_func(data), &data, &row, &col, n](auto&&... args) {
         for (size_t k = 0; k < data.size(); k++) {
             data[k] = 0;
@@ -52,7 +53,8 @@ RObject __impl_table_pmt(
                 dim = col;
             }
             return n_permutation(dim);
-        }());
+        }()
+    );
 
 #ifdef SETJMP
     SETJMP(statistic_func)
@@ -86,7 +88,8 @@ template <bool progress, typename T>
 RObject impl_table_pmt(
     IntegerMatrix data,
     T&& statistic_func,
-    const double n_permu)
+    const double n_permu
+)
 {
     return __impl_table_pmt<progress>(data, statistic_func, n_permu);
 }
@@ -185,7 +188,8 @@ RObject impl_distribution_pmt(
     const NumericVector x,
     const NumericVector y,
     T&& statistic_func,
-    const double n_permu)
+    const double n_permu
+)
 {
     DistributionTable data(x, y);
 

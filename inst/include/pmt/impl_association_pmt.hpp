@@ -5,13 +5,14 @@ RObject impl_association_pmt(
     NumericVector x,
     NumericVector y,
     T&& statistic_func,
-    const double n_permu)
+    const double n_permu
+)
 {
-    Stat<progress> statistic_container;
-
     if (n_permu == 0 && n_permutation(x) < n_permutation(y)) {
         std::swap(x, y);
     }
+
+    Stat<progress> statistic_container;
 
     auto statistic_closure = statistic_func(x, y);
     auto association_update = [&statistic_container, &statistic_closure, x, y]() {

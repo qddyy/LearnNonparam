@@ -5,7 +5,8 @@ RObject impl_ksample_pmt(
     const NumericVector data,
     IntegerVector group,
     T&& statistic_func,
-    const double n_permu)
+    const double n_permu
+)
 {
     Stat<progress> statistic_container;
 
@@ -43,7 +44,8 @@ RObject impl_multcomp_pmt(
     const NumericVector data,
     IntegerVector group,
     T&& statistic_func,
-    const double n_permu)
+    const double n_permu
+)
 {
     Stat<progress> statistic_container;
 

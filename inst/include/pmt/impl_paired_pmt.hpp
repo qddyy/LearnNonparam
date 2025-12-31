@@ -5,7 +5,8 @@ RObject impl_paired_pmt(
     NumericVector x,
     NumericVector y,
     T&& statistic_func,
-    const double n_permu)
+    const double n_permu
+)
 {
     Stat<progress> statistic_container;
 

@@ -4,7 +4,8 @@ template <bool progress, typename T>
 RObject impl_rcbd_pmt(
     NumericMatrix data,
     T&& statistic_func,
-    const double n_permu)
+    const double n_permu
+)
 {
     Stat<progress> statistic_container;
 
@@ -23,7 +24,8 @@ RObject impl_rcbd_pmt(
                 A *= n_permutation(it, it + k);
             }
             return A;
-        }());
+        }()
+    );
 
 #ifdef SETJMP
     SETJMP(statistic_func)
