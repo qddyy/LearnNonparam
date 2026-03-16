@@ -64,7 +64,7 @@ t <- pmt(
 #>       Jonckheere-Terpstra Test 
 #> 
 #> scoring: none    type: permu(10000)    method: default
-#> statistic = 145, p-value = 0.0307 (± 0.003381009 at 95% confidence)
+#> statistic = 145, p-value = 0.0298 (± 0.003332628 at 95% confidence)
 #> alternative hypothesis: greater
 
 t$type <- "asymp"

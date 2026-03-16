@@ -75,7 +75,7 @@ pmt(
 #>       Test for Association Between Paired Samples 
 #> 
 #> scoring: none    type: permu(10000)    method: pearson
-#> statistic = 0.8571756, p-value = 1e-04 (± 0.0001959866 at 95% confidence)
+#> statistic = 0.8571756, p-value < 2.220446e-16
 #> alternative hypothesis: true correlation is greater than 0
 
 t <- pmt(

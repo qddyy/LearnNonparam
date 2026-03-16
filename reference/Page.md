@@ -65,7 +65,7 @@ t <- pmt(
 #>       Page Test 
 #> 
 #> scoring: rank    type: permu(10000)    method: default
-#> statistic = 134, p-value = 0.0112 (± 0.002062583 at 95% confidence)
+#> statistic = 134, p-value = 0.0121 (± 0.002142877 at 95% confidence)
 #> alternative hypothesis: less
 
 t$type <- "asymp"

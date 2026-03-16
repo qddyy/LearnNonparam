@@ -82,12 +82,12 @@ t <- pmt(
 #> family-wise confidence level: 95%
 #> 
 #>                           statistic p-value  
-#> location_1 ~ location_2  0.02737145  0.9790  
-#> location_1 ~ location_3 -1.77914406  0.0908  
-#> location_1 ~ location_4 -3.41048230  0.0036 *
-#> location_2 ~ location_3 -1.80651550  0.0878  
-#> location_2 ~ location_4 -3.43785375  0.0044 *
-#> location_3 ~ location_4 -1.63133824  0.1228  
+#> location_1 ~ location_2  0.02737145  0.9754  
+#> location_1 ~ location_3 -1.77914406  0.0844  
+#> location_1 ~ location_4 -3.41048230  0.0018 *
+#> location_2 ~ location_3 -1.80651550  0.0868  
+#> location_2 ~ location_4 -3.43785375  0.0018 *
+#> location_3 ~ location_4 -1.63133824  0.1154  
 
 t$type <- "asymp"
 t
@@ -168,9 +168,9 @@ t
 #> 
 #>                          statistic p-value  
 #> location_1 ~ location_2 0.03870907  1.0000  
-#> location_1 ~ location_3 2.51608965  0.3133  
-#> location_1 ~ location_4 4.82315032  0.0133 *
-#> location_2 ~ location_3 2.55479873  0.2994  
-#> location_2 ~ location_4 4.86185939  0.0122 *
-#> location_3 ~ location_4 2.30706067  0.3843  
+#> location_1 ~ location_3 2.51608965  0.3172  
+#> location_1 ~ location_4 4.82315032  0.0150 *
+#> location_2 ~ location_3 2.55479873  0.3052  
+#> location_2 ~ location_4 4.86185939  0.0143 *
+#> location_3 ~ location_4 2.30706067  0.3921  
 ```

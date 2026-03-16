@@ -73,7 +73,7 @@ t <- pmt(
 #>       Kruskal-Wallis Test 
 #> 
 #> scoring: rank    type: permu(10000)    method: default
-#> statistic = 8.246588, p-value = 0.0101 (± 0.001959767 at 95% confidence)
+#> statistic = 8.246588, p-value = 0.0119 (± 0.002125309 at 95% confidence)
 
 t$type <- "asymp"
 t

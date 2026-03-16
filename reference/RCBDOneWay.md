@@ -57,7 +57,7 @@ t <- pmt(
 #>       One-Way Test for Equal Means in RCBD 
 #> 
 #> scoring: none    type: permu(5000)    method: default
-#> statistic = 110241.8, p-value = 0.0582 (± 0.006489391 at 95% confidence)
+#> statistic = 110241.8, p-value = 0.0598 (± 0.006572397 at 95% confidence)
 
 t$type <- "asymp"
 t

@@ -86,6 +86,6 @@ pmt(
 #>       Two-Sample Test Based on Mean or Median 
 #> 
 #> scoring: none    type: permu(1000)    method: mean
-#> statistic = 1.675, p-value = 0.196 (± 0.02460391 at 95% confidence)
+#> statistic = 1.675, p-value = 0.202 (± 0.02488429 at 95% confidence)
 #> alternative hypothesis: greater
 ```

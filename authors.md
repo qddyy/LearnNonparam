@@ -10,14 +10,14 @@
 Source:
 [`DESCRIPTION`](https://github.com/qddyy/LearnNonparam/blob/main/DESCRIPTION)
 
-Du Y (2025). *LearnNonparam: 'R6'-Based Flexible Framework for
+Du Y (2026). *LearnNonparam: 'R6'-Based Flexible Framework for
 Permutation Tests*. R package version 1.3.0,
 <https://github.com/qddyy/LearnNonparam>.
 
     @Manual{,
       title = {LearnNonparam: 'R6'-Based Flexible Framework for Permutation Tests},
       author = {Yan Du},
-      year = {2025},
+      year = {2026},
       note = {R package version 1.3.0},
       url = {https://github.com/qddyy/LearnNonparam},
     }

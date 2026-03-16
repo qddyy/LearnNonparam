@@ -239,7 +239,7 @@ t <- define_pmt(
 #>       User-Defined Permutation Test 
 #> 
 #> scoring: custom    type: permu(10000)    method: twosample
-#> statistic = 28, p-value = 0.5785 (± 0.009678288 at 95% confidence)
+#> statistic = 19, p-value = 0.0466 (± 0.004131223 at 95% confidence)
 
 t$scoring <- function(x) qnorm(rank(x) / (length(x) + 1)) # equivalent to "vw"
 t$print()
@@ -247,7 +247,7 @@ t$print()
 #>       User-Defined Permutation Test 
 #> 
 #> scoring: custom    type: permu(10000)    method: twosample
-#> statistic = 0.1141853, p-value = 0.5487 (± 0.009753225 at 95% confidence)
+#> statistic = -2.38528, p-value = 0.0375 (± 0.003723609 at 95% confidence)
 
 t$n_permu <- 0
 t$print()
@@ -255,7 +255,7 @@ t$print()
 #>       User-Defined Permutation Test 
 #> 
 #> scoring: custom    type: permu(252)    method: twosample
-#> statistic = 0.1141853, p-value = 0.5436508
+#> statistic = -2.38528, p-value = 0.03174603
 
 # \donttest{
 r <- define_pmt(
@@ -301,7 +301,7 @@ r$test(x, y)$print()
 #>       User-Defined Permutation Test 
 #> 
 #> scoring: none    type: permu(1e+05)    method: twosample
-#> statistic = 0.002255881, p-value = 1 (± 0 at 95% confidence)
+#> statistic = -0.6968372, p-value = 0.0485 (± 0.001331445 at 95% confidence)
 set.seed(0)
 quickr$test(x, y)$print()
 #> Loading required namespace: quickr
@@ -309,24 +309,24 @@ quickr$test(x, y)$print()
 #>       User-Defined Permutation Test 
 #> 
 #> scoring: none    type: permu(1e+05)    method: twosample
-#> statistic = 0.002255881, p-value = 1 (± 0 at 95% confidence)
+#> statistic = -0.6968372, p-value = 0.0485 (± 0.001331445 at 95% confidence)
 set.seed(0)
 rcpp$test(x, y)$print()
 #> 
 #>       User-Defined Permutation Test 
 #> 
 #> scoring: none    type: permu(1e+05)    method: twosample
-#> statistic = 0.002255881, p-value = 1 (± 0 at 95% confidence)
+#> statistic = -0.6968372, p-value = 0.0485 (± 0.001331445 at 95% confidence)
 
 options(LearnNonparam.pmt_progress = FALSE)
 system.time(r$test(x, y))
 #>    user  system elapsed 
-#>   0.114   0.000   0.114 
+#>   0.112   0.000   0.112 
 system.time(quickr$test(x, y))
 #>    user  system elapsed 
-#>   0.034   0.000   0.035 
+#>   0.034   0.000   0.034 
 system.time(rcpp$test(x, y))
 #>    user  system elapsed 
-#>   0.007   0.000   0.007 
+#>   0.008   0.000   0.008 
 # }
 ```
