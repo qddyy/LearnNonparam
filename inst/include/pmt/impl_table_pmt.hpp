@@ -132,13 +132,13 @@ template <typename T, typename U>
 class DistributionFunc : public T {
 public:
     template <typename V, typename = std::enable_if_t<std::is_same<std::remove_cv_t<std::remove_reference_t<V>>, T>::value>>
-    DistributionFunc(V&& func, const U& data, R_xlen_t n_x, R_xlen_t n_y) :
+    DistributionFunc(V&& func, const NumericVector x, const NumericVector y) :
         T(std::forward<V>(func)),
+        data(x, y),
+        _inv_n_x(1.0 / static_cast<double>(x.size())),
+        _inv_n_y(1.0 / static_cast<double>(y.size())),
         _F(no_init(data.ncol() + 1)),
-        _G(no_init(data.ncol() + 1)),
-        _inv_n_x(1.0 / static_cast<double>(n_x)),
-        _inv_n_y(1.0 / static_cast<double>(n_y)),
-        _data(data)
+        _G(no_init(data.ncol() + 1))
     {
         *_F.begin() = *_G.begin() = 0.0;
     }
@@ -153,6 +153,8 @@ public:
         };
     }
 
+    U data;
+
 private:
     void _build_ecdf()
     {
@@ -161,20 +163,18 @@ private:
 
         typename table_traits<U>::size_type k = 0;
         for (R_xlen_t i = 1; i < _G.size(); i++) {
-            prob_F += _data[k++] * _inv_n_x;
-            prob_G += _data[k++] * _inv_n_y;
+            prob_F += data[k++] * _inv_n_x;
+            prob_G += data[k++] * _inv_n_y;
             _F[i] = prob_F;
             _G[i] = prob_G;
         }
     }
 
-    NumericVector _F;
-    NumericVector _G;
-
     double _inv_n_x;
     double _inv_n_y;
 
-    const U& _data;
+    NumericVector _F;
+    NumericVector _G;
 };
 
 template <>
@@ -191,9 +191,7 @@ RObject impl_distribution_pmt(
     const double n_permu
 )
 {
-    DistributionTable data(x, y);
+    DistributionFunc<std::remove_cv_t<std::remove_reference_t<T>>, DistributionTable> statistic_func_(std::forward<T>(statistic_func), x, y);
 
-    DistributionFunc<std::remove_cv_t<std::remove_reference_t<T>>, DistributionTable> statistic_func_(std::forward<T>(statistic_func), data, x.size(), y.size());
-
-    return __impl_table_pmt<progress>(data, statistic_func_, n_permu);
+    return __impl_table_pmt<progress>(statistic_func_.data, statistic_func_, n_permu);
 }
