@@ -321,12 +321,12 @@ rcpp$test(x, y)$print()
 options(LearnNonparam.pmt_progress = FALSE)
 system.time(r$test(x, y))
 #>    user  system elapsed 
-#>   0.071   0.000   0.071 
+#>   0.085   0.000   0.085 
 system.time(quickr$test(x, y))
 #>    user  system elapsed 
-#>   0.022   0.000   0.023 
+#>   0.028   0.000   0.029 
 system.time(rcpp$test(x, y))
 #>    user  system elapsed 
-#>   0.006   0.000   0.006 
+#>   0.007   0.000   0.007 
 # }
 ```
