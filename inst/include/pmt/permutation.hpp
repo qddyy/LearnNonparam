@@ -1,23 +1,10 @@
 #pragma once
 
 #include <algorithm>
-#include <cstring>
 #include <functional>
 #include <iterator>
 #include <type_traits>
 #include <unordered_map>
-
-template <typename T, typename = std::enable_if_t<std::is_trivially_copyable<T>::value>>
-void swap_if(bool c, T& a, T& b) noexcept
-{
-    struct alignas(T) {
-        unsigned char value[sizeof(T)];
-    } buffer[2];
-    std::memcpy(buffer[1].value, &b, sizeof(T));
-    std::memcpy(buffer[0].value, &a, sizeof(T));
-    std::memcpy(&a, buffer[c].value, sizeof(T));
-    std::memcpy(&b, buffer[1 - c].value, sizeof(T));
-}
 
 template <typename T>
 void random_shuffle(T first, T last)
