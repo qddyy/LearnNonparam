@@ -114,16 +114,16 @@ follows. Note that the names can be customized, and the types can be
 replaced with `auto` (thanks to the support for generic lambdas in
 C++14). See examples.
 
-|                  |                                             |                                              |
-|------------------|---------------------------------------------|----------------------------------------------|
-| `method`         | Parameter 1                                 | Parameter 2                                  |
-| `"twosample"`    | `const NumericVector& sample_1`             | `const NumericVector& sample_2`              |
-| `"distribution"` | `const NumericVector& cumulative_prob_1`    | `const NumericVector& cumulative_prob_2`     |
-| `"association"`  | `const NumericVector& sample_1`             | `const NumericVector& sample_2`              |
-| `"paired"`       | `const NumericVector& sample_1`             | `const NumericVector& sample_2`              |
-| `"ksample"`      | `const NumericVector& combined_sample`      | `const IntegerVector& one_based_group_index` |
-| `"rcbd"`         | `const NumericMatrix& block_as_column_data` |                                              |
-| `"table"`        | `const IntegerMatrix& contingency_table`    |                                              |
+|  |  |  |
+|----|----|----|
+| `method` | Parameter 1 | Parameter 2 |
+| `"twosample"` | `const NumericVector& sample_1` | `const NumericVector& sample_2` |
+| `"distribution"` | `const NumericVector& cumulative_prob_1` | `const NumericVector& cumulative_prob_2` |
+| `"association"` | `const NumericVector& sample_1` | `const NumericVector& sample_2` |
+| `"paired"` | `const NumericVector& sample_1` | `const NumericVector& sample_2` |
+| `"ksample"` | `const NumericVector& combined_sample` | `const IntegerVector& one_based_group_index` |
+| `"rcbd"` | `const NumericMatrix& block_as_column_data` |  |
+| `"table"` | `const IntegerMatrix& contingency_table` |  |
 
 When using R, `statistic` and the parameters should be the R equivalents
 of the above. If no constants exist during permutation, `statistic` may
@@ -321,12 +321,12 @@ rcpp$test(x, y)$print()
 options(LearnNonparam.pmt_progress = FALSE)
 system.time(r$test(x, y))
 #>    user  system elapsed 
-#>   0.112   0.000   0.112 
+#>   0.071   0.000   0.071 
 system.time(quickr$test(x, y))
 #>    user  system elapsed 
-#>   0.034   0.000   0.034 
+#>   0.022   0.000   0.023 
 system.time(rcpp$test(x, y))
 #>    user  system elapsed 
-#>   0.008   0.000   0.008 
+#>   0.006   0.000   0.006 
 # }
 ```
